@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^0.0.32",
+    "@types/cheerio": "^0.22.7",
     "@types/request-promise": "^4.1.41",
     "serverless-webpack": "^3.0.0",
     "ts-loader": "^2.3.7",
