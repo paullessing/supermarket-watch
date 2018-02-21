@@ -1,0 +1,19 @@
+# package directories
+node_modules
+
+# Serverless directories
+.serverless
+.build
+
+# Webpack directories
+.webpack
+
+# IDE
+**/.idea
+
+# OS
+.DS_Store
+.tmp
+
+# Logs
+*.log
