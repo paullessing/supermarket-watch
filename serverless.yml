@@ -9,11 +9,12 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: eu-west-2
+  memorySize: 128
 
 functions:
-  hello:
-    handler: handler.hello
+  getProduct:
+    handler: handler.getProduct
     events:
       - http:
           method: get
-          path: hello
+          path: getProduct
