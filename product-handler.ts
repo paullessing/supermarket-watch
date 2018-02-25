@@ -2,7 +2,6 @@ import { Waitrose } from './supermarkets/waitrose';
 import { Sainsburys } from './supermarkets/sainsburys';
 import { Supermarket } from './supermarkets/supermarket';
 import { HandlerRequest, HandlerResponse } from 'serverless-api-handlers';
-import { SearchableItem } from './models/searchable-item.model';
 
 export const getProduct = async (request: HandlerRequest): Promise<HandlerResponse> => {
   const id = request.queryParameters.id as string || '';
@@ -22,6 +21,26 @@ export const getProduct = async (request: HandlerRequest): Promise<HandlerRespon
   }
 };
 
+export const search = async (request: HandlerRequest): Promise<HandlerResponse> => {
+  const waitrose = new Waitrose();
+  const sainsburys = new Sainsburys();
+  const query = request.queryParameters.q as string;
+
+  const [waitroseResults, sainsburysResults] = await Promise.all([waitrose.search(query), sainsburys.search(query)]);
+
+  const result = {
+    supermarkets: [{
+      name: 'Waitrose',
+      items: waitroseResults.items
+    }, {
+      name: `Sainsbury's`,
+      items: sainsburysResults.items
+    }]
+  };
+
+  return { statusCode: 200, body: JSON.stringify(result) }; // TODO copy makeResponse() method
+};
+
 function handleResult(result: any) {
   if (!result) {
     return { statusCode: 404 };
@@ -31,7 +50,6 @@ function handleResult(result: any) {
 }
 
 const fetch = async (supermarket: Supermarket, productId: string) => {
-  await supermarket.init();
   const product = await supermarket.getProduct(productId);
   return product || null;
 };

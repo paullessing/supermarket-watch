@@ -2,6 +2,7 @@ import { Supermarket } from './supermarket';
 import * as request from 'request-promise';
 import { Product } from '../models/product.model';
 import * as cheerio from 'cheerio';
+import { SearchResult } from '../models/search-result.model';
 
 export class Sainsburys extends Supermarket {
 
@@ -29,6 +30,12 @@ export class Sainsburys extends Supermarket {
       unitName: measure,
       pricePerUnit: pricePerMeasure,
       isPence: false
+    };
+  }
+
+  public async search(term: string): Promise<SearchResult> {
+    return {
+      items: []
     };
   }
 }
