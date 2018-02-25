@@ -13,7 +13,7 @@ provider:
 
 functions:
   getProduct:
-    handler: handler.getProduct
+    handler: index.getProduct
     events:
       - http:
           method: get

@@ -1,6 +1,6 @@
 import { Supermarket } from './supermarket';
 import * as request from 'request-promise';
-import { Product } from './product';
+import { Product } from '../models/product.model';
 import * as cheerio from 'cheerio';
 
 export class Sainsburys extends Supermarket {

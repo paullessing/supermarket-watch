@@ -1,4 +1,4 @@
-import { Product } from './product';
+import { Product } from '../models/product.model';
 
 export abstract class Supermarket {
 

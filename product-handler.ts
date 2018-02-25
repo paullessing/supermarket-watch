@@ -2,6 +2,7 @@ import { Waitrose } from './supermarkets/waitrose';
 import { Sainsburys } from './supermarkets/sainsburys';
 import { Supermarket } from './supermarkets/supermarket';
 import { HandlerRequest, HandlerResponse } from 'serverless-api-handlers';
+import { SearchableItem } from './models/searchable-item.model';
 
 export const getProduct = async (request: HandlerRequest): Promise<HandlerResponse> => {
   const id = request.queryParameters.id as string || '';

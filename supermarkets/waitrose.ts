@@ -1,6 +1,6 @@
 import { Supermarket } from './supermarket';
 import * as request from 'request-promise';
-import { Product } from './product';
+import { Product } from '../models/product.model';
 
 export class Waitrose extends Supermarket {
   private customerId: string = '';
