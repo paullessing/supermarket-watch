@@ -38,14 +38,14 @@ export const search = async (request: HandlerRequest): Promise<HandlerResponse> 
     }]
   };
 
-  return { statusCode: 200, body: JSON.stringify(result) }; // TODO copy makeResponse() method
+  return handleResult(result); // TODO copy makeResponse() method
 };
 
 function handleResult(result: any) {
   if (!result) {
-    return { statusCode: 404 };
+    return { statusCode: 404, headers: { 'Access-Control-Allow-Origin': '*' } };
   } else {
-    return { statusCode: 200, body: JSON.stringify(result) };
+    return { statusCode: 200, headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(result) };
   }
 }
 

@@ -6,6 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "@angular/cli": "^1.7.2",
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "serverless-api-handlers": "paullessing/serverless-api-handlers"
+  },
   "devDependencies": {
     "@types/aws-lambda": "^0.0.32",
     "@types/cheerio": "^0.22.7",
@@ -16,11 +23,5 @@
     "webpack": "^3.6.0"
   },
   "author": "Paul Lessing <paul@paullessing.com>",
-  "license": "MIT",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2",
-    "serverless-api-handlers": "paullessing/serverless-api-handlers"
-  }
+  "license": "MIT"
 }
