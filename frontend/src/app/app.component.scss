@@ -1,0 +1,14 @@
+.results {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__header {
+    flex: 1 0 100%;
+  }
+
+  &__item {
+    flex: 1 1 240px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+}
