@@ -1,9 +1,11 @@
+import { config } from '../config/config';
 import { Supermarket } from './supermarket';
 import axios from 'axios';
 import { Product } from '../models/product.model';
 import * as cheerio from 'cheerio';
 import { SearchResult, SearchResultItem } from '../models/search-result.model';
 import axiosCookieJarSupport from 'axios-cookiejar-support';
+import * as qs from 'querystring';
 
 axiosCookieJarSupport(axios);
 
@@ -23,10 +25,13 @@ export class Sainsburys extends Supermarket {
     }
 
     const name = $('.productTitleDescriptionContainer h1').text();
-    const price = parseFloat($('.pricePerUnit').text().replace(/[^\d.]+/g, ''));
+    const priceText = $('.pricePerUnit').text();
+    const isPence = priceText.indexOf('£') < 0;
+    const priceValue = parseFloat(priceText.replace(/[^\d.]+/g, ''));
+    const price = priceValue && priceValue / (isPence ? 100 : 0);
     const pricePerMeasureMatch = $('.pricePerMeasure').text().match(/([\d.]+)/);
     const pricePerMeasure = pricePerMeasureMatch ? parseFloat(pricePerMeasureMatch[1]) : -1;
-    const measure = $('.pricePerMeasureMeasure').text();
+    const measure = $('.pricePerMeasureMeasure').text(); // TODO this is wrong
 
     return {
       name,
@@ -38,7 +43,15 @@ export class Sainsburys extends Supermarket {
   }
 
   public async search(term: string): Promise<SearchResult> {
-    const url = `https://www.sainsburys.co.uk/shop/gb/SearchDisplay?langId=44&storeId=10151&searchType=2&searchTerm=${encodeURIComponent(term)}`;
+    const params = qs.stringify({
+      langId: 44,
+      storeId: 10151,
+      searchType: 2,
+      pageSize: config.limit,
+      searchTerm: term,
+    });
+
+    const url = `https://www.sainsburys.co.uk/shop/gb/SearchDisplay?${params}`;
     const search = await axios.get(url, {
       jar: true,
       withCredentials: true,
@@ -63,7 +76,9 @@ export class Sainsburys extends Supermarket {
         const urlMatch = url!.match(/\/([^/]*$)/i);
         const id = urlMatch && `sainsburys:${urlMatch[1]}` || '';
         const priceText = $('.pricePerUnit', element).text().trim();
-        const price = parseFloat(priceText.replace(/[^\d.]+/g, ''));
+        const isPence = priceText.indexOf('£') < 0;
+        const priceValue = parseFloat(priceText.replace(/[^\d.]+/g, ''));
+        const price = priceValue && (priceValue / (isPence ? 100 : 1));
 
         if (id) {
           items.push({

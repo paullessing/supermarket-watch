@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Product } from '../models/product.model';
 import * as cheerio from 'cheerio';
 import { SearchResult, SearchResultItem } from '../models/search-result.model';
+import * as qs from 'querystring';
 
 export class Tesco extends Supermarket {
 
@@ -33,7 +34,13 @@ export class Tesco extends Supermarket {
   }
 
   public async search(term: string): Promise<SearchResult> {
-    const url = `https://dev.tescolabs.com/grocery/products/?query=${encodeURIComponent(term)}&offset=0&limit=20`;
+    const params = qs.stringify({
+      query: term,
+      offset: 0,
+      limit: config.limit,
+    });
+
+    const url = `https://dev.tescolabs.com/grocery/products/?${params}`;
 
     const search = await axios.get(url, {
       headers: {

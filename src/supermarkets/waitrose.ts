@@ -1,3 +1,4 @@
+import { config } from '../config/config';
 import { Supermarket } from './supermarket';
 import axios from 'axios';
 import { Product } from '../models/product.model';
@@ -56,7 +57,7 @@ export class Waitrose extends Supermarket {
     const requestBody = {
       customerSearchRequest: {
         queryParams: {
-          size: 48,
+          size: config.limit,
           searchTerm: term,
           sortBy: 'RELEVANCE',
           searchTags: [],
