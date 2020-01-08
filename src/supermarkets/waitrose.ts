@@ -1,5 +1,5 @@
 import { Supermarket } from './supermarket';
-import * as request from 'request-promise';
+import axios from 'axios';
 import { Product } from '../models/product.model';
 import { SearchResult, SearchResultItem } from '../models/search-result.model';
 
@@ -22,23 +22,24 @@ export class Waitrose extends Supermarket {
     if (this.token) {
       return;
     }
-    const tokenBody = await request('https://www.waitrose.com/api/authentication-prod/v2/authentication/token');
-    const result = JSON.parse(tokenBody);
-    const { customerId, jwtString } = result.loginResult;
-    this.customerId = customerId;
-    this.token = jwtString;
+    this.customerId = '-1';
+    this.token = 'Bearer unauthenticated';
+    // const response = await axios.get('https://www.waitrose.com/api/authentication-prod/v2/authentication/token');
+    // const { customerId, jwtString } = response.data.loginResult;
+    // this.customerId = customerId;
+    // this.token = jwtString;
   }
 
   public async getProduct(id: string): Promise<Product | null> {
     await this.init();
 
-    const search = await request(`https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`, {
+    const search = await axios.get(`https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`, {
       headers: {
         authorization: this.token
       }
     });
 
-    const searchResult = JSON.parse(search);
+    const searchResult = search.data;
     if (!searchResult.products.length) {
       return null;
     } else {
@@ -65,8 +66,8 @@ export class Waitrose extends Supermarket {
       }
     };
 
-    const response = await request.post(url, {
-      body: JSON.stringify(requestBody),
+    const response = await axios.post(url, requestBody,
+    {
       headers: {
         authorization: this.token
       }
@@ -76,10 +77,8 @@ export class Waitrose extends Supermarket {
       return { items: [] };
     }
 
-    const parsedResponse = JSON.parse(response);
-
     return {
-      items: (parsedResponse.componentsAndProducts || [])
+      items: (response.data.componentsAndProducts || [])
         .filter((item: any) => item && item.searchProduct)
         .map(({ searchProduct: product }: any): SearchResultItem => {
           const item: SearchResultItem = {

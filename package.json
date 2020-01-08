@@ -1,27 +1,21 @@
 {
   "name": "supermarket-watch",
   "version": "0.0.1",
+  "author": "Paul Lessing <paul@paullessing.com>",
+  "license": "MIT",
   "description": "",
-  "main": "handler.js",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cli": "ts-node src/cli.ts"
   },
   "dependencies": {
-    "@angular/cli": "^1.7.2",
-    "cheerio": "^1.0.0-rc.2",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2",
-    "serverless-api-handlers": "paullessing/serverless-api-handlers"
+    "axios": "^0.19.1",
+    "axios-cookiejar-support": "^0.5.1",
+    "cheerio": "^1.0.0-rc.3"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^0.0.32",
-    "@types/cheerio": "^0.22.7",
-    "@types/request-promise": "^4.1.41",
-    "serverless-webpack": "^3.0.0",
-    "ts-loader": "^2.3.7",
-    "typescript": "^2.5.2",
-    "webpack": "^3.6.0"
-  },
-  "author": "Paul Lessing <paul@paullessing.com>",
-  "license": "MIT"
+    "@types/cheerio": "^0.22.15",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
 }

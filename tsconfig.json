@@ -1,19 +1,14 @@
 {
   "compilerOptions": {
+    "target": "es2016",
     "strict": true,
     "lib": [
       "dom",
       "es2016"
     ],
+    "types": [
+      "node"
+    ],
     "sourceMap": true
-  },
-  "include": [
-    "./models/*",
-    "./supermarkets/*",
-    "./product-handler.ts",
-    "./index.ts"
-  ],
-  "exclude": [
-    "./frontend/*"
-  ]
+  }
 }
