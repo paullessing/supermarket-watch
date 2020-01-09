@@ -1,3 +1,4 @@
+import { Tesco } from './supermarkets/tesco';
 import { Waitrose } from './supermarkets/waitrose';
 import { Sainsburys } from './supermarkets/sainsburys';
 import { Supermarket } from './supermarkets/supermarket';
@@ -13,9 +14,11 @@ export const getProduct = async (request: HandlerRequest): Promise<HandlerRespon
   const productId = match[2];
   switch (match[1]) {
     case 'waitrose':
-      return handleResult(await fetch(new Waitrose(), productId));
+      return handleResult(await fetchProduct(new Waitrose(), productId));
     case 'sainsburys':
-      return handleResult(await fetch(new Sainsburys(), productId));
+      return handleResult(await fetchProduct(new Sainsburys(), productId));
+    case 'tesco':
+      return handleResult(await fetchProduct(new Tesco(), productId));
     default:
       return { statusCode: 400, body: '"Unsupported supermarket"' };
   }
@@ -49,7 +52,7 @@ function handleResult(result: any) {
   }
 }
 
-const fetch = async (supermarket: Supermarket, productId: string) => {
+const fetchProduct = async (supermarket: Supermarket, productId: string) => {
   const product = await supermarket.getProduct(productId);
   return product || null;
 };

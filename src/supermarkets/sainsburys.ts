@@ -1,15 +1,19 @@
-import { config } from '../config/config';
-import { Supermarket } from './supermarket';
 import axios from 'axios';
-import { Product } from '../models/product.model';
-import * as cheerio from 'cheerio';
-import { SearchResult, SearchResultItem } from '../models/search-result.model';
 import axiosCookieJarSupport from 'axios-cookiejar-support';
+import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
+import { config } from '../config/config';
+import { Product } from '../models/product.model';
+import { SearchResult, SearchResultItem } from '../models/search-result.model';
+import { Supermarket } from './supermarket';
 
 axiosCookieJarSupport(axios);
 
 export class Sainsburys extends Supermarket {
+
+  public getPrefix(): string {
+    return 'sainsburys';
+  }
 
   public async getProduct(productLink: string): Promise<Product | null> {
     const search = await axios.get(`https://www.sainsburys.co.uk/shop/gb/groceries/${productLink}`, {
@@ -74,7 +78,7 @@ export class Sainsburys extends Supermarket {
         const image = getImageUrl($('.productNameAndPromotions img', element).attr('src')!);
         const url = link.attr('href'); // https://www.sainsburys.co.uk/shop/gb/groceries/andrex-toilet-tissue--classic-white-16x241-sheets
         const urlMatch = url!.match(/\/([^/]*$)/i);
-        const id = urlMatch && `sainsburys:${urlMatch[1]}` || '';
+        const id = urlMatch && `${this.getPrefix()}:${urlMatch[1]}` || '';
         const priceText = $('.pricePerUnit', element).text().trim();
         const isPence = priceText.indexOf('£') < 0;
         const priceValue = parseFloat(priceText.replace(/[^\d.]+/g, ''));

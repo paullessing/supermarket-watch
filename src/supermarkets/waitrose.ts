@@ -19,6 +19,10 @@ export class Waitrose extends Supermarket {
   // missing (1litre)
   // (£1.89/kg)
 
+  public getPrefix(): string {
+    return 'waitrose';
+  }
+
   private async init(): Promise<void> {
     if (this.token) {
       return;
@@ -83,7 +87,7 @@ export class Waitrose extends Supermarket {
         .filter((item: any) => item && item.searchProduct)
         .map(({ searchProduct: product }: any): SearchResultItem => {
           const item: SearchResultItem = {
-            id: `waitrose:${product.id}`,
+            id: `${this.getPrefix()}:${product.id}`,
             name: product.name,
             price: product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail

@@ -3,6 +3,8 @@ import { SearchResult } from '../models/search-result.model';
 
 export abstract class Supermarket {
 
+  public abstract getPrefix(): string;
+
   public abstract getProduct(id: string): Promise<Product | null>;
 
   public async getProducts(ids: string[]): Promise<(Product | null)[]> {

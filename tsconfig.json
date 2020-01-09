@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "strict": true,
+    "esModuleInterop": true,
     "lib": [
       "dom",
       "es2016"

@@ -8,6 +8,10 @@ import * as qs from 'querystring';
 
 export class Tesco extends Supermarket {
 
+  public getPrefix(): string {
+    return 'tesco';
+  }
+
   public async getProduct(productId: string): Promise<Product | null> {
     const search = await axios.get(`https://www.tesco.com/groceries/en-GB/products/${productId}`);
 
@@ -55,7 +59,7 @@ export class Tesco extends Supermarket {
     }
 
     const items: SearchResultItem[] = results.map(({ id, name, image, price }: any) => ({
-      id: `tesco:${id}`,
+      id: `${this.getPrefix()}:${id}`,
       name,
       image,
       price
