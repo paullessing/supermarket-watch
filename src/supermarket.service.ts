@@ -28,13 +28,18 @@ export class SupermarketService {
     return results;
   }
 
-  public getSingleItem(id: string): Promise<Product|null> {
+  public async getSingleItem(id: string): Promise<Product|null> {
+    const match = id.match(/^(\w+)\:(.+)$/);
+    if (!match) {
+      return null;
+    }
+
     for (const supermarket of this.supermarkets) {
       const prefix = supermarket.getPrefix();
-      if (id.indexOf(prefix) === 0) {
-        return supermarket.getProduct(id);
+      if (prefix === match[1]) {
+        return supermarket.getProduct(match[2]);
       }
     }
-    return Promise.resolve(null);
+    return null;
   }
 }
