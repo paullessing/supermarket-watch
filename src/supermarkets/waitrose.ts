@@ -90,7 +90,8 @@ export class Waitrose extends Supermarket {
             id: `${this.getPrefix()}:${product.id}`,
             name: product.name,
             price: product.currentSaleUnitPrice.price.amount,
-            image: product.thumbnail
+            image: product.thumbnail,
+            supermarket: 'Waitrose',
           };
           return item;
         })

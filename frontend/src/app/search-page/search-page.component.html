@@ -1,0 +1,16 @@
+<h2>Search</h2>
+<input #query>
+<button (click)="search(query.value)">Search</button>
+
+<ul *ngIf="results?.length" class="results">
+  <li *ngFor="let result of results" class="results__item result">
+    <div
+      class="result__image"
+      [style.backgroundImage]="'url(' + result.image + ')'"
+    ></div>
+    <h3>{{ result.name }}</h3>
+    <h4>{{ result.supermarket }}</h4>
+    <p>{{ result.price | currency:'GBP' }}</p>
+  </li>
+</ul>
+

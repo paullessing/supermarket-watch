@@ -89,7 +89,8 @@ export class Sainsburys extends Supermarket {
             id,
             name,
             image,
-            price
+            price,
+            supermarket: 'Sainsbury\'s',
           });
         }
       });

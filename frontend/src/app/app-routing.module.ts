@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { RouterModule, Routes } from '@angular/router';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    component: SearchPageComponent,
   },
   {
     path: '**',
@@ -18,3 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

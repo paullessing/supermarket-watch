@@ -1,0 +1,22 @@
+.results {
+  $gutter: 16px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 (-$gutter / 2);
+
+  &__item {
+    flex: 0 0 150px;
+    margin: 0 ($gutter / 2);
+  }
+}
+
+.result {
+  background-color: #fff0eb;
+
+  &__image {
+    width: 100%;
+    padding-bottom: 100%;
+    background-size: contain;
+  }
+}

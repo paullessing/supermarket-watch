@@ -3,6 +3,7 @@ export interface SearchResultItem {
   name: string;
   price: number;
   image: string;
+  supermarket: string;
 }
 
 export interface SearchResult {

@@ -62,7 +62,8 @@ export class Tesco extends Supermarket {
       id: `${this.getPrefix()}:${id}`,
       name,
       image,
-      price
+      price,
+      supermarket: 'Tesco',
     }));
 
     return {
