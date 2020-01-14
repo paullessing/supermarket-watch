@@ -1,6 +1,8 @@
 <h2>Search</h2>
-<input #query>
-<button (click)="search(query.value)">Search</button>
+<form (submit)="search(query.value)">
+  <input #query>
+  <button type="submit">Search</button>
+</form>
 
 <ul *ngIf="results?.length" class="results">
   <li *ngFor="let result of results" class="results__item result">
@@ -13,4 +15,3 @@
     <p>{{ result.price | currency:'GBP' }}</p>
   </li>
 </ul>
-
