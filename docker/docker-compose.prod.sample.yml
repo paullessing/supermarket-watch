@@ -3,11 +3,12 @@ version: '3'
 services:
   api:
     build: .
+    command: yarn start
     expose:
       - ${PORT:-3000}
     volumes:
-      - ./:/usr/src/app
       - /usr/src/app/node_modules
+      - /usr/src/app/frontend/node_modules
     environment:
       # Config for the application
       NODE_ENV: prod
@@ -18,7 +19,6 @@ services:
       VIRTUAL_PORT: ${PORT:-3000}
       VIRTUAL_HOST: shopping.me.com
       LETSENCRYPT_HOST: shopping.me.com
-    command: yarn serve:prod
     networks:
       webnet:
     restart_policy: on-failure
