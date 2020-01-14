@@ -10,13 +10,14 @@ export class Config {
   private readonly configObject: { [key: string]: any } | null;
 
   constructor() {
-    const stat = fs.statSync(path.join(__dirname, '../config/config.json'));
-    this.configObject = stat.isFile() && JSON.parse(fs.readFileSync(path.join(__dirname, '../config/config.json')).toString()) || null;
+    const configFilePath = path.join(__dirname, '../config/config.json');
+    const exists = fs.existsSync(configFilePath);
+    this.configObject = exists && JSON.parse(fs.readFileSync(configFilePath).toString()) || null;
 
     this.port              = this.getConfigValue('PORT', Number, 3000);
     this.environment       = this.getConfigValue('NODE_ENV', String, 'development');
     this.tescoApiKey       = this.getConfigValue('TESCO_API_KEY');
-    this.searchResultCount = this.getConfigValue('SEARCH_RESULT_COUNT', Number);
+    this.searchResultCount = this.getConfigValue('SEARCH_RESULT_COUNT', Number, 120);
   }
 
   private getConfigValue<T>(configKey: string, converter?: (input: string) => T, defaultValue?: T): T {
