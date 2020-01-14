@@ -1,5 +1,5 @@
 import express from 'express';
-import proxy from 'express-http-proxy';
+import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
 import path from 'path';
 import { config } from './config.service';
@@ -17,7 +17,10 @@ if (config.environment === 'prod') {
   app.use(express.static(path.join(__dirname, 'frontend')));
   app.use((req, res) => res.sendFile(path.join(__dirname, 'frontend/index.html'))); // Send unexpected routes to the root index.html
 } else {
-  app.use(proxy('http://localhost:4200'));
+  app.use(proxy({
+    target: 'http://localhost:4200',
+    ws: true,
+  }));
 }
 
 app.listen(config.port, () => console.log(`App running on port ${config.port}`));
