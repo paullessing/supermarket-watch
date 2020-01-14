@@ -2,7 +2,7 @@ import axios from 'axios';
 import axiosCookieJarSupport from 'axios-cookiejar-support';
 import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
-import { config } from '../config/config';
+import { config } from '../config.service';
 import { Product } from '../models/product.model';
 import { SearchResult, SearchResultItem } from '../models/search-result.model';
 import { Supermarket } from './supermarket';
@@ -51,7 +51,7 @@ export class Sainsburys extends Supermarket {
       langId: 44,
       storeId: 10151,
       searchType: 2,
-      pageSize: config.limit,
+      pageSize: config.searchResultCount,
       searchTerm: term,
     });
 

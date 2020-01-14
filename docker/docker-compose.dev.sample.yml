@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - /usr/src/app/node_modules
+      - ./dist/:/usr/src/app
+      - ./config/config.json:/usr/src/app/config.json
+    command: yarn serve:prod
+    environment:
+      NODE_ENV: development

@@ -1,14 +1,12 @@
 import * as readline from 'readline';
 import { SearchResultItem } from './models/search-result.model';
-import { SupermarketService } from './supermarket.service';
+import { supermarketService, SupermarketService } from './supermarket.service';
 import { createTable } from './util';
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-
-const supermarketService = new SupermarketService();
 
 const question = (question: string, allowBlank = false): Promise<string> => {
   const ask = () => new Promise<string>((resolve) => rl.question(question, (result: string) => {

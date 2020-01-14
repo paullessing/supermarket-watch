@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    expose:
+      - ${PORT:-3000}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      # Config for the application
+      NODE_ENV: prod
+      PORT: ${PORT:-3000}
+      TESCO_API_KEY: 000000000000000000000000
+      SEARCH_RESULT_COUNT: 120
+      # Nginx Config
+      VIRTUAL_PORT: ${PORT:-3000}
+      VIRTUAL_HOST: shopping.me.com
+      LETSENCRYPT_HOST: shopping.me.com
+    command: yarn serve:prod
+    networks:
+      webnet:
+
+networks:
+  webnet:
+    external: true

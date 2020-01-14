@@ -1,4 +1,4 @@
-import { config } from '../config/config';
+import { config } from '../config.service';
 import { Supermarket } from './supermarket';
 import axios from 'axios';
 import { Product } from '../models/product.model';
@@ -41,14 +41,14 @@ export class Tesco extends Supermarket {
     const params = qs.stringify({
       query: term,
       offset: 0,
-      limit: config.limit,
+      limit: config.searchResultCount,
     });
 
     const url = `https://dev.tescolabs.com/grocery/products/?${params}`;
 
     const search = await axios.get(url, {
       headers: {
-        'Ocp-Apim-Subscription-Key': config.tescoApiToken
+        'Ocp-Apim-Subscription-Key': config.tescoApiKey
       }
     });
 

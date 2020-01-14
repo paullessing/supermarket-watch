@@ -43,3 +43,5 @@ export class SupermarketService {
     return null;
   }
 }
+
+export const supermarketService = new SupermarketService();

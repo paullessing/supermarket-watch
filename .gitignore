@@ -17,3 +17,9 @@ node_modules
 
 # Logs
 *.log
+
+# Output directories
+dist/
+
+# Copy from .sample.yml for your specific configuration
+./docker-compose.yml
