@@ -22,4 +22,4 @@ node_modules
 dist/
 
 # Copy from .sample.yml for your specific configuration
-./docker-compose.yml
+/docker-compose.yml

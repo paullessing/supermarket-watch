@@ -21,6 +21,7 @@ services:
     command: yarn serve:prod
     networks:
       webnet:
+    restart_policy: on-failure
 
 networks:
   webnet:
