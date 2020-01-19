@@ -7,6 +7,10 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 
+import axios from 'axios';
+import axiosCookieJarSupport from 'axios-cookiejar-support';
+axiosCookieJarSupport(axios);
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
