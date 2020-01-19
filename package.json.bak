@@ -1,0 +1,40 @@
+{
+  "name": "supermarket-watch",
+  "version": "0.0.1",
+  "author": "Paul Lessing <paul@paullessing.com>",
+  "license": "MIT",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "postinstall": "cd frontend && yarn install",
+    "start": "node dist/index.js",
+    "cli": "ts-node src/cli.ts",
+    "clean": "rimraf dist",
+    "build": "yarn clean && yarn build:api && yarn build:frontend",
+    "build:frontend": "cd frontend && yarn build --prod",
+    "build:api": "tsc -p .",
+    "serve:api": "nodemon -e ts,json -w src -w config -x \"ts-node src/index.ts\"",
+    "serve:frontend": "(cd frontend && yarn start)",
+    "serve:dev": "concurrently -n \"backend,frontend\" -c \"cyan,yellow\" \"yarn serve:api\" \"yarn serve:frontend\""
+  },
+  "dependencies": {
+    "axios": "^0.19.1",
+    "axios-cookiejar-support": "^0.5.1",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.15",
+    "@types/express": "^4.17.2",
+    "@types/http-proxy-middleware": "^0.19.3",
+    "@types/morgan": "^1.7.37",
+    "@types/node": "^13.1.6",
+    "concurrently": "^5.0.2",
+    "http-proxy-middleware": "^0.20.0",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
