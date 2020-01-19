@@ -1,36 +1,36 @@
 {
   "version": 1,
   "projects": {
-    "shoppi": {
+    "frontend": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/shoppi",
-      "sourceRoot": "apps/shoppi/src",
-      "prefix": "shoppi",
+      "root": "apps/frontend",
+      "sourceRoot": "apps/frontend/src",
+      "prefix": "frontend",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/shoppi",
-            "index": "apps/shoppi/src/index.html",
-            "main": "apps/shoppi/src/main.ts",
-            "polyfills": "apps/shoppi/src/polyfills.ts",
-            "tsConfig": "apps/shoppi/tsconfig.app.json",
+            "outputPath": "dist/apps/frontend",
+            "index": "apps/frontend/src/index.html",
+            "main": "apps/frontend/src/main.ts",
+            "polyfills": "apps/frontend/src/polyfills.ts",
+            "tsConfig": "apps/frontend/tsconfig.app.json",
             "aot": false,
-            "assets": ["apps/shoppi/src/favicon.ico", "apps/shoppi/src/assets"],
-            "styles": ["apps/shoppi/src/styles.scss"],
+            "assets": ["apps/frontend/src/favicon.ico", "apps/frontend/src/assets"],
+            "styles": ["apps/frontend/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/shoppi/src/environments/environment.ts",
-                  "with": "apps/shoppi/src/environments/environment.prod.ts"
+                  "replace": "apps/frontend/src/environments/environment.ts",
+                  "with": "apps/frontend/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -60,37 +60,37 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "shoppi:build",
-            "proxyConfig": "apps/shoppi/proxy.conf.json"
+            "browserTarget": "frontend:build",
+            "proxyConfig": "apps/frontend/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "shoppi:build:production"
+              "browserTarget": "frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "shoppi:build"
+            "browserTarget": "frontend:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/shoppi/tsconfig.app.json",
-              "apps/shoppi/tsconfig.spec.json"
+              "apps/frontend/tsconfig.app.json",
+              "apps/frontend/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/shoppi/**"]
+            "exclude": ["**/node_modules/**", "!apps/frontend/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/shoppi/jest.config.js",
-            "tsConfig": "apps/shoppi/tsconfig.spec.json",
-            "setupFile": "apps/shoppi/src/test-setup.ts"
+            "jestConfig": "apps/frontend/jest.config.js",
+            "tsConfig": "apps/frontend/tsconfig.spec.json",
+            "setupFile": "apps/frontend/src/test-setup.ts"
           }
         }
       }
@@ -186,5 +186,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "shoppi"
+  "defaultProject": "frontend"
 }

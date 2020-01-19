@@ -1,0 +1,20 @@
+<div class="content">
+  <h2 class="title">Search</h2>
+  <form (submit)="search(query.value, $event);">
+    <input #query>
+    <button type="submit" [disabled]="isSearching">{{ isSearching ? 'Searching...' : 'Search' }}</button>
+  </form>
+
+  <ul *ngIf="results?.length" class="results">
+    <li *ngFor="let result of results" class="results__item result">
+      <div
+        class="result__image"
+        [style.backgroundImage]="'url(' + result.image + ')'"
+      ></div>
+      <p class="result__supermarket">{{ result.supermarket }}</p>
+      <p class="result__name">{{ result.name }}</p>
+      <p class="result__price">{{ result.price | currency:'GBP' }}</p>
+    </li>
+  </ul>
+
+</div>

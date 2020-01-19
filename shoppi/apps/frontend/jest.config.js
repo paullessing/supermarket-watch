@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'shoppi',
+  name: 'frontend',
   preset: '../../jest.config.js',
-  coverageDirectory: '../../coverage/apps/shoppi',
+  coverageDirectory: '../../coverage/apps/frontend',
   snapshotSerializers: [
     'jest-preset-angular/AngularSnapshotSerializer.js',
     'jest-preset-angular/HTMLCommentSerializer.js'
