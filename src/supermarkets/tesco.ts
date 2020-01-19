@@ -38,6 +38,12 @@ export class Tesco extends Supermarket {
   }
 
   public async search(term: string): Promise<SearchResult> {
+    if (!config.tescoApiKey) {
+      return {
+        items: []
+      };
+    }
+
     const params = qs.stringify({
       query: term,
       offset: 0,

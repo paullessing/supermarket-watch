@@ -16,7 +16,7 @@ export class Config {
 
     this.port              = this.getConfigValue('PORT', Number, 3000);
     this.environment       = this.getConfigValue('NODE_ENV', String, 'development');
-    this.tescoApiKey       = this.getConfigValue('TESCO_API_KEY');
+    this.tescoApiKey       = this.getConfigValue('TESCO_API_KEY', String, '');
     this.searchResultCount = this.getConfigValue('SEARCH_RESULT_COUNT', Number, 120);
   }
 
