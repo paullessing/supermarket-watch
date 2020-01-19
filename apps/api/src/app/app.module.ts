@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ProductsController } from '../product/products.controller';
 import { Sainsburys } from './supermarkets/sainsburys';
 import { Waitrose } from './supermarkets/waitrose';
@@ -18,7 +17,6 @@ import { SearchController } from '../search/search.controller';
     SearchController,
   ],
   providers: [
-    AppService,
     Config,
     SupermarketService,
     Sainsburys,
