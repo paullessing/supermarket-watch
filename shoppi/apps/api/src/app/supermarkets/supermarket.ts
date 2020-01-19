@@ -1,5 +1,5 @@
-import { Product } from '../models/product.model';
-import { SearchResult } from '../models/search-result.model';
+import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
+import { SearchResult } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
 
 export abstract class Supermarket {
 

@@ -1,5 +1,4 @@
-import { Product } from './models/product.model';
-import { SearchResultItem } from './models/search-result.model';
+import { Product, SearchResultItem } from '@shoppi/api-interfaces';
 import { Sainsburys } from './supermarkets/sainsburys';
 import { Supermarket } from './supermarkets/supermarket';
 import { Tesco } from './supermarkets/tesco';

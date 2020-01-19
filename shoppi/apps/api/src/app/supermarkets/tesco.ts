@@ -1,8 +1,8 @@
 import { Supermarket } from './supermarket';
 import axios from 'axios';
-import { Product } from '../models/product.model';
+import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
 import * as cheerio from 'cheerio';
-import { SearchResult, SearchResultItem } from '../models/search-result.model';
+import { SearchResult, SearchResultItem } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
 import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import { Config } from '../config.service';

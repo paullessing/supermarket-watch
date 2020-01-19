@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
 import { Config } from '../config.service';
-import { Product } from '../models/product.model';
-import { SearchResult, SearchResultItem } from '../models/search-result.model';
+import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
+import { SearchResult, SearchResultItem } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
 import { Supermarket } from './supermarket';
 import { Injectable } from '@nestjs/common';
 

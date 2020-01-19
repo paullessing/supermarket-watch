@@ -10,7 +10,7 @@
       },
       "root": "apps/frontend",
       "sourceRoot": "apps/frontend/src",
-      "prefix": "frontend",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -21,8 +21,13 @@
             "polyfills": "apps/frontend/src/polyfills.ts",
             "tsConfig": "apps/frontend/tsconfig.app.json",
             "aot": false,
-            "assets": ["apps/frontend/src/favicon.ico", "apps/frontend/src/assets"],
-            "styles": ["apps/frontend/src/styles.scss"],
+            "assets": [
+              "apps/frontend/src/favicon.ico",
+              "apps/frontend/src/assets"
+            ],
+            "styles": [
+              "apps/frontend/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
