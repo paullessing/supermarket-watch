@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: docker/api.Dockerfile
+    command: yarn start:api
+    expose:
+      - ${PORT:-3333}
+    volumes:
+      - /usr/src/app/node_modules
+      - /usr/src/app/frontend/node_modules
+    environment:
+      # Config for the application
+      NODE_ENV: prod
+      PORT: ${PORT:-3333}
+      TESCO_API_KEY: 000000000000000000000000
+      SEARCH_RESULT_COUNT: 120
+      # Nginx Config
+      VIRTUAL_PORT: ${PORT:-3333}
+      VIRTUAL_HOST: shoppi.lessi.ng
+      LETSENCRYPT_HOST: shoppi.lessi.ng
+    networks:
+      webnet:
+#    restart_policy: on-failure
+  frontend:
+    build:
+      context: ../
+      dockerfile: docker/frontend.Dockerfile
+    expose:
+      - 80
+#    restart_policy: on-failure
+
+networks:
+  webnet:
+    external: true

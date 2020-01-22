@@ -7,6 +7,7 @@
     "nx": "nx",
     "serve:all": "concurrently -n \"backend,frontend\" -c \"cyan,yellow\" \"yarn ng serve api\" \"yarn ng serve frontend\"",
     "start": "ng serve",
+    "start:api": "node dist/apps/api/main.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
