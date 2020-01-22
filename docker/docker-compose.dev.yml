@@ -13,14 +13,14 @@ services:
       - /usr/src/app/frontend/node_modules
     environment:
       # Config for the application
-      NODE_ENV: prod
+      NODE_ENV: development
       PORT: ${PORT:-3333}
-      TESCO_API_KEY: 000000000000000000000000
-      SEARCH_RESULT_COUNT: 120
+      TESCO_API_KEY: ${TESCO_API_KEY:-000000000000000000000000}
+      SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-120}
       # Nginx Config
       VIRTUAL_PORT: ${PORT:-3333}
-      VIRTUAL_HOST: shoppi.lessi.ng
-      LETSENCRYPT_HOST: shoppi.lessi.ng
+      VIRTUAL_HOST: ${HOSTNAME:-shoppi.lessi.ng}
+      LETSENCRYPT_HOST: ${HOSTNAME:-shoppi.lessi.ng}
     networks:
       webnet:
 #    restart_policy: on-failure
