@@ -8,12 +8,9 @@ services:
     command: yarn start:api
     expose:
       - ${PORT:-3333}
-    volumes:
-      - /usr/src/app/node_modules
-      - /usr/src/app/frontend/node_modules
     environment:
       # Config for the application
-      NODE_ENV: development
+      NODE_ENV: prod
       PORT: ${PORT:-3333}
       TESCO_API_KEY: ${TESCO_API_KEY:-000000000000000000000000}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-120}
@@ -23,18 +20,6 @@ services:
       LETSENCRYPT_HOST: ${HOSTNAME:-shoppi.lessi.ng}
     networks:
       webnet:
-#    restart_policy: on-failure
-  frontend:
-    depends_on:
-      - api
-    build:
-      context: ../
-      dockerfile: docker/frontend.Dockerfile
-    command: /opt/wait-for api:3333 -- nginx -g "daemon off;"
-    expose:
-      - 80
-    volumes:
-      - ../dist/apps/frontend:/usr/share/nginx/html:ro
 #    restart_policy: on-failure
 
 networks:

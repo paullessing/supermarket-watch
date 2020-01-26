@@ -11,3 +11,6 @@ COPY apps apps/
 COPY libs libs/
 
 RUN yarn ng build api --prod
+RUN yarn ng build frontend --prod
+
+CMD [ "yarn", "start:api" ]

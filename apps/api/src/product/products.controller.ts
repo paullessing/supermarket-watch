@@ -2,7 +2,7 @@ import { BadRequestException, Controller, Get, NotFoundException, Param } from '
 import { Product } from '@shoppi/api-interfaces';
 import { SupermarketService } from '../app/supermarket.service';
 
-@Controller('products')
+@Controller('api/products')
 export class ProductsController {
 
   constructor(

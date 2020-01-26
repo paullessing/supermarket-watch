@@ -1,18 +1,21 @@
 import { Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import path from 'path';
 import { ProductsController } from '../product/products.controller';
-import { Sainsburys } from './supermarkets/sainsburys';
-import { Waitrose } from './supermarkets/waitrose';
-import { Tesco } from './supermarkets/tesco';
+import { SearchController } from '../search/search.controller';
 import { Config } from './config.service';
 import { SupermarketService } from './supermarket.service';
-import { SearchController } from '../search/search.controller';
+import { Sainsburys } from './supermarkets/sainsburys';
+import { Tesco } from './supermarkets/tesco';
+import { Waitrose } from './supermarkets/waitrose';
 
 @Module({
-  imports: [],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'frontend')
+    })
+  ],
   controllers: [
-    AppController,
     ProductsController,
     SearchController,
   ],
