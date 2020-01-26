@@ -30,6 +30,8 @@ services:
       dockerfile: docker/frontend.Dockerfile
     expose:
       - 80
+    volumes:
+      - ../dist/apps/frontend:/usr/share/nginx/html:ro
 #    restart_policy: on-failure
 
 networks:
