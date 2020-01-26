@@ -5,8 +5,9 @@ WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn install
 
-COPY . ./
+COPY angular.json nest-cli.json nx.json tsconfig.json ./
+
+COPY apps apps/
+COPY libs libs/
 
 RUN yarn ng build api --prod
-
-CMD [ "yarn", "start:dev" ]
