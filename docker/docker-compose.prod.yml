@@ -4,7 +4,7 @@ services:
   api:
     build:
       context: ../
-      dockerfile: docker/api.Dockerfile
+      dockerfile: docker/prod.Dockerfile
     command: yarn start:api
     expose:
       - ${PORT:-3333}

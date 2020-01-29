@@ -5,12 +5,15 @@
   "scripts": {
     "ng": "ng",
     "nx": "nx",
-    "serve:all": "concurrently -n \"backend,frontend\" -c \"cyan,yellow\" \"yarn ng serve api\" \"yarn ng serve frontend\"",
+    "serve:all": "concurrently -n \"backend,frontend\" -c \"cyan,yellow\" \"yarn serve:api:dev\" \"yarn serve:frontend:dev\"",
+    "serve:api:dev": "ng serve api",
+    "serve:frontend:dev": "ng serve frontend --host=0.0.0.0",
     "start": "ng serve",
     "start:api": "node dist/apps/api/main.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
+
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
@@ -18,9 +21,11 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
+
     "format": "nx format:write",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
+
     "update": "ng update @nrwl/workspace",
     "update:check": "ng update",
     "workspace-schematic": "nx workspace-schematic",

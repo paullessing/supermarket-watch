@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { SearchResultItem } from '@shoppi/api-interfaces';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-search-page',
@@ -27,11 +28,10 @@ export class SearchPageComponent {
     }
     this.isSearching = true;
 
-    this.http.get('/api/search', {
+    this.http.get(environment.apiUrl + '/search', {
       params: { q: query }
     }).subscribe(({ items }: any) => {
       this.results = items;
-      this.isSearching = false;
     });
   }
 }
