@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: yarn start:api
+    expose:
+      - ${PORT:-3333}
+    environment:
+      # Config for the application
+      NODE_ENV: prod
+      PORT: ${PORT:-3333}
+      TESCO_API_KEY: ${TESCO_API_KEY:-000000000000000000000000}
+      SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-120}
+      # Nginx Config
+      VIRTUAL_PORT: ${PORT:-3333}
+      VIRTUAL_HOST: ${HOSTNAME:-my.domain.com}
+      LETSENCRYPT_HOST: ${HOSTNAME:-my.domain.comg}
+    networks:
+      webnet:
+#    restart_policy: on-failure
+
+networks:
+  webnet:
+    external: true
