@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
 import { Config } from '../config.service';
-import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
-import { SearchResult, SearchResultItem } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
+import { Product } from '@shoppi/api-interfaces';
+import { SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Supermarket } from './supermarket';
 import { Injectable } from '@nestjs/common';
 
@@ -51,52 +51,26 @@ export class Sainsburys extends Supermarket {
 
   public async search(term: string): Promise<SearchResult> {
     const params = qs.stringify({
-      langId: 44,
-      storeId: 10151,
-      searchType: 2,
-      pageSize: this.config.searchResultCount,
-      searchTerm: term,
+      'filter[keyword]': term,
+      page_size: this.config.searchResultCount,
     });
 
-    const url = `https://www.sainsburys.co.uk/shop/gb/SearchDisplay?${params}`;
-    const search = await axios.get(url, {
-      jar: true,
-      withCredentials: true,
-    });
+    const url = `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?${params}`;
+    const search = await axios.get(url);
 
-    const $ = cheerio.load(search.data);
+    const results = search.data.products;
 
-    const hasResult = $('#productsContainer').length > 0;
-
-    if (!hasResult) {
+    if (!results.length) {
       return { items: [] };
     }
 
-    const items: SearchResultItem[] = [];
-
-    $('#productsContainer .productLister .product')
-      .each((i, element) => {
-        const link = $('.productNameAndPromotions h3 a', element);
-        const name = link.text().trim();
-        const image = getImageUrl($('.productNameAndPromotions img', element).attr('src')!);
-        const url = link.attr('href'); // https://www.sainsburys.co.uk/shop/gb/groceries/andrex-toilet-tissue--classic-white-16x241-sheets
-        const urlMatch = url!.match(/\/([^/]*$)/i);
-        const id = urlMatch && `${this.getPrefix()}:${urlMatch[1]}` || '';
-        const priceText = $('.pricePerUnit', element).text().trim();
-        const isPence = priceText.indexOf('£') < 0;
-        const priceValue = parseFloat(priceText.replace(/[^\d.]+/g, ''));
-        const price = priceValue && (priceValue / (isPence ? 100 : 1));
-
-        if (id) {
-          items.push({
-            id,
-            name,
-            image,
-            price,
-            supermarket: 'Sainsbury\'s',
-          });
-        }
-      });
+    const items: SearchResultItem[] = results.map((result) => ({
+      name: result.name,
+      image: result.image,
+      price: result.retail_price.price,
+      id: result.product_uid,
+      supermarket: 'Sainsbury\'s',
+    }));
 
     return {
       items
