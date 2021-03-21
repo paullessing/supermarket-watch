@@ -12,12 +12,12 @@ services:
       # Config for the application
       NODE_ENV: prod
       PORT: ${PORT:-3333}
-      TESCO_API_KEY: ${TESCO_API_KEY:-000000000000000000000000}
-      SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-120}
+      TESCO_API_KEY: ${TESCO_API_KEY}
+      SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
       # Nginx Config
       VIRTUAL_PORT: ${PORT:-3333}
-      VIRTUAL_HOST: ${HOSTNAME:-my.domain.com}
-      LETSENCRYPT_HOST: ${HOSTNAME:-my.domain.comg}
+      VIRTUAL_HOST: ${HOSTNAME}
+      LETSENCRYPT_HOST: ${HOSTNAME}
     networks:
       webnet:
 #    restart_policy: on-failure

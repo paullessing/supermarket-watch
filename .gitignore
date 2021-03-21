@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Copy from .sample.yml for your specific configuration
-/docker-compose.yml
+# Copy from .env.dist for your specific configuration
+/.env
 
 # compiled output
 /dist
