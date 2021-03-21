@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: docker/dev.Dockerfile
+    command: 'yarn serve:all'
+    environment:
+      NODE_ENV: dev
+      PORT: ${PORT:-3333}
+      TESCO_API_KEY: ${TESCO_API_KEY:?Tesco API Key is required}
+      SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
+    ports:
+      - ${PORT:-3333}:${PORT:-3333}
+      - 4200:4200
+    networks:
+      webnet:
+    volumes:
+      - ./apps:/usr/src/app/apps
+      - ./config:/usr/src/app/config
+      - ./libs:/usr/src/app/libs
+      - ./tools:/usr/src/app/tools
+      - ./node_modules:/usr/src/app/node_modules
+      - ./angular.json:/usr/src/app/angular.json:ro
+      - ./nx.json:/usr/src/app/nx.json:ro
+      - ./nest-cli.json:/usr/src/app/nest-cli.json:ro
+      - ./tsconfig.json:/usr/src/app/tsconfig.json:ro
+      - ./package.json:/usr/src/app/package.json:ro
+      - ./yarn.lock:/usr/src/app/yarn.lock:ro
+
+networks:
+  webnet:
+    external: true
