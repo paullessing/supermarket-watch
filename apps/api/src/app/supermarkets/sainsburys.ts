@@ -78,6 +78,8 @@ interface SainsburysSearchResult {
 @Injectable()
 export class Sainsburys extends Supermarket {
 
+  public static readonly NAME = 'Sainsbury\'s';
+
   constructor(private config: Config) {
     super();
   }
@@ -98,6 +100,7 @@ export class Sainsburys extends Supermarket {
 
     return {
       name: product.name,
+      supermarket: Sainsburys.NAME,
       price: product.retail_price.price,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,

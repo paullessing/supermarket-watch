@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { Product } from '@shoppi/api-interfaces';
 import { SupermarketService } from '../app/supermarket.service';
 
@@ -20,5 +20,29 @@ export class ProductsController {
     }
 
     return item;
+  }
+
+  @Get('/')
+  public async getMultipleById(@Query('ids') idsQuery: string): Promise<{ items: Product[] }> {
+    if (!idsQuery) {
+      throw new BadRequestException('Missing required URL parameter "id"');
+    }
+    const ids = idsQuery.split(',');
+
+    if (!ids.length) {
+      throw new BadRequestException('Missing required URL parameter "ids"');
+    }
+
+    const items = await Promise.all(ids.map(async (id): Promise<Product> => {
+      const item = await this.supermarketService.getSingleItem(id);
+      if (!item) {
+        throw new NotFoundException();
+      }
+      return item;
+    }));
+
+    return {
+      items
+    };
   }
 }

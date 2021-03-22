@@ -1,14 +1,15 @@
-import { Supermarket } from './supermarket';
-import axios from 'axios';
-import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
-import * as cheerio from 'cheerio';
-import { SearchResult, SearchResultItem } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
-import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
+import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+import * as qs from 'querystring';
 import { Config } from '../config.service';
+import { Supermarket } from './supermarket';
 
 @Injectable()
 export class Tesco extends Supermarket {
+
+  public static readonly NAME = 'Tesco';
 
   constructor(private config: Config) {
     super();
@@ -37,6 +38,7 @@ export class Tesco extends Supermarket {
     return {
       name,
       price,
+      supermarket: Tesco.NAME,
       unitName: measure,
       pricePerUnit: pricePerMeasure,
       isPence: false

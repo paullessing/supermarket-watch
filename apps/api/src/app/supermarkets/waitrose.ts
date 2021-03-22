@@ -1,12 +1,14 @@
+import { Injectable } from '@nestjs/common';
+import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
+import axios from 'axios';
 import { Config } from '../config.service';
 import { Supermarket } from './supermarket';
-import axios from 'axios';
-import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
-import { SearchResult, SearchResultItem } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class Waitrose extends Supermarket {
+
+  public static readonly NAME = 'Waitrose';
+
   private customerId: string = '';
   private token: string = '';
 
@@ -97,7 +99,7 @@ export class Waitrose extends Supermarket {
             name: product.name,
             price: product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail,
-            supermarket: 'Waitrose',
+            supermarket: Waitrose.NAME,
           };
           return item;
         })
@@ -106,13 +108,12 @@ export class Waitrose extends Supermarket {
 }
 
 function transformSingleResult(result: any): Product {
-  const product: Partial<Product> = {
+  return {
     name: result.name,
-    price: result.currentSaleUnitPrice.price.amount,
+    price: result.promotion?.promotionUnitPrice?.amount || result.currentSaleUnitPrice.price.amount,
+    supermarket: Waitrose.NAME,
     ...getPrice(result)
   };
-
-  return product as Product;
 }
 
 function getPrice(result: any): { pricePerUnit: number, unitName: string, isPence: boolean } {
