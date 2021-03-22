@@ -1,11 +1,79 @@
+import { Injectable } from '@nestjs/common';
+import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import axios from 'axios';
-import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
 import { Config } from '../config.service';
-import { Product } from '@shoppi/api-interfaces';
-import { SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Supermarket } from './supermarket';
-import { Injectable } from '@nestjs/common';
+
+type PriceInPounds = number;
+
+interface SainsburysSearchResults {
+  products: SainsburysSearchResult[];
+}
+
+interface SainsburysSearchResult {
+  product_uid: string;
+  favourite_uid: unknown;
+  product_type: 'BASIC' | unknown;
+  name: string;
+  image: string; // size: L
+  image_zoom: unknown;
+  image_thumbnail: string; // size: M
+  image_thumbnail_small: string; // size: S
+  full_url: string; // product web URL
+  unit_price: {
+    price: PriceInPounds;
+    measure: 'ltr' | string;
+    measure_amount: number
+  };
+  retail_price: {
+    price: PriceInPounds;
+    measure: 'unit' | string;
+  };
+  is_available: boolean;
+  promotions: unknown[];
+  associations: unknown[];
+  is_alcoholic: boolean;
+  is_spotlight: boolean;
+  is_intolerant: boolean;
+  is_mhra: boolean;
+  badges: unknown[];
+  labels: unknown[];
+  zone: unknown;
+  department: unknown;
+  reviews: {
+    is_enabled: boolean;
+    product_uid: string; // same as top
+    total: number;
+    average_rating: number; // 1-5
+  };
+  breadcrumbs: {
+    label: string;
+    url: string; // relative to root
+  }[];
+  'details_html'?: string; // base64 encoded HTML
+  assets: {
+    plp_image: string;
+    images: {
+      id: string; // e.g. '1'
+      sizes: {
+        width: number; // px
+        height: number; // px
+        url: string;
+      }[];
+    }[];
+    video: unknown[]
+  };
+  description: string[]; // e.g. 'Almond drink with added calcium and vitamins.'
+  important_information: string[];
+  attachments: unknown[];
+  categories: {
+    id: string; // category ID e.g. '428940'
+    name: string; // category name e.g. 'All dairy free'
+  }[];
+  display_icons: unknown[];
+  pdp_deep_link: '/shop/ProductDisplay?storeId=10151&langId=44&productId=34260'
+}
 
 @Injectable()
 export class Sainsburys extends Supermarket {
@@ -18,33 +86,21 @@ export class Sainsburys extends Supermarket {
     return 'sainsburys';
   }
 
-  public async getProduct(productLink: string): Promise<Product | null> {
-    const search = await axios.get(`https://www.sainsburys.co.uk/shop/gb/groceries/${productLink}`, {
-      jar: true,
-      withCredentials: true,
-    });
+  public async getProduct(productUid: string): Promise<Product | null> {
 
-    const $ = cheerio.load(search.data);
+    const search = await axios.get<SainsburysSearchResults>(`https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`);
 
-    const hasResult = $('.productContent').length > 0;
-    if (!hasResult) {
+    if (!search.data.products || !search.data.products.length) {
       return null;
     }
 
-    const name = $('.productTitleDescriptionContainer h1').text();
-    const priceText = $('.pricePerUnit').text();
-    const isPence = priceText.indexOf('£') < 0;
-    const priceValue = parseFloat(priceText.replace(/[^\d.]+/g, ''));
-    const price = priceValue && priceValue / (isPence ? 100 : 0);
-    const pricePerMeasureMatch = $('.pricePerMeasure').text().match(/([\d.]+)/);
-    const pricePerMeasure = pricePerMeasureMatch ? parseFloat(pricePerMeasureMatch[1]) : -1;
-    const measure = $('.pricePerMeasureMeasure').text(); // TODO this is wrong
+    const product = search.data.products[0];
 
     return {
-      name,
-      price,
-      unitName: measure,
-      pricePerUnit: pricePerMeasure,
+      name: product.name,
+      price: product.retail_price.price,
+      unitName: product.unit_price.measure,
+      pricePerUnit: product.unit_price.price,
       isPence: false
     };
   }
@@ -75,13 +131,5 @@ export class Sainsburys extends Supermarket {
     return {
       items
     };
-  }
-}
-
-function getImageUrl(image: string): string {
-  if (image.indexOf('//') === 0) {
-    return 'https:' + image;
-  } else {
-    return image;
   }
 }
