@@ -36,7 +36,9 @@ export class ProductsController {
     const items = await Promise.all(ids.map(async (id): Promise<Product> => {
       let item;
       try {
+        console.log('Fetching:', id);
         item = await this.supermarketService.getSingleItem(id);
+        console.log('Done');
       } catch (e) {
         console.log('Error finding item:', id, e);
         throw e;
