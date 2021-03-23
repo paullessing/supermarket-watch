@@ -28,7 +28,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "node ./decorate-angular-cli.js"
+    "postinstall": "node ./decorate-angular-cli.js",
+    "dc-prod": "docker-compose -f docker/docker-compose.prod.yml"
   },
   "private": true,
   "dependencies": {
