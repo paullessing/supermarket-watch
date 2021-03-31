@@ -3,7 +3,7 @@ FROM node:12-alpine
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock decorate-angular-cli.js ./
-RUN yarn install
+RUN yarn install --frozen-lockfile --network-timeout 60000
 
 COPY angular.json nest-cli.json nx.json tsconfig.base.json ./
 
