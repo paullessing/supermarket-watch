@@ -4,8 +4,8 @@ services:
   api:
     container_name: shoppi_lessi_ng
     image: ghcr.io/paullessing/supermarket-watch:latest
-    expose:
-      - ${PORT:-3333}
+    ports:
+      - ${HOST_PORT:-3333}:${PORT:-3333}
     environment:
       # Config for the application
       NODE_ENV: prod
