@@ -32,4 +32,4 @@ jobs:
           file: "./docker/Dockerfile"
           push: true
           tags: "ghcr.io/paullessing/supermarket-watch:latest,ghcr.io/paullessing/supermarket-watch:${{ github.sha }}"
-          platforms: linux/amd64,linux/arm/v7
+          platforms: linux/arm/v7
