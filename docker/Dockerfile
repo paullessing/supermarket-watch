@@ -18,6 +18,6 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/dist dist/
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=true --network-timeout 60000
+RUN yarn install --frozen-lockfile --production=true --network-timeout 60000 && yarn cache clean
 
 CMD [ "yarn", "start:api" ]
