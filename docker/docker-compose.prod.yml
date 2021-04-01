@@ -3,10 +3,7 @@ version: '3'
 services:
   api:
     container_name: shoppi_lessi_ng
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile
-    command: yarn start:api
+    image: ghcr.io/paullessing/supermarket-watch:latest
     expose:
       - ${PORT:-3333}
     environment:
