@@ -23,11 +23,11 @@ export class ProductsController {
   }
 
   @Get('/')
-  public async getMultipleById(@Query('ids') idsQuery: string): Promise<{ items: Product[] }> {
+  public async getMultipleById(@Query('ids') idsQuery: string | string[]): Promise<{ items: Product[] }> {
     if (!idsQuery) {
-      throw new BadRequestException('Missing required URL parameter "id"');
+      throw new BadRequestException('Missing required URL parameter "ids"');
     }
-    const ids = idsQuery.split(',');
+    const ids = Array.isArray(idsQuery) ? idsQuery : idsQuery.split(',');
 
     if (!ids.length) {
       throw new BadRequestException('Missing required URL parameter "ids"');

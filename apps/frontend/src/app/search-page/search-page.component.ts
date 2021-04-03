@@ -32,6 +32,7 @@ export class SearchPageComponent {
       params: { q: query }
     }).subscribe(({ items }: any) => {
       this.results = items;
+      this.isSearching = false;
     });
   }
 }
