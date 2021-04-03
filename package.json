@@ -29,7 +29,9 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "if [ \"$NODE_ENV\" != \"production\" ]; then node ./decorate-angular-cli.js; fi",
-    "dc-prod": "docker-compose -f docker/docker-compose.prod.yml"
+    "dc-prod": "docker-compose -f docker/docker-compose.prod.yml",
+    "build:proxy": "cd proxy && yarn install",
+    "start:proxy": "cd proxy && yarn start"
   },
   "private": true,
   "dependencies": {
