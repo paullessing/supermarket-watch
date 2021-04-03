@@ -4,8 +4,11 @@ services:
   api:
     container_name: shoppi_lessi_ng
     image: ghcr.io/paullessing/supermarket-watch:latest
-    ports:
-      - ${HOST_PORT:-3333}:${PORT:-3333}
+    command: sh -c "ip route add 192.168.255.0/24 via 172.30.0.100 && yarn start:api" # Allow the proxy through
+    cap_add: # Required to make `ip route add` work
+      - NET_ADMIN
+    expose:
+      - ${PORT:-3333}
     environment:
       # Config for the application
       NODE_ENV: prod
