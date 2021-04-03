@@ -1,0 +1,12 @@
+{
+  "name": "supermarket-watch-proxy",
+  "version": "0.0.0",
+  "main": "proxy.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node proxy.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

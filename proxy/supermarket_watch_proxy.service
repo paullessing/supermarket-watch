@@ -1,0 +1,12 @@
+[Unit]
+Description=Supermarket Watch Proxy
+After=network.target
+
+[Service]
+Type=simple
+User=node-daemon
+ExecStart=/usr/bin/env node /opt/supermarket-watch/proxy/proxy.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

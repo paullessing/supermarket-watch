@@ -7,6 +7,7 @@ export class Config {
   public readonly port: number;
   public readonly environment: string;
   public readonly tescoApiKey: string;
+  public readonly tescoProductUrl: string;
   public readonly searchResultCount: number; // Number of results a search query will fetch from the supermarket search page
 
   private readonly configObject: { [key: string]: any } | null;
@@ -19,6 +20,7 @@ export class Config {
     this.port              = this.getConfigValue('PORT', Number, 3000);
     this.environment       = this.getConfigValue('NODE_ENV', String, 'development');
     this.tescoApiKey       = this.getConfigValue('TESCO_API_KEY', String, '');
+    this.tescoProductUrl   = this.getConfigValue('TESCO_PRODUCT_URL', String, 'https://www.tesco.com/groceries/en-GB/products/');
     this.searchResultCount = this.getConfigValue('SEARCH_RESULT_COUNT', Number, 120);
   }
 

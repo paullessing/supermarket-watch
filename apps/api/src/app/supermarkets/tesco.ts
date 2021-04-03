@@ -20,7 +20,7 @@ export class Tesco extends Supermarket {
   }
 
   public async getProduct(productId: string): Promise<Product | null> {
-    const search = await axios.get(`https://www.tesco.com/groceries/en-GB/products/${productId}`);
+    const search = await axios.get(this.config.tescoProductUrl + productId);
 
     const $ = cheerio.load(search.data);
 
