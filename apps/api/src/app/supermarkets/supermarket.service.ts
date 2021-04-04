@@ -1,25 +1,13 @@
+import { Inject, Injectable } from '@nestjs/common';
 import { Product, SearchResultItem } from '@shoppi/api-interfaces';
-import { Sainsburys } from './sainsburys';
-import { Supermarket } from './supermarket';
-import { Tesco } from './tesco';
-import { Waitrose } from './waitrose';
-import { Injectable } from '@nestjs/common';
+import { Supermarket, Supermarkets } from './supermarket';
 
 @Injectable()
 export class SupermarketService {
-  private readonly supermarkets: Supermarket[];
 
   constructor(
-    waitrose: Waitrose,
-    sainsburys: Sainsburys,
-    tesco: Tesco,
-  ) {
-    this.supermarkets = [
-      waitrose,
-      sainsburys,
-      tesco,
-    ];
-  }
+    @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
+  ) {}
 
   public async search(query: string): Promise<SearchResultItem[]> {
     const resultsBySupermarket = await Promise.all(

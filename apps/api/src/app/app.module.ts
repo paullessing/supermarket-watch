@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import path from 'path';
+import { Config } from './config.service';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
-import { Config } from './config.service';
-import { SupermarketService } from './supermarkets';
-import { Sainsburys } from './supermarkets/sainsburys';
-import { Tesco } from './supermarkets/tesco';
-import { Waitrose } from './supermarkets/waitrose';
+import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
 
 @Module({
   imports: [
@@ -25,6 +22,11 @@ import { Waitrose } from './supermarkets/waitrose';
     Sainsburys,
     Waitrose,
     Tesco,
+    {
+      provide: Supermarkets,
+      useFactory: (...supermarkets: Supermarket[]) => supermarkets,
+      inject: [Sainsburys, Waitrose, Tesco],
+    },
   ]
 })
 export class AppModule {}

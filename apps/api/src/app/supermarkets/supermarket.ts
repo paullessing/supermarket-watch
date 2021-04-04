@@ -1,5 +1,7 @@
 import { Product, SearchResult } from '@shoppi/api-interfaces';
 
+export const Supermarkets = 'Supermarkets';
+
 export abstract class Supermarket {
 
   public abstract getPrefix(): string;
