@@ -3,7 +3,7 @@ import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces'
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
-import { Config } from '../config.service';
+import { Config } from '../config';
 import { Supermarket } from './supermarket';
 
 @Injectable()

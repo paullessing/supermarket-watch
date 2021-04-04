@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import axios from 'axios';
-import { Config } from '../config.service';
+import { Config } from '../config';
 import { Supermarket } from './supermarket';
 
 @Injectable()

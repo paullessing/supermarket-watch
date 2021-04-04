@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import path from 'path';
-import { Config } from './config.service';
+import { ConfigProvider } from './config';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
@@ -17,7 +17,7 @@ import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitr
     SearchController,
   ],
   providers: [
-    Config,
+    ConfigProvider,
     SupermarketService,
     Sainsburys,
     Waitrose,
