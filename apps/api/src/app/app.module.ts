@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import path from 'path';
-import { ProductsController } from '../product/products.controller';
-import { SearchController } from '../search/search.controller';
+import { ProductsController } from './products.controller';
+import { SearchController } from './search.controller';
 import { Config } from './config.service';
-import { SupermarketService } from './supermarket.service';
+import { SupermarketService } from './supermarkets';
 import { Sainsburys } from './supermarkets/sainsburys';
 import { Tesco } from './supermarkets/tesco';
 import { Waitrose } from './supermarkets/waitrose';

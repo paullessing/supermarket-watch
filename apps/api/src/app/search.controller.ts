@@ -1,5 +1,5 @@
 import { BadRequestException, Controller, Get, NotFoundException, Query } from '@nestjs/common';
-import { SupermarketService } from '../app/supermarket.service';
+import { SupermarketService } from './supermarkets';
 import { SearchResult } from '@shoppi/api-interfaces';
 
 @Controller('api/search')

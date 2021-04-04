@@ -1,8 +1,8 @@
 import { Product, SearchResultItem } from '@shoppi/api-interfaces';
-import { Sainsburys } from './supermarkets/sainsburys';
-import { Supermarket } from './supermarkets/supermarket';
-import { Tesco } from './supermarkets/tesco';
-import { Waitrose } from './supermarkets/waitrose';
+import { Sainsburys } from './sainsburys';
+import { Supermarket } from './supermarket';
+import { Tesco } from './tesco';
+import { Waitrose } from './waitrose';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
