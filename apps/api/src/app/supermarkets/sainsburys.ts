@@ -99,7 +99,7 @@ export class Sainsburys extends Supermarket {
     const product = search.data.products[0];
 
     return {
-      id: productUid,
+      id: this.getId(productUid),
       name: product.name,
       supermarket: Sainsburys.NAME,
       price: product.retail_price.price,
@@ -125,10 +125,10 @@ export class Sainsburys extends Supermarket {
     }
 
     const items: SearchResultItem[] = results.map((result) => ({
+      id: this.getId(result.product_uid),
       name: result.name,
       image: result.image,
       price: result.retail_price.price,
-      id: result.product_uid,
       supermarket: 'Sainsbury\'s',
     }));
 

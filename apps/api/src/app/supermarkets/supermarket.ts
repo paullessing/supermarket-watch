@@ -1,9 +1,12 @@
-import { Product } from '../../../../../libs/api-interfaces/src/lib/product.model';
-import { SearchResult } from '../../../../../libs/api-interfaces/src/lib/search-result.model';
+import { Product, SearchResult } from '@shoppi/api-interfaces';
 
 export abstract class Supermarket {
 
   public abstract getPrefix(): string;
+
+  protected getId(internalId: string): string {
+    return `${this.getPrefix()}:${internalId}`;
+  }
 
   public abstract getProduct(id: string): Promise<Product | null>;
 

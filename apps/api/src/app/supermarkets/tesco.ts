@@ -36,7 +36,7 @@ export class Tesco extends Supermarket {
     const measure = ($('.price-per-quantity-weight .weight').html() ||'').replace(/^\//, ''); // Use HTML because for some reason cheerio doesn't seem to like `<span>/litre</span>` and returns `/litre/litre`
 
     return {
-      id: productId,
+      id: this.getId(productId),
       name,
       price,
       supermarket: Tesco.NAME,
@@ -74,7 +74,7 @@ export class Tesco extends Supermarket {
     }
 
     const items: SearchResultItem[] = results.map(({ id, name, image, price }: any) => ({
-      id: `${this.getPrefix()}:${id}`,
+      id: this.getId(id),
       name,
       image,
       price,
