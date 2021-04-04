@@ -99,6 +99,7 @@ export class Sainsburys extends Supermarket {
     const product = search.data.products[0];
 
     return {
+      id: productUid,
       name: product.name,
       supermarket: Sainsburys.NAME,
       price: product.retail_price.price,

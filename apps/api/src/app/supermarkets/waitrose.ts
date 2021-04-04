@@ -58,7 +58,7 @@ export class Waitrose extends Supermarket {
     } else {
       const result = searchResult.products[0];
 
-      return transformSingleResult(result);
+      return transformSingleResult(id, result);
     }
   }
 
@@ -107,8 +107,9 @@ export class Waitrose extends Supermarket {
   }
 }
 
-function transformSingleResult(result: any): Product {
+function transformSingleResult(id: string, result: any): Product {
   return {
+    id,
     name: result.name,
     price: result.promotion?.promotionUnitPrice?.amount || result.currentSaleUnitPrice.price.amount,
     supermarket: Waitrose.NAME,
