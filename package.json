@@ -43,6 +43,8 @@
     "axios-cookiejar-support": "^0.5.1",
     "cheerio": "^1.0.0-rc.3",
     "core-js": "^2.5.4",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.0.0"
   },
@@ -70,6 +72,7 @@
     "@nrwl/workspace": "11.5.2",
     "@types/cheerio": "^0.22.15",
     "@types/jest": "26.0.8",
+    "@types/nedb": "^1.8.11",
     "@types/node": "12.12.38",
     "codelyzer": "^6.0.0",
     "concurrently": "^5.0.2",

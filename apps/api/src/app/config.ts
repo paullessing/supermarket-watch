@@ -7,6 +7,7 @@ export class Config {
   public readonly tescoApiKey: string;
   public readonly tescoProductUrl: string;
   public readonly searchResultCount: number;
+  public readonly dbDirPath: string;
 
   constructor(
     config: { [key in keyof Config]: Config[key] }
@@ -15,9 +16,11 @@ export class Config {
   }
 }
 
-type ConfigEntry<T extends string | number> = [
+type ConfigEntry<T extends string | number | boolean> = [
   envValue: string,
-  typeCaster: T extends string ? typeof String : typeof Number,
+  typeCaster: T extends string ? typeof String :
+    T extends number ? typeof Number :
+    never,
   defaultValue?: T
 ];
 
@@ -27,6 +30,7 @@ const configProps: { [configKey in keyof Config]: ConfigEntry<Config[configKey]>
   tescoApiKey:       ['TESCO_API_KEY',       String],
   tescoProductUrl:   ['TESCO_PRODUCT_URL',   String, 'https://www.tesco.com/groceries/en-GB/products/'],
   searchResultCount: ['SEARCH_RESULT_COUNT', Number, 120], // Number of results a search query will fetch from the supermarket search page
+  dbDirPath:         ['DB_DIR_PATH',         String, ''],
 }
 
 export function getConfig(): Config {
