@@ -1,12 +1,23 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Product, SearchResultItem } from '@shoppi/api-interfaces';
+import { ItemSetRepository } from '../db/item-set.repository';
 import { Supermarket, Supermarkets } from './supermarket';
+
+export class InvalidIdException extends Error {
+  constructor(id: string) {
+    super('Invalid ID or Product not found: ' + id);
+
+    // Set the prototype explicitly.
+    Object.setPrototypeOf(this, InvalidIdException.prototype);
+  }
+}
 
 @Injectable()
 export class SupermarketService {
 
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
+    private itemSetRepo: ItemSetRepository,
   ) {}
 
   public async search(query: string): Promise<SearchResultItem[]> {
@@ -21,10 +32,14 @@ export class SupermarketService {
     return results;
   }
 
-  public async getSingleItem(id: string): Promise<Product|null> {
+  public async getMultipleItems(ids: string[]): Promise<Product[]> {
+    return Promise.all(ids.map((id) => this.getSingleItem(id)));
+  }
+
+  public async getSingleItem(id: string): Promise<Product> {
     const match = id.match(/^(\w+)\:(.+)$/);
     if (!match) {
-      return null;
+      throw new InvalidIdException(id);
     }
 
     for (const supermarket of this.supermarkets) {
@@ -33,6 +48,6 @@ export class SupermarketService {
         return supermarket.getProduct(match[2]);
       }
     }
-    return null;
+    throw new InvalidIdException(id);
   }
 }

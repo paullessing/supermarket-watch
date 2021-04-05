@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import path from 'path';
 import { ConfigProvider } from './config';
+import { ItemSetRepository } from './db/item-set.repository';
+import { ItemController } from './item.controller';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
@@ -15,6 +17,7 @@ import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitr
   controllers: [
     ProductsController,
     SearchController,
+    ItemController,
   ],
   providers: [
     ConfigProvider,
@@ -27,6 +30,7 @@ import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitr
       useFactory: (...supermarkets: Supermarket[]) => supermarkets,
       inject: [Sainsburys, Waitrose, Tesco],
     },
+    ItemSetRepository,
   ]
 })
 export class AppModule {}
