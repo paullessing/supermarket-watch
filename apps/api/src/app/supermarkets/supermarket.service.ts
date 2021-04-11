@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Product, SearchResultItem } from '@shoppi/api-interfaces';
-import { ItemSetRepository } from '../db/item-set.repository';
 import { Supermarket, Supermarkets } from './supermarket';
 
 export class InvalidIdException extends Error {
@@ -17,7 +16,6 @@ export class SupermarketService {
 
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private itemSetRepo: ItemSetRepository,
   ) {}
 
   public async search(query: string): Promise<SearchResultItem[]> {
