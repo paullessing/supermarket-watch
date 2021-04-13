@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
 import { Item, ItemService } from './db/item.service';
 import { SupermarketService } from './supermarkets';
 
@@ -11,47 +11,61 @@ export class ItemController {
   ) {}
 
   @Post('')
-  public async addItem(
-    @Body('name') name: string,
+  public async createItem(
     @Body('productIds') productIds: string[],
   ): Promise<Item> {
-    return await this.itemService.createItem(name, productIds);
+    if (!productIds || !productIds.length) {
+      throw new BadRequestException('Missing required parameter "productIds"');
+    }
 
-    // const products: Product[] = await Promise.all(productIds.map(async (productId) => {
-    //   let result: Product;
-    //   try {
-    //     result = await this.supermarketService.getSingleItem(productId);
-    //   } catch (e) {
-    //     throw new BadRequestException(e);
-    //   }
-    //   if (!result) {
-    //     throw new NotFoundException('ID not found: ' + productId);
-    //   }
-    //   return result;
-    // }));
-    //
-    // const now = new Date();
-    //
-    // const itemSet: ItemSet = {
-    //   _id: undefined,
-    //   name: name,
-    //   variants: products.map((product) => ({
-    //     supermarketId: product.id,
-    //     priceHistory: [{ price: product.price, date: now }],
-    //     regularPrice: product.price,
-    //   })),
-    // };
-    //
-    // return await this.itemSetRepo.create(itemSet);
+    const now = new Date();
+
+    return await this.itemService.createOrUpdateItem(null, productIds, now);
+  }
+
+  @Patch(':id')
+  public async addProducts(
+    @Param('id') itemId: string,
+    @Body('addProductIds') productIds: string[],
+    @Body('setName') name: string,
+  ): Promise<Item> {
+    productIds = (productIds || []).filter(Boolean);
+    name = (name || '').trim();
+
+    let item: Item;
+    if (productIds.length) {
+      const now = new Date();
+      item = await this.itemService.createOrUpdateItem(itemId, productIds, now);
+    }
+
+    if (name.length) {
+      item = await this.itemService.updateName(itemId, name);
+    }
+
+    if (!item) {
+      throw new BadRequestException('No update operations specified');
+    }
+
+    return item;
+  }
+
+  @Patch(':id/name')
+  public async updateName(
+    @Param('id') itemId: string,
+    @Body('name') name: string,
+  ): Promise<Item> {
+    name = (name || '').trim();
+    if (!name) {
+      throw new BadRequestException('Missing required parameter "name"');
+    }
+
+    return await this.itemService.updateName(itemId, name);
   }
 
   @Get(':id')
   public async getSingleItem(
     @Param('id') id: string,
   ): Promise<Item> {
-    console.log('HELLOW', id);
-
-
     const item = await this.itemService.getItem(id);
 
     if (!item) {

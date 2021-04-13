@@ -24,7 +24,7 @@ export class Repository<T extends { _id: string }> {
     this.db = Datastore.create(dbConfig);
   }
 
-  public async find(id: string): Promise<T> {
+  public async find(id: string): Promise<T | null> {
     return await this.db.findOne({ _id: id });
   }
 
