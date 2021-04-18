@@ -22,10 +22,23 @@
 }
 
 .result {
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  $root: &;
+
+  &__content {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 2px solid transparent;
+
+    #{$root}__checkbox:checked + & {
+      border-color: #444;
+    }
+  }
+
+  &__checkbox {
+    display: none;
+  }
 
   &__supermarket {
     order: 0;
@@ -43,6 +56,7 @@
   &__name {
     order: 2;
     padding: 0.5rem;
+    min-height: 4.6em; // 3 lines, visually determined
   }
 
   &__price {
