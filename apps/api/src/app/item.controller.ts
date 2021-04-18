@@ -1,4 +1,15 @@
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  InternalServerErrorException,
+  NotFoundException,
+  Param,
+  Patch,
+  Post
+} from '@nestjs/common';
+import { EntityNotFoundError } from './db/entity-not-found.error';
 import { Item, ItemService } from './db/item.service';
 import { SupermarketService } from './supermarkets';
 
@@ -32,7 +43,11 @@ export class ItemController {
     productIds = (productIds || []).filter(Boolean);
     name = (name || '').trim();
 
-    let item: Item;
+    let item: Item = await this.itemService.getItem(itemId);
+    if (!item) {
+      throw new NotFoundException();
+    }
+
     if (productIds.length) {
       const now = new Date();
       item = await this.itemService.createOrUpdateItem(itemId, productIds, now);
@@ -59,7 +74,16 @@ export class ItemController {
       throw new BadRequestException('Missing required parameter "name"');
     }
 
-    return await this.itemService.updateName(itemId, name);
+    try {
+      return await this.itemService.updateName(itemId, name);
+    } catch (e) {
+      if (e instanceof EntityNotFoundError) {
+        throw new NotFoundException();
+      } else {
+        console.error(e);
+        throw new InternalServerErrorException();
+      }
+    }
   }
 
   @Get(':id')

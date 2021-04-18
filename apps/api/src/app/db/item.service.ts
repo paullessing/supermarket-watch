@@ -110,7 +110,7 @@ export class ItemService {
     });
 
     itemProduct.maxPrice = Math.max(itemProduct.maxPrice, product.price);
-    item.price = Math.min(...item.products.map(({ history: [{ price }] }) => price))
+    item.price = Math.min(...item.products.map(({ history: [{ price }] }) => price));
 
     return item;
   }
