@@ -1,4 +1,5 @@
 import { BadRequestException, Controller, Get, NotFoundException, Query } from '@nestjs/common';
+import { FavouritesRepository } from './db/favourites.repository';
 import { SupermarketService } from './supermarkets';
 import { SearchResult } from '@shoppi/api-interfaces';
 
@@ -6,7 +7,8 @@ import { SearchResult } from '@shoppi/api-interfaces';
 export class SearchController {
 
   constructor(
-    private supermarketService: SupermarketService
+    private supermarketService: SupermarketService,
+    private favouritesRepo: FavouritesRepository,
   ) {}
 
   @Get()
@@ -14,10 +16,18 @@ export class SearchController {
     if (!query) {
       throw new BadRequestException('Missing required query parameter "q"');
     }
-    const items = await this.supermarketService.search(query);
-    if (!items) {
+    const supermarketItems = await this.supermarketService.search(query);
+    if (!supermarketItems) {
       throw new NotFoundException();
     }
+
+    const favourites = await this.favouritesRepo.getFavourites(supermarketItems.map(({ id }) => id));
+
+    const items = supermarketItems.map((item) => ({
+      ...item,
+      isFavourite: favourites.indexOf(item.id) >= 0,
+    }));
+
     return { items };
   }
 }

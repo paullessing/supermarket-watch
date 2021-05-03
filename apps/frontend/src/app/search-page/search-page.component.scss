@@ -27,10 +27,43 @@
   flex-direction: column;
   position: relative;
 
-  &__supermarket {
+  &__title {
     order: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__supermarket {
     font-weight: bold;
     padding: 0.5rem;
+  }
+
+  &__favourite {
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: inline-block;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 2rem;
+    width: 2rem;
+    height: 2rem;
+
+    &::before {
+      content: '☆';
+      color: #aaa;
+    }
+
+    &--selected::before {
+      content: '★';
+      color: #ffdd00;
+    }
+
+    &:hover::before {
+      content: '★';
+      color: #ffe765;
+    }
   }
 
   &__image {
@@ -43,6 +76,7 @@
   &__name {
     order: 2;
     padding: 0.5rem;
+    min-height: 4.6em; // 3 lines, visually determined
   }
 
   &__price {

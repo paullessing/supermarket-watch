@@ -5,7 +5,7 @@ import Datastore from 'nedb-promises';
 
 export class Repository<T extends { _id: string }> {
 
-  protected readonly db: Datastore;
+  public readonly db: Datastore;
 
   constructor(
     private config: Config,
@@ -24,7 +24,7 @@ export class Repository<T extends { _id: string }> {
     this.db = Datastore.create(dbConfig);
   }
 
-  public async find(id: string): Promise<T | null> {
+  public async findOne(id: string): Promise<T | null> {
     return await this.db.findOne({ _id: id });
   }
 
@@ -39,5 +39,9 @@ export class Repository<T extends { _id: string }> {
   public async update(item: T): Promise<T> {
     await this.db.update({ _id: item._id }, item);
     return item;
+  }
+
+  public async removeOne(query: any): Promise<number> {
+    return await this.db.remove(query, { multi: false });
   }
 }

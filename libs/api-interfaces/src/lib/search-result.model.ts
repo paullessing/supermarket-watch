@@ -4,6 +4,7 @@ export interface SearchResultItem {
   price: number;
   image: string;
   supermarket: string;
+  isFavourite?: boolean;
 }
 
 export interface SearchResult {
