@@ -1,12 +1,14 @@
-import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post, Query } from '@nestjs/common';
 import { Product } from '@shoppi/api-interfaces';
+import { FavouritesRepository } from './db/favourites.repository';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/products')
 export class ProductsController {
 
   constructor(
-    private supermarketService: SupermarketService
+    private supermarketService: SupermarketService,
+    private favouritesRepo: FavouritesRepository
   ) {}
 
   @Get('/:id')
@@ -44,5 +46,15 @@ export class ProductsController {
     return {
       items
     };
+  }
+
+  // WIP: This should have is own controller
+  @Post('/favourite')
+  public async setFavourite(
+    @Body('isFavourite') isFavourite: boolean,
+    @Body('itemId') itemId: string
+  ): Promise<any> {
+    await this.favouritesRepo.setFavourite(itemId, isFavourite);
+    return { done: true };
   }
 }
