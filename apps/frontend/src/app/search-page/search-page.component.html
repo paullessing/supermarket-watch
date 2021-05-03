@@ -24,4 +24,18 @@
     </li>
   </ul>
 
+  <table *ngIf="favourites.length" style="margin-top: 2rem;">
+    <tr *ngFor="let favourite of favourites; trackBy trackItem">
+      <td style="padding: 0.25rem 0.5rem">
+        {{ favourite.name }}
+      </td>
+      <td style="padding: 0.25rem 0.5rem">
+        <em>{{ favourite.supermarket }}</em>
+      </td>
+      <td style="padding: 0.25rem 0.5rem">
+        {{ favourite.price | currency:'GBP' }}
+      </td>
+    </tr>
+  </table>
+
 </div>

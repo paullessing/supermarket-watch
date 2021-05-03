@@ -20,8 +20,12 @@ export class Repository<T extends { _id: string }> {
       inMemoryOnly: true,
       timestampData: true,
     };
-    console.log('Creating DB with config:', dbConfig);
+    // console.log('Creating DB with config:', dbConfig);
     this.db = Datastore.create(dbConfig);
+  }
+
+  public async findAll(): Promise<T[]> {
+    return this.db.find({});
   }
 
   public async findOne(id: string): Promise<T | null> {

@@ -2,15 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { Config } from '../config';
 import { Repository } from './repository';
 
+interface Favourite {
+  _id: string;
+  itemId: string;
+}
+
 @Injectable()
 export class FavouritesRepository {
 
-  private repo: Repository<any>;
+  private repo: Repository<Favourite>;
 
   constructor(
     config: Config,
   ) {
-    this.repo = new Repository<any>(config, 'favourites.db');
+    this.repo = new Repository(config, 'favourites.db');
   }
 
   public async setFavourite<T extends boolean>(itemId: string, isFavourite: T): Promise<T> {
@@ -22,6 +27,11 @@ export class FavouritesRepository {
     }
 
     return isFavourite;
+  }
+
+  public async getAll(): Promise<string[]> {
+    return (await this.repo.db.find<Favourite>({}).sort({ createdAt: 1 }))
+      .map(({ itemId }) => itemId);
   }
 
   public async getFavourites(itemIds: string[]): Promise<string[]> {

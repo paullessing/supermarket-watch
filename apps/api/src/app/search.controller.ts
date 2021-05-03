@@ -1,7 +1,7 @@
 import { BadRequestException, Controller, Get, NotFoundException, Query } from '@nestjs/common';
 import { FavouritesRepository } from './db/favourites.repository';
 import { SupermarketService } from './supermarkets';
-import { SearchResult } from '@shoppi/api-interfaces';
+import { Product, SearchResult } from '@shoppi/api-interfaces';
 
 @Controller('api/search')
 export class SearchController {
@@ -29,5 +29,15 @@ export class SearchController {
     }));
 
     return { items };
+  }
+
+  @Get('/favourites')
+  public async searchFavourites(): Promise<{ items: Product[] }> {
+    const favourites = await this.favouritesRepo.getAll();
+    const items = await this.supermarketService.getMultipleItems(favourites);
+
+    return {
+      items
+    };
   }
 }
