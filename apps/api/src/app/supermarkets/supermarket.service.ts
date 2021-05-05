@@ -33,26 +33,28 @@ export class SupermarketService {
     return results;
   }
 
-  public async getMultipleItems(ids: string[]): Promise<Product[]> {
+  public async getMultipleItems(ids: string[], forceFresh: boolean = false): Promise<Product[]> {
     return Promise.all(ids.map((id) =>
-      this.getSingleItem(id).catch((e) => {
+      this.getSingleItem(id, forceFresh).catch((e) => {
         console.log('Failed to fetch item', id, e);
         throw e;
       })
     ));
   }
 
-  public async getSingleItem(id: string): Promise<Product> {
+  public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
     const match = id.match(/^(\w+)\:(.+)$/);
     if (!match) {
       throw new InvalidIdException(id);
     }
 
-    const updatedAfter = startOfDay(new Date());
-    const cachedValue = await this.productRepo.get(id, updatedAfter);
-    if (cachedValue) {
-      console.debug('Cache hit for ' + id);
-      return cachedValue;
+    if (!forceFresh) {
+      const updatedAfter = startOfDay(new Date());
+      const cachedValue = await this.productRepo.get(id, updatedAfter);
+      if (cachedValue) {
+        console.debug('Cache hit for ' + id);
+        return cachedValue;
+      }
     }
 
     for (const supermarket of this.supermarkets) {
@@ -60,7 +62,11 @@ export class SupermarketService {
       if (prefix === match[1]) {
         const product = await supermarket.getProduct(match[2]);
         if (product) {
-          console.debug('Cache miss, storing', id);
+          if (forceFresh) {
+            console.debug('Forced refresh', id);
+          } else {
+            console.debug('Cache miss, storing', id);
+          }
           await this.productRepo.save(product);
         }
         return product;
