@@ -13,6 +13,7 @@ export class Tesco extends Supermarket {
 
   constructor(private config: Config) {
     super();
+    console.log('Using Tesco API at ' + config.tescoProductUrl);
   }
 
   public getPrefix(): string {
@@ -33,7 +34,7 @@ export class Tesco extends Supermarket {
     const price = parseFloat($('.price-per-sellable-unit [data-auto="price-value"]').text().replace(/[^\d.]+/g, ''));
     const pricePerMeasureMatch = $('.price-per-quantity-weight [data-auto="price-value"]').text().match(/([\d.]+)/);
     const pricePerMeasure = pricePerMeasureMatch ? parseFloat(pricePerMeasureMatch[1]) : -1;
-    const measure = ($('.price-per-quantity-weight .weight').html() ||'').replace(/^\//, ''); // Use HTML because for some reason cheerio doesn't seem to like `<span>/litre</span>` and returns `/litre/litre`
+    const measure = ($('.price-per-quantity-weight .weight').html() || '').replace(/^\//, ''); // Use HTML because for some reason cheerio doesn't seem to like `<span>/litre</span>` and returns `/litre/litre`
 
     return {
       id: this.getId(productId),
