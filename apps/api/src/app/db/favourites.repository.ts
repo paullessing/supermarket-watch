@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Config } from '../config';
+import { NedbTimestampedDocument } from './nedb-document';
 import { Repository } from './repository';
 
-interface Favourite {
-  _id: string;
+interface Favourite extends NedbTimestampedDocument {
   itemId: string;
 }
 
@@ -15,7 +15,7 @@ export class FavouritesRepository {
   constructor(
     config: Config,
   ) {
-    this.repo = new Repository(config, 'favourites.db');
+    this.repo = new Repository(config, 'favourites.db', { timestampData: true });
   }
 
   public async setFavourite<T extends boolean>(itemId: string, isFavourite: T): Promise<T> {
