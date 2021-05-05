@@ -35,6 +35,9 @@
       <td style="padding: 0.25rem 0.5rem">
         {{ favourite.price | currency:'GBP' }}
       </td>
+      <td style="padding: 0.25rem 0.5rem">
+        {{ favourite.pricePerUnit | currency:'GBP' }}/{{ favourite.unitAmount === 1 ? '' : favourite.unitAmount }}{{ favourite.unitName }}
+      </td>
     </tr>
   </table>
 

@@ -12,11 +12,14 @@ export class ProductsController {
   ) {}
 
   @Get('/:id')
-  public async getById(@Param('id') id: string): Promise<Product> {
+  public async getById(
+    @Param('id') id: string,
+    @Query('force') force: string,
+  ): Promise<Product> {
     if (!id) {
       throw new BadRequestException('Missing required URL parameter "id"');
     }
-    const item = await this.supermarketService.getSingleItem(id);
+    const item = await this.supermarketService.getSingleItem(id, force === 'true');
     if (!item) {
       throw new NotFoundException();
     }

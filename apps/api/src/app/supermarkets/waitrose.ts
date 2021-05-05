@@ -116,29 +116,27 @@ function transformSingleResult(id: string, result: any): Product {
   };
 }
 
-function getPrice(result: any): { pricePerUnit: number, unitName: string, isPence: boolean } {
+function getPrice(result: any): { pricePerUnit: number, unitAmount: number, unitName: string } {
   if (result.displayPriceQualifier) {
     const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
     if (match) {
-      if (match[1][0] === '£') {
-        return {
-          pricePerUnit: parseFloat(match[1].slice(1)),
-          unitName: match[2],
-          isPence: false,
-        };
-      } else {
-        return {
-          pricePerUnit: parseFloat(match[1]) * 100,
-          unitName: match[2],
-          isPence: true
-        };
-      }
+      const [, unitAmountString, unitName] = match[2].match(/^(\d*)([^\d].*)$/);
+      const unitAmount = parseFloat(unitAmountString?.trim() || '') || 1;
+      const pricePerUnit = match[1][0] === '£' ?
+        parseFloat(match[1].slice(1)) :
+        parseFloat(match[1].slice(0, -1)) / 100;
+
+      return {
+        unitAmount,
+        pricePerUnit,
+        unitName: unitName.trim(),
+      };
     }
   }
 
   return {
     pricePerUnit: result.currentSaleUnitPrice.price.amount,
+    unitAmount: 1,
     unitName: 'each',
-    isPence: false
-  }
+  };
 }

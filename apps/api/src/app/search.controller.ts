@@ -32,9 +32,9 @@ export class SearchController {
   }
 
   @Get('/favourites')
-  public async searchFavourites(): Promise<{ items: Product[] }> {
+  public async searchFavourites(@Query('force') force: string): Promise<{ items: Product[] }> {
     const favourites = await this.favouritesRepo.getAll();
-    const items = await this.supermarketService.getMultipleItems(favourites);
+    const items = await this.supermarketService.getMultipleItems(favourites, force === 'true');
 
     return {
       items

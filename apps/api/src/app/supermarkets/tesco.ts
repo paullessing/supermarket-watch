@@ -35,15 +35,16 @@ export class Tesco extends Supermarket {
     const pricePerMeasureMatch = $('.price-per-quantity-weight [data-auto="price-value"]').text().match(/([\d.]+)/);
     const pricePerMeasure = pricePerMeasureMatch ? parseFloat(pricePerMeasureMatch[1]) : -1;
     const measure = ($('.price-per-quantity-weight .weight').html() || '').replace(/^\//, ''); // Use HTML because for some reason cheerio doesn't seem to like `<span>/litre</span>` and returns `/litre/litre`
+    const [, unitAmountString, unitName] = measure.match(/^(\d*)([^\d].*)$/);
 
     return {
       id: this.getId(productId),
       name,
       price,
       supermarket: Tesco.NAME,
-      unitName: measure,
+      unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,
+      unitName: unitName.trim(),
       pricePerUnit: pricePerMeasure,
-      isPence: false
     };
   }
 
