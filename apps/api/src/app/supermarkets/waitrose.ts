@@ -116,7 +116,7 @@ function transformSingleResult(id: string, result: any): Product {
   };
 }
 
-function getPrice(result: any): { pricePerUnit: number, unitName: string, isPence: boolean } {
+function getPrice(result: any): { pricePerUnit: number, unitName: string } {
   if (result.displayPriceQualifier) {
     const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
     if (match) {
@@ -124,13 +124,11 @@ function getPrice(result: any): { pricePerUnit: number, unitName: string, isPenc
         return {
           pricePerUnit: parseFloat(match[1].slice(1)),
           unitName: match[2],
-          isPence: false,
         };
       } else {
         return {
-          pricePerUnit: parseFloat(match[1]) * 100,
+          pricePerUnit: parseFloat(match[1].slice(0, -1)) * 100,
           unitName: match[2],
-          isPence: true
         };
       }
     }
@@ -139,6 +137,5 @@ function getPrice(result: any): { pricePerUnit: number, unitName: string, isPenc
   return {
     pricePerUnit: result.currentSaleUnitPrice.price.amount,
     unitName: 'each',
-    isPence: false
   }
 }

@@ -5,5 +5,4 @@ export interface Product {
   price: number;
   pricePerUnit: number;
   unitName: string;
-  isPence: boolean;
 }

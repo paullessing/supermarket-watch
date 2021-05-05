@@ -43,7 +43,6 @@ export class Tesco extends Supermarket {
       supermarket: Tesco.NAME,
       unitName: measure,
       pricePerUnit: pricePerMeasure,
-      isPence: false
     };
   }
 

@@ -103,9 +103,8 @@ export class Sainsburys extends Supermarket {
       name: product.name,
       supermarket: Sainsburys.NAME,
       price: product.retail_price.price,
-      unitName: product.unit_price.measure,
+      unitName: `${product.unit_price.measure_amount}${product.unit_price.measure}`,
       pricePerUnit: product.unit_price.price,
-      isPence: false
     };
   }
 
