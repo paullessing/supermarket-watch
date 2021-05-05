@@ -43,8 +43,9 @@
     "axios-cookiejar-support": "^0.5.1",
     "cheerio": "^1.0.0-rc.3",
     "core-js": "^2.5.4",
+    "date-fns": "^2.21.2",
     "nedb": "^1.8.0",
-    "nedb-promises": "^4.1.1",
+    "nedb-promises": "^4.1.3",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.0.0"
   },
