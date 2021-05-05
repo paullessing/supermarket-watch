@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Product, SearchResultItem } from '@shoppi/api-interfaces';
+import { startOfDay } from 'date-fns';
+import { ProductRepository } from '../db/product.repository';
 import { Supermarket, Supermarkets } from './supermarket';
 
 export class InvalidIdException extends Error {
@@ -16,6 +18,7 @@ export class SupermarketService {
 
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
+    private readonly productRepo: ProductRepository,
   ) {}
 
   public async search(query: string): Promise<SearchResultItem[]> {
@@ -31,7 +34,12 @@ export class SupermarketService {
   }
 
   public async getMultipleItems(ids: string[]): Promise<Product[]> {
-    return Promise.all(ids.map((id) => this.getSingleItem(id)));
+    return Promise.all(ids.map((id) =>
+      this.getSingleItem(id).catch((e) => {
+        console.log('Failed to fetch item', id, e);
+        throw e;
+      })
+    ));
   }
 
   public async getSingleItem(id: string): Promise<Product> {
@@ -40,10 +48,22 @@ export class SupermarketService {
       throw new InvalidIdException(id);
     }
 
+    const updatedAfter = startOfDay(new Date());
+    const cachedValue = await this.productRepo.get(id, updatedAfter);
+    if (cachedValue) {
+      console.debug('Cache hit for ' + id);
+      return cachedValue;
+    }
+
     for (const supermarket of this.supermarkets) {
       const prefix = supermarket.getPrefix();
       if (prefix === match[1]) {
-        return supermarket.getProduct(match[2]);
+        const product = await supermarket.getProduct(match[2]);
+        if (product) {
+          console.debug('Cache miss, storing', id);
+          await this.productRepo.save(product);
+        }
+        return product;
       }
     }
     throw new InvalidIdException(id);
