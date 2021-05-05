@@ -16,13 +16,20 @@ services:
       TESCO_API_KEY: ${TESCO_API_KEY:?Tesco API Key is required}
       TESCO_PRODUCT_URL: ${TESCO_PRODUCT_URL}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
+      DB_DIR_PATH: ${DB_DIR_PATH}
+
       # Nginx Config
       VIRTUAL_PORT: ${PORT:-3333}
       VIRTUAL_HOST: ${HOSTNAME}
       LETSENCRYPT_HOST: ${HOSTNAME}
     networks:
       webnet:
-#    restart_policy: on-failure
+    #    restart_policy: on-failure
+    volumes:
+      - db:/db
+
+volumes:
+  db:
 
 networks:
   webnet:
