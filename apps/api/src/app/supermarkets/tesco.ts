@@ -5,6 +5,8 @@ import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
+import { Tesco as TescoInterface } from './tesco-product.model';
+import ProductDetails = TescoInterface.ProductDetails;
 
 @Injectable()
 export class Tesco extends Supermarket {
@@ -13,7 +15,7 @@ export class Tesco extends Supermarket {
 
   constructor(private config: Config) {
     super();
-    console.log('Using Tesco API at ' + config.tescoProductUrl);
+    console.log('Using Tesco API at ' + config.tescoUrl);
   }
 
   public getPrefix(): string {
@@ -21,72 +23,92 @@ export class Tesco extends Supermarket {
   }
 
   public async getProduct(productId: string): Promise<Product | null> {
-    const search = await axios.get(this.config.tescoProductUrl + productId);
+    const search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
 
     const $ = cheerio.load(search.data);
+    const reduxState = $('body').data('reduxState');
 
-    const hasResult = $('.product-details-tile').length > 0;
-    if (!hasResult) {
-      return null;
-    }
+    const { product, promotions }: ProductDetails = reduxState.productDetails.item;
 
-    const name = $('.product-details-tile__title').text();
-    const price = parseFloat($('.price-per-sellable-unit [data-auto="price-value"]').text().replace(/[^\d.]+/g, ''));
-    const pricePerMeasureMatch = $('.price-per-quantity-weight [data-auto="price-value"]').text().match(/([\d.]+)/);
-    const pricePerMeasure = pricePerMeasureMatch ? parseFloat(pricePerMeasureMatch[1]) : -1;
-    const measure = ($('.price-per-quantity-weight .weight').html() || '').replace(/^\//, ''); // Use HTML because for some reason cheerio doesn't seem to like `<span>/litre</span>` and returns `/litre/litre`
-    const [, unitAmountString, unitName] = measure.match(/^(\d*)([^\d].*)$/);
+    const [, unitAmountString, unitName] = product.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
 
-    return {
-      id: this.getId(productId),
-      name,
-      price,
+    const result: Product = {
+      id: this.getId(product.id),
+      name: product.title,
+      price: product.price,
       supermarket: Tesco.NAME,
       unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,
       unitName: unitName.trim(),
-      pricePerUnit: pricePerMeasure,
+      pricePerUnit: product.unitPrice,
       isSpecialOffer: false,
     };
+
+    const promotionalPrice = this.getPromotionalPrice(promotions);
+
+    if (promotionalPrice !== null) {
+      const originalPrice = product.price;
+      result.price = promotionalPrice;
+      result.pricePerUnit = parseFloat((product.unitPrice * promotionalPrice / originalPrice).toFixed(2));
+      result.isSpecialOffer = true;
+    }
+
+    return result;
   }
 
   public async search(term: string): Promise<SearchResult> {
-    if (!this.config.tescoApiKey) {
-      return {
-        items: []
-      };
-    }
-
     const params = qs.stringify({
       query: term,
       offset: 0,
       limit: this.config.searchResultCount,
     });
 
-    const url = `https://dev.tescolabs.com/grocery/products/?${params}`;
+    const url = `${this.config.tescoUrl}search?${params}`;
 
-    const search = await axios.get(url, {
-      headers: {
-        'Ocp-Apim-Subscription-Key': this.config.tescoApiKey
+    const search = await axios.get(url);
+
+    const $ = cheerio.load(search.data);
+    const reduxState = $('#data-attributes').data('reduxState');
+
+    const results = [];
+    reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
+      console.log("ID " + id + ', data:', data.product.title)
+
+      const { product, promotions } = data;
+
+      const result: SearchResultItem = {
+        id: this.getId(id),
+        name: product.title,
+        image: product.defaultImageUrl,
+        price: product.price,
+        isSpecialOffer: false,
+        supermarket: Tesco.NAME,
+      };
+
+      const promotionalPrice = this.getPromotionalPrice(promotions);
+
+      if (promotionalPrice !== null) {
+        result.price = promotionalPrice;
+        result.isSpecialOffer = true;
       }
+
+      results.push(result);
     });
 
-    const results = search.data.uk.ghs.products.results;
+    return {
+      items: results,
+    };
+  }
 
-    if (results.length === 0) {
-      return { items: [] };
+  private getPromotionalPrice(promotions: ProductDetails['promotions']): null | number {
+    const promotion = promotions.find(({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0);
+
+    if (promotion) {
+      const match = promotion.offerText.match(/^£(\d+\.\d{2}) /);
+      if (match) {
+        return parseFloat(match[1]);
+      }
     }
 
-    const items: SearchResultItem[] = results.map(({ id, name, image, price }: any) => ({
-      id: this.getId(id),
-      name,
-      image,
-      price,
-      isSpecialOffer: false,
-      supermarket: 'Tesco',
-    }));
-
-    return {
-      items
-    };
+    return null;
   }
 }
