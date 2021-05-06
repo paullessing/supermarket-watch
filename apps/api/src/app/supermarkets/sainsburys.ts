@@ -106,6 +106,7 @@ export class Sainsburys extends Supermarket {
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,
+      isSpecialOffer: false,
     };
   }
 
@@ -129,6 +130,7 @@ export class Sainsburys extends Supermarket {
       name: result.name,
       image: result.image,
       price: result.retail_price.price,
+      isSpecialOffer: false, // TODO
       supermarket: 'Sainsbury\'s',
     }));
 

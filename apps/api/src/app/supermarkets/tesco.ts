@@ -45,6 +45,7 @@ export class Tesco extends Supermarket {
       unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,
       unitName: unitName.trim(),
       pricePerUnit: pricePerMeasure,
+      isSpecialOffer: false,
     };
   }
 
@@ -80,6 +81,7 @@ export class Tesco extends Supermarket {
       name,
       image,
       price,
+      isSpecialOffer: false,
       supermarket: 'Tesco',
     }));
 

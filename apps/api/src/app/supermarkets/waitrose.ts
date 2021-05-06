@@ -100,6 +100,7 @@ export class Waitrose extends Supermarket {
             price: product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail,
             supermarket: Waitrose.NAME,
+            isSpecialOffer: false, // TODO
           };
         })
     };
@@ -112,6 +113,7 @@ function transformSingleResult(id: string, result: any): Product {
     name: result.name,
     price: result.promotion?.promotionUnitPrice?.amount || result.currentSaleUnitPrice.price.amount,
     supermarket: Waitrose.NAME,
+    isSpecialOffer: false,
     ...getPrice(result)
   };
 }
