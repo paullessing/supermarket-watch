@@ -99,7 +99,7 @@ export class Waitrose extends Supermarket {
         .filter(isProduct)
         .map(({ searchProduct: product }: any): SearchResultItem => {
 
-          const promotionalPrice = product.promotion?.promotionUnitPrice.amount;
+          const promotionalPrice = product.promotion?.promotionUnitPrice?.amount;
 
           return {
             id: this.getId(product.id),
@@ -115,7 +115,7 @@ export class Waitrose extends Supermarket {
 }
 
 function transformSingleResult(id: string, result: SingleResult['products'][0]): Product {
-  const promotionalPrice = result.promotion?.promotionUnitPrice.amount;
+  const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
 
   return {
     id,
