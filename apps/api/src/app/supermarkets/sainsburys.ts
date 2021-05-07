@@ -4,76 +4,8 @@ import axios from 'axios';
 import * as qs from 'querystring';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
-
-type PriceInPounds = number;
-
-interface SainsburysSearchResults {
-  products: SainsburysSearchResult[];
-}
-
-interface SainsburysSearchResult {
-  product_uid: string;
-  favourite_uid: unknown;
-  product_type: 'BASIC' | unknown;
-  name: string;
-  image: string; // size: L
-  image_zoom: unknown;
-  image_thumbnail: string; // size: M
-  image_thumbnail_small: string; // size: S
-  full_url: string; // product web URL
-  unit_price: {
-    price: PriceInPounds;
-    measure: 'ltr' | string;
-    measure_amount: number
-  };
-  retail_price: {
-    price: PriceInPounds;
-    measure: 'unit' | string;
-  };
-  is_available: boolean;
-  promotions: unknown[];
-  associations: unknown[];
-  is_alcoholic: boolean;
-  is_spotlight: boolean;
-  is_intolerant: boolean;
-  is_mhra: boolean;
-  badges: unknown[];
-  labels: unknown[];
-  zone: unknown;
-  department: unknown;
-  reviews: {
-    is_enabled: boolean;
-    product_uid: string; // same as top
-    total: number;
-    average_rating: number; // 1-5
-  };
-  breadcrumbs: {
-    label: string;
-    url: string; // relative to root
-  }[];
-  'details_html'?: string; // base64 encoded HTML
-  assets: {
-    plp_image: string;
-    images: {
-      id: string; // e.g. '1'
-      sizes: {
-        width: number; // px
-        height: number; // px
-        url: string;
-      }[];
-    }[];
-    video: unknown[]
-  };
-  description: string[]; // e.g. 'Almond drink with added calcium and vitamins.'
-  important_information: string[];
-  attachments: unknown[];
-  categories: {
-    id: string; // category ID e.g. '428940'
-    name: string; // category name e.g. 'All dairy free'
-  }[];
-  display_icons: unknown[];
-  pdp_deep_link: '/shop/ProductDisplay?storeId=10151&langId=44&productId=34260'
-}
+import { Sainsburys as SainsburysData } from './sainsburys-search-results.model';
+import SearchResults = SainsburysData.SearchResults;
 
 @Injectable()
 export class Sainsburys extends Supermarket {
@@ -90,7 +22,7 @@ export class Sainsburys extends Supermarket {
 
   public async getProduct(productUid: string): Promise<Product | null> {
 
-    const search = await axios.get<SainsburysSearchResults>(`https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`);
+    const search = await axios.get<SearchResults>(`https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`);
 
     if (!search.data.products || !search.data.products.length) {
       return null;
@@ -98,14 +30,17 @@ export class Sainsburys extends Supermarket {
 
     const product = search.data.products[0];
 
+    const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
+
     return {
       id: this.getId(productUid),
       name: product.name,
-      supermarket: Sainsburys.NAME,
       price: product.retail_price.price,
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,
+      isSpecialOffer: !!promo,
+      supermarket: Sainsburys.NAME,
     };
   }
 
@@ -124,13 +59,18 @@ export class Sainsburys extends Supermarket {
       return { items: [] };
     }
 
-    const items: SearchResultItem[] = results.map((result) => ({
-      id: this.getId(result.product_uid),
-      name: result.name,
-      image: result.image,
-      price: result.retail_price.price,
-      supermarket: 'Sainsbury\'s',
-    }));
+    const items: SearchResultItem[] = results.map((result) => {
+      const promo = result.promotions.find((promotion) => promotion.original_price > result.retail_price.price);
+
+      return {
+        id: this.getId(result.product_uid),
+        name: result.name,
+        image: result.image,
+        price: result.retail_price.price,
+        isSpecialOffer: !!promo,
+        supermarket: Sainsburys.NAME,
+      };
+    });
 
     return {
       items

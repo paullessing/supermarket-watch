@@ -6,4 +6,5 @@ export interface Product {
   pricePerUnit: number;
   unitName: string;
   unitAmount: number;
+  isSpecialOffer: boolean;
 }

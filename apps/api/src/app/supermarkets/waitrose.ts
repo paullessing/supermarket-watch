@@ -3,6 +3,10 @@ import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces'
 import axios from 'axios';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
+import { Waitrose as WaitroseData } from './waitrose-search.model';
+import SearchResults = WaitroseData.SearchResults;
+import isProduct = WaitroseData.isProduct;
+import SingleResult = WaitroseData.SingleResult;
 
 @Injectable()
 export class Waitrose extends Supermarket {
@@ -46,7 +50,7 @@ export class Waitrose extends Supermarket {
   public async getProduct(id: string): Promise<Product | null> {
     await this.init();
 
-    const search = await axios.get(`https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`, {
+    const search = await axios.get<SingleResult>(`https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`, {
       headers: {
         authorization: this.token
       }
@@ -79,7 +83,7 @@ export class Waitrose extends Supermarket {
       }
     };
 
-    const response = await axios.post(url, requestBody,
+    const response = await axios.post<SearchResults>(url, requestBody,
     {
       headers: {
         authorization: this.token
@@ -92,26 +96,33 @@ export class Waitrose extends Supermarket {
 
     return {
       items: (response.data.componentsAndProducts || [])
-        .filter((item: any) => item && item.searchProduct)
+        .filter(isProduct)
         .map(({ searchProduct: product }: any): SearchResultItem => {
+
+          const promotionalPrice = product.promotion?.promotionUnitPrice.amount;
+
           return {
             id: this.getId(product.id),
             name: product.name,
-            price: product.currentSaleUnitPrice.price.amount,
+            price: promotionalPrice || product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail,
             supermarket: Waitrose.NAME,
+            isSpecialOffer: !!promotionalPrice,
           };
         })
     };
   }
 }
 
-function transformSingleResult(id: string, result: any): Product {
+function transformSingleResult(id: string, result: SingleResult['products'][0]): Product {
+  const promotionalPrice = result.promotion?.promotionUnitPrice.amount;
+
   return {
     id,
     name: result.name,
-    price: result.promotion?.promotionUnitPrice?.amount || result.currentSaleUnitPrice.price.amount,
+    price: promotionalPrice || result.currentSaleUnitPrice.price.amount,
     supermarket: Waitrose.NAME,
+    isSpecialOffer: !!promotionalPrice,
     ...getPrice(result)
   };
 }
