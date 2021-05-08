@@ -40,16 +40,20 @@ export class Tesco extends Supermarket {
       unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,
       unitName: unitName.trim(),
       pricePerUnit: product.unitPrice,
-      isSpecialOffer: false,
+      specialOffer: null,
     };
 
-    const promotionalPrice = this.getPromotionalPrice(promotions);
+    const promotion = this.getPromotion(promotions);
 
-    if (promotionalPrice !== null) {
+    if (promotion) {
       const originalPrice = product.price;
-      result.price = promotionalPrice;
-      result.pricePerUnit = parseFloat((product.unitPrice * promotionalPrice / originalPrice).toFixed(2));
-      result.isSpecialOffer = true;
+      result.price = promotion.price;
+      result.pricePerUnit = parseFloat((product.unitPrice * promotion.price / originalPrice).toFixed(2));
+      result.specialOffer = {
+        originalPrice,
+        offerText: promotion.offerText,
+        validUntil: promotion.endDate,
+      };
     }
 
     return result;
@@ -84,10 +88,10 @@ export class Tesco extends Supermarket {
         supermarket: Tesco.NAME,
       };
 
-      const promotionalPrice = this.getPromotionalPrice(promotions);
+      const promotion = this.getPromotion(promotions);
 
-      if (promotionalPrice !== null) {
-        result.price = promotionalPrice;
+      if (promotion) {
+        result.price = promotion.price;
         result.isSpecialOffer = true;
       }
 
@@ -99,13 +103,17 @@ export class Tesco extends Supermarket {
     };
   }
 
-  private getPromotionalPrice(promotions: ProductDetails['promotions']): null | number {
+  private getPromotion(promotions: ProductDetails['promotions']): null | { price: number, offerText: string, endDate: string } {
     const promotion = promotions.find(({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0);
 
     if (promotion) {
-      const match = promotion.offerText.match(/^£(\d+\.\d{2}) /);
+      const match = promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
       if (match) {
-        return parseFloat(match[1]);
+         return {
+           price: parseFloat(match[1]),
+           offerText: match[2],
+           endDate: promotion.endDate,
+         };
       }
     }
 

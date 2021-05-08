@@ -117,12 +117,18 @@ export class Waitrose extends Supermarket {
 function transformSingleResult(id: string, result: SingleResult['products'][0]): Product {
   const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
 
+  const defaultPrice = result.currentSaleUnitPrice.price.amount;
+
   return {
     id,
     name: result.name,
-    price: promotionalPrice || result.currentSaleUnitPrice.price.amount,
+    price: promotionalPrice || defaultPrice,
     supermarket: Waitrose.NAME,
-    isSpecialOffer: !!promotionalPrice,
+    specialOffer: result.promotion ? {
+      offerText: result.promotion.promotionDescription,
+      validUntil: new Date(result.promotion.promotionExpiryDate).toISOString(),
+      originalPrice: defaultPrice,
+    } : null,
     ...getPrice(result)
   };
 }
