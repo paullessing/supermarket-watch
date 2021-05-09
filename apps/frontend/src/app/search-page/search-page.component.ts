@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 
@@ -8,24 +9,34 @@ import { environment } from '../../environments/environment';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent {
+export class SearchPageComponent implements OnInit {
 
   public results: SearchResultItem[];
 
   public isSearching: boolean;
+  public query: string;
 
   constructor(
     private http: HttpClient,
+    private route: ActivatedRoute,
   ) {
     this.isSearching = false;
+    this.query = '';
 
     // test code
     // setTimeout(() => this.search('', { preventDefault: () => {}} as any));
   }
 
-  public search(query: string, event: Event): void {
-    event.preventDefault();
+  public ngOnInit(): void {
+    if (this.route.snapshot.queryParamMap.has('query')) {
+      this.query = this.route.snapshot.queryParamMap.get('query');
+      if (this.query) {
+        this.search(this.query);
+      }
+    }
+  }
 
+  public search(query: string): void {
     if (this.isSearching) {
       return;
     }

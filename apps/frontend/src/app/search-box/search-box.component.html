@@ -1,0 +1,4 @@
+<form (submit)="search.emit(query.value); $event.preventDefault()">
+  <input #query [value]="searchText || ''">
+  <button type="submit" [disabled]="isSearching">{{ isSearching ? 'Searching...' : 'Search' }}</button>
+</form>

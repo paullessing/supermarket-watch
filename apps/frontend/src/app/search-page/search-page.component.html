@@ -1,9 +1,11 @@
 <div class="content">
   <h2 class="title">Search</h2>
-  <form (submit)="search(query.value, $event);">
-    <input #query>
-    <button type="submit" [disabled]="isSearching">{{ isSearching ? 'Searching...' : 'Search' }}</button>
-  </form>
+
+  <app-search-box
+    [isSearching]="isSearching"
+    [searchText]="query"
+    (search)="search($event)"
+  ></app-search-box>
 
   <ul *ngIf="results?.length" class="results">
     <li *ngFor="let result of results; trackBy trackItem" class="results__item result">

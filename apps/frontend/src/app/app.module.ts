@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FavouritesPageComponent } from './favourites-page/favourites-page.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { FavouritesPageComponent } from './favourites-page/favourites-page.compo
     AppComponent,
     SearchPageComponent,
     HomePageComponent,
-    FavouritesPageComponent
+    FavouritesPageComponent,
+    SearchBoxComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
