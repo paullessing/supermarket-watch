@@ -8,29 +8,19 @@ import { environment } from '../../environments/environment';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent {
 
   public results: SearchResultItem[];
-  public favourites: Product[];
 
   public isSearching: boolean;
-
-  public selected: boolean;
 
   constructor(
     private http: HttpClient,
   ) {
     this.isSearching = false;
 
-    this.favourites = [];
-
     // test code
     // setTimeout(() => this.search('', { preventDefault: () => {}} as any));
-  }
-
-  public ngOnInit(): void {
-    this.http.get<{ items: Product[] }>(environment.apiUrl + '/favourites?promotionsOnly=true')
-      .subscribe(({ items }) => this.favourites = items);
   }
 
   public search(query: string, event: Event): void {

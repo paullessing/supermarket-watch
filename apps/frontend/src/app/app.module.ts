@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { FavouritesPageComponent } from './favourites-page/favourites-page.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { SearchPageComponent } from './search-page/search-page.component';
   ],
   declarations: [
     AppComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    HomePageComponent,
+    FavouritesPageComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

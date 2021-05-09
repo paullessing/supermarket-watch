@@ -1,0 +1,28 @@
+<div class="content">
+  <h2 class="title">Favourites</h2>
+
+  <table *ngIf="favourites.length">
+    <ng-container *ngFor="let favourite of favourites; trackBy trackItem">
+      <tr>
+        <td style="padding: 0.25rem 0.5rem 0.25rem 0">
+          {{ favourite.name }}
+        </td>
+        <td style="padding: 0.25rem 0.5rem">
+          <em>{{ favourite.supermarket }}</em>
+        </td>
+        <td style="padding: 0.25rem 0.5rem">
+          {{ favourite.price | currency:'GBP' }}
+        </td>
+        <td style="padding: 0.25rem 0.5rem">
+          {{ favourite.pricePerUnit | currency:'GBP' }}/{{ favourite.unitAmount === 1 ? '' : favourite.unitAmount }}{{ favourite.unitName }}
+        </td>
+      </tr>
+      <tr *ngIf="favourite.specialOffer">
+        <td colspan="2"></td>
+        <td colspan="2" style="padding: 0 0.5rem 0.25rem; color: red">
+          {{ favourite.specialOffer.offerText }}
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
