@@ -39,7 +39,11 @@ export class Sainsburys extends Supermarket {
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,
-      isSpecialOffer: !!promo,
+      specialOffer: promo ? {
+        offerText: promo.strap_line,
+        originalPrice: promo.original_price,
+        validUntil: promo.end_date,
+      } : null,
       supermarket: Sainsburys.NAME,
     };
   }

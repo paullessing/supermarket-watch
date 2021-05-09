@@ -40,11 +40,34 @@ export namespace Waitrose {
     }[];
     searchTime: number; // 0
     totalTime: number; // 0
-    componentsAndProducts: (SearchComponent | SearchProduct)[];
+    componentsAndProducts: (SearchAemComponent | SearchProduct)[];
   }
 
-  export function isProduct(item: SearchProduct | SearchComponent): item is SearchProduct {
+  export function isProduct(item: SearchProduct | SearchAemComponent): item is SearchProduct {
     return item && item.hasOwnProperty('searchProduct');
+  }
+
+  interface Promotion {
+    promotionUnitPrice?: {
+      amount: number; // 2.4,
+      currencyCode: string; // 'GBP'
+    },
+    promotionalPricePerUnit?: string; // '(£13.72 per kg)'
+    promotionDescription: string; // '20% Off'
+    promotionTypeCode: string; // 'POF' | 'MV' (POF = percent off, MV = multi-purchase)
+    promotionExpiryDate: string; // '2021-06-01'
+    promotionId: number; // 375864
+    pyoPromotion: boolean; // false
+    myWaitrosePromotion: boolean; // false
+  }
+  interface DetailedPromotion extends Promotion {
+    groups: {
+      threshold: number; // 1: number of items required to buy to fulfil promotion
+      name: string; // 'X'
+      lineNumbers: [
+        "472425"
+      ]
+    }[];
   }
 
   export interface SearchProduct {
@@ -59,7 +82,7 @@ export namespace Waitrose {
       reviews: {
         averageRating: number; // 4.4412,
         reviewCount: number; // 34
-      },
+      };
       currentSaleUnitPrice: {
         quantity: {
           amount: number; // 1
@@ -69,46 +92,13 @@ export namespace Waitrose {
           amount: number; // 3
           currencyCode: string; // 'GBP'
         }
-      },
+      };
       defaultQuantity: {
         amount: number; // 1
         uom: string; // 'C62'
-      },
-      promotion?: {
-        promotionUnitPrice: {
-          amount: number; // 2.4,
-          currencyCode: string; // 'GBP'
-        },
-        promotionDescription: string; // '20% Off'
-        promotionTypeCode: string; // 'POF'
-        promotionExpiryDate: string; // '2021-06-01'
-        promotionId: number; // 375864
-        promotionalPricePerUnit: string; // '(£13.72 per kg)'
-        pyoPromotion: boolean; // false
-        myWaitrosePromotion: boolean; // false
-      },
-      promotions: {
-        promotionUnitPrice: {
-          amount: number; // 2.4,
-          currencyCode: string; // 'GBP'
-        },
-        promotionDescription: string; // '20% Off'
-        promotionTypeCode: string; // 'POF'
-        promotionExpiryDate: string; // '2021-06-01'
-        promotionId: number; // 375864
-        promotionalPricePerUnit: string; // '(£13.72 per kg)'
-        pyoPromotion: boolean; // false
-        myWaitrosePromotion: boolean; // false
-        groups: [
-          {
-            threshold: number; // 1
-            name: string; // 'X'
-            lineNumbers: [
-              "472425"
-            ]
-          }
-        ]
-      }[];
+      };
+      promotion?: Promotion;
+      promotions: DetailedPromotion[];
       persistDefault: boolean; // false
       displayPrice: string; // '£2.40'
       displayPriceEstimated: boolean; // false
@@ -120,50 +110,30 @@ export namespace Waitrose {
         medium: string; // 'https://ecom-su-static-prod.wtrecom.com/images/products/3/LN_472425_BP_3.jpg'
         large: string; // 'https://ecom-su-static-prod.wtrecom.com/images/products/11/LN_472425_BP_11.jpg'
         extraLarge: string; // 'https://ecom-su-static-prod.wtrecom.com/images/products/4/LN_472425_BP_4.jpg'
-      },
+      };
       weights: {
-        uoms: [
-          "C62"
-        ],
+        uoms: string[]; // ["C62"]
         pricePerUomQualifier: string; // '(£13.72/kg)'
-      },
+      };
       restriction: {},
       searchScore: string; // '2.5'
       substitutionsProhibited: boolean; // false
       customerProductDetails: {
         customerFavourite: boolean; // false
         customerPyo: boolean; // false
-      },
+      };
       markedForDelete: boolean; // false
       cqResponsive: {
-        deviceBreakpoints: [
-          {
-            name: string; // 'default'
-            visible: boolean; // true
-          },
-          {
-            name: string; // 'lg'
-            visible: boolean; // true
-          },
-          {
-            name: string; // 'md'
-            visible: boolean; // true
-          },
-          {
-            name: string; // 'sm'
-            visible: boolean; // true
-          },
-          {
-            name: string; // 'xs'
-            visible: boolean; // true
-          }
-        ]
-      },
+        deviceBreakpoints: {
+          name: string; // 'default'
+          visible: boolean; // true
+        }[];
+      };
       sponsored: boolean; // false
     }
   }
 
-  export interface SearchComponent {
+  export interface SearchAemComponent {
     aemComponent: {
       multiService: boolean; // false
       multiServiceData: {},
@@ -342,39 +312,8 @@ export namespace Waitrose {
           amount: number; // 1
           uom: string; // 'C62'
         },
-        promotion?: {
-          promotionUnitPrice: {
-            amount: number; // 2.4
-            currencyCode: string; // 'GBP'
-          },
-          promotionDescription: string; // '20% Off'
-          promotionTypeCode: string; // 'POF'
-          promotionExpiryDate: string; // '2021-06-01'
-          promotionId: number; // 375864
-          promotionalPricePerUnit: string; // '(£13.72 per kg)'
-          pyoPromotion: boolean; // false
-          myWaitrosePromotion: boolean; // false
-        },
-        promotions: {
-          promotionUnitPrice: {
-            amount: number; // 2.4
-            currencyCode: string; // 'GBP'
-          },
-          promotionDescription: string; // '20% Off'
-          promotionTypeCode: string; // 'POF'
-          promotionExpiryDate: string; // '2021-06-01'
-          promotionId: number; // 375864
-          promotionalPricePerUnit: string; // '(£13.72 per kg)'
-          pyoPromotion: boolean; // false
-          myWaitrosePromotion: boolean; // false
-          groups: {
-            threshold: number; // 1
-            name: string; // 'X'
-            lineNumbers: [
-              "472425"
-            ]
-          }[];
-        }[];
+        promotion?: Promotion;
+        promotions: DetailedPromotion[];
         persistDefault: boolean; // false
         displayPrice: string; // '£2.40'
         displayPriceEstimated: boolean; // false

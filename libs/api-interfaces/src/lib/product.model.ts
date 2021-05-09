@@ -6,5 +6,9 @@ export interface Product {
   pricePerUnit: number;
   unitName: string;
   unitAmount: number;
-  isSpecialOffer: boolean;
+  specialOffer: null | {
+    offerText: string;
+    originalPrice: null | number;
+    validUntil: string;
+  }
 }
