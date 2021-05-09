@@ -6,6 +6,7 @@ import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
 import { FavouritesRepository } from './db/favourites.repository';
 import { ProductRepository } from './db/product.repository';
+import { FavouritesController } from './favourites.controller';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
@@ -20,6 +21,7 @@ import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitr
   controllers: [
     ProductsController,
     SearchController,
+    FavouritesController,
   ],
   providers: [
     {

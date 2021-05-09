@@ -50,14 +50,4 @@ export class ProductsController {
       items
     };
   }
-
-  // WIP: This should have is own controller
-  @Post('/favourite')
-  public async setFavourite(
-    @Body('isFavourite') isFavourite: boolean,
-    @Body('itemId') itemId: string
-  ): Promise<any> {
-    await this.favouritesRepo.setFavourite(itemId, isFavourite);
-    return { done: true };
-  }
 }

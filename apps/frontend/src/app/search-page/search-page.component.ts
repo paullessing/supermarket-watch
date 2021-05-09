@@ -29,7 +29,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.http.get<{ items: Product[] }>(environment.apiUrl + '/search/favourites')
+    this.http.get<{ items: Product[] }>(environment.apiUrl + '/favourites?promotionsOnly=true')
       .subscribe(({ items }) => this.favourites = items);
   }
 
@@ -60,7 +60,7 @@ export class SearchPageComponent implements OnInit {
 
     this.results = this.results.map((item) => item.id === itemId ? { ...item, isFavourite: isFavourite } : item);
 
-    this.http.post(environment.apiUrl + '/products/favourite', { itemId, isFavourite }).subscribe();
+    this.http.post(environment.apiUrl + '/favourites', { itemId, isFavourite }).subscribe();
   }
 
   public isFavourite(resultId: string): boolean {

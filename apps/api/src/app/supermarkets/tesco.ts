@@ -75,8 +75,6 @@ export class Tesco extends Supermarket {
 
     const results = [];
     reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
-      console.log("ID " + id + ', data:', data.product.title)
-
       const { product, promotions } = data;
 
       const result: SearchResultItem = {
