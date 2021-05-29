@@ -25,7 +25,7 @@ export class SearchPageComponent implements OnInit {
     this.query = '';
 
     // test code
-    setTimeout(() => this.search('vivera shawarma'));
+    // setTimeout(() => this.search('vivera shawarma'));
   }
 
   public ngOnInit(): void {
