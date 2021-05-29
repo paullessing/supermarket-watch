@@ -107,7 +107,11 @@ export class Waitrose extends Supermarket {
             price: promotionalPrice || product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail,
             supermarket: Waitrose.NAME,
-            isSpecialOffer: !!promotionalPrice,
+            specialOffer: product.promotion ? {
+              offerText: product.promotion.promotionDescription,
+              validUntil: new Date(product.promotion.promotionExpiryDate).toISOString(),
+              originalPrice: product.currentSaleUnitPrice.price.amount,
+            } : null,
           };
         })
     };

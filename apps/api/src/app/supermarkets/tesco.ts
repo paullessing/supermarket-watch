@@ -82,15 +82,20 @@ export class Tesco extends Supermarket {
         name: product.title,
         image: product.defaultImageUrl,
         price: product.price,
-        isSpecialOffer: false,
+        specialOffer: null,
         supermarket: Tesco.NAME,
       };
 
       const promotion = this.getPromotion(promotions);
 
       if (promotion) {
+        const originalPrice = result.price;
         result.price = promotion.price;
-        result.isSpecialOffer = true;
+        result.specialOffer = {
+          originalPrice,
+          offerText: promotion.offerText,
+          validUntil: promotion.endDate,
+        };
       }
 
       results.push(result);

@@ -71,7 +71,11 @@ export class Sainsburys extends Supermarket {
         name: result.name,
         image: result.image,
         price: result.retail_price.price,
-        isSpecialOffer: !!promo,
+        specialOffer: promo ? {
+          offerText: promo.strap_line,
+          originalPrice: promo.original_price,
+          validUntil: promo.end_date,
+        } : null,
         supermarket: Sainsburys.NAME,
       };
     });
