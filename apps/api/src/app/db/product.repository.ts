@@ -7,6 +7,10 @@ import { Repository } from './repository';
 interface ProductEntry extends NedbTimestampedDocument {
   productId: string;
   product: Product;
+  history: {
+    date: Date;
+    product: Product;
+  }[];
 }
 
 @Injectable()
@@ -38,9 +42,13 @@ export class ProductRepository {
   }
 
   public async save(product: Product): Promise<Product> {
+    const existingEntry = await this.repo.db.findOne<ProductEntry>({ productId: product.id });
+
     const newEntity: InsertQuery<ProductEntry> = {
+      ...existingEntry,
       productId: product.id,
-      product
+      product,
+      history: [{ product, date: new Date() }, ...(existingEntry?.history || [])],
     };
     await this.repo.db.update<ProductEntry>(
       { productId: product.id },
