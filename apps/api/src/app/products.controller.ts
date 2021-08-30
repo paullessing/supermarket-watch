@@ -1,6 +1,6 @@
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post, Query } from '@nestjs/common';
+import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { Product } from '@shoppi/api-interfaces';
-import { FavouritesRepository } from './db/favourites.repository';
+import { ProductRepository } from './db/product.repository';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/products')
@@ -8,7 +8,7 @@ export class ProductsController {
 
   constructor(
     private supermarketService: SupermarketService,
-    private favouritesRepo: FavouritesRepository
+    private productRepo: ProductRepository,
   ) {}
 
   @Get('/:id')
@@ -25,6 +25,18 @@ export class ProductsController {
     }
 
     return item;
+  }
+
+  @Get('/:id/history')
+  public async getHistory(
+    @Param('id') id: string
+  ): Promise<{ history: unknown[] }> {
+    if (!id) {
+      throw new BadRequestException('Missing required URL parameter "id"');
+    }
+    const history = await this.productRepo.getHistory(id);
+
+    return { history };
   }
 
   @Get('/')
