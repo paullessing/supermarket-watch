@@ -1,55 +1,62 @@
-import Nedb, { DataStoreOptions } from 'nedb';
-import * as path from 'path';
+import { Collection, Filter, MongoClient, OptionalUnlessRequiredId, WithId } from 'mongodb';
 import { Config } from '../config';
-import Datastore from 'nedb-promises';
-import { InsertQuery } from './nedb-document';
 
 export class Repository<T extends { _id: string }> {
 
-  public readonly db: Datastore;
+  public get db(): Collection<T> {
+    return this._db;
+  }
+  private _db: Collection<T>;
+
+  public readonly initialised: Promise<void>;
 
   constructor(
     private config: Config,
-    private fileName: string,
-    private dbConfigOptions: DataStoreOptions = {}
+    private collectionName: string,
   ) {
-    const dbConfig: Nedb.DataStoreOptions = config.dbDirPath ? {
-      inMemoryOnly: false,
-      timestampData: true,
-      filename: path.join(config.dbDirPath, fileName),
-      autoload: true,
-      ...dbConfigOptions,
-    } : {
-      inMemoryOnly: true,
-      timestampData: true,
-      ...dbConfigOptions,
+    const client = new MongoClient('mongodb://mongo:27017');
+
+    this.initialised = client.connect().then(() => {
+      console.log('Connected successfully to server');
+      const db = client.db('shopping');
+      this._db = db.collection<T>(this.collectionName);
+    })
+  }
+
+  public async findAll(): Promise<WithId<T>[]> {
+    await this.initialised;
+    return this.db.find({}).toArray();
+  }
+
+  public async findOne(id: string): Promise<WithId<T> | null> {
+    await this.initialised;
+    return await this.db.findOne({ _id: id } as Filter<any>);
+  }
+
+  // TODO fix the typing on this
+  public async create(item: OptionalUnlessRequiredId<T>): Promise<T> {
+    await this.initialised;
+    const { insertedId } = await this.db.insertOne(item);
+    return {
+      ...item as T,
+      _id: insertedId
     };
-    // console.log('Creating DB with config:', dbConfig);
-    this.db = Datastore.create(dbConfig);
   }
 
-  public async findAll(): Promise<T[]> {
-    return this.db.find({});
-  }
-
-  public async findOne(id: string): Promise<T | null> {
-    return await this.db.findOne({ _id: id });
-  }
-
-  public async create(item: InsertQuery<T>): Promise<T> {
-    return await this.db.insert(item) as unknown as T;
-  }
-
-  public async count(query: any): Promise<number> {
-    return await this.db.count(query);
+  public async count(query: Filter<T>): Promise<number> {
+    await this.initialised;
+    return await this.db.countDocuments(query as Filter<any>);
   }
 
   public async update(item: T): Promise<T> {
-    await this.db.update({ _id: item._id }, item);
+    await this.initialised;
+    await this.db.updateOne({ _id: item._id } as Filter<any>, item);
     return item;
   }
 
-  public async removeOne(query: any): Promise<number> {
-    return await this.db.remove(query, { multi: false });
+  public async removeOne(query: Filter<T>): Promise<number> {
+    await this.initialised;
+    const result = await this.db.deleteOne(query as Filter<any>);
+    return result.deletedCount;
   }
 }
