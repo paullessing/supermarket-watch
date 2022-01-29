@@ -41,6 +41,12 @@ export class ProductRepository {
     return item?.product || null;
   }
 
+  public async getHistory(productId: string): Promise<{ date: Date, price: number, pricePerUnit: number }[]> {
+    const item = await this.repo.db.findOne<ProductEntry>({ productId });
+
+    return (item?.history || []).map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
+  }
+
   public async save(product: Product): Promise<Product> {
     const existingEntry = await this.repo.db.findOne<ProductEntry>({ productId: product.id });
 
