@@ -21,3 +21,4 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --production=true --network-timeout 60000 && yarn cache clean
 
 CMD [ "yarn", "start:api" ]
+
