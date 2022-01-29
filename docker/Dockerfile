@@ -1,4 +1,4 @@
-FROM node:12-alpine AS build
+FROM node:16-alpine AS build
 
 WORKDIR /usr/src/app
 
@@ -13,7 +13,7 @@ COPY libs libs/
 RUN yarn ng build api --prod
 RUN yarn ng build frontend --prod
 
-FROM node:12-alpine AS serve
+FROM node:16-alpine AS serve
 WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/dist dist/
