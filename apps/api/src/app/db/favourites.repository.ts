@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Config } from '../config';
-import { NedbTimestampedDocument } from './nedb-document';
+import { TimestampedDocument } from './timestamped-document';
 import { Repository } from './repository';
 
-interface Favourite extends NedbTimestampedDocument {
+interface Favourite extends TimestampedDocument {
   itemId: string;
 }
 
@@ -15,12 +15,17 @@ export class FavouritesRepository {
   constructor(
     config: Config,
   ) {
-    this.repo = new Repository(config, 'favourites.db', { timestampData: true });
+    this.repo = new Repository(config, 'favourites');
   }
 
   public async setFavourite<T extends boolean>(itemId: string, isFavourite: T): Promise<T> {
     if (isFavourite && await this.repo.count({ itemId }) === 0) {
-      await this.repo.create({ itemId });
+      await this.repo.create({
+        _id: undefined,
+        itemId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     }
     if (!isFavourite) {
       await this.repo.removeOne({ itemId });
@@ -30,12 +35,14 @@ export class FavouritesRepository {
   }
 
   public async getAll(): Promise<string[]> {
-    return (await this.repo.db.find<Favourite>({}).sort({ createdAt: 1 }))
-      .map(({ itemId }) => itemId);
+    return this.repo.db.find({}).sort({ createdAt: 1 })
+      .map(({ itemId }) => itemId)
+      .toArray();
   }
 
   public async getFavourites(itemIds: string[]): Promise<string[]> {
-    return (await this.repo.db.find<{ itemId: string }>({ itemId: { $in: itemIds } }, { itemId: 1 }))
-      .map((x) => x.itemId);
+    return this.repo.db.find<{ itemId: string }>({ itemId: { $in: itemIds } }, { projection: { itemId: 1 } })
+      .map((x) => x.itemId)
+      .toArray();
   }
 }

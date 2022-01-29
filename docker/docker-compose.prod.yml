@@ -4,6 +4,8 @@ services:
   api:
     container_name: shoppi_lessi_ng
     image: ghcr.io/paullessing/supermarket-watch:latest
+    depends_on:
+      - mongo
     command: sh -c "ip route add 192.168.255.0/24 via 172.30.0.100 && yarn start:api" # Allow the proxy through
     cap_add: # Required to make `ip route add` work
       - NET_ADMIN
@@ -16,7 +18,6 @@ services:
       TESCO_API_KEY: ${TESCO_API_KEY:?Tesco API Key is required}
       TESCO_URL: ${TESCO_URL}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
-      DB_DIR_PATH: ${DB_DIR_PATH}
 
       # Nginx Config
       VIRTUAL_PORT: ${PORT:-3333}
@@ -24,9 +25,17 @@ services:
       LETSENCRYPT_HOST: ${HOSTNAME}
     networks:
       webnet:
+      mongo_network:
     #    restart_policy: on-failure
     volumes:
       - db:/db
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      mongo_network:
 
 volumes:
   db:
@@ -34,3 +43,4 @@ volumes:
 networks:
   webnet:
     external: true
+  mongo_network:
