@@ -1,8 +1,13 @@
-import { Collection, Filter, MongoClient, OptionalUnlessRequiredId, WithId } from 'mongodb';
+import {
+  Collection,
+  Filter,
+  MongoClient,
+  OptionalUnlessRequiredId,
+  WithId,
+} from 'mongodb';
 import { Config } from '../config';
 
 export class Repository<T extends { _id: string }> {
-
   public get db(): Collection<T> {
     return this._db;
   }
@@ -10,17 +15,14 @@ export class Repository<T extends { _id: string }> {
 
   public readonly initialised: Promise<void>;
 
-  constructor(
-    private config: Config,
-    private collectionName: string,
-  ) {
+  constructor(private config: Config, private collectionName: string) {
     const client = new MongoClient('mongodb://mongo:27017');
 
     this.initialised = client.connect().then(() => {
       console.log('Connected successfully to server');
       const db = client.db('shopping');
       this._db = db.collection<T>(this.collectionName);
-    })
+    });
   }
 
   public async findAll(): Promise<WithId<T>[]> {
@@ -38,8 +40,8 @@ export class Repository<T extends { _id: string }> {
     await this.initialised;
     const { insertedId } = await this.db.insertOne(item);
     return {
-      ...item as T,
-      _id: insertedId
+      ...(item as T),
+      _id: insertedId,
     };
   }
 
