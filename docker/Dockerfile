@@ -16,8 +16,7 @@ FROM node:16-alpine AS serve
 WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/dist dist/
-COPY --from=build /usr/src/app/.yarn-cache .yarn-cache/
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=true --network-timeout 60000 --cache-folder .yarn-cache && rm -rf .yarn-cache
+RUN yarn install --frozen-lockfile --production=true --network-timeout 60000 && yarn cache clean
 
 CMD [ "yarn", "start:api" ]
