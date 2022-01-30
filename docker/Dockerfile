@@ -3,22 +3,21 @@ FROM node:16-alpine AS build
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock decorate-angular-cli.js ./
-RUN yarn install --frozen-lockfile --network-timeout 60000
+RUN yarn install --frozen-lockfile --network-timeout 60000 --cache-folder .yarn-cache
 
 COPY angular.json nest-cli.json nx.json tsconfig.base.json ./
 
 COPY apps apps/
 COPY libs libs/
 
-RUN yarn ng build api --prod
-RUN yarn ng build frontend --prod
+RUN yarn nx run-many --target=build --configuration=production --projects=api,frontend
 
 FROM node:16-alpine AS serve
 WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/dist dist/
+COPY --from=build /usr/src/app/.yarn-cache .yarn-cache/
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=true --network-timeout 60000 && yarn cache clean
+RUN yarn install --frozen-lockfile --production=true --network-timeout 60000 --cache-folder .yarn-cache && rm -rf .yarn-cache
 
 CMD [ "yarn", "start:api" ]
-
