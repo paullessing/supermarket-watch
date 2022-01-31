@@ -34,9 +34,9 @@ services:
       - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json:ro
       - ./package.json:/usr/src/app/package.json:ro
       - ./yarn.lock:/usr/src/app/yarn.lock:ro
-      - ./db:/db
+    restart: on-failure
   mongo:
-    image: mongo
+    image: mongo:5
     restart: always
     ports:
       - 27017:27017
