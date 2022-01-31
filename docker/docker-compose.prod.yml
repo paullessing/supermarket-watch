@@ -1,8 +1,8 @@
-version: '3'
+version: '3.8'
 
 services:
   api:
-    container_name: shoppi_lessi_ng
+    container_name: shoppi_lessi_ng_api
     image: ghcr.io/paullessing/supermarket-watch:latest
     depends_on:
       - mongo
@@ -26,19 +26,21 @@ services:
     networks:
       webnet:
       mongo_network:
-    #    restart_policy: on-failure
-    volumes:
-      - db:/db
+    restart: on-failure
+    # restart_policy is not supported outside docker swarm, despite v3 docs saying it should be used
+    # restart_policy:
+    #   condition: on-failure
+    #   window: 300s
   mongo:
+    container_name: shoppi_lessi_ng_mongo
     image: mongo
     restart: always
-    ports:
-      - 27017:27017
     networks:
       mongo_network:
-
-volumes:
-  db:
+    restart: always
+    # restart_policy is not supported outside docker swarm, despite v3 docs saying it should be used
+    # restart_policy:
+    #   condition: any
 
 networks:
   webnet:
