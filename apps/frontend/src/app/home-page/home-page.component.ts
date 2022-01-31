@@ -11,7 +11,7 @@ export class HomePageComponent {
   public isSearching: boolean;
 
   constructor(
-    private router: Router
+    private readonly router: Router
   ) {}
 
   public onSearch(text: string): void {

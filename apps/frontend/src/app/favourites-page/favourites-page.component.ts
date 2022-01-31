@@ -13,7 +13,7 @@ export class FavouritesPageComponent implements OnInit {
   public favourites: Product[];
 
   constructor(
-    private http: HttpClient,
+    private readonly http: HttpClient,
   ) {
     this.favourites = [];
   }

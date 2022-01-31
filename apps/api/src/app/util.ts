@@ -12,7 +12,7 @@ export interface RowDefinition<T> {
   padLeft?: boolean;
 }
 
-export function createTable<T = any>(cols: RowDefinition<T>[], values: T[]): string {
+export function createTable<T = unknown>(cols: RowDefinition<T>[], values: T[]): string {
   const lengths = cols.map(({ name }) => name.length);
   const rows = values.map((value) => {
     return cols.map((col, i) => {

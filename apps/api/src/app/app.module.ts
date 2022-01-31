@@ -26,7 +26,7 @@ import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitr
   providers: [
     {
       provide: Supermarkets,
-      useFactory: (...supermarkets: Supermarket[]) => supermarkets,
+      useFactory: (...supermarkets: Supermarket[]) => supermarkets as const,
       inject: [Sainsburys, Waitrose, Tesco],
     },
     ConfigProvider,

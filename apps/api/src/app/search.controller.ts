@@ -1,14 +1,14 @@
 import { BadRequestException, Controller, Get, NotFoundException, Query } from '@nestjs/common';
 import { FavouritesRepository } from './db/favourites.repository';
 import { SupermarketService } from './supermarkets';
-import { Product, SearchResult } from '@shoppi/api-interfaces';
+import { SearchResult } from '@shoppi/api-interfaces';
 
 @Controller('api/search')
 export class SearchController {
 
   constructor(
-    private supermarketService: SupermarketService,
-    private favouritesRepo: FavouritesRepository,
+    private readonly supermarketService: SupermarketService,
+    private readonly favouritesRepo: FavouritesRepository,
   ) {}
 
   @Get()

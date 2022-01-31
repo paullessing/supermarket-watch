@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
-import { of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -18,8 +17,8 @@ export class SearchPageComponent implements OnInit {
   public query: string;
 
   constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute,
+    private readonly http: HttpClient,
+    private readonly route: ActivatedRoute,
   ) {
     this.isSearching = false;
     this.query = '';

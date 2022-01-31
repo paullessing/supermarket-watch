@@ -13,8 +13,8 @@ import { SupermarketService } from './supermarkets';
 @Controller('api/products')
 export class ProductsController {
   constructor(
-    private supermarketService: SupermarketService,
-    private productRepo: ProductRepository
+    private readonly supermarketService: SupermarketService,
+    private readonly productRepo: ProductRepository
   ) {}
 
   @Get('/:id')
