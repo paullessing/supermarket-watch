@@ -76,3 +76,4 @@ jobs:
           file: './docker/Dockerfile'
           push: true
           tags: 'ghcr.io/paullessing/supermarket-watch:${{ github.sha }}'
+# See also https://nx.dev/ci/monorepo-ci-github-actions

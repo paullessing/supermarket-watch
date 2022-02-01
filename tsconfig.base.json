@@ -17,7 +17,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@shoppi/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@shoppi/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@shoppi/util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

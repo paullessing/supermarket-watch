@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/util",
+  "sourceRoot": "libs/util/src",
+  "prefix": "shoppi",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/util"],
+      "options": {
+        "jestConfig": "libs/util/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/util/src/**/*.ts", "libs/util/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
