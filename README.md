@@ -14,7 +14,7 @@ cp .env.dist .env
 ## Running the app
 To run everything locally, use:
 ```shell
-yarn serve
+yarn serve:all
 ```
 
 The development docker image works using `docker-compose`:

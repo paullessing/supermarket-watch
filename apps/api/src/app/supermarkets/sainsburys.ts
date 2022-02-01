@@ -4,15 +4,14 @@ import axios from 'axios';
 import * as qs from 'querystring';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
-import { Sainsburys as SainsburysData } from './sainsburys-search-results.model';
-import SearchResults = SainsburysData.SearchResults;
+import { SearchResults } from './sainsburys-search-results.model';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
 
   public static readonly NAME = 'Sainsbury\'s';
 
-  constructor(private config: Config) {
+  constructor(private readonly config: Config) {
     super();
   }
 

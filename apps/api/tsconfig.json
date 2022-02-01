@@ -1,13 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "types": ["node", "jest"],
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "include": [],
   "files": [],
+  "include": [],
   "references": [
     {
       "path": "./tsconfig.app.json"

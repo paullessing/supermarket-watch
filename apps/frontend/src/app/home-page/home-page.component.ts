@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-  public isSearching: boolean;
+  public isSearching: boolean = false;
 
   constructor(
-    private router: Router
+    private readonly router: Router
   ) {}
 
   public onSearch(text: string): void {

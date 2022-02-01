@@ -11,7 +11,7 @@ import { environment } from './environments/environment';
 
 axiosCookieJarSupport(axios);
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);

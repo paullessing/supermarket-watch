@@ -43,7 +43,7 @@ export class SupermarketService {
   }
 
   public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
-    const match = id.match(/^(\w+)\:(.+)$/);
+    const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
       throw new InvalidIdException(id);
     }

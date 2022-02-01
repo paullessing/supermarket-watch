@@ -7,8 +7,8 @@ import { SupermarketService } from './supermarkets';
 export class FavouritesController {
 
   constructor(
-    private supermarketService: SupermarketService,
-    private favouritesRepo: FavouritesRepository
+    private readonly supermarketService: SupermarketService,
+    private readonly favouritesRepo: FavouritesRepository
   ) {}
 
   @Get('/')
@@ -34,7 +34,7 @@ export class FavouritesController {
   public async setFavourite(
     @Body('isFavourite') isFavourite: boolean,
     @Body('itemId') itemId: string
-  ): Promise<any> {
+  ): Promise<{ done: boolean }> {
     await this.favouritesRepo.setFavourite(itemId, isFavourite);
     return { done: true };
   }

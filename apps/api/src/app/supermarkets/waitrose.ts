@@ -3,10 +3,7 @@ import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces'
 import axios from 'axios';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
-import { Waitrose as WaitroseData } from './waitrose-search.model';
-import SearchResults = WaitroseData.SearchResults;
-import isProduct = WaitroseData.isProduct;
-import SingleResult = WaitroseData.SingleResult;
+import { SearchResults, isProduct, SingleResult } from './waitrose-search.model';
 
 @Injectable()
 export class Waitrose extends Supermarket {
@@ -27,7 +24,7 @@ export class Waitrose extends Supermarket {
   // missing (1litre)
   // (£1.89/kg)
 
-  constructor(private config: Config) {
+  constructor(private readonly config: Config) {
     super();
   }
 
@@ -97,7 +94,7 @@ export class Waitrose extends Supermarket {
     return {
       items: (response.data.componentsAndProducts || [])
         .filter(isProduct)
-        .map(({ searchProduct: product }: any): SearchResultItem => {
+        .map(({ searchProduct: product }): SearchResultItem => {
 
           const promotionalPrice = product.promotion?.promotionUnitPrice?.amount;
 
@@ -137,7 +134,7 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
   };
 }
 
-function getPrice(result: any): { pricePerUnit: number, unitAmount: number, unitName: string } {
+function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number, unitAmount: number, unitName: string } {
   if (result.displayPriceQualifier) {
     const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
     if (match) {

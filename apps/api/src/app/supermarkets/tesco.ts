@@ -5,15 +5,14 @@ import * as cheerio from 'cheerio';
 import * as qs from 'querystring';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
-import { Tesco as TescoInterface } from './tesco-product.model';
-import ProductDetails = TescoInterface.ProductDetails;
+import { ProductDetails } from './tesco-product.model';
 
 @Injectable()
 export class Tesco extends Supermarket {
 
   public static readonly NAME = 'Tesco';
 
-  constructor(private config: Config) {
+  constructor(private readonly config: Config) {
     super();
     console.log('Using Tesco API at ' + config.tescoUrl);
   }

@@ -1,0 +1,58 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nrwl/nx"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+
+        "brace-style": ["error", "1tbs"],
+        "curly": "error",
+
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "constructors": "no-public"
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "off", // generally handled by strict mode
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-inferrable-types": "off", // I prefer the verbosity
+        "@typescript-eslint/no-parameter-properties": [
+          "error",
+          { "allows": ["private readonly"] }
+        ],
+        "@typescript-eslint/no-unused-vars": "error",
+        "max-len": "off", // checked by prettier
+
+        "@typescript-eslint/no-empty-function": [
+          "error"
+        ]
+      }
+    }
+  ]
+}
