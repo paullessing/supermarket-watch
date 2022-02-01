@@ -24,7 +24,9 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-inferrable-types": "off", // I prefer the verbosity
+        "@typescript-eslint/no-non-null-assertion": "off" // Required in Angular for e.g. Inputs
       }
     },
     {

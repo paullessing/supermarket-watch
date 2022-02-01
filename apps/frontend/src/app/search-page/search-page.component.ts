@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class SearchPageComponent implements OnInit {
 
-  public results: SearchResultItem[];
+  public results: SearchResultItem[] = [];
 
   public isSearching: boolean;
   public query: string;
@@ -29,7 +29,7 @@ export class SearchPageComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.has('query')) {
-      this.query = this.route.snapshot.queryParamMap.get('query');
+      this.query = this.route.snapshot.queryParamMap.get('query')!;
       if (this.query) {
         this.search(this.query);
       }
@@ -52,7 +52,7 @@ export class SearchPageComponent implements OnInit {
       });
   }
 
-  public trackItem(_, item: SearchResultItem | Product): string {
+  public trackItem(_: number, item: SearchResultItem | Product): string {
     return item.id;
   }
 

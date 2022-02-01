@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-  public isSearching: boolean;
+  public isSearching: boolean = false;
 
   constructor(
     private readonly router: Router

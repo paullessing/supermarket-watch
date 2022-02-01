@@ -23,7 +23,7 @@ export class FavouritesPageComponent implements OnInit {
       .subscribe(({ items }) => this.favourites = items);
   }
 
-  public trackItem(_, item: SearchResultItem | Product): string {
+  public trackItem(_: number, item: SearchResultItem | Product): string {
     return item.id;
   }
 }
