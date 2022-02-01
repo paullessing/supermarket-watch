@@ -27,9 +27,6 @@
       }
     }
   },
-  "affected": {
-    "defaultBase": "master"
-  },
   "targetDependencies": {
     "build": [
       {

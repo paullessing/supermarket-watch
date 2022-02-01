@@ -9,9 +9,49 @@ on:
   workflow_dispatch:
 
 jobs:
-  push_to_registry:
-    name: 'Build and Push Docker image'
+  build:
+    name: Run production build
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn affected:build
+  lint:
+    name: Run linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn affected:lint
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn affected:test
+  push_to_registry:
+    name: Build and Push Docker image
+    runs-on: ubuntu-latest
+    needs: [build, lint, test]
     steps:
 # Steps not needed if not building for ARM
 #      - name: Set up QEMU
