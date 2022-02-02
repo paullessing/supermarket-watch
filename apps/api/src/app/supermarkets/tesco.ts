@@ -9,7 +9,6 @@ import { ProductDetails } from './tesco-product.model';
 
 @Injectable()
 export class Tesco extends Supermarket {
-
   public static readonly NAME = 'Tesco';
 
   constructor(private readonly config: Config) {
@@ -25,7 +24,8 @@ export class Tesco extends Supermarket {
     const search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
 
     const $ = cheerio.load(search.data);
-    const reduxState = $('body').data('reduxState');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const reduxState = $('body').data('reduxState') as any;
 
     const { product, promotions }: ProductDetails = reduxState.productDetails.item;
 
@@ -47,7 +47,7 @@ export class Tesco extends Supermarket {
     if (promotion) {
       const originalPrice = product.price;
       result.price = promotion.price;
-      result.pricePerUnit = parseFloat((product.unitPrice * promotion.price / originalPrice).toFixed(2));
+      result.pricePerUnit = parseFloat(((product.unitPrice * promotion.price) / originalPrice).toFixed(2));
       result.specialOffer = {
         originalPrice,
         offerText: promotion.offerText,
@@ -70,7 +70,8 @@ export class Tesco extends Supermarket {
     const search = await axios.get(url);
 
     const $ = cheerio.load(search.data);
-    const reduxState = $('#data-attributes').data('reduxState');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const reduxState = $('#data-attributes').data('reduxState') as any;
 
     const results = [];
     reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
@@ -105,17 +106,19 @@ export class Tesco extends Supermarket {
     };
   }
 
-  private getPromotion(promotions: ProductDetails['promotions']): null | { price: number, offerText: string, endDate: string } {
+  private getPromotion(
+    promotions: ProductDetails['promotions']
+  ): null | { price: number; offerText: string; endDate: string } {
     const promotion = promotions.find(({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0);
 
     if (promotion) {
       const match = promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
       if (match) {
-         return {
-           price: parseFloat(match[1]),
-           offerText: match[2],
-           endDate: promotion.endDate,
-         };
+        return {
+          price: parseFloat(match[1]),
+          offerText: match[2],
+          endDate: promotion.endDate,
+        };
       }
     }
 
