@@ -29,7 +29,7 @@ export class SearchBoxComponent implements OnInit {
 
   public SortBy: typeof SortBy = SortBy;
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.queryString = this.searchText || '';
     this.searchSortBy = this.sortBy || SortBy.NONE;
   }

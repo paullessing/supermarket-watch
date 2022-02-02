@@ -1,1 +1,1 @@
-export * from './lib/util.module';
+export * from './lib/unreachable-case.error';

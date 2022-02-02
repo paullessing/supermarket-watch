@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Product, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { startOfDay } from 'date-fns';
-import { UnreachableCaseError } from '../../../../../libs/util/src/lib/unreachable-case.error';
+import { Product, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
+import { UnreachableCaseError } from '@shoppi/util';
 import { ProductRepository } from '../db/product.repository';
 import { Supermarket, Supermarkets } from './supermarket';
 

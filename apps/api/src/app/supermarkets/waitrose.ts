@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import axios from 'axios';
+import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
-import { SearchResults, isProduct, SingleResult } from './waitrose-search.model';
+import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
 
 @Injectable()
 export class Waitrose extends Supermarket {
-
   public static readonly NAME = 'Waitrose';
 
   private customerId: string = '';
@@ -47,11 +46,14 @@ export class Waitrose extends Supermarket {
   public async getProduct(id: string): Promise<Product | null> {
     await this.init();
 
-    const search = await axios.get<SingleResult>(`https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`, {
-      headers: {
-        authorization: this.token
+    const search = await axios.get<SingleResult>(
+      `https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`,
+      {
+        headers: {
+          authorization: this.token,
+        },
       }
-    });
+    );
 
     const searchResult = search.data;
     if (!searchResult.products.length) {
@@ -75,16 +77,15 @@ export class Waitrose extends Supermarket {
           sortBy: 'RELEVANCE',
           searchTags: [],
           filterTags: [],
-          orderId: '0'
-        }
-      }
+          orderId: '0',
+        },
+      },
     };
 
-    const response = await axios.post<SearchResults>(url, requestBody,
-    {
+    const response = await axios.post<SearchResults>(url, requestBody, {
       headers: {
-        authorization: this.token
-      }
+        authorization: this.token,
+      },
     });
 
     if (!response) {
@@ -95,7 +96,6 @@ export class Waitrose extends Supermarket {
       items: (response.data.componentsAndProducts || [])
         .filter(isProduct)
         .map(({ searchProduct: product }): SearchResultItem => {
-
           const promotionalPrice = product.promotion?.promotionUnitPrice?.amount;
 
           return {
@@ -104,13 +104,15 @@ export class Waitrose extends Supermarket {
             price: promotionalPrice || product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail,
             supermarket: Waitrose.NAME,
-            specialOffer: product.promotion ? {
-              offerText: product.promotion.promotionDescription,
-              validUntil: new Date(product.promotion.promotionExpiryDate).toISOString(),
-              originalPrice: product.currentSaleUnitPrice.price.amount,
-            } : null,
+            specialOffer: product.promotion
+              ? {
+                  offerText: product.promotion.promotionDescription,
+                  validUntil: new Date(product.promotion.promotionExpiryDate).toISOString(),
+                  originalPrice: product.currentSaleUnitPrice.price.amount,
+                }
+              : null,
           };
-        })
+        }),
     };
   }
 }
@@ -125,24 +127,25 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
     name: result.name,
     price: promotionalPrice || defaultPrice,
     supermarket: Waitrose.NAME,
-    specialOffer: result.promotion ? {
-      offerText: result.promotion.promotionDescription,
-      validUntil: new Date(result.promotion.promotionExpiryDate).toISOString(),
-      originalPrice: defaultPrice,
-    } : null,
-    ...getPrice(result)
+    specialOffer: result.promotion
+      ? {
+          offerText: result.promotion.promotionDescription,
+          validUntil: new Date(result.promotion.promotionExpiryDate).toISOString(),
+          originalPrice: defaultPrice,
+        }
+      : null,
+    ...getPrice(result),
   };
 }
 
-function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number, unitAmount: number, unitName: string } {
+function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
   if (result.displayPriceQualifier) {
     const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
     if (match) {
       const [, unitAmountString, unitName] = match[2].match(/^(\d*)([^\d].*)$/);
       const unitAmount = parseFloat(unitAmountString?.trim() || '') || 1;
-      const pricePerUnit = match[1][0] === '£' ?
-        parseFloat(match[1].slice(1)) :
-        parseFloat(match[1].slice(0, -1)) / 100;
+      const pricePerUnit =
+        match[1][0] === '£' ? parseFloat(match[1].slice(1)) : parseFloat(match[1].slice(0, -1)) / 100;
 
       return {
         unitAmount,

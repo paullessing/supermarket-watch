@@ -1,8 +1,8 @@
+import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import * as qs from 'querystring';
+import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { Supermarket } from './supermarket';
 import { ProductDetails } from './tesco-product.model';

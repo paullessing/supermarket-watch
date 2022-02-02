@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
-import axios from 'axios';
 import * as qs from 'querystring';
+import { Injectable } from '@nestjs/common';
+import axios from 'axios';
+import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { Supermarket } from './supermarket';
 import { SearchResults } from './sainsburys-search-results.model';
+import { Supermarket } from './supermarket';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
