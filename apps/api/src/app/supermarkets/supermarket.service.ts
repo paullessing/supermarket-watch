@@ -89,6 +89,13 @@ export class SupermarketService {
         return results.slice().sort((a, b) => multiplier * (a.price - b.price));
       case SortBy.SUPERMARKET:
         return results.slice().sort((a, b) => multiplier * a.supermarket.localeCompare(b.supermarket));
+      case SortBy.SPECIAL_OFFERS: {
+        // Returning a negative value if the item is a special offer will prioritise special offers over regular offers, but still allow
+        // sorting by price
+        const specialPrice = (result: SearchResultItem): number =>
+          result.specialOffer ? multiplier * -100000 + result.price : result.price;
+        return results.slice().sort((a, b) => specialPrice(a) - specialPrice(b));
+      }
       default:
         throw new UnreachableCaseError(sortBy);
     }

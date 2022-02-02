@@ -6,5 +6,6 @@ export enum SortOrder {
 export enum SortBy {
   PRICE = 'price',
   SUPERMARKET = 'supermarket',
+  SPECIAL_OFFERS = 'offers',
   NONE = 'none',
 }
