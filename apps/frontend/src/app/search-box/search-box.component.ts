@@ -31,7 +31,7 @@ export class SearchBoxComponent implements OnInit {
 
   public ngOnInit() {
     this.queryString = this.searchText || '';
-    this.searchSortBy = this.sortBy || SortBy.PRICE;
+    this.searchSortBy = this.sortBy || SortBy.NONE;
   }
 
   public onSearch(event: SubmitEvent): void {
