@@ -44,4 +44,10 @@ export class TrackedProductsRepository {
       };
     }
   }
+
+  public async getAllTrackedIds(): Promise<string[]> {
+    return (await this.repo.findAll())
+      .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
+      .reduce((acc, curr) => acc.concat(curr.products.map(({ productId }) => productId)), []);
+  }
 }
