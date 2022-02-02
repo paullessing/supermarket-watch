@@ -4,7 +4,6 @@ export class Config {
 
   public readonly port: number;
   public readonly environment: string;
-  public readonly tescoApiKey: string;
   public readonly tescoUrl: string;
   public readonly searchResultCount: number;
   public readonly dbDirPath: string;
@@ -27,7 +26,6 @@ type ConfigEntry<T extends string | number | boolean> = [
 const configProps: { [configKey in keyof Config]: ConfigEntry<Config[configKey]> } = {
   port:              ['PORT',                Number, 3000],
   environment:       ['NODE_ENV',            String, 'development'],
-  tescoApiKey:       ['TESCO_API_KEY',       String],
   tescoUrl:          ['TESCO_URL',           String, 'https://www.tesco.com/groceries/en-GB/'],
   searchResultCount: ['SEARCH_RESULT_COUNT', Number, 120], // Number of results a search query will fetch from the supermarket search page
   dbDirPath:         ['DB_DIR_PATH',         String, ''],
