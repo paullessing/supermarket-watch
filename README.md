@@ -47,3 +47,11 @@ Update the config variable `TESCO_PRODUCT_URL` to point at the proxy including p
 # .env
 TESCO_PRODUCT_URL=http://192.168.1.2:3333/tesco/
 ```
+
+## Github Actions
+By default, any push to a branch will run `nx affected:{build,test,lint}`.
+To build a docker image from a branch commit, add `[build]` to the commit message.
+
+Main branch commits are automatically built, and pushed to the repo tagged as `latest`.
+
+All commits that are built to docker are also tagged with their full SHA.

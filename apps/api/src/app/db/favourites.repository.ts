@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Config } from '../config';
-import { TimestampedDocument } from './timestamped-document';
 import { Repository } from './repository';
+import { TimestampedDocument } from './timestamped-document';
 
 interface Favourite extends TimestampedDocument {
   itemId: string;

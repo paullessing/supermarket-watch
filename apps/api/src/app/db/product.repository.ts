@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { TimestampedDocument } from './timestamped-document';
 import { Repository } from './repository';
+import { TimestampedDocument } from './timestamped-document';
 
 interface ProductEntry extends TimestampedDocument {
   productId: string;

@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Product, SearchResultItem } from '@shoppi/api-interfaces';
 import { startOfDay } from 'date-fns';
+import { Product, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
+import { UnreachableCaseError } from '@shoppi/util';
 import { ProductRepository } from '../db/product.repository';
 import { Supermarket, Supermarkets } from './supermarket';
 
@@ -15,31 +16,34 @@ export class InvalidIdException extends Error {
 
 @Injectable()
 export class SupermarketService {
-
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private readonly productRepo: ProductRepository,
+    private readonly productRepo: ProductRepository
   ) {}
 
-  public async search(query: string): Promise<SearchResultItem[]> {
+  public async search(
+    query: string,
+    sortBy: SortBy = SortBy.NONE,
+    sortOrder: SortOrder = SortOrder.ASCENDING
+  ): Promise<SearchResultItem[]> {
     const resultsBySupermarket = await Promise.all(
-      this.supermarkets
-        .map((supermarket) => supermarket.search(query)
-          .then(({ items }) => items))
+      this.supermarkets.map((supermarket) => supermarket.search(query).then(({ items }) => items))
     );
 
     const results: SearchResultItem[] = ([] as SearchResultItem[]).concat.apply([], resultsBySupermarket);
 
-    return results;
+    return this.sortResults(results, sortBy, sortOrder);
   }
 
   public async getMultipleItems(ids: string[], forceFresh: boolean = false): Promise<Product[]> {
-    return Promise.all(ids.map((id) =>
-      this.getSingleItem(id, forceFresh).catch((e) => {
-        console.log('Failed to fetch item', id, e);
-        throw e;
-      })
-    ));
+    return Promise.all(
+      ids.map((id) =>
+        this.getSingleItem(id, forceFresh).catch((e) => {
+          console.log('Failed to fetch item', id, e);
+          throw e;
+        })
+      )
+    );
   }
 
   public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
@@ -73,5 +77,20 @@ export class SupermarketService {
       }
     }
     throw new InvalidIdException(id);
+  }
+
+  private sortResults(results: SearchResultItem[], sortBy: SortBy, sortOrder: SortOrder): SearchResultItem[] {
+    const multiplier = sortOrder === SortOrder.ASCENDING ? 1 : -1;
+
+    switch (sortBy) {
+      case SortBy.NONE:
+        return results;
+      case SortBy.PRICE:
+        return results.slice().sort((a, b) => multiplier * (a.price - b.price));
+      case SortBy.SUPERMARKET:
+        return results.slice().sort((a, b) => multiplier * a.supermarket.localeCompare(b.supermarket));
+      default:
+        throw new UnreachableCaseError(sortBy);
+    }
   }
 }

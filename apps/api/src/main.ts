@@ -4,9 +4,9 @@
  */
 
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
 import axios from 'axios';
 import axiosCookieJarSupport from 'axios-cookiejar-support';
+import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 axiosCookieJarSupport(axios);
