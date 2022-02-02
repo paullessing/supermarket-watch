@@ -79,6 +79,10 @@ export class SearchPageComponent implements OnInit {
   public isFavourite(resultId: string): boolean {
     return !!this.results.find(({ id }) => id === resultId)?.isFavourite;
   }
+
+  public track(productId: string): void {
+    this.http.post(environment.apiUrl + '/tracked-products', { productId }).subscribe();
+  }
 }
 
 function isValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): boolean {

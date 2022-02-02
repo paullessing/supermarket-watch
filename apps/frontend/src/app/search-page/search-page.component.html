@@ -35,6 +35,7 @@
         >was {{ result.specialOffer.originalPrice | currency:'GBP'  }}</span>
         <span style="color: #888; margin-left: 0.25rem; white-space: nowrap">until {{ result.specialOffer.validUntil | date: 'dd/MM' }}</span>
       </p>
+      <button (click)="track(result.id)">Track</button>
     </li>
   </ul>
 </div>
