@@ -1,5 +1,7 @@
+import { ObjectId } from 'mongodb';
+
 export interface Document {
-  _id: string;
+  _id: ObjectId;
 }
 
 export interface TimestampedDocument extends Document {
