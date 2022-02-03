@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ObjectId, WithoutId } from 'mongodb';
+import { WithoutId } from 'mongodb';
 import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { Repository } from './repository';
@@ -15,6 +15,7 @@ interface TrackedProduct {
 }
 
 interface TrackedProducts extends TimestampedDocument {
+  name: string;
   products: TrackedProduct[];
 }
 
@@ -51,6 +52,7 @@ export class TrackedProductsRepository {
     } else {
       const newEntry: WithoutId<TrackedProducts> = {
         products: this.getOrCreateProductEntry([], product),
+        name: product.name,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -70,6 +72,12 @@ export class TrackedProductsRepository {
 
   public async removeAll(): Promise<void> {
     await this.repo.db.deleteMany({});
+  }
+
+  public async search(searchTerm: string): Promise<TrackedProducts[]> {
+    const result = this.repo.db.find({ 'products.product.name': { $regex: searchTerm, $options: '$i' } });
+
+    return result.toArray();
   }
 
   private getOrCreateProductEntry(trackedProducts: TrackedProduct[], product: Product): TrackedProduct[] {

@@ -1,4 +1,16 @@
-import { Body, Controller, Delete, HttpCode, NotFoundException, Param, Post, Res } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  NotFoundException,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { ProductSearchResults } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
 
@@ -26,5 +38,19 @@ export class TrackedProductsController {
   @HttpCode(204)
   public async deleteAll(): Promise<void> {
     await this.trackingRepo.removeAll();
+  }
+
+  @Get('/search')
+  public async search(@Query('term') searchTerm: string): Promise<ProductSearchResults> {
+    if (!searchTerm || !searchTerm.trim()) {
+      throw new BadRequestException('Query parameter "searchTerm" must not be blank');
+    }
+    const result = await this.trackingRepo.search(searchTerm);
+    return {
+      results: result.map((entry) => ({
+        name: entry.name,
+        trackingId: entry._id.toString(),
+      })),
+    };
   }
 }
