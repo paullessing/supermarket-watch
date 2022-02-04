@@ -8,8 +8,7 @@ import { Supermarket } from './supermarket';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
-
-  public static readonly NAME = 'Sainsbury\'s';
+  public static readonly NAME = "Sainsbury's";
 
   constructor(private readonly config: Config) {
     super();
@@ -20,8 +19,9 @@ export class Sainsburys extends Supermarket {
   }
 
   public async getProduct(productUid: string): Promise<Product | null> {
-
-    const search = await axios.get<SearchResults>(`https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`);
+    const search = await axios.get<SearchResults>(
+      `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`
+    );
 
     if (!search.data.products || !search.data.products.length) {
       return null;
@@ -38,11 +38,13 @@ export class Sainsburys extends Supermarket {
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,
-      specialOffer: promo ? {
-        offerText: promo.strap_line,
-        originalPrice: promo.original_price,
-        validUntil: promo.end_date,
-      } : null,
+      specialOffer: promo
+        ? {
+            offerText: this.formatStrapline(promo.strap_line),
+            originalPrice: promo.original_price,
+            validUntil: promo.end_date,
+          }
+        : null,
       supermarket: Sainsburys.NAME,
     };
   }
@@ -70,17 +72,26 @@ export class Sainsburys extends Supermarket {
         name: result.name,
         image: result.image,
         price: result.retail_price.price,
-        specialOffer: promo ? {
-          offerText: promo.strap_line,
-          originalPrice: promo.original_price,
-          validUntil: promo.end_date,
-        } : null,
+        specialOffer: promo
+          ? {
+              offerText: this.formatStrapline(promo.strap_line),
+              originalPrice: promo.original_price,
+              validUntil: promo.end_date,
+            }
+          : null,
         supermarket: Sainsburys.NAME,
       };
     });
 
     return {
-      items
+      items,
     };
+  }
+
+  private formatStrapline(strapline: string): string {
+    console.log('Strapline', JSON.stringify(strapline));
+    if (strapline.match(/:\s+Was [£p0-9.]+ Now [£p0-9.]+/i)) {
+      return strapline.replace(/:\s+Was [£p0-9.]+ Now [£p0-9.]+/i, '');
+    }
   }
 }
