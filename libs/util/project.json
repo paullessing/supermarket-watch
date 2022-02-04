@@ -2,7 +2,7 @@
   "projectType": "library",
   "root": "libs/util",
   "sourceRoot": "libs/util/src",
-  "prefix": "shoppi",
+  "prefix": "app",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
