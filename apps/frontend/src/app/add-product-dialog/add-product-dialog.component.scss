@@ -1,0 +1,32 @@
+.add-product-dialog {
+  $spacing: 1rem;
+  position: fixed;
+  left: $spacing;
+  right: $spacing;
+  top: $spacing;
+  bottom: $spacing;
+  background-color: white;
+  z-index: 1000;
+
+  &__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    overflow-y: auto;
+
+    padding: 1rem;
+  }
+
+  &__close {
+    border: 0;
+    background-color: transparent;
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 100;
+  }
+}

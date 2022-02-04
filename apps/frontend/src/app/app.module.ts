@@ -10,6 +10,7 @@ import { FavouritesPageComponent } from './favourites-page/favourites-page.compo
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
 
 // prettier-ignore
 @NgModule({
@@ -26,6 +27,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
     HomePageComponent,
     FavouritesPageComponent,
     SearchBoxComponent,
+    AddProductDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

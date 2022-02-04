@@ -7,6 +7,12 @@
     (search)="search($event)"
   ></app-search-box>
 
+  <app-add-product-dialog
+    *ngIf="addItemDetails"
+    [item]="addItemDetails"
+    (exit)="addItemDetails = null"
+  ></app-add-product-dialog>
+
   <ul *ngIf="results?.length" class="results">
     <li
       *ngFor="let result of results; trackBy trackItem"
@@ -39,7 +45,7 @@
         >was {{ result.specialOffer.originalPrice | currency:'GBP'  }}</span>
         <span style="color: #888; margin-left: 0.25rem; white-space: nowrap">until {{ result.specialOffer.validUntil | date: 'dd/MM' }}</span>
       </p>
-      <button (click)="track(result.id)">Track</button>
+      <button class="result__add-button" (click)="addItemDetails = result">Track</button>
     </li>
   </ul>
 </div>
