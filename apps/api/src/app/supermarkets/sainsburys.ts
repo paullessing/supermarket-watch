@@ -1,15 +1,15 @@
 import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { isBefore } from 'date-fns';
 import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { SearchResults } from './sainsburys-search-results.model';
+import * as SainsburysModels from './sainsburys-search-results.model';
 import { Supermarket } from './supermarket';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
-
-  public static readonly NAME = 'Sainsbury\'s';
+  public static readonly NAME = "Sainsbury's";
 
   constructor(private readonly config: Config) {
     super();
@@ -20,8 +20,9 @@ export class Sainsburys extends Supermarket {
   }
 
   public async getProduct(productUid: string): Promise<Product | null> {
-
-    const search = await axios.get<SearchResults>(`https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`);
+    const search = await axios.get<SainsburysModels.SearchResults>(
+      `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`
+    );
 
     if (!search.data.products || !search.data.products.length) {
       return null;
@@ -29,20 +30,16 @@ export class Sainsburys extends Supermarket {
 
     const product = search.data.products[0];
 
-    const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
+    const { price, specialOffer } = this.getPriceData(product);
 
     return {
       id: this.getId(productUid),
       name: product.name,
-      price: product.retail_price.price,
+      price,
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,
-      specialOffer: promo ? {
-        offerText: promo.strap_line,
-        originalPrice: promo.original_price,
-        validUntil: promo.end_date,
-      } : null,
+      specialOffer,
       supermarket: Sainsburys.NAME,
     };
   }
@@ -54,7 +51,7 @@ export class Sainsburys extends Supermarket {
     });
 
     const url = `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?${params}`;
-    const search = await axios.get(url);
+    const search = await axios.get<SainsburysModels.SearchResults>(url);
 
     const results = search.data.products;
 
@@ -62,25 +59,43 @@ export class Sainsburys extends Supermarket {
       return { items: [] };
     }
 
-    const items: SearchResultItem[] = results.map((result) => {
-      const promo = result.promotions.find((promotion) => promotion.original_price > result.retail_price.price);
+    const items: SearchResultItem[] = results.map((product) => {
+      const { price, specialOffer } = this.getPriceData(product);
 
       return {
-        id: this.getId(result.product_uid),
-        name: result.name,
-        image: result.image,
-        price: result.retail_price.price,
-        specialOffer: promo ? {
-          offerText: promo.strap_line,
-          originalPrice: promo.original_price,
-          validUntil: promo.end_date,
-        } : null,
+        id: this.getId(product.product_uid),
+        name: product.name,
+        image: product.image,
+        price,
+        specialOffer,
         supermarket: Sainsburys.NAME,
       };
     });
 
     return {
-      items
+      items,
+    };
+  }
+
+  private getPriceData(product: SainsburysModels.SearchResult): {
+    price: number;
+    specialOffer: SearchResultItem['specialOffer'] | null;
+  } {
+    const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
+    const isPromoActive = promo?.start_date && isBefore(new Date(promo.start_date), new Date());
+
+    const price = !promo || isPromoActive ? product.retail_price.price : promo.original_price;
+    const specialOffer = isPromoActive
+      ? {
+          offerText: promo.strap_line,
+          originalPrice: promo.original_price,
+          validUntil: promo.end_date,
+        }
+      : null;
+
+    return {
+      price,
+      specialOffer,
     };
   }
 }
