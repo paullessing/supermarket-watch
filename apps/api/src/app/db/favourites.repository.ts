@@ -9,22 +9,15 @@ interface Favourite extends TimestampedDocument {
 
 @Injectable()
 export class FavouritesRepository {
-
   private repo: Repository<Favourite>;
 
-  constructor(
-    config: Config,
-  ) {
+  constructor(config: Config) {
     this.repo = new Repository(config, 'favourites');
   }
 
-  public async setFavourite<T extends boolean>(
-    itemId: string,
-    isFavourite: T
-  ): Promise<T> {
+  public async setFavourite<T extends boolean>(itemId: string, isFavourite: T): Promise<T> {
     if (isFavourite && (await this.repo.count({ itemId })) === 0) {
       await this.repo.create({
-        _id: undefined,
         itemId,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -47,10 +40,7 @@ export class FavouritesRepository {
 
   public async getFavourites(itemIds: string[]): Promise<string[]> {
     return this.repo.db
-      .find<{ itemId: string }>(
-        { itemId: { $in: itemIds } },
-        { projection: { itemId: 1 } }
-      )
+      .find<{ itemId: string }>({ itemId: { $in: itemIds } }, { projection: { itemId: 1 } })
       .map((x) => x.itemId)
       .toArray();
   }

@@ -46,6 +46,9 @@ export class SupermarketService {
     );
   }
 
+  /**
+   * @throws InvalidIdException if the ID is invalid or the product is not found
+   */
   public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
@@ -72,8 +75,8 @@ export class SupermarketService {
             console.debug('Cache miss, storing', id);
           }
           await this.productRepo.save(product);
+          return product;
         }
-        return product;
       }
     }
     throw new InvalidIdException(id);

@@ -19,7 +19,7 @@ export interface SearchResult {
   unit_price: {
     price: PriceInPounds;
     measure: 'ltr' | string;
-    measure_amount: number
+    measure_amount: number;
   };
   retail_price: {
     price: PriceInPounds;
@@ -27,7 +27,7 @@ export interface SearchResult {
   };
   is_available: boolean;
   promotions: {
-    end_date: string; "2021-05-24T23:00:00Z"
+    end_date: string; // "2021-05-24T23:00:00Z"
     icon: string; // "https://www.sainsburys.co.uk/wcsstore/Sainsburys/Promotion assets/Promotion icons/SO_Fixed_Price_S_Icon.gif"
     original_price: number; // 4.5
     promotion_uid: string; // "10459956"
@@ -53,7 +53,7 @@ export interface SearchResult {
     label: string;
     url: string; // relative to root
   }[];
-  'details_html'?: string; // base64 encoded HTML
+  details_html?: string; // base64 encoded HTML
   assets: {
     plp_image: string;
     images: {
@@ -64,7 +64,7 @@ export interface SearchResult {
         url: string;
       }[];
     }[];
-    video: unknown[]
+    video: unknown[];
   };
   description: string[]; // e.g. 'Almond drink with added calcium and vitamins.'
   important_information: string[];
@@ -74,5 +74,5 @@ export interface SearchResult {
     name: string; // category name e.g. 'All dairy free'
   }[];
   display_icons: unknown[];
-  pdp_deep_link: '/shop/ProductDisplay?storeId=10151&langId=44&productId=34260'
+  pdp_deep_link: '/shop/ProductDisplay?storeId=10151&langId=44&productId=34260';
 }

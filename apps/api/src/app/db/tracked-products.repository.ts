@@ -35,11 +35,11 @@ export class TrackedProductsRepository {
 
     console.log('FINDING ONE', trackingId);
 
-    const existingTrackingEntry: TrackedProducts | null = trackingId && (await this.repo.findOne(trackingId));
+    const existingTrackingEntry: TrackedProducts | null = trackingId ? await this.repo.findOne(trackingId) : null;
 
     console.log('FINDING xxx', existingTrackingEntry);
 
-    if (existingTrackingEntry) {
+    if (trackingId && existingTrackingEntry) {
       const updatedEntry: TrackedProducts = {
         ...existingTrackingEntry,
         products: this.getOrCreateProductEntry(existingTrackingEntry.products, product),
@@ -67,7 +67,7 @@ export class TrackedProductsRepository {
   public async getAllTrackedIds(): Promise<string[]> {
     return (await this.repo.findAll())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
-      .reduce((acc, curr) => acc.concat(curr.products.map(({ productId }) => productId)), []);
+      .reduce((acc, curr) => acc.concat(curr.products.map(({ productId }) => productId)), [] as string[]);
   }
 
   public async removeAll(): Promise<void> {

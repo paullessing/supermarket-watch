@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { SearchResults } from './sainsburys-search-results.model';
+import { SearchResult as SainsburysSearchResult, SearchResults } from './sainsburys-search-results.model';
 import { Supermarket } from './supermarket';
 
 @Injectable()
@@ -64,7 +64,7 @@ export class Sainsburys extends Supermarket {
       return { items: [] };
     }
 
-    const items: SearchResultItem[] = results.map((result) => {
+    const items: SearchResultItem[] = results.map((result: SainsburysSearchResult) => {
       const promo = result.promotions.find((promotion) => promotion.original_price > result.retail_price.price);
 
       return {
@@ -92,6 +92,8 @@ export class Sainsburys extends Supermarket {
     console.log('Strapline', JSON.stringify(strapline));
     if (strapline.match(/:\s+Was [£p0-9.]+ Now [£p0-9.]+/i)) {
       return strapline.replace(/:\s+Was [£p0-9.]+ Now [£p0-9.]+/i, '');
+    } else {
+      return strapline;
     }
   }
 }

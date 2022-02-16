@@ -29,7 +29,11 @@ export class Tesco extends Supermarket {
 
     const { product, promotions }: ProductDetails = reduxState.productDetails.item;
 
-    const [, unitAmountString, unitName] = product.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
+    const unitOfMeasure = product.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
+    if (!unitOfMeasure) {
+      throw new Error('Could not parse unit of measure');
+    }
+    const [, unitAmountString, unitName] = unitOfMeasure;
 
     const result: Product = {
       id: this.getId(product.id),
@@ -73,7 +77,7 @@ export class Tesco extends Supermarket {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reduxState = $('#data-attributes').data('reduxState') as any;
 
-    const results = [];
+    const results: SearchResultItem[] = [];
     reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
       const { product, promotions } = data;
 

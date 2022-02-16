@@ -141,8 +141,9 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
 function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
   if (result.displayPriceQualifier) {
     const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
-    if (match) {
-      const [, unitAmountString, unitName] = match[2].match(/^(\d*)([^\d].*)$/);
+    const innerMatch = match?.[2].match(/^(\d*)([^\d].*)$/);
+    if (match && innerMatch) {
+      const [, unitAmountString, unitName] = innerMatch;
       const unitAmount = parseFloat(unitAmountString?.trim() || '') || 1;
       const pricePerUnit =
         match[1][0] === '£' ? parseFloat(match[1].slice(1)) : parseFloat(match[1].slice(0, -1)) / 100;

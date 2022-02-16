@@ -15,7 +15,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.port || 3333;
+  const port = process.env['port'] || 3333;
 
   if (!environment.production) {
     app.enableCors();

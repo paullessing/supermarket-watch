@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Filter, ObjectId } from 'mongodb';
 import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { Repository } from './repository';
@@ -33,7 +34,7 @@ export class ProductRepository {
   }
 
   public async get(productId: string, updatedAfter?: Date): Promise<Product | null> {
-    const query = {
+    const query: Filter<ProductEntry> = {
       productId,
     };
     if (updatedAfter) {
@@ -58,7 +59,7 @@ export class ProductRepository {
       productId: product.id,
     });
 
-    const newEntity: ProductEntry = {
+    const newEntity: OptionalId<ProductEntry> = {
       ...existingEntry,
       productId: product.id,
       product,
@@ -71,3 +72,5 @@ export class ProductRepository {
     return product;
   }
 }
+
+type OptionalId<T> = { _id?: ObjectId } & { [K in Exclude<keyof T, '_id'>]: T[K] };
