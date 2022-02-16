@@ -90,10 +90,19 @@ export class Sainsburys extends Supermarket {
 
   private formatStrapline(strapline: string): string {
     console.log('Strapline', JSON.stringify(strapline));
-    if (strapline.match(/:\s+Was [£p0-9.]+ Now [£p0-9.]+/i)) {
-      return strapline.replace(/:\s+Was [£p0-9.]+ Now [£p0-9.]+/i, '');
-    } else {
-      return strapline;
+
+    // prettier-ignore
+    const redundantStraplines = [
+      /:\s+Was [£p0-9.]+ Now [£p0-9.]+/i,
+      /^Only [£p0-9.]+: Save [£p0-9.]+/i
+    ] as const;
+
+    for (const redundantStrapline of redundantStraplines) {
+      if (redundantStrapline.test(strapline)) {
+        return strapline.replace(redundantStrapline, '').trim();
+      }
     }
+
+    return strapline;
   }
 }

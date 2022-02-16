@@ -38,11 +38,11 @@
         *ngIf="result.specialOffer"
         class="result__special-offer"
       >
-        {{ result.specialOffer.offerText }},
+        {{ result.specialOffer.offerText }}{{ result.specialOffer.offerText ? ',' : '' }}
         <span
           *ngIf="result.specialOffer.originalPrice !== result.price"
           style="white-space: nowrap"
-        >was {{ result.specialOffer.originalPrice | currency:'GBP'  }}</span>
+        >{{ result.specialOffer.offerText ? 'was' : 'Was' }} {{ result.specialOffer.originalPrice | currency:'GBP'  }}</span>
         <span style="color: #888; margin-left: 0.25rem; white-space: nowrap">until {{ result.specialOffer.validUntil | date: 'dd/MM' }}</span>
       </p>
       <button class="result__add-button" (click)="addItemDetails = result">Track</button>
