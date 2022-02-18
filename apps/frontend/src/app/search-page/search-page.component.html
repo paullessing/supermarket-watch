@@ -11,6 +11,7 @@
     *ngIf="addItemDetails"
     [item]="addItemDetails"
     (exit)="addItemDetails = null"
+    (addProduct)="track($event)"
   ></app-add-product-dialog>
 
   <ul *ngIf="results?.length" class="results">

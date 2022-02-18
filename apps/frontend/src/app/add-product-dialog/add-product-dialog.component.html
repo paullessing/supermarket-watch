@@ -2,13 +2,36 @@
   <button class="add-product-dialog__close" (click)="onClose()" style="cursor: pointer">
     Close
   </button>
+
   <div class="add-product-dialog__content">
-    <h1>Add {{ item.name }}</h1>
-    <div>
+    <h1>Add Item</h1>
+    <h2>{{ item.name }} - {{ item.price | currency:'GBP' }}</h2>
+    <p>{{ item.supermarket }}</p>
+    <div style="margin-top: 1rem">
       <label>
-        <input type="checkbox" />
+        <input type="checkbox" [(ngModel)]="combine" />
         Combine with existing item
       </label>
+    </div>
+    <div style="margin-top: 1rem" *ngIf="combine">
+      <ng-container *ngIf="!combineWithItem; else selectedItem">
+        <input type="text" placeholder="Enter item name" [ngModel]="searchItemName" (ngModelChange)="onSearchTextChange($event)" />
+        <ul *ngIf="results">
+          <li *ngFor="let result of results">
+            <button class="add-product-dialog__search-result" (click)="combineWithItem = result">{{ result.name }}</button>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #selectedItem>
+        <p style="margin-left: 1rem">{{ combineWithItem!.name }}
+          <button (click)="combineWithItem = null">Clear</button>
+        </p>
+      </ng-template>
+    </div>
+
+    <div class="add-product-dialog__buttons">
+      <button class="add-product-dialog__button" (click)="onClose()">Cancel</button>
+      <button class="add-product-dialog__button" type="submit" (click)="onAdd()">Add</button>
     </div>
   </div>
 </div>

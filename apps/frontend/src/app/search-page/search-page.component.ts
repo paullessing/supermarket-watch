@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product, SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
+import { AddProductData } from '../add-product-dialog/add-product-dialog.component';
 import { SearchParams } from '../search-box/search-box.component';
 
 @Component({
@@ -92,8 +93,14 @@ export class SearchPageComponent implements OnInit {
     return !!this.results.find(({ id }) => id === resultId)?.isFavourite;
   }
 
-  public track(productId: string): void {
-    this.http.post(environment.apiUrl + '/tracked-products', { productId }).subscribe();
+  public track(data: AddProductData): void {
+    const url = `${environment.apiUrl}/tracked-products${data.combinedTrackingId ? `/${data.combinedTrackingId}` : ''}`;
+    this.http
+      .post(url, {
+        productId: data.productId,
+      })
+      .subscribe();
+    this.addItemDetails = null;
   }
 }
 

@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchResultItem } from '@shoppi/api-interfaces';
 import { AddProductDialogComponent } from './add-product-dialog.component';
@@ -9,6 +10,7 @@ describe('AddProductDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AddProductDialogComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 
