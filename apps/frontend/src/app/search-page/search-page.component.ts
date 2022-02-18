@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product, SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
+import { SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 import { AddProductData } from '../add-product-dialog/add-product-dialog.component';
 import { SearchParams } from '../search-box/search-box.component';
+import { AddFavouriteData } from '../search-result-list/search-result-list.component';
 
 @Component({
   selector: 'app-search-page',
@@ -77,22 +78,6 @@ export class SearchPageComponent implements OnInit {
       });
   }
 
-  public trackItem(_: number, item: SearchResultItem | Product): string {
-    return item.id;
-  }
-
-  public setFavourite(itemId: string): void {
-    const isFavourite = !this.isFavourite(itemId);
-
-    this.results = this.results.map((item) => (item.id === itemId ? { ...item, isFavourite: isFavourite } : item));
-
-    this.http.post(environment.apiUrl + '/favourites', { itemId, isFavourite }).subscribe();
-  }
-
-  public isFavourite(resultId: string): boolean {
-    return !!this.results.find(({ id }) => id === resultId)?.isFavourite;
-  }
-
   public track(data: AddProductData): void {
     const url = `${environment.apiUrl}/tracked-products${data.combinedTrackingId ? `/${data.combinedTrackingId}` : ''}`;
     this.http
@@ -101,6 +86,12 @@ export class SearchPageComponent implements OnInit {
       })
       .subscribe();
     this.addItemDetails = null;
+  }
+
+  public setFavourite({ itemId, isFavourite }: AddFavouriteData): void {
+    this.results = this.results.map((item) => (item.id === itemId ? { ...item, isFavourite: isFavourite } : item));
+
+    this.http.post(environment.apiUrl + '/favourites', { itemId, isFavourite }).subscribe();
   }
 }
 
