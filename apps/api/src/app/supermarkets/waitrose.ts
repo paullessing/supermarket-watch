@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
+import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
 

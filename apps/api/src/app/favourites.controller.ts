@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { Product } from '@shoppi/api-interfaces';
+import { HistoryProduct } from '@shoppi/api-interfaces';
 import { FavouritesRepository } from './db/favourites.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
@@ -16,7 +16,7 @@ export class FavouritesController {
   public async searchFavourites(
     @Query('force') force: string,
     @Query('promotionsOnly') promotionsOnly: string
-  ): Promise<{ items: Product[] }> {
+  ): Promise<{ items: HistoryProduct[] }> {
     const favourites = await this.trackedProductsRepo.getAllTrackedIds();
     const items = await this.supermarketService.getMultipleItems(favourites, force === 'true');
 

@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { Product, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
+import { SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { ProductRepository } from '../db/product.repository';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
+import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 
 export class InvalidIdException extends Error {

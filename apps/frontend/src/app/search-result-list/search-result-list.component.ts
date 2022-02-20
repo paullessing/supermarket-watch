@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product, SearchResultItem } from '@shoppi/api-interfaces';
+import { SearchResultItem } from '@shoppi/api-interfaces';
 
 @Component({
   selector: 'app-search-result-list',
@@ -13,7 +13,7 @@ export class SearchResultListComponent {
   @Output()
   public addItem: EventEmitter<SearchResultItem> = new EventEmitter();
 
-  public trackItem(_: number, item: SearchResultItem | Product): string {
+  public trackItem(_: number, item: SearchResultItem): string {
     return item.id;
   }
 

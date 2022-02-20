@@ -11,8 +11,9 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { Product, ProductSearchResults } from '@shoppi/api-interfaces';
+import { ProductSearchResults } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
+import { Product } from './product.model';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/tracked-products')

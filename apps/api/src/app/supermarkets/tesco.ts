@@ -2,8 +2,8 @@ import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
-import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
+import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { ProductDetails } from './tesco-product.model';
 

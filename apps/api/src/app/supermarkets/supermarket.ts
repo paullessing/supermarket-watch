@@ -1,4 +1,5 @@
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
+import { SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
+import { Product } from '../product.model';
 
 export const Supermarkets = 'Supermarkets';
 

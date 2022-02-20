@@ -1,8 +1,8 @@
 import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
+import { Product } from '../product.model';
 import { SearchResult as SainsburysSearchResult, SearchResults } from './sainsburys-search-results.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 

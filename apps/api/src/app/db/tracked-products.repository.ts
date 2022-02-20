@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Filter, WithoutId } from 'mongodb';
-import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
+import { Product } from '../product.model';
 import { Repository } from './repository';
 import { TimestampedDocument } from './timestamped-document';
 

@@ -1,6 +1,7 @@
 import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
-import { Product } from '@shoppi/api-interfaces';
+import { HistoryProduct } from '@shoppi/api-interfaces';
 import { ProductRepository } from './db/product.repository';
+import { Product } from './product.model';
 import { InvalidIdException, SupermarketService } from './supermarkets';
 
 @Controller('api/products')
@@ -11,7 +12,7 @@ export class ProductsController {
   ) {}
 
   @Get('/:id')
-  public async getById(@Param('id') id: string, @Query('force') force: string): Promise<Product> {
+  public async getById(@Param('id') id: string, @Query('force') force: string): Promise<HistoryProduct> {
     if (!id) {
       throw new BadRequestException('Missing required URL parameter "id"');
     }
@@ -26,7 +27,9 @@ export class ProductsController {
   }
 
   @Get('/:id/history')
-  public async getHistory(@Param('id') id: string): Promise<{ history: unknown[] }> {
+  public async getHistory(
+    @Param('id') id: string
+  ): Promise<{ history: Awaited<ReturnType<ProductRepository['getHistory']>> }> {
     if (!id) {
       throw new BadRequestException('Missing required URL parameter "id"');
     }
@@ -36,7 +39,7 @@ export class ProductsController {
   }
 
   @Get('/')
-  public async getMultipleById(@Query('ids') idsQuery: string | string[]): Promise<{ items: Product[] }> {
+  public async getMultipleById(@Query('ids') idsQuery: string | string[]): Promise<{ items: HistoryProduct[] }> {
     if (!idsQuery) {
       throw new BadRequestException('Missing required URL parameter "ids"');
     }
