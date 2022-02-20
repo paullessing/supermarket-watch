@@ -1,14 +1,10 @@
 import { BadRequestException, Controller, Get, NotFoundException, Query } from '@nestjs/common';
 import { SearchResult, SortBy, SortOrder } from '@shoppi/api-interfaces';
-import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/search')
 export class SearchController {
-  constructor(
-    private readonly supermarketService: SupermarketService,
-    private readonly trackedProductsRepo: TrackedProductsRepository
-  ) {}
+  constructor(private readonly supermarketService: SupermarketService) {}
 
   @Get()
   public async search(
@@ -29,17 +25,10 @@ export class SearchController {
       }
       sortOrder = ['asc', '1', 1].includes(querySortOrder) ? SortOrder.ASCENDING : SortOrder.DESCENDING;
     }
-    const supermarketItems = await this.supermarketService.search(query, sortBy, sortOrder);
-    if (!supermarketItems) {
+    const items = await this.supermarketService.search(query, sortBy, sortOrder);
+    if (!items) {
       throw new NotFoundException();
     }
-
-    const favourites = await this.trackedProductsRepo.getTrackedIds(supermarketItems.map(({ id }) => id));
-
-    const items = supermarketItems.map((item) => ({
-      ...item,
-      isFavourite: favourites.has(item.id),
-    }));
 
     return { items };
   }

@@ -3,7 +3,8 @@ import { startOfDay } from 'date-fns';
 import { Product, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { ProductRepository } from '../db/product.repository';
-import { Supermarket, Supermarkets } from './supermarket';
+import { TrackedProductsRepository } from '../db/tracked-products.repository';
+import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 
 export class InvalidIdException extends Error {
   constructor(id: string) {
@@ -18,7 +19,8 @@ export class InvalidIdException extends Error {
 export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private readonly productRepo: ProductRepository
+    private readonly productRepo: ProductRepository,
+    private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
 
   public async search(
@@ -30,7 +32,19 @@ export class SupermarketService {
       this.supermarkets.map((supermarket) => supermarket.search(query).then(({ items }) => items))
     );
 
-    const results: SearchResultItem[] = ([] as SearchResultItem[]).concat.apply([], resultsBySupermarket);
+    const searchResults: SearchResultItemWithoutTracking[] = ([] as SearchResultItemWithoutTracking[]).concat.apply(
+      [],
+      resultsBySupermarket
+    );
+
+    const trackedItems = await this.trackedProductsRepo.getTrackedIds(searchResults.map(({ id }) => id));
+
+    const results = searchResults.map(
+      (item: SearchResultItemWithoutTracking): SearchResultItem => ({
+        ...item,
+        trackingId: trackedItems.get(item.id) ?? null,
+      })
+    );
 
     return this.sortResults(results, sortBy, sortOrder);
   }
