@@ -2,9 +2,9 @@ import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
+import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { Supermarket } from './supermarket';
+import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { ProductDetails } from './tesco-product.model';
 
 @Injectable()
@@ -62,7 +62,7 @@ export class Tesco extends Supermarket {
     return result;
   }
 
-  public async search(term: string): Promise<SearchResult> {
+  public async search(term: string): Promise<SearchResultWithoutTracking> {
     const params = qs.stringify({
       query: term,
       offset: 0,
@@ -89,16 +89,16 @@ export class Tesco extends Supermarket {
     }
   }
 
-  private extractSearchResults(search: AxiosResponse<string>): SearchResultItem[] {
+  private extractSearchResults(search: AxiosResponse<string>): SearchResultItemWithoutTracking[] {
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reduxState = $('#data-attributes').data('reduxState') as any;
 
-    const results: SearchResultItem[] = [];
+    const results: SearchResultItemWithoutTracking[] = [];
     reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
       const { product, promotions } = data;
 
-      const result: SearchResultItem = {
+      const result: SearchResultItemWithoutTracking = {
         id: this.getId(id),
         name: product.title,
         image: product.defaultImageUrl,

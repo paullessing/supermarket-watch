@@ -10,7 +10,8 @@
     ></div>
     <button
       class="result__favourite"
-      [class.result__favourite--selected]="result.isFavourite"
+      [class.result__favourite--selected]="result.trackingId"
+      (click)="onAddItem(result)"
     ></button>
     <p class="result__supermarket">{{ result.supermarket }}</p>
     <p class="result__name">{{ result.name }}</p>
@@ -29,6 +30,5 @@
       >{{ result.specialOffer.offerText ? 'was' : 'Was' }} {{ result.specialOffer.originalPrice | currency:'GBP'  }}</span>
       <span style="color: #888; margin-left: 0.25rem; white-space: nowrap">until {{ result.specialOffer.validUntil | date: 'dd/MM' }}</span>
     </p>
-    <button class="result__add-button" (click)="onAddItem(result)">Track</button>
   </li>
 </ul>

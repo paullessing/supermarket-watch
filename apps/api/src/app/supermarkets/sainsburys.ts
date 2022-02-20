@@ -1,10 +1,10 @@
 import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
+import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { SearchResult as SainsburysSearchResult, SearchResults } from './sainsburys-search-results.model';
-import { Supermarket } from './supermarket';
+import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
@@ -49,7 +49,7 @@ export class Sainsburys extends Supermarket {
     };
   }
 
-  public async search(term: string): Promise<SearchResult> {
+  public async search(term: string): Promise<SearchResultWithoutTracking> {
     const params = qs.stringify({
       'filter[keyword]': term,
       page_size: this.config.searchResultCount,
@@ -64,10 +64,10 @@ export class Sainsburys extends Supermarket {
       return { items: [] };
     }
 
-    const items: SearchResultItem[] = results.map((result: SainsburysSearchResult) => {
+    const items: SearchResultItemWithoutTracking[] = results.map((result: SainsburysSearchResult) => {
       const promo = result.promotions.find((promotion) => promotion.original_price > result.retail_price.price);
 
-      return {
+      const resultItem: SearchResultItemWithoutTracking = {
         id: this.getId(result.product_uid),
         name: result.name,
         image: result.image,
@@ -81,6 +81,7 @@ export class Sainsburys extends Supermarket {
           : null,
         supermarket: Sainsburys.NAME,
       };
+      return resultItem;
     });
 
     return {
@@ -89,7 +90,7 @@ export class Sainsburys extends Supermarket {
   }
 
   private formatStrapline(strapline: string): string {
-    console.log('Strapline', JSON.stringify(strapline));
+    console.debug('Strapline', JSON.stringify(strapline));
 
     // prettier-ignore
     const redundantStraplines = [

@@ -5,7 +5,6 @@ import { SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 import { AddProductData } from '../add-product-dialog/add-product-dialog.component';
 import { SearchParams } from '../search-box/search-box.component';
-import { AddFavouriteData } from '../search-result-list/search-result-list.component';
 
 @Component({
   selector: 'app-search-page',
@@ -88,12 +87,6 @@ export class SearchPageComponent implements OnInit {
         this.results = this.results.map((item) => (item.id === data.productId ? { ...item, isFavourite: true } : item));
       });
     this.addItemDetails = null;
-  }
-
-  public setFavourite({ itemId, isFavourite }: AddFavouriteData): void {
-    this.results = this.results.map((item) => (item.id === itemId ? { ...item, isFavourite: isFavourite } : item));
-
-    this.http.post(environment.apiUrl + '/favourites', { itemId, isFavourite }).subscribe();
   }
 }
 
