@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
 import { SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
-import { ProductRepository } from '../db/product.repository';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
@@ -20,7 +19,6 @@ export class InvalidIdException extends Error {
 export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private readonly productRepo: ProductRepository,
     private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
 
@@ -72,7 +70,7 @@ export class SupermarketService {
 
     if (!forceFresh) {
       const updatedAfter = startOfDay(new Date());
-      const cachedValue = await this.productRepo.get(id, updatedAfter);
+      const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
         console.debug('Cache hit for ' + id);
         return cachedValue;
@@ -89,7 +87,7 @@ export class SupermarketService {
           } else {
             console.debug('Cache miss, storing', id);
           }
-          await this.productRepo.save(product);
+          await this.trackedProductsRepo.addToHistory([product]);
           return product;
         }
       }

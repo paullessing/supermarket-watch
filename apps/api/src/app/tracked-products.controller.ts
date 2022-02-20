@@ -41,7 +41,7 @@ export class TrackedProductsController {
       throw new NotFoundException(`Could not find product with ID "${productId}"`);
     }
 
-    return await this.trackingRepo.save(trackingId, product);
+    return await this.trackingRepo.createTrackingOrAddToExisting(trackingId, product);
   }
 
   @Delete('/all')

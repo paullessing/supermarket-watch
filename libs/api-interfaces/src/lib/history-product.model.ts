@@ -13,3 +13,22 @@ export interface HistoryProduct {
     validUntil: string;
   };
 }
+
+export interface HistoryProduct2 {
+  id: string;
+  name: string;
+  products: SingleHistoryProduct[];
+}
+
+export interface SingleHistoryProduct {
+  name: string;
+  price: number;
+  pricePerUnit: number;
+  unitName: string;
+  unitAmount: number;
+  specialOffer: null | {
+    offerText: string;
+    originalPrice: null | number;
+    validUntil: string;
+  };
+}

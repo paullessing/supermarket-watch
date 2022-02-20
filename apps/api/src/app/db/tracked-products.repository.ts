@@ -19,6 +19,8 @@ interface TrackedProducts extends TimestampedDocument {
   products: TrackedProduct[];
 }
 
+type ArrayType<T> = T extends (infer U)[] ? U : never;
+
 @Injectable()
 export class TrackedProductsRepository {
   private repo: Repository<TrackedProducts>;
@@ -27,17 +29,31 @@ export class TrackedProductsRepository {
     this.repo = new Repository(config, 'productGroups');
   }
 
-  public async save(trackingId: string | null, product: Product): Promise<{ trackingId: string }> {
+  public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
+    const query: Filter<TrackedProducts> = {
+      'products.productId': productId,
+    };
+    if (updatedAfter) {
+      query['updatedAt'] = { $gte: updatedAfter };
+    }
+    const trackedProductEntry = await this.repo.db.findOne<TrackedProducts>(query);
+    return trackedProductEntry?.products.find((product) => product.productId === productId)?.product || null;
+  }
+
+  public async createTrackingOrAddToExisting(
+    trackingId: string | null,
+    product: Product
+  ): Promise<{ trackingId: string }> {
+    console.debug('Creating tracking. Existing ID:', trackingId, 'Product:', product);
     const existingEntryForProduct = await this.repo.db.findOne({ 'products.productId': product.id });
     if (existingEntryForProduct) {
+      console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
       return { trackingId: existingEntryForProduct._id.toString() };
     }
 
-    console.log('FINDING ONE', trackingId);
-
+    console.debug((trackingId ? '' : 'Not') + 'Looking up by TrackingId', trackingId);
     const existingTrackingEntry: TrackedProducts | null = trackingId ? await this.repo.findOne(trackingId) : null;
-
-    console.log('FINDING xxx', existingTrackingEntry);
+    console.debug('Existing entry:', existingTrackingEntry);
 
     if (trackingId && existingTrackingEntry) {
       const updatedEntry: TrackedProducts = {
@@ -47,7 +63,7 @@ export class TrackedProductsRepository {
         updatedAt: new Date(),
       };
       const result = await this.repo.update(updatedEntry);
-      console.log('Updating', result);
+      console.debug('Updating', result);
       return { trackingId };
     } else {
       const newEntry: WithoutId<TrackedProducts> = {
@@ -57,10 +73,43 @@ export class TrackedProductsRepository {
         updatedAt: new Date(),
       };
       const result = await this.repo.create(newEntry as TrackedProducts);
-      console.log('Creating', result);
+      console.debug('Creating', result);
       return {
         trackingId: result._id.toString(),
       };
+    }
+  }
+
+  public async addToHistory(products: Product[]): Promise<void> {
+    const now = new Date();
+
+    const entries = await this.repo.db
+      .find({
+        'products.productId': { $in: products.map((pproduct) => pproduct.id) },
+      })
+      .toArray();
+
+    for (const entry of entries) {
+      const updatedEntry: TrackedProducts = {
+        ...entry,
+        updatedAt: now,
+        products: entry.products.map((productEntry) => {
+          const product = products.find((p) => p.id === productEntry.productId);
+          if (product) {
+            const historyEntry: ArrayType<TrackedProduct['history']> = {
+              date: now,
+              product: product,
+            };
+            return {
+              ...productEntry,
+              history: [historyEntry, ...productEntry.history],
+            };
+          } else {
+            return productEntry;
+          }
+        }),
+      };
+      await this.repo.update(updatedEntry);
     }
   }
 
