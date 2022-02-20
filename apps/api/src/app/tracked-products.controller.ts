@@ -1,4 +1,5 @@
 import {
+  BadGatewayException,
   BadRequestException,
   Body,
   Controller,
@@ -10,7 +11,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ProductSearchResults } from '@shoppi/api-interfaces';
+import { Product, ProductSearchResults } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
 
@@ -26,7 +27,15 @@ export class TrackedProductsController {
     @Body('productId') productId: string,
     @Param('trackingId') trackingId: string
   ): Promise<{ trackingId: string }> {
-    const product = await this.supermarketService.getSingleItem(productId);
+    let product: Product | null = null;
+
+    try {
+      product = await this.supermarketService.getSingleItem(productId);
+    } catch (e) {
+      console.error(`Error fetching product ID:`, productId);
+      console.error(e);
+      throw new BadGatewayException(e);
+    }
     if (!product) {
       throw new NotFoundException(`Could not find product with ID "${productId}"`);
     }

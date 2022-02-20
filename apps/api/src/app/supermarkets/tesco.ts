@@ -1,6 +1,6 @@
 import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
 import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
@@ -71,8 +71,25 @@ export class Tesco extends Supermarket {
 
     const url = `${this.config.tescoUrl}search?${params}`;
 
-    const search = await axios.get(url);
+    try {
+      const search = await axios.get(url);
 
+      return {
+        items: this.extractSearchResults(search),
+      };
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status === 404) {
+        // No results for this search term
+        console.info(`Tesco: Search query "${term}" returned no results`);
+        return {
+          items: [],
+        };
+      }
+      throw e;
+    }
+  }
+
+  private extractSearchResults(search: AxiosResponse<string>): SearchResultItem[] {
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reduxState = $('#data-attributes').data('reduxState') as any;
@@ -105,9 +122,7 @@ export class Tesco extends Supermarket {
       results.push(result);
     });
 
-    return {
-      items: results,
-    };
+    return results;
   }
 
   private getPromotion(
