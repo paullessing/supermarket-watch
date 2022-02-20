@@ -84,7 +84,9 @@ export class SearchPageComponent implements OnInit {
       .post(url, {
         productId: data.productId,
       })
-      .subscribe();
+      .subscribe(() => {
+        this.results = this.results.map((item) => (item.id === data.productId ? { ...item, isFavourite: true } : item));
+      });
     this.addItemDetails = null;
   }
 

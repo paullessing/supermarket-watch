@@ -1,13 +1,13 @@
 import { BadRequestException, Controller, Get, NotFoundException, Query } from '@nestjs/common';
 import { SearchResult, SortBy, SortOrder } from '@shoppi/api-interfaces';
-import { FavouritesRepository } from './db/favourites.repository';
+import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/search')
 export class SearchController {
   constructor(
     private readonly supermarketService: SupermarketService,
-    private readonly favouritesRepo: FavouritesRepository
+    private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
 
   @Get()
@@ -34,11 +34,11 @@ export class SearchController {
       throw new NotFoundException();
     }
 
-    const favourites = await this.favouritesRepo.getFavourites(supermarketItems.map(({ id }) => id));
+    const favourites = await this.trackedProductsRepo.getTrackedIds(supermarketItems.map(({ id }) => id));
 
     const items = supermarketItems.map((item) => ({
       ...item,
-      isFavourite: favourites.indexOf(item.id) >= 0,
+      isFavourite: favourites.has(item.id),
     }));
 
     return { items };

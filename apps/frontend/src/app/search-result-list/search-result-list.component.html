@@ -8,11 +8,10 @@
       class="result__image"
       [style.backgroundImage]="'url(' + result.image + ')'"
     ></div>
-<!--    <button-->
-<!--      class="result__favourite"-->
-<!--      [class.result__favourite&#45;&#45;selected]="isFavourite(result.id)"-->
-<!--      (click)="onSetFavourite(result.id)"-->
-<!--    ></button>-->
+    <button
+      class="result__favourite"
+      [class.result__favourite--selected]="result.isFavourite"
+    ></button>
     <p class="result__supermarket">{{ result.supermarket }}</p>
     <p class="result__name">{{ result.name }}</p>
     <p

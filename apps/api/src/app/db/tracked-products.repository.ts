@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { WithoutId } from 'mongodb';
+import { Filter, WithoutId } from 'mongodb';
 import { Product } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { Repository } from './repository';
@@ -68,6 +68,44 @@ export class TrackedProductsRepository {
     return (await this.repo.findAll())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
       .reduce((acc, curr) => acc.concat(curr.products.map(({ productId }) => productId)), [] as string[]);
+  }
+
+  /**
+   * Returns all tracked products from the set of IDs. The result is a map of itemId => trackedId.
+   */
+  public async getTrackedIds(itemIds: string[]): Promise<Map<string, string>> {
+    const filter: Filter<TrackedProducts> = {
+      products: {
+        $elemMatch: {
+          productId: {
+            $in: itemIds,
+          },
+        },
+      },
+    };
+    console.log('Filter:', JSON.stringify(filter));
+
+    const trackedItems = await this.repo.db
+      .aggregate<{ _id: string; productId: string }>([
+        {
+          $match: {
+            products: {
+              $elemMatch: {
+                productId: {
+                  $in: itemIds,
+                },
+              },
+            },
+          },
+        },
+        { $unwind: '$products' },
+        {
+          $project: { productId: '$products.productId' },
+        },
+      ])
+      .toArray();
+
+    return new Map(trackedItems.map(({ productId, _id }) => [productId, _id]));
   }
 
   public async removeAll(): Promise<void> {
