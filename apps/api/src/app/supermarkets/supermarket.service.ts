@@ -48,10 +48,14 @@ export class SupermarketService {
     return this.sortResults(results, sortBy, sortOrder);
   }
 
-  public async getMultipleItems(ids: string[], forceFresh: boolean = false): Promise<Product[]> {
+  public async getMultipleItems(
+    ids: string[],
+    forceFresh: boolean = false,
+    addToHistory: boolean = true
+  ): Promise<Product[]> {
     return Promise.all(
       ids.map((id) =>
-        this.getSingleItem(id, forceFresh).catch((e) => {
+        this.getSingleItem(id, forceFresh, addToHistory).catch((e) => {
           console.log('Failed to fetch item', id, e);
           throw e;
         })
@@ -62,7 +66,7 @@ export class SupermarketService {
   /**
    * @throws InvalidIdException if the ID is invalid or the product is not found
    */
-  public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
+  public async getSingleItem(id: string, forceFresh: boolean = false, addToHistory: boolean = true): Promise<Product> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
       throw new InvalidIdException(id);
@@ -87,7 +91,9 @@ export class SupermarketService {
           } else {
             console.debug('Cache miss, storing', id);
           }
-          await this.trackedProductsRepo.addToHistory([product]);
+          if (addToHistory) {
+            await this.trackedProductsRepo.addToHistory(product);
+          }
           return product;
         }
       }

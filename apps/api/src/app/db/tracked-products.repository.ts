@@ -1,128 +1,173 @@
 import { Injectable } from '@nestjs/common';
-import { Filter, WithoutId } from 'mongodb';
-import { Config } from '../config';
+import { Collection, Filter, MongoClient, ObjectId, WithoutId } from 'mongodb';
 import { Product } from '../product.model';
-import { Repository } from './repository';
 import { TimestampedDocument } from './timestamped-document';
-
-interface TrackedProduct {
-  productId: string;
-  product: Product;
-  history: {
-    date: Date;
-    product: Product;
-  }[];
-}
 
 interface TrackedProducts extends TimestampedDocument {
   name: string;
-  products: TrackedProduct[];
+  products: Product[];
+  productsLastUpdated: Date;
 }
 
-type ArrayType<T> = T extends (infer U)[] ? U : never;
+interface HistoryEntry {
+  date: Date;
+  product: Product;
+}
+
+interface ProductHistory extends TimestampedDocument {
+  productId: string;
+  history: HistoryEntry[];
+}
 
 @Injectable()
 export class TrackedProductsRepository {
-  private repo: Repository<TrackedProducts>;
+  private products!: Collection<TrackedProducts>;
+  private history!: Collection<ProductHistory>;
 
-  constructor(config: Config) {
-    this.repo = new Repository(config, 'productGroups');
+  private readonly initialised: Promise<void>;
+
+  constructor() {
+    const client = new MongoClient('mongodb://mongo:27017');
+
+    this.initialised = client.connect().then(async () => {
+      console.log('TPReg: Connected successfully to the server');
+      const db = client.db('shopping');
+      this.products = db.collection('trackedProducts');
+      this.history = db.collection('productHistory');
+      await Promise.all([
+        this.products.createIndex(
+          {
+            'products.id': 1,
+          },
+          {
+            unique: true,
+            sparse: false,
+          }
+        ),
+        this.history.createIndex(
+          {
+            productId: 1,
+          },
+          {
+            unique: true,
+            sparse: false,
+          }
+        ),
+      ]);
+    });
   }
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
+    await this.initialised;
+
     const query: Filter<TrackedProducts> = {
-      'products.productId': productId,
+      'products.id': productId,
     };
     if (updatedAfter) {
-      query['updatedAt'] = { $gte: updatedAfter };
+      query['productsLastUpdated'] = { $gte: updatedAfter };
     }
-    const trackedProductEntry = await this.repo.db.findOne<TrackedProducts>(query);
-    return trackedProductEntry?.products.find((product) => product.productId === productId)?.product || null;
+    const trackedProductEntry = await this.products.findOne(query);
+    return trackedProductEntry?.products.find((product) => product.id === productId) ?? null;
   }
 
-  public async createTrackingOrAddToExisting(
-    trackingId: string | null,
-    product: Product
-  ): Promise<{ trackingId: string }> {
-    console.debug('Creating tracking. Existing ID:', trackingId, 'Product:', product);
-    const existingEntryForProduct = await this.repo.db.findOne({ 'products.productId': product.id });
+  public async getProductIds(trackingId: string): Promise<string[]> {
+    await this.initialised;
+
+    const trackedProduct = await this.products.findOne({ _id: toId(trackingId) });
+    if (!trackedProduct) {
+      return [];
+    }
+    return trackedProduct.products.map((product) => product.id) ?? [];
+  }
+
+  public async createTracking(product: Product): Promise<string> {
+    await this.initialised;
+
+    const existingEntryForProduct = await this.products.findOne({ 'products.productId': product.id });
     if (existingEntryForProduct) {
       console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
-      return { trackingId: existingEntryForProduct._id.toString() };
+      throw new Error('Tracking for this product already exists');
     }
 
-    console.debug((trackingId ? '' : 'Not') + 'Looking up by TrackingId', trackingId);
-    const existingTrackingEntry: TrackedProducts | null = trackingId ? await this.repo.findOne(trackingId) : null;
-    console.debug('Existing entry:', existingTrackingEntry);
+    const now = new Date();
+    const result = await this.products.insertOne({
+      name: product.name,
+      products: [product],
+      productsLastUpdated: now,
+      createdAt: now,
+      updatedAt: now,
+    } as TrackedProducts);
+    const trackingId = result.insertedId.toString();
 
-    if (trackingId && existingTrackingEntry) {
-      const updatedEntry: TrackedProducts = {
-        ...existingTrackingEntry,
-        products: this.getOrCreateProductEntry(existingTrackingEntry.products, product),
-        createdAt: existingTrackingEntry.createdAt,
-        updatedAt: new Date(),
-      };
-      const result = await this.repo.update(updatedEntry);
-      console.debug('Updating', result);
-      return { trackingId };
-    } else {
-      const newEntry: WithoutId<TrackedProducts> = {
-        products: this.getOrCreateProductEntry([], product),
-        name: product.name,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      const result = await this.repo.create(newEntry as TrackedProducts);
-      console.debug('Creating', result);
-      return {
-        trackingId: result._id.toString(),
-      };
-    }
+    await this.addToHistory(product);
+
+    return trackingId;
   }
 
-  public async addToHistory(products: Product[]): Promise<void> {
-    const now = new Date();
+  public async addToTrackedProduct(trackingId: string, updatedProducts: Product[], newProduct: Product): Promise<void> {
+    await this.initialised;
 
-    const entries = await this.repo.db
-      .find({
-        'products.productId': { $in: products.map((pproduct) => pproduct.id) },
-      })
-      .toArray();
-
-    for (const entry of entries) {
-      const updatedEntry: TrackedProducts = {
-        ...entry,
-        updatedAt: now,
-        products: entry.products.map((productEntry) => {
-          const product = products.find((p) => p.id === productEntry.productId);
-          if (product) {
-            const historyEntry: ArrayType<TrackedProduct['history']> = {
-              date: now,
-              product: product,
-            };
-            return {
-              ...productEntry,
-              history: [historyEntry, ...productEntry.history],
-            };
-          } else {
-            return productEntry;
-          }
-        }),
-      };
-      await this.repo.update(updatedEntry);
+    console.debug('Creating tracking. Existing ID:', trackingId, 'Product:', newProduct);
+    const existingEntryForProduct = await this.products.findOne({ 'products.productId': newProduct.id });
+    if (existingEntryForProduct) {
+      console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
+      throw new Error('Tracking for this product already exists');
     }
+
+    const existingTrackingEntry: TrackedProducts | null = await this.products.findOne({
+      _id: toId(trackingId),
+    } as Filter<TrackedProducts>);
+    console.debug('Existing entry:', existingTrackingEntry);
+
+    if (!existingTrackingEntry) {
+      throw new Error('Tracking does not exist');
+    }
+
+    const products = [...existingTrackingEntry.products, newProduct];
+
+    const trackedProducts = {
+      ...existingTrackingEntry,
+      products,
+    };
+
+    await this.updateProducts(trackedProducts, products);
+  }
+
+  public async updateCurrentProducts(trackingId: string, updatedProducts: Product[]): Promise<void> {
+    await this.initialised;
+
+    const trackedProducts = await this.products.findOne({
+      _id: toId(trackingId),
+    } as Filter<TrackedProducts>);
+    console.debug('Existing entry:', trackedProducts);
+
+    if (!trackedProducts) {
+      throw new Error('Tracking does not exist');
+    }
+
+    await this.updateProducts(trackedProducts, updatedProducts);
+  }
+
+  public async addToHistory(product: Product): Promise<void> {
+    await this.initialised;
+
+    return this.addProductToHistory(product, new Date());
   }
 
   public async getAllTrackedIds(): Promise<string[]> {
-    return (await this.repo.findAll())
+    await this.initialised;
+
+    return (await this.products.find({}).toArray())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
-      .reduce((acc, curr) => acc.concat(curr.products.map(({ productId }) => productId)), [] as string[]);
+      .reduce((acc, curr) => acc.concat(curr.products.map(({ id }) => id)), [] as string[]);
   }
 
   /**
    * Returns all tracked products from the set of IDs. The result is a map of itemId => trackedId.
    */
   public async getTrackedIds(itemIds: string[]): Promise<Map<string, string>> {
+    await this.initialised;
+
     const filter: Filter<TrackedProducts> = {
       products: {
         $elemMatch: {
@@ -132,15 +177,15 @@ export class TrackedProductsRepository {
         },
       },
     };
-    console.log('Filter:', JSON.stringify(filter));
+    console.debug('Filter:', JSON.stringify(filter));
 
-    const trackedItems = await this.repo.db
+    const trackedItems = await this.products
       .aggregate<{ _id: string; productId: string }>([
         {
           $match: {
             products: {
               $elemMatch: {
-                productId: {
+                id: {
                   $in: itemIds,
                 },
               },
@@ -149,7 +194,7 @@ export class TrackedProductsRepository {
         },
         { $unwind: '$products' },
         {
-          $project: { productId: '$products.productId' },
+          $project: { productId: '$products.id' },
         },
       ])
       .toArray();
@@ -157,30 +202,103 @@ export class TrackedProductsRepository {
     return new Map(trackedItems.map(({ productId, _id }) => [productId, _id]));
   }
 
-  public async removeAll(): Promise<void> {
-    await this.repo.db.deleteMany({});
+  /**
+   * Debug method only
+   */
+  public async removeAllTrackedProducts(): Promise<void> {
+    await this.initialised;
+
+    await this.products.deleteMany({});
+  }
+
+  /**
+   * Debug method only
+   */
+  public async removeAllHistory(): Promise<void> {
+    await this.initialised;
+
+    await this.history.deleteMany({});
   }
 
   public async search(searchTerm: string): Promise<TrackedProducts[]> {
-    const result = this.repo.db.find({ 'products.product.name': { $regex: searchTerm, $options: '$i' } });
+    await this.initialised;
+
+    const result = this.products.find({ 'products.name': { $regex: searchTerm, $options: '$i' } });
 
     return result.toArray();
   }
 
-  private getOrCreateProductEntry(trackedProducts: TrackedProduct[], product: Product): TrackedProduct[] {
-    const existingProduct = trackedProducts.find(({ productId }) => productId === product.id);
-    const historyEntry = { product, date: new Date() };
-    const newEntry: TrackedProduct = {
-      ...existingProduct,
-      productId: product.id,
-      product,
-      history: [historyEntry, ...(existingProduct?.history || [])],
-    };
+  private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[]): Promise<void> {
+    const existingIds = trackedProducts.products.map((product) => product.id);
+    const newIds = updatedProducts.map((product) => product.id);
+    if (existingIds.sort().join(',') !== newIds.sort().join(',')) {
+      console.error('Product ID mismatch, expected:', existingIds.sort().join(','), 'got:', newIds.sort().join(','));
+      throw new Error('Product IDs do not match');
+    }
 
-    if (existingProduct) {
-      return trackedProducts.map((_product) => (_product.productId === product.id ? newEntry : _product));
+    const products = trackedProducts.products.map(
+      (product) => updatedProducts.find((updatedProduct) => updatedProduct.id === product.id)! // eslint-disable-line @typescript-eslint/no-non-null-assertion
+    );
+
+    const now = new Date();
+    const updatedEntry: TrackedProducts = {
+      ...trackedProducts,
+      products,
+      productsLastUpdated: now,
+      updatedAt: now,
+    };
+    const result = await this.products.updateOne({ _id: trackedProducts._id }, { $set: updatedEntry });
+    console.debug('Updated', result);
+
+    console.debug('Updating history');
+    await updatedProducts.forEach((product) => this.addProductToHistory(product, now));
+  }
+
+  private async addProductToHistory(product: Product, now: Date): Promise<void> {
+    const entry = await this.history.findOne({
+      productId: product.id,
+    });
+
+    if (entry) {
+      const updatedEntry: ProductHistory = {
+        ...entry,
+        history: this.addHistoryEntry(entry.history, product, now),
+        updatedAt: now,
+      };
+      console.debug('Updating history entry', updatedEntry);
+      await this.history.updateOne({ _id: toId(entry._id) }, { $set: updatedEntry });
     } else {
-      return [...trackedProducts, newEntry];
+      const newEntry: WithoutId<ProductHistory> = {
+        productId: product.id,
+        history: this.addHistoryEntry([], product, now),
+        createdAt: now,
+        updatedAt: now,
+      };
+      console.debug('Creating history entry', newEntry);
+      await this.history.insertOne(newEntry as ProductHistory);
     }
   }
+
+  private addHistoryEntry(history: HistoryEntry[], product: Product, now: Date): HistoryEntry[] {
+    const newEntry: HistoryEntry = {
+      date: now,
+      product,
+    };
+    for (let i = 0; i < history.length; i++) {
+      if (history[i].date.getTime() === now.getTime()) {
+        history[i] = newEntry;
+        return history;
+      }
+      if (history[i].date.getTime() < now.getTime()) {
+        const copy = history.slice();
+        copy.splice(i, 0, newEntry);
+        return copy;
+      }
+    }
+    return [...history, newEntry];
+  }
+}
+
+function toId(id: string | ObjectId): ObjectId {
+  return typeof id === 'string' ? new ObjectId(id) : id;
 }

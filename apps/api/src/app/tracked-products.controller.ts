@@ -26,28 +26,48 @@ export class TrackedProductsController {
   @Post('/:trackingId?')
   public async addTracking(
     @Body('productId') productId: string,
-    @Param('trackingId') trackingId: string
+    @Param('trackingId') trackingId: string | undefined
   ): Promise<{ trackingId: string }> {
     let product: Product | null = null;
+    let otherProducts: Product[] = [];
+    const otherProductIdsForSameTrackingId = trackingId ? await this.trackingRepo.getProductIds(trackingId) : [];
+
+    const productIds = [productId, ...otherProductIdsForSameTrackingId];
 
     try {
-      product = await this.supermarketService.getSingleItem(productId);
+      [product, ...otherProducts] = await this.supermarketService.getMultipleItems(productIds, false, false);
     } catch (e) {
-      console.error(`Error fetching product ID:`, productId);
+      console.error(`Error fetching product IDs:`, productIds);
       console.error(e);
       throw new BadGatewayException(e);
     }
+
     if (!product) {
       throw new NotFoundException(`Could not find product with ID "${productId}"`);
     }
 
-    return await this.trackingRepo.createTrackingOrAddToExisting(trackingId, product);
+    if (trackingId) {
+      console.log(`Updating tracking ID "${trackingId}"`, otherProducts, product);
+
+      await this.trackingRepo.addToTrackedProduct(trackingId, otherProducts, product);
+
+      return {
+        trackingId,
+      };
+    } else {
+      const resultId = await this.trackingRepo.createTracking(product);
+
+      return {
+        trackingId: resultId,
+      };
+    }
   }
 
   @Delete('/all')
   @HttpCode(204)
   public async deleteAll(): Promise<void> {
-    await this.trackingRepo.removeAll();
+    await this.trackingRepo.removeAllTrackedProducts();
+    await this.trackingRepo.removeAllHistory();
   }
 
   @Get('/search')
