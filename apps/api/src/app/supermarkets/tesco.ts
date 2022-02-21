@@ -21,7 +21,18 @@ export class Tesco extends Supermarket {
   }
 
   public async getProduct(productId: string): Promise<Product | null> {
-    const search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
+    let search: AxiosResponse;
+
+    try {
+      search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status === 404) {
+        console.error(`Got a 404 while fetching tesco product "${productId}":`, e.message);
+        return null;
+      } else {
+        throw e;
+      }
+    }
 
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
