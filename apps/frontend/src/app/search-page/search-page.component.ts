@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
+import { AddTrackedProduct, SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 import { AddProductData } from '../add-product-dialog/add-product-dialog.component';
 import { SearchParams } from '../search-box/search-box.component';
@@ -80,11 +80,13 @@ export class SearchPageComponent implements OnInit {
   public track(data: AddProductData): void {
     const url = `${environment.apiUrl}/tracked-products${data.combinedTrackingId ? `/${data.combinedTrackingId}` : ''}`;
     this.http
-      .post(url, {
+      .post<AddTrackedProduct>(url, {
         productId: data.productId,
       })
-      .subscribe(() => {
-        this.results = this.results.map((item) => (item.id === data.productId ? { ...item, isFavourite: true } : item));
+      .subscribe(({ trackingId }) => {
+        this.results = this.results.map(
+          (item): SearchResultItem => (item.id === data.productId ? { ...item, trackingId } : item)
+        );
       });
     this.addItemDetails = null;
   }

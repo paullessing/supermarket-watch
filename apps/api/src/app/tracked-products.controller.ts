@@ -11,7 +11,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ProductSearchResults } from '@shoppi/api-interfaces';
+import { AddTrackedProduct, ProductSearchResults } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { Product } from './product.model';
 import { SupermarketService } from './supermarkets';
@@ -27,7 +27,7 @@ export class TrackedProductsController {
   public async addTracking(
     @Body('productId') productId: string,
     @Param('trackingId') trackingId: string | undefined
-  ): Promise<{ trackingId: string }> {
+  ): Promise<AddTrackedProduct> {
     let product: Product | null = null;
     let otherProducts: Product[] = [];
     const otherProductIdsForSameTrackingId = trackingId ? await this.trackingRepo.getProductIds(trackingId) : [];

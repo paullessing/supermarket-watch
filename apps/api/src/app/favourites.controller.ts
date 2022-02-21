@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { HistoryProduct } from '@shoppi/api-interfaces';
-import { FavouritesRepository } from './db/favourites.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
 
@@ -8,7 +7,6 @@ import { SupermarketService } from './supermarkets';
 export class FavouritesController {
   constructor(
     private readonly supermarketService: SupermarketService,
-    private readonly favouritesRepo: FavouritesRepository,
     private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
 
@@ -29,14 +27,5 @@ export class FavouritesController {
     return {
       items,
     };
-  }
-
-  @Post('/')
-  public async setFavourite(
-    @Body('isFavourite') isFavourite: boolean,
-    @Body('itemId') itemId: string
-  ): Promise<{ done: boolean }> {
-    await this.favouritesRepo.setFavourite(itemId, isFavourite);
-    return { done: true };
   }
 }
