@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import { Collection, Filter, MongoClient, ObjectId, WithoutId } from 'mongodb';
+import { Collection, Filter, ObjectId, WithoutId } from 'mongodb';
 import { Product } from '../product.model';
+import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { TimestampedDocument } from './timestamped-document';
 
 interface TrackedProducts extends TimestampedDocument {
@@ -24,33 +25,10 @@ interface ProductHistory extends TimestampedDocument {
 
 @Injectable()
 export class TrackedProductsRepository {
-  private products!: Collection<TrackedProducts>;
-  private history!: Collection<ProductHistory>;
-
-  constructor(client: MongoClient) {
-    console.log('TPReg: Connected successfully to the server');
-    const db = client.db('shopping');
-    this.products = db.collection('trackedProducts');
-    this.history = db.collection('productHistory');
-    this.products.createIndex(
-      {
-        'products.id': 1,
-      },
-      {
-        unique: true,
-        sparse: false,
-      }
-    );
-    this.history.createIndex(
-      {
-        productId: 1,
-      },
-      {
-        unique: true,
-        sparse: false,
-      }
-    );
-  }
+  constructor(
+    @Inject(TRACKING_COLLECTION) private readonly products: Collection<TrackedProducts>,
+    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>
+  ) {}
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
     const query: Filter<TrackedProducts> = {

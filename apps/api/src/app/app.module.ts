@@ -2,9 +2,9 @@ import path from 'path';
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { MongoClient } from 'mongodb';
 import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
+import { dbProviders } from './db/db.providers';
 import { FavouritesRepository } from './db/favourites.repository';
 import { ProductRepository } from './db/product.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
@@ -29,6 +29,7 @@ import { TrackedProductsController } from './tracked-products.controller';
       inject: [Sainsburys, Waitrose, Tesco],
     },
     ConfigProvider,
+    ...dbProviders,
     SupermarketService,
     Sainsburys,
     Waitrose,
@@ -37,16 +38,6 @@ import { TrackedProductsController } from './tracked-products.controller';
     ProductRepository,
     TrackedProductsRepository,
     CronService,
-    {
-      provide: MongoClient,
-      useFactory: async () => {
-        const client = new MongoClient('mongodb://mongo:27017');
-
-        await client.connect();
-
-        return client;
-      },
-    },
   ],
 })
 export class AppModule {}
