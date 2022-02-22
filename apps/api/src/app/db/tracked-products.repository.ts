@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
 import { Collection, Filter, ObjectId, WithoutId } from 'mongodb';
+import { NOW } from '../now';
 import { Product } from '../product.model';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { TimestampedDocument } from './timestamped-document';
@@ -27,7 +28,8 @@ interface ProductHistory extends TimestampedDocument {
 export class TrackedProductsRepository {
   constructor(
     @Inject(TRACKING_COLLECTION) private readonly products: Collection<TrackedProducts>,
-    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>
+    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>,
+    @Inject(NOW) private readonly now: Date
   ) {}
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
@@ -56,14 +58,11 @@ export class TrackedProductsRepository {
     if (!trackedProduct) {
       return [];
     }
+
     return trackedProduct.products.map(({ product }) => product.id) ?? [];
   }
 
-  public async addOrCreateTracking(
-    trackingId: string | undefined | null,
-    product: Product,
-    now: Date
-  ): Promise<string> {
+  public async addOrCreateTracking(trackingId: string | undefined | null, product: Product): Promise<string> {
     const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
     if (existingEntryForProduct) {
       console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
@@ -72,17 +71,17 @@ export class TrackedProductsRepository {
 
     let resultTrackingId: string;
     if (trackingId) {
-      resultTrackingId = await this.addProductToTrackingEntry(trackingId, product, now);
+      resultTrackingId = await this.addProductToTrackingEntry(trackingId, product);
     } else {
-      resultTrackingId = await this.createNewTrackingEntry(product, now);
+      resultTrackingId = await this.createNewTrackingEntry(product);
     }
 
-    await this.addProductToHistory(product, now);
+    await this.addProductToHistory(product);
 
     return resultTrackingId;
   }
 
-  public async updateCurrentProducts(trackingId: string, updatedProducts: Product[], now: Date): Promise<void> {
+  public async updateCurrentProducts(trackingId: string, updatedProducts: Product[]): Promise<void> {
     const trackedProducts = await this.products.findOne({
       _id: toId(trackingId),
     } as Filter<TrackedProducts>);
@@ -92,19 +91,19 @@ export class TrackedProductsRepository {
       throw new Error('Tracking does not exist');
     }
 
-    await this.updateProducts(trackedProducts, updatedProducts, now);
+    await this.updateProducts(trackedProducts, updatedProducts);
 
-    await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product, now)));
+    await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product)));
   }
 
-  public async addToHistory(product: Product, now: Date): Promise<void> {
-    await this.addProductToHistory(product, now);
+  public async addToHistory(product: Product): Promise<void> {
+    await this.addProductToHistory(product);
 
     const trackedProducts = await this.products.findOne({
       'products.product.id': product.id,
     });
     if (trackedProducts) {
-      await this.updateProducts(trackedProducts, [product], now);
+      await this.updateProducts(trackedProducts, [product]);
     }
   }
 
@@ -177,18 +176,18 @@ export class TrackedProductsRepository {
     return result.toArray();
   }
 
-  private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[], now: Date): Promise<void> {
+  private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[]): Promise<void> {
     const products = updatedProducts.map((updatedProduct) => {
       const existingProduct = trackedProducts.products.find(({ product }) => product.id === updatedProduct.id);
       if (!existingProduct) {
         throw new Error('Product not found');
       }
-      if (existingProduct.lastUpdated > now) {
+      if (existingProduct.lastUpdated > this.now) {
         return existingProduct; // Don't use older data
       }
       return {
         product: updatedProduct,
-        lastUpdated: now,
+        lastUpdated: this.now,
       };
     });
 
@@ -197,49 +196,49 @@ export class TrackedProductsRepository {
       {
         $set: {
           products,
-          lastUpdated: now,
+          lastUpdated: this.now,
         },
       }
     );
     console.debug('Updated', result);
   }
 
-  private async addProductToHistory(product: Product, now: Date): Promise<void> {
+  private async addProductToHistory(product: Product): Promise<void> {
     const entry = await this.history.findOne({
       productId: product.id,
     });
 
     if (entry) {
       const updatedEntry: Partial<ProductHistory> = {
-        history: this.addHistoryEntry(entry.history, product, now),
-        updatedAt: now,
+        history: this.addHistoryEntry(entry.history, product),
+        updatedAt: this.now,
       };
       console.debug('Updating history entry', updatedEntry);
       await this.history.updateOne({ _id: toId(entry._id) }, { $set: updatedEntry });
     } else {
       const newEntry: WithoutId<ProductHistory> = {
         productId: product.id,
-        history: this.addHistoryEntry([], product, now),
-        createdAt: now,
-        updatedAt: now,
+        history: this.addHistoryEntry([], product),
+        createdAt: this.now,
+        updatedAt: this.now,
       };
       console.debug('Creating history entry', newEntry);
       await this.history.insertOne(newEntry as ProductHistory);
     }
   }
 
-  private addHistoryEntry(history: HistoryEntry[], product: Product, now: Date): HistoryEntry[] {
+  private addHistoryEntry(history: HistoryEntry[], product: Product): HistoryEntry[] {
     const newEntry: HistoryEntry = {
-      date: now,
+      date: this.now,
       product,
     };
     for (let i = 0; i < history.length; i++) {
-      if (Math.abs(differenceInMinutes(now, history[i].date)) < 5) {
+      if (Math.abs(differenceInMinutes(this.now, history[i].date)) < 5) {
         // Don't create closely-spaced history entries
         history[i] = newEntry;
         return history;
       }
-      if (history[i].date.getTime() < now.getTime()) {
+      if (history[i].date.getTime() < this.now.getTime()) {
         const copy = history.slice();
         copy.splice(i, 0, newEntry);
         return copy;
@@ -248,7 +247,7 @@ export class TrackedProductsRepository {
     return [...history, newEntry];
   }
 
-  private async addProductToTrackingEntry(trackingId: string, product: Product, now: Date): Promise<string> {
+  private async addProductToTrackingEntry(trackingId: string, product: Product): Promise<string> {
     const existingTrackingEntry = await this.products.findOne({
       _id: toId(trackingId),
     } as Filter<TrackedProducts>);
@@ -266,23 +265,23 @@ export class TrackedProductsRepository {
         $push: {
           products: {
             product,
-            lastUpdated: now,
+            lastUpdated: this.now,
           },
         },
         $set: {
-          updatedAt: now,
+          updatedAt: this.now,
         },
       }
     );
     return trackingId;
   }
 
-  private async createNewTrackingEntry(product: Product, now: Date): Promise<string> {
+  private async createNewTrackingEntry(product: Product): Promise<string> {
     const result = await this.products.insertOne({
       name: product.name,
-      products: [{ product, lastUpdated: now }],
-      createdAt: now,
-      updatedAt: now,
+      products: [{ product, lastUpdated: this.now }],
+      createdAt: this.now,
+      updatedAt: this.now,
     } as TrackedProducts);
     return result.insertedId.toString();
   }

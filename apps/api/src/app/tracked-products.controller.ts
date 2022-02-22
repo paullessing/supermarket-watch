@@ -36,10 +36,8 @@ export class TrackedProductsController {
       throw new BadGatewayException(e);
     }
 
-    const now = new Date();
-
     console.log(`Updating tracking ID "${trackingId}"`, product);
-    const resultId = await this.trackingRepo.addOrCreateTracking(trackingId, product, now);
+    const resultId = await this.trackingRepo.addOrCreateTracking(trackingId, product);
 
     return {
       trackingId: resultId,

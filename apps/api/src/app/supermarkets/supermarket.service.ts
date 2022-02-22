@@ -3,6 +3,7 @@ import { startOfDay } from 'date-fns';
 import { SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
+import { NOW } from '../now';
 import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 
@@ -19,7 +20,8 @@ export class InvalidIdException extends Error {
 export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private readonly trackedProductsRepo: TrackedProductsRepository
+    private readonly trackedProductsRepo: TrackedProductsRepository,
+    @Inject(NOW) private readonly now: Date
   ) {}
 
   public async search(
@@ -69,15 +71,13 @@ export class SupermarketService {
     }
 
     if (!forceFresh) {
-      const updatedAfter = startOfDay(new Date());
+      const updatedAfter = startOfDay(this.now);
       const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
         console.debug('Cache hit for ' + id);
         return cachedValue;
       }
     }
-
-    const now = new Date();
 
     for (const supermarket of this.supermarkets) {
       const prefix = supermarket.getPrefix();
@@ -89,7 +89,7 @@ export class SupermarketService {
           } else {
             console.debug('Cache miss, storing', id);
           }
-          await this.trackedProductsRepo.addToHistory(product, now);
+          await this.trackedProductsRepo.addToHistory(product);
           return product;
         }
       }
