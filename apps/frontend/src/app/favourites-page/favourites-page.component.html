@@ -5,17 +5,14 @@
     <ng-container *ngFor="let favourite of favourites; trackBy trackItem">
       <thead>
       <tr>
-        <td colspan="3" style="padding: 0.25rem 0.5rem 0.25rem 0">{{ favourite.name }}</td>
+        <td colspan="3" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ favourite.name }}</td>
       </tr>
       </thead>
       <tbody>
       <ng-container *ngFor="let product of favourite.products; trackBy trackProduct">
         <tr>
-<!--          <td style="padding: 0.25rem 0.5rem 0.25rem 0">-->
-<!--            {{ product.name }}-->
-<!--          </td>-->
           <td style="padding: 0.25rem 0.5rem">
-            <em>{{ product.supermarket }}</em>
+            <em [title]="product.name">{{ product.supermarket }}</em>
           </td>
           <td
             style="padding: 0.25rem 0.5rem"

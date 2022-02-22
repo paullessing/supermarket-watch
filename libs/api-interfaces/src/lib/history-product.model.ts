@@ -1,4 +1,3 @@
-// TODO replace with data only tracking relevant fields and containing multiple items
 export interface Favourites {
   id: string;
   name: string;
