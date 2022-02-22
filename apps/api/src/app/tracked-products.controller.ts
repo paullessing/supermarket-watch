@@ -6,7 +6,6 @@ import {
   Delete,
   Get,
   HttpCode,
-  NotFoundException,
   Param,
   Post,
   Query,
@@ -28,39 +27,23 @@ export class TrackedProductsController {
     @Body('productId') productId: string,
     @Param('trackingId') trackingId: string | undefined
   ): Promise<AddTrackedProduct> {
-    let product: Product | null = null;
-    let otherProducts: Product[] = [];
-    const otherProductIdsForSameTrackingId = trackingId ? await this.trackingRepo.getProductIds(trackingId) : [];
-
-    const productIds = [productId, ...otherProductIdsForSameTrackingId];
+    let product: Product;
 
     try {
-      [product, ...otherProducts] = await this.supermarketService.getMultipleItems(productIds, false, false);
+      product = await this.supermarketService.getSingleItem(productId);
     } catch (e) {
-      console.error(`Error fetching product IDs:`, productIds);
       console.error(e);
       throw new BadGatewayException(e);
     }
 
-    if (!product) {
-      throw new NotFoundException(`Could not find product with ID "${productId}"`);
-    }
+    const now = new Date();
 
-    if (trackingId) {
-      console.log(`Updating tracking ID "${trackingId}"`, otherProducts, product);
+    console.log(`Updating tracking ID "${trackingId}"`, product);
+    const resultId = await this.trackingRepo.addOrCreateTracking(trackingId, product, now);
 
-      await this.trackingRepo.addToTrackedProduct(trackingId, otherProducts, product);
-
-      return {
-        trackingId,
-      };
-    } else {
-      const resultId = await this.trackingRepo.createTracking(product);
-
-      return {
-        trackingId: resultId,
-      };
-    }
+    return {
+      trackingId: resultId,
+    };
   }
 
   @Delete('/all')
