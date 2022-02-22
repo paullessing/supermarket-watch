@@ -2,6 +2,7 @@ import path from 'path';
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { MongoClient } from 'mongodb';
 import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
 import { FavouritesRepository } from './db/favourites.repository';
@@ -36,6 +37,16 @@ import { TrackedProductsController } from './tracked-products.controller';
     ProductRepository,
     TrackedProductsRepository,
     CronService,
+    {
+      provide: MongoClient,
+      useFactory: async () => {
+        const client = new MongoClient('mongodb://mongo:27017');
+
+        await client.connect();
+
+        return client;
+      },
+    },
   ],
 })
 export class AppModule {}

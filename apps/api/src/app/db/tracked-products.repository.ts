@@ -27,42 +27,32 @@ export class TrackedProductsRepository {
   private products!: Collection<TrackedProducts>;
   private history!: Collection<ProductHistory>;
 
-  private readonly initialised: Promise<void>;
-
-  constructor() {
-    const client = new MongoClient('mongodb://mongo:27017');
-
-    this.initialised = client.connect().then(async () => {
-      console.log('TPReg: Connected successfully to the server');
-      const db = client.db('shopping');
-      this.products = db.collection('trackedProducts');
-      this.history = db.collection('productHistory');
-      await Promise.all([
-        this.products.createIndex(
-          {
-            'products.id': 1,
-          },
-          {
-            unique: true,
-            sparse: false,
-          }
-        ),
-        this.history.createIndex(
-          {
-            productId: 1,
-          },
-          {
-            unique: true,
-            sparse: false,
-          }
-        ),
-      ]);
-    });
+  constructor(client: MongoClient) {
+    console.log('TPReg: Connected successfully to the server');
+    const db = client.db('shopping');
+    this.products = db.collection('trackedProducts');
+    this.history = db.collection('productHistory');
+    this.products.createIndex(
+      {
+        'products.id': 1,
+      },
+      {
+        unique: true,
+        sparse: false,
+      }
+    );
+    this.history.createIndex(
+      {
+        productId: 1,
+      },
+      {
+        unique: true,
+        sparse: false,
+      }
+    );
   }
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
-    await this.initialised;
-
     const query: Filter<TrackedProducts> = {
       products: {
         $elemMatch: {
@@ -84,8 +74,6 @@ export class TrackedProductsRepository {
   }
 
   public async getProductIds(trackingId: string): Promise<string[]> {
-    await this.initialised;
-
     const trackedProduct = await this.products.findOne({ _id: toId(trackingId) });
     if (!trackedProduct) {
       return [];
@@ -98,8 +86,6 @@ export class TrackedProductsRepository {
     product: Product,
     now: Date
   ): Promise<string> {
-    await this.initialised;
-
     const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
     if (existingEntryForProduct) {
       console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
@@ -119,8 +105,6 @@ export class TrackedProductsRepository {
   }
 
   public async updateCurrentProducts(trackingId: string, updatedProducts: Product[], now: Date): Promise<void> {
-    await this.initialised;
-
     const trackedProducts = await this.products.findOne({
       _id: toId(trackingId),
     } as Filter<TrackedProducts>);
@@ -136,8 +120,6 @@ export class TrackedProductsRepository {
   }
 
   public async addToHistory(product: Product, now: Date): Promise<void> {
-    await this.initialised;
-
     await this.addProductToHistory(product, now);
 
     const trackedProducts = await this.products.findOne({
@@ -149,8 +131,6 @@ export class TrackedProductsRepository {
   }
 
   public async getAllTrackedIds(): Promise<string[]> {
-    await this.initialised;
-
     return (await this.products.find({}).toArray())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
       .reduce((acc, curr) => acc.concat(curr.products.map(({ product: { id } }) => id)), [] as string[]);
@@ -160,8 +140,6 @@ export class TrackedProductsRepository {
    * Returns all tracked products from the set of IDs. The result is a map of itemId => trackedId.
    */
   public async getTrackedIds(itemIds: string[]): Promise<Map<string, string>> {
-    await this.initialised;
-
     const filter: Filter<TrackedProducts> = {
       products: {
         $elemMatch: {
@@ -200,8 +178,6 @@ export class TrackedProductsRepository {
    * Debug method only
    */
   public async removeAllTrackedProducts(): Promise<void> {
-    await this.initialised;
-
     await this.products.deleteMany({});
   }
 
@@ -209,14 +185,10 @@ export class TrackedProductsRepository {
    * Debug method only
    */
   public async removeAllHistory(): Promise<void> {
-    await this.initialised;
-
     await this.history.deleteMany({});
   }
 
   public async search(searchTerm: string): Promise<TrackedProducts[]> {
-    await this.initialised;
-
     const result = this.products.find({
       $or: [
         { 'products.product.name': { $regex: searchTerm, $options: '$i' } },
