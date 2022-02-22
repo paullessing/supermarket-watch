@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
+import { HistoricalProduct, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { NOW } from '../now';
@@ -59,6 +59,22 @@ export class SupermarketService {
         })
       )
     );
+  }
+
+  public async getAllTrackedProducts(forceFresh: boolean = false): Promise<
+    {
+      id: string;
+      name: string;
+      products: HistoricalProduct[];
+    }[]
+  > {
+    if (forceFresh) {
+      const startOfToday = startOfDay(this.now);
+      const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
+      await this.getMultipleItems(outdatedIds, true);
+    }
+
+    return await this.trackedProductsRepo.getAllTrackedProducts();
   }
 
   /**

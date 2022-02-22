@@ -3,26 +3,38 @@
 
   <table *ngIf="favourites.length">
     <ng-container *ngFor="let favourite of favourites; trackBy trackItem">
+      <thead>
       <tr>
-        <td style="padding: 0.25rem 0.5rem 0.25rem 0">
-          {{ favourite.name }}
-        </td>
-        <td style="padding: 0.25rem 0.5rem">
-          <em>{{ favourite.supermarket }}</em>
-        </td>
-        <td style="padding: 0.25rem 0.5rem">
-          {{ favourite.price | currency:'GBP' }}
-        </td>
-        <td style="padding: 0.25rem 0.5rem">
-          {{ favourite.pricePerUnit | currency:'GBP' }}/{{ favourite.unitAmount === 1 ? '' : favourite.unitAmount }}{{ favourite.unitName }}
-        </td>
+        <td colspan="3" style="padding: 0.25rem 0.5rem 0.25rem 0">{{ favourite.name }}</td>
       </tr>
-      <tr *ngIf="favourite.specialOffer">
-        <td colspan="2"></td>
-        <td colspan="2" style="padding: 0 0.5rem 0.25rem; color: red">
-          {{ favourite.specialOffer.offerText }}
-        </td>
-      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let product of favourite.products; trackBy trackProduct">
+        <tr>
+<!--          <td style="padding: 0.25rem 0.5rem 0.25rem 0">-->
+<!--            {{ product.name }}-->
+<!--          </td>-->
+          <td style="padding: 0.25rem 0.5rem">
+            <em>{{ product.supermarket }}</em>
+          </td>
+          <td
+            style="padding: 0.25rem 0.5rem"
+            [style.color]="product.specialOffer? 'red' : null"
+          >
+            {{ product.price | currency:'GBP' }}
+          </td>
+          <td style="padding: 0.25rem 0.5rem">
+            {{ product.pricePerUnit | currency:'GBP' }}/{{ product.unitAmount === 1 ? '' : product.unitAmount }}{{ product.unitName }}
+          </td>
+        </tr>
+        <tr *ngIf="product.specialOffer">
+          <td colspan="1"></td>
+          <td colspan="2" style="padding: 0 0.5rem 0.25rem; color: red">
+            {{ product.specialOffer.offerText }}
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
     </ng-container>
   </table>
 </div>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { HistoryProduct } from '@shoppi/api-interfaces';
+import { Favourites, HistoricalProduct } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./favourites-page.component.scss'],
 })
 export class FavouritesPageComponent implements OnInit {
-  public favourites: HistoryProduct[];
+  public favourites: Favourites[];
 
   constructor(private readonly http: HttpClient) {
     this.favourites = [];
@@ -17,11 +17,15 @@ export class FavouritesPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.http
-      .get<{ items: HistoryProduct[] }>(environment.apiUrl + '/favourites')
+      .get<{ items: Favourites[] }>(environment.apiUrl + '/favourites')
       .subscribe(({ items }) => (this.favourites = items));
   }
 
-  public trackItem(_: number, item: HistoryProduct): string {
+  public trackItem(_: number, item: Favourites): string {
     return item.id;
+  }
+
+  public trackProduct(_: number, product: HistoricalProduct): string {
+    return product.id;
   }
 }

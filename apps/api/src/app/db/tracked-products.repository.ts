@@ -107,6 +107,39 @@ export class TrackedProductsRepository {
     }
   }
 
+  public async getAllTrackedProducts(): Promise<
+    {
+      id: string;
+      name: string;
+      products: Product[];
+    }[]
+  > {
+    const trackedProducts = await this.products.find({}).toArray();
+    return trackedProducts.map(({ _id, name, products }) => ({
+      id: _id.toString(),
+      name,
+      products: products.map(({ product }) => product),
+    }));
+  }
+
+  public async getOutdatedProductIds(updatedAfter: Date): Promise<string[]> {
+    const trackedProducts = await this.products
+      .find({
+        'products.lastUpdated': {
+          $lt: updatedAfter,
+        },
+      })
+      .toArray();
+
+    function getOutdatedProductIds(trackedProduct: TrackedProducts): string[] {
+      return trackedProduct.products
+        .filter(({ lastUpdated }) => lastUpdated < updatedAfter)
+        .map(({ product }) => product.id);
+    }
+
+    return trackedProducts.map(getOutdatedProductIds).reduce((acc, curr) => acc.concat(...curr), [] as string[]);
+  }
+
   public async getAllTrackedIds(): Promise<string[]> {
     return (await this.products.find({}).toArray())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
