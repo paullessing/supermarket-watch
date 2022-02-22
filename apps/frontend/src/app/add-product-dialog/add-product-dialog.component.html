@@ -8,12 +8,7 @@
     <h2>{{ item.name }} - {{ item.price | currency:'GBP' }}</h2>
     <p>{{ item.supermarket }}</p>
     <div style="margin-top: 1rem">
-      <label>
-        <input type="checkbox" [(ngModel)]="combine" />
-        Combine with existing item
-      </label>
-    </div>
-    <div style="margin-top: 1rem" *ngIf="combine">
+      Combine with existing item
       <ng-container *ngIf="!combineWithItem; else selectedItem">
         <input type="text" placeholder="Enter item name" [ngModel]="searchItemName" (ngModelChange)="onSearchTextChange($event)" />
         <ul *ngIf="results">
@@ -21,6 +16,7 @@
             <button class="add-product-dialog__search-result" (click)="combineWithItem = result">{{ result.name }}</button>
           </li>
         </ul>
+        <p *ngIf="searchComplete && !results.length">No results found</p>
       </ng-container>
       <ng-template #selectedItem>
         <p style="margin-left: 1rem">{{ combineWithItem!.name }}

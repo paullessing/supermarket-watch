@@ -22,9 +22,9 @@ export class AddProductDialogComponent {
   @Output()
   public addProduct: EventEmitter<AddProductData> = new EventEmitter();
 
-  public combine: boolean;
   public searchItemName: string;
   public results: ProductSearchResult[];
+  public searchComplete: boolean;
 
   public get combineWithItem(): ProductSearchResult | null {
     return this._combineWithItem;
@@ -46,9 +46,9 @@ export class AddProductDialogComponent {
     private readonly renderer: Renderer2,
     private readonly http: HttpClient
   ) {
-    this.combine = false;
     this.searchItemName = '';
     this.results = [];
+    this.searchComplete = false;
     this._combineWithItem = null;
 
     renderer.listen(elementRef.nativeElement, 'click', (event: MouseEvent) => {
@@ -74,6 +74,7 @@ export class AddProductDialogComponent {
 
     if (searchText.length <= 2) {
       this._combineWithItem = null;
+      this.searchComplete = false;
       return;
     }
 
@@ -86,6 +87,7 @@ export class AddProductDialogComponent {
       .subscribe(({ results }) => {
         this._combineWithItem = null;
         this.results = results;
+        this.searchComplete = true;
       });
 
     console.log(searchText);
