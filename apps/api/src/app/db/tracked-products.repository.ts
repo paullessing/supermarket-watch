@@ -234,7 +234,7 @@ export class TrackedProductsRepository {
       product,
     };
     for (let i = 0; i < history.length; i++) {
-      if (differenceInMinutes(history[i].date, now) < 5) {
+      if (Math.abs(differenceInMinutes(now, history[i].date)) < 5) {
         // Don't create closely-spaced history entries
         history[i] = newEntry;
         return history;
