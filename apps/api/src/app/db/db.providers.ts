@@ -19,7 +19,7 @@ export const dbProviders: Provider[] = [
       const collection = db.collection('trackedProducts');
       await collection.createIndex(
         {
-          'products.id': 1,
+          'products.product.id': 1,
         },
         {
           unique: true,
