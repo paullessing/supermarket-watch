@@ -1,10 +1,10 @@
 import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { Supermarket } from './supermarket';
+import { Product } from '../product.model';
+import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { ProductDetails } from './tesco-product.model';
 
 @Injectable()
@@ -21,7 +21,18 @@ export class Tesco extends Supermarket {
   }
 
   public async getProduct(productId: string): Promise<Product | null> {
-    const search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
+    let search: AxiosResponse;
+
+    try {
+      search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status === 404) {
+        console.error(`Got a 404 while fetching tesco product "${productId}":`, e.message);
+        return null;
+      } else {
+        throw e;
+      }
+    }
 
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,7 +40,11 @@ export class Tesco extends Supermarket {
 
     const { product, promotions }: ProductDetails = reduxState.productDetails.item;
 
-    const [, unitAmountString, unitName] = product.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
+    const unitOfMeasure = product.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
+    if (!unitOfMeasure) {
+      throw new Error('Could not parse unit of measure');
+    }
+    const [, unitAmountString, unitName] = unitOfMeasure;
 
     const result: Product = {
       id: this.getId(product.id),
@@ -58,7 +73,7 @@ export class Tesco extends Supermarket {
     return result;
   }
 
-  public async search(term: string): Promise<SearchResult> {
+  public async search(term: string): Promise<SearchResultWithoutTracking> {
     const params = qs.stringify({
       query: term,
       offset: 0,
@@ -67,17 +82,34 @@ export class Tesco extends Supermarket {
 
     const url = `${this.config.tescoUrl}search?${params}`;
 
-    const search = await axios.get(url);
+    try {
+      const search = await axios.get(url);
 
+      return {
+        items: this.extractSearchResults(search),
+      };
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status === 404) {
+        // No results for this search term
+        console.info(`Tesco: Search query "${term}" returned no results`);
+        return {
+          items: [],
+        };
+      }
+      throw e;
+    }
+  }
+
+  private extractSearchResults(search: AxiosResponse<string>): SearchResultItemWithoutTracking[] {
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reduxState = $('#data-attributes').data('reduxState') as any;
 
-    const results = [];
+    const results: SearchResultItemWithoutTracking[] = [];
     reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
       const { product, promotions } = data;
 
-      const result: SearchResultItem = {
+      const result: SearchResultItemWithoutTracking = {
         id: this.getId(id),
         name: product.title,
         image: product.defaultImageUrl,
@@ -101,9 +133,7 @@ export class Tesco extends Supermarket {
       results.push(result);
     });
 
-    return {
-      items: results,
-    };
+    return results;
   }
 
   private getPromotion(

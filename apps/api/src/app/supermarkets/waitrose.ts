@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { Supermarket } from './supermarket';
+import { Product } from '../product.model';
+import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
 
 @Injectable()
@@ -65,7 +65,7 @@ export class Waitrose extends Supermarket {
     }
   }
 
-  public async search(term: string): Promise<SearchResult> {
+  public async search(term: string): Promise<SearchResultWithoutTracking> {
     await this.init();
 
     const url = `https://www.waitrose.com/api/content-prod/v2/cms/publish/productcontent/search/${this.customerId}?clientType=WEB_APP`;
@@ -95,7 +95,7 @@ export class Waitrose extends Supermarket {
     return {
       items: (response.data.componentsAndProducts || [])
         .filter(isProduct)
-        .map(({ searchProduct: product }): SearchResultItem => {
+        .map(({ searchProduct: product }): SearchResultItemWithoutTracking => {
           const promotionalPrice = product.promotion?.promotionUnitPrice?.amount;
 
           return {
@@ -141,8 +141,9 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
 function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
   if (result.displayPriceQualifier) {
     const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
-    if (match) {
-      const [, unitAmountString, unitName] = match[2].match(/^(\d*)([^\d].*)$/);
+    const innerMatch = match?.[2].match(/^(\d*)([^\d].*)$/);
+    if (match && innerMatch) {
+      const [, unitAmountString, unitName] = innerMatch;
       const unitAmount = parseFloat(unitAmountString?.trim() || '') || 1;
       const pricePerUnit =
         match[1][0] === '£' ? parseFloat(match[1].slice(1)) : parseFloat(match[1].slice(0, -1)) / 100;

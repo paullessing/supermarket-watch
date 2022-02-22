@@ -1,0 +1,60 @@
+:host {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.add-product-dialog {
+  $spacing: 1rem;
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+
+  &__content {
+    background-color: white;
+    max-height: 100%;
+    overflow-y: auto;
+    box-shadow: rgba(0,0,0,0.3) 0 3px 8px 3px;
+    border-radius: 3px;
+
+    padding: 1rem;
+  }
+
+  &__close {
+    border: 0;
+    background-color: transparent;
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 100;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+  }
+
+  &__button {
+    margin-left: 1rem;
+  }
+
+  &__search-result {
+    border: 0;
+    background-color: transparent;
+    display: inline-block;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -1,41 +1,26 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { Product } from '@shoppi/api-interfaces';
-import { FavouritesRepository } from './db/favourites.repository';
+import { Controller, Get, Query } from '@nestjs/common';
+import { Favourites } from '@shoppi/api-interfaces';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/favourites')
 export class FavouritesController {
-
-  constructor(
-    private readonly supermarketService: SupermarketService,
-    private readonly favouritesRepo: FavouritesRepository
-  ) {}
+  constructor(private readonly supermarketService: SupermarketService) {}
 
   @Get('/')
   public async searchFavourites(
     @Query('force') force: string,
-    @Query('promotionsOnly') promotionsOnly: string,
-  ): Promise<{ items: Product[] }> {
-    const favourites = await this.favouritesRepo.getAll();
-    const items = await this.supermarketService.getMultipleItems(favourites, force === 'true');
+    @Query('promotionsOnly') promotionsOnly: string
+  ): Promise<{ items: Favourites[] }> {
+    const favourites = await this.supermarketService.getAllTrackedProducts();
 
     if (promotionsOnly) {
       return {
-        items: items.filter((item) => item.specialOffer),
-      }
+        items: favourites.filter(({ products }) => products.find(({ specialOffer }) => !!specialOffer)),
+      };
     }
 
     return {
-      items
+      items: favourites,
     };
-  }
-
-  @Post('/')
-  public async setFavourite(
-    @Body('isFavourite') isFavourite: boolean,
-    @Body('itemId') itemId: string
-  ): Promise<{ done: boolean }> {
-    await this.favouritesRepo.setFavourite(itemId, isFavourite);
-    return { done: true };
   }
 }

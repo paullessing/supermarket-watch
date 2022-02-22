@@ -6,10 +6,10 @@ export interface SearchResultItem {
     offerText: string;
     originalPrice: null | number;
     validUntil: string;
-  }
+  };
   image: string;
   supermarket: string;
-  isFavourite?: boolean;
+  trackingId: string | null;
 }
 
 export interface SearchResult {

@@ -27,6 +27,7 @@
 
         "brace-style": ["error", "1tbs"],
         "curly": "error",
+        "consistent-return": "error",
 
         "@typescript-eslint/explicit-member-accessibility": [
           "error",

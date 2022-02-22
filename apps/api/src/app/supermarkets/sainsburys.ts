@@ -2,10 +2,10 @@ import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { isBefore } from 'date-fns';
-import { Product, SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { Config } from '../config';
+import { Product } from '../product.model';
 import * as SainsburysModels from './sainsburys-search-results.model';
-import { Supermarket } from './supermarket';
+import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
@@ -44,7 +44,7 @@ export class Sainsburys extends Supermarket {
     };
   }
 
-  public async search(term: string): Promise<SearchResult> {
+  public async search(term: string): Promise<SearchResultWithoutTracking> {
     const params = qs.stringify({
       'filter[keyword]': term,
       page_size: this.config.searchResultCount,
@@ -59,7 +59,7 @@ export class Sainsburys extends Supermarket {
       return { items: [] };
     }
 
-    const items: SearchResultItem[] = results.map((product) => {
+    const items: SearchResultItemWithoutTracking[] = results.map((product) => {
       const { price, specialOffer } = this.getPriceData(product);
 
       return {
@@ -79,7 +79,7 @@ export class Sainsburys extends Supermarket {
 
   private getPriceData(product: SainsburysModels.SearchResult): {
     price: number;
-    specialOffer: SearchResultItem['specialOffer'] | null;
+    specialOffer: SearchResultItemWithoutTracking['specialOffer'] | null;
   } {
     const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
     const isPromoActive = promo?.start_date && isBefore(new Date(promo.start_date), new Date());
@@ -87,7 +87,7 @@ export class Sainsburys extends Supermarket {
     const price = !promo || isPromoActive ? product.retail_price.price : promo.original_price;
     const specialOffer = isPromoActive
       ? {
-          offerText: promo.strap_line,
+          offerText: this.formatStrapline(promo.strap_line),
           originalPrice: promo.original_price,
           validUntil: promo.end_date,
         }
@@ -97,5 +97,23 @@ export class Sainsburys extends Supermarket {
       price,
       specialOffer,
     };
+  }
+
+  private formatStrapline(strapline: string): string {
+    console.debug('Strapline', JSON.stringify(strapline));
+
+    // prettier-ignore
+    const redundantStraplines = [
+      /:\s+Was [£p0-9.]+ Now [£p0-9.]+/i,
+      /^Only [£p0-9.]+: Save [£p0-9.]+/i
+    ] as const;
+
+    for (const redundantStrapline of redundantStraplines) {
+      if (redundantStrapline.test(strapline)) {
+        return strapline.replace(redundantStrapline, '').trim();
+      }
+    }
+
+    return strapline;
   }
 }

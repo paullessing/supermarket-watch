@@ -1,9 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { Product, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
+import { HistoricalProduct, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
-import { ProductRepository } from '../db/product.repository';
-import { Supermarket, Supermarkets } from './supermarket';
+import { TrackedProductsRepository } from '../db/tracked-products.repository';
+import { NOW } from '../now';
+import { Product } from '../product.model';
+import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 
 export class InvalidIdException extends Error {
   constructor(id: string) {
@@ -18,7 +20,8 @@ export class InvalidIdException extends Error {
 export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private readonly productRepo: ProductRepository
+    private readonly trackedProductsRepo: TrackedProductsRepository,
+    @Inject(NOW) private readonly now: Date
   ) {}
 
   public async search(
@@ -30,7 +33,19 @@ export class SupermarketService {
       this.supermarkets.map((supermarket) => supermarket.search(query).then(({ items }) => items))
     );
 
-    const results: SearchResultItem[] = ([] as SearchResultItem[]).concat.apply([], resultsBySupermarket);
+    const searchResults: SearchResultItemWithoutTracking[] = ([] as SearchResultItemWithoutTracking[]).concat.apply(
+      [],
+      resultsBySupermarket
+    );
+
+    const trackedItems = await this.trackedProductsRepo.getTrackedIds(searchResults.map(({ id }) => id));
+
+    const results = searchResults.map(
+      (item: SearchResultItemWithoutTracking): SearchResultItem => ({
+        ...item,
+        trackingId: trackedItems.get(item.id) ?? null,
+      })
+    );
 
     return this.sortResults(results, sortBy, sortOrder);
   }
@@ -46,6 +61,25 @@ export class SupermarketService {
     );
   }
 
+  public async getAllTrackedProducts(forceFresh: boolean = false): Promise<
+    {
+      id: string;
+      name: string;
+      products: HistoricalProduct[];
+    }[]
+  > {
+    if (forceFresh) {
+      const startOfToday = startOfDay(this.now);
+      const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
+      await this.getMultipleItems(outdatedIds, true);
+    }
+
+    return await this.trackedProductsRepo.getAllTrackedProducts();
+  }
+
+  /**
+   * @throws InvalidIdException if the ID is invalid or the product is not found
+   */
   public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
@@ -53,8 +87,8 @@ export class SupermarketService {
     }
 
     if (!forceFresh) {
-      const updatedAfter = startOfDay(new Date());
-      const cachedValue = await this.productRepo.get(id, updatedAfter);
+      const updatedAfter = startOfDay(this.now);
+      const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
         console.debug('Cache hit for ' + id);
         return cachedValue;
@@ -71,9 +105,9 @@ export class SupermarketService {
           } else {
             console.debug('Cache miss, storing', id);
           }
-          await this.productRepo.save(product);
+          await this.trackedProductsRepo.addToHistory(product);
+          return product;
         }
-        return product;
       }
     }
     throw new InvalidIdException(id);
