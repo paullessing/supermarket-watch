@@ -33,6 +33,7 @@ services:
       - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json:ro
       - ./package.json:/usr/src/app/package.json:ro
       - ./yarn.lock:/usr/src/app/yarn.lock:ro
+      - /tmp/cache
     restart: on-failure
   mongo:
     image: mongo:5

@@ -1,7 +1,8 @@
 import path from 'path';
-import { Module } from '@nestjs/common';
+import { Module, Provider } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { environment } from '../environments/environment';
 import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
@@ -12,6 +13,7 @@ import { nowProvider } from './now';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
+import { DevCacheService } from './supermarkets/dev-cache.service';
 import { TrackedProductsController } from './tracked-products.controller';
 
 @Module({
@@ -39,6 +41,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     ProductRepository,
     TrackedProductsRepository,
     CronService,
+    ...([environment.production ? null : DevCacheService.provider()].filter(Boolean) as Provider[]),
   ],
 })
 export class AppModule {}
