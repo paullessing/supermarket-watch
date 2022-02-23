@@ -10,10 +10,18 @@
     <div style="margin-top: 1rem">
       Combine with existing item
       <ng-container *ngIf="!combineWithItem; else selectedItem">
-        <input type="text" placeholder="Enter item name" [ngModel]="searchItemName" (ngModelChange)="onSearchTextChange($event)" />
+        <input
+          type="text"
+          placeholder="Enter item name"
+          [ngModel]="searchItemName"
+          (ngModelChange)="onSearchTextChange($event)"
+        />
         <ul *ngIf="results">
           <li *ngFor="let result of results">
-            <button class="add-product-dialog__search-result" (click)="combineWithItem = result">{{ result.name }}</button>
+            <button
+              class="add-product-dialog__search-result button-link"
+              (click)="combineWithItem = result"
+            >{{ result.name }}</button>
           </li>
         </ul>
         <p *ngIf="searchComplete && !results.length">No results found</p>

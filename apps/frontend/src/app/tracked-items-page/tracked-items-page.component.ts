@@ -11,8 +11,11 @@ import { environment } from '../../environments/environment';
 export class TrackedItemsPageComponent implements OnInit {
   public itemGroups: TrackedItemGroup[];
 
+  public editItemGroup: TrackedItemGroup | null;
+
   constructor(private readonly http: HttpClient) {
     this.itemGroups = [];
+    this.editItemGroup = null;
   }
 
   public ngOnInit(): void {

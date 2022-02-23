@@ -5,7 +5,8 @@
     <ng-container *ngFor="let itemGroup of itemGroups; trackBy trackItem">
       <thead>
       <tr>
-        <td colspan="3" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ favourite.name }}</td>
+        <td colspan="2" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ itemGroup.name }}</td>
+        <td><button class="tracked-product__edit" (click)="editItemGroup = itemGroup">Edit</button></td>
       </tr>
       </thead>
       <tbody>
@@ -35,3 +36,9 @@
     </ng-container>
   </table>
 </div>
+
+<app-edit-item-group-dialog
+  *ngIf="editItemGroup"
+  [group]="editItemGroup"
+  (exit)="editItemGroup = null"
+></app-edit-item-group-dialog>

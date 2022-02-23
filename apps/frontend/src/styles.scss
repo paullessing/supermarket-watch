@@ -90,3 +90,12 @@ em {
   padding: 0 1rem;
   min-height: 100%;
 }
+
+.button-link {
+  color: inherit;
+  text-decoration: underline;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
