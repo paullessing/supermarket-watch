@@ -6,11 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FavouritesPageComponent } from './favourites-page/favourites-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchResultListComponent } from './search-result-list/search-result-list.component';
+import { TrackedItemsPageComponent } from './tracked-items-page/tracked-items-page.component';
 
 // prettier-ignore
 @NgModule({
@@ -25,7 +25,7 @@ import { SearchResultListComponent } from './search-result-list/search-result-li
     AppComponent,
     SearchPageComponent,
     HomePageComponent,
-    FavouritesPageComponent,
+    TrackedItemsPageComponent,
     SearchBoxComponent,
     AddProductDialogComponent,
     SearchResultListComponent,

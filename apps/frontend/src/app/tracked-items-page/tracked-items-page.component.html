@@ -1,15 +1,15 @@
 <div class="content">
-  <h2 class="title">Favourites</h2>
+  <h2 class="title">Tracked Items</h2>
 
-  <table *ngIf="favourites.length">
-    <ng-container *ngFor="let favourite of favourites; trackBy trackItem">
+  <table *ngIf="itemGroups.length">
+    <ng-container *ngFor="let itemGroup of itemGroups; trackBy trackItem">
       <thead>
       <tr>
         <td colspan="3" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ favourite.name }}</td>
       </tr>
       </thead>
       <tbody>
-      <ng-container *ngFor="let product of favourite.products; trackBy trackProduct">
+      <ng-container *ngFor="let product of itemGroup.products; trackBy trackProduct">
         <tr>
           <td style="padding: 0.25rem 0.5rem">
             <em [title]="product.name">{{ product.supermarket }}</em>

@@ -10,7 +10,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { AddTrackedProduct, ProductSearchResults } from '@shoppi/api-interfaces';
+import { AddTrackedProduct, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { Product } from './product.model';
 import { SupermarketService } from './supermarkets';
@@ -41,6 +41,24 @@ export class TrackedProductsController {
 
     return {
       trackingId: resultId,
+    };
+  }
+
+  @Get('/')
+  public async getTrackedItems(
+    @Query('force') force: string,
+    @Query('promotionsOnly') promotionsOnly: string
+  ): Promise<{ items: TrackedItemGroup[] }> {
+    const trackedProducts = await this.supermarketService.getAllTrackedProducts();
+
+    if (promotionsOnly) {
+      return {
+        items: trackedProducts.filter(({ products }) => products.find(({ specialOffer }) => !!specialOffer)),
+      };
+    }
+
+    return {
+      items: trackedProducts,
     };
   }
 
