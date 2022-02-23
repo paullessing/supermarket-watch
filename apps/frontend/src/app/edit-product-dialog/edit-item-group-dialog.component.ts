@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { HistoricalProduct, ProductSearchResult, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
 
-export interface EditItemGroupDialogData {
+export interface RemoveProductData {
   productId: string;
-  combinedTrackingId: string | null;
+  trackingId: string;
 }
 
 @Component({
@@ -20,13 +20,10 @@ export class EditItemGroupDialogComponent {
   public exit: EventEmitter<void> = new EventEmitter();
 
   @Output()
-  public editProduct: EventEmitter<EditItemGroupDialogData> = new EventEmitter();
-
-  @Output()
   public deleteTrackedGroup: EventEmitter<{ id: string }> = new EventEmitter();
 
   @Output()
-  public removeProduct: EventEmitter<{ productId: string }> = new EventEmitter();
+  public removeProduct: EventEmitter<RemoveProductData> = new EventEmitter();
 
   public searchItemName: string;
   public results: ProductSearchResult[];
@@ -64,11 +61,8 @@ export class EditItemGroupDialogComponent {
     });
   }
 
-  public onAdd(): void {
-    this.editProduct.emit({
-      productId: this.group.id,
-      combinedTrackingId: this._combineWithItem?.trackingId ?? null,
-    });
+  public onConfirm(): void {
+    // TODO implement
   }
 
   public onDelete(): void {
@@ -79,7 +73,7 @@ export class EditItemGroupDialogComponent {
 
   public onRemoveProduct(product: HistoricalProduct): void {
     if (window.confirm(`Are you sure you want to remove "${product.supermarket} - ${product.name}" from this group?`)) {
-      this.removeProduct.emit({ productId: product.id });
+      this.removeProduct.emit({ trackingId: this.group.id, productId: product.id });
     }
   }
 

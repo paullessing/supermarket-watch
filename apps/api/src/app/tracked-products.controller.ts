@@ -75,6 +75,15 @@ export class TrackedProductsController {
     await this.trackingRepo.removeTrackedProduct(trackingId);
   }
 
+  @Delete('/:trackingId/:productId')
+  @HttpCode(204)
+  public async removeProductFromTrackingGroup(
+    @Param('trackingId') trackingId: string,
+    @Param('productId') productId: string
+  ): Promise<void> {
+    await this.trackingRepo.removeProductFromTrackingGroup(trackingId, productId);
+  }
+
   @Get('/search')
   public async search(@Query('term') searchTerm: string): Promise<ProductSearchResults> {
     if (!searchTerm || !searchTerm.trim()) {

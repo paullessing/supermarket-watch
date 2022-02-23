@@ -2,11 +2,11 @@
   <h2 class="title">Tracked Items</h2>
 
   <table *ngIf="itemGroups.length">
-    <ng-container *ngFor="let itemGroup of itemGroups; trackBy trackItem">
+    <ng-container *ngFor="let itemGroup of itemGroups; trackBy trackItem; let index = index">
       <thead>
       <tr>
         <td colspan="2" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ itemGroup.name }}</td>
-        <td><button class="tracked-product__edit" (click)="editItemGroup = itemGroup">Edit</button></td>
+        <td><button class="tracked-product__edit" (click)="editItemGroupIndex = index">Edit</button></td>
       </tr>
       </thead>
       <tbody>
@@ -38,8 +38,9 @@
 </div>
 
 <app-edit-item-group-dialog
-  *ngIf="editItemGroup"
-  [group]="editItemGroup"
-  (exit)="editItemGroup = null"
-  (deleteTrackedGroup)="deleteTrackingGroup($event.id); editItemGroup = null"
+  *ngIf="editItemGroupIndex !== null"
+  [group]="itemGroups[editItemGroupIndex]"
+  (exit)="editItemGroupIndex = null"
+  (deleteTrackedGroup)="deleteTrackingGroup($event.id); editItemGroupIndex = null"
+  (removeProduct)="removeProduct($event)"
 ></app-edit-item-group-dialog>

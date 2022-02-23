@@ -188,6 +188,27 @@ export class TrackedProductsRepository {
     await this.products.deleteOne({ _id: toId(trackingId) });
   }
 
+  public async removeProductFromTrackingGroup(trackingId: string, productId: string): Promise<void> {
+    const trackedProducts = await this.products.findOne({
+      _id: toId(trackingId),
+    } as Filter<TrackedProducts>);
+
+    if (!trackedProducts) {
+      throw new Error('Tracking does not exist');
+    }
+
+    const updatedProducts = trackedProducts.products.filter(({ product }) => product.id !== productId);
+
+    await this.products.updateOne(
+      { _id: toId(trackingId) },
+      {
+        $set: {
+          products: updatedProducts,
+        },
+      }
+    );
+  }
+
   /**
    * Debug method only
    */
