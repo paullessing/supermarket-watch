@@ -150,24 +150,13 @@ export class TrackedProductsRepository {
    * Returns all tracked products from the set of IDs. The result is a map of itemId => trackedId.
    */
   public async getTrackedIds(itemIds: string[]): Promise<Map<string, string>> {
-    const filter: Filter<TrackedProducts> = {
-      products: {
-        $elemMatch: {
-          productId: {
-            $in: itemIds,
-          },
-        },
-      },
-    };
-    console.debug('Filter:', JSON.stringify(filter));
-
     const trackedItems = await this.products
       .aggregate<{ _id: string; productId: string }>([
         {
           $match: {
             products: {
               $elemMatch: {
-                id: {
+                'product.id': {
                   $in: itemIds,
                 },
               },
@@ -176,7 +165,7 @@ export class TrackedProductsRepository {
         },
         { $unwind: '$products' },
         {
-          $project: { productId: '$products.id' },
+          $project: { productId: '$products.product.id' },
         },
       ])
       .toArray();
