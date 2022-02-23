@@ -1,0 +1,9 @@
+.tracked-product {
+  &__edit {
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+  }
+}

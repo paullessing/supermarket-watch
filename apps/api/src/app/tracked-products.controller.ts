@@ -10,7 +10,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { AddTrackedProduct, ProductSearchResults } from '@shoppi/api-interfaces';
+import { AddTrackedProduct, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { Product } from './product.model';
 import { SupermarketService } from './supermarkets';
@@ -44,11 +44,44 @@ export class TrackedProductsController {
     };
   }
 
+  @Get('/')
+  public async getTrackedItems(
+    @Query('force') force: string,
+    @Query('promotionsOnly') promotionsOnly: string
+  ): Promise<{ items: TrackedItemGroup[] }> {
+    const trackedProducts = await this.supermarketService.getAllTrackedProducts();
+
+    if (promotionsOnly) {
+      return {
+        items: trackedProducts.filter(({ products }) => products.find(({ specialOffer }) => !!specialOffer)),
+      };
+    }
+
+    return {
+      items: trackedProducts,
+    };
+  }
+
   @Delete('/all')
   @HttpCode(204)
   public async deleteAll(): Promise<void> {
     await this.trackingRepo.removeAllTrackedProducts();
     await this.trackingRepo.removeAllHistory();
+  }
+
+  @Delete('/:trackingId')
+  @HttpCode(204)
+  public async deleteTrackedProduct(@Param('trackingId') trackingId: string): Promise<void> {
+    await this.trackingRepo.removeTrackedProduct(trackingId);
+  }
+
+  @Delete('/:trackingId/:productId')
+  @HttpCode(204)
+  public async removeProductFromTrackingGroup(
+    @Param('trackingId') trackingId: string,
+    @Param('productId') productId: string
+  ): Promise<void> {
+    await this.trackingRepo.removeProductFromTrackingGroup(trackingId, productId);
   }
 
   @Get('/search')

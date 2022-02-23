@@ -1,0 +1,23 @@
+<div class="edit-product-dialog">
+  <button class="edit-product-dialog__close" (click)="onClose()" style="cursor: pointer">
+    Close
+  </button>
+
+  <div class="edit-product-dialog__content">
+    <h1>Edit Item Group</h1>
+    <h2>{{ group.name }}</h2>
+
+    <ul>
+      <li *ngFor="let product of group.products">
+        {{ product.name }} (<em>{{ product.supermarket }}</em>)
+        <button (click)="onRemoveProduct(product)">Remove</button>
+      </li>
+    </ul>
+
+    <div class="edit-product-dialog__buttons">
+      <button class="edit-product-dialog__button button-link edit-product-dialog__button--delete edit-product-dialog__button--left" (click)="onDelete()">Delete Item</button>
+      <button class="edit-product-dialog__button" (click)="onClose()">Cancel</button>
+      <button class="edit-product-dialog__button" type="submit" (click)="onConfirm()">Save</button>
+    </div>
+  </div>
+</div>

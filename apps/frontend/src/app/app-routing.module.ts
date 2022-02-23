@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FavouritesPageComponent } from './favourites-page/favourites-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { TrackedItemsPageComponent } from './tracked-items-page/tracked-items-page.component';
 
 const routes: Routes = [
   {
@@ -14,8 +14,8 @@ const routes: Routes = [
     component: SearchPageComponent,
   },
   {
-    path: 'favourites',
-    component: FavouritesPageComponent,
+    path: 'tracked-items',
+    component: TrackedItemsPageComponent,
   },
   {
     path: '**',
@@ -25,7 +25,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}

@@ -8,7 +8,6 @@ import { dbProviders } from './db/db.providers';
 import { FavouritesRepository } from './db/favourites.repository';
 import { ProductRepository } from './db/product.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
-import { FavouritesController } from './favourites.controller';
 import { nowProvider } from './now';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
@@ -22,7 +21,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     }),
     ScheduleModule.forRoot(),
   ],
-  controllers: [ProductsController, SearchController, FavouritesController, TrackedProductsController],
+  controllers: [ProductsController, SearchController, TrackedProductsController],
   providers: [
     {
       provide: Supermarkets,

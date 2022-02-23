@@ -1,4 +1,4 @@
-export interface Favourites {
+export interface TrackedItemGroup {
   id: string;
   name: string;
   products: HistoricalProduct[];
