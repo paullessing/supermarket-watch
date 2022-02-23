@@ -184,6 +184,10 @@ export class TrackedProductsRepository {
     return new Map(trackedItems.map(({ productId, _id }) => [productId, _id]));
   }
 
+  public async removeTrackedProduct(trackingId: string): Promise<void> {
+    await this.products.deleteOne({ _id: toId(trackingId) });
+  }
+
   /**
    * Debug method only
    */

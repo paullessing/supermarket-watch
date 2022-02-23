@@ -31,4 +31,10 @@ export class TrackedItemsPageComponent implements OnInit {
   public trackProduct(_: number, product: HistoricalProduct): string {
     return product.id;
   }
+
+  public deleteTrackingGroup(id: string): void {
+    this.http.delete(environment.apiUrl + '/tracked-products/' + id).subscribe(() => {
+      this.itemGroups = this.itemGroups.filter((item) => item.id !== id);
+    });
+  }
 }

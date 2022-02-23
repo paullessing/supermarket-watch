@@ -41,4 +41,5 @@
   *ngIf="editItemGroup"
   [group]="editItemGroup"
   (exit)="editItemGroup = null"
+  (deleteTrackedGroup)="deleteTrackingGroup($event.id); editItemGroup = null"
 ></app-edit-item-group-dialog>
