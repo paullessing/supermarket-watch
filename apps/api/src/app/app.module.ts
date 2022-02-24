@@ -36,7 +36,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     Tesco,
     TrackedProductsRepository,
     CronService,
-    ...([environment.production ? null : DevCacheService.provider()].filter(Boolean) as Provider[]),
+    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
   ],
 })
 export class AppModule {}

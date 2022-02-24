@@ -13,6 +13,7 @@ services:
       PORT: ${PORT:-3333}
       TESCO_URL: ${TESCO_URL}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
+      USE_CACHE: 'true'
     ports:
       - ${PORT:-3333}:${PORT:-3333}
       - 4200:4200
