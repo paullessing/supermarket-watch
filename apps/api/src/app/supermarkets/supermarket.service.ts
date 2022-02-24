@@ -131,6 +131,10 @@ export class SupermarketService {
           }
           await this.trackedProductsRepo.addToHistory(product);
 
+          if (this.cache) {
+            this.cache.storeProduct(product);
+          }
+
           return product;
         }
       }
