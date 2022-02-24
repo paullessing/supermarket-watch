@@ -1,13 +1,10 @@
 import path from 'path';
-import { Module, Provider } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { environment } from '../environments/environment';
 import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
-import { FavouritesRepository } from './db/favourites.repository';
-import { ProductRepository } from './db/product.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { nowProvider } from './now';
 import { ProductsController } from './products.controller';
@@ -37,8 +34,6 @@ import { TrackedProductsController } from './tracked-products.controller';
     Sainsburys,
     Waitrose,
     Tesco,
-    FavouritesRepository,
-    ProductRepository,
     TrackedProductsRepository,
     CronService,
     ...([environment.production ? null : DevCacheService.provider()].filter(Boolean) as Provider[]),

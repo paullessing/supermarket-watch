@@ -4,6 +4,7 @@ import { Collection, Filter, ObjectId, WithoutId } from 'mongodb';
 import { NOW } from '../now';
 import { Product } from '../product.model';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
+import { EntityNotFoundError } from './entity-not-found.error';
 import { TimestampedDocument } from './timestamped-document';
 
 interface TrackedProducts extends TimestampedDocument {
@@ -221,6 +222,14 @@ export class TrackedProductsRepository {
     });
 
     return result.toArray();
+  }
+
+  public async getHistory(productId: string): Promise<{ date: Date; price: number; pricePerUnit: number }[]> {
+    const historyData = await this.history.findOne({ productId });
+    if (!historyData) {
+      throw new EntityNotFoundError(productId);
+    }
+    return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
   }
 
   private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[]): Promise<void> {
