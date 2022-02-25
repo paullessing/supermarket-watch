@@ -27,7 +27,7 @@ export class DevCacheService {
 
     this.writePromise = Promise.resolve();
 
-    console.log('Cache initialised with keys: ', [
+    console.debug('Cache initialised with keys: ', [
       Array.from(this.productCache.keys()),
       Array.from(this.searchCache.keys()),
     ]);
@@ -40,7 +40,7 @@ export class DevCacheService {
         const productCache$ = (async () => {
           try {
             const data = await readFile('/tmp/cache/product-cache.json', 'utf8');
-            console.log('product data', data);
+            // console.debug('product data', data);
             return JSON.parse(data) as [string, CacheEntry<Product>][];
           } catch (e) {
             return [];
@@ -49,7 +49,7 @@ export class DevCacheService {
         const searchCache$ = (async () => {
           try {
             const data = await readFile('/tmp/cache/search-cache.json', 'utf8');
-            console.log('search data', data);
+            // console.debug('search data', data);
             return JSON.parse(data) as [string, CacheEntry<SearchResultItemWithoutTracking[]>][];
           } catch (e) {
             return [];
@@ -66,21 +66,21 @@ export class DevCacheService {
   public getProduct(productId: string): Product | null {
     const entry = this.productCache.get(productId);
     if (!entry) {
-      console.log('Cache miss for product', productId);
+      console.debug('Cache miss for product', productId);
       return null;
     }
     if (entry.expires < Date.now()) {
-      console.log('Cache expired for product', productId);
+      console.debug('Cache expired for product', productId);
       this.productCache.delete(productId);
       return null;
     }
-    console.log('Cache hit for product', productId);
+    console.debug('Cache hit for product', productId);
     return entry.data;
   }
 
   public storeProduct(product: Product): void {
     this.productCache.set(product.id, { expires: Date.now() + 48 * 3600_000, data: product });
-    console.log('stored product', product.id);
+    console.debug('stored product', product.id);
 
     this.writePromise = this.writePromise.then(() =>
       writeFile('/tmp/cache/product-cache.json', JSON.stringify(Array.from(this.productCache.entries())))
@@ -90,21 +90,21 @@ export class DevCacheService {
   public getSearch(searchTerm: string): SearchResultItemWithoutTracking[] | null {
     const entry = this.searchCache.get(searchTerm);
     if (!entry) {
-      console.log('Cache miss for search', searchTerm);
+      console.debug('Cache miss for search', searchTerm);
       return null;
     }
     if (entry.expires < Date.now()) {
-      console.log('Cache expired for search', searchTerm);
+      console.debug('Cache expired for search', searchTerm);
       this.searchCache.delete(searchTerm);
       return null;
     }
-    console.log('Cache hit for search', searchTerm);
+    console.debug('Cache hit for search', searchTerm);
     return entry.data;
   }
 
   public storeSearch(searchTerm: string, search: SearchResultItem[]): void {
     this.searchCache.set(searchTerm, { expires: Date.now() + 48 * 3600_000, data: search });
-    console.log('stored search', searchTerm);
+    console.debug('stored search', searchTerm);
 
     this.writePromise = this.writePromise.then(() =>
       writeFile('/tmp/cache/search-cache.json', JSON.stringify(Array.from(this.searchCache.entries())))

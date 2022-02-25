@@ -125,7 +125,7 @@ export class SupermarketService {
 
         if (product) {
           if (forceFresh) {
-            console.debug('Forced refresh', id);
+            console.debug('Forced refresh, storing', id);
           } else {
             console.debug('Cache miss, storing', id);
           }
