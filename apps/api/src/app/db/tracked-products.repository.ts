@@ -4,6 +4,7 @@ import { Collection, Filter, ObjectId, WithoutId } from 'mongodb';
 import { NOW } from '../now';
 import { Product } from '../product.model';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
+import { EntityNotFoundError } from './entity-not-found.error';
 import { TimestampedDocument } from './timestamped-document';
 
 interface TrackedProducts extends TimestampedDocument {
@@ -150,24 +151,13 @@ export class TrackedProductsRepository {
    * Returns all tracked products from the set of IDs. The result is a map of itemId => trackedId.
    */
   public async getTrackedIds(itemIds: string[]): Promise<Map<string, string>> {
-    const filter: Filter<TrackedProducts> = {
-      products: {
-        $elemMatch: {
-          productId: {
-            $in: itemIds,
-          },
-        },
-      },
-    };
-    console.debug('Filter:', JSON.stringify(filter));
-
     const trackedItems = await this.products
       .aggregate<{ _id: string; productId: string }>([
         {
           $match: {
             products: {
               $elemMatch: {
-                id: {
+                'product.id': {
                   $in: itemIds,
                 },
               },
@@ -176,7 +166,7 @@ export class TrackedProductsRepository {
         },
         { $unwind: '$products' },
         {
-          $project: { productId: '$products.id' },
+          $project: { productId: '$products.product.id' },
         },
       ])
       .toArray();
@@ -232,6 +222,14 @@ export class TrackedProductsRepository {
     });
 
     return result.toArray();
+  }
+
+  public async getHistory(productId: string): Promise<{ date: Date; price: number; pricePerUnit: number }[]> {
+    const historyData = await this.history.findOne({ productId });
+    if (!historyData) {
+      throw new EntityNotFoundError(productId);
+    }
+    return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
   }
 
   private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[]): Promise<void> {

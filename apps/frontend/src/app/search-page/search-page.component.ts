@@ -56,7 +56,7 @@ export class SearchPageComponent implements OnInit {
       queryParamsHandling: 'merge', // remove to replace all query params by provided
     });
 
-    if (!environment.production) {
+    if (!environment.production && localStorage.getItem('useCache')) {
       const cacheResults = getCache(query, sortBy);
       if (cacheResults) {
         this.results = cacheResults;

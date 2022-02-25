@@ -5,13 +5,12 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
-import { FavouritesRepository } from './db/favourites.repository';
-import { ProductRepository } from './db/product.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { nowProvider } from './now';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
+import { DevCacheService } from './supermarkets/dev-cache.service';
 import { TrackedProductsController } from './tracked-products.controller';
 
 @Module({
@@ -35,10 +34,9 @@ import { TrackedProductsController } from './tracked-products.controller';
     Sainsburys,
     Waitrose,
     Tesco,
-    FavouritesRepository,
-    ProductRepository,
     TrackedProductsRepository,
     CronService,
+    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
   ],
 })
 export class AppModule {}

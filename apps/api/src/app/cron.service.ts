@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { FavouritesRepository } from './db/favourites.repository';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketService } from './supermarkets';
 
 @Injectable()
 export class CronService {
   constructor(
-    private readonly favouritesRepo: FavouritesRepository,
     private readonly supermarketService: SupermarketService,
     private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
