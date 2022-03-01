@@ -6,7 +6,6 @@ import { ConfigProvider } from './config';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
-import { nowProvider } from './now';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
@@ -29,7 +28,6 @@ import { TrackedProductsController } from './tracked-products.controller';
     },
     ConfigProvider,
     ...dbProviders,
-    nowProvider,
     SupermarketService,
     Sainsburys,
     Waitrose,
