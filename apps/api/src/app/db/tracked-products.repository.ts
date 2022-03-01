@@ -9,6 +9,8 @@ import { TimestampedDocument } from './timestamped-document';
 
 interface TrackedProducts extends TimestampedDocument {
   name: string;
+  unitName: string;
+  unitAmount: number;
   products: {
     product: Product;
     lastUpdated: Date;
@@ -62,23 +64,28 @@ export class TrackedProductsRepository {
     return trackedProduct.products.map(({ product }) => product.id) ?? [];
   }
 
-  public async addOrCreateTracking(
-    trackingId: string | undefined | null,
-    product: Product,
-    now: Date
-  ): Promise<string> {
+  public async createTracking(product: Product, unit: string, unitAmount: number, now: Date): Promise<string> {
     const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
     if (existingEntryForProduct) {
       console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
       throw new Error('Tracking for this product already exists');
     }
 
-    let resultTrackingId: string;
-    if (trackingId) {
-      resultTrackingId = await this.addProductToTrackingEntry(trackingId, product, now);
-    } else {
-      resultTrackingId = await this.createNewTrackingEntry(product, now);
+    const resultTrackingId = await this.createNewTrackingEntry(product, unit, unitAmount, now);
+
+    await this.addProductToHistory(product, now);
+
+    return resultTrackingId;
+  }
+
+  public async addToTracking(trackingId: string, product: Product, now: Date): Promise<string> {
+    const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
+    if (existingEntryForProduct) {
+      console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
+      throw new Error('Tracking for this product already exists');
     }
+
+    const resultTrackingId = await this.addProductToTrackingEntry(trackingId, product, now);
 
     await this.addProductToHistory(product, now);
 
@@ -115,13 +122,17 @@ export class TrackedProductsRepository {
     {
       id: string;
       name: string;
+      unitName: string;
+      unitAmount: number;
       products: Product[];
     }[]
   > {
     const trackedProducts = await this.products.find({}).toArray();
-    return trackedProducts.map(({ _id, name, products }) => ({
+    return trackedProducts.map(({ _id, name, products, unitName, unitAmount }) => ({
       id: _id.toString(),
       name,
+      unitName,
+      unitAmount,
       products: products.map(({ product }) => product),
     }));
   }
@@ -344,9 +355,16 @@ export class TrackedProductsRepository {
     return trackingId;
   }
 
-  private async createNewTrackingEntry(product: Product, now: Date): Promise<string> {
+  private async createNewTrackingEntry(
+    product: Product,
+    unitName: string,
+    unitAmount: number,
+    now: Date
+  ): Promise<string> {
     const result = await this.products.insertOne({
       name: product.name,
+      unitName,
+      unitAmount,
       products: [{ product, lastUpdated: now }],
       createdAt: now,
       updatedAt: now,

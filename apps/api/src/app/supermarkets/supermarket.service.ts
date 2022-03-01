@@ -1,7 +1,8 @@
 import { Inject, Injectable, Optional } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { HistoricalProduct, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
+import { SearchResultItem, SortBy, SortOrder, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
+import { ConversionService } from '../conversion.service';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { Product } from '../product.model';
 import { DevCacheService } from './dev-cache.service';
@@ -21,7 +22,8 @@ export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
     private readonly trackedProductsRepo: TrackedProductsRepository,
-    @Optional() private readonly cache: DevCacheService
+    @Optional() private readonly cache: DevCacheService,
+    private readonly conversionService: ConversionService
   ) {}
 
   public async search(
@@ -76,23 +78,31 @@ export class SupermarketService {
     );
   }
 
-  public async getAllTrackedProducts(
-    now: Date,
-    forceFresh: boolean = false
-  ): Promise<
-    {
-      id: string;
-      name: string;
-      products: HistoricalProduct[];
-    }[]
-  > {
+  public async getAllTrackedProducts(now: Date, forceFresh: boolean = false): Promise<TrackedItemGroup[]> {
     if (forceFresh) {
       const startOfToday = startOfDay(now);
       const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
       await this.getMultipleItems(outdatedIds, now, true);
     }
 
-    return await this.trackedProductsRepo.getAllTrackedProducts();
+    const trackedProducts = await this.trackedProductsRepo.getAllTrackedProducts();
+
+    return trackedProducts.map(({ id, name, products, unitName, unitAmount }) => ({
+      id,
+      name,
+      unitName,
+      unitAmount,
+      products: products.map((product) => ({
+        ...product,
+        pricePerUnit: this.conversionService.convert(
+          product.pricePerUnit,
+          product.unitAmount,
+          product.unitName,
+          unitName,
+          unitAmount
+        ),
+      })),
+    }));
   }
 
   /**
