@@ -17,15 +17,20 @@ export const dbProviders: Provider[] = [
     provide: TRACKING_COLLECTION,
     useFactory: async (db: Db) => {
       const collection = db.collection('trackedProducts');
-      await collection.createIndex(
+      await collection.createIndexes([
         {
-          'products.product.id': 1,
-        },
-        {
+          key: { 'products.product.id': 1 },
           unique: true,
           sparse: false,
-        }
-      );
+        },
+        {
+          key: {
+            'products.product.name': 'text',
+            name: 'text',
+          },
+        },
+      ]);
+
       return collection;
     },
     inject: [DATABASE],

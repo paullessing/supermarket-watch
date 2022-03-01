@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { ProductSearchResult, ProductSearchResults, SearchResultItem } from '@shoppi/api-interfaces';
 
 export interface AddProductData {
@@ -12,7 +12,7 @@ export interface AddProductData {
   templateUrl: './add-product-dialog.component.html',
   styleUrls: ['./add-product-dialog.component.scss'],
 })
-export class AddProductDialogComponent {
+export class AddProductDialogComponent implements OnInit {
   @Input()
   public item!: SearchResultItem;
 
@@ -58,6 +58,10 @@ export class AddProductDialogComponent {
     });
   }
 
+  public ngOnInit(): void {
+    this.search(this.item.name);
+  }
+
   public onAdd(): void {
     this.addProduct.emit({
       productId: this.item.id,
@@ -78,6 +82,10 @@ export class AddProductDialogComponent {
       return;
     }
 
+    this.search(searchText);
+  }
+
+  private search(searchText: string): void {
     this.http
       .get<ProductSearchResults>('/api/tracked-products/search', {
         params: {
@@ -89,7 +97,5 @@ export class AddProductDialogComponent {
         this.results = results;
         this.searchComplete = true;
       });
-
-    console.log(searchText);
   }
 }
