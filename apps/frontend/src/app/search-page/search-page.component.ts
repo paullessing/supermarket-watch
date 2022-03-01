@@ -77,15 +77,16 @@ export class SearchPageComponent implements OnInit {
       });
   }
 
-  public track(data: AddProductData): void {
-    const url = `${environment.apiUrl}/tracked-products${data.combinedTrackingId ? `/${data.combinedTrackingId}` : ''}`;
+  public track({ productId, combinedTrackingId }: AddProductData): void {
+    const url = `${environment.apiUrl}/tracked-products${combinedTrackingId ? `/${combinedTrackingId}` : ''}`;
+
     this.http
       .post<AddTrackedProduct>(url, {
-        productId: data.productId,
+        productId,
       })
       .subscribe(({ trackingId }) => {
         this.results = this.results.map(
-          (item): SearchResultItem => (item.id === data.productId ? { ...item, trackingId } : item)
+          (item): SearchResultItem => (item.id === productId ? { ...item, trackingId } : item)
         );
       });
     this.addItemDetails = null;

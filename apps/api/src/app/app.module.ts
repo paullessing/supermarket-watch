@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigProvider } from './config';
+import { ConversionService } from './conversion.service';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
@@ -21,6 +22,7 @@ import { TrackedProductsController } from './tracked-products.controller';
   ],
   controllers: [ProductsController, SearchController, TrackedProductsController],
   providers: [
+    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
     {
       provide: Supermarkets,
       useFactory: (...supermarkets: Supermarket[]) => supermarkets,
@@ -34,7 +36,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     Tesco,
     TrackedProductsRepository,
     CronService,
-    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
+    ConversionService,
   ],
 })
 export class AppModule {}

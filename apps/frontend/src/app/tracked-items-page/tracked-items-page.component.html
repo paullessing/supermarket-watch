@@ -22,7 +22,7 @@
             {{ product.price | currency:'GBP' }}
           </td>
           <td style="padding: 0.25rem 0.5rem">
-            {{ product.pricePerUnit | currency:'GBP' }}/{{ product.unitAmount === 1 ? '' : product.unitAmount }}{{ product.unitName }}
+            {{ product.pricePerUnit | currency:'GBP' }}/{{ itemGroup.unitAmount === 1 ? '' : itemGroup.unitAmount }}{{ itemGroup.unitName }}
           </td>
         </tr>
         <tr *ngIf="product.specialOffer">

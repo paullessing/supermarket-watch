@@ -37,7 +37,13 @@ export class TrackedProductsController {
     }
 
     console.log(`Updating tracking ID "${trackingId}"`, product);
-    const resultId = await this.trackingRepo.addOrCreateTracking(trackingId, product, new Date());
+    let resultId: string;
+    if (trackingId) {
+      resultId = await this.trackingRepo.addToTracking(trackingId, product, new Date());
+    } else {
+      // Consider allowing user to set units on creation
+      resultId = await this.trackingRepo.createTracking(product, product.unitName, product.unitAmount, new Date());
+    }
 
     return {
       trackingId: resultId,
