@@ -31,18 +31,6 @@ export const dbProviders: Provider[] = [
         },
       ]);
 
-      // TODO remove after running in prod
-      const update = await collection.updateMany({ unitName: { $exists: false } }, [
-        {
-          $addFields: {
-            unitName: { $first: '$products.product.unitName' },
-            unitAmount: { $first: '$products.product.unitAmount' },
-          },
-        },
-      ]);
-
-      console.log('UPDATED unit names', update);
-
       return collection;
     },
     inject: [DATABASE],
