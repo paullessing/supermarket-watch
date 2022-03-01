@@ -22,6 +22,7 @@ import { TrackedProductsController } from './tracked-products.controller';
   ],
   controllers: [ProductsController, SearchController, TrackedProductsController],
   providers: [
+    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
     {
       provide: Supermarkets,
       useFactory: (...supermarkets: Supermarket[]) => supermarkets,
@@ -35,7 +36,6 @@ import { TrackedProductsController } from './tracked-products.controller';
     Tesco,
     TrackedProductsRepository,
     CronService,
-    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
     ConversionService,
   ],
 })
