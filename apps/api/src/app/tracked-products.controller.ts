@@ -30,7 +30,7 @@ export class TrackedProductsController {
     let product: Product;
 
     try {
-      product = await this.supermarketService.getSingleItem(productId);
+      product = await this.supermarketService.getSingleItem(productId, new Date());
     } catch (e) {
       console.error(e);
       throw new BadGatewayException(e);
@@ -49,7 +49,7 @@ export class TrackedProductsController {
     @Query('force') force: string,
     @Query('promotionsOnly') promotionsOnly: string
   ): Promise<{ items: TrackedItemGroup[] }> {
-    const trackedProducts = await this.supermarketService.getAllTrackedProducts();
+    const trackedProducts = await this.supermarketService.getAllTrackedProducts(new Date());
 
     if (promotionsOnly) {
       return {

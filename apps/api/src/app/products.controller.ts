@@ -17,7 +17,7 @@ export class ProductsController {
       throw new BadRequestException('Missing required URL parameter "id"');
     }
     try {
-      return await this.supermarketService.getSingleItem(id, force === 'true');
+      return await this.supermarketService.getSingleItem(id, new Date(), force === 'true');
     } catch (e) {
       if (e instanceof InvalidIdException) {
         throw new NotFoundException();
@@ -52,7 +52,7 @@ export class ProductsController {
     const items = await Promise.all(
       ids.map(async (id): Promise<Product> => {
         try {
-          return await this.supermarketService.getSingleItem(id);
+          return await this.supermarketService.getSingleItem(id, new Date());
         } catch (e) {
           if (e instanceof InvalidIdException) {
             throw new NotFoundException();
