@@ -3,7 +3,6 @@ import { startOfDay } from 'date-fns';
 import { HistoricalProduct, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
-import { NOW } from '../now';
 import { Product } from '../product.model';
 import { DevCacheService } from './dev-cache.service';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
@@ -22,8 +21,7 @@ export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
     private readonly trackedProductsRepo: TrackedProductsRepository,
-    @Optional() private readonly cache: DevCacheService,
-    @Inject(NOW) private readonly now: Date
+    @Optional() private readonly cache: DevCacheService
   ) {}
 
   public async search(
@@ -67,10 +65,10 @@ export class SupermarketService {
     return this.sortResults(results, sortBy, sortOrder);
   }
 
-  public async getMultipleItems(ids: string[], forceFresh: boolean = false): Promise<Product[]> {
+  public async getMultipleItems(ids: string[], now: Date, forceFresh: boolean = false): Promise<Product[]> {
     return Promise.all(
       ids.map((id) =>
-        this.getSingleItem(id, forceFresh).catch((e) => {
+        this.getSingleItem(id, now, forceFresh).catch((e) => {
           console.log('Failed to fetch item', id, e);
           throw e;
         })
@@ -78,7 +76,10 @@ export class SupermarketService {
     );
   }
 
-  public async getAllTrackedProducts(forceFresh: boolean = false): Promise<
+  public async getAllTrackedProducts(
+    now: Date,
+    forceFresh: boolean = false
+  ): Promise<
     {
       id: string;
       name: string;
@@ -86,9 +87,9 @@ export class SupermarketService {
     }[]
   > {
     if (forceFresh) {
-      const startOfToday = startOfDay(this.now);
+      const startOfToday = startOfDay(now);
       const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
-      await this.getMultipleItems(outdatedIds, true);
+      await this.getMultipleItems(outdatedIds, now, true);
     }
 
     return await this.trackedProductsRepo.getAllTrackedProducts();
@@ -97,14 +98,14 @@ export class SupermarketService {
   /**
    * @throws InvalidIdException if the ID is invalid or the product is not found
    */
-  public async getSingleItem(id: string, forceFresh: boolean = false): Promise<Product> {
+  public async getSingleItem(id: string, now: Date, forceFresh: boolean = false): Promise<Product> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
       throw new InvalidIdException(id);
     }
 
     if (!forceFresh) {
-      const updatedAfter = startOfDay(this.now);
+      const updatedAfter = startOfDay(now);
       const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
         console.debug('Cache hit for ' + id);
@@ -129,7 +130,7 @@ export class SupermarketService {
           } else {
             console.debug('Cache miss, storing', id);
           }
-          await this.trackedProductsRepo.addToHistory(product);
+          await this.trackedProductsRepo.addToHistory(product, now);
 
           if (this.cache) {
             this.cache.storeProduct(product);

@@ -19,7 +19,7 @@ export class CronService {
     const favourites = await this.trackedProductsRepo.getAllTrackedIds();
     console.log(`Refreshing ${favourites.length} items...`);
 
-    const results = await this.supermarketService.getMultipleItems(favourites, true);
+    const results = await this.supermarketService.getMultipleItems(favourites, new Date(), true);
 
     console.log(`Refreshed ${results.length} items.`);
     console.log(`Cronjob completed.`);
