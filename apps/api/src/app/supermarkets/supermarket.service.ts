@@ -78,7 +78,10 @@ export class SupermarketService {
     );
   }
 
-  public async getAllTrackedProducts(now: Date, forceFresh: boolean = false): Promise<TrackedItemGroup[]> {
+  public async getAllTrackedProducts(
+    now: Date,
+    { forceFresh = false, sortByPrice = true } = {}
+  ): Promise<TrackedItemGroup[]> {
     if (forceFresh) {
       const startOfToday = startOfDay(now);
       const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
@@ -92,16 +95,24 @@ export class SupermarketService {
       name,
       unitName,
       unitAmount,
-      products: products.map((product) => ({
-        ...product,
-        pricePerUnit: this.conversionService.convert(
-          product.pricePerUnit,
-          product.unitAmount,
-          product.unitName,
-          unitName,
-          unitAmount
-        ),
-      })),
+      products: products
+        .map((product) => ({
+          ...product,
+          pricePerUnit: this.conversionService.convert(
+            product.pricePerUnit,
+            product.unitAmount,
+            product.unitName,
+            unitName,
+            unitAmount
+          ),
+        }))
+        .sort((a, b) => {
+          if (sortByPrice) {
+            return a.pricePerUnit - b.pricePerUnit;
+          } else {
+            return 0;
+          }
+        }),
     }));
   }
 
