@@ -37,7 +37,8 @@ services:
     restart: always
     networks:
       mongo_network:
-    restart: always
+    volumes:
+      - mongodata:/data/db
     # restart_policy is not supported outside docker swarm, despite v3 docs saying it should be used
     # restart_policy:
     #   condition: any
@@ -46,3 +47,6 @@ networks:
   webnet:
     external: true
   mongo_network:
+
+volumes:
+  mongodata:
