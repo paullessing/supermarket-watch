@@ -130,7 +130,7 @@ export class SupermarketService {
           } else {
             console.debug('Cache miss, storing', id);
           }
-          await this.trackedProductsRepo.addToHistory(product);
+          await this.trackedProductsRepo.addToHistory(product, now);
 
           if (this.cache) {
             this.cache.storeProduct(product);

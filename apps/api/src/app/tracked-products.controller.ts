@@ -37,7 +37,7 @@ export class TrackedProductsController {
     }
 
     console.log(`Updating tracking ID "${trackingId}"`, product);
-    const resultId = await this.trackingRepo.addOrCreateTracking(trackingId, product);
+    const resultId = await this.trackingRepo.addOrCreateTracking(trackingId, product, new Date());
 
     return {
       trackingId: resultId,
