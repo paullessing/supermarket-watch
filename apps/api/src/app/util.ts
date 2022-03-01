@@ -8,7 +8,7 @@ export function lpad(value: string, length: number, padChar: string = ' '): stri
 
 export interface RowDefinition<T> {
   name: string;
-  key: (keyof T) | ((val: T) => string);
+  key: keyof T | ((val: T) => string);
   padLeft?: boolean;
 }
 
@@ -25,10 +25,14 @@ export function createTable<T = unknown>(cols: RowDefinition<T>[], values: T[]):
   });
   const headers = cols.map(({ name }, i) => rpad(name, lengths[i])).join(' | ');
   const separator = lengths.map((length) => rpad('', length, '-')).join('-|-');
-  const body = rows.map((row) =>
-    row.map((value, i) =>
-      (cols[i].padLeft ? lpad : rpad)(value, lengths[i])
-    ).join(' | ')
-  );
+  const body = rows.map((row) => row.map((value, i) => (cols[i].padLeft ? lpad : rpad)(value, lengths[i])).join(' | '));
   return [headers, separator, ...body].join('\n');
+}
+
+export function unique<T>(getId?: (value: T) => unknown): (value: T, index: number, arr: T[]) => boolean {
+  if (getId) {
+    return (value: T, index: number, arr: T[]) => arr.findIndex((v) => getId(v) === getId(value)) === index;
+  } else {
+    return (value: T, index: number, arr: T[]) => arr.indexOf(value) === index;
+  }
 }

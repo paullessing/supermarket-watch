@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
 import { Collection, Filter, ObjectId, WithoutId } from 'mongodb';
 import { Product } from '../product.model';
+import { unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { TimestampedDocument } from './timestamped-document';
@@ -216,14 +217,23 @@ export class TrackedProductsRepository {
   }
 
   public async search(searchTerm: string): Promise<TrackedProducts[]> {
-    const result = this.products.find({
-      $or: [
-        { 'products.product.name': { $regex: searchTerm, $options: '$i' } },
-        { name: { $regex: searchTerm, $options: '$i' } },
-      ],
-    });
+    const [fuzzyResults, regexResults] = await Promise.all([
+      this.products
+        .find({
+          $text: { $search: searchTerm, $caseSensitive: false, $language: 'english' },
+        })
+        .toArray(),
+      this.products
+        .find({
+          $or: [
+            { 'products.product.name': { $regex: searchTerm, $options: '$i' } },
+            { name: { $regex: searchTerm, $options: '$i' } },
+          ],
+        })
+        .toArray(),
+    ]);
 
-    return result.toArray();
+    return [...fuzzyResults, ...regexResults].filter(unique(({ _id }) => _id.toString()));
   }
 
   public async getHistory(productId: string): Promise<{ date: Date; price: number; pricePerUnit: number }[]> {
