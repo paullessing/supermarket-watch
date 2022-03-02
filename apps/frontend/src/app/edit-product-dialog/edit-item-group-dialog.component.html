@@ -5,12 +5,45 @@
 
   <div class="edit-product-dialog__content">
     <h1>Edit Item Group</h1>
-    <h2>{{ group.name }}</h2>
+    <h2
+      *ngIf="!isEditingName; else editingName"
+    >{{ group.name }}
+      <button
+        class="edit-product-dialog__edit-name-button button-link"
+        (click)="isEditingName = true"
+        style="cursor: pointer"
+      >Edit</button>
+    </h2>
+    <ng-template #editingName>
+      <input
+        type="text"
+        class="edit-product-dialog__name-input"
+        [(ngModel)]="details.name"
+      />
+    </ng-template>
 
-    <ul>
-      <li *ngFor="let product of group.products">
+    <h3 class="edit-product-dialog__items-title">
+      Items
+      <button
+        class="edit-product-dialog__edit-items-button button-link"
+        (click)="isRemovingItems = !isRemovingItems"
+        style="cursor: pointer"
+      >{{ isRemovingItems ? 'Done' : 'Edit' }}</button>
+    </h3>
+    <ul
+      class="edit-product-dialog__product-list"
+      [class.edit-product-dialog__product-list--edit]="isRemovingItems"
+    >
+      <li
+        *ngFor="let product of group.products"
+        class="edit-product-dialog__product-list-item"
+      >
         {{ product.name }} (<em>{{ product.supermarket }}</em>)
-        <button (click)="onRemoveProduct(product)">Remove</button>
+        <button
+          *ngIf="isRemovingItems"
+          class="edit-product-dialog__remove-button button-link"
+          (click)="onRemoveProduct(product)"
+        >Remove</button>
       </li>
     </ul>
 

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { HistoricalProduct, ProductSearchResult, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
 
 export interface RemoveProductData {
@@ -7,14 +7,22 @@ export interface RemoveProductData {
   trackingId: string;
 }
 
+export interface EditGroupData {
+  groupId: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-edit-item-group-dialog',
   templateUrl: './edit-item-group-dialog.component.html',
   styleUrls: ['./edit-item-group-dialog.component.scss'],
 })
-export class EditItemGroupDialogComponent {
+export class EditItemGroupDialogComponent implements OnInit {
   @Input()
   public group!: TrackedItemGroup;
+
+  @Output()
+  public editGroup: EventEmitter<EditGroupData> = new EventEmitter();
 
   @Output()
   public exit: EventEmitter<void> = new EventEmitter();
@@ -28,6 +36,10 @@ export class EditItemGroupDialogComponent {
   public searchItemName: string;
   public results: ProductSearchResult[];
   public searchComplete: boolean;
+  public isEditingName: boolean;
+  public isRemovingItems: boolean;
+
+  public details: Pick<HistoricalProduct, 'name'>;
 
   public get combineWithItem(): ProductSearchResult | null {
     return this._combineWithItem;
@@ -53,6 +65,9 @@ export class EditItemGroupDialogComponent {
     this.results = [];
     this.searchComplete = false;
     this._combineWithItem = null;
+    this.isEditingName = false;
+    this.isRemovingItems = false;
+    this.details = { name: '' };
 
     renderer.listen(elementRef.nativeElement, 'click', (event: MouseEvent) => {
       if (event.target === elementRef.nativeElement) {
@@ -61,8 +76,19 @@ export class EditItemGroupDialogComponent {
     });
   }
 
+  public ngOnInit(): void {
+    this.details.name = this.group.name;
+  }
+
   public onConfirm(): void {
-    // TODO implement
+    if (this.detailsHaveChanged()) {
+      this.editGroup.emit({
+        groupId: this.group.id,
+        name: this.details.name,
+      });
+    } else {
+      this.exit.emit();
+    }
   }
 
   public onDelete(): void {
@@ -103,5 +129,9 @@ export class EditItemGroupDialogComponent {
       });
 
     console.log(searchText);
+  }
+
+  private detailsHaveChanged(): boolean {
+    return this.details.name !== this.group.name;
   }
 }
