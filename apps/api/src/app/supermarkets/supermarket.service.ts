@@ -2,7 +2,6 @@ import { Inject, Injectable, Optional } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
 import { SearchResultItem, SortBy, SortOrder, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
-import { ConversionService } from '../conversion.service';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { Product } from '../product.model';
 import { DevCacheService } from './dev-cache.service';
@@ -22,8 +21,7 @@ export class SupermarketService {
   constructor(
     @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
     private readonly trackedProductsRepo: TrackedProductsRepository,
-    @Optional() private readonly cache: DevCacheService,
-    private readonly conversionService: ConversionService
+    @Optional() private readonly cache: DevCacheService
   ) {}
 
   public async search(
@@ -95,24 +93,13 @@ export class SupermarketService {
       name,
       unitName,
       unitAmount,
-      products: products
-        .map((product) => ({
-          ...product,
-          pricePerUnit: this.conversionService.convert(
-            product.pricePerUnit,
-            product.unitAmount,
-            product.unitName,
-            unitName,
-            unitAmount
-          ),
-        }))
-        .sort((a, b) => {
-          if (sortByPrice) {
-            return a.pricePerUnit - b.pricePerUnit;
-          } else {
-            return 0;
-          }
-        }),
+      products: products.sort((a, b) => {
+        if (sortByPrice) {
+          return a.pricePerUnit - b.pricePerUnit;
+        } else {
+          return 0;
+        }
+      }),
     }));
   }
 

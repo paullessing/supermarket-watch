@@ -6,11 +6,15 @@ import {
   Delete,
   Get,
   HttpCode,
+  InternalServerErrorException,
+  NotFoundException,
   Param,
+  Patch,
   Post,
   Query,
 } from '@nestjs/common';
 import { AddTrackedProduct, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { EntityNotFoundError } from './db/entity-not-found.error';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { Product } from './product.model';
 import { SupermarketService } from './supermarkets';
@@ -102,5 +106,23 @@ export class TrackedProductsController {
         trackingId: entry._id.toString(),
       })),
     };
+  }
+
+  @Patch('/:trackingId')
+  public async editTrackedProduct(
+    @Param('trackingId') trackingId: string,
+    @Body('name') name: string
+  ): Promise<TrackedItemGroup> {
+    try {
+      return this.trackingRepo.updateProduct(trackingId, {
+        name,
+      });
+    } catch (e) {
+      if (e instanceof EntityNotFoundError) {
+        throw new NotFoundException(`Tracking ID "${trackingId}" not found`);
+      }
+      console.error(e);
+      throw new InternalServerErrorException(e);
+    }
   }
 }
