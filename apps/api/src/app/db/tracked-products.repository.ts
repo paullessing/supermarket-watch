@@ -146,22 +146,28 @@ export class TrackedProductsRepository {
 
   public async getAllTrackedProducts(): Promise<TrackedItemGroup[]> {
     const trackedProducts = await this.products.find({}).toArray();
-    return trackedProducts.map(({ _id, name, products, unitName, unitAmount }) => ({
-      id: _id.toString(),
-      name,
-      unitName,
-      unitAmount,
-      products: products.map(({ product }) => ({
-        ...product,
-        pricePerUnit: this.conversionService.convert(
-          product.pricePerUnit,
-          product.unitAmount,
-          product.unitName,
-          unitName,
-          unitAmount
-        ),
-      })),
-    }));
+    return trackedProducts.map(({ _id, name, products, unitName, unitAmount }) => {
+      return {
+        id: _id.toString(),
+        name,
+        unitName,
+        unitAmount,
+        products: products.map(({ product }) => ({
+          ...product,
+          pricePerUnit: this.conversionService.convert(
+            product.pricePerUnit,
+            {
+              unit: product.unitName,
+              unitAmount: product.unitAmount,
+            },
+            {
+              unit: unitName,
+              unitAmount,
+            }
+          ),
+        })),
+      };
+    });
   }
 
   public async getOutdatedProductIds(updatedAfter: Date): Promise<string[]> {
