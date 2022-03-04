@@ -40,6 +40,7 @@
 <app-edit-item-group-dialog
   *ngIf="editItemGroupIndex !== null"
   [group]="itemGroups[editItemGroupIndex]"
+  (editGroup)="onEditGroup($event)"
   (exit)="editItemGroupIndex = null"
   (deleteTrackedGroup)="deleteTrackingGroup($event.id); editItemGroupIndex = null"
   (removeProduct)="removeProduct($event)"

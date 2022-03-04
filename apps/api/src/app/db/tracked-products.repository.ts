@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import { Collection, Filter, ObjectId, WithoutId } from 'mongodb';
+import { Collection, Filter, ObjectId, ReturnDocument, WithoutId } from 'mongodb';
+import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
 import { unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
@@ -31,7 +33,8 @@ interface ProductHistory extends TimestampedDocument {
 export class TrackedProductsRepository {
   constructor(
     @Inject(TRACKING_COLLECTION) private readonly products: Collection<TrackedProducts>,
-    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>
+    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>,
+    private readonly conversionService: ConversionService
   ) {}
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
@@ -107,6 +110,29 @@ export class TrackedProductsRepository {
     await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product, now)));
   }
 
+  public async updateProduct(trackingId: string, { name }: { name?: string }): Promise<TrackedItemGroup> {
+    const updates: Partial<TrackedProducts> = {};
+    if (name) {
+      updates.name = name;
+    }
+
+    if (!Object.keys(updates).length) {
+      throw new Error('No updates provided');
+    }
+
+    const { ok, value } = await this.products.findOneAndUpdate(
+      { _id: toId(trackingId) },
+      { $set: updates },
+      { returnDocument: ReturnDocument.AFTER }
+    );
+
+    if (!ok || !value) {
+      throw new Error('Tracking does not exist');
+    }
+
+    return this.convertToTrackedItemGroup(value);
+  }
+
   public async addToHistory(product: Product, now: Date): Promise<void> {
     await this.addProductToHistory(product, now);
 
@@ -118,22 +144,23 @@ export class TrackedProductsRepository {
     }
   }
 
-  public async getAllTrackedProducts(): Promise<
-    {
-      id: string;
-      name: string;
-      unitName: string;
-      unitAmount: number;
-      products: Product[];
-    }[]
-  > {
+  public async getAllTrackedProducts(): Promise<TrackedItemGroup[]> {
     const trackedProducts = await this.products.find({}).toArray();
     return trackedProducts.map(({ _id, name, products, unitName, unitAmount }) => ({
       id: _id.toString(),
       name,
       unitName,
       unitAmount,
-      products: products.map(({ product }) => product),
+      products: products.map(({ product }) => ({
+        ...product,
+        pricePerUnit: this.conversionService.convert(
+          product.pricePerUnit,
+          product.unitAmount,
+          product.unitName,
+          unitName,
+          unitAmount
+        ),
+      })),
     }));
   }
 
@@ -370,6 +397,25 @@ export class TrackedProductsRepository {
       updatedAt: now,
     } as TrackedProducts);
     return result.insertedId.toString();
+  }
+
+  private convertToTrackedItemGroup(value: TrackedProducts): TrackedItemGroup {
+    return {
+      id: value._id.toString(),
+      name: value.name,
+      unitName: value.unitName,
+      unitAmount: value.unitAmount,
+      products: value.products.map(
+        ({ product }): HistoricalProduct => ({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          pricePerUnit: product.pricePerUnit,
+          supermarket: product.supermarket,
+          specialOffer: product.specialOffer,
+        })
+      ),
+    };
   }
 }
 

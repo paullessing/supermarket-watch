@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
-import { RemoveProductData } from '../edit-product-dialog/edit-item-group-dialog.component';
+import { EditGroupData, RemoveProductData } from '../edit-product-dialog/edit-item-group-dialog.component';
 
 @Component({
   selector: 'app-tracked-items-page',
@@ -47,5 +47,16 @@ export class TrackedItemsPageComponent implements OnInit {
           : item
       );
     });
+  }
+
+  public onEditGroup({ groupId, name }: EditGroupData): void {
+    this.http
+      .patch<TrackedItemGroup>(`${environment.apiUrl}/tracked-products/${groupId}`, {
+        name,
+      })
+      .subscribe((itemGroup) => {
+        this.itemGroups = this.itemGroups.map((item) => (item.id === groupId ? itemGroup : item));
+        this.editItemGroupIndex = null;
+      });
   }
 }
