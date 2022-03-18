@@ -1,42 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Collection, WithoutId } from 'mongodb';
+import { OverloadedParameters, OverloadedReturnType } from '@shoppi/util';
 import { ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { ProductHistory, TrackedProducts, TrackedProductsRepository } from './tracked-products.repository';
-
-// This nightmare type exists because TypeScript doesn't support getting overloaded return types as a union
-// From https://github.com/microsoft/TypeScript/issues/32164#issuecomment-811608386
-// prettier-ignore
-type Overloads<T extends (...args: unknown[]) => unknown> =
-  T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6; (...args: infer A7): infer R7; (...args: infer A8): infer R8; (...args: infer A9): infer R9; (...args: infer A10): infer R10; (...args: infer A11): infer R11; (...args: infer A12): infer R12 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6) | ((...args: A7) => R7) | ((...args: A8) => R8) | ((...args: A9) => R9) | ((...args: A10) => R10) | ((...args: A11) => R11) | ((...args: A12) => R12)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6; (...args: infer A7): infer R7; (...args: infer A8): infer R8; (...args: infer A9): infer R9; (...args: infer A10): infer R10; (...args: infer A11): infer R11 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6) | ((...args: A7) => R7) | ((...args: A8) => R8) | ((...args: A9) => R9) | ((...args: A10) => R10) | ((...args: A11) => R11)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6; (...args: infer A7): infer R7; (...args: infer A8): infer R8; (...args: infer A9): infer R9; (...args: infer A10): infer R10 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6) | ((...args: A7) => R7) | ((...args: A8) => R8) | ((...args: A9) => R9) | ((...args: A10) => R10)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6; (...args: infer A7): infer R7; (...args: infer A8): infer R8; (...args: infer A9): infer R9 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6) | ((...args: A7) => R7) | ((...args: A8) => R8) | ((...args: A9) => R9)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6; (...args: infer A7): infer R7; (...args: infer A8): infer R8}
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6) | ((...args: A7) => R7) | ((...args: A8) => R8)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6; (...args: infer A7): infer R7 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6) | ((...args: A7) => R7)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5; (...args: infer A6): infer R6 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5) | ((...args: A6) => R6)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4; (...args: infer A5): infer R5 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4) | ((...args: A5) => R5)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3; (...args: infer A4): infer R4 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3) | ((...args: A4) => R4)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2; (...args: infer A3): infer R3 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2) | ((...args: A3) => R3)
-  : T extends { (...args: infer A1): infer R1; (...args: infer A2): infer R2 }
-  ? ((...args: A1) => R1) | ((...args: A2) => R2)
-  : T extends { (...args: infer A1): infer R1 }
-  ? (...args: A1) => R1
-  : never
-
-type OverloadedParameters<T extends (...args: unknown[]) => unknown> = Parameters<Overloads<T>>;
-type OverloadedReturnType<T extends (...args: unknown[]) => unknown> = ReturnType<Overloads<T>>;
 
 type FunctionMembers<Class> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -118,7 +86,7 @@ describe('TrackedProductsRepository', () => {
     let product: Product;
 
     beforeEach(() => {
-      products.findOne.mockReturnValue(null);
+      products.findOne.mockResolvedValue(null);
 
       product = {
         id: '123',
@@ -133,7 +101,7 @@ describe('TrackedProductsRepository', () => {
     });
 
     it('should create a new history entry if the product does not exist in history', async () => {
-      history.findOne.mockReturnValue(null);
+      history.findOne.mockResolvedValue(null);
 
       try {
         await repo.addToHistory(product, now);
