@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
+import { Collection, Filter, ObjectId, OptionalId, ReturnDocument } from 'mongodb';
 import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { ConversionService } from '../conversion.service';
 import { Product } from '../product.model';

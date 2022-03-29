@@ -103,11 +103,7 @@ describe('TrackedProductsRepository', () => {
     it('should create a new history entry if the product does not exist in history', async () => {
       history.findOne.mockResolvedValue(null);
 
-      try {
-        await repo.addToHistory(product, now);
-      } catch (e) {
-        console.error('ERROR', e);
-      }
+      await repo.addToHistory(product, now);
 
       expect(history.findOne).toHaveBeenCalledTimes(1);
       expect(history.findOne).toHaveBeenCalledWith({ productId: product.id });
