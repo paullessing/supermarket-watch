@@ -1,3 +1,4 @@
+import { commonConversions } from '@shoppi/api-interfaces';
 import { CannotConvertError } from './cannot-convert.error';
 
 export type Conversion = Unit[];
@@ -6,36 +7,6 @@ export interface Unit {
   name: string;
   multiplier: number;
 }
-
-export const commonConversions: [name: string, multiplier: number][][] = [
-  [
-    ['l', 1],
-    ['litre', 1],
-    ['ltr', 1],
-    ['ml', 1000],
-    ['mls', 1000],
-  ],
-  [
-    ['kg', 1],
-    ['kgs', 1],
-    ['g', 1000],
-    ['gs', 1000],
-    ['mg', 1000_000],
-    ['mgs', 1000_000],
-  ],
-  [
-    ['sheet', 1],
-    ['sheets', 1],
-    ['sht', 1],
-  ],
-  [
-    ['each', 1],
-    ['eaches', 1],
-    ['ea', 1],
-    ['unit', 1],
-    ['units', 1],
-  ],
-];
 
 export class ConversionService {
   private conversions: Conversion[] = [];
@@ -147,6 +118,55 @@ export class ConversionService {
     );
 
     return amountConvertedToTargetFinalUnit;
+  }
+
+  /**
+   * Gets all convertable units for a product, given a list of allowed conversions and a list of actual units of the product.
+   * It is assumed that all existing units can be converted between, using default conversions and/or the given manual conversions.
+   * This method will throw if that assumption does not hold.
+   *
+   * @param units
+   * @param manualConversion
+   */
+  public getConvertableUnits(units: string[], manualConversion?: Conversion): string[] {
+    const foundConversions = new Set<string>();
+
+    // add the first value
+    const firstUnit = units[0];
+    foundConversions.add(firstUnit);
+    const conversion = this.getConversion(firstUnit);
+    const hasManualConversion = manualConversion && !!manualConversion.find((unit) => unit.name === firstUnit);
+
+    // We know there is a conversion, so we can add the rest of the units
+    const addConversion = (conversion: Conversion): void => {
+      for (const convertedUnit of conversion) {
+        if (!foundConversions.has(convertedUnit.name)) {
+          foundConversions.add(convertedUnit.name);
+          const conversion = this.getConversion(convertedUnit.name);
+          if (conversion) {
+            addConversion(conversion);
+            if (manualConversion?.find((unit) => unit.name === convertedUnit.name)) {
+              addConversion(manualConversion);
+            }
+          }
+        }
+      }
+    };
+
+    if (conversion) {
+      addConversion(conversion);
+    }
+    if (hasManualConversion) {
+      addConversion(manualConversion);
+    }
+
+    for (const unit of units) {
+      if (!foundConversions.has(unit)) {
+        throw new CannotConvertError(units[0], unit);
+      }
+    }
+
+    return Array.from(foundConversions.values());
   }
 
   private findManualConversion(conversion1: Conversion, conversion2: Conversion): string | null {

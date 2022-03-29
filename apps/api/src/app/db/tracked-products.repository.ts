@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
 import { Collection, Filter, ObjectId, ReturnDocument, WithoutId } from 'mongodb';
 import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
-import { ConversionService } from '../conversion.service';
+import { Conversion, ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
 import { unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
@@ -17,6 +17,7 @@ interface TrackedProducts extends TimestampedDocument {
     product: Product;
     lastUpdated: Date;
   }[];
+  conversions: Conversion[];
 }
 
 interface HistoryEntry {
