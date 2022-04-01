@@ -121,5 +121,8 @@ describe('TrackedProductsRepository', () => {
         updatedAt: now,
       } as WithoutId<ProductHistory>);
     });
+
+    // TODO there should be tests here to ensure that #71 remains fixed
+    // but I don't have the time to fix this right now and it's stalling development
   });
 });
