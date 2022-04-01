@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import { Collection, Filter, ObjectId, ReturnDocument, WithoutId } from 'mongodb';
+import { Collection, Filter, ObjectId, OptionalId, ReturnDocument } from 'mongodb';
 import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { Conversion, ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
@@ -9,7 +9,7 @@ import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { TimestampedDocument } from './timestamped-document';
 
-interface TrackedProducts extends TimestampedDocument {
+export interface TrackedProducts extends TimestampedDocument {
   name: string;
   unitName: string;
   unitAmount: number;
@@ -25,7 +25,7 @@ interface HistoryEntry {
   product: Product;
 }
 
-interface ProductHistory extends TimestampedDocument {
+export interface ProductHistory extends TimestampedDocument {
   productId: string;
   history: HistoryEntry[];
 }
@@ -290,19 +290,24 @@ export class TrackedProductsRepository {
   }
 
   private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[], now: Date): Promise<void> {
-    const products = updatedProducts.map((updatedProduct) => {
-      const existingProduct = trackedProducts.products.find(({ product }) => product.id === updatedProduct.id);
-      if (!existingProduct) {
+    const products = trackedProducts.products.slice();
+
+    for (const updatedProduct of updatedProducts) {
+      const existingProductIndex = trackedProducts.products.findIndex(
+        ({ product }) => product.id === updatedProduct.id
+      );
+      if (existingProductIndex < 0) {
         throw new Error('Product not found');
       }
-      if (existingProduct.lastUpdated > now) {
-        return existingProduct; // Don't use older data
+      const existingProduct = products[existingProductIndex];
+      if (existingProduct.lastUpdated < now) {
+        products[existingProductIndex] = {
+          ...existingProduct,
+          product: updatedProduct,
+          lastUpdated: now,
+        };
       }
-      return {
-        product: updatedProduct,
-        lastUpdated: now,
-      };
-    });
+    }
 
     const result = await this.products.updateOne(
       { _id: trackedProducts._id },
@@ -329,7 +334,7 @@ export class TrackedProductsRepository {
       console.debug('Updating history entry', updatedEntry);
       await this.history.updateOne({ _id: toId(entry._id) }, { $set: updatedEntry });
     } else {
-      const newEntry: WithoutId<ProductHistory> = {
+      const newEntry: OptionalId<ProductHistory> = {
         productId: product.id,
         history: this.addHistoryEntry([], product, now),
         createdAt: now,
