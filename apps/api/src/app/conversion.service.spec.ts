@@ -132,8 +132,10 @@ describe('ConversionService', () => {
       const result = service.getConvertableUnits(
         ['box'],
         [
-          { name: 'box', multiplier: 1 },
-          { name: 'crate', multiplier: 2 },
+          [
+            { name: 'box', multiplier: 1 },
+            { name: 'crate', multiplier: 2 },
+          ],
         ]
       );
 
@@ -144,8 +146,10 @@ describe('ConversionService', () => {
       const result = service.getConvertableUnits(
         ['box'],
         [
-          { name: 'box', multiplier: 1 },
-          { name: 'kg', multiplier: 2 },
+          [
+            { name: 'box', multiplier: 1 },
+            { name: 'kg', multiplier: 2 },
+          ],
         ]
       );
 
@@ -156,8 +160,10 @@ describe('ConversionService', () => {
       const result = service.getConvertableUnits(
         ['kg'],
         [
-          { name: 'box', multiplier: 1 },
-          { name: 'kg', multiplier: 2 },
+          [
+            { name: 'box', multiplier: 1 },
+            { name: 'kg', multiplier: 2 },
+          ],
         ]
       );
 
@@ -168,8 +174,10 @@ describe('ConversionService', () => {
       const result = service.getConvertableUnits(
         ['kg'],
         [
-          { name: 'ea', multiplier: 1 },
-          { name: 'kg', multiplier: 2 },
+          [
+            { name: 'ea', multiplier: 1 },
+            { name: 'kg', multiplier: 2 },
+          ],
         ]
       );
 
@@ -180,21 +188,67 @@ describe('ConversionService', () => {
       const result = service.getConvertableUnits(
         ['box'],
         [
-          { name: 'box', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
-          { name: 'carton', multiplier: 1 },
+          [
+            { name: 'box', multiplier: 2 },
+            { name: 'crate', multiplier: 4 },
+            { name: 'carton', multiplier: 1 },
+          ],
         ]
       );
 
       expect(result).toIncludeSameMembers(['box', 'crate', 'carton']);
     });
 
+    it('should return all reachable conversions if there are multiple separate manual direct conversions', () => {
+      const result = service.getConvertableUnits(
+        ['box'],
+        [
+          [
+            { name: 'box', multiplier: 2 },
+            { name: 'crate', multiplier: 4 },
+            { name: 'carton', multiplier: 1 },
+          ],
+          [
+            { name: 'box', multiplier: 2 },
+            { name: 'bottle', multiplier: 7 },
+          ],
+        ]
+      );
+
+      expect(result).toIncludeSameMembers(['box', 'crate', 'carton', 'bottle']);
+    });
+
+    it('should return all reachable conversions if there are multiple separate manual conversions via an in-between step', () => {
+      const result = service.getConvertableUnits(
+        ['box'],
+        [
+          [
+            { name: 'box', multiplier: 2 },
+            { name: 'crate', multiplier: 4 },
+            { name: 'carton', multiplier: 1 },
+          ],
+          [
+            { name: 'carton', multiplier: 2 },
+            { name: 'bottle', multiplier: 7 },
+          ],
+        ]
+      );
+
+      expect(result).toIncludeSameMembers(['box', 'crate', 'carton', 'bottle']);
+    });
+
     it('should not return unreachable manual conversions', () => {
       const result = service.getConvertableUnits(
         ['box'],
         [
-          { name: 'dog', multiplier: 2 },
-          { name: 'cow', multiplier: 4 },
+          [
+            { name: 'dog', multiplier: 2 },
+            { name: 'cow', multiplier: 4 },
+          ],
+          [
+            { name: 'bottle', multiplier: 2 },
+            { name: 'litres', multiplier: 4 },
+          ],
         ]
       );
 
@@ -224,8 +278,10 @@ describe('ConversionService', () => {
         service.getConvertableUnits(
           ['box', 'l'],
           [
-            { name: 'box', multiplier: 2 },
-            { name: 'kg', multiplier: 4 },
+            [
+              { name: 'box', multiplier: 2 },
+              { name: 'kg', multiplier: 4 },
+            ],
           ]
         );
       }).toThrowError(new CannotConvertError('box', 'l'));

@@ -1,5 +1,6 @@
 import { commonConversions } from '@shoppi/api-interfaces';
 import { CannotConvertError } from './cannot-convert.error';
+import { exists } from './util';
 
 export type Conversion = Unit[];
 
@@ -42,7 +43,7 @@ export class ConversionService {
     // 3. ea => kg + ea<>g  (convert using manualConversion, then convert using defaults)
     // 4. ml => kg + l<>g   (convert using each manualConversion, then convert using defaults)
 
-    const fromConversion = this.getConversion(from.unit) || [{ name: from.unit, multiplier: 1 }];
+    const fromConversion = this.getSimpleConversion(from.unit) || [{ name: from.unit, multiplier: 1 }];
 
     if (fromConversion.find((unit) => unit.name === to.unit)) {
       return this.convertSpecific(
@@ -70,7 +71,7 @@ export class ConversionService {
       throw new CannotConvertError(from.unit, to.unit);
     }
 
-    const toConversion = this.getConversion(to.unit) || [{ name: to.unit, multiplier: 1 }];
+    const toConversion = this.getSimpleConversion(to.unit) || [{ name: to.unit, multiplier: 1 }];
 
     const manualToUnitName = this.findManualConversion(manualConversion, toConversion);
     if (!manualToUnitName) {
@@ -126,38 +127,39 @@ export class ConversionService {
    * This method will throw if that assumption does not hold.
    *
    * @param units
-   * @param manualConversion
+   * @param manualConversions
    */
-  public getConvertableUnits(units: string[], manualConversion?: Conversion): string[] {
-    const foundConversions = new Set<string>();
-
-    // add the first value
-    const firstUnit = units[0];
-    foundConversions.add(firstUnit);
-    const conversion = this.getConversion(firstUnit);
-    const hasManualConversion = manualConversion && !!manualConversion.find((unit) => unit.name === firstUnit);
+  public getConvertableUnits(units: string[], manualConversions: Conversion[] = []): string[] {
+    const getMatchingConversions = (targetUnit: string): Conversion[] =>
+      [
+        this.getSimpleConversion(targetUnit),
+        ...manualConversions.filter((conversion) => conversion.find((unit) => unit.name === targetUnit)),
+      ].filter(exists);
 
     // We know there is a conversion, so we can add the rest of the units
-    const addConversion = (conversion: Conversion): void => {
+    const addConversions = (conversion: Conversion): void => {
       for (const convertedUnit of conversion) {
         if (!foundConversions.has(convertedUnit.name)) {
           foundConversions.add(convertedUnit.name);
-          const conversion = this.getConversion(convertedUnit.name);
-          if (conversion) {
-            addConversion(conversion);
-            if (manualConversion?.find((unit) => unit.name === convertedUnit.name)) {
-              addConversion(manualConversion);
-            }
+
+          const possibleConversions = getMatchingConversions(convertedUnit.name);
+
+          for (const possibleConversion of possibleConversions) {
+            addConversions(possibleConversion);
           }
         }
       }
     };
 
-    if (conversion) {
-      addConversion(conversion);
-    }
-    if (hasManualConversion) {
-      addConversion(manualConversion);
+    const foundConversions = new Set<string>();
+
+    // add the first value
+    const firstUnit = units[0];
+    foundConversions.add(firstUnit);
+    const conversions = getMatchingConversions(firstUnit);
+
+    for (const conversion of conversions) {
+      addConversions(conversion);
     }
 
     for (const unit of units) {
@@ -174,7 +176,7 @@ export class ConversionService {
     return conversion1.find((unit) => conversion2.find((unit2) => unit2.name === unit.name))?.name ?? null;
   }
 
-  private getConversion(name: string): Conversion | null {
+  private getSimpleConversion(name: string): Conversion | null {
     for (const conversion of this.conversions) {
       for (const unit of conversion) {
         if (unit.name === name) {
