@@ -192,6 +192,9 @@ describe('ConversionService', () => {
           [
             { name: 'box', multiplier: 2 },
             { name: 'crate', multiplier: 4 },
+          ],
+          [
+            { name: 'box', multiplier: 2 },
             { name: 'carton', multiplier: 1 },
           ],
         ]
@@ -200,32 +203,12 @@ describe('ConversionService', () => {
       expect(result).toIncludeSameMembers(['box', 'crate', 'carton']);
     });
 
-    it('should return all reachable conversions if there are multiple separate manual direct conversions', () => {
-      const result = service.getConvertableUnits(
-        ['box'],
-        [
-          [
-            { name: 'box', multiplier: 2 },
-            { name: 'crate', multiplier: 4 },
-            { name: 'carton', multiplier: 1 },
-          ],
-          [
-            { name: 'box', multiplier: 2 },
-            { name: 'bottle', multiplier: 7 },
-          ],
-        ]
-      );
-
-      expect(result).toIncludeSameMembers(['box', 'crate', 'carton', 'bottle']);
-    });
-
     it('should return all reachable conversions if there are multiple separate manual conversions via an in-between step', () => {
       const result = service.getConvertableUnits(
         ['box'],
         [
           [
             { name: 'box', multiplier: 2 },
-            { name: 'crate', multiplier: 4 },
             { name: 'carton', multiplier: 1 },
           ],
           [
@@ -235,7 +218,7 @@ describe('ConversionService', () => {
         ]
       );
 
-      expect(result).toIncludeSameMembers(['box', 'crate', 'carton', 'bottle']);
+      expect(result).toIncludeSameMembers(['box', 'carton', 'bottle']);
     });
 
     it('should not return unreachable manual conversions', () => {
@@ -289,160 +272,327 @@ describe('ConversionService', () => {
     });
   });
 
-  describe('areManualConversionsCircular()', () => {
-    it('should return false if there are no conversions', () => {
-      const result = service.areManualConversionsCircular([]);
+  describe('canAddManualConversion()', () => {
+    it('should return true if there are no manual conversions and the new conversion is between non-standard units', () => {
+      const result = service.canAddManualConversion(
+        [],
+        [
+          {
+            name: 'box',
+            multiplier: 1,
+          },
+          {
+            name: 'crate',
+            multiplier: 1,
+          },
+        ]
+      );
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if there are no manual conversions and the new conversion is between a non-standard and a common unit', () => {
+      const result = service.canAddManualConversion(
+        [],
+        [
+          {
+            name: 'box',
+            multiplier: 1,
+          },
+          {
+            name: 'kg',
+            multiplier: 2,
+          },
+        ]
+      );
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if there are no manual conversions and the new conversion is between distinct common units', () => {
+      const result = service.canAddManualConversion(
+        [],
+        [
+          {
+            name: 'kg',
+            multiplier: 1,
+          },
+          {
+            name: 'ea',
+            multiplier: 2,
+          },
+        ]
+      );
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if existing manual conversions are for other units', () => {
+      const result = service.canAddManualConversion(
+        [
+          [
+            {
+              name: 'box',
+              multiplier: 1,
+            },
+            {
+              name: 'l',
+              multiplier: 4,
+            },
+          ],
+        ],
+        [
+          {
+            name: 'kg',
+            multiplier: 1,
+          },
+          {
+            name: 'ea',
+            multiplier: 2,
+          },
+        ]
+      );
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if existing manual conversions do not overlap with the new one', () => {
+      const result = service.canAddManualConversion(
+        [
+          [
+            {
+              name: 'box',
+              multiplier: 1,
+            },
+            {
+              name: 'l',
+              multiplier: 4,
+            },
+          ],
+        ],
+        [
+          {
+            name: 'l',
+            multiplier: 1,
+          },
+          {
+            name: 'kg',
+            multiplier: 2,
+          },
+        ]
+      );
+      expect(result).toBeTrue();
+    });
+
+    it('should return false if the new conversion already exists as a common conversion', () => {
+      const result = service.canAddManualConversion(
+        [],
+        [
+          {
+            name: 'kg',
+            multiplier: 1,
+          },
+          {
+            name: 'g',
+            multiplier: 1000,
+          },
+        ]
+      );
       expect(result).toBeFalse();
     });
 
-    it('should return false there is just one manual conversion', () => {
-      const result = service.areManualConversionsCircular([
+    it('should return false if the new conversion would introduce a common conversion to itself via existing manual conversions', () => {
+      const result = service.canAddManualConversion(
         [
-          { name: 'box', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
+          [
+            {
+              name: 'kg',
+              multiplier: 1,
+            },
+            {
+              name: 'box',
+              multiplier: 2,
+            },
+          ],
         ],
-      ]);
+        [
+          {
+            name: 'box',
+            multiplier: 2,
+          },
+          {
+            name: 'kg',
+            multiplier: 1,
+          },
+        ]
+      );
       expect(result).toBeFalse();
     });
 
-    it('should return false there are two non-overlapping manual conversions', () => {
-      const result = service.areManualConversionsCircular([
+    it('should return false if the new conversion would introduce a common conversion to itself via existing manual conversions and an internal common conversion', () => {
+      const result = service.canAddManualConversion(
         [
-          { name: 'box', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
+          [
+            {
+              name: 'kg',
+              multiplier: 1,
+            },
+            {
+              name: 'box',
+              multiplier: 2,
+            },
+          ],
         ],
         [
-          { name: 'box', multiplier: 2 },
-          { name: 'carton', multiplier: 4 },
-        ],
-      ]);
+          {
+            name: 'box',
+            multiplier: 2,
+          },
+          {
+            name: 'g',
+            multiplier: 1000,
+          },
+        ]
+      );
       expect(result).toBeFalse();
     });
 
-    it('should return false there are two manual conversions that depend on each other', () => {
-      const result = service.areManualConversionsCircular([
+    it('should return false if the new conversion would introduce a common conversion to itself via multiple steps', () => {
+      const result = service.canAddManualConversion(
         [
-          { name: 'box', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
+          [
+            {
+              name: 'kg',
+              multiplier: 1,
+            },
+            {
+              name: 'box',
+              multiplier: 2,
+            },
+          ],
+          [
+            {
+              name: 'box',
+              multiplier: 1,
+            },
+            {
+              name: 'l',
+              multiplier: 2,
+            },
+          ],
         ],
         [
-          { name: 'box', multiplier: 2 },
-          { name: 'carton', multiplier: 4 },
-        ],
-      ]);
+          {
+            name: 'g',
+            multiplier: 2,
+          },
+          {
+            name: 'ml',
+            multiplier: 1,
+          },
+        ]
+      );
       expect(result).toBeFalse();
     });
 
-    it('should return false there are two manual conversions converting to and from common units', () => {
-      const result = service.areManualConversionsCircular([
+    it('should return false if the new conversion directly mirrors an existing manual conversion', () => {
+      const result = service.canAddManualConversion(
         [
-          { name: 'l', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
+          [
+            {
+              name: 'kg',
+              multiplier: 1,
+            },
+            {
+              name: 'box',
+              multiplier: 2,
+            },
+          ],
         ],
         [
-          { name: 'crate', multiplier: 2 },
-          { name: 'kg', multiplier: 4 },
-        ],
-      ]);
+          {
+            name: 'box',
+            multiplier: 2,
+          },
+          {
+            name: 'kg',
+            multiplier: 1,
+          },
+        ]
+      );
       expect(result).toBeFalse();
     });
 
-    it('should return true if a conversion is to and from itself', () => {
-      const result = service.areManualConversionsCircular([
+    it('should return false if the new conversion would introduce a manual conversion loop', () => {
+      const result = service.canAddManualConversion(
         [
-          { name: 'l', multiplier: 2 },
-          { name: 'l', multiplier: 4 },
+          [
+            {
+              name: 'kg',
+              multiplier: 1,
+            },
+            {
+              name: 'box',
+              multiplier: 2,
+            },
+          ],
+          [
+            {
+              name: 'box',
+              multiplier: 1,
+            },
+            {
+              name: 'crate',
+              multiplier: 2,
+            },
+          ],
         ],
-      ]);
-      expect(result).toBeTrue();
+        [
+          {
+            name: 'crate',
+            multiplier: 2,
+          },
+          {
+            name: 'kg',
+            multiplier: 1,
+          },
+        ]
+      );
+      expect(result).toBeFalse();
     });
 
-    it('should return true if a conversion is circular via an intermediate custom unit', () => {
-      const result = service.areManualConversionsCircular([
+    it('should return false if the new conversion would introduce a loop via common conversions', () => {
+      const result = service.canAddManualConversion(
         [
-          { name: 'l', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
+          [
+            {
+              name: 'kg',
+              multiplier: 1,
+            },
+            {
+              name: 'box',
+              multiplier: 2,
+            },
+          ],
+          [
+            {
+              name: 'box',
+              multiplier: 1,
+            },
+            {
+              name: 'l',
+              multiplier: 2,
+            },
+          ],
         ],
         [
-          { name: 'crate', multiplier: 2 },
-          { name: 'l', multiplier: 4 },
-        ],
-      ]);
-      expect(result).toBeTrue();
-    });
-
-    it('should return true if a conversion is circular via common units', () => {
-      const result = service.areManualConversionsCircular([
-        [
-          { name: 'l', multiplier: 2 },
-          { name: 'kg', multiplier: 4 },
-        ],
-        [
-          { name: 'kg', multiplier: 2 },
-          { name: 'l', multiplier: 4 },
-        ],
-      ]);
-      expect(result).toBeTrue();
-    });
-
-    it('should return true if a conversion is circular across more than one intermediate unit', () => {
-      const result = service.areManualConversionsCircular([
-        [
-          { name: 'l', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
-        ],
-        [
-          { name: 'crate', multiplier: 2 },
-          { name: 'box', multiplier: 4 },
-        ],
-        [
-          { name: 'crate', multiplier: 2 },
-          { name: 'kg', multiplier: 4 },
-        ],
-        [
-          { name: 'kg', multiplier: 2 },
-          { name: 'l', multiplier: 4 },
-        ],
-      ]);
-      expect(result).toBeTrue();
-    });
-
-    it('should return true if a conversion is circular by providing a conversion from a common unit to a synonym', () => {
-      const result = service.areManualConversionsCircular([
-        [
-          { name: 'l', multiplier: 2 },
-          { name: 'litres', multiplier: 4 },
-        ],
-      ]);
-      expect(result).toBeTrue();
-    });
-
-    it('should return true if a conversion is circular by providing synonyms across multiple common conversions', () => {
-      const result = service.areManualConversionsCircular([
-        [
-          { name: 'l', multiplier: 2 },
-          { name: 'kg', multiplier: 4 },
-        ],
-        [
-          { name: 'mgs', multiplier: 2 },
-          { name: 'ml', multiplier: 4 },
-        ],
-      ]);
-      expect(result).toBeTrue();
-    });
-
-    it('should return true if a conversion is circular across manual conversions only', () => {
-      const result = service.areManualConversionsCircular([
-        [
-          { name: 'box', multiplier: 2 },
-          { name: 'crate', multiplier: 4 },
-        ],
-        [
-          { name: 'crate', multiplier: 2 },
-          { name: 'box', multiplier: 4 },
-        ],
-      ]);
-      expect(result).toBeTrue();
+          {
+            name: 'ml',
+            multiplier: 2,
+          },
+          {
+            name: 'g',
+            multiplier: 1,
+          },
+        ]
+      );
+      expect(result).toBeFalse();
     });
   });
 });
