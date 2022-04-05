@@ -13,7 +13,8 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { AddTrackedProduct, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { AddTrackedProduct, ProductSearchResult, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { ConversionService, ManualConversion } from './conversion.service';
 import { EntityNotFoundError } from './db/entity-not-found.error';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { Product } from './product.model';
@@ -23,15 +24,20 @@ import { SupermarketService } from './supermarkets';
 export class TrackedProductsController {
   constructor(
     private readonly trackingRepo: TrackedProductsRepository,
-    private readonly supermarketService: SupermarketService
+    private readonly supermarketService: SupermarketService,
+    private readonly conversionService: ConversionService
   ) {}
 
   @Post('/:trackingId?')
   public async addTracking(
+    @Param('trackingId') trackingId: string | undefined,
     @Body('productId') productId: string,
-    @Param('trackingId') trackingId: string | undefined
+    @Body('manualConversion')
+    manualConversionData: { fromUnit: string; fromQuantity: number; toUnit: string; toQuantity: number } | undefined
   ): Promise<AddTrackedProduct> {
     let product: Product;
+
+    console.log('addTracking', trackingId, productId, manualConversionData);
 
     try {
       product = await this.supermarketService.getSingleItem(productId, new Date());
@@ -40,13 +46,26 @@ export class TrackedProductsController {
       throw new BadGatewayException(e);
     }
 
-    console.log(`Updating tracking ID "${trackingId}"`, product);
+    const manualConversion: ManualConversion | undefined = manualConversionData
+      ? [
+          { name: manualConversionData.fromUnit, multiplier: manualConversionData.fromQuantity },
+          { name: manualConversionData.toUnit, multiplier: manualConversionData.toQuantity },
+        ]
+      : undefined;
+
+    console.log(`Updating tracking ID "${trackingId}"`, product, manualConversion);
     let resultId: string;
     if (trackingId) {
-      resultId = await this.trackingRepo.addToTracking(trackingId, product, new Date());
+      resultId = await this.trackingRepo.addToTracking(trackingId, product, new Date(), manualConversion);
     } else {
       // Consider allowing user to set units on creation
-      resultId = await this.trackingRepo.createTracking(product, product.unitName, product.unitAmount, new Date());
+      resultId = await this.trackingRepo.createTracking(
+        product,
+        product.unitName,
+        product.unitAmount,
+        new Date(),
+        manualConversion
+      );
     }
 
     return {
@@ -100,12 +119,20 @@ export class TrackedProductsController {
       throw new BadRequestException('Query parameter "searchTerm" must not be blank');
     }
     const result = await this.trackingRepo.search(searchTerm);
-    return {
-      results: result.map((entry) => ({
+    const results = result.map((entry): ProductSearchResult => {
+      const units = this.conversionService.getConvertableUnits(
+        entry.products.map(({ product }) => product.unitName),
+        entry.manualConversions
+      );
+
+      return {
         name: entry.name,
         trackingId: entry._id.toString(),
-      })),
-    };
+        units,
+      };
+    });
+
+    return { results };
   }
 
   @Patch('/:trackingId')

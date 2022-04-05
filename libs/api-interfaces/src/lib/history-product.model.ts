@@ -12,6 +12,8 @@ export interface HistoricalProduct {
   supermarket: string;
   price: number;
   pricePerUnit: number;
+  unitName: string;
+  unitAmount: number;
   specialOffer: null | {
     offerText: string;
     originalPrice: null | number;

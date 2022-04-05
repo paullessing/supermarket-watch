@@ -23,6 +23,7 @@ describe('ConversionService', () => {
   describe('convert()', () => {
     it('should convert between known units (1l -> 1ml)', () => {
       // £50.00/l = £0.05/ml
+      // £50.00/l = £0.05/ml
       const pricePerUnit = 5000;
       const from = { unit: 'l', unitAmount: 1 };
       const to = { unit: 'ml' };
@@ -285,6 +286,163 @@ describe('ConversionService', () => {
           ]
         );
       }).toThrowError(new CannotConvertError('box', 'l'));
+    });
+  });
+
+  describe('areManualConversionsCircular()', () => {
+    it('should return false if there are no conversions', () => {
+      const result = service.areManualConversionsCircular([]);
+      expect(result).toBeFalse();
+    });
+
+    it('should return false there is just one manual conversion', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'box', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeFalse();
+    });
+
+    it('should return false there are two non-overlapping manual conversions', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'box', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+        [
+          { name: 'box', multiplier: 2 },
+          { name: 'carton', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeFalse();
+    });
+
+    it('should return false there are two manual conversions that depend on each other', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'box', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+        [
+          { name: 'box', multiplier: 2 },
+          { name: 'carton', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeFalse();
+    });
+
+    it('should return false there are two manual conversions converting to and from common units', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+        [
+          { name: 'crate', multiplier: 2 },
+          { name: 'kg', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeFalse();
+    });
+
+    it('should return true if a conversion is to and from itself', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'l', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if a conversion is circular via an intermediate custom unit', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+        [
+          { name: 'crate', multiplier: 2 },
+          { name: 'l', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if a conversion is circular via common units', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'kg', multiplier: 4 },
+        ],
+        [
+          { name: 'kg', multiplier: 2 },
+          { name: 'l', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if a conversion is circular across more than one intermediate unit', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+        [
+          { name: 'crate', multiplier: 2 },
+          { name: 'box', multiplier: 4 },
+        ],
+        [
+          { name: 'crate', multiplier: 2 },
+          { name: 'kg', multiplier: 4 },
+        ],
+        [
+          { name: 'kg', multiplier: 2 },
+          { name: 'l', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if a conversion is circular by providing a conversion from a common unit to a synonym', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'litres', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if a conversion is circular by providing synonyms across multiple common conversions', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'l', multiplier: 2 },
+          { name: 'kg', multiplier: 4 },
+        ],
+        [
+          { name: 'mgs', multiplier: 2 },
+          { name: 'ml', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
+    });
+
+    it('should return true if a conversion is circular across manual conversions only', () => {
+      const result = service.areManualConversionsCircular([
+        [
+          { name: 'box', multiplier: 2 },
+          { name: 'crate', multiplier: 4 },
+        ],
+        [
+          { name: 'crate', multiplier: 2 },
+          { name: 'box', multiplier: 4 },
+        ],
+      ]);
+      expect(result).toBeTrue();
     });
   });
 });

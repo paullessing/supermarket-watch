@@ -3,39 +3,58 @@
     Close
   </button>
 
-  <div class="add-product-dialog__content">
-    <h1>Add Item</h1>
-    <h2>{{ item.name }} - {{ item.price | currency:'GBP' }}</h2>
-    <p>{{ item.supermarket }}</p>
-    <div style="margin-top: 1rem">
-      Combine with existing item
-      <ng-container *ngIf="!combineWithItem; else selectedItem">
-        <input
-          type="text"
-          placeholder="Enter item name"
-          [ngModel]="searchItemName"
-          (ngModelChange)="onSearchTextChange($event)"
-        />
-        <ul *ngIf="results">
-          <li *ngFor="let result of results">
-            <button
-              class="add-product-dialog__search-result button-link"
-              (click)="combineWithItem = result"
-            >{{ result.name }}</button>
-          </li>
-        </ul>
-        <p *ngIf="searchComplete && !results.length">No results found</p>
-      </ng-container>
-      <ng-template #selectedItem>
-        <p style="margin-left: 1rem">{{ combineWithItem!.name }}
-          <button (click)="combineWithItem = null">Clear</button>
-        </p>
-      </ng-template>
+  <ng-template #loading>
+    <div class="add-product-dialog__content">
+      Loading...
     </div>
+  </ng-template>
+  <ng-container *ngIf="product$ | async as product; else loading">
+    <div class="add-product-dialog__content">
+      <h1>Add Item</h1>
+      <h2>{{ product.name }} - {{ product.price | currency:'GBP' }}</h2>
+      <p>{{ product.supermarket }}</p>
+      <div style="margin-top: 1rem">
+        Combine with existing item
+        <ng-container *ngIf="!combineWithItem; else selectedItem">
+          <input
+            type="text"
+            placeholder="Enter item name"
+            [ngModel]="searchItemName"
+            (ngModelChange)="onSearchTextChange($event)"
+          />
+          <ul *ngIf="results">
+            <li *ngFor="let result of results">
+              <button
+                class="add-product-dialog__search-result button-link"
+                (click)="combineWithItem = result"
+              >{{ result.name }}</button>
+            </li>
+          </ul>
+          <p *ngIf="searchComplete && !results.length">No results found</p>
+        </ng-container>
+        <ng-template #selectedItem>
+          <p style="margin-left: 1rem">{{ combineWithItem!.name }}
+            <button (click)="combineWithItem = null">Clear</button>
+          </p>
+          <div *ngIf="mustProvideConversion">
+            <label>How does this item convert?</label><br>
+            <input type="number" style="width: 50px" [(ngModel)]="conversion.fromQuantity" />
+            <select [(ngModel)]="conversion.fromUnit">
+              <option *ngFor="let unit of combineWithItem!.units" [value]="unit">
+                {{ unit }}
+              </option>
+            </select>
+            =
+            <input type="number" style="width: 50px" [(ngModel)]="conversion.toQuantity" />
+            {{ product.unitName }}
+          </div>
+        </ng-template>
+      </div>
 
-    <div class="add-product-dialog__buttons">
-      <button class="add-product-dialog__button" (click)="onClose()">Cancel</button>
-      <button class="add-product-dialog__button" type="submit" (click)="onAdd()">Add</button>
+      <div class="add-product-dialog__buttons">
+        <button class="add-product-dialog__button" (click)="onClose()">Cancel</button>
+        <button class="add-product-dialog__button" type="submit" (click)="onAdd()">Add</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

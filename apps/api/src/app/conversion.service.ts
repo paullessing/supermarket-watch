@@ -171,6 +171,68 @@ export class ConversionService {
     return Array.from(foundConversions.values());
   }
 
+  public areManualConversionsCircular(manualConversions: Conversion[]): boolean {
+    if (!manualConversions.length) {
+      return false;
+    }
+
+    const allowedConversions = new Set<Conversion>();
+    for (const conversion of [...this.conversions, ...manualConversions]) {
+      allowedConversions.add(conversion);
+    }
+
+    const seenUnits = new Set<string>();
+    const unitsToCheck = new Set<string>();
+    // Start with the first manual conversion
+    const firstConversion = manualConversions[0];
+    allowedConversions.delete(firstConversion);
+    for (const unit of firstConversion) {
+      unitsToCheck.add(unit.name);
+    }
+
+    while (unitsToCheck.size) {
+      const unit = unitsToCheck.values().next().value;
+      unitsToCheck.delete(unit);
+      seenUnits.add(unit);
+
+      for (const conversion of conversions) {
+        for (const unit of conversion) {
+          if (seenUnits.has(unit.name)) {
+            return true;
+          }
+          unitsToCheck.add(unit.name);
+        }
+      }
+    }
+
+    // Step 1: Grab an arbitrary unit from the seenUnits set
+    // Step 2: Find all conversions that can be made from that unit
+    // Step 3: Remove those conversions from the allowedConversions set
+    // Step 4: Add those conversions to the seenUnits set
+    // Step 5: Repeat until the allowedConversions set is empty
+    // Step 6: If the seenUnits set is not empty, there is a cycle
+
+    // Now start seeing what we can find from here, and see if we ever hit the same unit twice
+    const x = (unit: string): boolean => {
+      const conversionsInvolvingUnit = Array.from(allowedConversions.values()).filter((conversion) =>
+        conversion.find((convertedUnit) => convertedUnit.name === unit)
+      );
+      for (const conversion of conversionsInvolvingUnit) {
+        for (const convertedUnit of conversion) {
+          if (seenUnits.has(convertedUnit.name)) {
+            return true;
+          }
+          seenUnits.add(convertedUnit.name);
+        }
+        allowedConversions.delete(conversion);
+      }
+
+      return false;
+    };
+
+    return false;
+  }
+
   private findManualConversion(conversion1: Conversion, conversion2: Conversion): string | null {
     // return the unit that is in both conversions
     return conversion1.find((unit) => conversion2.find((unit2) => unit2.name === unit.name))?.name ?? null;

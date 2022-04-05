@@ -31,6 +31,20 @@ export const dbProviders: Provider[] = [
         },
       ]);
 
+      // Remove after release of branch
+      const updateResult = await collection.updateMany(
+        {
+          manualConversions: { $exists: false },
+        },
+        {
+          $set: {
+            manualConversions: [],
+          },
+        }
+      );
+
+      console.log('Updated manualConversions', updateResult);
+
       return collection;
     },
     inject: [DATABASE],
