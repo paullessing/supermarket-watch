@@ -36,90 +36,81 @@ export class ConversionService {
       unit: string;
       unitAmount?: number;
     },
-    manualConversion?: Conversion
+    manualConversions: ManualConversion[] = []
   ): number {
-    // Cases:
-    // 1. ml => l  + __     (both units in defaults, all fine)
-    // 2. ea => kg + ea<>kg (direct conversion using manual value)
-    // 3. ea => kg + ea<>g  (convert using manualConversion, then convert using defaults)
-    // 4. ml => kg + l<>g   (convert using each manualConversion, then convert using defaults)
+    // We have the "from" unit, so we can do a breadth-first search to find the shortest path to the "to" unit
+    // We don't need to initially calculate any conversions, we can just store the list of conversions during the search
 
-    const fromConversion = this.getSimpleConversion(from.unit) || [{ name: from.unit, multiplier: 1 }];
+    const step = (
+      currentUnits: {
+        unit: string;
+        /**
+         * During the search, the path represents "previous unit" + "conversion from previous to current unit"
+         * However, when we return, the returned path will represent "current unit" + "conversion from previous to current unit"
+         */
+        path: { unit: string; conversion: Conversion }[];
+      }[]
+    ): { unit: string; conversion: Conversion }[] | null => {
+      if (currentUnits.length === 0) {
+        return null;
+      }
 
-    if (fromConversion.find((unit) => unit.name === to.unit)) {
-      return this.convertSpecific(
-        fromConversion,
-        pricePerUnit,
-        {
-          unit: from.unit,
-          unitAmount: from.unitAmount,
-        },
-        {
-          unit: to.unit,
-          unitAmount: to.unitAmount ?? 1,
+      const nextSteps = [];
+
+      for (const { unit, path } of currentUnits) {
+        if (unit === to.unit) {
+          // Shift all units left by one so that the path represents conversion + targetUnit rather than conversion + sourceUnit
+          return path.map(({ conversion }, index) => ({
+            unit: index < path.length - 1 ? path[index + 1].unit : to.unit,
+            conversion,
+          }));
         }
+
+        const matchingConversions = [...this.conversions, ...manualConversions]
+          .filter((conversion) => !path.some((pathUnit) => pathUnit.conversion === conversion))
+          .filter((conversion) => conversion.some(({ name }) => name === unit));
+
+        for (const conversion of matchingConversions) {
+          for (const { name: nextUnit } of conversion) {
+            if (nextUnit === unit) {
+              continue;
+            }
+            if (path.some(({ unit }) => unit === nextUnit)) {
+              // Skip this conversion if we've already had the same unit at some point
+              continue;
+            }
+            const newPath = [...path, { unit, conversion }];
+            nextSteps.push({ unit: nextUnit, path: newPath });
+          }
+        }
+      }
+
+      return step(nextSteps);
+    };
+
+    const result = step([{ unit: from.unit, path: [] }]);
+    if (result === null) {
+      throw new CannotConvertError(from.unit, to.unit);
+    }
+
+    let fromUnit = from.unit;
+    let price = pricePerUnit;
+
+    for (let i = 0; i < result.length; i++) {
+      const { unit: toUnit, conversion } = result[i];
+
+      price = this.convertSpecific(
+        conversion,
+        price,
+        { unit: fromUnit, unitAmount: 1 },
+        { unit: toUnit, unitAmount: 1 }
       );
+      fromUnit = toUnit;
     }
 
-    if (!manualConversion) {
-      // We can't convert from->to, and there is no manual conversion defined
-      throw new CannotConvertError(from.unit, to.unit);
-    }
+    const toUnitAmount = to.unitAmount || 1;
 
-    const manualFromUnitName = this.findManualConversion(manualConversion, fromConversion);
-    if (!manualFromUnitName) {
-      // We can't convert from->manual using any intermediate value
-      throw new CannotConvertError(from.unit, to.unit);
-    }
-
-    const toConversion = this.getSimpleConversion(to.unit) || [{ name: to.unit, multiplier: 1 }];
-
-    const manualToUnitName = this.findManualConversion(manualConversion, toConversion);
-    if (!manualToUnitName) {
-      // We can't convert to->manual using any intermediate value
-      throw new CannotConvertError(from.unit, to.unit);
-    }
-
-    const amountConvertedToCommonBaseUnit = this.convertSpecific(
-      fromConversion,
-      pricePerUnit,
-      {
-        unit: from.unit,
-        unitAmount: from.unitAmount,
-      },
-      {
-        unit: manualFromUnitName,
-        unitAmount: 1,
-      }
-    );
-
-    const amountConvertedToTargetBaseUnit = this.convertSpecific(
-      manualConversion,
-      amountConvertedToCommonBaseUnit,
-      {
-        unit: manualFromUnitName,
-        unitAmount: 1,
-      },
-      {
-        unit: manualToUnitName,
-        unitAmount: 1,
-      }
-    );
-
-    const amountConvertedToTargetFinalUnit = this.convertSpecific(
-      toConversion,
-      amountConvertedToTargetBaseUnit,
-      {
-        unit: manualToUnitName,
-        unitAmount: 1,
-      },
-      {
-        unit: to.unit,
-        unitAmount: to.unitAmount ?? 1,
-      }
-    );
-
-    return amountConvertedToTargetFinalUnit;
+    return (price / from.unitAmount) * toUnitAmount;
   }
 
   /**
@@ -192,11 +183,6 @@ export class ConversionService {
     }
 
     return true;
-  }
-
-  private findManualConversion(conversion1: Conversion, conversion2: Conversion): string | null {
-    // return the unit that is in both conversions
-    return conversion1.find((unit) => conversion2.find((unit2) => unit2.name === unit.name))?.name ?? null;
   }
 
   private getSimpleConversion(name: string): Conversion | null {

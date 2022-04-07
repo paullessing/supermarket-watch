@@ -3,7 +3,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EACH_UNITS, GRAM_UNITS } from '@shoppi/api-interfaces';
 import { CannotConvertError } from './cannot-convert.error';
-import { Conversion, ConversionService } from './conversion.service';
+import { ConversionService, ManualConversion } from './conversion.service';
 
 describe('ConversionService', () => {
   let service: ConversionService;
@@ -21,6 +21,36 @@ describe('ConversionService', () => {
   });
 
   describe('convert()', () => {
+    it('should convert a unit to itself with identical unitAmounts (1kg -> 1kg)', () => {
+      const pricePerUnit = 450;
+      const from = { unit: 'kg', unitAmount: 1 };
+      const to = { unit: 'kg', unitAmount: 1 };
+
+      const result = service.convert(pricePerUnit, from, to);
+
+      expect(result).toBe(450);
+    });
+
+    it('should convert a unit to itself without a target unitAmount (10kg -> 1kg)', () => {
+      const pricePerUnit = 450;
+      const from = { unit: 'kg', unitAmount: 10 };
+      const to = { unit: 'kg' };
+
+      const result = service.convert(pricePerUnit, from, to);
+
+      expect(result).toBe(45);
+    });
+
+    it('should convert a unit to itself with non-standard target unitAmount (10kg -> 100kg)', () => {
+      const pricePerUnit = 450;
+      const from = { unit: 'kg', unitAmount: 10 };
+      const to = { unit: 'kg', unitAmount: 100 };
+
+      const result = service.convert(pricePerUnit, from, to);
+
+      expect(result).toBe(4500);
+    });
+
     it('should convert between known units (1l -> 1ml)', () => {
       // £50.00/l = £0.05/ml
       // £50.00/l = £0.05/ml
@@ -59,13 +89,15 @@ describe('ConversionService', () => {
       // £6/3ea [8ea/2kg] = £2/ea = £16/2kg = £8/kg = £56/7kg
       const pricePerUnit = 600;
       const from = { unit: 'ea', unitAmount: 3 };
-      const conversion: Conversion = [
-        { name: 'ea', multiplier: 8 },
-        { name: 'kg', multiplier: 2 },
+      const conversions: ManualConversion[] = [
+        [
+          { name: 'ea', multiplier: 8 },
+          { name: 'kg', multiplier: 2 },
+        ],
       ];
       const to = { unit: 'kg', unitAmount: 7 };
 
-      const result = service.convert(pricePerUnit, from, to, conversion);
+      const result = service.convert(pricePerUnit, from, to, conversions);
 
       expect(result).toBe(5600);
     });
@@ -74,13 +106,15 @@ describe('ConversionService', () => {
       // £0.06/100ml [4l/5kg] = £0.60/l = £2.40/4l = £2.40/5kg = £0.48/kg = £0.96/2kg
       const pricePerUnit = 6;
       const from = { unit: 'ml', unitAmount: 100 };
-      const conversion: Conversion = [
-        { name: 'l', multiplier: 4 },
-        { name: 'kg', multiplier: 5 },
+      const conversions: ManualConversion[] = [
+        [
+          { name: 'l', multiplier: 4 },
+          { name: 'kg', multiplier: 5 },
+        ],
       ];
       const to = { unit: 'kg', unitAmount: 2 };
 
-      const result = service.convert(pricePerUnit, from, to, conversion);
+      const result = service.convert(pricePerUnit, from, to, conversions);
 
       expect(result).toBe(96);
     });
@@ -89,13 +123,15 @@ describe('ConversionService', () => {
       // £6/l [4l/5kg] = £24/4l = £24/5kg = £4.80/kg = £0.48/100g
       const pricePerUnit = 600;
       const from = { unit: 'l', unitAmount: 1 };
-      const conversion: Conversion = [
-        { name: 'l', multiplier: 4 },
-        { name: 'kg', multiplier: 5 },
+      const conversions: ManualConversion[] = [
+        [
+          { name: 'l', multiplier: 4 },
+          { name: 'kg', multiplier: 5 },
+        ],
       ];
       const to = { unit: 'g', unitAmount: 100 };
 
-      const result = service.convert(pricePerUnit, from, to, conversion);
+      const result = service.convert(pricePerUnit, from, to, conversions);
 
       expect(result).toBe(48);
     });
@@ -104,15 +140,44 @@ describe('ConversionService', () => {
       // £0.60/100ml [4l/5kg] = £6/l = £24/4l = £24/5kg = £4.80/kg = £0.48/100g
       const pricePerUnit = 60;
       const from = { unit: 'ml', unitAmount: 100 };
-      const conversion: Conversion = [
-        { name: 'l', multiplier: 4 },
-        { name: 'kg', multiplier: 5 },
+      const conversions: ManualConversion[] = [
+        [
+          { name: 'l', multiplier: 4 },
+          { name: 'kg', multiplier: 5 },
+        ],
       ];
       const to = { unit: 'g', unitAmount: 100 };
 
-      const result = service.convert(pricePerUnit, from, to, conversion);
+      const result = service.convert(pricePerUnit, from, to, conversions);
 
       expect(result).toBe(48);
+    });
+
+    it('should convert when a series of manual conversions is required (100ml -> [l/kg] -> 100g -> [g/ea] -> [ea/sht] -> 10sht)', () => {
+      // £0.60/100ml [4l/5kg] = £6/l = £24/4l = £24/5kg = £4.80/kg = £0.48/100g
+      // (£0.48/100g) [10g/ea] = £0.48/10ea = £0.048/ea
+      // (£0.048/ea) [100ea/4sht] = £4.80/4sht = £1.20/sht = £12/10sht
+      const pricePerUnit = 60;
+      const from = { unit: 'ml', unitAmount: 100 };
+      const conversions: ManualConversion[] = [
+        [
+          { name: 'l', multiplier: 4 },
+          { name: 'kg', multiplier: 5 },
+        ],
+        [
+          { name: 'g', multiplier: 10 },
+          { name: 'ea', multiplier: 1 },
+        ],
+        [
+          { name: 'each', multiplier: 100 },
+          { name: 'sht', multiplier: 4 },
+        ],
+      ];
+      const to = { unit: 'sheets', unitAmount: 10 };
+
+      const result = service.convert(pricePerUnit, from, to, conversions);
+
+      expect(result).toBe(1200);
     });
   });
 
