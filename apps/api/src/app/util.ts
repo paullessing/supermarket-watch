@@ -1,4 +1,5 @@
-export function rpad(value: string, length: number, padChar: string = ' '): string {
+export function rpad(value: string | number, length: number, padChar: string = ' '): string {
+  value = `${value}`;
   return value + new Array(Math.max(0, length - value.length)).fill(padChar).join('');
 }
 
@@ -35,4 +36,8 @@ export function unique<T>(getId?: (value: T) => unknown): (value: T, index: numb
   } else {
     return (value: T, index: number, arr: T[]) => arr.indexOf(value) === index;
   }
+}
+
+export function exists<T>(value: T | undefined | null): value is T {
+  return value !== undefined && value !== null;
 }

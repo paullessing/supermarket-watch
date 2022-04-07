@@ -38,7 +38,14 @@ export class SupermarketService {
       searchResults = cachedResults;
     } else {
       const resultsBySupermarket = await Promise.all(
-        this.supermarkets.map((supermarket) => supermarket.search(query).then(({ items }) => items))
+        this.supermarkets.map(async (supermarket) => {
+          try {
+            return await supermarket.search(query).then(({ items }) => items);
+          } catch (e) {
+            console.error(e);
+            return [];
+          }
+        })
       );
 
       searchResults = ([] as SearchResultItemWithoutTracking[]).concat.apply([], resultsBySupermarket);
@@ -57,6 +64,8 @@ export class SupermarketService {
         trackingId: trackedItems.get(item.id) ?? null,
       })
     );
+
+    console.log('Search results', results);
 
     if (this.cache && !cachedResults) {
       this.cache.storeSearch(`${query}|${sortBy}|${sortOrder}`, results);

@@ -1,10 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
-import { ProductSearchResult, ProductSearchResults, SearchResultItem } from '@shoppi/api-interfaces';
+import { Observable } from 'rxjs';
+import { HistoricalProduct, ProductSearchResult, ProductSearchResults, SearchResultItem } from '@shoppi/api-interfaces';
 
 export interface AddProductData {
   productId: string;
   combinedTrackingId: string | null;
+  conversion: {
+    fromQuantity: number;
+    fromUnit: string;
+    toQuantity: number;
+    toUnit: string;
+  } | null;
 }
 
 @Component({
@@ -22,9 +29,23 @@ export class AddProductDialogComponent implements OnInit {
   @Output()
   public addProduct: EventEmitter<AddProductData> = new EventEmitter();
 
+  public product$!: Observable<HistoricalProduct>;
+
   public searchItemName: string;
   public results: ProductSearchResult[];
   public searchComplete: boolean;
+  public mustProvideConversion: boolean;
+  public conversion: {
+    fromUnit: string;
+    fromQuantity: number;
+    toQuantity: number;
+    toUnit: string;
+  } = {
+    fromUnit: '',
+    fromQuantity: 1,
+    toQuantity: 1,
+    toUnit: '',
+  };
 
   public get combineWithItem(): ProductSearchResult | null {
     return this._combineWithItem;
@@ -36,6 +57,14 @@ export class AddProductDialogComponent implements OnInit {
     if (!value) {
       this.searchItemName = '';
       this.results = [];
+    }
+
+    if (value) {
+      this.product$.subscribe((product) => {
+        this.mustProvideConversion = !value.units.includes(product.unitName);
+        this.conversion.fromUnit = value.units[0];
+        this.conversion.toUnit = product.unitName;
+      });
     }
   }
 
@@ -50,6 +79,7 @@ export class AddProductDialogComponent implements OnInit {
     this.results = [];
     this.searchComplete = false;
     this._combineWithItem = null;
+    this.mustProvideConversion = false;
 
     renderer.listen(elementRef.nativeElement, 'click', (event: MouseEvent) => {
       if (event.target === elementRef.nativeElement) {
@@ -59,6 +89,8 @@ export class AddProductDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    // TODO move this out of this component, it should be loaded before the popup opens
+    this.product$ = this.http.get<HistoricalProduct>(`/api/products/${this.item.id}`);
     this.search(this.item.name);
   }
 
@@ -66,6 +98,7 @@ export class AddProductDialogComponent implements OnInit {
     this.addProduct.emit({
       productId: this.item.id,
       combinedTrackingId: this._combineWithItem?.trackingId ?? null,
+      conversion: this.mustProvideConversion ? this.conversion : null,
     });
   }
 

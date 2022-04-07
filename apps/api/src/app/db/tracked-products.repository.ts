@@ -1,10 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import { Collection, Filter, ObjectId, OptionalId, ReturnDocument } from 'mongodb';
+import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
 import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
-import { ConversionService } from '../conversion.service';
+import { CannotConvertError } from '../cannot-convert.error';
+import { ConversionService, ManualConversion } from '../conversion.service';
 import { Product } from '../product.model';
-import { unique } from '../util';
+import { exists, unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { TimestampedDocument } from './timestamped-document';
@@ -17,6 +18,7 @@ export interface TrackedProducts extends TimestampedDocument {
     product: Product;
     lastUpdated: Date;
   }[];
+  manualConversions: ManualConversion[];
 }
 
 interface HistoryEntry {
@@ -67,28 +69,39 @@ export class TrackedProductsRepository {
     return trackedProduct.products.map(({ product }) => product.id) ?? [];
   }
 
-  public async createTracking(product: Product, unit: string, unitAmount: number, now: Date): Promise<string> {
+  public async createTracking(
+    product: Product,
+    unit: string,
+    unitAmount: number,
+    now: Date,
+    manualConversion?: ManualConversion
+  ): Promise<string> {
     const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
     if (existingEntryForProduct) {
       console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
       throw new Error('Tracking for this product already exists');
     }
 
-    const resultTrackingId = await this.createNewTrackingEntry(product, unit, unitAmount, now);
+    const resultTrackingId = await this.createNewTrackingEntry(product, unit, unitAmount, now, manualConversion);
 
     await this.addProductToHistory(product, now);
 
     return resultTrackingId;
   }
 
-  public async addToTracking(trackingId: string, product: Product, now: Date): Promise<string> {
+  public async addToTracking(
+    trackingId: string,
+    product: Product,
+    now: Date,
+    manualConversion?: ManualConversion
+  ): Promise<string> {
     const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
     if (existingEntryForProduct) {
       console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
       throw new Error('Tracking for this product already exists');
     }
 
-    const resultTrackingId = await this.addProductToTrackingEntry(trackingId, product, now);
+    const resultTrackingId = await this.addProductToTrackingEntry(trackingId, product, now, manualConversion);
 
     await this.addProductToHistory(product, now);
 
@@ -146,22 +159,29 @@ export class TrackedProductsRepository {
 
   public async getAllTrackedProducts(): Promise<TrackedItemGroup[]> {
     const trackedProducts = await this.products.find({}).toArray();
-    return trackedProducts.map(({ _id, name, products, unitName, unitAmount }) => ({
-      id: _id.toString(),
-      name,
-      unitName,
-      unitAmount,
-      products: products.map(({ product }) => ({
-        ...product,
-        pricePerUnit: this.conversionService.convert(
-          product.pricePerUnit,
-          product.unitAmount,
-          product.unitName,
-          unitName,
-          unitAmount
-        ),
-      })),
-    }));
+    return trackedProducts.map(({ _id, name, products, unitName, unitAmount, manualConversions }) => {
+      return {
+        id: _id.toString(),
+        name,
+        unitName,
+        unitAmount,
+        products: products.map(({ product }) => ({
+          ...product,
+          pricePerUnit: this.conversionService.convert(
+            product.pricePerUnit,
+            {
+              unit: product.unitName,
+              unitAmount: product.unitAmount,
+            },
+            {
+              unit: unitName,
+              unitAmount,
+            },
+            manualConversions
+          ),
+        })),
+      };
+    });
   }
 
   public async getOutdatedProductIds(updatedAfter: Date): Promise<string[]> {
@@ -358,7 +378,12 @@ export class TrackedProductsRepository {
     return [...history, newEntry];
   }
 
-  private async addProductToTrackingEntry(trackingId: string, product: Product, now: Date): Promise<string> {
+  private async addProductToTrackingEntry(
+    trackingId: string,
+    product: Product,
+    now: Date,
+    manualConversion?: ManualConversion
+  ): Promise<string> {
     const existingTrackingEntry = await this.products.findOne({
       _id: toId(trackingId),
     } as Filter<TrackedProducts>);
@@ -367,6 +392,20 @@ export class TrackedProductsRepository {
       throw new Error('Tracking ID does not exist');
     }
     console.debug('Existing entry:', existingTrackingEntry);
+    if (
+      manualConversion &&
+      !this.conversionService.canAddManualConversion(existingTrackingEntry.manualConversions, manualConversion)
+    ) {
+      throw new Error('Cannot add manual conversion');
+    }
+
+    const convertableUnits = this.conversionService.getConvertableUnits(
+      existingTrackingEntry.products.map(({ product: { unitName } }) => unitName),
+      [...existingTrackingEntry.manualConversions, ...[manualConversion].filter(exists)]
+    );
+    if (!convertableUnits.includes(product.unitName)) {
+      throw new CannotConvertError(existingTrackingEntry.unitName, product.unitName);
+    }
 
     await this.products.updateOne(
       {
@@ -378,6 +417,7 @@ export class TrackedProductsRepository {
             product,
             lastUpdated: now,
           },
+          ...(manualConversion ? { manualConversions: manualConversion } : {}),
         },
         $set: {
           updatedAt: now,
@@ -391,16 +431,20 @@ export class TrackedProductsRepository {
     product: Product,
     unitName: string,
     unitAmount: number,
-    now: Date
+    now: Date,
+    manualConversion?: ManualConversion
   ): Promise<string> {
-    const result = await this.products.insertOne({
+    const newEntry: WithoutId<TrackedProducts> = {
       name: product.name,
       unitName,
       unitAmount,
       products: [{ product, lastUpdated: now }],
       createdAt: now,
       updatedAt: now,
-    } as TrackedProducts);
+      manualConversions: manualConversion ? [manualConversion] : [],
+    };
+
+    const result = await this.products.insertOne(newEntry as TrackedProducts);
     return result.insertedId.toString();
   }
 
@@ -418,6 +462,8 @@ export class TrackedProductsRepository {
           pricePerUnit: product.pricePerUnit,
           supermarket: product.supermarket,
           specialOffer: product.specialOffer,
+          unitName: product.unitName,
+          unitAmount: product.unitAmount,
         })
       ),
     };
