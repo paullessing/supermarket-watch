@@ -1,9 +1,9 @@
 /// <reference types="jest-extended" />
 
 import { Test, TestingModule } from '@nestjs/testing';
-import { EACH_UNITS, GRAM_UNITS } from '@shoppi/api-interfaces';
+import { GRAM_UNITS, LITRE_UNITS, ManualConversion } from '@shoppi/api-interfaces';
 import { CannotConvertError } from './cannot-convert.error';
-import { ConversionService, ManualConversion } from './conversion.service';
+import { ConversionService } from './conversion.service';
 
 describe('ConversionService', () => {
   let service: ConversionService;
@@ -169,11 +169,11 @@ describe('ConversionService', () => {
           { name: 'ea', multiplier: 1 },
         ],
         [
-          { name: 'each', multiplier: 100 },
+          { name: 'ea', multiplier: 100 },
           { name: 'sht', multiplier: 4 },
         ],
       ];
-      const to = { unit: 'sheets', unitAmount: 10 };
+      const to = { unit: 'sht', unitAmount: 10 };
 
       const result = service.convert(pricePerUnit, from, to, conversions);
 
@@ -241,13 +241,13 @@ describe('ConversionService', () => {
         ['kg'],
         [
           [
-            { name: 'ea', multiplier: 1 },
+            { name: 'l', multiplier: 1 },
             { name: 'kg', multiplier: 2 },
           ],
         ]
       );
 
-      expect(result).toIncludeSameMembers([...GRAM_UNITS, ...EACH_UNITS]);
+      expect(result).toIncludeSameMembers([...GRAM_UNITS, ...LITRE_UNITS]);
     });
 
     it('should return all possible conversions if there are multiple manual conversions', () => {

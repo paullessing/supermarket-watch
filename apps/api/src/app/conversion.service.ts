@@ -1,14 +1,6 @@
-import { commonConversions } from '@shoppi/api-interfaces';
+import { commonConversions, Conversion, ManualConversion, Unit } from '@shoppi/api-interfaces';
 import { CannotConvertError } from './cannot-convert.error';
 import { exists } from './util';
-
-export type Conversion = Unit[];
-export type ManualConversion = [Unit, Unit];
-
-export interface Unit {
-  name: string;
-  multiplier: number;
-}
 
 export class ConversionService {
   private conversions: Conversion[] = [];

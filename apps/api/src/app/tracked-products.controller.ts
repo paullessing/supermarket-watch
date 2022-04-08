@@ -13,8 +13,15 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { AddTrackedProduct, ProductSearchResult, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
-import { ConversionService, ManualConversion } from './conversion.service';
+import {
+  AddTrackedProduct,
+  ManualConversion,
+  ProductSearchResult,
+  ProductSearchResults,
+  standardiseUnit,
+  TrackedItemGroup,
+} from '@shoppi/api-interfaces';
+import { ConversionService } from './conversion.service';
 import { EntityNotFoundError } from './db/entity-not-found.error';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { Product } from './product.model';
@@ -48,8 +55,8 @@ export class TrackedProductsController {
 
     const manualConversion: ManualConversion | undefined = manualConversionData
       ? [
-          { name: manualConversionData.fromUnit, multiplier: manualConversionData.fromQuantity },
-          { name: manualConversionData.toUnit, multiplier: manualConversionData.toQuantity },
+          { name: standardiseUnit(manualConversionData.fromUnit), multiplier: manualConversionData.fromQuantity },
+          { name: standardiseUnit(manualConversionData.toUnit), multiplier: manualConversionData.toQuantity },
         ]
       : undefined;
 

@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
 import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
-import { HistoricalProduct, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { HistoricalProduct, ManualConversion, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
-import { ConversionService, ManualConversion } from '../conversion.service';
+import { ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
 import { exists, unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
