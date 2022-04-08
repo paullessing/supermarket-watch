@@ -49,7 +49,7 @@ export const dbProviders: Provider[] = [
             }
           }
           if (hasUpdate) {
-            const updateResult = await collection.updateOne({ _id: trackedProducts._id }, trackedProducts);
+            const updateResult = await collection.updateOne({ _id: trackedProducts._id }, { $set: trackedProducts });
             console.log('Updated to fix units', updateResult);
           }
         })
@@ -86,7 +86,7 @@ export const dbProviders: Provider[] = [
           }
 
           if (hasUpdate) {
-            const updateResult = await collection.updateOne({ _id: productHistory._id }, productHistory);
+            const updateResult = await collection.updateOne({ _id: productHistory._id }, { $set: productHistory });
             console.log('Updated to fix units', updateResult);
           }
         })
