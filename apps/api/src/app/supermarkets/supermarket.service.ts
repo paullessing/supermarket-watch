@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { SearchResultItem, SortBy, SortOrder, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { SearchResultItem, SortBy, SortOrder, standardiseUnit, TrackedItemGroup } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { Product } from '../product.model';
@@ -142,11 +142,12 @@ export class SupermarketService {
         }
 
         if (product) {
-          if (forceFresh) {
-            console.debug('Forced refresh, storing', id);
-          } else {
-            console.debug('Cache miss, storing', id);
-          }
+          product = {
+            ...product,
+            unitName: standardiseUnit(product.unitName),
+          };
+
+          console.debug(forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing', id);
           await this.trackedProductsRepo.addToHistory(product, now);
 
           if (this.cache) {
