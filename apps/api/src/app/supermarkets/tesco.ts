@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
 import { Config } from '../config';
-import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
+import { SupermarketProduct } from './supermarket-product.model';
 import { ProductDetails } from './tesco-product.model';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class Tesco extends Supermarket {
     return 'tesco';
   }
 
-  public async getProduct(productId: string): Promise<Product | null> {
+  public async getProduct(productId: string): Promise<SupermarketProduct | null> {
     let search: AxiosResponse;
 
     try {
@@ -46,9 +46,10 @@ export class Tesco extends Supermarket {
     }
     const [, unitAmountString, unitName] = unitOfMeasure;
 
-    const result: Product = {
+    const result: SupermarketProduct = {
       id: this.getId(product.id),
       name: product.title,
+      image: product.defaultImageUrl,
       price: product.price,
       supermarket: Tesco.NAME,
       unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,

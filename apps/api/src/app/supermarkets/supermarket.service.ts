@@ -6,6 +6,7 @@ import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { Product } from '../product.model';
 import { DevCacheService } from './dev-cache.service';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
+import { SupermarketProduct } from './supermarket-product.model';
 
 export class InvalidIdException extends Error {
   constructor(id: string) {
@@ -115,7 +116,7 @@ export class SupermarketService {
   /**
    * @throws InvalidIdException if the ID is invalid or the product is not found
    */
-  public async getSingleItem(id: string, now: Date, forceFresh: boolean = false): Promise<Product> {
+  public async getSingleItem(id: string, now: Date, forceFresh: boolean = false): Promise<SupermarketProduct> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
       throw new InvalidIdException(id);

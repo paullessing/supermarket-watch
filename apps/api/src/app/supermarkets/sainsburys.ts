@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { isBefore } from 'date-fns';
 import { Config } from '../config';
-import { Product } from '../product.model';
 import * as SainsburysModels from './sainsburys-search-results.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
+import { SupermarketProduct } from './supermarket-product.model';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
@@ -19,7 +19,7 @@ export class Sainsburys extends Supermarket {
     return 'sainsburys';
   }
 
-  public async getProduct(productUid: string): Promise<Product | null> {
+  public async getProduct(productUid: string): Promise<SupermarketProduct | null> {
     const search = await axios.get<SainsburysModels.SearchResults>(
       `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`
     );
@@ -35,6 +35,7 @@ export class Sainsburys extends Supermarket {
     return {
       id: this.getId(productUid),
       name: product.name,
+      image: product.image,
       price,
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,

@@ -5,6 +5,7 @@ import { HistoricalProduct, ManualConversion, TrackedItemGroup } from '@shoppi/a
 import { CannotConvertError } from '../cannot-convert.error';
 import { ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
+import { SupermarketProduct } from '../supermarkets';
 import { exists, unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
@@ -12,10 +13,11 @@ import { TimestampedDocument } from './timestamped-document';
 
 export interface TrackedProducts extends TimestampedDocument {
   name: string;
+  image: string;
   unitName: string;
   unitAmount: number;
   products: {
-    product: Product;
+    product: Product; // TODO make distinct type so that SupermarketService can return extra data without breaking history
     lastUpdated: Date;
   }[];
   manualConversions: ManualConversion[];
@@ -23,7 +25,7 @@ export interface TrackedProducts extends TimestampedDocument {
 
 interface HistoryEntry {
   date: Date;
-  product: Product;
+  product: Product; // TODO make distinct type so that SupermarketService can return extra data without breaking history
 }
 
 export interface ProductHistory extends TimestampedDocument {
@@ -39,7 +41,7 @@ export class TrackedProductsRepository {
     private readonly conversionService: ConversionService
   ) {}
 
-  public async getProduct(productId: string, updatedAfter?: Date): Promise<Product | null> {
+  public async getProduct(productId: string, updatedAfter?: Date): Promise<SupermarketProduct | null> {
     const query: Filter<TrackedProducts> = {
       products: {
         $elemMatch: {
@@ -70,7 +72,7 @@ export class TrackedProductsRepository {
   }
 
   public async createTracking(
-    product: Product,
+    product: SupermarketProduct,
     unit: string,
     unitAmount: number,
     now: Date,
@@ -159,10 +161,11 @@ export class TrackedProductsRepository {
 
   public async getAllTrackedProducts(): Promise<TrackedItemGroup[]> {
     const trackedProducts = await this.products.find({}).toArray();
-    return trackedProducts.map(({ _id, name, products, unitName, unitAmount, manualConversions }) => {
+    return trackedProducts.map(({ _id, name, image, products, unitName, unitAmount, manualConversions }) => {
       return {
         id: _id.toString(),
         name,
+        image,
         unitName,
         unitAmount,
         products: products.map(({ product }) => ({
@@ -428,7 +431,7 @@ export class TrackedProductsRepository {
   }
 
   private async createNewTrackingEntry(
-    product: Product,
+    product: SupermarketProduct,
     unitName: string,
     unitAmount: number,
     now: Date,
@@ -436,6 +439,7 @@ export class TrackedProductsRepository {
   ): Promise<string> {
     const newEntry: WithoutId<TrackedProducts> = {
       name: product.name,
+      image: product.image,
       unitName,
       unitAmount,
       products: [{ product, lastUpdated: now }],
@@ -452,6 +456,7 @@ export class TrackedProductsRepository {
     return {
       id: value._id.toString(),
       name: value.name,
+      image: value.image,
       unitName: value.unitName,
       unitAmount: value.unitAmount,
       products: value.products.map(

@@ -24,8 +24,7 @@ import {
 import { ConversionService } from './conversion.service';
 import { EntityNotFoundError } from './db/entity-not-found.error';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
-import { Product } from './product.model';
-import { SupermarketService } from './supermarkets';
+import { SupermarketProduct, SupermarketService } from './supermarkets';
 
 @Controller('api/tracked-products')
 export class TrackedProductsController {
@@ -42,11 +41,14 @@ export class TrackedProductsController {
     @Body('manualConversion')
     manualConversionData: { fromUnit: string; fromQuantity: number; toUnit: string; toQuantity: number } | undefined
   ): Promise<AddTrackedProduct> {
-    let product: Product;
+    let product: SupermarketProduct;
 
     console.log('addTracking', trackingId, productId, manualConversionData);
 
     try {
+      // NOTE: This returns a TrackedProduct Product, but the actual "add tracking" call requires a SupermarketProduct which has more info.
+      // We may need to split the responsibilities for getting cached data out of the `getSingleItem` call and make it explicit,
+      // so that we can return either a "user wants this" kind of product or a "system needs all the info" kind of product.
       product = await this.supermarketService.getSingleItem(productId, new Date());
     } catch (e) {
       console.error(e);

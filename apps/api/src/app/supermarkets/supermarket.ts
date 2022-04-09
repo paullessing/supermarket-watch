@@ -1,5 +1,5 @@
 import { SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
-import { Product } from '../product.model';
+import { SupermarketProduct } from './supermarket-product.model';
 
 export const Supermarkets = 'Supermarkets';
 
@@ -15,9 +15,9 @@ export abstract class Supermarket {
     return `${this.getPrefix()}:${internalId}`;
   }
 
-  public abstract getProduct(id: string): Promise<Product | null>;
+  public abstract getProduct(id: string): Promise<SupermarketProduct | null>;
 
-  public async getProducts(ids: string[]): Promise<(Product | null)[]> {
+  public async getProducts(ids: string[]): Promise<(SupermarketProduct | null)[]> {
     return await Promise.all(ids.map((id) => this.getProduct(id)));
   }
 

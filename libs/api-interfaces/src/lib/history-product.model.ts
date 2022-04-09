@@ -1,6 +1,7 @@
 export interface TrackedItemGroup {
   id: string;
   name: string;
+  image: string;
   products: HistoricalProduct[];
   unitName: string;
   unitAmount: number;

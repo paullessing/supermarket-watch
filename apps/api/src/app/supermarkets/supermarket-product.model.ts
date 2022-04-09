@@ -1,8 +1,9 @@
-import { SpecialOffer } from './supermarkets';
+import { SpecialOffer } from './special-offer.model';
 
-export interface Product {
+export interface SupermarketProduct {
   id: string;
   name: string;
+  image: string;
   supermarket: string;
   price: number;
   pricePerUnit: number;

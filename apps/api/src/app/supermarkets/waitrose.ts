@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Config } from '../config';
-import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
+import { SupermarketProduct } from './supermarket-product.model';
 import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
 
 @Injectable()
@@ -43,7 +43,7 @@ export class Waitrose extends Supermarket {
     // this.token = jwtString;
   }
 
-  public async getProduct(id: string): Promise<Product | null> {
+  public async getProduct(id: string): Promise<SupermarketProduct | null> {
     await this.init();
 
     const search = await axios.get<SingleResult>(
@@ -117,7 +117,7 @@ export class Waitrose extends Supermarket {
   }
 }
 
-function transformSingleResult(id: string, result: SingleResult['products'][0]): Product {
+function transformSingleResult(id: string, result: SingleResult['products'][0]): SupermarketProduct {
   const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
 
   const defaultPrice = result.currentSaleUnitPrice.price.amount;
@@ -125,6 +125,7 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
   return {
     id,
     name: result.name,
+    image: result.image,
     price: promotionalPrice || defaultPrice,
     supermarket: Waitrose.NAME,
     specialOffer: result.promotion
