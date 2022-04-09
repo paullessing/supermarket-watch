@@ -30,19 +30,29 @@ export class Sainsburys extends Supermarket {
 
     const product = search.data.products[0];
 
+    // console.log(JSON.stringify(product, null, 2));
+
     const { price, specialOffer } = this.getPriceData(product);
 
-    return {
+    return SupermarketProduct({
       id: this.getId(productUid),
       name: product.name,
       image: product.image,
+      url: product.full_url,
+
       price,
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
       pricePerUnit: product.unit_price.price,
+      packSize: {
+        amount: Math.round((price / (product.unit_price.price * product.unit_price.measure_amount)) * 1000) / 1000,
+        unit: product.unit_price.measure,
+      },
+
       specialOffer,
+
       supermarket: Sainsburys.NAME,
-    };
+    });
   }
 
   public async search(term: string): Promise<SearchResultWithoutTracking> {

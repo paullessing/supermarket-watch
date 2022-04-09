@@ -2,6 +2,7 @@ import * as qs from 'querystring';
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
+import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { SupermarketProduct } from './supermarket-product.model';
@@ -46,32 +47,46 @@ export class Tesco extends Supermarket {
     }
     const [, unitAmountString, unitName] = unitOfMeasure;
 
-    const result: SupermarketProduct = {
+    // console.log(JSON.stringify(product, null, 2));
+
+    const promotion = this.getPromotion(promotions);
+
+    let specialOffer: Pick<SupermarketProduct, 'specialOffer'> & Partial<SupermarketProduct> = { specialOffer: null };
+
+    if (promotion) {
+      const originalPrice = product.price;
+
+      specialOffer = {
+        price: promotion.price,
+        pricePerUnit: parseFloat(((product.unitPrice * promotion.price) / originalPrice).toFixed(2)),
+        specialOffer: {
+          originalPrice,
+          offerText: promotion.offerText,
+          validUntil: promotion.endDate,
+        },
+      };
+    }
+
+    const packSize = product.details.packSize[0];
+
+    return SupermarketProduct({
       id: this.getId(product.id),
       name: product.title,
       image: product.defaultImageUrl,
+      url: `https://www.tesco.com/groceries/en-GB/products/${product.id}`,
       price: product.price,
+      packSize: {
+        amount: parseFloat(packSize.value || '') || 1,
+        unit: standardiseUnit(packSize.units),
+      },
+
       supermarket: Tesco.NAME,
       unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,
       unitName: unitName.trim(),
       pricePerUnit: product.unitPrice,
-      specialOffer: null,
-    };
 
-    const promotion = this.getPromotion(promotions);
-
-    if (promotion) {
-      const originalPrice = product.price;
-      result.price = promotion.price;
-      result.pricePerUnit = parseFloat(((product.unitPrice * promotion.price) / originalPrice).toFixed(2));
-      result.specialOffer = {
-        originalPrice,
-        offerText: promotion.offerText,
-        validUntil: promotion.endDate,
-      };
-    }
-
-    return result;
+      ...specialOffer,
+    });
   }
 
   public async search(term: string): Promise<SearchResultWithoutTracking> {

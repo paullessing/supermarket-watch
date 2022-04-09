@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { SupermarketProduct } from './supermarket-product.model';
@@ -60,6 +61,8 @@ export class Waitrose extends Supermarket {
       return null;
     } else {
       const result = searchResult.products[0];
+
+      // console.log(JSON.stringify(result, null, 2));
 
       return transformSingleResult(this.getId(id), result);
     }
@@ -122,12 +125,26 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
 
   const defaultPrice = result.currentSaleUnitPrice.price.amount;
 
-  return {
+  const { pricePerUnit, unitAmount, unitName } = getPrice(result);
+
+  const price = promotionalPrice || defaultPrice;
+
+  return SupermarketProduct({
     id,
     name: result.name,
-    image: result.image,
-    price: promotionalPrice || defaultPrice,
-    supermarket: Waitrose.NAME,
+    image:
+      result.productImageUrls.extraLarge ||
+      result.productImageUrls.large ||
+      result.productImageUrls.medium ||
+      result.thumbnail,
+    url: `https://www.waitrose.com/ecom/products/_/${result.id}`, // _ is a slug and not relevant, so we use something arbitrary
+
+    price,
+    pricePerUnit,
+    unitAmount,
+    unitName,
+    packSize: parsePackSize(result.size),
+
     specialOffer: result.promotion
       ? {
           offerText: result.promotion.promotionDescription,
@@ -135,8 +152,9 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
           originalPrice: defaultPrice,
         }
       : null,
-    ...getPrice(result),
-  };
+
+    supermarket: Waitrose.NAME,
+  });
 }
 
 function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
@@ -161,5 +179,25 @@ function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; 
     pricePerUnit: result.currentSaleUnitPrice.price.amount,
     unitAmount: 1,
     unitName: 'each',
+  };
+}
+
+function parsePackSize(sizeString: string): { amount: number; unit: string } {
+  const match = sizeString.match(/^(\d*)([^\d].*)$/);
+  if (match) {
+    const [, amountString, unit] = match;
+    const amount = parseFloat(amountString?.trim() || '') || 1;
+
+    return {
+      amount,
+      unit: standardiseUnit(unit.trim()),
+    };
+  }
+
+  console.error('Could not parse size', sizeString);
+
+  return {
+    amount: 1,
+    unit: '',
   };
 }
