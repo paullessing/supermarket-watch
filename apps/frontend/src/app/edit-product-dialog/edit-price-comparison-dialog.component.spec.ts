@@ -1,23 +1,23 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TrackedItemGroup } from '@shoppi/api-interfaces';
-import { EditItemGroupDialogComponent } from './edit-item-group-dialog.component';
+import { EditPriceComparisonDialogComponent } from './edit-price-comparison-dialog.component';
 
 describe('EditProductDialogComponent', () => {
-  let component: EditItemGroupDialogComponent;
-  let fixture: ComponentFixture<EditItemGroupDialogComponent>;
+  let component: EditPriceComparisonDialogComponent;
+  let fixture: ComponentFixture<EditPriceComparisonDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditItemGroupDialogComponent],
+      declarations: [EditPriceComparisonDialogComponent],
       imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditItemGroupDialogComponent);
+    fixture = TestBed.createComponent(EditPriceComparisonDialogComponent);
     component = fixture.componentInstance;
-    component.group = {
+    component.comparison = {
       name: 'Item Name',
     } as TrackedItemGroup;
 

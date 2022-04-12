@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { differenceInMinutes } from 'date-fns';
+import { compareDesc, differenceInMinutes, isAfter, isBefore, startOfDay, sub } from 'date-fns';
 import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
-import { HistoricalProduct, ManualConversion, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
 import { ConversionService } from '../conversion.service';
 import { Product } from '../product.model';
@@ -11,15 +11,21 @@ import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { TimestampedDocument } from './timestamped-document';
 
-export interface TrackedProducts extends TimestampedDocument {
+export interface InternalPriceComparisonDocument extends TimestampedDocument {
   name: string;
   image: string;
-  unitName: string;
-  unitAmount: number;
+  unitOfMeasurement: {
+    name: string;
+    amount: number;
+  };
   products: {
-    product: Product; // TODO make distinct type so that SupermarketService can return extra data without breaking history
+    product: SupermarketProduct; // TODO make distinct type so that SupermarketService can return extra data without breaking history
     lastUpdated: Date;
   }[];
+  pricePerUnit: {
+    best: number;
+    usual: number;
+  };
   manualConversions: ManualConversion[];
 }
 
@@ -36,13 +42,13 @@ export interface ProductHistory extends TimestampedDocument {
 @Injectable()
 export class TrackedProductsRepository {
   constructor(
-    @Inject(TRACKING_COLLECTION) private readonly products: Collection<TrackedProducts>,
+    @Inject(TRACKING_COLLECTION) private readonly priceComparisons: Collection<InternalPriceComparisonDocument>,
     @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>,
     private readonly conversionService: ConversionService
   ) {}
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<SupermarketProduct | null> {
-    const query: Filter<TrackedProducts> = {
+    const query: Filter<InternalPriceComparisonDocument> = {
       products: {
         $elemMatch: {
           ...{
@@ -58,75 +64,79 @@ export class TrackedProductsRepository {
         },
       },
     };
-    const trackedProductEntry = await this.products.findOne(query);
-    return trackedProductEntry?.products.find(({ product }) => product.id === productId)?.product ?? null;
+    const priceComparison = await this.priceComparisons.findOne(query);
+    return priceComparison?.products.find(({ product }) => product.id === productId)?.product ?? null;
   }
 
-  public async getProductIds(trackingId: string): Promise<string[]> {
-    const trackedProduct = await this.products.findOne({ _id: toId(trackingId) });
-    if (!trackedProduct) {
+  public async getProductIds(comparisonId: string): Promise<string[]> {
+    const priceComparison = await this.priceComparisons.findOne({ _id: toId(comparisonId) });
+    if (!priceComparison) {
       return [];
     }
 
-    return trackedProduct.products.map(({ product }) => product.id) ?? [];
+    return priceComparison.products.map(({ product }) => product.id) ?? [];
   }
 
-  public async createTracking(
+  public async createPriceComparison(
     product: SupermarketProduct,
     unit: string,
     unitAmount: number,
     now: Date,
     manualConversion?: ManualConversion
   ): Promise<string> {
-    const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
-    if (existingEntryForProduct) {
-      console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
-      throw new Error('Tracking for this product already exists');
+    const existingComparison = await this.priceComparisons.findOne({ 'products.product.id': product.id });
+    if (existingComparison) {
+      console.debug('Comparison for this product already exists:', existingComparison._id.toString());
+      throw new Error('Comparison for this product already exists');
     }
 
-    const resultTrackingId = await this.createNewTrackingEntry(product, unit, unitAmount, now, manualConversion);
+    const resultComparisonId = await this.createNewPriceComparison(product, unit, unitAmount, now, manualConversion);
 
     await this.addProductToHistory(product, now);
 
-    return resultTrackingId;
+    return resultComparisonId;
   }
 
-  public async addToTracking(
-    trackingId: string,
-    product: Product,
+  public async addToComparison(
+    comparisonId: string,
+    product: SupermarketProduct,
     now: Date,
     manualConversion?: ManualConversion
   ): Promise<string> {
-    const existingEntryForProduct = await this.products.findOne({ 'products.product.id': product.id });
-    if (existingEntryForProduct) {
-      console.debug('Tracking for this product already exists:', existingEntryForProduct._id.toString());
-      throw new Error('Tracking for this product already exists');
+    const existingComparison = await this.priceComparisons.findOne({ 'products.product.id': product.id });
+    if (existingComparison) {
+      console.debug('Comparison for this product already exists:', existingComparison._id.toString());
+      throw new Error('Comparison for this product already exists');
     }
 
-    const resultTrackingId = await this.addProductToTrackingEntry(trackingId, product, now, manualConversion);
+    const resultComparisonId = await this.addProductToComparison(comparisonId, product, now, manualConversion);
 
     await this.addProductToHistory(product, now);
 
-    return resultTrackingId;
+    return resultComparisonId;
   }
 
-  public async updateCurrentProducts(trackingId: string, updatedProducts: Product[], now: Date): Promise<void> {
-    const trackedProducts = await this.products.findOne({
+  public async updateCurrentProducts(
+    trackingId: string,
+    updatedProducts: SupermarketProduct[],
+    now: Date
+  ): Promise<void> {
+    const comparison = await this.priceComparisons.findOne({
       _id: toId(trackingId),
-    } as Filter<TrackedProducts>);
-    console.debug('Existing entry:', trackedProducts);
+    } as Filter<InternalPriceComparisonDocument>);
+    console.debug('Existing entry:', comparison);
 
-    if (!trackedProducts) {
-      throw new Error('Tracking does not exist');
+    if (!comparison) {
+      throw new Error('Comparison does not exist');
     }
 
-    await this.updateProducts(trackedProducts, updatedProducts, now);
+    await this.updateProducts(comparison, updatedProducts, now);
 
     await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product, now)));
   }
 
-  public async updateProduct(trackingId: string, { name }: { name?: string }): Promise<TrackedItemGroup> {
-    const updates: Partial<TrackedProducts> = {};
+  public async updateProduct(comparisonId: string, { name }: { name?: string }): Promise<PriceComparison> {
+    const updates: Partial<InternalPriceComparisonDocument> = {};
     if (name) {
       updates.name = name;
     }
@@ -135,8 +145,8 @@ export class TrackedProductsRepository {
       throw new Error('No updates provided');
     }
 
-    const { ok, value } = await this.products.findOneAndUpdate(
-      { _id: toId(trackingId) },
+    const { ok, value } = await this.priceComparisons.findOneAndUpdate(
+      { _id: toId(comparisonId) },
       { $set: updates },
       { returnDocument: ReturnDocument.AFTER }
     );
@@ -145,13 +155,13 @@ export class TrackedProductsRepository {
       throw new Error('Tracking does not exist');
     }
 
-    return this.convertToTrackedItemGroup(value);
+    return this.convertToPriceComparison(value);
   }
 
-  public async addToHistory(product: Product, now: Date): Promise<void> {
+  public async addToHistory(product: SupermarketProduct, now: Date): Promise<void> {
     await this.addProductToHistory(product, now);
 
-    const trackedProducts = await this.products.findOne({
+    const trackedProducts = await this.priceComparisons.findOne({
       'products.product.id': product.id,
     });
     if (trackedProducts) {
@@ -159,15 +169,18 @@ export class TrackedProductsRepository {
     }
   }
 
-  public async getAllTrackedProducts(): Promise<TrackedItemGroup[]> {
-    const trackedProducts = await this.products.find({}).toArray();
-    return trackedProducts.map(({ _id, name, image, products, unitName, unitAmount, manualConversions }) => {
+  public async getAllTrackedProducts(now: Date): Promise<PriceComparison[]> {
+    const trackedProducts = await this.priceComparisons.find({}).toArray();
+    return trackedProducts.map(({ _id, name, image, products, unitOfMeasurement, manualConversions }) => {
       return {
         id: _id.toString(),
         name,
         image,
-        unitName,
-        unitAmount,
+        pricePerUnit: this.getBestPrice(products, now, unitOfMeasurement, manualConversions),
+        unitOfMeasurement: {
+          name: unitOfMeasurement.name,
+          amount: unitOfMeasurement.amount,
+        },
         products: products.map(({ product }) => ({
           ...product,
           pricePerUnit: this.conversionService.convert(
@@ -177,8 +190,8 @@ export class TrackedProductsRepository {
               unitAmount: product.unitAmount,
             },
             {
-              unit: unitName,
-              unitAmount,
+              unit: unitOfMeasurement.name,
+              unitAmount: unitOfMeasurement.amount,
             },
             manualConversions
           ),
@@ -188,7 +201,7 @@ export class TrackedProductsRepository {
   }
 
   public async getOutdatedProductIds(updatedAfter: Date): Promise<string[]> {
-    const trackedProducts = await this.products
+    const comparisons = await this.priceComparisons
       .find({
         'products.lastUpdated': {
           $lt: updatedAfter,
@@ -196,17 +209,17 @@ export class TrackedProductsRepository {
       })
       .toArray();
 
-    function getOutdatedProductIds(trackedProduct: TrackedProducts): string[] {
-      return trackedProduct.products
+    function getOutdatedProductIds(comparison: InternalPriceComparisonDocument): string[] {
+      return comparison.products
         .filter(({ lastUpdated }) => lastUpdated < updatedAfter)
         .map(({ product }) => product.id);
     }
 
-    return trackedProducts.map(getOutdatedProductIds).reduce((acc, curr) => acc.concat(...curr), [] as string[]);
+    return comparisons.map(getOutdatedProductIds).reduce((acc: string[], curr) => acc.concat(...curr), []);
   }
 
   public async getAllTrackedIds(): Promise<string[]> {
-    return (await this.products.find({}).toArray())
+    return (await this.priceComparisons.find({}).toArray())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
       .reduce((acc, curr) => acc.concat(curr.products.map(({ product: { id } }) => id)), [] as string[]);
   }
@@ -215,7 +228,7 @@ export class TrackedProductsRepository {
    * Returns all tracked products from the set of IDs. The result is a map of itemId => trackedId.
    */
   public async getTrackedIds(itemIds: string[]): Promise<Map<string, string>> {
-    const trackedItems = await this.products
+    const trackedItems = await this.priceComparisons
       .aggregate<{ _id: string; productId: string }>([
         {
           $match: {
@@ -238,23 +251,23 @@ export class TrackedProductsRepository {
     return new Map(trackedItems.map(({ productId, _id }) => [productId, _id]));
   }
 
-  public async removeTrackedProduct(trackingId: string): Promise<void> {
-    await this.products.deleteOne({ _id: toId(trackingId) });
+  public async removeComparison(comparisonId: string): Promise<void> {
+    await this.priceComparisons.deleteOne({ _id: toId(comparisonId) });
   }
 
-  public async removeProductFromTrackingGroup(trackingId: string, productId: string): Promise<void> {
-    const trackedProducts = await this.products.findOne({
-      _id: toId(trackingId),
-    } as Filter<TrackedProducts>);
+  public async removeProductFromComparison(comparisonId: string, productId: string): Promise<void> {
+    const comparison = await this.priceComparisons.findOne({
+      _id: toId(comparisonId),
+    } as Filter<InternalPriceComparisonDocument>);
 
-    if (!trackedProducts) {
-      throw new Error('Tracking does not exist');
+    if (!comparison) {
+      throw new Error('Comparison does not exist');
     }
 
-    const updatedProducts = trackedProducts.products.filter(({ product }) => product.id !== productId);
+    const updatedProducts = comparison.products.filter(({ product }) => product.id !== productId);
 
-    await this.products.updateOne(
-      { _id: toId(trackingId) },
+    await this.priceComparisons.updateOne(
+      { _id: toId(comparisonId) },
       {
         $set: {
           products: updatedProducts,
@@ -266,8 +279,8 @@ export class TrackedProductsRepository {
   /**
    * Debug method only
    */
-  public async removeAllTrackedProducts(): Promise<void> {
-    await this.products.deleteMany({});
+  public async removeAllComparisons(): Promise<void> {
+    await this.priceComparisons.deleteMany({});
   }
 
   /**
@@ -277,14 +290,14 @@ export class TrackedProductsRepository {
     await this.history.deleteMany({});
   }
 
-  public async search(searchTerm: string): Promise<TrackedProducts[]> {
+  public async search(searchTerm: string): Promise<InternalPriceComparisonDocument[]> {
     const [fuzzyResults, regexResults] = await Promise.all([
-      this.products
+      this.priceComparisons
         .find({
           $text: { $search: searchTerm, $caseSensitive: false, $language: 'english' },
         })
         .toArray(),
-      this.products
+      this.priceComparisons
         .find({
           $or: [
             { 'products.product.name': { $regex: searchTerm, $options: '$i' } },
@@ -305,13 +318,15 @@ export class TrackedProductsRepository {
     return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
   }
 
-  private async updateProducts(trackedProducts: TrackedProducts, updatedProducts: Product[], now: Date): Promise<void> {
-    const products = trackedProducts.products.slice();
+  private async updateProducts(
+    comparison: InternalPriceComparisonDocument,
+    updatedProducts: SupermarketProduct[],
+    now: Date
+  ): Promise<void> {
+    const products = comparison.products.slice();
 
     for (const updatedProduct of updatedProducts) {
-      const existingProductIndex = trackedProducts.products.findIndex(
-        ({ product }) => product.id === updatedProduct.id
-      );
+      const existingProductIndex = comparison.products.findIndex(({ product }) => product.id === updatedProduct.id);
       if (existingProductIndex < 0) {
         throw new Error('Product not found');
       }
@@ -325,8 +340,8 @@ export class TrackedProductsRepository {
       }
     }
 
-    const result = await this.products.updateOne(
-      { _id: trackedProducts._id },
+    const result = await this.priceComparisons.updateOne(
+      { _id: comparison._id },
       {
         $set: {
           products,
@@ -381,39 +396,46 @@ export class TrackedProductsRepository {
     return [...history, newEntry];
   }
 
-  private async addProductToTrackingEntry(
+  private async addProductToComparison(
     trackingId: string,
-    product: Product,
+    product: SupermarketProduct,
     now: Date,
     manualConversion?: ManualConversion
   ): Promise<string> {
-    const existingTrackingEntry = await this.products.findOne({
+    const comparison = await this.priceComparisons.findOne({
       _id: toId(trackingId),
-    } as Filter<TrackedProducts>);
+    } as Filter<InternalPriceComparisonDocument>);
 
-    if (!existingTrackingEntry) {
-      throw new Error('Tracking ID does not exist');
+    if (!comparison) {
+      throw new Error('Comparison ID does not exist');
     }
-    console.debug('Existing entry:', existingTrackingEntry);
+    console.debug('Existing entry:', comparison);
     if (
       manualConversion &&
-      !this.conversionService.canAddManualConversion(existingTrackingEntry.manualConversions, manualConversion)
+      !this.conversionService.canAddManualConversion(comparison.manualConversions, manualConversion)
     ) {
       throw new Error('Cannot add manual conversion');
     }
 
     const convertableUnits = this.conversionService.getConvertableUnits(
-      existingTrackingEntry.products.map(({ product: { unitName } }) => unitName),
-      [...existingTrackingEntry.manualConversions, ...[manualConversion].filter(exists)]
+      comparison.products.map(({ product: { unitName } }) => unitName),
+      [...comparison.manualConversions, ...[manualConversion].filter(exists)]
     );
     if (!convertableUnits.includes(product.unitName)) {
-      throw new CannotConvertError(existingTrackingEntry.unitName, product.unitName);
+      throw new CannotConvertError(comparison.unitOfMeasurement.name, product.unitName);
     }
 
-    await this.products.updateOne(
+    const price = this.getBestPrice(
+      [...comparison.products, { product, lastUpdated: now }],
+      now,
+      { name: product.unitName, amount: product.unitAmount },
+      comparison.manualConversions
+    );
+
+    await this.priceComparisons.updateOne(
       {
         _id: toId(trackingId),
-      } as Filter<TrackedProducts>,
+      } as Filter<InternalPriceComparisonDocument>,
       {
         $push: {
           products: {
@@ -423,6 +445,7 @@ export class TrackedProductsRepository {
           ...(manualConversion ? { manualConversions: manualConversion } : {}),
         },
         $set: {
+          pricePerUnit: price,
           updatedAt: now,
         },
       }
@@ -430,45 +453,115 @@ export class TrackedProductsRepository {
     return trackingId;
   }
 
-  private async createNewTrackingEntry(
+  private getBestPrice(
+    products: { product: SupermarketProduct; lastUpdated: Date }[],
+    now: Date,
+    targetUnit: { name: string; amount: number },
+    manualConversions: ManualConversion[]
+  ): {
+    best: number;
+    usual: number;
+  } {
+    const today = startOfDay(now);
+    const recentProducts = products
+      .sort((a, b) => compareDesc(a.lastUpdated, b.lastUpdated))
+      .filter(({ lastUpdated }) => isAfter(lastUpdated, today))
+      .filter(unique(({ product: { supermarket } }) => supermarket));
+
+    const best =
+      recentProducts.reduce((best: number | null, { product: { pricePerUnit, unitName, unitAmount } }) => {
+        const value = this.conversionService.convert(
+          pricePerUnit,
+          { unit: unitName, unitAmount },
+          { unit: targetUnit.name, unitAmount: targetUnit.amount },
+          manualConversions
+        );
+        return best !== null ? Math.min(best, value) : null;
+      }, null) ?? 0;
+
+    const usualPrices: { [supermarketName: string]: number } = {};
+    const currentMonth = sub(today, { months: 1 });
+    for (const { product, lastUpdated } of products) {
+      if (product.specialOffer) {
+        continue;
+      }
+      if (isBefore(lastUpdated, currentMonth)) {
+        break;
+      }
+      if (usualPrices[product.supermarket] === undefined) {
+        const pricePerUnit = this.conversionService.convert(
+          product.pricePerUnit,
+          { unit: product.unitName, unitAmount: product.unitAmount },
+          { unit: targetUnit.name, unitAmount: targetUnit.amount },
+          manualConversions
+        );
+        usualPrices[product.supermarket] = pricePerUnit;
+      }
+    }
+
+    const usualPrice = Object.values(usualPrices).reduce(
+      (usual, price) => Math.min(usual, price),
+      Number.POSITIVE_INFINITY
+    );
+
+    return { best, usual: usualPrice === Number.POSITIVE_INFINITY ? 0 : usualPrice };
+  }
+
+  private async createNewPriceComparison(
     product: SupermarketProduct,
     unitName: string,
     unitAmount: number,
     now: Date,
     manualConversion?: ManualConversion
   ): Promise<string> {
-    const newEntry: WithoutId<TrackedProducts> = {
+    const newEntry: WithoutId<InternalPriceComparisonDocument> = {
       name: product.name,
       image: product.image,
-      unitName,
-      unitAmount,
+      unitOfMeasurement: {
+        amount: unitAmount,
+        name: unitName,
+      },
+      pricePerUnit: {
+        best: product.pricePerUnit,
+        usual: product.specialOffer ? 0 : product.pricePerUnit,
+      },
       products: [{ product, lastUpdated: now }],
       createdAt: now,
       updatedAt: now,
       manualConversions: manualConversion ? [manualConversion] : [],
     };
 
-    const result = await this.products.insertOne(newEntry as TrackedProducts);
+    const result = await this.priceComparisons.insertOne(newEntry as InternalPriceComparisonDocument);
     return result.insertedId.toString();
   }
 
-  private convertToTrackedItemGroup(value: TrackedProducts): TrackedItemGroup {
+  private convertToPriceComparison(value: InternalPriceComparisonDocument): PriceComparison {
     return {
       id: value._id.toString(),
       name: value.name,
       image: value.image,
-      unitName: value.unitName,
-      unitAmount: value.unitAmount,
+      unitOfMeasurement: {
+        name: value.unitOfMeasurement.name,
+        amount: value.unitOfMeasurement.amount,
+      },
+      pricePerUnit: {
+        best: 0, // TODO implement
+        usual: 0, // TODO implement
+      },
       products: value.products.map(
-        ({ product }): HistoricalProduct => ({
+        ({ product }): ComparisonProductData => ({
           id: product.id,
           name: product.name,
+          url: product.url,
+          image: product.image,
+          packSize: {
+            unit: product.packSize.unit,
+            amount: product.packSize.amount,
+          },
           price: product.price,
           pricePerUnit: product.pricePerUnit,
           supermarket: product.supermarket,
           specialOffer: product.specialOffer,
-          unitName: product.unitName,
-          unitAmount: product.unitAmount,
         })
       ),
     };

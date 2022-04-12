@@ -1,34 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
-import { HistoricalProduct, ProductSearchResult, ProductSearchResults, TrackedItemGroup } from '@shoppi/api-interfaces';
+import {
+  ComparisonProductData,
+  PriceComparison,
+  ProductSearchResult,
+  ProductSearchResults,
+} from '@shoppi/api-interfaces';
 
 export interface RemoveProductData {
   productId: string;
-  trackingId: string;
+  comparisonId: string;
 }
 
-export interface EditGroupData {
-  groupId: string;
+export interface EditComparisonDetailsData {
+  id: string;
   name: string;
 }
 
 @Component({
-  selector: 'app-edit-item-group-dialog',
-  templateUrl: './edit-item-group-dialog.component.html',
-  styleUrls: ['./edit-item-group-dialog.component.scss'],
+  selector: 'app-edit-price-comparison-dialog',
+  templateUrl: './edit-price-comparison-dialog.component.html',
+  styleUrls: ['./edit-price-comparison-dialog.component.scss'],
 })
-export class EditItemGroupDialogComponent implements OnInit {
+export class EditPriceComparisonDialogComponent implements OnInit {
   @Input()
-  public group!: TrackedItemGroup;
+  public comparison!: PriceComparison;
 
   @Output()
-  public editGroup: EventEmitter<EditGroupData> = new EventEmitter();
+  public editDetails: EventEmitter<EditComparisonDetailsData> = new EventEmitter();
 
   @Output()
   public exit: EventEmitter<void> = new EventEmitter();
 
   @Output()
-  public deleteTrackedGroup: EventEmitter<{ id: string }> = new EventEmitter();
+  public deletePriceComparison: EventEmitter<{ id: string }> = new EventEmitter();
 
   @Output()
   public removeProduct: EventEmitter<RemoveProductData> = new EventEmitter();
@@ -39,7 +44,7 @@ export class EditItemGroupDialogComponent implements OnInit {
   public isEditingName: boolean;
   public isRemovingItems: boolean;
 
-  public details: Pick<HistoricalProduct, 'name'>;
+  public details: Pick<PriceComparison, 'name'>;
 
   public get combineWithItem(): ProductSearchResult | null {
     return this._combineWithItem;
@@ -77,13 +82,13 @@ export class EditItemGroupDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.details.name = this.group.name;
+    this.details.name = this.comparison.name;
   }
 
   public onConfirm(): void {
     if (this.detailsHaveChanged()) {
-      this.editGroup.emit({
-        groupId: this.group.id,
+      this.editDetails.emit({
+        id: this.comparison.id,
         name: this.details.name,
       });
     } else {
@@ -92,14 +97,15 @@ export class EditItemGroupDialogComponent implements OnInit {
   }
 
   public onDelete(): void {
-    if (window.confirm('Are you sure you want to delete this group?')) {
-      this.deleteTrackedGroup.emit({ id: this.group.id });
+    if (window.confirm('Are you sure you want to delete this price comparison?')) {
+      this.deletePriceComparison.emit({ id: this.comparison.id });
     }
   }
 
-  public onRemoveProduct(product: HistoricalProduct): void {
-    if (window.confirm(`Are you sure you want to remove "${product.supermarket} - ${product.name}" from this group?`)) {
-      this.removeProduct.emit({ trackingId: this.group.id, productId: product.id });
+  public onRemoveProduct(product: ComparisonProductData): void {
+    const prompt = `Are you sure you want to remove "${product.supermarket} - ${product.name}" from this comparison?`;
+    if (window.confirm(prompt)) {
+      this.removeProduct.emit({ comparisonId: this.comparison.id, productId: product.id });
     }
   }
 
@@ -117,7 +123,7 @@ export class EditItemGroupDialogComponent implements OnInit {
     }
 
     this.http
-      .get<ProductSearchResults>('/api/tracked-products/search', {
+      .get<ProductSearchResults>('/api/price-comparisons/search', {
         params: {
           term: searchText,
         },
@@ -132,6 +138,6 @@ export class EditItemGroupDialogComponent implements OnInit {
   }
 
   private detailsHaveChanged(): boolean {
-    return this.details.name !== this.group.name;
+    return this.details.name !== this.comparison.name;
   }
 }

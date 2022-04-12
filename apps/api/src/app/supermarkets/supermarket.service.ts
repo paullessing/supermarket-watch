@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { SearchResultItem, SortBy, SortOrder, standardiseUnit, TrackedItemGroup } from '@shoppi/api-interfaces';
+import { PriceComparison, SearchResultItem, SortBy, SortOrder, standardiseUnit } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
 import { Product } from '../product.model';
@@ -86,30 +86,21 @@ export class SupermarketService {
     );
   }
 
-  public async getAllTrackedProducts(
+  public async getAllPriceComparisons(
     now: Date,
     { forceFresh = false, sortByPrice = true } = {}
-  ): Promise<TrackedItemGroup[]> {
+  ): Promise<PriceComparison[]> {
     if (forceFresh) {
       const startOfToday = startOfDay(now);
       const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
       await this.getMultipleItems(outdatedIds, now, true);
     }
 
-    const trackedProducts = await this.trackedProductsRepo.getAllTrackedProducts();
+    const priceComparisons = await this.trackedProductsRepo.getAllTrackedProducts(now);
 
-    return trackedProducts.map(({ id, name, products, unitName, unitAmount }) => ({
-      id,
-      name,
-      unitName,
-      unitAmount,
-      products: products.sort((a, b) => {
-        if (sortByPrice) {
-          return a.pricePerUnit - b.pricePerUnit;
-        } else {
-          return 0;
-        }
-      }),
+    return priceComparisons.map((comparison) => ({
+      ...comparison,
+      products: sortByPrice ? comparison.products.sort((a, b) => a.pricePerUnit - b.pricePerUnit) : comparison.products,
     }));
   }
 
@@ -134,7 +125,7 @@ export class SupermarketService {
     for (const supermarket of this.supermarkets) {
       const prefix = supermarket.getPrefix();
       if (prefix === match[1]) {
-        let product: Product | null = null;
+        let product: SupermarketProduct | null = null;
         if (this.cache) {
           product = this.cache.getProduct(id);
         }

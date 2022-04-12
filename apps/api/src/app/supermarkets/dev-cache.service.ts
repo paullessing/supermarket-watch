@@ -1,8 +1,8 @@
 import { promises } from 'fs';
 import { Injectable, Provider } from '@nestjs/common';
 import { SearchResultItem } from '@shoppi/api-interfaces';
-import { Product } from '../product.model';
 import { SearchResultItemWithoutTracking } from './supermarket';
+import { SupermarketProduct } from './supermarket-product.model';
 
 const { readFile, writeFile } = promises;
 
@@ -13,13 +13,13 @@ interface CacheEntry<T> {
 
 @Injectable()
 export class DevCacheService {
-  private productCache: Map<string, CacheEntry<Product>>;
+  private productCache: Map<string, CacheEntry<SupermarketProduct>>;
   private searchCache: Map<string, CacheEntry<SearchResultItemWithoutTracking[]>>;
 
   private writePromise: Promise<void>;
 
   constructor(
-    productCache: [string, CacheEntry<Product>][],
+    productCache: [string, CacheEntry<SupermarketProduct>][],
     searchCache: [string, CacheEntry<SearchResultItemWithoutTracking[]>][]
   ) {
     this.productCache = new Map(productCache.filter(([key]) => !!key));
@@ -41,7 +41,7 @@ export class DevCacheService {
           try {
             const data = await readFile('/tmp/cache/product-cache.json', 'utf8');
             // console.debug('product data', data);
-            return JSON.parse(data) as [string, CacheEntry<Product>][];
+            return JSON.parse(data) as [string, CacheEntry<SupermarketProduct>][];
           } catch (e) {
             return [];
           }
@@ -63,7 +63,7 @@ export class DevCacheService {
     };
   }
 
-  public getProduct(productId: string): Product | null {
+  public getProduct(productId: string): SupermarketProduct | null {
     const entry = this.productCache.get(productId);
     if (!entry) {
       console.debug('Cache miss for product', productId);
@@ -78,7 +78,7 @@ export class DevCacheService {
     return entry.data;
   }
 
-  public storeProduct(product: Product): void {
+  public storeProduct(product: SupermarketProduct): void {
     this.productCache.set(product.id, { expires: Date.now() + 48 * 3600_000, data: product });
     console.debug('stored product', product.id);
 

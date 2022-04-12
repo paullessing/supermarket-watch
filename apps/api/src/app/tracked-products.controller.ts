@@ -16,6 +16,7 @@ import {
 import {
   AddTrackedProduct,
   ManualConversion,
+  PriceComparison,
   ProductSearchResult,
   ProductSearchResults,
   standardiseUnit,
@@ -26,7 +27,7 @@ import { EntityNotFoundError } from './db/entity-not-found.error';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { SupermarketProduct, SupermarketService } from './supermarkets';
 
-@Controller('api/tracked-products')
+@Controller('api/price-comparisons')
 export class TrackedProductsController {
   constructor(
     private readonly trackingRepo: TrackedProductsRepository,
@@ -34,16 +35,16 @@ export class TrackedProductsController {
     private readonly conversionService: ConversionService
   ) {}
 
-  @Post('/:trackingId?')
-  public async addTracking(
-    @Param('trackingId') trackingId: string | undefined,
+  @Post('/:comparisonId?')
+  public async addComparison(
+    @Param('comparisonId') comparisonId: string | undefined,
     @Body('productId') productId: string,
     @Body('manualConversion')
     manualConversionData: { fromUnit: string; fromQuantity: number; toUnit: string; toQuantity: number } | undefined
   ): Promise<AddTrackedProduct> {
     let product: SupermarketProduct;
 
-    console.log('addTracking', trackingId, productId, manualConversionData);
+    console.log('addComparison', comparisonId, productId, manualConversionData);
 
     try {
       // NOTE: This returns a TrackedProduct Product, but the actual "add tracking" call requires a SupermarketProduct which has more info.
@@ -62,13 +63,13 @@ export class TrackedProductsController {
         ]
       : undefined;
 
-    console.log(`Updating tracking ID "${trackingId}"`, product, manualConversion);
+    console.log(`Updating comparison ID "${comparisonId}"`, product, manualConversion);
     let resultId: string;
-    if (trackingId) {
-      resultId = await this.trackingRepo.addToTracking(trackingId, product, new Date(), manualConversion);
+    if (comparisonId) {
+      resultId = await this.trackingRepo.addToComparison(comparisonId, product, new Date(), manualConversion);
     } else {
       // Consider allowing user to set units on creation
-      resultId = await this.trackingRepo.createTracking(
+      resultId = await this.trackingRepo.createPriceComparison(
         product,
         product.unitName,
         product.unitAmount,
@@ -83,11 +84,11 @@ export class TrackedProductsController {
   }
 
   @Get('/')
-  public async getTrackedItems(
+  public async getPriceComparisons(
     @Query('force') force: string,
     @Query('promotionsOnly') promotionsOnly: string
-  ): Promise<{ items: TrackedItemGroup[] }> {
-    const trackedProducts = await this.supermarketService.getAllTrackedProducts(new Date());
+  ): Promise<{ items: PriceComparison[] }> {
+    const trackedProducts = await this.supermarketService.getAllPriceComparisons(new Date());
 
     if (promotionsOnly) {
       return {
@@ -103,14 +104,14 @@ export class TrackedProductsController {
   @Delete('/all')
   @HttpCode(204)
   public async deleteAll(): Promise<void> {
-    await this.trackingRepo.removeAllTrackedProducts();
+    await this.trackingRepo.removeAllComparisons();
     await this.trackingRepo.removeAllHistory();
   }
 
   @Delete('/:trackingId')
   @HttpCode(204)
   public async deleteTrackedProduct(@Param('trackingId') trackingId: string): Promise<void> {
-    await this.trackingRepo.removeTrackedProduct(trackingId);
+    await this.trackingRepo.removeComparison(trackingId);
   }
 
   @Delete('/:trackingId/:productId')
@@ -119,7 +120,7 @@ export class TrackedProductsController {
     @Param('trackingId') trackingId: string,
     @Param('productId') productId: string
   ): Promise<void> {
-    await this.trackingRepo.removeProductFromTrackingGroup(trackingId, productId);
+    await this.trackingRepo.removeProductFromComparison(trackingId, productId);
   }
 
   @Get('/search')
