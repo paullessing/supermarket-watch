@@ -78,7 +78,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   public track({ productId, combinedTrackingId, conversion }: AddProductData): void {
-    const url = `${environment.apiUrl}/tracked-products${combinedTrackingId ? `/${combinedTrackingId}` : ''}`;
+    const url = `${environment.apiUrl}/price-comparisons${combinedTrackingId ? `/${combinedTrackingId}` : ''}`;
 
     this.http
       .post<AddTrackedProduct>(url, {

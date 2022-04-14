@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HistoricalProduct, ProductSearchResult, ProductSearchResults, SearchResultItem } from '@shoppi/api-interfaces';
+import { ProductDetails, ProductSearchResult, ProductSearchResults, SearchResultItem } from '@shoppi/api-interfaces';
 
 export interface AddProductData {
   productId: string;
@@ -29,7 +29,7 @@ export class AddProductDialogComponent implements OnInit {
   @Output()
   public addProduct: EventEmitter<AddProductData> = new EventEmitter();
 
-  public product$!: Observable<HistoricalProduct>;
+  public product$!: Observable<ProductDetails>;
 
   public searchItemName: string;
   public results: ProductSearchResult[];
@@ -90,7 +90,7 @@ export class AddProductDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     // TODO move this out of this component, it should be loaded before the popup opens
-    this.product$ = this.http.get<HistoricalProduct>(`/api/products/${this.item.id}`);
+    this.product$ = this.http.get<ProductDetails>(`/api/products/${this.item.id}`);
     this.search(this.item.name);
   }
 
@@ -120,7 +120,7 @@ export class AddProductDialogComponent implements OnInit {
 
   private search(searchText: string): void {
     this.http
-      .get<ProductSearchResults>('/api/tracked-products/search', {
+      .get<ProductSearchResults>('/api/price-comparisons/search', {
         params: {
           term: searchText,
         },

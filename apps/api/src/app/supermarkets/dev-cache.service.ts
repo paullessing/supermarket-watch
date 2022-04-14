@@ -58,6 +58,8 @@ export class DevCacheService {
 
         const [productCache, searchCache] = await Promise.all([productCache$, searchCache$]);
 
+        console.log('Dev Cache Enabled');
+
         return new DevCacheService(productCache, searchCache);
       },
     };

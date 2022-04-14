@@ -3,7 +3,6 @@ import { startOfDay } from 'date-fns';
 import { PriceComparison, SearchResultItem, SortBy, SortOrder, standardiseUnit } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
-import { Product } from '../product.model';
 import { DevCacheService } from './dev-cache.service';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 import { SupermarketProduct } from './supermarket-product.model';
@@ -75,7 +74,7 @@ export class SupermarketService {
     return this.sortResults(results, sortBy, sortOrder);
   }
 
-  public async getMultipleItems(ids: string[], now: Date, forceFresh: boolean = false): Promise<Product[]> {
+  public async getMultipleItems(ids: string[], now: Date, forceFresh: boolean = false): Promise<SupermarketProduct[]> {
     return Promise.all(
       ids.map((id) =>
         this.getSingleItem(id, now, forceFresh).catch((e) => {
@@ -117,7 +116,7 @@ export class SupermarketService {
       const updatedAfter = startOfDay(now);
       const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
-        console.debug('Cache hit for ' + id);
+        console.debug('Cache hit in DB for ' + id);
         return cachedValue;
       }
     }
@@ -134,6 +133,8 @@ export class SupermarketService {
         }
 
         if (product) {
+          console.log('PRODUCT', product);
+
           product = {
             ...product,
             unitName: standardiseUnit(product.unitName),
@@ -146,6 +147,7 @@ export class SupermarketService {
             this.cache.storeProduct(product);
           }
 
+          console.log('PRODUCT RET', product);
           return product;
         }
       }

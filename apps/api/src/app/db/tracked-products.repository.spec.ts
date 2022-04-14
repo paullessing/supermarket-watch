@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Collection, WithoutId } from 'mongodb';
+import { SupermarketProduct } from '@shoppi/api-interfaces';
 import { OverloadedParameters, OverloadedReturnType } from '@shoppi/util';
 import { ConversionService } from '../conversion.service';
-import { Product } from '../product.model';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
-import { ProductHistory, TrackedProducts, TrackedProductsRepository } from './tracked-products.repository';
+import { PriceComparisonDocument, ProductHistory, TrackedProductsRepository } from './tracked-products.repository';
 
 type FunctionMembers<Class> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -30,13 +30,13 @@ function stubClass<Class>(functionNames: FunctionMembers<Class>[] = []): Class &
 describe('TrackedProductsRepository', () => {
   let repo: TrackedProductsRepository;
   // let conversionService: ConversionService;
-  let products: Stubbed<Collection<TrackedProducts>>;
+  let products: Stubbed<Collection<PriceComparisonDocument>>;
   let history: Stubbed<Collection<ProductHistory>>;
 
   let now: Date;
 
   beforeEach(async () => {
-    products = stubClass<Collection<TrackedProducts>>([
+    products = stubClass<Collection<PriceComparisonDocument>>([
       'deleteOne',
       'deleteMany',
       'findOne',
@@ -83,13 +83,15 @@ describe('TrackedProductsRepository', () => {
   });
 
   describe('addToHistory()', () => {
-    let product: Product;
+    let product: SupermarketProduct;
 
     beforeEach(() => {
       products.findOne.mockResolvedValue(null);
 
-      product = {
+      product = SupermarketProduct({
         id: '123',
+        image: 'http://url.com/image.jpg',
+        url: 'http://url.com/product',
         name: 'Test Product',
         unitAmount: 1.1,
         price: 2.2,
@@ -97,7 +99,11 @@ describe('TrackedProductsRepository', () => {
         unitName: 'kgs',
         specialOffer: null,
         supermarket: 'Test Supermarket',
-      };
+        packSize: {
+          unit: 'g',
+          amount: 1,
+        },
+      });
     });
 
     it('should create a new history entry if the product does not exist in history', async () => {

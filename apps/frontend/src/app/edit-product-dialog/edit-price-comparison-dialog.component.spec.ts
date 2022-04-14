@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TrackedItemGroup } from '@shoppi/api-interfaces';
+import { PriceComparison } from '@shoppi/api-interfaces';
 import { EditPriceComparisonDialogComponent } from './edit-price-comparison-dialog.component';
 
 describe('EditProductDialogComponent', () => {
@@ -19,7 +19,7 @@ describe('EditProductDialogComponent', () => {
     component = fixture.componentInstance;
     component.comparison = {
       name: 'Item Name',
-    } as TrackedItemGroup;
+    } as PriceComparison;
 
     fixture.detectChanges();
   });

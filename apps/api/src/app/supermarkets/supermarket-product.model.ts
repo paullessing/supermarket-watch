@@ -1,4 +1,4 @@
-import { SpecialOffer } from './special-offer.model';
+import { SpecialOffer } from '@shoppi/api-interfaces';
 
 declare const SupermarketProductPhantomId: unique symbol;
 

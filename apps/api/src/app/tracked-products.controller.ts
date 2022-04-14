@@ -20,7 +20,6 @@ import {
   ProductSearchResult,
   ProductSearchResults,
   standardiseUnit,
-  TrackedItemGroup,
 } from '@shoppi/api-interfaces';
 import { ConversionService } from './conversion.service';
 import { EntityNotFoundError } from './db/entity-not-found.error';
@@ -149,7 +148,7 @@ export class TrackedProductsController {
   public async editTrackedProduct(
     @Param('trackingId') trackingId: string,
     @Body('name') name: string
-  ): Promise<TrackedItemGroup> {
+  ): Promise<PriceComparison> {
     try {
       return this.trackingRepo.updateProduct(trackingId, {
         name,

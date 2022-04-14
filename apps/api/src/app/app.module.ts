@@ -22,7 +22,7 @@ import { TrackedProductsController } from './tracked-products.controller';
   ],
   controllers: [ProductsController, SearchController, TrackedProductsController],
   providers: [
-    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
+    ...(process.env['USE_CACHE'] === 'true' ? [DevCacheService.provider()] : []),
     {
       provide: Supermarkets,
       useFactory: (...supermarkets: Supermarket[]) => supermarkets,
