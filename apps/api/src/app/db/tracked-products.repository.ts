@@ -475,25 +475,29 @@ export class TrackedProductsRepository {
           { unit: targetUnit.name, unitAmount: targetUnit.amount },
           manualConversions
         );
-        return best !== null ? Math.min(best, value) : null;
+
+        return best === null ? value : Math.min(best, value);
       }, null) ?? 0;
 
+    // TODO Pretty sure this is operating on the wrong data. Check that it's actually comparing across all the history we have
+    // We likely shouldn't be iterating over anything, just storing every time we get an update
     const usualPrices: { [supermarketName: string]: number } = {};
     const currentMonth = sub(today, { months: 1 });
     for (const { product, lastUpdated } of products) {
-      if (product.specialOffer) {
-        continue;
-      }
       if (isBefore(lastUpdated, currentMonth)) {
         break;
       }
-      if (usualPrices[product.supermarket] === undefined) {
-        usualPrices[product.supermarket] = this.conversionService.convert(
-          product.pricePerUnit,
-          { unit: product.unitName, unitAmount: product.unitAmount },
-          { unit: targetUnit.name, unitAmount: targetUnit.amount },
-          manualConversions
-        );
+      const pricePerUnit = (product.specialOffer && product.specialOffer.originalPricePerUnit) ?? product.pricePerUnit;
+
+      const convertedPricePerUnit = this.conversionService.convert(
+        pricePerUnit,
+        { unit: product.unitName, unitAmount: product.unitAmount },
+        { unit: targetUnit.name, unitAmount: targetUnit.amount },
+        manualConversions
+      );
+
+      if (usualPrices[product.supermarket] === undefined || usualPrices[product.supermarket] > convertedPricePerUnit) {
+        usualPrices[product.supermarket] = convertedPricePerUnit;
       }
     }
 

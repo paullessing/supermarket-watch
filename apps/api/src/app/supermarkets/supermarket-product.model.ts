@@ -1,6 +1,11 @@
-import { SpecialOffer } from '@shoppi/api-interfaces';
-
 declare const SupermarketProductPhantomId: unique symbol;
+
+export interface SpecialOffer {
+  offerText: string;
+  originalPrice: null | number;
+  validUntil: string;
+  originalPricePerUnit: null | number;
+}
 
 export interface SupermarketProduct {
   [SupermarketProductPhantomId]: never;
@@ -28,5 +33,6 @@ export interface SupermarketProduct {
 export function SupermarketProduct(
   data: Omit<SupermarketProduct, typeof SupermarketProductPhantomId>
 ): SupermarketProduct {
+  console.log('Supermarket Data\n\n', data);
   return data as SupermarketProduct;
 }

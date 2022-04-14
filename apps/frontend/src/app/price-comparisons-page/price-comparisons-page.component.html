@@ -1,5 +1,17 @@
 <div class="content">
-  <h2 class="title">Tracked Items</h2>
+  <h2 class="title">Compare Prices</h2>
+
+  <div *ngFor="let comparison of priceComparisons; trackBy trackById; let index = index;">
+    <div
+      style="width: 150px; height: 150px; background-repeat: no-repeat; background-size: cover; background-position: center;"
+      [style.background-image]="getBackgroundImage(comparison)"
+    ></div>
+    <p>{{ comparison.name }}</p>
+    <p>
+      {{ comparison.pricePerUnit.best | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }}
+      <span *ngIf="comparison.pricePerUnit.best !== comparison.pricePerUnit.usual"> (usually {{ comparison.pricePerUnit.usual | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }})</span>
+    </p>
+  </div>
 
   <table *ngIf="priceComparisons.length">
     <ng-container *ngFor="let comparison of priceComparisons; trackBy trackById; let index = index">

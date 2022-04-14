@@ -129,6 +129,8 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
 
   const price = promotionalPrice || defaultPrice;
 
+  // TODO figure out how to compute promotional price
+
   return SupermarketProduct({
     id,
     name: result.name,
@@ -150,6 +152,7 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
           offerText: result.promotion.promotionDescription,
           validUntil: new Date(result.promotion.promotionExpiryDate).toISOString(),
           originalPrice: defaultPrice,
+          originalPricePerUnit: result.currentSaleUnitPrice.price.amount,
         }
       : null,
 

@@ -5,7 +5,7 @@ import { isBefore } from 'date-fns';
 import { Config } from '../config';
 import * as SainsburysModels from './sainsburys-search-results.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { SupermarketProduct } from './supermarket-product.model';
+import { SpecialOffer, SupermarketProduct } from './supermarket-product.model';
 
 @Injectable()
 export class Sainsburys extends Supermarket {
@@ -32,7 +32,7 @@ export class Sainsburys extends Supermarket {
 
     // console.log(JSON.stringify(product, null, 2));
 
-    const { price, specialOffer } = this.getPriceData(product);
+    const { price, pricePerUnit, specialOffer, packSize } = this.getPriceData(product);
 
     return SupermarketProduct({
       id: this.getId(productUid),
@@ -43,11 +43,8 @@ export class Sainsburys extends Supermarket {
       price,
       unitAmount: product.unit_price.measure_amount,
       unitName: product.unit_price.measure,
-      pricePerUnit: product.unit_price.price,
-      packSize: {
-        amount: Math.round((price / (product.unit_price.price * product.unit_price.measure_amount)) * 1000) / 1000,
-        unit: product.unit_price.measure,
-      },
+      pricePerUnit,
+      packSize,
 
       specialOffer,
 
@@ -70,7 +67,7 @@ export class Sainsburys extends Supermarket {
       return { items: [] };
     }
 
-    const items: SearchResultItemWithoutTracking[] = results.map((product) => {
+    const items = results.map((product): SearchResultItemWithoutTracking => {
       const { price, specialOffer } = this.getPriceData(product);
 
       return {
@@ -78,7 +75,13 @@ export class Sainsburys extends Supermarket {
         name: product.name,
         image: product.image,
         price,
-        specialOffer,
+        specialOffer: specialOffer
+          ? {
+              offerText: specialOffer.offerText,
+              validUntil: specialOffer.validUntil,
+              originalPrice: specialOffer.originalPrice,
+            }
+          : null,
         supermarket: Sainsburys.NAME,
       };
     });
@@ -90,23 +93,37 @@ export class Sainsburys extends Supermarket {
 
   private getPriceData(product: SainsburysModels.SearchResult): {
     price: number;
-    specialOffer: SearchResultItemWithoutTracking['specialOffer'] | null;
+    pricePerUnit: number;
+    specialOffer: SpecialOffer | null;
+    packSize: { amount: number; unit: string };
   } {
+    console.log("Sainsbury's Product", product, '\n\n\n\n\n');
+
     const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
     const isPromoActive = promo?.start_date && isBefore(new Date(promo.start_date), new Date());
 
     const price = !promo || isPromoActive ? product.retail_price.price : promo.original_price;
+
+    const pricePerUnit = product.unit_price.price;
+    const packSize = {
+      amount: Math.round((price / (pricePerUnit * product.unit_price.measure_amount)) * 1000) / 1000,
+      unit: product.unit_price.measure,
+    };
+
     const specialOffer = isPromoActive
       ? {
           offerText: this.formatStrapline(promo.strap_line),
           originalPrice: promo.original_price,
+          originalPricePerUnit: pricePerUnit * (promo.original_price / price),
           validUntil: promo.end_date,
         }
       : null;
 
     return {
       price,
+      pricePerUnit,
       specialOffer,
+      packSize,
     };
   }
 
