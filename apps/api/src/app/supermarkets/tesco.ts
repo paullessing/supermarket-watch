@@ -58,11 +58,12 @@ export class Tesco extends Supermarket {
 
       specialOffer = {
         price: promotion.price,
-        pricePerUnit: parseFloat(((product.unitPrice * promotion.price) / originalPrice).toFixed(2)),
+        pricePerUnit: parseFloat((promotion.price * (product.unitPrice / originalPrice)).toFixed(2)),
         specialOffer: {
           originalPrice,
           offerText: promotion.offerText,
           validUntil: promotion.endDate,
+          originalPricePerUnit: product.unitPrice,
         },
       };
     }
