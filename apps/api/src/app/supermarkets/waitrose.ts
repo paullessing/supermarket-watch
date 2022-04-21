@@ -3,7 +3,7 @@ import axios from 'axios';
 import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { SupermarketProduct } from './supermarket-product.model';
+import { SpecialOffer, SupermarketProduct } from './supermarket-product.model';
 import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
 
 @Injectable()
@@ -120,16 +120,33 @@ export class Waitrose extends Supermarket {
   }
 }
 
+function getSpecialOffer(
+  promotion: Required<SingleResult['products'][0]>['promotion'],
+  originalPrice: number,
+  promotionalPrice: number,
+  pricePerUnit: number
+): SpecialOffer {
+  const originalPricePerUnit = pricePerUnit * (originalPrice / promotionalPrice);
+
+  return {
+    offerText: promotion.promotionDescription,
+    validUntil: new Date(promotion.promotionExpiryDate).toISOString(),
+    originalPrice,
+    originalPricePerUnit,
+  };
+}
+
 function transformSingleResult(id: string, result: SingleResult['products'][0]): SupermarketProduct {
   const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
 
   const defaultPrice = result.currentSaleUnitPrice.price.amount;
 
   const { pricePerUnit, unitAmount, unitName } = getPrice(result);
+  const packSize = parsePackSize(result.size);
 
   const price = promotionalPrice || defaultPrice;
 
-  // TODO figure out how to compute promotional price
+  const specialOffer = result.promotion ? getSpecialOffer(result.promotion, defaultPrice, price, pricePerUnit) : null;
 
   return SupermarketProduct({
     id,
@@ -145,16 +162,9 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
     pricePerUnit,
     unitAmount,
     unitName,
-    packSize: parsePackSize(result.size),
+    packSize,
 
-    specialOffer: result.promotion
-      ? {
-          offerText: result.promotion.promotionDescription,
-          validUntil: new Date(result.promotion.promotionExpiryDate).toISOString(),
-          originalPrice: defaultPrice,
-          originalPricePerUnit: result.currentSaleUnitPrice.price.amount,
-        }
-      : null,
+    specialOffer,
 
     supermarket: Waitrose.NAME,
   });
