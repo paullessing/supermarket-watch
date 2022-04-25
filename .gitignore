@@ -46,3 +46,4 @@ Thumbs.db
 
 # Local test code
 /db
+.cache/
