@@ -134,7 +134,7 @@ export class TrackedProductsRepository {
     await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product, now)));
   }
 
-  public async updateProduct(comparisonId: string, { name }: { name?: string }): Promise<PriceComparison> {
+  public async updatePriceComparisonConfig(comparisonId: string, { name }: { name?: string }): Promise<PriceComparison> {
     const updates: Partial<PriceComparisonDocument> = {};
     if (name) {
       updates.name = name;

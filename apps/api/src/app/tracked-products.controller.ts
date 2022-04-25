@@ -150,7 +150,7 @@ export class TrackedProductsController {
     @Body('name') name: string
   ): Promise<PriceComparison> {
     try {
-      return this.trackingRepo.updateProduct(trackingId, {
+      return this.trackingRepo.updatePriceComparisonConfig(trackingId, {
         name,
       });
     } catch (e) {
