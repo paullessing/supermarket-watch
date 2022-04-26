@@ -21,6 +21,11 @@ async function bootstrap(): Promise<void> {
     app.enableCors();
   }
 
+  if (process.env['VCR_MODE']) {
+    console.log('Using recorder with VCR_MODE:', process.env['VCR_MODE']);
+    require('replayer');
+  }
+
   await app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });

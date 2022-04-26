@@ -7213,6 +7213,11 @@ leven@^3.1.0:
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
   integrity sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==
 
+levenshtein@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/levenshtein/-/levenshtein-1.0.2.tgz#cd02e8b32075645ddcf5d059e02efa918f9fb3ec"
+  integrity sha1-zQLosyB1ZF3c9dBZ4C76kY+fs+w=
+
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"
@@ -7479,6 +7484,18 @@ mime-db@1.51.0:
   version "1.51.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.51.0.tgz#d9ff62451859b18342d960850dc3cfb77e63fb0c"
   integrity sha512-5y8A56jg7XVQx2mbv1lu49NR4dokRnhZYTtL+KGfaa27uq4pSTXkwQkFJl4pkRMyNFz/EtYDSkiiEHx3F7UN6g==
+
+mime-db@~1.30.0:
+  version "1.30.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
+  integrity sha1-dMZD2i3Z1qRTmZY0ZbJtXKfXHwE=
+
+mime-types@2.1.17:
+  version "2.1.17"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.17.tgz#09d7a393f03e995a79f8af857b70a9e0ab16557a"
+  integrity sha1-Cdejk/A+mVp5+K+Fe3Cp4KsWVXo=
+  dependencies:
+    mime-db "~1.30.0"
 
 mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.24:
   version "2.1.26"
@@ -8926,6 +8943,14 @@ regjsparser@^0.6.4:
   integrity sha512-ib77G0uxsA2ovgiYbCVGx4Pv3PSttAx2vIwidqQzbL2U5S4Q+j00HdSAneSBuyVcMvEnTXMjiGgB+DlXozVhpQ==
   dependencies:
     jsesc "~0.5.0"
+
+replayer@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/replayer/-/replayer-2.2.3.tgz#98a9309cb645f814af8660bcd68e4734cccae416"
+  integrity sha512-Nx3S/jefme+48fue5pjrYUuN4XSBYnVp69ob2T4u2uJB3jDS+uKUbMo3ywBzI2Q6V8eHlJlBiW+GMsLsIMaR1w==
+  dependencies:
+    levenshtein "1.0.2"
+    mime-types "2.1.17"
 
 require-directory@^2.1.1:
   version "2.1.1"
