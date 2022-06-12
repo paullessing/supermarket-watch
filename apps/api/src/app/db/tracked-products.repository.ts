@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { compareDesc, differenceInMinutes, isAfter, isBefore, startOfDay, sub } from 'date-fns';
+import { differenceInMinutes, isAfter, startOfDay } from 'date-fns';
 import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
 import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
@@ -18,6 +18,7 @@ export interface PriceComparisonDocument extends TimestampedDocument {
     amount: number;
   };
   products: {
+    // unique by product.id
     product: SupermarketProduct;
     lastUpdated: Date;
   }[];
@@ -169,13 +170,15 @@ export class TrackedProductsRepository {
   }
 
   public async getAllTrackedProducts(now: Date): Promise<PriceComparison[]> {
-    const trackedProducts = await this.priceComparisons.find({}).toArray();
-    return trackedProducts.map(({ _id, name, image, products, unitOfMeasurement, manualConversions }) => {
+    const priceComparisons = await this.priceComparisons.find({}).toArray();
+    return priceComparisons.map((priceComparison) => {
+      const { _id, name, products, image, unitOfMeasurement, manualConversions } = priceComparison;
+
       return {
         id: _id.toString(),
         name,
         image,
-        pricePerUnit: this.getBestPrice(products, now, unitOfMeasurement, manualConversions),
+        pricePerUnit: this.getBestPrice(priceComparison, now),
         unitOfMeasurement: {
           name: unitOfMeasurement.name,
           amount: unitOfMeasurement.amount,
@@ -425,10 +428,11 @@ export class TrackedProductsRepository {
     }
 
     const price = this.getBestPrice(
-      [...comparison.products, { product, lastUpdated: now }],
+      {
+        ...comparison,
+        products: [...comparison.products, { product, lastUpdated: now }]
+      },
       now,
-      { name: product.unitName, amount: product.unitAmount },
-      comparison.manualConversions
     );
 
     await this.priceComparisons.updateOne(
@@ -453,60 +457,55 @@ export class TrackedProductsRepository {
   }
 
   private getBestPrice(
-    products: { product: SupermarketProduct; lastUpdated: Date }[],
+    priceComparison: PriceComparisonDocument,
     now: Date,
-    targetUnit: { name: string; amount: number },
-    manualConversions: ManualConversion[]
   ): {
     best: number;
     usual: number;
   } {
     const today = startOfDay(now);
-    const recentProducts = products
-      .sort((a, b) => compareDesc(a.lastUpdated, b.lastUpdated))
-      .filter(({ lastUpdated }) => isAfter(lastUpdated, today))
-      .filter(unique(({ product: { supermarket } }) => supermarket));
 
-    const best =
-      recentProducts.reduce((best: number | null, { product: { pricePerUnit, unitName, unitAmount } }) => {
-        const value = this.conversionService.convert(
-          pricePerUnit,
-          { unit: unitName, unitAmount },
+    const targetUnit = priceComparison.unitOfMeasurement;
+
+    const productPrices = priceComparison.products
+      .map(({ product, lastUpdated }) => {
+        const currentPrice = this.conversionService.convert(
+          product.pricePerUnit,
+          { unit: product.unitName, unitAmount: product.unitAmount },
           { unit: targetUnit.name, unitAmount: targetUnit.amount },
-          manualConversions
+          priceComparison.manualConversions
         );
 
-        return best === null ? value : Math.min(best, value);
-      }, null) ?? 0;
+        const usualPrice = product.specialOffer ? this.conversionService.convert(
+          product.specialOffer.originalPricePerUnit,
+          { unit: product.unitName, unitAmount: product.unitAmount },
+          { unit: targetUnit.name, unitAmount: targetUnit.amount },
+          priceComparison.manualConversions
+        ) : currentPrice;
 
-    // TODO Pretty sure this is operating on the wrong data. Check that it's actually comparing across all the history we have
-    // We likely shouldn't be iterating over anything, just storing every time we get an update
-    const usualPrices: { [supermarketName: string]: number } = {};
-    const currentMonth = sub(today, { months: 1 });
-    for (const { product, lastUpdated } of products) {
-      if (isBefore(lastUpdated, currentMonth)) {
-        break;
-      }
-      const pricePerUnit = (product.specialOffer && product.specialOffer.originalPricePerUnit) ?? product.pricePerUnit;
+        return {
+          lastUpdated,
+          currentPrice,
+          usualPrice,
+        }
+      });
 
-      const convertedPricePerUnit = this.conversionService.convert(
-        pricePerUnit,
-        { unit: product.unitName, unitAmount: product.unitAmount },
-        { unit: targetUnit.name, unitAmount: targetUnit.amount },
-        manualConversions
-      );
-
-      if (usualPrices[product.supermarket] === undefined || usualPrices[product.supermarket] > convertedPricePerUnit) {
-        usualPrices[product.supermarket] = convertedPricePerUnit;
-      }
+    function minimum(min: number | undefined, current: number): number {
+      return min === undefined ? current : Math.min(min, current);
     }
 
-    const usualPrice = Object.values(usualPrices).reduce(
-      (usual, price) => Math.min(usual, price),
-      Number.POSITIVE_INFINITY
-    );
+    const best =
+      productPrices
+        .filter(({ lastUpdated }) => isAfter(lastUpdated, today))
+        .map(({ currentPrice }) => currentPrice)
+        .reduce(minimum) ?? 0;
 
-    return { best, usual: usualPrice === Number.POSITIVE_INFINITY ? 0 : usualPrice };
+    const usual =
+      productPrices
+        .map(({ usualPrice }) => usualPrice)
+        .reduce(minimum) ?? 0;
+
+    return { best, usual };
   }
 
   private async createNewPriceComparison(
