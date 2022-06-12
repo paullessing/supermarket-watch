@@ -6,6 +6,7 @@ import { ConfigProvider } from './config';
 import { ConversionService } from './conversion.service';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
+import { ProductPriceCalculator } from './db/product-price-calculator.service';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
@@ -37,6 +38,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     TrackedProductsRepository,
     CronService,
     ConversionService,
+    ProductPriceCalculator,
   ],
 })
 export class AppModule {}

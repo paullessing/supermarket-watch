@@ -38,6 +38,13 @@ export function unique<T>(getId?: (value: T) => unknown): (value: T, index: numb
   }
 }
 
+/**
+ * Reducer function, use like .reduce(minimum)
+ */
+export function minimum(min: number | undefined, current: number): number {
+  return min === undefined ? current : Math.min(min, current);
+}
+
 export function exists<T>(value: T | undefined | null): value is T {
   return value !== undefined && value !== null;
 }

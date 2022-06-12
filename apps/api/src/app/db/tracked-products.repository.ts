@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { differenceInMinutes, isAfter, startOfDay } from 'date-fns';
+import { differenceInMinutes } from 'date-fns';
 import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
 import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
@@ -8,6 +8,7 @@ import { SupermarketProduct } from '../supermarkets';
 import { exists, unique } from '../util';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
+import { ProductPriceCalculator } from './product-price-calculator.service';
 import { TimestampedDocument } from './timestamped-document';
 
 export interface PriceComparisonDocument extends TimestampedDocument {
@@ -44,7 +45,8 @@ export class TrackedProductsRepository {
   constructor(
     @Inject(TRACKING_COLLECTION) private readonly priceComparisons: Collection<PriceComparisonDocument>,
     @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>,
-    private readonly conversionService: ConversionService
+    private readonly conversionService: ConversionService,
+    private readonly priceCalculator: ProductPriceCalculator
   ) {}
 
   public async getProduct(productId: string, updatedAfter?: Date): Promise<SupermarketProduct | null> {
@@ -169,16 +171,16 @@ export class TrackedProductsRepository {
     }
   }
 
-  public async getAllTrackedProducts(now: Date): Promise<PriceComparison[]> {
+  public async getAllTrackedProducts(): Promise<PriceComparison[]> {
     const priceComparisons = await this.priceComparisons.find({}).toArray();
     return priceComparisons.map((priceComparison) => {
-      const { _id, name, products, image, unitOfMeasurement, manualConversions } = priceComparison;
+      const { _id, name, products, image, unitOfMeasurement, pricePerUnit, manualConversions } = priceComparison;
 
       return {
         id: _id.toString(),
         name,
         image,
-        pricePerUnit: this.getBestPrice(priceComparison, now),
+        pricePerUnit,
         unitOfMeasurement: {
           name: unitOfMeasurement.name,
           amount: unitOfMeasurement.amount,
@@ -427,13 +429,14 @@ export class TrackedProductsRepository {
       throw new CannotConvertError(comparison.unitOfMeasurement.name, product.unitName);
     }
 
-    const price = this.getBestPrice(
-      {
-        ...comparison,
-        products: [...comparison.products, { product, lastUpdated: now }]
-      },
-      now,
-    );
+    const manualConversions = [...comparison.manualConversions, ...(manualConversion ? [manualConversion] : [])];
+
+    const products = [...comparison.products, { product, lastUpdated: now }];
+
+    const pricePerUnit = {
+      best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, manualConversions),
+      usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, manualConversions),
+    }
 
     await this.priceComparisons.updateOne(
       {
@@ -445,67 +448,15 @@ export class TrackedProductsRepository {
             product,
             lastUpdated: now,
           },
-          ...(manualConversion ? { manualConversions: manualConversion } : {}),
         },
         $set: {
-          pricePerUnit: price,
-          updatedAt: now,
+          pricePerUnit,
+          manualConversions,
+          updatedAt: now
         },
       }
     );
     return trackingId;
-  }
-
-  private getBestPrice(
-    priceComparison: PriceComparisonDocument,
-    now: Date,
-  ): {
-    best: number;
-    usual: number;
-  } {
-    const today = startOfDay(now);
-
-    const targetUnit = priceComparison.unitOfMeasurement;
-
-    const productPrices = priceComparison.products
-      .map(({ product, lastUpdated }) => {
-        const currentPrice = this.conversionService.convert(
-          product.pricePerUnit,
-          { unit: product.unitName, unitAmount: product.unitAmount },
-          { unit: targetUnit.name, unitAmount: targetUnit.amount },
-          priceComparison.manualConversions
-        );
-
-        const usualPrice = product.specialOffer ? this.conversionService.convert(
-          product.specialOffer.originalPricePerUnit,
-          { unit: product.unitName, unitAmount: product.unitAmount },
-          { unit: targetUnit.name, unitAmount: targetUnit.amount },
-          priceComparison.manualConversions
-        ) : currentPrice;
-
-        return {
-          lastUpdated,
-          currentPrice,
-          usualPrice,
-        }
-      });
-
-    function minimum(min: number | undefined, current: number): number {
-      return min === undefined ? current : Math.min(min, current);
-    }
-
-    const best =
-      productPrices
-        .filter(({ lastUpdated }) => isAfter(lastUpdated, today))
-        .map(({ currentPrice }) => currentPrice)
-        .reduce(minimum) ?? 0;
-
-    const usual =
-      productPrices
-        .map(({ usualPrice }) => usualPrice)
-        .reduce(minimum) ?? 0;
-
-    return { best, usual };
   }
 
   private async createNewPriceComparison(
