@@ -26,6 +26,7 @@ export interface PriceComparisonDocument extends TimestampedDocument {
   pricePerUnit: {
     best: number;
     usual: number;
+    computedAt: Date;
   };
   manualConversions: ManualConversion[];
 }
@@ -270,11 +271,19 @@ export class TrackedProductsRepository {
 
     const updatedProducts = comparison.products.filter(({ product }) => product.id !== productId);
 
+    const priceComputedAt = comparison.pricePerUnit.computedAt;
+    const pricePerUnit = { // TODO test this
+      best: this.priceCalculator.getBestPrice(updatedProducts, priceComputedAt, comparison.unitOfMeasurement, comparison.manualConversions),
+      usual: this.priceCalculator.getUsualPrice(updatedProducts, comparison.unitOfMeasurement, comparison.manualConversions),
+      computedAt: priceComputedAt,
+    }
+
     await this.priceComparisons.updateOne(
       { _id: toId(comparisonId) },
       {
         $set: {
           products: updatedProducts,
+          pricePerUnit,
         },
       }
     );
@@ -344,12 +353,19 @@ export class TrackedProductsRepository {
       }
     }
 
+    const pricePerUnit = {
+      best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, comparison.manualConversions),
+      usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, comparison.manualConversions),
+      computedAt: now,
+    }
+
     const result = await this.priceComparisons.updateOne(
       { _id: comparison._id },
       {
         $set: {
           products,
           lastUpdated: now,
+          pricePerUnit,
         },
       }
     );
@@ -436,6 +452,7 @@ export class TrackedProductsRepository {
     const pricePerUnit = {
       best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, manualConversions),
       usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, manualConversions),
+      computedAt: now,
     }
 
     await this.priceComparisons.updateOne(
@@ -476,6 +493,7 @@ export class TrackedProductsRepository {
       pricePerUnit: {
         best: product.pricePerUnit,
         usual: product.specialOffer ? 0 : product.pricePerUnit,
+        computedAt: now,
       },
       products: [{ product, lastUpdated: now }],
       createdAt: now,

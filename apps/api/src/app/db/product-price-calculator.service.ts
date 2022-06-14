@@ -1,14 +1,15 @@
+import { Injectable } from '@nestjs/common';
 import { isAfter, startOfDay } from 'date-fns';
 import { ManualConversion } from '@shoppi/api-interfaces';
 import { ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarkets';
 import { minimum } from '../util';
 
+@Injectable()
 export class ProductPriceCalculator {
   constructor(
     private readonly conversionService: ConversionService
-  ) {
-  }
+  ) {}
 
   public getBestPrice(
     products: { product: SupermarketProduct; lastUpdated: Date }[],
