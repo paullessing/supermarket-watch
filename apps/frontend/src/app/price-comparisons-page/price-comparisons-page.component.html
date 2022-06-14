@@ -11,7 +11,17 @@
       {{ comparison.pricePerUnit.best | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }}
       <span *ngIf="comparison.pricePerUnit.best !== comparison.pricePerUnit.usual"> (usually {{ comparison.pricePerUnit.usual | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }})</span>
     </p>
+    <ul>
+      <li
+        *ngFor="let product of comparison.products"
+        [style.color]="product.specialOffer? 'red' : null"
+      >
+        {{ product.supermarket }}, {{ product.packSize.amount }}{{ product.packSize.unit }}: {{ product.price | currency:'GBP' }}
+      </li>
+    </ul>
   </div>
+
+  <hr>
 
   <table *ngIf="priceComparisons.length">
     <ng-container *ngFor="let comparison of priceComparisons; trackBy trackById; let index = index">
