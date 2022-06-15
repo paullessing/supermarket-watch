@@ -1,24 +1,12 @@
 <div class="content">
   <h2 class="title">Compare Prices</h2>
 
-  <div *ngFor="let comparison of priceComparisons; trackBy trackById; let index = index;">
-    <div
-      style="width: 150px; height: 150px; background-repeat: no-repeat; background-size: cover; background-position: center;"
-      [style.background-image]="getBackgroundImage(comparison)"
-    ></div>
-    <p>{{ comparison.name }}</p>
-    <p>
-      {{ comparison.pricePerUnit.best | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }}
-      <span *ngIf="comparison.pricePerUnit.best !== comparison.pricePerUnit.usual"> (usually {{ comparison.pricePerUnit.usual | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }})</span>
-    </p>
-    <ul>
-      <li
-        *ngFor="let product of comparison.products"
-        [style.color]="product.specialOffer? 'red' : null"
-      >
-        {{ product.supermarket }}, {{ product.packSize.amount }}{{ product.packSize.unit }}: {{ product.price | currency:'GBP' }}
-      </li>
-    </ul>
+  <div style="display: flex">
+    <app-price-comparison-card
+      *ngFor="let comparison of priceComparisons; trackBy trackById"
+      [priceComparison]="comparison"
+    >
+    </app-price-comparison-card>
   </div>
 
   <hr>
@@ -28,7 +16,9 @@
       <thead>
       <tr>
         <td colspan="2" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ comparison.name }}</td>
-        <td><button class="tracked-product__edit" (click)="editIndex = index">Edit</button></td>
+        <td>
+          <button class="tracked-product__edit" (click)="editIndex = index">Edit</button>
+        </td>
       </tr>
       </thead>
       <tbody>
@@ -44,7 +34,8 @@
             {{ product.price | currency:'GBP' }}
           </td>
           <td style="padding: 0.25rem 0.5rem">
-            {{ product.pricePerUnit | currency:'GBP' }}/{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }}
+            {{ product.pricePerUnit | currency:'GBP' }}
+            /{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }}
           </td>
         </tr>
         <tr *ngIf="product.specialOffer">

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { PriceComparison } from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 import {
@@ -21,7 +20,7 @@ export class PriceComparisonsPageComponent implements OnInit {
 
   public trackById = trackById;
 
-  constructor(private readonly http: HttpClient, private readonly sanitizer: DomSanitizer) {
+  constructor(private readonly http: HttpClient) {
     this.priceComparisons = [];
     this.editIndex = null;
   }
@@ -30,10 +29,6 @@ export class PriceComparisonsPageComponent implements OnInit {
     this.http
       .get<{ items: PriceComparison[] }>(environment.apiUrl + '/price-comparisons')
       .subscribe(({ items }) => (this.priceComparisons = items));
-  }
-
-  public getBackgroundImage(comparison: PriceComparison): SafeStyle {
-    return this.sanitizer.bypassSecurityTrustStyle(`url(${comparison.image})`);
   }
 
   public deletePriceComparison(id: string): void {

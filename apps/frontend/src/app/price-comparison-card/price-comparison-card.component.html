@@ -1,0 +1,36 @@
+<div
+  style="width: 150px; height: 150px; background-repeat: no-repeat; background-size: cover; background-position: center;"
+  [style.background-image]="backgroundImage"
+></div>
+<p>{{ priceComparison.name }}</p>
+<p>
+  {{ priceComparison.pricePerUnit.best | currency:'GBP' }}
+  /{{ priceComparison.unitOfMeasurement.amount === 1 ? '' : priceComparison.unitOfMeasurement.amount }}{{ priceComparison.unitOfMeasurement.name }}
+  <span
+    *ngIf="priceComparison.pricePerUnit.best !== priceComparison.pricePerUnit.usual"> (usually {{ priceComparison.pricePerUnit.usual | currency:'GBP' }}
+    /{{ priceComparison.unitOfMeasurement.amount === 1 ? '' : priceComparison.unitOfMeasurement.amount }}{{ priceComparison.unitOfMeasurement.name }}
+    )</span>
+</p>
+<button class="button-link" (click)="isExpanded = !isExpanded">Products {{ isExpanded ? '-' : '+' }}</button>
+<table *ngIf="isExpanded">
+  <tbody>
+  <tr
+    *ngFor="let product of priceComparison.products"
+  >
+    <td>{{ product.supermarket }}</td>
+    <td
+      [style.color]="product.specialOffer? 'red' : null"
+    >
+      {{ product.pricePerUnit | currency:'GBP' }}
+    </td>
+    <td
+      [style.color]="product.specialOffer? 'red' : null"
+    >{{ product.packSize.amount }}{{ product.packSize.unit }}</td>
+    <td
+      [style.color]="product.specialOffer? 'red' : null"
+    >
+      {{ product.price | currency:'GBP' }}
+    </td>
+  </tr>
+  </tbody>
+</table>

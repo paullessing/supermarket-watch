@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditPriceComparisonDialogComponent } from './edit-product-dialog/edit-price-comparison-dialog.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { PriceComparisonCardComponent } from './price-comparison-card/price-comparison-card.component';
 import { PriceComparisonsPageComponent } from './price-comparisons-page/price-comparisons-page.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchPageComponent } from './search-page/search-page.component';
@@ -31,8 +32,10 @@ import { SearchResultListComponent } from './search-result-list/search-result-li
     AddProductDialogComponent,
     EditPriceComparisonDialogComponent,
     SearchResultListComponent,
+    PriceComparisonCardComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
