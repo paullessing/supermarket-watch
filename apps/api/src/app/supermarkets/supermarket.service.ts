@@ -95,7 +95,7 @@ export class SupermarketService {
       await this.getMultipleItems(outdatedIds, now, true);
     }
 
-    const priceComparisons = await this.trackedProductsRepo.getAllTrackedProducts(now);
+    const priceComparisons = await this.trackedProductsRepo.getAllTrackedProducts();
 
     return priceComparisons.map((comparison) => ({
       ...comparison,

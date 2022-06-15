@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Collection, WithoutId } from 'mongodb';
-import { SupermarketProduct } from '@shoppi/api-interfaces';
 import { OverloadedParameters, OverloadedReturnType } from '@shoppi/util';
 import { ConversionService } from '../conversion.service';
+import { SupermarketProduct } from '../supermarkets';
 import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
-import { PriceComparisonDocument, ProductHistory, TrackedProductsRepository } from './tracked-products.repository';
+import { PriceComparisonDocument, ProductHistoryDocument, TrackedProductsRepository } from './tracked-products.repository';
 
 type FunctionMembers<Class> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -31,7 +31,7 @@ describe('TrackedProductsRepository', () => {
   let repo: TrackedProductsRepository;
   // let conversionService: ConversionService;
   let products: Stubbed<Collection<PriceComparisonDocument>>;
-  let history: Stubbed<Collection<ProductHistory>>;
+  let history: Stubbed<Collection<ProductHistoryDocument>>;
 
   let now: Date;
 
@@ -45,7 +45,7 @@ describe('TrackedProductsRepository', () => {
       'insertOne',
       'updateOne',
     ]);
-    history = stubClass<Collection<ProductHistory>>(['deleteMany', 'findOne', 'insertOne', 'updateOne']);
+    history = stubClass<Collection<ProductHistoryDocument>>(['deleteMany', 'findOne', 'insertOne', 'updateOne']);
     now = new Date('2020-01-01T00:00:00.000Z');
 
     const module: TestingModule = await Test.createTestingModule({
@@ -125,7 +125,7 @@ describe('TrackedProductsRepository', () => {
         ],
         createdAt: now,
         updatedAt: now,
-      } as WithoutId<ProductHistory>);
+      } as WithoutId<ProductHistoryDocument>);
     });
 
     // TODO there should be tests here to ensure that #71 remains fixed

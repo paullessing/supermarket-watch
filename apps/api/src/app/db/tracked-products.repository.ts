@@ -36,7 +36,7 @@ interface HistoryEntry {
   product: SupermarketProduct;
 }
 
-export interface ProductHistory extends TimestampedDocument {
+export interface ProductHistoryDocument extends TimestampedDocument {
   productId: string;
   history: HistoryEntry[];
 }
@@ -45,7 +45,7 @@ export interface ProductHistory extends TimestampedDocument {
 export class TrackedProductsRepository {
   constructor(
     @Inject(TRACKING_COLLECTION) private readonly priceComparisons: Collection<PriceComparisonDocument>,
-    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistory>,
+    @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistoryDocument>,
     private readonly conversionService: ConversionService,
     private readonly priceCalculator: ProductPriceCalculator
   ) {}
@@ -378,21 +378,21 @@ export class TrackedProductsRepository {
     });
 
     if (entry) {
-      const updatedEntry: Partial<ProductHistory> = {
+      const updatedEntry: Partial<ProductHistoryDocument> = {
         history: this.addHistoryEntry(entry.history, product, now),
         updatedAt: now,
       };
       console.debug('Updating history entry', updatedEntry);
       await this.history.updateOne({ _id: toId(entry._id) }, { $set: updatedEntry });
     } else {
-      const newEntry: OptionalId<ProductHistory> = {
+      const newEntry: OptionalId<ProductHistoryDocument> = {
         productId: product.id,
         history: this.addHistoryEntry([], product, now),
         createdAt: now,
         updatedAt: now,
       };
       console.debug('Creating history entry', newEntry);
-      await this.history.insertOne(newEntry as ProductHistory);
+      await this.history.insertOne(newEntry as ProductHistoryDocument);
     }
   }
 
