@@ -106,7 +106,7 @@ export class Sainsburys extends Supermarket {
 
     const pricePerUnit = product.unit_price.price;
     const packSize = {
-      amount: Math.round((price / (pricePerUnit * product.unit_price.measure_amount)) * 1000) / 1000,
+      amount: Math.round((price / pricePerUnit) * product.unit_price.measure_amount * 1000) / 1000,
       unit: product.unit_price.measure,
     };
 
