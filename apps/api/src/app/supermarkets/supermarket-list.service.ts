@@ -1,13 +1,24 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { standardiseUnit } from '@shoppi/api-interfaces';
-import { Supermarket, Supermarkets } from './supermarket';
+import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 import { SupermarketProduct } from './supermarket-product.model';
-import { InvalidIdException } from './supermarket.service';
+
+export class InvalidIdException extends Error {
+  constructor(id: string) {
+    super('Invalid ID or Product not found: ' + id);
+
+    // Set the prototype explicitly.
+    Object.setPrototypeOf(this, InvalidIdException.prototype);
+  }
+}
 
 @Injectable()
-export class SupermarketClient {
+export class SupermarketList {
   constructor(@Inject(Supermarkets) private readonly supermarkets: Supermarket[]) {}
 
+  /**
+   * @throws InvalidIdException if the ID is invalid or the product is not found
+   */
   public async fetchProduct(id: string): Promise<SupermarketProduct> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
@@ -34,5 +45,24 @@ export class SupermarketClient {
     }
 
     throw new InvalidIdException(id);
+  }
+
+  public async search(query: string): Promise<SearchResultItemWithoutTracking[]> {
+    if (!this.supermarkets.length) {
+      return [];
+    }
+
+    const resultsBySupermarket = await Promise.all(
+      this.supermarkets.map(async (supermarket) => {
+        try {
+          return await supermarket.search(query).then(({ items }) => items);
+        } catch (e) {
+          console.error(e);
+          return [];
+        }
+      })
+    );
+
+    return ([] as SearchResultItemWithoutTracking[]).concat.apply([], resultsBySupermarket);
   }
 }

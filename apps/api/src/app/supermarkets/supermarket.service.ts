@@ -1,27 +1,17 @@
-import { Inject, Injectable, Optional } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { PriceComparison, SearchResultItem, SortBy, SortOrder, standardiseUnit } from '@shoppi/api-interfaces';
+import { PriceComparison, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
-import { DevCacheService } from './dev-cache.service';
-import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
+import { SearchResultItemWithoutTracking } from './supermarket';
+import { SupermarketList } from './supermarket-list.service';
 import { SupermarketProduct } from './supermarket-product.model';
-
-export class InvalidIdException extends Error {
-  constructor(id: string) {
-    super('Invalid ID or Product not found: ' + id);
-
-    // Set the prototype explicitly.
-    Object.setPrototypeOf(this, InvalidIdException.prototype);
-  }
-}
 
 @Injectable()
 export class SupermarketService {
   constructor(
-    @Inject(Supermarkets) private readonly supermarkets: Supermarket[],
-    private readonly trackedProductsRepo: TrackedProductsRepository,
-    @Optional() private readonly cache: DevCacheService
+    private readonly supermarketClient: SupermarketList,
+    private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
 
   public async search(
@@ -29,27 +19,14 @@ export class SupermarketService {
     sortBy: SortBy = SortBy.NONE,
     sortOrder: SortOrder = SortOrder.ASCENDING
   ): Promise<SearchResultItem[]> {
+    const useCache = false;
     let cachedResults: SearchResultItemWithoutTracking[] | null = null;
-    if (this.cache) {
-      cachedResults = this.cache.getSearch(`${query}|${sortBy}|${sortOrder}`);
+    if (useCache) {
+      cachedResults = this.getCachedSearch(`${query}|${sortBy}|${sortOrder}`);
     }
-    let searchResults: SearchResultItemWithoutTracking[];
-    if (cachedResults) {
-      searchResults = cachedResults;
-    } else {
-      const resultsBySupermarket = await Promise.all(
-        this.supermarkets.map(async (supermarket) => {
-          try {
-            return await supermarket.search(query).then(({ items }) => items);
-          } catch (e) {
-            console.error(e);
-            return [];
-          }
-        })
-      );
 
-      searchResults = ([] as SearchResultItemWithoutTracking[]).concat.apply([], resultsBySupermarket);
-    }
+    const searchResults: SearchResultItemWithoutTracking[] =
+      cachedResults ?? (await this.supermarketClient.search(query));
 
     const trackedItems = await this.trackedProductsRepo.getTrackedIds(searchResults.map(({ id }) => id));
     console.log(
@@ -67,8 +44,8 @@ export class SupermarketService {
 
     console.log('Search results', results);
 
-    if (this.cache && !cachedResults) {
-      this.cache.storeSearch(`${query}|${sortBy}|${sortOrder}`, results);
+    if (useCache && !cachedResults) {
+      this.storeCachedSearch(`${query}|${sortBy}|${sortOrder}`, results);
     }
 
     return this.sortResults(results, sortBy, sortOrder);
@@ -107,52 +84,21 @@ export class SupermarketService {
    * @throws InvalidIdException if the ID is invalid or the product is not found
    */
   public async getSingleItem(id: string, now: Date, forceFresh: boolean = false): Promise<SupermarketProduct> {
-    const match = id.match(/^(\w+):(.+)$/);
-    if (!match) {
-      throw new InvalidIdException(id);
-    }
-
     if (!forceFresh) {
       const updatedAfter = startOfDay(now);
       const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
-        console.debug('Cache hit in DB for ' + id);
+        console.debug('getSingleItem: Cache hit in DB for ' + id);
         return cachedValue;
       }
     }
 
-    for (const supermarket of this.supermarkets) {
-      const prefix = supermarket.getPrefix();
-      if (prefix === match[1]) {
-        let product: SupermarketProduct | null = null;
-        if (this.cache) {
-          product = this.cache.getProduct(id);
-        }
-        if (!product) {
-          product = await supermarket.getProduct(match[2]);
-        }
+    const product = await this.supermarketClient.fetchProduct(id);
 
-        if (product) {
-          console.log('PRODUCT', product);
+    console.debug('getSingleItem:', forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing', id);
+    await this.trackedProductsRepo.addToHistory(product, now);
 
-          product = {
-            ...product,
-            unitName: standardiseUnit(product.unitName),
-          };
-
-          console.debug(forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing', id);
-          await this.trackedProductsRepo.addToHistory(product, now);
-
-          if (this.cache) {
-            this.cache.storeProduct(product);
-          }
-
-          console.log('PRODUCT RET', product);
-          return product;
-        }
-      }
-    }
-    throw new InvalidIdException(id);
+    return product;
   }
 
   private sortResults(results: SearchResultItem[], sortBy: SortBy, sortOrder: SortOrder): SearchResultItem[] {
@@ -175,5 +121,15 @@ export class SupermarketService {
       default:
         throw new UnreachableCaseError(sortBy);
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private getCachedSearch(searchId: string): SearchResultItemWithoutTracking[] | null {
+    return searchId ? null : null; // implement if necessary
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private storeCachedSearch(searchId: string, results: SearchResultItemWithoutTracking[]): void {
+    return searchId && results ? undefined : undefined; // implement if necessary
   }
 }

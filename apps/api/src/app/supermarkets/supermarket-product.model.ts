@@ -4,7 +4,7 @@ export interface SpecialOffer {
   offerText: string;
   originalPrice: null | number;
   validUntil: string;
-  originalPricePerUnit: number;
+  originalPricePerUnit: null | number;
 }
 
 export interface SupermarketProduct {
