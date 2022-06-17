@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import { Collection, Filter, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
+import { Collection, Filter, MatchKeysAndValues, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
 import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
 import { ConversionService } from '../conversion.service';
@@ -138,7 +138,10 @@ export class TrackedProductsRepository {
     await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product, now)));
   }
 
-  public async updatePriceComparisonConfig(comparisonId: string, { name }: { name?: string }): Promise<PriceComparison> {
+  public async updatePriceComparisonConfig(
+    comparisonId: string,
+    { name }: { name?: string }
+  ): Promise<PriceComparison> {
     const updates: Partial<PriceComparisonDocument> = {};
     if (name) {
       updates.name = name;
@@ -272,11 +275,21 @@ export class TrackedProductsRepository {
     const updatedProducts = comparison.products.filter(({ product }) => product.id !== productId);
 
     const priceComputedAt = comparison.pricePerUnit.computedAt;
-    const pricePerUnit = { // TODO test this
-      best: this.priceCalculator.getBestPrice(updatedProducts, priceComputedAt, comparison.unitOfMeasurement, comparison.manualConversions),
-      usual: this.priceCalculator.getUsualPrice(updatedProducts, comparison.unitOfMeasurement, comparison.manualConversions),
+    const pricePerUnit = {
+      // TODO test this
+      best: this.priceCalculator.getBestPrice(
+        updatedProducts,
+        priceComputedAt,
+        comparison.unitOfMeasurement,
+        comparison.manualConversions
+      ),
+      usual: this.priceCalculator.getUsualPrice(
+        updatedProducts,
+        comparison.unitOfMeasurement,
+        comparison.manualConversions
+      ),
       computedAt: priceComputedAt,
-    }
+    };
 
     await this.priceComparisons.updateOne(
       { _id: toId(comparisonId) },
@@ -354,9 +367,24 @@ export class TrackedProductsRepository {
     }
 
     const pricePerUnit = {
-      best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, comparison.manualConversions),
+      best: this.priceCalculator.getBestPrice(
+        products,
+        now,
+        comparison.unitOfMeasurement,
+        comparison.manualConversions
+      ),
       usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, comparison.manualConversions),
       computedAt: now,
+    };
+
+    let image: MatchKeysAndValues<PriceComparisonDocument> = {};
+    if (!comparison.image) {
+      const images = products.map(({ product: { image } }) => image).filter(Boolean);
+      if (images.length) {
+        image = {
+          image: images[0],
+        };
+      }
     }
 
     const result = await this.priceComparisons.updateOne(
@@ -364,8 +392,10 @@ export class TrackedProductsRepository {
       {
         $set: {
           products,
+          updatedAt: now,
           lastUpdated: now,
           pricePerUnit,
+          ...image,
         },
       }
     );
@@ -453,7 +483,7 @@ export class TrackedProductsRepository {
       best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, manualConversions),
       usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, manualConversions),
       computedAt: now,
-    }
+    };
 
     await this.priceComparisons.updateOne(
       {
@@ -469,7 +499,7 @@ export class TrackedProductsRepository {
         $set: {
           pricePerUnit,
           manualConversions,
-          updatedAt: now
+          updatedAt: now,
         },
       }
     );

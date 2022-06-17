@@ -8,7 +8,11 @@ export class CronService {
   constructor(
     private readonly supermarketService: SupermarketService,
     private readonly trackedProductsRepo: TrackedProductsRepository
-  ) {}
+  ) {
+    if (process.env['RUN_MIGRATION'] === 'true') {
+      this.regenerateFavouriteData();
+    }
+  }
 
   @Cron(CronExpression.EVERY_DAY_AT_1AM, {
     name: 'regenerateFavouritesData',
