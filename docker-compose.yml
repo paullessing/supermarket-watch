@@ -40,6 +40,7 @@ services:
     restart: on-failure
   mongo:
     image: mongo:5
+    command: mongod --quiet --logpath /dev/null
     restart: always
     ports:
       - 27017:27017
