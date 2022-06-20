@@ -1,7 +1,7 @@
 <div class="content">
   <h2 class="title">Compare Prices</h2>
 
-  <div style="display: flex">
+  <div style="display: flex; flex-wrap: wrap">
     <app-price-comparison-card
       *ngFor="let comparison of priceComparisons; trackBy trackById"
       [priceComparison]="comparison"
