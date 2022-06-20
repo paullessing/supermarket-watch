@@ -4,8 +4,8 @@ import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
 import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
+import { SupermarketProduct } from '../supermarket-product.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { SupermarketProduct } from './supermarket-product.model';
 import { ProductDetails } from './tesco-product.model';
 
 @Injectable()

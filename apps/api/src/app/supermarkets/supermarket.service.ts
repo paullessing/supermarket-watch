@@ -3,14 +3,14 @@ import { startOfDay } from 'date-fns';
 import { PriceComparison, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
 import { TrackedProductsRepository } from '../db/tracked-products.repository';
+import { SupermarketProduct } from '../supermarket-product.model';
 import { SearchResultItemWithoutTracking } from './supermarket';
 import { SupermarketList } from './supermarket-list.service';
-import { SupermarketProduct } from './supermarket-product.model';
 
 @Injectable()
 export class SupermarketService {
   constructor(
-    private readonly supermarketClient: SupermarketList,
+    private readonly supermarketList: SupermarketList,
     private readonly trackedProductsRepo: TrackedProductsRepository
   ) {}
 
@@ -26,7 +26,7 @@ export class SupermarketService {
     }
 
     const searchResults: SearchResultItemWithoutTracking[] =
-      cachedResults ?? (await this.supermarketClient.search(query));
+      cachedResults ?? (await this.supermarketList.search(query));
 
     const trackedItems = await this.trackedProductsRepo.getTrackedIds(searchResults.map(({ id }) => id));
     console.log(
@@ -93,7 +93,7 @@ export class SupermarketService {
       }
     }
 
-    const product = await this.supermarketClient.fetchProduct(id);
+    const product = await this.supermarketList.fetchProduct(id);
 
     console.debug('getSingleItem:', forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing', id);
     await this.trackedProductsRepo.addToHistory(product, now);

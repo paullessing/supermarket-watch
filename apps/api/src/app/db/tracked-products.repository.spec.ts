@@ -2,9 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Collection, WithoutId } from 'mongodb';
 import { OverloadedParameters, OverloadedReturnType } from '@shoppi/util';
 import { ConversionService } from '../conversion.service';
-import { SupermarketProduct } from '../supermarkets';
-import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
-import { PriceComparisonDocument, ProductHistoryDocument, TrackedProductsRepository } from './tracked-products.repository';
+import { SupermarketProduct } from '../supermarket-product.model';
+import { COMPARISONS_COLLECTION, HISTORY_COLLECTION } from './db.providers';
+import {
+  PriceComparisonDocument,
+  ProductHistoryDocument,
+  TrackedProductsRepository,
+} from './tracked-products.repository';
 
 type FunctionMembers<Class> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -56,7 +60,7 @@ describe('TrackedProductsRepository', () => {
           useValue: null,
         },
         {
-          provide: TRACKING_COLLECTION,
+          provide: COMPARISONS_COLLECTION,
           useValue: products,
         },
         {

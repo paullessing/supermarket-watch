@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { isBefore } from 'date-fns';
 import { Config } from '../config';
+import { SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
 import * as SainsburysModels from './sainsburys-search-results.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { SpecialOffer, SupermarketProduct } from './supermarket-product.model';
 
 @Injectable()
 export class Sainsburys extends Supermarket {

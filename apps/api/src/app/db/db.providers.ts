@@ -1,10 +1,11 @@
 import { Provider } from '@nestjs/common';
 import { Collection, Db, MongoClient } from 'mongodb';
-import { SupermarketList, SupermarketProduct } from '../supermarkets';
-import { ProductHistoryDocument } from './tracked-products.repository';
+import { SupermarketProduct } from '../supermarket-product.model';
+import { SupermarketList } from '../supermarkets/supermarket-list.service';
+import { PriceComparisonDocument, ProductHistoryDocument } from './tracked-products.repository';
 
 const DATABASE = Symbol('Database');
-export const TRACKING_COLLECTION = Symbol('TRACKING_COLLECTION');
+export const COMPARISONS_COLLECTION = Symbol('TRACKING_COLLECTION');
 export const HISTORY_COLLECTION = Symbol('HISTORY_COLLECTION');
 
 const productCache: Map<string, SupermarketProduct> = new Map();
@@ -18,9 +19,14 @@ export const dbProviders: Provider[] = [
     },
   },
   {
-    provide: TRACKING_COLLECTION,
+    provide: COMPARISONS_COLLECTION,
+    inject: [DATABASE],
     useFactory: async (db: Db) => {
-      const collection = db.collection('trackedProducts');
+      if (process.env['RUN_MIGRATION'] === 'true') {
+        await runComparisonsMigration(db);
+      }
+
+      const collection = db.collection('priceComparisons');
       await collection.createIndexes([
         {
           key: { 'products.product.id': 1 },
@@ -37,10 +43,10 @@ export const dbProviders: Provider[] = [
 
       return collection;
     },
-    inject: [DATABASE],
   },
   {
     provide: HISTORY_COLLECTION,
+    inject: [DATABASE, SupermarketList],
     useFactory: async (db: Db, supermarketList: SupermarketList) => {
       const collection = db.collection<ProductHistoryDocument>('productHistory');
       await collection.createIndex(
@@ -59,7 +65,6 @@ export const dbProviders: Provider[] = [
 
       return collection;
     },
-    inject: [DATABASE],
   },
 ];
 
@@ -98,4 +103,41 @@ async function runHistoryMigration(
     })
   );
   console.log('\n=============== MIGRATION COMPLETE: History ==================\n');
+}
+
+async function runComparisonsMigration(db: Db): Promise<void> {
+  console.log('\n=============== RUNNING MIGRATION: Comparisons ==================\n');
+  const collections = await (await db.listCollections()).toArray();
+  const collectionNames = collections.map(({ name }) => name);
+  if (collectionNames.includes('trackedProducts') && !collectionNames.includes('priceComparisons')) {
+    await db.renameCollection('trackedProducts', 'priceComparisons');
+  }
+
+  const collection = db.collection<PriceComparisonDocument>('priceComparisons');
+  const comparisons = await collection.find({}).toArray();
+
+  for (const comparison of comparisons) {
+    const unitOfMeasurement: PriceComparisonDocument['unitOfMeasurement'] = {
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      name: comparison?.unitOfMeasurement?.name ?? (comparison as any).unitName,
+      amount: comparison?.unitOfMeasurement?.amount ?? (comparison as any).unitAmount,
+      /* eslint-enable @typescript-eslint/no-explicit-any */
+    };
+    if (
+      unitOfMeasurement.amount !== comparison.unitOfMeasurement?.amount ||
+      unitOfMeasurement.name !== comparison.unitOfMeasurement?.name
+    ) {
+      console.log('Updating document', comparison._id, unitOfMeasurement);
+      await collection.updateOne(
+        { _id: comparison._id },
+        {
+          $set: {
+            unitOfMeasurement,
+          },
+        }
+      );
+    }
+  }
+
+  console.log('\n=============== MIGRATION COMPLETE: Comparisons ==================\n');
 }

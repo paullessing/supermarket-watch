@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { standardiseUnit } from '@shoppi/api-interfaces';
+import { SupermarketProduct } from '../supermarket-product.model';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
-import { SupermarketProduct } from './supermarket-product.model';
 
 export class InvalidIdException extends Error {
   constructor(id: string) {

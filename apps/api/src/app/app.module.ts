@@ -21,6 +21,10 @@ import {
 } from './supermarkets';
 import { TrackedProductsController } from './tracked-products.controller';
 
+if (process.env['RUN_MIGRATION'] === 'true') {
+  console.log('\n\n\nRUNNING MIGRATIONS\n\n\n\n');
+}
+
 @Module({
   imports: [
     ServeStaticModule.forRoot({

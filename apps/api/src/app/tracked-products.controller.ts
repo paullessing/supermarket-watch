@@ -24,7 +24,8 @@ import {
 import { ConversionService } from './conversion.service';
 import { EntityNotFoundError } from './db/entity-not-found.error';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
-import { SupermarketProduct, SupermarketService } from './supermarkets';
+import { SupermarketProduct } from './supermarket-product.model';
+import { SupermarketService } from './supermarkets';
 
 @Controller('api/price-comparisons')
 export class TrackedProductsController {

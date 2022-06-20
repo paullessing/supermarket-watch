@@ -1,7 +1,8 @@
 import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { ComparisonProductData, ProductDetails } from '@shoppi/api-interfaces';
 import { TrackedProductsRepository } from './db/tracked-products.repository';
-import { InvalidIdException, SupermarketProduct, SupermarketService } from './supermarkets';
+import { SupermarketProduct } from './supermarket-product.model';
+import { InvalidIdException, SupermarketService } from './supermarkets';
 
 @Controller('api/products')
 export class ProductsController {

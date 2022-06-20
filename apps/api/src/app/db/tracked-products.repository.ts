@@ -4,9 +4,9 @@ import { Collection, Filter, MatchKeysAndValues, ObjectId, OptionalId, ReturnDoc
 import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
 import { ConversionService } from '../conversion.service';
-import { SupermarketProduct } from '../supermarkets';
+import { SupermarketProduct } from '../supermarket-product.model';
 import { exists, unique } from '../util';
-import { HISTORY_COLLECTION, TRACKING_COLLECTION } from './db.providers';
+import { COMPARISONS_COLLECTION, HISTORY_COLLECTION } from './db.providers';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { ProductPriceCalculator } from './product-price-calculator.service';
 import { TimestampedDocument } from './timestamped-document';
@@ -44,7 +44,7 @@ export interface ProductHistoryDocument extends TimestampedDocument {
 @Injectable()
 export class TrackedProductsRepository {
   constructor(
-    @Inject(TRACKING_COLLECTION) private readonly priceComparisons: Collection<PriceComparisonDocument>,
+    @Inject(COMPARISONS_COLLECTION) private readonly priceComparisons: Collection<PriceComparisonDocument>,
     @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistoryDocument>,
     private readonly conversionService: ConversionService,
     private readonly priceCalculator: ProductPriceCalculator
