@@ -31,14 +31,14 @@ export class SupermarketList {
         let product: SupermarketProduct | null = await supermarket.getProduct(match[2]);
 
         if (product) {
-          console.log('PRODUCT', product);
+          // console.log('PRODUCT', product);
 
           product = {
             ...product,
             unitName: standardiseUnit(product.unitName),
           };
 
-          console.log('PRODUCT RET', product);
+          // console.log('PRODUCT RET', product);
           return product;
         }
       }

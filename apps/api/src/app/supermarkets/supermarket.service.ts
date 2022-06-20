@@ -42,7 +42,7 @@ export class SupermarketService {
       })
     );
 
-    console.log('Search results', results);
+    // console.log('Search results', results);
 
     if (useCache && !cachedResults) {
       this.storeCachedSearch(`${query}|${sortBy}|${sortOrder}`, results);

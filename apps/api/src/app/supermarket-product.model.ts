@@ -33,6 +33,6 @@ export interface SupermarketProduct {
 export function SupermarketProduct(
   data: Omit<SupermarketProduct, typeof SupermarketProductPhantomId>
 ): SupermarketProduct {
-  console.log('Supermarket Data\n\n', data);
+  // console.log('Supermarket Data\n\n', data);
   return data as SupermarketProduct;
 }

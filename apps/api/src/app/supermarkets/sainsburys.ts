@@ -97,7 +97,7 @@ export class Sainsburys extends Supermarket {
     specialOffer: SpecialOffer | null;
     packSize: { amount: number; unit: string };
   } {
-    console.log("Sainsbury's Product", product, '\n\n\n\n\n');
+    // console.log("Sainsbury's Product", product, '\n\n\n\n\n');
 
     const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
     const isPromoActive = promo?.start_date && isBefore(new Date(promo.start_date), new Date());
@@ -128,7 +128,7 @@ export class Sainsburys extends Supermarket {
   }
 
   private formatStrapline(strapline: string): string {
-    console.debug('Strapline', JSON.stringify(strapline));
+    // console.debug('Strapline', JSON.stringify(strapline));
 
     // prettier-ignore
     const redundantStraplines = [
