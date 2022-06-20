@@ -106,7 +106,7 @@ export class Sainsburys extends Supermarket {
 
     const pricePerUnit = product.unit_price.price;
     const packSize = {
-      amount: Math.round((price / pricePerUnit) * product.unit_price.measure_amount * 1000) / 1000,
+      amount: this.formatPackSizeAmount((price / pricePerUnit) * product.unit_price.measure_amount),
       unit: product.unit_price.measure,
     };
 
@@ -125,6 +125,25 @@ export class Sainsburys extends Supermarket {
       specialOffer,
       packSize,
     };
+  }
+
+  private formatPackSizeAmount(packSizeAmount: number): number {
+    if (packSizeAmount < 1) {
+      // Numbers < 1 are probably something like 0.175kg so give it three decimal points of accuracy
+      return +packSizeAmount.toFixed(3);
+    } else if (packSizeAmount < 10) {
+      // Below 10, allow a single decimal point e.g. 4.5g
+      return +packSizeAmount.toFixed(1);
+    } else if (packSizeAmount < 100) {
+      // Up to 100, round to the nearest integer e.g. 73g
+      return Math.round(packSizeAmount);
+    } else if (packSizeAmount < 200) {
+      // Between 100-200, round to the nearest multiple of 5 so we can get e.g. 175g
+      return Math.round(packSizeAmount / 5) * 5;
+    } else {
+      // Beyond 200, assume it's meant to be a multiple of 10
+      return Math.round(packSizeAmount / 10) * 10;
+    }
   }
 
   private formatStrapline(strapline: string): string {
