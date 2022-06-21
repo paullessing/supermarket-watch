@@ -60,6 +60,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
+    "winston": "^3.7.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

@@ -7,9 +7,11 @@ import { NestFactory } from '@nestjs/core';
 import axios from 'axios';
 import axiosCookieJarSupport from 'axios-cookiejar-support';
 import { AppModule } from './app/app.module';
+import { initialiseLogger } from './app/logger';
 import { environment } from './environments/environment';
 
 axiosCookieJarSupport(axios);
+initialiseLogger(process.env['LOG_LEVEL']);
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);

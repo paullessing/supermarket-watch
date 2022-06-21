@@ -387,7 +387,7 @@ export class TrackedProductsRepository {
       }
     }
 
-    await this.priceComparisons.updateOne(
+    const result = await this.priceComparisons.updateOne(
       { _id: comparison._id },
       {
         $set: {
@@ -399,7 +399,7 @@ export class TrackedProductsRepository {
         },
       }
     );
-    // console.debug('Updated', result);
+    console.debug('Updated', result);
   }
 
   private async addProductToHistory(product: SupermarketProduct, now: Date): Promise<void> {
@@ -412,7 +412,7 @@ export class TrackedProductsRepository {
         history: this.addHistoryEntry(entry.history, product, now),
         updatedAt: now,
       };
-      // console.debug('Updating history entry', updatedEntry);
+      console.debug('Updating history entry', updatedEntry);
       await this.history.updateOne({ _id: toId(entry._id) }, { $set: updatedEntry });
     } else {
       const newEntry: OptionalId<ProductHistoryDocument> = {

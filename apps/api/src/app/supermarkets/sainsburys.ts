@@ -147,7 +147,7 @@ export class Sainsburys extends Supermarket {
   }
 
   private formatStrapline(strapline: string): string {
-    // console.debug('Strapline', JSON.stringify(strapline));
+    console.debug('Strapline', JSON.stringify(strapline));
 
     // prettier-ignore
     const redundantStraplines = [
