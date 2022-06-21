@@ -7,3 +7,19 @@
     cursor: pointer;
   }
 }
+
+.price-comparison-list {
+  $gutter: 16px;
+
+  display: flex; // TODO use grid here
+  flex-wrap: wrap;
+
+  margin: 0 (-$gutter / 2);
+
+  > * {
+    margin: $gutter / 2;
+    width: calc(25% - #{$gutter});
+    max-width: 200px;
+    min-width: 160px;
+  }
+}

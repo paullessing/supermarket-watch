@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { PriceComparison } from '@shoppi/api-interfaces';
 
@@ -6,6 +6,7 @@ import { PriceComparison } from '@shoppi/api-interfaces';
   selector: 'app-price-comparison-card',
   templateUrl: './price-comparison-card.component.html',
   styleUrls: ['./price-comparison-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PriceComparisonCardComponent implements OnInit {
   @Input()
@@ -19,5 +20,10 @@ export class PriceComparisonCardComponent implements OnInit {
 
   public ngOnInit(): void {
     this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.priceComparison.image})`);
+  }
+
+  public getReductionPercentage(): number {
+    const { best, usual } = this.priceComparison.pricePerUnit;
+    return Math.round((1 - best / usual) * 100);
   }
 }

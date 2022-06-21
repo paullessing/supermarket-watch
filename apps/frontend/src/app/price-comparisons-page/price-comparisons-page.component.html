@@ -1,16 +1,6 @@
 <div class="content">
   <h2 class="title">Compare Prices</h2>
 
-  <div style="display: flex; flex-wrap: wrap">
-    <app-price-comparison-card
-      *ngFor="let comparison of priceComparisons; trackBy trackById"
-      [priceComparison]="comparison"
-    >
-    </app-price-comparison-card>
-  </div>
-
-  <hr>
-
   <table *ngIf="priceComparisons.length">
     <ng-container *ngFor="let comparison of priceComparisons; trackBy trackById; let index = index">
       <thead>
@@ -48,6 +38,16 @@
       </tbody>
     </ng-container>
   </table>
+
+  <hr style="margin: 2rem 0"/>
+
+  <div class="price-comparison-list">
+    <app-price-comparison-card
+      *ngFor="let comparison of priceComparisons; trackBy trackById"
+      [priceComparison]="comparison"
+    >
+    </app-price-comparison-card>
+  </div>
 </div>
 
 <app-edit-price-comparison-dialog
