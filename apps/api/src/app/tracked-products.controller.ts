@@ -88,7 +88,8 @@ export class TrackedProductsController {
     @Query('force') force: string,
     @Query('promotionsOnly') promotionsOnly: string
   ): Promise<{ items: PriceComparison[] }> {
-    const trackedProducts = await this.supermarketService.getAllPriceComparisons(new Date());
+    const forceFresh = force ? (force as 'none' | 'all' | 'today') : 'none';
+    const trackedProducts = await this.supermarketService.getAllPriceComparisons(new Date(), { forceFresh });
 
     if (promotionsOnly) {
       return {

@@ -64,11 +64,12 @@ export class SupermarketService {
 
   public async getAllPriceComparisons(
     now: Date,
-    { forceFresh = false, sortByPrice = true } = {}
+    { forceFresh = 'none', sortByPrice = true }: { forceFresh?: 'none' | 'today' | 'all'; sortByPrice?: boolean } = {}
   ): Promise<PriceComparison[]> {
-    if (forceFresh) {
-      const startOfToday = startOfDay(now);
-      const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(startOfToday);
+    if (forceFresh === 'today' || forceFresh === 'all') {
+      const refreshLimit = forceFresh === 'today' ? startOfDay(now) : now;
+
+      const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(refreshLimit);
       await this.getMultipleItems(outdatedIds, now, true);
     }
 
