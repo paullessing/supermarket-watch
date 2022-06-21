@@ -11,9 +11,14 @@ import { initialiseLogger } from './app/logger';
 import { environment } from './environments/environment';
 
 axiosCookieJarSupport(axios);
-initialiseLogger(process.env['LOG_LEVEL']);
+const logger = initialiseLogger(process.env['LOG_LEVEL']);
 
 async function bootstrap(): Promise<void> {
+  if (process.env['RUN_MIGRATION'] === 'true') {
+    logger.level = 'verbose';
+    console.log('\nRUNNING MIGRATIONS\n');
+  }
+
   const app = await NestFactory.create(AppModule);
   const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);
