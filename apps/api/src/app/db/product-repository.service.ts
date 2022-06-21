@@ -42,7 +42,7 @@ export interface ProductHistoryDocument extends TimestampedDocument {
 }
 
 @Injectable()
-export class TrackedProductsRepository {
+export class ProductRepository {
   constructor(
     @Inject(COMPARISONS_COLLECTION) private readonly priceComparisons: Collection<PriceComparisonDocument>,
     @Inject(HISTORY_COLLECTION) private readonly history: Collection<ProductHistoryDocument>,

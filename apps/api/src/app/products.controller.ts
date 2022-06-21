@@ -1,6 +1,6 @@
 import { BadRequestException, Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { ComparisonProductData, ProductDetails } from '@shoppi/api-interfaces';
-import { TrackedProductsRepository } from './db/tracked-products.repository';
+import { ProductRepository } from './db/product-repository.service';
 import { SupermarketProduct } from './supermarket-product.model';
 import { InvalidIdException, SupermarketService } from './supermarkets';
 
@@ -8,13 +8,8 @@ import { InvalidIdException, SupermarketService } from './supermarkets';
 export class ProductsController {
   constructor(
     private readonly supermarketService: SupermarketService,
-    private readonly trackedProductsRepository: TrackedProductsRepository
+    private readonly productRepo: ProductRepository
   ) {}
-
-  // TODO
-  // Figure out which endpoints should return which data, and which version of Product we actually want to store.
-  // Once that's sorted, it should hopefully be clear what the interface of Product vs HistoricalProduct vs SupermarketProduct should be.
-  // We may not need Product.
 
   @Get('/:id')
   public async getById(@Param('id') id: string, @Query('force') force: string): Promise<ProductDetails> {
@@ -35,11 +30,11 @@ export class ProductsController {
   @Get('/:id/history')
   public async getHistory(
     @Param('id') id: string
-  ): Promise<{ history: Awaited<ReturnType<TrackedProductsRepository['getHistory']>> }> {
+  ): Promise<{ history: Awaited<ReturnType<ProductRepository['getHistory']>> }> {
     if (!id) {
       throw new BadRequestException('Missing required URL parameter "id"');
     }
-    const history = await this.trackedProductsRepository.getHistory(id);
+    const history = await this.productRepo.getHistory(id);
 
     return { history };
   }

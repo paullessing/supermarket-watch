@@ -23,14 +23,14 @@ import {
 } from '@shoppi/api-interfaces';
 import { ConversionService } from './conversion.service';
 import { EntityNotFoundError } from './db/entity-not-found.error';
-import { TrackedProductsRepository } from './db/tracked-products.repository';
+import { ProductRepository } from './db/product-repository.service';
 import { SupermarketProduct } from './supermarket-product.model';
 import { SupermarketService } from './supermarkets';
 
 @Controller('api/price-comparisons')
-export class TrackedProductsController {
+export class PriceComparionsController {
   constructor(
-    private readonly trackingRepo: TrackedProductsRepository,
+    private readonly productRepo: ProductRepository,
     private readonly supermarketService: SupermarketService,
     private readonly conversionService: ConversionService
   ) {}
@@ -66,10 +66,10 @@ export class TrackedProductsController {
     console.log(`Updating comparison ID "${comparisonId}"`, product, manualConversion);
     let resultId: string;
     if (comparisonId) {
-      resultId = await this.trackingRepo.addToComparison(comparisonId, product, new Date(), manualConversion);
+      resultId = await this.productRepo.addToComparison(comparisonId, product, new Date(), manualConversion);
     } else {
       // Consider allowing user to set units on creation
-      resultId = await this.trackingRepo.createPriceComparison(
+      resultId = await this.productRepo.createPriceComparison(
         product,
         product.unitName,
         product.unitAmount,
@@ -105,14 +105,14 @@ export class TrackedProductsController {
   @Delete('/all')
   @HttpCode(204)
   public async deleteAll(): Promise<void> {
-    await this.trackingRepo.removeAllComparisons();
-    await this.trackingRepo.removeAllHistory();
+    await this.productRepo.removeAllComparisons();
+    await this.productRepo.removeAllHistory();
   }
 
   @Delete('/:trackingId')
   @HttpCode(204)
   public async deleteTrackedProduct(@Param('trackingId') trackingId: string): Promise<void> {
-    await this.trackingRepo.removeComparison(trackingId);
+    await this.productRepo.removeComparison(trackingId);
   }
 
   @Delete('/:trackingId/:productId')
@@ -121,7 +121,7 @@ export class TrackedProductsController {
     @Param('trackingId') trackingId: string,
     @Param('productId') productId: string
   ): Promise<void> {
-    await this.trackingRepo.removeProductFromComparison(trackingId, productId);
+    await this.productRepo.removeProductFromComparison(trackingId, productId);
   }
 
   @Get('/search')
@@ -129,7 +129,7 @@ export class TrackedProductsController {
     if (!searchTerm || !searchTerm.trim()) {
       throw new BadRequestException('Query parameter "searchTerm" must not be blank');
     }
-    const result = await this.trackingRepo.search(searchTerm);
+    const result = await this.productRepo.search(searchTerm);
     const results = result.map((entry): ProductSearchResult => {
       const units = this.conversionService.getConvertableUnits(
         entry.products.map(({ product }) => product.unitName),
@@ -152,7 +152,7 @@ export class TrackedProductsController {
     @Body('name') name: string
   ): Promise<PriceComparison> {
     try {
-      return this.trackingRepo.updatePriceComparisonConfig(trackingId, {
+      return this.productRepo.updatePriceComparisonConfig(trackingId, {
         name,
       });
     } catch (e) {

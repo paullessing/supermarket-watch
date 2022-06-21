@@ -2,17 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
 import { PriceComparison, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
 import { UnreachableCaseError } from '@shoppi/util';
-import { TrackedProductsRepository } from '../db/tracked-products.repository';
+import { ProductRepository } from '../db/product-repository.service';
 import { SupermarketProduct } from '../supermarket-product.model';
 import { SearchResultItemWithoutTracking } from './supermarket';
 import { SupermarketList } from './supermarket-list.service';
 
 @Injectable()
 export class SupermarketService {
-  constructor(
-    private readonly supermarketList: SupermarketList,
-    private readonly trackedProductsRepo: TrackedProductsRepository
-  ) {}
+  constructor(private readonly supermarketList: SupermarketList, private readonly productRepo: ProductRepository) {}
 
   public async search(
     query: string,
@@ -28,7 +25,7 @@ export class SupermarketService {
     const searchResults: SearchResultItemWithoutTracking[] =
       cachedResults ?? (await this.supermarketList.search(query));
 
-    const trackedItems = await this.trackedProductsRepo.getTrackedIds(searchResults.map(({ id }) => id));
+    const trackedItems = await this.productRepo.getTrackedIds(searchResults.map(({ id }) => id));
     console.log(
       'Tracked IDs',
       searchResults.map(({ id }) => id),
@@ -69,11 +66,11 @@ export class SupermarketService {
     if (forceFresh === 'today' || forceFresh === 'all') {
       const refreshLimit = forceFresh === 'today' ? startOfDay(now) : now;
 
-      const outdatedIds = await this.trackedProductsRepo.getOutdatedProductIds(refreshLimit);
+      const outdatedIds = await this.productRepo.getOutdatedProductIds(refreshLimit);
       await this.getMultipleItems(outdatedIds, now, true);
     }
 
-    const priceComparisons = await this.trackedProductsRepo.getAllTrackedProducts();
+    const priceComparisons = await this.productRepo.getAllTrackedProducts();
 
     return priceComparisons.map((comparison) => ({
       ...comparison,
@@ -87,7 +84,7 @@ export class SupermarketService {
   public async getSingleItem(id: string, now: Date, forceFresh: boolean = false): Promise<SupermarketProduct> {
     if (!forceFresh) {
       const updatedAfter = startOfDay(now);
-      const cachedValue = await this.trackedProductsRepo.getProduct(id, updatedAfter);
+      const cachedValue = await this.productRepo.getProduct(id, updatedAfter);
       if (cachedValue) {
         console.debug('getSingleItem: Cache hit in DB for ' + id);
         return cachedValue;
@@ -97,7 +94,7 @@ export class SupermarketService {
     const product = await this.supermarketList.fetchProduct(id);
 
     console.debug('getSingleItem:', forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing', id);
-    await this.trackedProductsRepo.addToHistory(product, now);
+    await this.productRepo.addToHistory(product, now);
 
     return product;
   }

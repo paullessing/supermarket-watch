@@ -7,7 +7,8 @@ import { ConversionService } from './conversion.service';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
 import { ProductPriceCalculator } from './db/product-price-calculator.service';
-import { TrackedProductsRepository } from './db/tracked-products.repository';
+import { ProductRepository } from './db/product-repository.service';
+import { PriceComparionsController } from './price-comparions.controller';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
 import {
@@ -19,7 +20,6 @@ import {
   Tesco,
   Waitrose,
 } from './supermarkets';
-import { TrackedProductsController } from './tracked-products.controller';
 
 @Module({
   imports: [
@@ -28,7 +28,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     }),
     ScheduleModule.forRoot(),
   ],
-  controllers: [ProductsController, SearchController, TrackedProductsController],
+  controllers: [ProductsController, SearchController, PriceComparionsController],
   providers: [
     {
       provide: Supermarkets,
@@ -42,7 +42,7 @@ import { TrackedProductsController } from './tracked-products.controller';
     Sainsburys,
     Waitrose,
     Tesco,
-    TrackedProductsRepository,
+    ProductRepository,
     CronService,
     ConversionService,
     ProductPriceCalculator,

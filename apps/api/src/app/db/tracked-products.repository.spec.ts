@@ -4,11 +4,7 @@ import { OverloadedParameters, OverloadedReturnType } from '@shoppi/util';
 import { ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarket-product.model';
 import { COMPARISONS_COLLECTION, HISTORY_COLLECTION } from './db.providers';
-import {
-  PriceComparisonDocument,
-  ProductHistoryDocument,
-  TrackedProductsRepository,
-} from './tracked-products.repository';
+import { PriceComparisonDocument, ProductHistoryDocument, ProductRepository } from './product-repository.service';
 
 type FunctionMembers<Class> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -31,8 +27,8 @@ function stubClass<Class>(functionNames: FunctionMembers<Class>[] = []): Class &
   return stubs as unknown as Class & StubbedFunctions<Class>;
 }
 
-describe('TrackedProductsRepository', () => {
-  let repo: TrackedProductsRepository;
+describe('ProductRepository', () => {
+  let repo: ProductRepository;
   // let conversionService: ConversionService;
   let products: Stubbed<Collection<PriceComparisonDocument>>;
   let history: Stubbed<Collection<ProductHistoryDocument>>;
@@ -54,7 +50,7 @@ describe('TrackedProductsRepository', () => {
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        TrackedProductsRepository,
+        ProductRepository,
         {
           provide: ConversionService,
           useValue: null,
@@ -70,7 +66,7 @@ describe('TrackedProductsRepository', () => {
       ],
     }).compile();
 
-    repo = module.get<TrackedProductsRepository>(TrackedProductsRepository);
+    repo = module.get<ProductRepository>(ProductRepository);
     // conversionService = module.get<ConversionService>(ConversionService);
   });
 

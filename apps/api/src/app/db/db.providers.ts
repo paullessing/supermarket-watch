@@ -2,7 +2,7 @@ import { Provider } from '@nestjs/common';
 import { Collection, Db, MongoClient } from 'mongodb';
 import { SupermarketProduct } from '../supermarket-product.model';
 import { SupermarketList } from '../supermarkets/supermarket-list.service';
-import { PriceComparisonDocument, ProductHistoryDocument } from './tracked-products.repository';
+import { PriceComparisonDocument, ProductHistoryDocument } from './product-repository.service';
 
 const DATABASE = Symbol('Database');
 export const COMPARISONS_COLLECTION = Symbol('TRACKING_COLLECTION');
