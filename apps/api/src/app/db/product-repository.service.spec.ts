@@ -4,6 +4,7 @@ import { OverloadedParameters, OverloadedReturnType } from '@shoppi/util';
 import { ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarket-product.model';
 import { COMPARISONS_COLLECTION, HISTORY_COLLECTION } from './db.providers';
+import { ProductPriceCalculator } from './product-price-calculator.service';
 import { PriceComparisonDocument, ProductHistoryDocument, ProductRepository } from './product-repository.service';
 
 type FunctionMembers<Class> = {
@@ -53,6 +54,10 @@ describe('ProductRepository', () => {
         ProductRepository,
         {
           provide: ConversionService,
+          useValue: null,
+        },
+        {
+          provide: ProductPriceCalculator,
           useValue: null,
         },
         {
