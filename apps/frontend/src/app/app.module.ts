@@ -13,6 +13,7 @@ import { PriceComparisonsPageComponent } from './price-comparisons-page/price-co
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchResultListComponent } from './search-result-list/search-result-list.component';
+import { UnitAmountPipe } from './unit-amount.pipe';
 
 // prettier-ignore
 @NgModule({
@@ -33,6 +34,7 @@ import { SearchResultListComponent } from './search-result-list/search-result-li
     EditPriceComparisonDialogComponent,
     SearchResultListComponent,
     PriceComparisonCardComponent,
+    UnitAmountPipe,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -43,7 +43,7 @@
     grid-area: name;
   }
 
-  &__price {
+  &__price-area {
     font-weight: 300;
     text-align: right;
 
@@ -51,8 +51,42 @@
     justify-content: start;
   }
 
+  &__price {
+    margin-bottom: 0.5rem;
+  }
+
+  &__reduction {
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: red;
+  }
+
   &__usual-price {
     display: block;
     text-align: right;
+  }
+
+  &__best-price {
+    font-weight: 400;
+    font-size: 1.1em;
+  }
+
+  &__items {
+    grid-area: data;
+  }
+
+  &__original-price {
+    position: relative;
+
+    &::before {
+      display: block;
+      content: '';
+      border-bottom: 1px solid #444;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+    }
   }
 }

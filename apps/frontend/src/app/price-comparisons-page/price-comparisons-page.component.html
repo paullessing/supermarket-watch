@@ -24,8 +24,7 @@
             {{ product.price | currency:'GBP' }}
           </td>
           <td style="padding: 0.25rem 0.5rem">
-            {{ product.pricePerUnit | currency:'GBP' }}
-            /{{ comparison.unitOfMeasurement.amount === 1 ? '' : comparison.unitOfMeasurement.amount }}{{ comparison.unitOfMeasurement.name }}
+            {{ product.pricePerUnit | currency:'GBP' }}/{{ comparison.unitOfMeasurement | unitAmount }}
           </td>
         </tr>
         <tr *ngIf="product.specialOffer">
