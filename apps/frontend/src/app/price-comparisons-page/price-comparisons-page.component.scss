@@ -9,17 +9,11 @@
 }
 
 .price-comparison-list {
-  $gutter: 16px;
+  $item-spacing: 1rem;
 
-  display: flex; // TODO use grid here
-  flex-wrap: wrap;
-
-  margin: 0 (-$gutter / 2);
+  margin-bottom: -$item-spacing;
 
   > * {
-    margin: $gutter / 2;
-    width: calc(25% - #{$gutter});
-    max-width: 200px;
-    min-width: 160px;
+    margin-bottom: $item-spacing;
   }
 }

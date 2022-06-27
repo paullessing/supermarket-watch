@@ -15,7 +15,7 @@
     }}
     <span
       *ngIf="getReductionPercentage() > 0"
-      style="color: red"
+      style="color: red; display: block;"
     >-{{ getReductionPercentage() }}%</span>
 <!--    <span-->
 <!--      class="price-comparison-card__usual-price"-->
@@ -29,27 +29,31 @@
 <!--      }})</span>-->
     <!-- @formatter:on -->
   </p>
-  <button class="button-link" (click)="isExpanded = !isExpanded">Products {{ isExpanded ? '-' : '+' }}</button>
-  <table *ngIf="isExpanded">
-    <tbody>
-    <tr
-      *ngFor="let product of priceComparison.products"
-    >
-      <td>{{ product.supermarket }}</td>
-      <td
-        [style.color]="product.specialOffer? 'red' : null"
+  <div>
+    <button class="button-link" (click)="isExpanded = !isExpanded">Products {{ isExpanded ? '-' : '+' }}</button>
+    <table *ngIf="isExpanded">
+      <tbody>
+      <tr
+        *ngFor="let product of priceComparison.products"
       >
-        {{ product.pricePerUnit | currency:'GBP' }}
-      </td>
-      <td
-        [style.color]="product.specialOffer? 'red' : null"
-      >{{ product.packSize.amount }}{{ product.packSize.unit }}</td>
-      <td
-        [style.color]="product.specialOffer? 'red' : null"
-      >
-        {{ product.price | currency:'GBP' }}
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        <td style="padding-right: 8px">{{ product.supermarket }}</td>
+        <td
+          style="padding-right: 8px"
+          [style.color]="product.specialOffer? 'red' : null"
+        >
+          {{ product.pricePerUnit | currency:'GBP' }}
+        </td>
+        <td
+          style="padding-right: 8px"
+          [style.color]="product.specialOffer? 'red' : null"
+        >{{ product.packSize.amount }}{{ product.packSize.unit }}</td>
+        <td
+          [style.color]="product.specialOffer? 'red' : null"
+        >
+          {{ product.price | currency:'GBP' }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
