@@ -7,3 +7,13 @@
     cursor: pointer;
   }
 }
+
+.price-comparison-list {
+  $item-spacing: 1rem;
+
+  margin-bottom: -$item-spacing;
+
+  > * {
+    margin-bottom: $item-spacing;
+  }
+}

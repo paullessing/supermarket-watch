@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { commonConversions, Conversion, ManualConversion, Unit } from '@shoppi/api-interfaces';
 import { CannotConvertError } from './cannot-convert.error';
 import { exists } from './util';
 
+@Injectable()
 export class ConversionService {
   private conversions: Conversion[] = [];
 

@@ -6,12 +6,20 @@ import { ConfigProvider } from './config';
 import { ConversionService } from './conversion.service';
 import { CronService } from './cron.service';
 import { dbProviders } from './db/db.providers';
-import { TrackedProductsRepository } from './db/tracked-products.repository';
+import { ProductPriceCalculator } from './db/product-price-calculator.service';
+import { ProductRepository } from './db/product-repository.service';
+import { PriceComparionsController } from './price-comparions.controller';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
-import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
-import { DevCacheService } from './supermarkets/dev-cache.service';
-import { TrackedProductsController } from './tracked-products.controller';
+import {
+  Sainsburys,
+  Supermarket,
+  SupermarketList,
+  Supermarkets,
+  SupermarketService,
+  Tesco,
+  Waitrose,
+} from './supermarkets';
 
 @Module({
   imports: [
@@ -20,9 +28,8 @@ import { TrackedProductsController } from './tracked-products.controller';
     }),
     ScheduleModule.forRoot(),
   ],
-  controllers: [ProductsController, SearchController, TrackedProductsController],
+  controllers: [ProductsController, SearchController, PriceComparionsController],
   providers: [
-    ...(process.env['USE_CACHE'] ? [DevCacheService.provider()] : []),
     {
       provide: Supermarkets,
       useFactory: (...supermarkets: Supermarket[]) => supermarkets,
@@ -30,13 +37,15 @@ import { TrackedProductsController } from './tracked-products.controller';
     },
     ConfigProvider,
     ...dbProviders,
+    SupermarketList,
     SupermarketService,
     Sainsburys,
     Waitrose,
     Tesco,
-    TrackedProductsRepository,
+    ProductRepository,
     CronService,
     ConversionService,
+    ProductPriceCalculator,
   ],
 })
 export class AppModule {}

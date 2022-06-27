@@ -3,3 +3,4 @@ export * from './supermarket';
 export * from './tesco';
 export * from './waitrose';
 export * from './sainsburys';
+export * from './supermarket-list.service';

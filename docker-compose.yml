@@ -13,7 +13,9 @@ services:
       PORT: ${PORT:-3333}
       TESCO_URL: ${TESCO_URL}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
-      USE_CACHE: 'true'
+      VCR_MODE: ${VCR_MODE:-}
+      RUN_MIGRATION: ${RUN_MIGRATION:-}
+      LOG_LEVEL: ${LOG_LEVEL:-}
     ports:
       - ${PORT:-3333}:${PORT:-3333}
       - 4200:4200
@@ -34,10 +36,12 @@ services:
       - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json:ro
       - ./package.json:/usr/src/app/package.json:ro
       - ./yarn.lock:/usr/src/app/yarn.lock:ro
-      - /tmp/cache
+      - ./.cache:/tmp/cache
+      - ./.cache/fixtures:/usr/src/app/fixtures
     restart: on-failure
   mongo:
     image: mongo:5
+    command: mongod --quiet --logpath /dev/null
     restart: always
     ports:
       - 27017:27017

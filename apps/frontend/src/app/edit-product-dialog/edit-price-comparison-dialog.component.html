@@ -1,0 +1,56 @@
+<div class="edit-comparison-dialog">
+  <button class="edit-comparison-dialog__close" (click)="onClose()" style="cursor: pointer">
+    Close
+  </button>
+
+  <div class="edit-comparison-dialog__content">
+    <h1>Edit Price Comparison</h1>
+    <h2
+      *ngIf="!isEditingName; else editingName"
+    >{{ comparison.name }}
+      <button
+        class="edit-comparison-dialog__edit-name-button button-link"
+        (click)="isEditingName = true"
+        style="cursor: pointer"
+      >Edit</button>
+    </h2>
+    <ng-template #editingName>
+      <input
+        type="text"
+        class="edit-comparison-dialog__name-input"
+        [(ngModel)]="details.name"
+      />
+    </ng-template>
+
+    <h3 class="edit-comparison-dialog__items-title">
+      Products
+      <button
+        class="edit-comparison-dialog__edit-items-button button-link"
+        (click)="isRemovingItems = !isRemovingItems"
+        style="cursor: pointer"
+      >{{ isRemovingItems ? 'Done' : 'Edit' }}</button>
+    </h3>
+    <ul
+      class="edit-comparison-dialog__product-list"
+      [class.edit-comparison-dialog__product-list--edit]="isRemovingItems"
+    >
+      <li
+        *ngFor="let product of comparison.products"
+        class="edit-comparison-dialog__product-list-item"
+      >
+        {{ product.name }} (<em>{{ product.supermarket }}</em>)
+        <button
+          *ngIf="isRemovingItems"
+          class="edit-comparison-dialog__remove-button button-link"
+          (click)="onRemoveProduct(product)"
+        >Remove</button>
+      </li>
+    </ul>
+
+    <div class="edit-comparison-dialog__buttons">
+      <button class="edit-comparison-dialog__button button-link edit-comparison-dialog__button--delete edit-comparison-dialog__button--left" (click)="onDelete()">Delete Item</button>
+      <button class="edit-comparison-dialog__button" (click)="onClose()">Cancel</button>
+      <button class="edit-comparison-dialog__button" type="submit" (click)="onConfirm()">Save</button>
+    </div>
+  </div>
+</div>

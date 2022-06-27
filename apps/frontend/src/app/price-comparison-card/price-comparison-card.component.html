@@ -1,0 +1,74 @@
+<div class="price-comparison-card">
+  <div
+    class="price-comparison-card__image"
+    [style.background-image]="backgroundImage"
+  ></div>
+  <p class="price-comparison-card__name">{{ priceComparison.name }}</p>
+  <div class="price-comparison-card__price-area">
+    <!-- @formatter:off -->
+    <span
+      *ngIf="getReductionPercentage() > 0"
+      class="price-comparison-card__original-price"
+    >{{
+      priceComparison.products[0].specialOffer?.originalPrice | currency:'GBP'
+      }}</span>
+    <span
+      class="price-comparison-card__best-price"
+    >
+      {{ priceComparison.products[0].price | currency:'GBP' }}
+    </span>
+    <p class="price-comparison-card__price">
+    {{
+      priceComparison.pricePerUnit.best | currency:'GBP'
+    }}/{{
+      priceComparison.unitOfMeasurement | unitAmount
+    }}
+    </p>
+    <p
+      *ngIf="getReductionPercentage() > 0"
+      class="price-comparison-card__reduction"
+    >-{{ getReductionPercentage() }}%</p>
+<!--    <span-->
+<!--      class="price-comparison-card__usual-price"-->
+<!--      *ngIf="getReductionPercentage() > 0"-->
+<!--    > (usually {{-->
+<!--        priceComparison.pricePerUnit.usual | currency:'GBP'-->
+<!--      }}/{{-->
+<!--        priceComparison.unitOfMeasurement.amount === 1 ? '' : priceComparison.unitOfMeasurement.amount-->
+<!--      }}{{-->
+<!--        priceComparison.unitOfMeasurement.name-->
+<!--      }})</span>-->
+    <!-- @formatter:on -->
+  </div>
+  <div class="price-comparison-card__items">
+    <button class="button-link" (click)="isExpanded = !isExpanded">Products {{ isExpanded ? '-' : '+' }}</button>
+    <table *ngIf="isExpanded" style="border-collapse: collapse">
+      <tbody>
+      <tr
+        *ngFor="let product of priceComparison.products"
+      >
+        <td style="padding: 4px 16px 4px 0">{{ product.supermarket }}</td>
+        <td
+          style="padding-right: 16px"
+          [style.color]="product.specialOffer? 'red' : null"
+        >
+          {{
+          product.pricePerUnit | currency:'GBP'
+          }}/{{
+          priceComparison.unitOfMeasurement | unitAmount
+          }}
+        </td>
+        <td
+          style="padding-right: 8px"
+          [style.color]="product.specialOffer? 'red' : null"
+        >{{ product.packSize.amount }}{{ product.packSize.unit }}</td>
+        <td
+          [style.color]="product.specialOffer? 'red' : null"
+        >
+          {{ product.price | currency:'GBP' }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

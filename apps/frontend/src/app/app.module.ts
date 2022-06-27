@@ -6,12 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditItemGroupDialogComponent } from './edit-product-dialog/edit-item-group-dialog.component';
+import { EditPriceComparisonDialogComponent } from './edit-product-dialog/edit-price-comparison-dialog.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { PriceComparisonCardComponent } from './price-comparison-card/price-comparison-card.component';
+import { PriceComparisonsPageComponent } from './price-comparisons-page/price-comparisons-page.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchResultListComponent } from './search-result-list/search-result-list.component';
-import { TrackedItemsPageComponent } from './tracked-items-page/tracked-items-page.component';
+import { UnitAmountPipe } from './unit-amount.pipe';
 
 // prettier-ignore
 @NgModule({
@@ -26,13 +28,16 @@ import { TrackedItemsPageComponent } from './tracked-items-page/tracked-items-pa
     AppComponent,
     SearchPageComponent,
     HomePageComponent,
-    TrackedItemsPageComponent,
+    PriceComparisonsPageComponent,
     SearchBoxComponent,
     AddProductDialogComponent,
-    EditItemGroupDialogComponent,
+    EditPriceComparisonDialogComponent,
     SearchResultListComponent,
+    PriceComparisonCardComponent,
+    UnitAmountPipe,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

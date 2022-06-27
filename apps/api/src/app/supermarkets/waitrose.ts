@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { Product } from '../product.model';
+import { SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
 import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
 import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
 
@@ -43,7 +44,7 @@ export class Waitrose extends Supermarket {
     // this.token = jwtString;
   }
 
-  public async getProduct(id: string): Promise<Product | null> {
+  public async getProduct(id: string): Promise<SupermarketProduct | null> {
     await this.init();
 
     const search = await axios.get<SingleResult>(
@@ -60,6 +61,8 @@ export class Waitrose extends Supermarket {
       return null;
     } else {
       const result = searchResult.products[0];
+
+      // console.log(JSON.stringify(result, null, 2));
 
       return transformSingleResult(this.getId(id), result);
     }
@@ -117,25 +120,54 @@ export class Waitrose extends Supermarket {
   }
 }
 
-function transformSingleResult(id: string, result: SingleResult['products'][0]): Product {
+function getSpecialOffer(
+  promotion: Required<SingleResult['products'][0]>['promotion'],
+  originalPrice: number,
+  promotionalPrice: number,
+  pricePerUnit: number
+): SpecialOffer {
+  const originalPricePerUnit = pricePerUnit * (originalPrice / promotionalPrice);
+
+  return {
+    offerText: promotion.promotionDescription,
+    validUntil: new Date(promotion.promotionExpiryDate).toISOString(),
+    originalPrice,
+    originalPricePerUnit,
+  };
+}
+
+function transformSingleResult(id: string, result: SingleResult['products'][0]): SupermarketProduct {
   const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
 
   const defaultPrice = result.currentSaleUnitPrice.price.amount;
 
-  return {
+  const { pricePerUnit, unitAmount, unitName } = getPrice(result);
+  const packSize = parsePackSize(result.size);
+
+  const price = promotionalPrice || defaultPrice;
+
+  const specialOffer = result.promotion ? getSpecialOffer(result.promotion, defaultPrice, price, pricePerUnit) : null;
+
+  return SupermarketProduct({
     id,
     name: result.name,
-    price: promotionalPrice || defaultPrice,
+    image:
+      result.productImageUrls.extraLarge ||
+      result.productImageUrls.large ||
+      result.productImageUrls.medium ||
+      result.thumbnail,
+    url: `https://www.waitrose.com/ecom/products/_/${result.id}`, // _ is a slug and not relevant, so we use something arbitrary
+
+    price,
+    pricePerUnit,
+    unitAmount,
+    unitName,
+    packSize,
+
+    specialOffer,
+
     supermarket: Waitrose.NAME,
-    specialOffer: result.promotion
-      ? {
-          offerText: result.promotion.promotionDescription,
-          validUntil: new Date(result.promotion.promotionExpiryDate).toISOString(),
-          originalPrice: defaultPrice,
-        }
-      : null,
-    ...getPrice(result),
-  };
+  });
 }
 
 function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
@@ -160,5 +192,25 @@ function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; 
     pricePerUnit: result.currentSaleUnitPrice.price.amount,
     unitAmount: 1,
     unitName: 'each',
+  };
+}
+
+function parsePackSize(sizeString: string): { amount: number; unit: string } {
+  const match = sizeString.match(/^(\d*)([^\d].*)$/);
+  if (match) {
+    const [, amountString, unit] = match;
+    const amount = parseFloat(amountString?.trim() || '') || 1;
+
+    return {
+      amount,
+      unit: standardiseUnit(unit.trim()),
+    };
+  }
+
+  console.error('Could not parse size', sizeString);
+
+  return {
+    amount: 1,
+    unit: '',
   };
 }

@@ -1,14 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { TrackedProductsRepository } from './db/tracked-products.repository';
+import { ProductRepository } from './db/product-repository.service';
 import { SupermarketService } from './supermarkets';
 
 @Injectable()
 export class CronService {
   constructor(
     private readonly supermarketService: SupermarketService,
-    private readonly trackedProductsRepo: TrackedProductsRepository
-  ) {}
+    private readonly productRepo: ProductRepository
+  ) {
+    if (process.env['RUN_MIGRATION'] === 'true') {
+      this.regenerateFavouriteData();
+    }
+  }
 
   @Cron(CronExpression.EVERY_DAY_AT_1AM, {
     name: 'regenerateFavouritesData',
@@ -16,7 +20,7 @@ export class CronService {
   })
   public async regenerateFavouriteData(): Promise<void> {
     console.log('Starting cronjob to refresh favourites data');
-    const favourites = await this.trackedProductsRepo.getAllTrackedIds();
+    const favourites = await this.productRepo.getAllTrackedIds();
     console.log(`Refreshing ${favourites.length} items...`);
 
     const results = await this.supermarketService.getMultipleItems(favourites, new Date(), true);
