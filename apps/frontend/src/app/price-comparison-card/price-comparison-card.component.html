@@ -10,16 +10,16 @@
       *ngIf="getReductionPercentage() > 0"
       class="price-comparison-card__original-price"
     >{{
-      priceComparison.products[0].specialOffer?.originalPrice | currency:'GBP'
+      priceComparison.price.usual.itemPrice | currency:'GBP'
       }}</span>
     <span
       class="price-comparison-card__best-price"
     >
-      {{ priceComparison.products[0].price | currency:'GBP' }}
+      {{ priceComparison.price.best.itemPrice | currency:'GBP' }}
     </span>
     <p class="price-comparison-card__price">
     {{
-      priceComparison.pricePerUnit.best | currency:'GBP'
+      priceComparison.price.best.unitPrice | currency:'GBP'
     }}/{{
       priceComparison.unitOfMeasurement | unitAmount
     }}

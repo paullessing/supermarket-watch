@@ -39,10 +39,24 @@ export function unique<T>(getId?: (value: T) => unknown): (value: T, index: numb
 }
 
 /**
- * Reducer function, use like .reduce(minimum)
+ * Reducer function, use like .reduce(minimum())
  */
-export function minimum(min: number | undefined, current: number): number {
-  return min === undefined ? current : Math.min(min, current);
+export function minimum(): (acc: number | undefined, current: number) => number;
+export function minimum<T>(property: keyof T): (acc: T | undefined, current: T) => T;
+export function minimum<T>(predicate: (value: T) => number): (acc: T | undefined, current: T) => T;
+export function minimum<T = unknown>(
+  predicateOrKey?: keyof T | ((value: T) => number)
+): (acc: T | undefined, current: T) => T {
+  if (typeof predicateOrKey === 'string') {
+    const key = predicateOrKey;
+    return (min, current) => (min === undefined || current[key] < min[key] ? current : min);
+  } else if (typeof predicateOrKey === 'function') {
+    const predicate = predicateOrKey;
+    return (min, current) => (min === undefined || predicate(current) < predicate(min) ? current : min);
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (min: undefined | any, current: any) => (min === undefined ? current : Math.min(min, current)) as any;
+  }
 }
 
 export function exists<T>(value: T | undefined | null): value is T {

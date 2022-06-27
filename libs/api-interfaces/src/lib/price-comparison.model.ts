@@ -6,9 +6,15 @@ export interface PriceComparison {
     name: string;
     amount: number;
   };
-  pricePerUnit: {
-    best: number;
-    usual: number;
+  price: {
+    best: {
+      unitPrice: number;
+      itemPrice: number;
+    };
+    usual: {
+      unitPrice: number;
+      itemPrice: number;
+    };
   };
   products: ComparisonProductData[];
   // specialOffers: {

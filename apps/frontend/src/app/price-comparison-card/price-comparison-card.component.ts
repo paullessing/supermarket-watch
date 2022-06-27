@@ -23,7 +23,9 @@ export class PriceComparisonCardComponent implements OnInit {
   }
 
   public getReductionPercentage(): number {
-    const { best, usual } = this.priceComparison.pricePerUnit;
+    const best = this.priceComparison.price.best.unitPrice;
+    const usual = this.priceComparison.price.usual.unitPrice;
+
     return Math.round((1 - best / usual) * 100);
   }
 }

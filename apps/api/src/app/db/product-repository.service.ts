@@ -23,9 +23,15 @@ export interface PriceComparisonDocument extends TimestampedDocument {
     product: SupermarketProduct;
     lastUpdated: Date;
   }[];
-  pricePerUnit: {
-    best: number;
-    usual: number;
+  price: {
+    best: {
+      unitPrice: number;
+      itemPrice: number;
+    };
+    usual: {
+      unitPrice: number;
+      itemPrice: number;
+    };
     computedAt: Date;
   };
   manualConversions: ManualConversion[];
@@ -178,13 +184,13 @@ export class ProductRepository {
   public async getAllTrackedProducts(): Promise<PriceComparison[]> {
     const priceComparisons = await this.priceComparisons.find({}).toArray();
     return priceComparisons.map((priceComparison) => {
-      const { _id, name, products, image, unitOfMeasurement, pricePerUnit, manualConversions } = priceComparison;
+      const { _id, name, products, image, unitOfMeasurement, price, manualConversions } = priceComparison;
 
       return {
         id: _id.toString(),
         name,
         image,
-        pricePerUnit,
+        price,
         unitOfMeasurement: {
           name: unitOfMeasurement.name,
           amount: unitOfMeasurement.amount,
@@ -274,8 +280,8 @@ export class ProductRepository {
 
     const updatedProducts = comparison.products.filter(({ product }) => product.id !== productId);
 
-    const priceComputedAt = comparison.pricePerUnit.computedAt;
-    const pricePerUnit = {
+    const priceComputedAt = comparison.price.computedAt;
+    const price = {
       // TODO test this
       best: this.priceCalculator.getBestPrice(
         updatedProducts,
@@ -296,7 +302,7 @@ export class ProductRepository {
       {
         $set: {
           products: updatedProducts,
-          pricePerUnit,
+          price,
         },
       }
     );
@@ -366,7 +372,7 @@ export class ProductRepository {
       }
     }
 
-    const pricePerUnit = {
+    const price = {
       best: this.priceCalculator.getBestPrice(
         products,
         now,
@@ -394,7 +400,7 @@ export class ProductRepository {
           products,
           updatedAt: now,
           lastUpdated: now,
-          pricePerUnit,
+          price,
           ...image,
         },
       }
@@ -479,7 +485,7 @@ export class ProductRepository {
 
     const products = [...comparison.products, { product, lastUpdated: now }];
 
-    const pricePerUnit = {
+    const price = {
       best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, manualConversions),
       usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, manualConversions),
       computedAt: now,
@@ -497,7 +503,7 @@ export class ProductRepository {
           },
         },
         $set: {
-          pricePerUnit,
+          price,
           manualConversions,
           updatedAt: now,
         },
@@ -520,9 +526,20 @@ export class ProductRepository {
         amount: unitAmount,
         name: unitName,
       },
-      pricePerUnit: {
-        best: product.pricePerUnit,
-        usual: product.specialOffer ? 0 : product.pricePerUnit,
+      price: {
+        best: {
+          itemPrice: product.price,
+          unitPrice: product.pricePerUnit,
+        },
+        usual: product.specialOffer
+          ? {
+              itemPrice: product.specialOffer.originalPrice ?? 0,
+              unitPrice: product.specialOffer.originalPricePerUnit ?? 0,
+            }
+          : {
+              itemPrice: product.price,
+              unitPrice: product.pricePerUnit,
+            },
         computedAt: now,
       },
       products: [{ product, lastUpdated: now }],
@@ -544,9 +561,9 @@ export class ProductRepository {
         name: value.unitOfMeasurement.name,
         amount: value.unitOfMeasurement.amount,
       },
-      pricePerUnit: {
-        best: value.pricePerUnit.best,
-        usual: value.pricePerUnit.usual,
+      price: {
+        best: value.price.best,
+        usual: value.price.usual,
       },
       products: value.products.map(
         ({ product }): ComparisonProductData => ({

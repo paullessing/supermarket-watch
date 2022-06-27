@@ -14,7 +14,7 @@ export class ProductPriceCalculator {
     now: Date,
     targetUnit: { name: string; amount: number },
     manualConversions: ManualConversion[]
-  ): number {
+  ): { unitPrice: number; itemPrice: number } {
     const today = startOfDay(now);
 
     const productPrices = products.map(({ product, lastUpdated }) => {
@@ -27,24 +27,23 @@ export class ProductPriceCalculator {
 
       return {
         lastUpdated,
+        itemPrice: product.price,
         currentPrice,
       };
     });
 
-    const best =
-      productPrices
-        .filter(({ lastUpdated }) => isAfter(lastUpdated, today))
-        .map(({ currentPrice }) => currentPrice)
-        .reduce(minimum) ?? 0;
+    const best = productPrices
+      .filter(({ lastUpdated }) => isAfter(lastUpdated, today))
+      .reduce(minimum('currentPrice')) ?? { itemPrice: 0, unitPrice: 0 };
 
-    return best;
+    return { itemPrice: best.itemPrice, unitPrice: best.currentPrice };
   }
 
   public getUsualPrice(
     products: { product: SupermarketProduct }[],
     targetUnit: { name: string; amount: number },
     manualConversions: ManualConversion[]
-  ): number {
+  ): { unitPrice: number; itemPrice: number } {
     return (
       products
         .map(({ product }) => {
@@ -64,9 +63,12 @@ export class ProductPriceCalculator {
               )
             : currentPrice;
 
-          return usualPrice;
+          return {
+            unitPrice: usualPrice,
+            itemPrice: product.specialOffer ? product.specialOffer.originalPrice ?? 0 : product.price,
+          };
         })
-        .reduce(minimum) ?? 0
+        .reduce(minimum('unitPrice')) ?? { itemPrice: 0, unitPrice: 0 }
     );
   }
 }
