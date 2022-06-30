@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { UnitAmountPipe } from './unit-amount.pipe';
 
 // prettier-ignore
 @NgModule({
-  imports: [CommonModule, BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, NgApexchartsModule],
   declarations: [
     AppComponent,
     SearchPageComponent,

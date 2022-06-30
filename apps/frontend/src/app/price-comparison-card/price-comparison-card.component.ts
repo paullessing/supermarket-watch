@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { format } from 'date-fns';
+import { startOfDay } from 'date-fns';
+import { ApexAxisChartSeries } from 'ng-apexcharts';
 import { lastValueFrom } from 'rxjs';
 import { PriceComparison } from '@shoppi/api-interfaces';
 
@@ -24,7 +25,7 @@ export class PriceComparisonCardComponent implements OnInit {
   public isExpanded: boolean = false;
 
   public isLoadingHistoryData: boolean = false;
-  public historyData: unknown[] | null = null;
+  public historyData: ApexAxisChartSeries | null = null;
 
   constructor(
     private readonly sanitizer: DomSanitizer,
@@ -63,10 +64,7 @@ export class PriceComparisonCardComponent implements OnInit {
 
     this.historyData = data.map(({ name, history, supermarket }) => ({
       name: `${name} (${supermarket})`,
-      series: history.map(({ date, price }) => ({
-        name: format(new Date(date), 'yyyy-mm-dd'),
-        value: price,
-      })),
+      data: history.map(({ date, price }) => [startOfDay(new Date(date)).getTime(), price] as [number, number | null]),
     }));
 
     this.cdr.markForCheck();

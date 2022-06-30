@@ -80,9 +80,14 @@
       [disabled]="isLoadingHistoryData"
     >{{ isLoadingHistoryData ? 'Loading...' : 'View Stats' }}</button>
 
-    <ng-container
+    <apx-chart
       *ngIf="historyData"
       class="price-comparison-card__graph"
-    ></ng-container>
+      [series]="historyData"
+      [chart]="{ type: 'line', height: 350, animations: { enabled: false } }"
+      [stroke]="{ curve: 'stepline', width: 1 }"
+      [title]="{ text: 'Price History', align: 'left' }"
+      [xaxis]="{ type: 'datetime' }"
+    ></apx-chart>
   </div>
 </div>
