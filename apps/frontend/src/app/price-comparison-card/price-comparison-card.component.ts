@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { curveStepAfter } from 'd3-shape';
 import { format } from 'date-fns';
 import { lastValueFrom } from 'rxjs';
 import { PriceComparison } from '@shoppi/api-interfaces';
@@ -26,8 +25,6 @@ export class PriceComparisonCardComponent implements OnInit {
 
   public isLoadingHistoryData: boolean = false;
   public historyData: unknown[] | null = null;
-
-  public step = curveStepAfter;
 
   constructor(
     private readonly sanitizer: DomSanitizer,

@@ -39,7 +39,6 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.2.0",
-    "@angular/cdk": "~13.2.0",
     "@angular/common": "~13.2.0",
     "@angular/compiler": "~13.2.0",
     "@angular/core": "~13.2.0",
@@ -52,7 +51,6 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/schedule": "1.0.2",
     "@nestjs/serve-static": "2.2.2",
-    "@swimlane/ngx-charts": "^20.1.0",
     "axios": "^0.21.2",
     "axios-cookiejar-support": "^0.5.1",
     "cheerio": "^1.0.0-rc.10",
