@@ -71,4 +71,32 @@
       </tbody>
     </table>
   </div>
+
+  <div class="price-comparison-card__graph">
+    <button
+      *ngIf="!historyData"
+      class="button-link"
+      (click)="loadHistoryData()"
+      [disabled]="isLoadingHistoryData"
+    >{{ isLoadingHistoryData ? 'Loading...' : 'View History Data' }}</button>
+
+    <ngx-charts-line-chart
+      *ngIf="historyData"
+      class="price-comparison-card__graph"
+      [view]="[700, 300]"
+
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      xAxisLabel="Date"
+      yAxisLabel="Price"
+      [timeline]="true"
+      [results]="historyData"
+      [curve]="step"
+      [rotateXAxisTicks]="true"
+      [trimXAxisTicks]="true"
+      
+    ></ngx-charts-line-chart>
+  </div>
 </div>

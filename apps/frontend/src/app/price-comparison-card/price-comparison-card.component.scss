@@ -10,10 +10,11 @@
 
   display: grid;
   grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "image name price"
-    "image data data";
+    "image data data"
+    "graph graph graph";
 
   $padding: 0.5rem;
 
@@ -88,5 +89,9 @@
       right: 0;
       top: 50%;
     }
+  }
+
+  &__graph {
+    grid-area: graph;
   }
 }
