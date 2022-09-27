@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
-import deepEquals from 'fast-deep-equal';
 import { Collection, Filter, MatchKeysAndValues, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
-import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
+import { compareSpecialOffers, ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
 import { ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarket-product.model';
@@ -46,7 +45,7 @@ interface HistoryEntry {
 
 export interface ProductHistoryDocument extends TimestampedDocument {
   productId: string;
-  history: HistoryEntry[];
+  history: HistoryEntry[]; // Reverse chronological order
 }
 
 @Injectable()
@@ -169,7 +168,7 @@ export class ProductRepository {
       throw new Error('Tracking does not exist');
     }
 
-    return this.convertToPriceComparison(value);
+    return convertToPriceComparison(value);
   }
 
   public async addToHistory(product: SupermarketProduct, now: Date): Promise<void> {
@@ -353,41 +352,15 @@ export class ProductRepository {
   }
 
   public async getProductsWithSpecialOffersStartingSince(startDate: Date): Promise<PriceComparison[]> {
-    // this.priceComparisons.aggregate([{ $where: { $ } }]);
+    console.log(startDate);
 
-    // const priceComparisonsWithSpecialOffersIds = await this.priceComparisons
-    //   .find(
-    //     {
-    //       $where: function (this: PriceComparisonDocument) {
-    //         return this.price.best.unitPrice < this.price.usual.unitPrice;
-    //       },
-    //     },
-    //     {
-    //       projection: {
-    //         id: 1,
-    //       },
-    //     }
-    //   )
-    //   .toArray();
-
-    console.log(
-      JSON.stringify(
-        this.history
-          .aggregate([
-            {
-              $match: {
-                'product.specialOffer': { $ne: null },
-              },
-            },
-          ])
-          .toArray(),
-        null,
-        2
-      )
-    );
-
-    // this.history.find();
-    return [];
+    return (
+      await this.priceComparisons
+        .find({
+          'products.specialOfferStartedAt': { $gte: startDate },
+        })
+        .toArray()
+    ).map(convertToPriceComparison);
   }
 
   private async updateProducts(
@@ -406,7 +379,7 @@ export class ProductRepository {
       if (existingProduct.lastUpdated < now) {
         const oldSpecialOffer = existingProduct.product.specialOffer;
         const newSpecialOffer = updatedProduct.specialOffer;
-        const specialOfferStartedAt = deepEquals(oldSpecialOffer, newSpecialOffer)
+        const specialOfferStartedAt = compareSpecialOffers(oldSpecialOffer, newSpecialOffer)
           ? existingProduct.specialOfferStartedAt
           : now;
 
@@ -599,38 +572,38 @@ export class ProductRepository {
     const result = await this.priceComparisons.insertOne(newEntry as PriceComparisonDocument);
     return result.insertedId.toString();
   }
+}
 
-  private convertToPriceComparison(value: PriceComparisonDocument): PriceComparison {
-    return {
-      id: value._id.toString(),
-      name: value.name,
-      image: value.image,
-      unitOfMeasurement: {
-        name: value.unitOfMeasurement.name,
-        amount: value.unitOfMeasurement.amount,
-      },
-      price: {
-        best: value.price.best,
-        usual: value.price.usual,
-      },
-      products: value.products.map(
-        ({ product }): ComparisonProductData => ({
-          id: product.id,
-          name: product.name,
-          url: product.url,
-          image: product.image,
-          packSize: {
-            unit: product.packSize.unit,
-            amount: product.packSize.amount,
-          },
-          price: product.price,
-          pricePerUnit: product.pricePerUnit,
-          supermarket: product.supermarket,
-          specialOffer: product.specialOffer,
-        })
-      ),
-    };
-  }
+function convertToPriceComparison(value: PriceComparisonDocument): PriceComparison {
+  return {
+    id: value._id.toString(),
+    name: value.name,
+    image: value.image,
+    unitOfMeasurement: {
+      name: value.unitOfMeasurement.name,
+      amount: value.unitOfMeasurement.amount,
+    },
+    price: {
+      best: value.price.best,
+      usual: value.price.usual,
+    },
+    products: value.products.map(
+      ({ product }): ComparisonProductData => ({
+        id: product.id,
+        name: product.name,
+        url: product.url,
+        image: product.image,
+        packSize: {
+          unit: product.packSize.unit,
+          amount: product.packSize.amount,
+        },
+        price: product.price,
+        pricePerUnit: product.pricePerUnit,
+        supermarket: product.supermarket,
+        specialOffer: product.specialOffer,
+      })
+    ),
+  };
 }
 
 function toId(id: string | ObjectId): ObjectId {

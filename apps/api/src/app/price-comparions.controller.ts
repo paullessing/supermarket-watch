@@ -13,6 +13,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { parseISO } from 'date-fns';
 import {
   AddTrackedProduct,
   ManualConversion,
@@ -162,5 +163,24 @@ export class PriceComparionsController {
       console.error(e);
       throw new InternalServerErrorException(e);
     }
+  }
+
+  @Get('/offers')
+  public async getProductsOnOffer(@Query('since') since: string): Promise<{ items: PriceComparison[] }> {
+    let startDate: Date | null = null;
+    if (since) {
+      try {
+        startDate = parseISO(since);
+      } catch (e) {
+        console.error(e);
+        throw new BadRequestException('Invalid format for parameter "since", ISO-8601 string expected');
+      }
+    }
+
+    if (!startDate) {
+      throw new BadRequestException('Parameter "since" is required');
+    }
+
+    return { items: await this.productRepo.getProductsWithSpecialOffersStartingSince(startDate) };
   }
 }
