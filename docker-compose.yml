@@ -32,7 +32,7 @@ services:
       - ./decorate-angular-cli.js:/usr/src/app/decorate-angular-cli.js:ro
       - ./jest.preset.js:/usr/src/app/jest.preset.js:ro
       - ./nx.json:/usr/src/app/nx.json:ro
-      - ./nest-cli.json:/usr/src/app/nest-cli.json:ro
+      #- ./nest-cli.json:/usr/src/app/nest-cli.json:ro
       - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json:ro
       - ./package.json:/usr/src/app/package.json:ro
       - ./yarn.lock:/usr/src/app/yarn.lock:ro
