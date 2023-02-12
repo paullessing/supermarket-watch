@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
+import deepEquals from 'fast-deep-equal';
 import { Collection, Filter, MatchKeysAndValues, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
 import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
@@ -21,6 +22,7 @@ export interface PriceComparisonDocument extends TimestampedDocument {
   products: {
     // unique by product.id
     product: SupermarketProduct;
+    specialOfferStartedAt: Date | null;
     lastUpdated: Date;
   }[];
   price: {
@@ -350,6 +352,44 @@ export class ProductRepository {
     return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
   }
 
+  public async getProductsWithSpecialOffersStartingSince(startDate: Date): Promise<PriceComparison[]> {
+    // this.priceComparisons.aggregate([{ $where: { $ } }]);
+
+    // const priceComparisonsWithSpecialOffersIds = await this.priceComparisons
+    //   .find(
+    //     {
+    //       $where: function (this: PriceComparisonDocument) {
+    //         return this.price.best.unitPrice < this.price.usual.unitPrice;
+    //       },
+    //     },
+    //     {
+    //       projection: {
+    //         id: 1,
+    //       },
+    //     }
+    //   )
+    //   .toArray();
+
+    console.log(
+      JSON.stringify(
+        this.history
+          .aggregate([
+            {
+              $match: {
+                'product.specialOffer': { $ne: null },
+              },
+            },
+          ])
+          .toArray(),
+        null,
+        2
+      )
+    );
+
+    // this.history.find();
+    return [];
+  }
+
   private async updateProducts(
     comparison: PriceComparisonDocument,
     updatedProducts: SupermarketProduct[],
@@ -364,9 +404,16 @@ export class ProductRepository {
       }
       const existingProduct = products[existingProductIndex];
       if (existingProduct.lastUpdated < now) {
+        const oldSpecialOffer = existingProduct.product.specialOffer;
+        const newSpecialOffer = updatedProduct.specialOffer;
+        const specialOfferStartedAt = deepEquals(oldSpecialOffer, newSpecialOffer)
+          ? existingProduct.specialOfferStartedAt
+          : now;
+
         products[existingProductIndex] = {
           ...existingProduct,
           product: updatedProduct,
+          specialOfferStartedAt,
           lastUpdated: now,
         };
       }
@@ -499,6 +546,7 @@ export class ProductRepository {
         $push: {
           products: {
             product,
+            specialOfferStartedAt: product.specialOffer ? now : null, // TODO this should check the history for if the offer has been going on longer
             lastUpdated: now,
           },
         },
@@ -542,7 +590,7 @@ export class ProductRepository {
             },
         computedAt: now,
       },
-      products: [{ product, lastUpdated: now }],
+      products: [{ product, specialOfferStartedAt: product.specialOffer ? now : null, lastUpdated: now }],
       createdAt: now,
       updatedAt: now,
       manualConversions: manualConversion ? [manualConversion] : [],
