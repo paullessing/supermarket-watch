@@ -11,15 +11,8 @@ import { ProductRepository } from './db/product-repository.service';
 import { PriceComparionsController } from './price-comparions.controller';
 import { ProductsController } from './products.controller';
 import { SearchController } from './search.controller';
-import {
-  Sainsburys,
-  Supermarket,
-  SupermarketList,
-  Supermarkets,
-  SupermarketService,
-  Tesco,
-  Waitrose,
-} from './supermarkets';
+import { Sainsburys, Supermarket, Supermarkets, SupermarketService, Tesco, Waitrose } from './supermarkets';
+import { SupermarketList } from './supermarkets/supermarket-list.service';
 
 @Module({
   imports: [

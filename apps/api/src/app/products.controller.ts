@@ -2,7 +2,8 @@ import { BadRequestException, Controller, Get, NotFoundException, Param, Query }
 import { ComparisonProductData, ProductDetails } from '@shoppi/api-interfaces';
 import { ProductRepository } from './db/product-repository.service';
 import { SupermarketProduct } from './supermarket-product.model';
-import { InvalidIdException, SupermarketService } from './supermarkets';
+import { SupermarketService } from './supermarkets';
+import { InvalidIdException } from './supermarkets/supermarket-list.service';
 
 @Controller('api/products')
 export class ProductsController {
