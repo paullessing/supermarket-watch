@@ -59,6 +59,21 @@ export class SupermarketService {
     );
   }
 
+  public async refreshMultipleItems(
+    ids: string[],
+    now: Date,
+    forceFresh: boolean = false
+  ): Promise<PromiseSettledResult<SupermarketProduct>[]> {
+    return Promise.allSettled(
+      ids.map((id) =>
+        this.getSingleItem(id, now, forceFresh).catch((e) => {
+          console.log('Failed to fetch item', id, e);
+          throw e;
+        })
+      )
+    );
+  }
+
   public async getAllPriceComparisons(
     now: Date,
     { forceFresh = 'none', sortByPrice = true }: { forceFresh?: 'none' | 'today' | 'all'; sortByPrice?: boolean } = {}

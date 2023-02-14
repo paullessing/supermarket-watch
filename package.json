@@ -33,7 +33,8 @@
     "postinstall": "if [ \"$NODE_ENV\" != \"production\" ]; then node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main; fi",
     "dc-prod": "docker-compose -f docker/docker-compose.prod.yml",
     "build:proxy": "cd proxy && yarn install",
-    "start:proxy": "cd proxy && yarn start"
+    "start:proxy": "cd proxy && yarn start",
+    "mongo:restore": "dc exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && dc exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson"
   },
   "private": true,
   "dependencies": {
@@ -55,6 +56,7 @@
     "cheerio": "^1.0.0-rc.10",
     "core-js": "^2.5.4",
     "date-fns": "^2.21.2",
+    "fast-deep-equal": "^3.1.3",
     "jest-extended": "^2.0.0",
     "mongodb": "^4.3.1",
     "reflect-metadata": "^0.1.13",

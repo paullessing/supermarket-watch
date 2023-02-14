@@ -4,11 +4,15 @@ import { SupermarketProduct } from '../supermarket-product.model';
 import { SearchResultItemWithoutTracking, Supermarket, Supermarkets } from './supermarket';
 
 export class InvalidIdException extends Error {
-  constructor(id: string) {
+  public readonly explanation: string | undefined;
+
+  constructor(id: string, explanation?: string) {
     super('Invalid ID or Product not found: ' + id);
 
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, InvalidIdException.prototype);
+
+    this.explanation = explanation;
   }
 }
 
@@ -22,7 +26,7 @@ export class SupermarketList {
   public async fetchProduct(id: string): Promise<SupermarketProduct> {
     const match = id.match(/^(\w+):(.+)$/);
     if (!match) {
-      throw new InvalidIdException(id);
+      throw new InvalidIdException(id, 'Invalid ID format');
     }
 
     for (const supermarket of this.supermarkets) {
@@ -40,11 +44,13 @@ export class SupermarketList {
 
           // console.log('PRODUCT RET', product);
           return product;
+        } else {
+          throw new InvalidIdException(id, 'Item ID not found at supermarket');
         }
       }
     }
 
-    throw new InvalidIdException(id);
+    throw new InvalidIdException(id, 'ID did not match any supermarkets');
   }
 
   public async search(query: string): Promise<SearchResultItemWithoutTracking[]> {

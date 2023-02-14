@@ -25,6 +25,7 @@ export class Sainsburys extends Supermarket {
     );
 
     if (!search.data.products || !search.data.products.length) {
+      console.debug('No products found in search');
       return null;
     }
 

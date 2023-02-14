@@ -7,6 +7,10 @@ export function initialiseLogger(logLevel?: string): Logger {
     return `${timestamp} ${level}: ${message}`;
   });
 
+  if (logLevel) {
+    console.log(`Log level set to "${logLevel}"`);
+  }
+
   const logger = winston.createLogger({
     transports: [new winston.transports.Console()],
     format: format.combine(format.timestamp(), format.colorize(), myFormat),
@@ -14,12 +18,29 @@ export function initialiseLogger(logLevel?: string): Logger {
 
   logger.level = logLevel || 'info';
 
+  function formatConsoleLog(...args: unknown[]): string {
+    return args
+      .map((value) => {
+        if (typeof value === 'string') {
+          return value;
+        }
+        if (value === 'null') {
+          return 'null';
+        }
+        if (typeof value === 'undefined') {
+          return 'undefined';
+        }
+        return JSON.stringify(value);
+      })
+      .join(' ');
+  }
+
   /* eslint-disable @typescript-eslint/ban-types */
-  console.log = (...args: unknown[]) => (logger.verbose as Function).call(logger, ...args);
-  console.info = (...args: unknown[]) => (logger.info as Function).call(logger, ...args);
-  console.warn = (...args: unknown[]) => (logger.warn as Function).call(logger, ...args);
-  console.error = (...args: unknown[]) => (logger.error as Function).call(logger, ...args);
-  console.debug = (...args: unknown[]) => (logger.debug as Function).call(logger, ...args);
+  console.log = (...args: unknown[]) => logger.verbose(formatConsoleLog(...args));
+  console.info = (...args: unknown[]) => logger.info(formatConsoleLog(...args));
+  console.warn = (...args: unknown[]) => logger.warn(formatConsoleLog(...args));
+  console.error = (...args: unknown[]) => logger.error(formatConsoleLog(...args));
+  console.debug = (...args: unknown[]) => logger.debug(formatConsoleLog(...args));
 
   return logger;
 }

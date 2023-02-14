@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { differenceInMinutes } from 'date-fns';
 import { Collection, Filter, MatchKeysAndValues, ObjectId, OptionalId, ReturnDocument, WithoutId } from 'mongodb';
-import { ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
+import { compareSpecialOffers, ComparisonProductData, ManualConversion, PriceComparison } from '@shoppi/api-interfaces';
 import { CannotConvertError } from '../cannot-convert.error';
 import { ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarket-product.model';
@@ -21,6 +21,7 @@ export interface PriceComparisonDocument extends TimestampedDocument {
   products: {
     // unique by product.id
     product: SupermarketProduct;
+    specialOfferStartedAt: Date | null;
     lastUpdated: Date;
   }[];
   price: {
@@ -44,7 +45,7 @@ interface HistoryEntry {
 
 export interface ProductHistoryDocument extends TimestampedDocument {
   productId: string;
-  history: HistoryEntry[];
+  history: HistoryEntry[]; // Reverse chronological order
 }
 
 @Injectable()
@@ -167,7 +168,7 @@ export class ProductRepository {
       throw new Error('Tracking does not exist');
     }
 
-    return this.convertToPriceComparison(value);
+    return convertToPriceComparison(value);
   }
 
   public async addToHistory(product: SupermarketProduct, now: Date): Promise<void> {
@@ -350,6 +351,18 @@ export class ProductRepository {
     return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
   }
 
+  public async getProductsWithSpecialOffersStartingSince(startDate: Date): Promise<PriceComparison[]> {
+    console.log(startDate);
+
+    return (
+      await this.priceComparisons
+        .find({
+          'products.specialOfferStartedAt': { $gte: startDate },
+        })
+        .toArray()
+    ).map(convertToPriceComparison);
+  }
+
   private async updateProducts(
     comparison: PriceComparisonDocument,
     updatedProducts: SupermarketProduct[],
@@ -364,9 +377,16 @@ export class ProductRepository {
       }
       const existingProduct = products[existingProductIndex];
       if (existingProduct.lastUpdated < now) {
+        const oldSpecialOffer = existingProduct.product.specialOffer;
+        const newSpecialOffer = updatedProduct.specialOffer;
+        const specialOfferStartedAt = compareSpecialOffers(oldSpecialOffer, newSpecialOffer)
+          ? existingProduct.specialOfferStartedAt
+          : now;
+
         products[existingProductIndex] = {
           ...existingProduct,
           product: updatedProduct,
+          specialOfferStartedAt,
           lastUpdated: now,
         };
       }
@@ -499,6 +519,7 @@ export class ProductRepository {
         $push: {
           products: {
             product,
+            specialOfferStartedAt: product.specialOffer ? now : null, // TODO this should check the history for if the offer has been going on longer
             lastUpdated: now,
           },
         },
@@ -542,7 +563,7 @@ export class ProductRepository {
             },
         computedAt: now,
       },
-      products: [{ product, lastUpdated: now }],
+      products: [{ product, specialOfferStartedAt: product.specialOffer ? now : null, lastUpdated: now }],
       createdAt: now,
       updatedAt: now,
       manualConversions: manualConversion ? [manualConversion] : [],
@@ -551,38 +572,38 @@ export class ProductRepository {
     const result = await this.priceComparisons.insertOne(newEntry as PriceComparisonDocument);
     return result.insertedId.toString();
   }
+}
 
-  private convertToPriceComparison(value: PriceComparisonDocument): PriceComparison {
-    return {
-      id: value._id.toString(),
-      name: value.name,
-      image: value.image,
-      unitOfMeasurement: {
-        name: value.unitOfMeasurement.name,
-        amount: value.unitOfMeasurement.amount,
-      },
-      price: {
-        best: value.price.best,
-        usual: value.price.usual,
-      },
-      products: value.products.map(
-        ({ product }): ComparisonProductData => ({
-          id: product.id,
-          name: product.name,
-          url: product.url,
-          image: product.image,
-          packSize: {
-            unit: product.packSize.unit,
-            amount: product.packSize.amount,
-          },
-          price: product.price,
-          pricePerUnit: product.pricePerUnit,
-          supermarket: product.supermarket,
-          specialOffer: product.specialOffer,
-        })
-      ),
-    };
-  }
+function convertToPriceComparison(value: PriceComparisonDocument): PriceComparison {
+  return {
+    id: value._id.toString(),
+    name: value.name,
+    image: value.image,
+    unitOfMeasurement: {
+      name: value.unitOfMeasurement.name,
+      amount: value.unitOfMeasurement.amount,
+    },
+    price: {
+      best: value.price.best,
+      usual: value.price.usual,
+    },
+    products: value.products.map(
+      ({ product }): ComparisonProductData => ({
+        id: product.id,
+        name: product.name,
+        url: product.url,
+        image: product.image,
+        packSize: {
+          unit: product.packSize.unit,
+          amount: product.packSize.amount,
+        },
+        price: product.price,
+        pricePerUnit: product.pricePerUnit,
+        supermarket: product.supermarket,
+        specialOffer: product.specialOffer,
+      })
+    ),
+  };
 }
 
 function toId(id: string | ObjectId): ObjectId {

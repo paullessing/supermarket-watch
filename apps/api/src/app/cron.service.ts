@@ -23,9 +23,10 @@ export class CronService {
     const favourites = await this.productRepo.getAllTrackedIds();
     console.log(`Refreshing ${favourites.length} items...`);
 
-    const results = await this.supermarketService.getMultipleItems(favourites, new Date(), true);
+    const results = await this.supermarketService.refreshMultipleItems(favourites, new Date(), true);
+    const failures = results.filter(({ status }) => status === 'rejected');
 
-    console.log(`Refreshed ${results.length} items.`);
+    console.log(`Refreshed ${results.length} items. ${failures.length} failures.`);
     console.log(`Cronjob completed.`);
   }
 }
