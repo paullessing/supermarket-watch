@@ -34,7 +34,7 @@
     "dc-prod": "docker-compose -f docker/docker-compose.prod.yml",
     "build:proxy": "cd proxy && yarn install",
     "start:proxy": "cd proxy && yarn start",
-    "mongo:restore": "dc exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && dc exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson"
+    "db:restore": "docker compose exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && docker compose exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson"
   },
   "private": true,
   "dependencies": {
