@@ -172,7 +172,8 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
 
 function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
   if (result.displayPriceQualifier) {
-    const match = result.displayPriceQualifier.match(/\((£?[\d.]+|[\d.]+p)\/(.*)\)/i);
+    // Format for displayPriceQualifier: "18.5p each", "£5.88/100g"
+    const match = result.displayPriceQualifier.match(/(£?[\d.]+|[\d.]+p)[/ ](.*)\)?/i);
     const innerMatch = match?.[2].match(/^(\d*)([^\d].*)$/);
     if (match && innerMatch) {
       const [, unitAmountString, unitName] = innerMatch;
