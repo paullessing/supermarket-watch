@@ -1,5 +1,6 @@
 export * from './lib/add-tracked-product.model';
 export * from './lib/conversions';
+export * from './lib/issue.model';
 export * from './lib/product-details.model';
 export * from './lib/product-search-result.model';
 export * from './lib/search-result.model';
