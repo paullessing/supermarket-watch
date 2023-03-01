@@ -379,9 +379,11 @@ export class ProductRepository {
       if (existingProduct.lastUpdated < now) {
         const oldSpecialOffer = existingProduct.product.specialOffer;
         const newSpecialOffer = updatedProduct.specialOffer;
-        const specialOfferStartedAt = compareSpecialOffers(oldSpecialOffer, newSpecialOffer)
-          ? existingProduct.specialOfferStartedAt
-          : now;
+        const specialOfferStartedAt = newSpecialOffer
+          ? compareSpecialOffers(oldSpecialOffer, newSpecialOffer)
+            ? existingProduct.specialOfferStartedAt
+            : now
+          : null;
 
         products[existingProductIndex] = {
           ...existingProduct,
