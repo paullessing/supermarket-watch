@@ -11,12 +11,13 @@ const curlHeaders = [
 ].reduce((acc, curr) => acc.concat('-H', curr), []);
 const port = 3334;
 
-async function fetchFromUrl(url) {
+async function streamFromUrl(url, res) {
   return await new Promise((resolve, reject) => {
-    const data = [];
+    let bytes = 0;
     const curl = spawn('curl', [`${tescoUrl}${url}`, ...curlHeaders, '--compressed']);
     curl.stdout.on('data', (chunk) => {
-      data.push(chunk);
+      res.write(chunk);
+      bytes += `${chunk}`.length;
     });
 
     curl.on('error', (err) => reject(err));
@@ -25,7 +26,7 @@ async function fetchFromUrl(url) {
       if (code && code > 0) {
         reject(new Error('Non-Zero status code: ' + code));
       } else {
-        resolve(data.join(''));
+        resolve(bytes);
       }
     });
   });
@@ -39,10 +40,10 @@ app.get('/tesco/product/:id', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Fetching ${productId}`);
-    const result = await fetchFromUrl(`products/${encodeURIComponent(productId)}`);
+    const result = await streamFromUrl(`products/${encodeURIComponent(productId)}`, res);
 
-    console.log(`Got ${result.length} bytes`);
-    res.send(result);
+    console.log(`Got ${result} bytes`);
+    res.end();
   } catch (e) {
     console.log(e);
     res.status(500).send(e.toString()).end();
@@ -56,10 +57,10 @@ app.get('/tesco/search', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Searching "${queryString}"`);
-    const result = await fetchFromUrl(`search?query=${encodeURIComponent(queryString)}`);
+    const result = await streamFromUrl(`search?query=${encodeURIComponent(queryString)}`, res);
 
-    console.log(`Got ${result.length} bytes`);
-    res.send(result);
+    console.log(`Got ${result} bytes`);
+    res.end();
   } catch (e) {
     console.log(e);
     res.status(500).send(e.toString()).end();
