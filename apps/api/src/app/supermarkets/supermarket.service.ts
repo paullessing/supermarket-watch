@@ -106,6 +106,9 @@ export class SupermarketService {
       }
     }
 
+    // TODO if the next call fails, and we have an entry for it in the DB,
+    //  figure out if it's because the product 404d and raise an Issue for it
+    //  Maybe we can resolve by deleting it
     const product = await this.supermarketList.fetchProduct(id);
 
     console.debug('getSingleItem:', forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing', id);
