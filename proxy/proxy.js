@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const { spawn } = require('child_process');
+const compression = require('compression');
 const express = require('express');
 const app = express();
 
@@ -30,6 +31,7 @@ async function fetchFromUrl(url) {
   });
 }
 
+app.use(compression());
 app.get('/tesco/product/:id', async (req, res) => {
   try {
     const productId = parseInt(req.params.id, 10);
