@@ -9,7 +9,7 @@ const curlHeaders = [
   'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
   'accept-language: en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7',
 ].reduce((acc, curr) => acc.concat('-H', curr), []);
-const port = 3334;
+const port = 3333;
 
 async function streamFromUrl(url, res) {
   return await new Promise((resolve, reject) => {
