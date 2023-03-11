@@ -15,8 +15,6 @@ type HistoryReturnValue = { history: { date: Date; price: number; pricePerUnit: 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PriceComparisonCardComponent implements OnInit {
-  private static load: boolean = false;
-
   @Input()
   public priceComparison!: PriceComparison;
 
@@ -35,11 +33,6 @@ export class PriceComparisonCardComponent implements OnInit {
 
   public ngOnInit(): void {
     this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.priceComparison.image})`);
-
-    if (!PriceComparisonCardComponent.load) {
-      PriceComparisonCardComponent.load = true;
-      this.loadHistoryData();
-    }
   }
 
   public getReductionPercentage(): number {
@@ -60,13 +53,25 @@ export class PriceComparisonCardComponent implements OnInit {
       }))
     );
 
-    console.log('got the data', data);
+    // console.log('got the data', data);
 
     this.historyData = data.map(({ name, history, supermarket }) => ({
       name: `${name} (${supermarket})`,
+      color: getSupermarketColour(supermarket),
       data: history.map(({ date, price }) => [startOfDay(new Date(date)).getTime(), price] as [number, number | null]),
     }));
 
     this.cdr.markForCheck();
   }
+}
+
+function getSupermarketColour(supermarket: string): string | undefined {
+  return (
+    {
+      // TODO: Store this on the supermarkets themselves, or return it with the HTTP data
+      Waitrose: '#5c8018',
+      Tesco: '#00539f',
+      "Sainsbury's": '#f06b02',
+    }[supermarket] ?? undefined
+  );
 }
