@@ -18,26 +18,26 @@
       {{ priceComparison.price.best.itemPrice | currency:'GBP' }}
     </span>
     <p class="price-comparison-card__price">
-    {{
+      {{
       priceComparison.price.best.unitPrice | currency:'GBP'
-    }}/{{
+      }}/{{
       priceComparison.unitOfMeasurement | unitAmount
-    }}
+      }}
     </p>
     <p
       *ngIf="getReductionPercentage() > 0"
       class="price-comparison-card__reduction"
     >-{{ getReductionPercentage() }}%</p>
-<!--    <span-->
-<!--      class="price-comparison-card__usual-price"-->
-<!--      *ngIf="getReductionPercentage() > 0"-->
-<!--    > (usually {{-->
-<!--        priceComparison.pricePerUnit.usual | currency:'GBP'-->
-<!--      }}/{{-->
-<!--        priceComparison.unitOfMeasurement.amount === 1 ? '' : priceComparison.unitOfMeasurement.amount-->
-<!--      }}{{-->
-<!--        priceComparison.unitOfMeasurement.name-->
-<!--      }})</span>-->
+    <!--    <span-->
+    <!--      class="price-comparison-card__usual-price"-->
+    <!--      *ngIf="getReductionPercentage() > 0"-->
+    <!--    > (usually {{-->
+    <!--        priceComparison.pricePerUnit.usual | currency:'GBP'-->
+    <!--      }}/{{-->
+    <!--        priceComparison.unitOfMeasurement.amount === 1 ? '' : priceComparison.unitOfMeasurement.amount-->
+    <!--      }}{{-->
+    <!--        priceComparison.unitOfMeasurement.name-->
+    <!--      }})</span>-->
     <!-- @formatter:on -->
   </div>
   <div class="price-comparison-card__items">
@@ -70,5 +70,25 @@
       </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="price-comparison-card__graph">
+    <button
+      *ngIf="!historyData"
+      class="button-link"
+      (click)="loadHistoryData()"
+      [disabled]="isLoadingHistoryData"
+    >{{ isLoadingHistoryData ? 'Loading...' : 'View Stats' }}</button>
+
+    <apx-chart
+      *ngIf="historyData"
+      class="price-comparison-card__graph"
+      [series]="historyData"
+      [chart]="{ type: 'line', height: 350, animations: { enabled: false } }"
+      [stroke]="{ curve: 'stepline', width: 1 }"
+      [title]="{ text: 'Price History', align: 'left', style: { fontFamily: 'inherit' } }"
+      [xaxis]="{ type: 'datetime' }"
+      [legend]="{ fontFamily: 'inherit' }"
+    ></apx-chart>
   </div>
 </div>
