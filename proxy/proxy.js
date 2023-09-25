@@ -71,7 +71,7 @@ app.get('/tesco/search', async (req, res) => {
 
 app.get('/sainsburys/product', async (req, res) => {
   try {
-    const queryString = res.queryString;
+    const queryString = req.queryString;
     if (!queryString) {
       return res.status(400).end();
     }
