@@ -77,4 +77,10 @@ jobs:
           file: './docker/Dockerfile'
           push: true
           tags: 'ghcr.io/paullessing/supermarket-watch:${{ github.sha }}'
+      - name: Build and Push Proxy to GitHub Packages
+        uses: docker/build-push-action@v5
+        with:
+          file: './docker/proxy.Dockerfile'
+          push: true
+          tags: 'ghcr.io/paullessing/supermarket-watch-proxy:${{ github.sha }}'
 # See also https://nx.dev/ci/monorepo-ci-github-actions

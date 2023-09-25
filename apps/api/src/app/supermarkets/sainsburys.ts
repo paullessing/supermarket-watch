@@ -13,6 +13,7 @@ export class Sainsburys extends Supermarket {
 
   constructor(private readonly config: Config) {
     super();
+    console.log('Using Sainsburys API at ' + config.sainsburysUrl);
   }
 
   public getPrefix(): string {
@@ -21,7 +22,7 @@ export class Sainsburys extends Supermarket {
 
   public async getProduct(productUid: string): Promise<SupermarketProduct | null> {
     const search = await axios.get<SainsburysModels.SearchResults>(
-      `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?uids=${productUid}`
+      `${this.config.sainsburysUrl}product?uids=${productUid}`
     );
 
     if (!search.data.products || !search.data.products.length) {
@@ -59,7 +60,7 @@ export class Sainsburys extends Supermarket {
       page_size: this.config.searchResultCount,
     });
 
-    const url = `https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/product?${params}`;
+    const url = `${this.config.sainsburysUrl}product?${params}`;
     const search = await axios.get<SainsburysModels.SearchResults>(url);
 
     const results = search.data.products;
