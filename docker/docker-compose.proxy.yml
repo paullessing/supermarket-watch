@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  proxy:
+    container_name: shoppi_lessi_ng_proxy
+    image: ghcr.io/paullessing/supermarket-watch-proxy:latest
+    expose:
+      - ${PORT:-3333}
+    restart: always
