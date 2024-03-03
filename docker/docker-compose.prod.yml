@@ -2,41 +2,40 @@ version: '3.8'
 
 services:
   api:
-    container_name: shoppi_lessi_ng_api
+    container_name: shopping-api
     image: ghcr.io/paullessing/supermarket-watch:latest
     depends_on:
       - mongo
-    command: sh -c "ip route add 192.168.255.0/24 via 172.30.0.100 && yarn start:api" # Allow the proxy through
-    cap_add: # Required to make `ip route add` work
-      - NET_ADMIN
-    expose:
-      - ${PORT:-3333}
+      - proxy
+    command: yarn start:api
+    ports:
+      - ${PORT:-3333}:3333
     environment:
       # Config for the application
       NODE_ENV: prod
       PORT: ${PORT:-3333}
       TESCO_API_KEY: ${TESCO_API_KEY:?Tesco API Key is required}
       TESCO_URL: ${TESCO_URL}
+      SAINSBURYS_URL: ${SAINSBURYS_URL}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
-
-      # Nginx Config
-      VIRTUAL_PORT: ${PORT:-3333}
-      VIRTUAL_HOST: ${HOSTNAME}
-      LETSENCRYPT_HOST: ${HOSTNAME}
-    networks:
-      webnet:
-      mongo_network:
-    restart: on-failure
-    # restart_policy is not supported outside docker swarm, despite v3 docs saying it should be used
-    # restart_policy:
-    #   condition: on-failure
-    #   window: 300s
-  mongo:
-    container_name: shoppi_lessi_ng_mongo
-    image: mongo
     restart: always
     networks:
-      mongo_network:
+      webnet:
+      supermarket_network:
+  proxy:
+    container_name: shopping-proxy
+    image: ghcr.io/paullessing/supermarket-watch-proxy:latest
+    expose:
+      - ${PORT:-3333}
+    restart: always
+    networks:
+      supermarket_network:
+  mongo:
+    container_name: shopping-db
+    image: mongo:5
+    restart: always
+    networks:
+      supermarket_network:
     volumes:
       - mongodata:/data/db
     # restart_policy is not supported outside docker swarm, despite v3 docs saying it should be used
@@ -46,7 +45,7 @@ services:
 networks:
   webnet:
     external: true
-  mongo_network:
+  supermarket_network:
 
 volumes:
   mongodata:
