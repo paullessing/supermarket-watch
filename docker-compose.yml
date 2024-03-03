@@ -23,6 +23,7 @@ services:
     networks:
       webnet:
       mongo_network:
+      proxy_network:
     volumes:
       - ./apps:/usr/src/app/apps
       - ./config:/usr/src/app/config
@@ -40,6 +41,18 @@ services:
       - ./.cache:/tmp/cache
       - ./.cache/fixtures:/usr/src/app/fixtures
     restart: on-failure
+  proxy:
+    build:
+      context: ./
+      dockerfile: docker/proxy.Dockerfile
+    expose:
+      - ${PORT:-3333}
+    volumes:
+      - ./proxy/proxy.js:/usr/src/app/proxy.js
+    restart: always
+    networks:
+      proxy_network:
+
   mongo:
     image: mongo:5
     command: mongod --quiet --logpath /dev/null
@@ -53,3 +66,4 @@ networks:
   webnet:
     external: true
   mongo_network:
+  proxy_network:
