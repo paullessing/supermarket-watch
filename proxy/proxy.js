@@ -56,12 +56,13 @@ app.get('/tesco/search', async (req, res) => {
   try {
     const queryString = req.query.query;
     if (!queryString) {
+      console.log('Tesco: Query string not found');
       return res.status(400).end();
     }
-    console.log(`Searching "${queryString}"`);
+    console.log(`Tesco: Searching "${queryString}"`);
     const result = await streamFromUrl(`${tescoUrl}search?query=${encodeURIComponent(queryString)}`, res);
 
-    console.log(`Got ${result} bytes`);
+    console.log(`Tesco: Got ${result} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
@@ -71,14 +72,17 @@ app.get('/tesco/search', async (req, res) => {
 
 app.get('/sainsburys/product', async (req, res) => {
   try {
-    const queryString = req.queryString;
+    const queryIndex = req.originalUrl.indexOf('?');
+    const queryString = queryIndex >= 0 ? req.originalUrl.slice(queryIndex + 1) : '';
+
     if (!queryString) {
+      console.log('Sainsburys: Query string not found');
       return res.status(400).end();
     }
-    console.log(`Searching "${queryString}"`);
-    const result = await streamFromUrl(`${sainsburysUrl}product?${encodeURIComponent(queryString)}`, res);
+    console.log(`Sainsburys: Searching "${queryString}"`);
+    const result = await streamFromUrl(`${sainsburysUrl}product?${queryString}`, res);
 
-    console.log(`Got ${result} bytes`);
+    console.log(`Sainsburys: Got ${result} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
