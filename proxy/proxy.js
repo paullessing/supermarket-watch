@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 const puppeteer = require('puppeteer');
-
 const compression = require('compression');
 const express = require('express');
-const app = express();
+
+const port = 3333;
 
 const tescoUrl = 'https://www.tesco.com/groceries/en-GB/';
 const sainsburysUrl = 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
 
-const port = 3333;
+const curlHeaders = [
+  'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
+  'accept-language: en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7',
+].reduce((acc, curr) => acc.concat('-H', curr), []);
 
+const app = express();
 /**
  * @type puppeteer.Browser
  */
@@ -25,6 +29,27 @@ async function loadPage(url) {
   const data = await page.content();
 
   return data;
+}
+
+async function streamFromUrl(url, res) {
+  return await new Promise((resolve, reject) => {
+    let bytes = 0;
+    const curl = spawn('curl', [url, ...curlHeaders, '--compressed']);
+    curl.stdout.on('data', (chunk) => {
+      res.write(chunk);
+      bytes += `${chunk}`.length;
+    });
+
+    curl.on('error', (err) => reject(err));
+
+    curl.on('close', (code) => {
+      if (code && code > 0) {
+        reject(new Error('Non-Zero status code: ' + code));
+      } else {
+        resolve(bytes);
+      }
+    });
+  });
 }
 
 app.use(compression());
@@ -55,11 +80,9 @@ app.get('/tesco/search', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Tesco: Searching "${queryString}"`);
-    const result = await loadPage(`${tescoUrl}search?query=${encodeURIComponent(queryString)}`);
+    const result = await streamFromUrl(`${tescoUrl}search?query=${encodeURIComponent(queryString)}`, res);
 
-    res.send(result);
-
-    console.log(`Tesco: Got ${result.length} bytes`);
+    console.log(`Tesco: Got ${result} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
@@ -77,10 +100,9 @@ app.get('/sainsburys/product', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Sainsburys: Searching "${queryString}"`);
-    const result = await loadPage(`${sainsburysUrl}product?${queryString}`);
+    const result = await streamFromUrl(`${sainsburysUrl}product?${queryString}`, res);
 
-    res.send(result);
-    console.log(`Sainsburys: Got ${result.length} bytes`);
+    console.log(`Sainsburys: Got ${result} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
