@@ -1,17 +1,21 @@
-FROM node:18-alpine AS install
+FROM node:22-alpine AS install
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 WORKDIR /usr/src/app
 
-COPY proxy/package.json proxy/yarn.lock ./
-RUN yarn install --frozen-lockfile --network-timeout 60000 --cache-folder .yarn-cache
+COPY proxy/package.json proxy/package-lock.json ./
+RUN npm install --ci
 
-FROM node:18-alpine AS serve
+FROM satantime/puppeteer-node:22.4.1-bullseye-slim AS serve
+
 WORKDIR /usr/src/app
+USER node
 
-RUN apk add curl
-
-# No need to copy yarn.lock as the node_modules directory is separately copied, not installed
+# No need to copy lock file as the node_modules directory is separately copied, not installed
 COPY proxy/package.json proxy/proxy.js ./
 COPY --from=install /usr/src/app/node_modules node_modules/
 
-CMD [ "yarn", "start" ]
+RUN npx puppeteer browsers install chrome
+
+CMD [ "npm", "run", "start" ]

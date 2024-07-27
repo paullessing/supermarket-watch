@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const { spawn } = require('child_process');
+const puppeteer = require('puppeteer');
+
 const compression = require('compression');
 const express = require('express');
 const app = express();
@@ -7,31 +8,23 @@ const app = express();
 const tescoUrl = 'https://www.tesco.com/groceries/en-GB/';
 const sainsburysUrl = 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
 
-const curlHeaders = [
-  'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
-  'accept-language: en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7',
-].reduce((acc, curr) => acc.concat('-H', curr), []);
 const port = 3333;
 
-async function streamFromUrl(url, res) {
-  return await new Promise((resolve, reject) => {
-    let bytes = 0;
-    const curl = spawn('curl', [url, ...curlHeaders, '--compressed']);
-    curl.stdout.on('data', (chunk) => {
-      res.write(chunk);
-      bytes += `${chunk}`.length;
-    });
+/**
+ * @type puppeteer.Browser
+ */
+let browser;
 
-    curl.on('error', (err) => reject(err));
+async function loadPage(url) {
+  const page = await browser.newPage();
+  await page.setUserAgent(
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'
+  );
+  await page.goto(url, { waitUntil: 'networkidle0' });
 
-    curl.on('close', (code) => {
-      if (code && code > 0) {
-        reject(new Error('Non-Zero status code: ' + code));
-      } else {
-        resolve(bytes);
-      }
-    });
-  });
+  const data = await page.content();
+
+  return data;
 }
 
 app.use(compression());
@@ -42,9 +35,11 @@ app.get('/tesco/product/:id', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Fetching ${productId}`);
-    const result = await streamFromUrl(`${tescoUrl}products/${encodeURIComponent(productId)}`, res);
+    const result = await loadPage(`${tescoUrl}products/${encodeURIComponent(productId)}`);
 
-    console.log(`Got ${result} bytes`);
+    res.send(result);
+
+    console.log(`Got ${result.length} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
@@ -60,9 +55,11 @@ app.get('/tesco/search', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Tesco: Searching "${queryString}"`);
-    const result = await streamFromUrl(`${tescoUrl}search?query=${encodeURIComponent(queryString)}`, res);
+    const result = await loadPage(`${tescoUrl}search?query=${encodeURIComponent(queryString)}`);
 
-    console.log(`Tesco: Got ${result} bytes`);
+    res.send(result);
+
+    console.log(`Tesco: Got ${result.length} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
@@ -80,9 +77,10 @@ app.get('/sainsburys/product', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Sainsburys: Searching "${queryString}"`);
-    const result = await streamFromUrl(`${sainsburysUrl}product?${queryString}`, res);
+    const result = await loadPage(`${sainsburysUrl}product?${queryString}`);
 
-    console.log(`Sainsburys: Got ${result} bytes`);
+    res.send(result);
+    console.log(`Sainsburys: Got ${result.length} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
@@ -90,6 +88,19 @@ app.get('/sainsburys/product', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+console.log('Launching Puppeteer...');
+puppeteer
+  .launch()
+  .then((_browser) => {
+    browser = _browser;
+    console.log('Puppeteer is started');
+
+    console.log('Starting express...');
+    app.listen(port, () => {
+      console.log(`App listening at http://localhost:${port}`);
+    });
+  })
+  .catch((e) => {
+    console.error('An error has occurred:', e);
+    process.exit(1);
+  });

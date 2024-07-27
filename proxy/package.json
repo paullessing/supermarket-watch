@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "puppeteer": "^22.14.0"
   }
 }
