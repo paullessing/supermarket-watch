@@ -36,20 +36,32 @@ export class Tesco extends Supermarket {
     }
 
     const $ = cheerio.load(search.data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const reduxState = $('body').data('reduxState') as any;
 
-    const { product, promotions }: ProductDetails = reduxState.productDetails.item;
+    // TODO type these, mabye
+    let product;
+    let apollo;
 
-    const unitOfMeasure = product.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
+    try {
+      const rawState = $('script[type="application/discover+json"]').html();
+      if (!rawState) {
+        throw new Error('No raw state found in Tesco page');
+      }
+      const state = JSON.parse(rawState);
+
+      apollo = state['mfe-orchestrator']['props']['apolloCache'];
+      product = apollo['ProductType:' + productId];
+    } catch (e) {
+      console.error(e);
+      throw new Error('Failed to parse Tesco state');
+    }
+
+    const unitOfMeasure = product.price.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
     if (!unitOfMeasure) {
       throw new Error('Could not parse unit of measure');
     }
     const [, unitAmountString, unitName] = unitOfMeasure;
 
-    // console.log(JSON.stringify(product, null, 2));
-
-    const promotion = this.getPromotion(promotions);
+    const promotion = this.getApolloPromotion(product, apollo);
 
     let specialOffer: Pick<SupermarketProduct, 'specialOffer'> & Partial<SupermarketProduct> = { specialOffer: null };
 
@@ -71,11 +83,11 @@ export class Tesco extends Supermarket {
     const packSize = product.details.packSize[0];
 
     return SupermarketProduct({
-      id: this.getId(product.id),
+      id: this.getId(productId),
       name: product.title,
       image: product.defaultImageUrl,
-      url: `https://www.tesco.com/groceries/en-GB/products/${product.id}`,
-      price: product.price,
+      url: `https://www.tesco.com/groceries/en-GB/products/${productId}`,
+      price: product.price.actual,
       packSize: {
         amount: parseFloat(packSize.value || '') || 1,
         unit: standardiseUnit(packSize.units),
@@ -84,7 +96,7 @@ export class Tesco extends Supermarket {
       supermarket: Tesco.NAME,
       unitAmount: parseFloat(unitAmountString?.trim() || '') || 1,
       unitName: unitName.trim(),
-      pricePerUnit: product.unitPrice,
+      pricePerUnit: product.price.unitPrice,
 
       ...specialOffer,
     });
@@ -160,6 +172,37 @@ export class Tesco extends Supermarket {
 
     if (promotion) {
       const match = promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
+      if (match) {
+        return {
+          price: parseFloat(match[1]),
+          offerText: match[2],
+          endDate: promotion.endDate,
+        };
+      }
+    }
+
+    return null;
+  }
+
+  private getApolloPromotion(
+    product: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    apolloCache: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  ): null | {
+    price: number;
+    offerText: string;
+    endDate: string;
+  } {
+    if (!product.promotions?.length) {
+      return null;
+    }
+
+    const promotion = product.promotions
+      .map(({ __ref }: { __ref: string }) => apolloCache[__ref])
+      .filter(Boolean)
+      .filter(({ attributes }: { attributes: string[] }) => attributes.includes('CLUBCARD_PRICING'))[0];
+
+    if (promotion) {
+      const match = promotion.description.match(/^£(\d+\.\d{2}) (.*)$/);
       if (match) {
         return {
           price: parseFloat(match[1]),

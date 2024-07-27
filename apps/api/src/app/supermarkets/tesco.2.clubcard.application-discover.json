@@ -1,0 +1,1560 @@
+{
+  "mfe-header": {
+    "external": "header@\u002Fassets\u002Fmfe-header\u002F7fd746af7cdc023ae0a2.js",
+    "props": {
+      "authentication": {
+        "authenticated": false,
+        "UUID": null
+      },
+      "origin": "https:\u002F\u002Fwww.tesco.com",
+      "config": {
+        "client": {
+          "cookieBanner": {
+            "hasRejectAllCookies": true,
+            "managePreferencesUrl": "\u002Fhelp\u002Fen-GB\u002Fmanage-cookie-preferences",
+            "setPreferencesUrl": "\u002Fhelp\u002Fen-GB\u002Fset-cookie-preferences"
+          },
+          "helpUrl": "\u002Fhelp",
+          "pathPrefix": "groceries",
+          "logoVersion": "base",
+          "primaryNav": {
+            "menuItems": {
+              "desktop": [
+                "primary-nav-favourites",
+                "primary-nav-recipes",
+                "primary-nav-promotions",
+                "primary-nav-cms-driven",
+                "primary-nav-delivery-saver"
+              ],
+              "mobile": [
+                "primary-nav-favourites",
+                "utility-book-a-slot",
+                "utility-my-orders",
+                "primary-nav-cms-driven",
+                "primary-nav-promotions",
+                "utility-account",
+                "primary-nav-delivery-saver",
+                "utility-download-the-app",
+                "utility-clubcard-account",
+                "primary-nav-recipes",
+                "utility-store-locator",
+                "utility-marketplace",
+                "utility-direct-clothing",
+                "utility-feedback",
+                "utility-help"
+              ]
+            },
+            "useOffersLinks": true
+          },
+          "recipesUrl": "https:\u002F\u002Frealfood.tesco.com",
+          "slots": {
+            "slotExpiryTime": {
+              "collection": 1800000,
+              "delivery": 1800000,
+              "ondemand": 300000
+            }
+          },
+          "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
+          "externalMyAccountDomain": true,
+          "checkoutUrl": "https:\u002F\u002Fwww.tesco.com\u002Fcheckout\u002Fen-GB\u002Fgroceries\u002Frecommendations",
+          "deliverySaverUrl": "\u002Fdeliverysaver",
+          "hasSearchAsYouType": true,
+          "isLeftAlignedSearchBar": true,
+          "showMultiSearchLink": true,
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+            "consumer": "groceries",
+            "cookiePreferences": {
+              "displayCookieBanner": false,
+              "experienceCookiesEnabled": true,
+              "advertisingCookiesEnabled": true
+            },
+            "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "mfeRollout": {
+              "orders": true,
+              "pdp": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "homepage": true,
+              "favourites": true,
+              "trolley": true,
+              "slots": false,
+              "slots-ondemand": true,
+              "slots-collection": false,
+              "slots-delivery": false,
+              "search": false,
+              "browse": false
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+            "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": false
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "accept-all-cookies": "Accept all cookies",
+        "reject-all-cookies": "Reject all cookies",
+        "amend-order-banner.cancel-button-label": "Cancel",
+        "amend-order-banner.message": "Save by {date}",
+        "amend-order-banner.modal.close-text": "No",
+        "amend-order-banner.modal.confirm-cancel": "Yes, cancel",
+        "amend-order-banner.modal.modal.body.line1": "If you cancel, the changes you've made won't be saved.",
+        "amend-order-banner.modal.modal.body.line2": "Do you still want to cancel?",
+        "amend-order-banner.modal.modal.title": "Cancel",
+        "amend-order-banner.save-and-checkout-button-label": "Checkout to confirm changes",
+        "amend-order-banner.slot-change-message": "Save by {date} to retain your new slot",
+        "amend-order-banner.title": "Making changes",
+        "app-bar.feedback": "Feedback",
+        "app-bar.help": "Help",
+        "app-bar.signed-in.greeting": "Hello {firstName}",
+        "app-bar.signed-in.my-account": "My account",
+        "app-bar.signed-in.my-orders": "My orders",
+        "app-bar.signed-in.sign-out": "Sign out",
+        "app-bar.signed-out.register": "Register",
+        "app-bar.signed-out.sign-in": "Sign in",
+        "back": "Back",
+        "close": "Close",
+        "cookie-banner-body": "Want to know more? Check out our {cookiePolicyLink}. {manageCookiesLink}",
+        "cookie-banner-title": "We use cookies to improve your experience on our website. Please let us know your preferences.",
+        "cookies-policy-title": "cookies policy",
+        "guide-price": "Guide price",
+        "total": "Total",
+        "total-estimated": "Total (estimated)",
+        "manage-cookies": "Manage cookies",
+        "masthead.ally.logoLinkAriaLabel": "Tesco Home page",
+        "primary-navigation.about-this-site": "About this site",
+        "primary-navigation.account": "My account",
+        "primary-navigation.clothing": "F&F clothing",
+        "primary-navigation.clubcard-account": "Clubcard account",
+        "primary-navigation.online-club-url": "",
+        "primary-navigation.delivery-saver": "Delivery Saver",
+        "primary-navigation.marketplace": "Marketplace",
+        "primary-navigation.download-the-app": "Download the app",
+        "primary-navigation.favourites": "My Favourites",
+        "primary-navigation.feedback": "Feedback",
+        "primary-navigation.help": "Help",
+        "primary-navigation.inspiration": "Inspiration",
+        "primary-navigation.menu": "Menu",
+        "primary-navigation.more-from-tesco": "More from Tesco",
+        "primary-navigation.more": "More",
+        "primary-navigation.my-orders": "My orders",
+        "primary-navigation.online-club": "Online Club",
+        "primary-navigation.promotions": "Special Offers",
+        "primary-navigation.recipes": "Recipes",
+        "primary-navigation.store-locator": "Store locator",
+        "primary-navigation.taxonomy": "Groceries",
+        "primary-navigation.translation": "English",
+        "primary-navigation.book-a-slot": "Book a slot",
+        "search.ally.clearButtonAriaLabel": "Clear search field",
+        "search.ally.searchInputLabel": "Enter a product to search for",
+        "search.ally.showSearchButton": "Toggle search bar",
+        "search.ally.submitButtonAriaLabel": "Search for products",
+        "search.multiSearch": "Search with a list of items",
+        "search.placeholder": "Search",
+        "book-change-slot-button.new-order": "Book a slot",
+        "book-change-slot-button.additional-order": "Book another slot",
+        "book-change-slot-button.replace-order": "Change your slot",
+        "slot-context.book-a-slot.no-order-exists.header": "Reserve a slot for either home delivery or collection",
+        "slot-context.book-a-slot.order-exists.header": "You can place more than one order with us at a time",
+        "slot-context.order-in-progress.amend": "Making changes",
+        "slot-context.order-in-progress.checkout-by": "Please checkout by {time}",
+        "slot-context.order-in-progress.checkout-in": "Checkout in \u003Cb\u003E{minutes} mins {seconds} secs\u003C\u002Fb\u003E",
+        "slot-context.order-in-progress.deliver-by": "Today, 60 min delivery",
+        "slot-context.order-in-progress.expired": "Your slot has expired",
+        "slot-context.order-in-progress.order-type.click-n-collect": "Click+Collect",
+        "slot-context.order-in-progress.order-type.home-delivery": "Home delivery",
+        "slot-context.order-in-progress.order-type.on-demand": "Whoosh delivery",
+        "cookies-policy-url": "https:\u002F\u002Fwww.tesco.com\u002Fhelp\u002Fprivacy-and-cookies\u002Fprivacy-centre\u002Fprivacy-policy-information\u002Fprivacy-policy\u002F",
+        "primary-navigation.clubcard-account-url": "https:\u002F\u002Fsecure.tesco.com\u002Fclubcard\u002F",
+        "primary-navigation.store-locator-url": "https:\u002F\u002Fwww.tesco.com\u002Fstore-locator\u002Fuk\u002F?stop_mobi=yes"
+      }
+    },
+    "vanillaCSS": [
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-header\u002F1ec0792bf84e379f473a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-header\u002Fe66eae8d7993b960851a.css"
+      }
+    ],
+    "version": "2024.07.22-284c2279"
+  },
+  "mfe-pdp": {
+    "props": {
+      "config": {
+        "client": {
+          "basePath": "groceries",
+          "showRecommendationCarousel": true,
+          "isoCurrencyCode": "GBP",
+          "region": "uk",
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+            "consumer": "groceries",
+            "cookiePreferences": {
+              "displayCookieBanner": false,
+              "experienceCookiesEnabled": true,
+              "advertisingCookiesEnabled": true
+            },
+            "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "mfeRollout": {
+              "orders": true,
+              "pdp": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "homepage": true,
+              "favourites": true,
+              "trolley": true,
+              "slots": false,
+              "slots-ondemand": true,
+              "slots-collection": false,
+              "slots-delivery": false,
+              "search": false,
+              "browse": false
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+            "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": false
+          }
+        },
+        "feature": {}
+      },
+      "isAuthenticated": false,
+      "referrer": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB\u002Fpromotions",
+      "messages": {
+        "click-to-zoom-image": "Click here to open zoom in to image",
+        "aria-label-carousel-previous-button": "go to previous image",
+        "aria-label-carousel-next-button": "go to next image",
+        "image-alt-text": "image {imagePosition} of {altText}",
+        "product-image-aria-label": "product {ariaLabel}",
+        "thumbnail-image-aria-label": "thumbnail image {imagePosition} of {altText}",
+        "please-wait": "Please wait",
+        "ratings-reviews-rating-of": "rating of",
+        "ratings-reviews-review-rating-stars-out-of": "stars out of 5",
+        "ratings-reviews:stars": "stars",
+        "no-ratings-yet": "No ratings yet",
+        "reviews-report-link-text": "Report",
+        "reviews-reported-link-text": "Reported",
+        "reviews-reporting-link-text": "Reporting",
+        "review-author-and-date": "Reviewed by {authorName} on {reviewDate}",
+        "report-this-review-aria-label": "Report review for {reviewTitle}",
+        "average-rating-aria-label": "This product has an average rating of {averageRating} out of 5 star",
+        "no-of-reviews": "{noOfReviews} Reviews",
+        "review-card-title": "Help other customers like you",
+        "review-card-description": "Reviews are submitted by our customers directly through our website. We also share reviews from other retailers' websites to help you make an informed decision.",
+        "write-a-review-button-label": "Write a Review",
+        "write-a-review-button-aria-label": "Write a Review",
+        "show-more-reviews-button-label": "Show {rowsPerPage} more reviews",
+        "pagination-count-of-reviews": "Showing {pageRange} of {totalReviews} reviews",
+        "product-overview": "Product Overview",
+        "product-description": "Product Description",
+        "nutritional-information": "Nutritional Information",
+        "specifications": "Specifications",
+        "nutrition": "Nutrition",
+        "storage": "Storage",
+        "cooking-instructions": "Cooking Instructions",
+        "safety-information": "Safety Information",
+        "product-information": "Using Product Information",
+        "contact-information": "Name & Address",
+        "home-link": "Home",
+        "no-reviews-yet": "No reviews yet",
+        "average-rating-text": "Average Rating",
+        "syndication-source-label": "A {syndicatedSourceName} Customer",
+        "by-no-nickname": "A Tesco Customer",
+        "number-of-uses": "Number of uses",
+        "dosage": "Dosage",
+        "additives": "Additives",
+        "preparation-and-usage": "Preparation and Usage",
+        "net-contents": "Net Contents",
+        "product-warnings": "Warnings",
+        "recycling-info": "Recycling Information",
+        "return-to": "Return to",
+        "safety-warning": "Safety warning",
+        "nappy-size": "Nappy Size",
+        "toggle-quantity": "Quantity",
+        "other-nutrition-information": "Other Nutrition Information",
+        "oven": "Oven",
+        "pack-size": "Pack size",
+        "allergy": "Allergy Information",
+        "alcohol-type": "Alcohol Type",
+        "alcohol-unit-other-text": "Alcohol Unit Text",
+        "alcohol-by-volume-other-text": "Alcohol By Volume Text",
+        "alcohol-units": "Alcohol Units",
+        "allergy-information": "Allergy Information",
+        "cooking-guidelines": "Cooking Guidelines",
+        "healthmark": "Healthmark",
+        "importer-address": "Importer address",
+        "legal-labelling": "Legal information",
+        "lower-age-limit": "Lower age limit",
+        "manufacturer-address": "Manufacturer Address",
+        "regional-information": "Regional Information",
+        "region-of-origin": "Region of Origin",
+        "type-of-closure": "Type of Closure",
+        "tasting-notes": "Tasting Notes",
+        "wine-colour": "Wine Colour",
+        "percentage-alcohol": "ABV",
+        "current-vintage": "Current Vintage",
+        "producer": "Producer",
+        "wine-maker": "Wine Maker",
+        "country": "Country",
+        "taste-category": "Taste Category",
+        "grape-variety": "Grape Variety",
+        "vinification-details": "Vinification Details",
+        "storage-type": "Storage Type",
+        "history": "History",
+        "storage-instructions": "Storage Instructions",
+        "wine-effervescence": "Wine Effervescence",
+        "ingredients": "Ingredients",
+        "product-gda-title": "Typical values per 100g: Energy {energy} ",
+        "product-gda-nutritional-label": "of the reference intake",
+        "product-gda-reference": "of the reference intake",
+        "using-product-info-content1": "While every care has been taken to ensure product information is correct, food products are constantly being reformulated, so ingredients, nutrition content, dietary and allergens may change.  You should always read the product label and not rely solely on the information provided on the website.",
+        "using-product-info-content2": "If you have any queries, or you'd like advice on any Tesco brand products, please contact Tesco Customer Services, or the product manufacturer if not a Tesco brand product.",
+        "using-product-info-content3": "Although product information is regularly updated, Tesco is unable to accept liability for any incorrect information. This does not affect your statutory rights.",
+        "using-product-info-content4": "This information is supplied for personal use only, and may not be reproduced in any way without the prior consent of Tesco Stores Limited nor without due acknowledgement.",
+        "using-product-info-copy-right": "Tesco © Copyright {copyrightYear}",
+        "using-product-info-title": "Using Product Information",
+        "danger-type-explosive": "Explosive",
+        "danger-type-compressed-gas": "Compressed gas",
+        "danger-type-corrosive": "Corrosive",
+        "danger-type-flammable": "Flammable",
+        "danger-type-toxic": "Toxic",
+        "danger-type-irritant": "Irritant",
+        "danger-type-oxidizing-agent": "Oxidizing agent",
+        "danger-type-health-hazard": "Health hazard",
+        "danger-type-environmentally-damaging": "Environmentally damaging",
+        "cooking-instructions-title": "Instructions",
+        "cooking-instructions-temperature": "Temperature",
+        "cooking-instructions-time": "Time",
+        "oven-from-frozen": "Oven from frozen",
+        "oven-from-chilled": "Oven",
+        "microwave-from-frozen": "Microwave from frozen",
+        "microwave-from-chilled": "Microwave",
+        "cooking-precautions": "Cooking Precautions",
+        "modal-close-button-text": "Close",
+        "generic-some-error-occurred": "Sorry, an error has occurred. Please try later.",
+        "generic-error-dialog-title": "Error",
+        "delete-review-aria-label": "Delete review for {reviewTitle}",
+        "delete-review-link-text": "Delete review",
+        "delete-review-confirmation-heading-text": "Are you sure you want to delete your review?",
+        "delete-review-confirmation-body-text": "Your review will be removed from our site within a few hours once deleted.",
+        "delete-review-confirmation-cancel-text": "No, cancel",
+        "delete-review-confirmation-action-text": "Yes, delete review",
+        "back-to-search-results": "Back to search results",
+        "back-to-search-results-arial-label": "Back to search results {searchQuery}",
+        "view-all-aisle-button": "View all {aisle}",
+        "view-all-aisle-button-arial-label": "View all {aisle}",
+        "drained-weight": "Drained weight",
+        "distributor-address": "Distributor Address",
+        "breadcrumb-mobile-back-text": "Back to",
+        "about-marketplace": "About Marketplace",
+        "about-marketplace-content-1": "We're giving you more choice than ever before. Shop more products from more brands across homewares, beauty, electricals and much more.",
+        "about-marketplace-content-2": "And all delivered from our partners right to your door.",
+        "rest-of-shelf": "Rest of shelf",
+        "guideline-daily-amounts": "Guideline Daily Amounts",
+        "alcohol-percentage-units": "Alcohol Percentage and Units",
+        "percentage-alcohol-suffix": "% vol",
+        "clubcard-price-schema-description": "{title}. Regular price £{regularPrice}, Clubcard price is £{clubcardPrice} available until {endDate}, only available with Clubcard or Tesco app.",
+        "related-special-offers": "Related Special Offers",
+        "sold-dispatched-seller-name": "Sold and sent by {sellerName}",
+        "delivered-post-courier": "Delivered by post or courier",
+        "delivered-courier": "Delivered by courier",
+        "free-delivery": "FREE delivery for:",
+        "specialist-delivery": "Specialist Delivery:",
+        "marketplace-free-standard": "FREE standard delivery on this product",
+        "marketplace-free-standard-express": "FREE standard or express delivery on this product",
+        "marketplace-orders-standard": "Marketplace orders over £{freeDeliveryCriteriaValue}",
+        "marketplace-orders-specialist": "For products that are big or heavy",
+        "delivery-saver": "Delivery Saver",
+        "home-delivery-plan-customers": "Anytime plan customers",
+        "find-out-more-marketplace": "Find out more about Marketplace",
+        "eligibility-text-marketplace": "Eligible products only. £{freeDeliveryCriteriaValue} total excludes delivery cost, products that need specialist delivery and Tesco grocery order cost",
+        "delivery-returns": "Marketplace delivery and returns",
+        "delivery-options-heading": "Delivery",
+        "delivery-options-standard-text": "Here are your delivery options from this Marketplace partner:",
+        "delivery-options-specialist-text": "Here are your delivery options when ordering Marketplace products that are big or heavy.",
+        "exclusions-conditions-heading": "Exclusions and conditions",
+        "exclusions-conditions-standard-text": "£{freeDeliveryCriteriaValue} spend doesn't include delivery cost, amount spent on products that need specialist delivery, or Tesco grocery order.",
+        "exclusions-conditions-specialist-text": "Products that are big or heavy need specialist delivery.",
+        "delivery-accordion-special-spend-criteria": "when you spend over £{freeDeliveryCriteriaValue} on eligible Marketplace products",
+        "delivery-accordion-free-delivery-message": "FREE on this product sent by this partner",
+        "delivery-accordion-free-delivery-saver": "FREE {spendCriteria}",
+        "delivery-accordion-free-delivery-saver-text": "Included for Delivery Saver Anytime plan customers",
+        "delivery-accordion-special-2": "£{deliveryCharge} for orders under £{deliveryCriteriaValue}",
+        "delivery-accordion-standard-express-heading": "Express delivery - arrives in {minDeliveryDays}-{maxDeliveryDays} working days",
+        "delivery-accordion-standard-express-message": "£{nextDayDeliveryCharge} per delivery",
+        "delivery-accordion-express-delivery-cutoff-message": "Available on orders placed before {formattedCutOffTime}",
+        "delivery-accordion-standard-heading": "Standard delivery - arrives in {minDeliveryDays}-{maxDeliveryDays} working days",
+        "delivery-accordion-returns-message": "If you're unhappy with any Marketplace product, you can request a return and refund online within {daysToReturn} days. Then you'll need to send your order back to the Marketplace partner. You can't return Marketplace products to a Tesco store. ",
+        "delivery-accordion-returns-other-message": "For more information on how to return specialist products ",
+        "delivery-accordion-returns-faq-text": "Find out more about returns",
+        "delivery-accordion-special-express-heading": "Specialist express delivery - arrives in {minDeliveryDays}-{maxDeliveryDays} days",
+        "delivery-accordion-special-message": "£{chargeValue} per delivery",
+        "delivery-accordion-special-standard-heading": "Specialist standard delivery - arrives in {minDeliveryDays}-{maxDeliveryDays} working days",
+        "delivery-accordion-returns-heading": "Returns",
+        "product-data-sheet": "Product data sheet",
+        "energy-rating": "Energy rating",
+        "defrosting": "Defrosting",
+        "freezing-guidelines": "Freezing guidelines"
+      }
+    },
+    "external": "pdp@\u002Fassets\u002Fmfe-pdp\u002F66c462d658a6bc1031a8.js",
+    "version": "2024.06.25-7329d404"
+  },
+  "mfe-basket": {
+    "props": {
+      "authentication": {
+        "authenticated": false,
+        "UUID": null
+      },
+      "config": {
+        "client": {
+          "fetchFulfilmentEstimatedArrival": true,
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+            "consumer": "groceries",
+            "cookiePreferences": {
+              "displayCookieBanner": false,
+              "experienceCookiesEnabled": true,
+              "advertisingCookiesEnabled": true
+            },
+            "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "mfeRollout": {
+              "orders": true,
+              "pdp": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "homepage": true,
+              "favourites": true,
+              "trolley": true,
+              "slots": false,
+              "slots-ondemand": true,
+              "slots-collection": false,
+              "slots-delivery": false,
+              "search": false,
+              "browse": false
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+            "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": false
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "a11yBasketItemImage": "Image of {name}",
+        "a11yBasketSummary": "Basket Summary",
+        "a11yBasketUpdating": "Basket price updating",
+        "a11yDecrement": "Decrease {name} by one",
+        "a11yDecrementWithUnits": "Decrease {name} by one {units}",
+        "a11yDescription": "{amount} {isUnitsDisplayed, select, true {{units}} other {}} {isMax, select, true {(Maximum amount)} false {} other {}} {name} for {calculatedPrice}",
+        "a11yDescriptionLoading": "{amount} {isUnitsDisplayed, select, true {{units}} other {}} {name}, price is currently updating",
+        "a11yIncrement": "Increase {name} by one",
+        "a11yIncrementWithUnits": "Increase {name} by one {units}",
+        "a11yRemoveFromBasket": "Remove {name} from basket",
+        "a11yReviewBasket": "Review your basket",
+        "a11yUpdatingPrice": "Price is currently updating",
+        "adding": "Adding",
+        "basket": "Basket",
+        "basketGroceries": "Groceries",
+        "marketplace": "products",
+        "basketMarketplace": "Marketplace",
+        "totalItemPrice": "Total item price",
+        "totalEstimated": "Total (estimated)",
+        "total": "Total",
+        "marketplaceDeliveryOption": "Choose delivery option at checkout",
+        "basketGuidePriceWhat": "What's the guide price?",
+        "changeYourSlotMessage": "Change your slot",
+        "checkout": "Checkout",
+        "checkoutInAmend": "Checkout to confirm changes",
+        "checkoutInAmend1882": "Save changes",
+        "clubcard-price": "Clubcard Price applied",
+        "deliveryBreached": "Your basket exceeds the {itemsLimit} items limit. Please reduce to {itemsLimit} to checkout",
+        "deliveryBreached-ondemand": "Your basket is over the weight or size limit. To check out, please remove items.",
+        "emptyBasketExplanation": "Products you add to your basket will appear here",
+        "emptyBasketHeading": "Empty Basket",
+        "emptyGroceriesBasketHeading": "Grocery basket empty",
+        "epwWithAmendAvailabilityOverride": "Quantity can no longer be increased",
+        "epwWithoutAmendAvailabilityOverride": "This product is no longer available",
+        "excludedProduct": "This product's currently out of stock",
+        "favouritesExplanation": "Use Favourites to quickly add items you’ve bought before",
+        "favouritesHeading": "Favourites",
+        "favouritesLink": "Shop Favourites",
+        "freeDeliveryUnderThreshold": "Shop for {threshold} and enjoy free delivery",
+        "freeDeliveryOverThreshold": "Free delivery",
+        "previouslyBoughtHeading": "Previously bought",
+        "previouslyBoughtLink": "Shop Previously bought",
+        "previouslyBoughtExplanation": "Use Previously bought to quickly add items you’ve bought before.",
+        "usualsLink": "Shop my Usuals",
+        "inAhurryHeading": "In a hurry?",
+        "addUsualsButton": "Add my Usuals",
+        "addUsualsExplanation": "Quickly add regular buys to your basket or shop your previous purchases.",
+        "inAhurryExplanation": "Quickly shop for your previous purchases and regular buys.",
+        "groupBulkBuyLimitMessage": "Max. quantity ordered for product group",
+        "guidePrice": "Guide price",
+        "groceries": "groceries",
+        "items": "Items",
+        "maxQuantityMessage": "Max. quantity ordered for item",
+        "minimumBasketChargeLink": "minimum basket charge",
+        "minimumBasketChargeMessageWithSlot": "For baskets under {calculatedMinBasketCharge}, we add a {calculatedSurcharge}",
+        "minimumBasketChargeMessageWithGrocerySlot": "For grocery baskets under {calculatedMinBasketCharge}, we add a {calculatedSurcharge}",
+        "missedPromotions": "Missed Offer ",
+        "offerComplete": "Offer complete",
+        "offerIncomplete": "Offer incomplete",
+        "offerPartlyComplete": "Offer partially complete",
+        "offerSavings": "Offer savings",
+        "permanentlyUnavailable": "This product has been removed from our range",
+        "permanentlyUnavailableOnDemand": "This product's unavailable on Whoosh.",
+        "removing": "Removing",
+        "viewFullBasketLink": "View full basket",
+        "updating": "Updating",
+        "checkoutBy": "Please check out by {time}",
+        "onDemandCheckoutIn": "Please check out in ",
+        "onDemandCountdown": "{minutes} mins {seconds} secs",
+        "onDemandDeliverBy": "Delivery from as little as 20 minutes",
+        "onDemandDynamicDeliverBy": "Delivery in {min}-{max} {unit}",
+        "slotExpired": "Your slot has expired",
+        "seeFewer": "See fewer",
+        "seeMore": "See all",
+        "clickAndCollect": "Click+Collect",
+        "homeDelivery": "Home delivery",
+        "onDemand": "Whoosh delivery",
+        "slotContextCardHomeDelivery": "Home delivery booked",
+        "slotContextCardOnDemand": "Whoosh delivery booked",
+        "slotContextCardClickAndCollect": "Click+Collect booked",
+        "slotContextCardChangeYourSlot": " Change your slot?",
+        "bookASlot": "Book a slot",
+        "bookAnotherSlot": "Book another slot",
+        "changeYourSlot": "Change your slot",
+        "noSlotBooked": "Reserve a slot for either home delivery or collection",
+        "slotOrderExists": "You can place more than one order with us at a time",
+        "slotAmend": "Making changes",
+        "a11yDeliveryInformation": "Delivery information",
+        "errorBasketHeading": "Sorry, an error has occurred.",
+        "errorBasketBody": "Please press OK to refresh the page.",
+        "errorOk": "OK",
+        "summaryDepositMessage": "Deposits",
+        "includesDrsCharge": "Includes {charges} Deposit"
+      },
+      "timeZone": "Europe\u002FLondon"
+    },
+    "external": "basket@\u002Fassets\u002Fmfe-basket\u002Fe2b569b28f751ef83875.js",
+    "version": "2024.07.23-64543-648merge"
+  },
+  "mfe-footer": {
+    "external": "footer@\u002Fassets\u002Fmfe-footer\u002F127662c6b34868e5cd36.js",
+    "props": {
+      "config": {
+        "client": {
+          "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+            "consumer": "groceries",
+            "cookiePreferences": {
+              "displayCookieBanner": false,
+              "experienceCookiesEnabled": true,
+              "advertisingCookiesEnabled": true
+            },
+            "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "mfeRollout": {
+              "orders": true,
+              "pdp": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "homepage": true,
+              "favourites": true,
+              "trolley": true,
+              "slots": false,
+              "slots-ondemand": true,
+              "slots-collection": false,
+              "slots-delivery": false,
+              "search": false,
+              "browse": false
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+            "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": false
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "about": "About",
+        "accessibility": "Accessibility",
+        "amex": "American Express SafeKey",
+        "bookADelivery": "Book a delivery",
+        "clickCollect": "Click+Collect",
+        "clubcard": "Clubcard",
+        "clubcardPrices": "Clubcard Prices",
+        "contactUs": "Contact us",
+        "copyright": "{year} Tesco.com. All rights reserved",
+        "couponTermsConditions": "Coupon terms & conditions",
+        "deliverySaver": "Delivery Saver",
+        "facebook": "Tesco on Facebook (opens in a new window)",
+        "favourites": "Favourites",
+        "firstTimeShopping": "First time shopping",
+        "generalTermsConditions": "General terms & conditions",
+        "help": "Help & FAQS",
+        "hereToHelp": "Here to help",
+        "howToShop": "How to shop",
+        "instagram": "Tesco on Instagram (opens in a new window)",
+        "maestro": "Maestro",
+        "mastercard": "Mastercard ID Check",
+        "myAccount": "My Account",
+        "myOrders": "My Grocery Orders",
+        "partnerDirectory": "Partner directory",
+        "paymentOptions": "Payment options",
+        "pinterest": "Tesco on Pinterest (opens in a new window)",
+        "price": "Price",
+        "privacyAndCookies": "Privacy & Cookies",
+        "privacyCentre": "Privacy centre",
+        "privacyCookiePolicy": "Privacy & cookies policy",
+        "productRecall": "Product Recall",
+        "productTermsConditions": "Product terms & conditions",
+        "registration": "Registration",
+        "safeOnlineShopping": "Safe online shopping",
+        "serviceCharge": "Service Charge",
+        "sitemap": "Sitemap",
+        "storeLocator": "Store locator",
+        "termsAndConditions": "Terms & Conditions",
+        "tescoBank": "Tesco Bank",
+        "twitter": "Tesco on Twitter (opens in a new window)",
+        "vatInvoice": "How to get a VAT invoice",
+        "visa": "Visa Secure",
+        "waysToSave": "Ways to save",
+        "whereWeDeliver": "Where we deliver",
+        "youtube": "Tesco on YouTube (opens in a new window)"
+      }
+    },
+    "vanillaCSS": [
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F83a8091d906b8b07a258.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002Ff34d1dfb351dd7e00d14.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F53f6d51c2757e0b93124.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002Fae0a8557ff8a38126cec.css"
+      }
+    ],
+    "version": "2024.07.04-2abf45b3"
+  },
+  "mfe-global-scripts": {
+    "external": "globalScripts@\u002Fassets\u002Fmfe-global-scripts\u002Fb2d778cc79840d776646.js",
+    "version": "2024.07.24-2efdcfad",
+    "props": {
+      "authentication": {
+        "authenticated": false
+      },
+      "config": {
+        "client": {
+          "bingMaps": {
+            "clientId": "AsmhrPuia8p5xdMee4PT0Xzp4DNvHF3gyyBUCdfMfIopjHfCHCfLKLRtpBmdFPPS",
+            "sdkUrl": "https:\u002F\u002Fwww.bing.com\u002Fmaps\u002Fsdk\u002Fmapcontrol"
+          },
+          "dfpAdUnitPath": "\u002F8326\u002Fgrocery\u002F",
+          "dfp": {
+            "limitedSdkUrl": "https:\u002F\u002Fpagead2.googlesyndication.com\u002Ftag\u002Fjs\u002Fgpt.js",
+            "sdkUrl": "https:\u002F\u002Fsecurepubads.g.doubleclick.net\u002Ftag\u002Fjs\u002Fgpt.js",
+            "sizeMappings": [
+              [
+                [
+                  0,
+                  531
+                ],
+                [
+                  "fluid",
+                  [
+                    300,
+                    250
+                  ],
+                  [
+                    375,
+                    258
+                  ],
+                  [
+                    375,
+                    110
+                  ]
+                ]
+              ],
+              [
+                [
+                  532,
+                  723
+                ],
+                [
+                  "fluid",
+                  [
+                    532,
+                    110
+                  ]
+                ]
+              ],
+              [
+                [
+                  724,
+                  917
+                ],
+                [
+                  "fluid",
+                  [
+                    724,
+                    110
+                  ]
+                ]
+              ],
+              [
+                [
+                  918,
+                  50000
+                ],
+                [
+                  "fluid",
+                  [
+                    918,
+                    110
+                  ]
+                ]
+              ]
+            ]
+          },
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+            "consumer": "groceries",
+            "cookiePreferences": {
+              "displayCookieBanner": false,
+              "experienceCookiesEnabled": true,
+              "advertisingCookiesEnabled": true
+            },
+            "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "mfeRollout": {
+              "orders": true,
+              "pdp": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "homepage": true,
+              "favourites": true,
+              "trolley": true,
+              "slots": false,
+              "slots-ondemand": true,
+              "slots-collection": false,
+              "slots-delivery": false,
+              "search": false,
+              "browse": false
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+            "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": false
+          }
+        },
+        "feature": {},
+        "server": {
+          "global": {
+            "ssrMangoUrl": "http:\u002F\u002Frelease.xapi-gateway.disco.very"
+          }
+        }
+      },
+      "hostEnv": "prod",
+      "messages": {
+        "foresee.confirmation.continue": "Continue shopping",
+        "foresee.confirmation.text": "Please continue shopping and complete the survey when you have finished.",
+        "foresee.confirmation.title": "Thank you for participating",
+        "foresee.consent.email.accept": "Yes I can help",
+        "foresee.consent.email.text": "We would love to hear about your visit today. When you have finished on Tesco Groceries, can we email you some questions about your visit to improve our website?",
+        "foresee.consent.email.title": "Help us improve the website",
+        "foresee.consent.form.accept": "Yes I'll give feedback",
+        "foresee.consent.form.text": "When you have finished on Tesco Groceries, can we ask you some questions about your visit to help us improve our website? Remember to answer them after you have finished your shop so we can help about your full experience.",
+        "foresee.consent.form.title": "We would love to hear about your visit today",
+        "foresee.consent.reject": "No thanks",
+        "foresee.email.formLabel": "Please enter a valid email address",
+        "foresee.email.submit": "Confirm",
+        "foresee.email.text": "Please enter your email address for us to send the questions to below",
+        "foresee.email.title": "We really appreciate your help",
+        "inputs.email.label": "Email address",
+        "inputs.email.placeholder": "Email address",
+        "modal.label": "Tesco Groceries modal dialog"
+      },
+      "version": "2024.07.24-2efdcfad",
+      "route": {
+        "layout": {
+          "html": "\u003Cdiv\u003E\n  \u003C!-- Will remove sticky-header id, when moved to a conditional layout --\u003E\n  \u003Cdiv class=\"template-header has-mfe-children\" id=\"sticky-header\"\u003E \n    \u003Cdiv data-mfe=\"mfe-header\"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cdiv class=\"template-wrapper\"\u003E\n    \u003Cmain class=\"template-content has-mfe-children\"\u003E\u003Cdiv data-mfe=\"mfe-pdp\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fmain\u003E\n    \u003Cdiv class=\"template-sidecolumn has-mfe-children\"\u003E\n      \u003Cdiv data-mfe=\"mfe-basket\"\u003E\u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cdiv class=\"template-footer has-mfe-children\"\u003E\n    \u003Cdiv data-mfe=\"mfe-footer\"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cdiv data-mfe=\"mfe-global-scripts\"\u003E\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n",
+          "name": "with-sidebasket"
+        },
+        "microFrontends": [
+          {
+            "name": "mfe-header",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-pdp",
+            "fallback": false,
+            "format": "visual-primary"
+          },
+          {
+            "name": "mfe-basket",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-footer",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-global-scripts",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-analytics",
+            "fallback": false,
+            "format": "non-visual"
+          }
+        ],
+        "name": "pdp",
+        "path": "\u002Fgroceries\u002Fen-GB\u002Fproducts\u002F316188524",
+        "requiresAuthentication": false,
+        "params": {
+          "language": "en-GB",
+          "productId": "316188524"
+        }
+      }
+    }
+  },
+  "mfe-analytics": {
+    "external": "analytics@\u002Fassets\u002Fmfe-analytics\u002F81e190ebabc3b022088a.js",
+    "version": "2024.07.23-3ee429e1",
+    "props": {
+      "authentication": {
+        "authenticated": false
+      },
+      "version": "2024.07.23-3ee429e1",
+      "hostEnv": "prod",
+      "config": {
+        "client": {
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+            "consumer": "groceries",
+            "cookiePreferences": {
+              "displayCookieBanner": false,
+              "experienceCookiesEnabled": true,
+              "advertisingCookiesEnabled": true
+            },
+            "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "mfeRollout": {
+              "orders": true,
+              "pdp": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "homepage": true,
+              "favourites": true,
+              "trolley": true,
+              "slots": false,
+              "slots-ondemand": true,
+              "slots-collection": false,
+              "slots-delivery": false,
+              "search": false,
+              "browse": false
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+            "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": false
+          }
+        },
+        "feature": {}
+      },
+      "route": {
+        "layout": {
+          "html": "\u003Cdiv\u003E\n  \u003C!-- Will remove sticky-header id, when moved to a conditional layout --\u003E\n  \u003Cdiv class=\"template-header has-mfe-children\" id=\"sticky-header\"\u003E \n    \u003Cdiv data-mfe=\"mfe-header\"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cdiv class=\"template-wrapper\"\u003E\n    \u003Cmain class=\"template-content has-mfe-children\"\u003E\u003Cdiv data-mfe=\"mfe-pdp\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fmain\u003E\n    \u003Cdiv class=\"template-sidecolumn has-mfe-children\"\u003E\n      \u003Cdiv data-mfe=\"mfe-basket\"\u003E\u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cdiv class=\"template-footer has-mfe-children\"\u003E\n    \u003Cdiv data-mfe=\"mfe-footer\"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cdiv data-mfe=\"mfe-global-scripts\"\u003E\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E\n",
+          "name": "with-sidebasket"
+        },
+        "microFrontends": [
+          {
+            "name": "mfe-header",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-pdp",
+            "fallback": false,
+            "format": "visual-primary"
+          },
+          {
+            "name": "mfe-basket",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-footer",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-global-scripts",
+            "fallback": false,
+            "format": "visual"
+          },
+          {
+            "name": "mfe-analytics",
+            "fallback": false,
+            "format": "non-visual"
+          }
+        ],
+        "name": "pdp",
+        "path": "\u002Fgroceries\u002Fen-GB\u002Fproducts\u002F316188524",
+        "requiresAuthentication": false,
+        "params": {
+          "language": "en-GB",
+          "productId": "316188524"
+        }
+      }
+    }
+  },
+  "mfe-orchestrator": {
+    "props": {
+      "apolloCache": {
+        "ROOT_QUERY": {
+          "__typename": "Query",
+          "taxonomy({\"configs\":[],\"includeInspirationEvents\":true})": [
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Marketplace",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Summer",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Fresh Food",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Bakery",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Frozen Food",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Treats & Snacks",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Food Cupboard",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Drinks",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Baby & Toddler",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Health & Beauty",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Pets",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Household",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Home & Ents",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Mobile Phones",
+              "label": "superDepartment",
+              "source": "essearch"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Inspiration & Events",
+              "label": "superDepartments",
+              "source": "dcs"
+            }
+          ],
+          "page({\"dfpReportingRequired\":false,\"isReporting\":false,\"pageName\":\"navigation\",\"populateTargetingParams\":true,\"preview\":false,\"targetingParams\":\"aggregate=true&country=UK&lang=en_GB&loggedOn=false&sver=1\"})@maxTime({\"ms\":500})": {
+            "__typename": "DCSPage",
+            "children": [
+              {
+                "__typename": "RawComponent",
+                "type": "Panel",
+                "props": {
+                  "ruleId": "",
+                  "tracking": {},
+                  "id": "NavigationTab",
+                  "ordered": true
+                },
+                "childrenType": null,
+                "children": [
+                  {
+                    "__typename": "RawComponent",
+                    "type": "Tab",
+                    "props": {
+                      "catId": "0",
+                      "ruleId": "defaultClientType",
+                      "contentId": "4bc6f700-58d7-4f7a-b027-10a2df040245",
+                      "tracking": {},
+                      "id": "The Summer Shop",
+                      "tabName": "The Summer Shop",
+                      "link": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB\u002Fzone\u002Fsummer-celebrations?icid=topnav_summer"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "product({\"tpnc\":\"316188524\"})": {
+            "__ref": "ProductType:316188524"
+          }
+        },
+        "PromotionType:90475169": {
+          "__typename": "PromotionType",
+          "id": "90475169",
+          "promotionType": null,
+          "startDate": "2024-07-23T23:00:00Z",
+          "endDate": "2024-12-11T00:00:00Z",
+          "description": "£2.50 Clubcard Price",
+          "unitSellingInfo": "£0.56\u002F100ml",
+          "price": {
+            "__typename": "PromotionPriceType",
+            "beforeDiscount": null,
+            "afterDiscount": 3
+          },
+          "attributes": [
+            "CLUBCARD_PRICING"
+          ]
+        },
+        "ProductType:316188524": {
+          "__typename": "ProductType",
+          "id": "316188524",
+          "baseProductId": "92916545",
+          "isRestrictedOrderAmendment": null,
+          "gtin": "08720181466427",
+          "tpnb": "92916545",
+          "tpnc": "316188524",
+          "title": "Dove Hydrate Body Wash Shower Gel 450ml",
+          "description": [
+            "DOVE HYDRATE BODY WASH 450ML "
+          ],
+          "brandName": "DOVE",
+          "isInFavourites": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F854e7cb2-185a-4445-b21b-48b26578e2a1\u002Fd55f89c0-aced-475c-b5b8-988a21235d12_47359572.jpeg?h=225&w=225",
+          "superDepartmentName": "Health & Beauty",
+          "superDepartmentId": "b;SGVhbHRoJTIwJiUyMEJlYXV0eQ==",
+          "departmentName": "Shower, Bath & Hand Hygiene",
+          "departmentId": "b;SGVhbHRoJTIwJiUyMEJlYXV0eSU3Q1Nob3dlciwlMjBCYXRoJTIwJiUyMEhhbmQlMjBIeWdpZW5l",
+          "aisleName": "Shower",
+          "aisleId": "b;SGVhbHRoJTIwJiUyMEJlYXV0eSU3Q1Nob3dlciwlMjBCYXRoJTIwJiUyMEhhbmQlMjBIeWdpZW5lJTdDU2hvd2Vy",
+          "shelfName": "Shower Gel & Body Wash",
+          "displayType": "Quantity",
+          "shelfId": "b;SGVhbHRoJTIwJiUyMEJlYXV0eSU3Q1Nob3dlciwlMjBCYXRoJTIwJiUyMEhhbmQlMjBIeWdpZW5lJTdDU2hvd2VyJTdDU2hvd2VyJTIwR2VsJTIwJiUyMEJvZHklMjBXYXNo",
+          "averageWeight": null,
+          "bulkBuyLimit": 99,
+          "bulkBuyLimitGroupId": null,
+          "bulkBuyLimitMessage": "Max allowed is 99.",
+          "groupBulkBuyLimit": 0,
+          "isForSale": true,
+          "isNew": true,
+          "status": "AvailableForSale",
+          "productType": "SingleProduct",
+          "charges": [],
+          "seller": null,
+          "images": {
+            "__typename": "ProductImagesType",
+            "display": [
+              {
+                "__typename": "ProductAlternativeImageType",
+                "default": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F854e7cb2-185a-4445-b21b-48b26578e2a1\u002Fd55f89c0-aced-475c-b5b8-988a21235d12_47359572.jpeg?h=225&w=225",
+                  "originalUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F854e7cb2-185a-4445-b21b-48b26578e2a1\u002Fd55f89c0-aced-475c-b5b8-988a21235d12_47359572.jpeg?h=225&w=225"
+                },
+                "zoom": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F854e7cb2-185a-4445-b21b-48b26578e2a1\u002Fd55f89c0-aced-475c-b5b8-988a21235d12_47359572.jpeg?h=540&w=540"
+                }
+              },
+              {
+                "__typename": "ProductAlternativeImageType",
+                "default": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F2d2fb136-df3c-4f99-9b6b-35d21528a94c\u002F71ac7cf1-716b-4f2c-952a-c951c58d3500_1920244880.jpeg?h=225&w=225",
+                  "originalUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F2d2fb136-df3c-4f99-9b6b-35d21528a94c\u002F71ac7cf1-716b-4f2c-952a-c951c58d3500_1920244880.jpeg?h=225&w=225"
+                },
+                "zoom": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F2d2fb136-df3c-4f99-9b6b-35d21528a94c\u002F71ac7cf1-716b-4f2c-952a-c951c58d3500_1920244880.jpeg?h=540&w=540"
+                }
+              },
+              {
+                "__typename": "ProductAlternativeImageType",
+                "default": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F71d94a94-b79c-492b-bc4e-fe04720e3b85\u002F6c38ea75-47a3-4da4-845c-171ffccd33d1_2082567497.jpeg?h=225&w=225",
+                  "originalUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F71d94a94-b79c-492b-bc4e-fe04720e3b85\u002F6c38ea75-47a3-4da4-845c-171ffccd33d1_2082567497.jpeg?h=225&w=225"
+                },
+                "zoom": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F71d94a94-b79c-492b-bc4e-fe04720e3b85\u002F6c38ea75-47a3-4da4-845c-171ffccd33d1_2082567497.jpeg?h=540&w=540"
+                }
+              },
+              {
+                "__typename": "ProductAlternativeImageType",
+                "default": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F0aa415f8-5a8c-43c6-97ec-fd545c735f35\u002F9a0791db-7690-4b8d-9ed8-2f49a7a3a775_1845058275.jpeg?h=225&w=225",
+                  "originalUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F0aa415f8-5a8c-43c6-97ec-fd545c735f35\u002F9a0791db-7690-4b8d-9ed8-2f49a7a3a775_1845058275.jpeg?h=225&w=225"
+                },
+                "zoom": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F0aa415f8-5a8c-43c6-97ec-fd545c735f35\u002F9a0791db-7690-4b8d-9ed8-2f49a7a3a775_1845058275.jpeg?h=540&w=540"
+                }
+              },
+              {
+                "__typename": "ProductAlternativeImageType",
+                "default": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fe283ccee-a7b9-4d97-99ca-b68c0362692b\u002F577a0783-8d7b-4bca-a7fb-d7735b9e9ff9_699892041.jpeg?h=225&w=225",
+                  "originalUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fe283ccee-a7b9-4d97-99ca-b68c0362692b\u002F577a0783-8d7b-4bca-a7fb-d7735b9e9ff9_699892041.jpeg?h=225&w=225"
+                },
+                "zoom": {
+                  "__typename": "ProductImageType",
+                  "url": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fe283ccee-a7b9-4d97-99ca-b68c0362692b\u002F577a0783-8d7b-4bca-a7fb-d7735b9e9ff9_699892041.jpeg?h=540&w=540"
+                }
+              }
+            ]
+          },
+          "foodIcons": [],
+          "shelfLife": null,
+          "restrictions": [],
+          "distributorAddress": null,
+          "manufacturerAddress": {
+            "__typename": "AddressType",
+            "addressLine1": "Unilever Dept ER,",
+            "addressLine2": "Wirral CH63 3JW UK",
+            "addressLine3": null,
+            "addressLine4": null,
+            "addressLine5": null,
+            "addressLine6": null
+          },
+          "importerAddress": null,
+          "returnTo": null,
+          "maxWeight": null,
+          "minWeight": null,
+          "catchWeightList": null,
+          "multiPackDetails": null,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "energyEfficiency": {
+              "__typename": "EnergyEfficiencyType",
+              "class": null,
+              "energyClassUrl": null,
+              "productInfoDoc": null
+            },
+            "ingredients": [
+              "Aqua",
+              "Cocamidopropyl Betaine",
+              "Sodium Lauroyl Isethionate",
+              "Glycerin",
+              "Sodium Benzoate",
+              "Parfum",
+              "Sodium Chloride",
+              "Carbomer",
+              "Glycol Distearate",
+              "Caprylyl Glycol",
+              "Lauric Acid",
+              "Sodium Hydroxide",
+              "Stearic Acid",
+              "Sodium Lauroyl Glycinate",
+              "Sodium Isethionate",
+              "Palmitic Acid",
+              "PPG-6",
+              "PEG-150 Pentaerythrityl Tetrastearate",
+              "PPG-2 Hydroxyethyl Cocamide",
+              "Sodium Gluconate",
+              "Hexyl Cinnamal",
+              "Limonene",
+              "Linalool"
+            ],
+            "legalLabelling": [],
+            "packSize": [
+              {
+                "__typename": "PackSizeType",
+                "value": "450",
+                "units": "ML"
+              }
+            ],
+            "allergens": null,
+            "marketing": [
+              "If you're looking for a body wash that doesn't harm your skin and cares for it every day, it’s time to try Dove Hydrate body wash. Developed with 100% gentle cleansers, this mild and nourishing body wash works to cleanse and nourish skin, leaving it softer and smoother in just one shower. Specially formulated to to be mild and gentle to your skin, this body wash is made with 100% gentle cleansers and 0% sulfate SLES. It doesn't strip your skin's natural moisture so your skin stays hydrated and soft. It also nourishes your skin and is microbiome gentle.",
+              "Dove cares for all. Dove Hydrate body wash is a mild and gentle body wash that helps you turn every shower into an act of self-care. It gives you softer, smoother skin in just one shower. It also has a 92% biodegradable formula*, is packaged in 100% recycled plastic bottles** and is PETA Vegan approved.",
+              "*92% of ingredients break down into carbon dioxide, water & minerals (OECD test methods 301,302 and\u002For 310).",
+              "**bottle excluding cap and labels",
+              "Squeeze a generous amount of Dove Hydrate body wash into your palms. Massage the hydrating body wash onto your skin, then rinse off to reveal soft, smooth skin",
+              "Damp skin is more receptive to lotions and serums, so after showering is the perfect time to lock in moisture. After using a body wash apply your favourite Dove moisturiser as soon as you step out of the shower. Your skin will look and feel softer, as well as instantly more nourished.",
+              "At Dove, our vision is of a world where beauty is a source of confidence, and not anxiety. So, we are on a mission to help the next generation of women develop a positive relationship with the way they look—reaching over ¼ of a billion young people with self-esteem education by 2030. We are also committed to a landmark new initiative as part of our 2025 commitment to reduce plastic waste; reducing over 20,500 metric tons of virgin plastic annually by making the iconic beauty bar packaging plastic-free globally; launching new 100% recycled plastic bottles; and trialing a new refillable deodorant format that reduces plastic use over time. As one of the largest beauty brands in the world, we are revealing an agenda-setting commitment to tackle the global beauty industry’s plastic waste issue."
+            ],
+            "storage": null,
+            "nutrition": [],
+            "specifications": [],
+            "otherNutritionInformation": null,
+            "hazardInfo": null,
+            "guidelineDailyAmount": {
+              "__typename": "GuidelineDailyAmountType",
+              "title": null,
+              "dailyAmounts": []
+            },
+            "numberOfUses": null,
+            "preparationAndUsage": null,
+            "freezingInstructions": null,
+            "manufacturerMarketing": null,
+            "productMarketing": [
+              "If you're looking for a body wash that doesn't harm your skin and cares for it every day, it’s time to try Dove Hydrate body wash. Developed with 100% gentle cleansers, this mild and nourishing body wash works to cleanse and nourish skin, leaving it softer and smoother in just one shower. Specially formulated to to be mild and gentle to your skin, this body wash is made with 100% gentle cleansers and 0% sulfate SLES. It doesn't strip your skin's natural moisture so your skin stays hydrated and soft. It also nourishes your skin and is microbiome gentle.",
+              "Dove cares for all. Dove Hydrate body wash is a mild and gentle body wash that helps you turn every shower into an act of self-care. It gives you softer, smoother skin in just one shower. It also has a 92% biodegradable formula*, is packaged in 100% recycled plastic bottles** and is PETA Vegan approved.",
+              "*92% of ingredients break down into carbon dioxide, water & minerals (OECD test methods 301,302 and\u002For 310).",
+              "**bottle excluding cap and labels",
+              "Squeeze a generous amount of Dove Hydrate body wash into your palms. Massage the hydrating body wash onto your skin, then rinse off to reveal soft, smooth skin",
+              "Damp skin is more receptive to lotions and serums, so after showering is the perfect time to lock in moisture. After using a body wash apply your favourite Dove moisturiser as soon as you step out of the shower. Your skin will look and feel softer, as well as instantly more nourished.",
+              "At Dove, our vision is of a world where beauty is a source of confidence, and not anxiety. So, we are on a mission to help the next generation of women develop a positive relationship with the way they look—reaching over ¼ of a billion young people with self-esteem education by 2030. We are also committed to a landmark new initiative as part of our 2025 commitment to reduce plastic waste; reducing over 20,500 metric tons of virgin plastic annually by making the iconic beauty bar packaging plastic-free globally; launching new 100% recycled plastic bottles; and trialing a new refillable deodorant format that reduces plastic use over time. As one of the largest beauty brands in the world, we are revealing an agenda-setting commitment to tackle the global beauty industry’s plastic waste issue."
+            ],
+            "brandMarketing": null,
+            "otherInformation": null,
+            "additives": null,
+            "warnings": null,
+            "netContents": "450 ℮",
+            "drainedWeight": null,
+            "safetyWarning": null,
+            "lowerAgeLimit": null,
+            "upperAgeLimit": null,
+            "healthmark": null,
+            "recyclingInfo": null,
+            "nappies": null,
+            "alcohol": null,
+            "cookingInstructions": {
+              "__typename": "CookingInstructionsType",
+              "oven": {
+                "__typename": "OvenCookingInstructionType",
+                "chilled": {
+                  "__typename": "OvenCookingInstructionDetailType",
+                  "time": null,
+                  "instructions": [],
+                  "temperature": null
+                },
+                "frozen": {
+                  "__typename": "OvenCookingInstructionDetailType",
+                  "time": null,
+                  "instructions": [],
+                  "temperature": null
+                }
+              },
+              "microwave": {
+                "__typename": "MicrowaveCookingInstructionType",
+                "chilled": {
+                  "__typename": "MicrowaveCookingInstructionDetailType",
+                  "detail": null,
+                  "instructions": []
+                },
+                "frozen": {
+                  "__typename": "MicrowaveCookingInstructionDetailType",
+                  "detail": null,
+                  "instructions": []
+                }
+              },
+              "cookingMethods": [],
+              "otherInstructions": [],
+              "cookingGuidelines": [],
+              "cookingPrecautions": []
+            },
+            "originInformation": [
+              {
+                "__typename": "OriginInformationType",
+                "title": "Produce of",
+                "value": "Germany"
+              }
+            ],
+            "dosage": null,
+            "preparationGuidelines": null,
+            "directions": null,
+            "features": [
+              "A mild and caring body wash for your shower that gently cleanses for instantly softer, smoother skin.",
+              "Dove Hydrate body wash is made with 0% sulfate SLES so it gently cleanses your skin without stripping its natural moisture. Leaving it soft and smooth right from the shower.",
+              "This body cleanser gently but effectively washes away dirt and germs with a rich lather that won't dry out your skin.",
+              "Made with 100% gentle cleansers and 0% sulfate SLES for a hydrating shower experience.",
+              "This formula is dermatologically tested & approved. Made with skin nourishers & mild cleansers it gently cleanses your skin and nourishes its microbiome.",
+              "PETA vegan approved, made with 92% biodegradable ingredients* and uses 100% recycled plastic bottles**",
+              "*92% of ingredients break down into carbon dioxide, water & minerals (OECD test methods 301,302 and\u002For 310).",
+              "**bottle excluding cap and labels"
+            ],
+            "healthClaims": null,
+            "boxContents": null,
+            "nutritionalClaims": null,
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false,
+                "isLowPricePromise": false
+              }
+            ]
+          },
+          "price": {
+            "__typename": "PriceType",
+            "actual": 3,
+            "unitPrice": 0.67,
+            "unitOfMeasure": "100ml"
+          },
+          "promotions": [
+            {
+              "__ref": "PromotionType:90475169"
+            }
+          ],
+          "reviews({\"count\":10,\"offset\":0})": {
+            "__typename": "ReviewsType",
+            "info": {
+              "__typename": "ListInfoType",
+              "offset": 0,
+              "total": 0,
+              "page": 1,
+              "count": 0
+            },
+            "entries": [],
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": null,
+              "overallRating": null
+            }
+          }
+        }
+      },
+      "config": {
+        "global": {
+          "locale": "en-GB",
+          "supportedLocales": [
+            "en-GB"
+          ],
+          "timeZone": "Europe\u002FLondon",
+          "devTools": {
+            "apolloClient": false
+          },
+          "analytics": {
+            "host": "https:\u002F\u002Fwww.tesco.com",
+            "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+          },
+          "env": "prod",
+          "atrc": "f8dee70b-4935-47ca-a44c-e1790face7ee",
+          "consumer": "groceries",
+          "cookiePreferences": {
+            "displayCookieBanner": false,
+            "experienceCookiesEnabled": true,
+            "advertisingCookiesEnabled": true
+          },
+          "csrfToken": "HluMvDJp-z5EpT7mTCMCLdhpaCuIy9rDYSYc",
+          "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+          "mfeRollout": {
+            "orders": true,
+            "pdp": true,
+            "order-details": true,
+            "order-receipt": true,
+            "order-return": true,
+            "homepage": true,
+            "favourites": true,
+            "trolley": true,
+            "slots": false,
+            "slots-ondemand": true,
+            "slots-collection": false,
+            "slots-delivery": false,
+            "search": false,
+            "browse": false
+          },
+          "region": "uk",
+          "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+          "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+          "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Flogin\u002Fen-GB",
+          "signOutUrl": "\u002Fgroceries\u002Fen-GB\u002Flogout",
+          "optimizelyDisabled": false
+        },
+        "mangoApiKey": "TvOSZJHlEk0pjniDGQFAc9Q59WGAR4dA",
+        "mangoUrl": "https:\u002F\u002Fapi.tesco.com\u002Fshoppingexperience",
+        "traceId": "f8dee70b-4935-47ca-a44c-e1790face7ee:68faeb1b-e2a5-4ffb-a1da-093f8ba21a77"
+      },
+      "errorPageUrl": "\u002Fassets\u002Fmfe-orchestrator\u002Fb423d53f.html",
+      "experiments": {
+        "ghs-all_beans-product-tile": {
+          "flagKey": "GHS-ALL_beans-product-tile",
+          "variables": {
+            "productTile_config": "beans",
+            "experimentKey": "oop709",
+            "variationKey": "709-r"
+          },
+          "variationKey": "21317350896"
+        },
+        "ghs_clubcard_active_message": {
+          "flagKey": "ghs_clubcard_active_message",
+          "variables": {},
+          "variationKey": "21921911413"
+        },
+        "attributes": {
+          "$opt_user_agent": "Mozilla\u002F5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko\u002F20100101 Firefox\u002F128.0",
+          "consumer": "default",
+          "language": "en-GB",
+          "site": "GHS-UK"
+        }
+      },
+      "mfeRolloutDebug": "homepage:true;favourites:true;trolley:true;slots:71,false;slots-ondemand:true;slots-collection:100,false;slots-delivery:84,false;search:,false;browse:,false;"
+    },
+    "version": "2024.07.24-94ec8c0a"
+  }
+}
