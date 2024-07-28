@@ -47,6 +47,8 @@ services:
       dockerfile: docker/proxy.Dockerfile
     expose:
       - ${PORT:-3333}
+    ports:
+      - 3334:${PORT:-3333}
     volumes:
       - ./proxy/proxy.js:/usr/src/app/proxy.js
     restart: always
