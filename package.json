@@ -32,9 +32,11 @@
     "help": "nx help",
     "postinstall": "if [ \"$NODE_ENV\" != \"production\" ]; then node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main; fi",
     "dc-prod": "docker-compose -f docker/docker-compose.prod.yml",
-    "build:proxy": "cd proxy && yarn install",
-    "start:proxy": "cd proxy && yarn start",
-    "db:restore": "docker compose exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && docker compose exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson"
+    "build:proxy": "cd proxy && npm install",
+    "start:proxy": "cd proxy && npm run start",
+    "db:restore": "docker compose exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && docker compose exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson",
+    "docker:build:proxy": "docker build . -f docker/proxy.Dockerfile -t supermarket-watch-proxy:local",
+    "docker:run:proxy": "docker run -p 3334:3333 --rm --name supermarket-watch-proxy -t supermarket-watch-proxy:local"
   },
   "private": true,
   "dependencies": {
