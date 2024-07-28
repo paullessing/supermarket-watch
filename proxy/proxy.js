@@ -20,6 +20,9 @@ const app = express();
 let browser;
 
 async function loadPage(url) {
+  if (!browser) {
+    throw new Error('NO_BROWSER');
+  }
   const start = new Date().getTime();
   const page = await browser.newPage();
   await page.setUserAgent(
@@ -58,7 +61,6 @@ async function streamFromUrl(url, res) {
 app.use(compression());
 app.get('/tesco/product/:id', async (req, res) => {
   try {
-    start = new Date().getTime();
     const productId = parseInt(req.params.id, 10);
     if (isNaN(productId)) {
       return res.status(400).end();
@@ -117,10 +119,17 @@ app.get('/sainsburys/product', async (req, res) => {
 console.log('Launching Puppeteer...');
 puppeteer
   .launch()
-  .then((_browser) => {
-    browser = _browser;
-    console.log('Puppeteer is started');
-
+  .then(
+    (_browser) => {
+      browser = _browser;
+      console.log('Puppeteer is started');
+    },
+    (e) => {
+      console.log('Failed to start Puppeteer');
+      console.error(e);
+    }
+  )
+  .then(() => {
     console.log('Starting express...');
     app.listen(port, () => {
       console.log(`App listening at http://localhost:${port}`);
