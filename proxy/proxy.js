@@ -119,7 +119,11 @@ app.get('/sainsburys/product', async (req, res) => {
 
 console.log('Launching Puppeteer...');
 puppeteer
-  .launch()
+  .launch({
+    product: 'firefox',
+    executablePath: '/usr/bin/firefox',
+    // protocol: 'webDriverBiDi', // Not working in this version of Firefox
+  })
   .then(
     (_browser) => {
       browser = _browser;
