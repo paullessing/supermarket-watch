@@ -10,8 +10,8 @@ const tescoUrl = 'https://www.tesco.com/groceries/en-GB/';
 const sainsburysUrl = 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
 
 const curlHeaders = [
-  'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
-  'accept-language: en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7',
+  'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+  'Accept-Language: en-GB,en;q=0.5',
 ].reduce((acc, curr) => acc.concat('-H', curr), []);
 
 const app = express();

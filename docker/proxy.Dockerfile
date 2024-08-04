@@ -12,7 +12,9 @@ FROM node:22-slim AS serve
 WORKDIR /usr/src/app
 
 RUN apt-get update \
-    && apt-get install -y firefox-esr # Need to use ESR as there is no stable version of Firefox for Debian
+    && apt-get install -y \
+      curl \
+      firefox-esr # Need to use ESR as there is no stable version of Firefox for Debian
 
 USER node
 
