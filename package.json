@@ -36,7 +36,7 @@
     "start:proxy": "cd proxy && npm run start",
     "db:restore": "docker compose exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && docker compose exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson",
     "docker:build:proxy": "docker build . -f docker/proxy.Dockerfile -t supermarket-watch-proxy:local",
-    "docker:run:proxy": "docker run -p 3334:3333 --rm --name supermarket-watch-proxy -t supermarket-watch-proxy:local"
+    "docker:run:proxy": "docker run -p 3334:3333 --name supermarket-watch-proxy --rm --init -t supermarket-watch-proxy:local"
   },
   "private": true,
   "dependencies": {
