@@ -1,22 +1,22 @@
-import { SpecialOffer } from './special-offer.model';
+import type { SpecialOffer } from './special-offer.model';
 
 export interface ProductDetails {
-  id: string;
-  name: string;
-  image: string;
-  url: string;
+	id: string;
+	name: string;
+	image: string;
+	url: string;
 
-  supermarket: string;
+	supermarket: string;
 
-  price: number;
-  pricePerUnit: number;
-  unitName: string;
-  unitAmount: number;
+	price: number;
+	pricePerUnit: number;
+	unitName: string;
+	unitAmount: number;
 
-  packSize: {
-    amount: number;
-    unit: string;
-  };
+	packSize: {
+		amount: number;
+		unit: string;
+	};
 
-  specialOffer: null | SpecialOffer;
+	specialOffer: null | SpecialOffer;
 }
