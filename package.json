@@ -1,6 +1,7 @@
 {
-  "name": "supermarket-watch-2",
+  "name": "supermarket-watch",
   "version": "0.0.1",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "vite dev",
@@ -10,7 +11,13 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test": "vitest",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "dc-prod": "docker-compose -f docker/docker-compose.prod.yml",
+    "build:proxy": "cd proxy && npm install",
+    "start:proxy": "cd proxy && npm run start",
+    "db:restore": "docker compose exec -T mongo mongoimport --drop -d shopping -c priceComparisons < ./db_backups/priceComparisons.bson && docker compose exec -T mongo mongoimport --drop -d shopping -c productHistory < ./db_backups/productHistory.bson",
+    "docker:build:proxy": "docker build . -f docker/proxy.Dockerfile -t supermarket-watch-proxy:local",
+    "docker:run:proxy": "docker run -p 3334:3333 --name supermarket-watch-proxy --rm --init -t supermarket-watch-proxy:local"
   },
   "dependencies": {
     "date-fns": "^3.6.0",
@@ -34,5 +41,8 @@
     "vite": "^5.0.3",
     "vitest": "^2.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "volta": {
+    "node": "20.17.0"
+  }
 }
