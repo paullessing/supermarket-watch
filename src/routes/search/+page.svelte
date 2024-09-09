@@ -1,24 +1,42 @@
 <script lang="ts">
-  import type { PageServerData } from './$types';
   import { type SearchResultItem } from "$lib/models";
-  import type { SortBy } from '$lib';
+  import { SortBy } from '$lib';
   import SearchBox, { type SearchParams } from "./SearchBox.svelte";
+  import SearchResultList from "./SearchResultList.svelte";
+  import { page } from '$app/stores';
+  import type { PageServerData } from "./$types";
 
   export let data: PageServerData;
 
-  let isSearching: boolean;
+  $: {
+    console.log('Page data', data);
+  }
+
+  let results: SearchResultItem[] = [];
+
+  let isSearching: boolean = false;
   let query: string;
   let addItemDetails: SearchResultItem | null;
   let sortBy: SortBy;
 
-  let onSearch = ({ detail: { query, sortBy } }: CustomEvent<SearchParams>): void => {
+  const urlParams = $page.url.searchParams;
+  query = urlParams.get('q') ?? '';
+  sortBy = ensureValidEnumValue(SortBy, urlParams.get('sortBy') ?? SortBy.NONE);
+  if (query) {
+    search({ query, sortBy })
+  }
+
+  function onSearch(event: CustomEvent<SearchParams>): void {
+    search(event.detail);
+  }
+
+  function search({ query, sortBy }: SearchParams): void {
     if (isSearching) {
       return;
     }
     isSearching = true;
 
     console.log('Searching', query, sortBy);
-
 
     // this.router.navigate([], {
     //   relativeTo: this.route,
@@ -46,6 +64,22 @@
     //     this.isSearching = false;
     //   });
   }
+
+  function openAddItemDetailsModal(event: CustomEvent<SearchResultItem>): void {
+    addItemDetails = event.detail;
+  }
+
+  function ensureValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): T {
+    if (isValidEnumValue(enumClass, value)) {
+      return value as T;
+    } else {
+      throw new Error(`Unexpected enum value "${value}" is not one of: [${Object.values(enumClass).join(', ')}]`);
+    }
+  }
+
+  function isValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): boolean {
+    return Object.values(enumClass).indexOf(value as T) >= 0;
+  }
 </script>
 
 
@@ -57,23 +91,17 @@
     searchText={query}
     on:search={onSearch}
   ></SearchBox>
-  <!--  <app-search-box-->
-  <!--    [isSearching]="isSearching"-->
-  <!--    [searchText]="query"-->
-  <!--    (search)="search($event)"-->
-  <!--  ></app-search-box>-->
 
-  <div>Add Product Dialog</div>
+  <SearchResultList
+    results={results}
+    on:addItem={openAddItemDetailsModal}
+  ></SearchResultList>
+
+  <div style="display: none">Add Product Dialog {addItemDetails?.id}</div>
   <!--  <app-add-product-dialog-->
   <!--    *ngIf="addItemDetails"-->
   <!--    [item]="addItemDetails"-->
   <!--    (exit)="addItemDetails = null"-->
   <!--    (addProduct)="track($event)"-->
   <!--  ></app-add-product-dialog>-->
-
-  <div>Search Result List</div>
-  <!--  <app-search-result-list-->
-  <!--    [results]="results"-->
-  <!--    (addItem)="addItemDetails = $event"-->
-  <!--  ></app-search-result-list>-->
 </div>

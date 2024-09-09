@@ -33,10 +33,6 @@
     name="queryString"
     bind:value={searchText}
   >
-  <button
-    type="submit"
-    disabled={isSearching}
-  >{ isSearching ? 'Searching...' : 'Search' }</button>
   <select
     name="sortBy"
     bind:value={sortBy}
@@ -48,4 +44,8 @@
     <option value={SortBy.SPECIAL_OFFERS}>Offers</option>
     <option value={SortBy.SUPERMARKET}>Supermarket</option>
   </select>
+  <button
+    type="submit"
+    disabled={isSearching}
+  >{ isSearching ? 'Searching...' : 'Search' }</button>
 </form>
