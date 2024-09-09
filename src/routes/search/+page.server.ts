@@ -1,7 +1,37 @@
 import type { PageServerLoad } from './$types';
+import { SortBy } from '$lib';
+import { error } from '@sveltejs/kit';
 
-export const load = (async (event): Promise<{ results: string }> => {
+export const load = (async (event): Promise<{ query: string; sortBy: SortBy }> => {
+	const params = event.url.searchParams;
+
+	const query: string = params.get('q') ?? '';
+	const sortBy: SortBy = (params.get('sortBy') as SortBy) ?? SortBy.NONE;
+
+	if (sortBy && !Object.values(SortBy).includes(sortBy)) {
+		error(400, {
+			message: 'Invalid query parameter "sortBy"'
+		});
+	}
+
 	return {
-		results: 'hello'
+		query,
+		sortBy
 	};
 }) satisfies PageServerLoad;
+
+function search(query: string, sortBy: SortBy) {
+	let sortOrder = SortOrder.ASCENDING;
+	if (querySortOrder) {
+		if (!['asc', 'desc', '1', '-1', 1, -1].includes(querySortOrder)) {
+			throw new BadRequestException('Query parameter "sortOrder" must be "asc", "desc", 1 or -1 if provided');
+		}
+		sortOrder = ['asc', '1', 1].includes(querySortOrder) ? SortOrder.ASCENDING : SortOrder.DESCENDING;
+	}
+	const items = await this.supermarketService.search(query, sortBy, sortOrder);
+	if (!items) {
+		throw new NotFoundException();
+	}
+
+	return { items };
+}
