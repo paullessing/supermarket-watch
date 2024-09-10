@@ -9,7 +9,10 @@ import { SupermarketList } from './supermarket-list.service';
 
 @Injectable()
 export class SupermarketService {
-  constructor(private readonly supermarketList: SupermarketList, private readonly productRepo: ProductRepository) {}
+  constructor(
+    private readonly supermarketList: SupermarketList,
+    private readonly productRepo: ProductRepository
+  ) {}
 
   public async search(
     query: string,

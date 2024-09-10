@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { type SearchResultItem } from "$lib/models";
+  import { type SearchResultItem } from '$lib/models';
   import { SortBy } from '$lib';
-  import SearchBox, { type SearchParams } from "./SearchBox.svelte";
-  import SearchResultList from "./SearchResultList.svelte";
+  import SearchBox, { type SearchParams } from './SearchBox.svelte';
+  import SearchResultList from './SearchResultList.svelte';
   import { page } from '$app/stores';
-  import type { PageServerData } from "./$types";
+  import type { PageServerData } from './$types';
 
   export let data: PageServerData;
 
@@ -23,7 +23,7 @@
   query = urlParams.get('q') ?? '';
   sortBy = ensureValidEnumValue(SortBy, urlParams.get('sortBy') ?? SortBy.NONE);
   if (query) {
-    search({ query, sortBy })
+    search({ query, sortBy });
   }
 
   function onSearch(event: CustomEvent<SearchParams>): void {
@@ -82,18 +82,17 @@
   }
 </script>
 
-
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
   <SearchBox
-    isSearching={isSearching}
+    {isSearching}
     searchText={query}
     on:search={onSearch}
   ></SearchBox>
 
   <SearchResultList
-    results={results}
+    {results}
     on:addItem={openAddItemDetailsModal}
   ></SearchResultList>
 

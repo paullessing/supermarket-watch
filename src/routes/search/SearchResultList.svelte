@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type { SearchResultItem } from "$lib/models";
-  import { createEventDispatcher } from "svelte";
+  import type { SearchResultItem } from '$lib/models';
+  import { createEventDispatcher } from 'svelte';
 
   export let results: SearchResultItem[] = [];
 
   const dispatch = createEventDispatcher<{
-    addItem: SearchResultItem
+    addItem: SearchResultItem;
   }>();
 
   function onAddItem(item: SearchResultItem): void {
     if (item.trackingId === null) {
-      dispatch('addItem', item)
+      dispatch('addItem', item);
     }
   }
 </script>
@@ -20,7 +20,7 @@
     {#each results as result (result.id)}
       <li
         class="results__item result"
-        data-id="{result.id}"
+        data-id={result.id}
       >
         <div
           class="result__image"
@@ -31,23 +31,25 @@
           class:result__favourite--selected={result.trackingId}
           on:click={() => onAddItem(result)}
         ></button>
-        <p class="result__supermarket">{ result.supermarket }</p>
-        <p class="result__name">{ result.name }</p>
+        <p class="result__supermarket">{result.supermarket}</p>
+        <p class="result__name">{result.name}</p>
         <p
           class="result__price"
           class:result__price--special-offer={result.specialOffer}
-        >TODO GBP{ result.price }</p>
+        >TODO GBP{result.price}</p>
         {#if result.specialOffer}
-          <p
-            class="result__special-offer"
-          >
-            { result.specialOffer.offerText }{ result.specialOffer.offerText ? ',' : '' }
+          <p class="result__special-offer">
+            {result.specialOffer.offerText}{result.specialOffer.offerText ? ',' : ''}
             {#if result.specialOffer.originalPrice !== result.price}
-            <span
-              style="white-space: nowrap"
-            >{ result.specialOffer.offerText ? 'was' : 'Was' } TODO GBP{ result.specialOffer.originalPrice  }</span>
+              <span
+                style="white-space: nowrap"
+              >{result.specialOffer.offerText ? 'was' : 'Was'} TODO GBP{result.specialOffer.originalPrice}</span
+              >
             {/if}
-            <span style="color: #888; margin-left: 0.25rem; white-space: nowrap">until TODO (dd/MM){ result.specialOffer.validUntil }</span>
+            <span
+              style="color: #888; margin-left: 0.25rem; white-space: nowrap"
+            >until TODO (dd/MM){result.specialOffer.validUntil}</span
+            >
           </p>
         {/if}
       </li>
@@ -122,7 +124,6 @@
       }
     }
 
-
     &__name {
       grid-area: 2 / 1 / 3 / 3;
       padding: 0.5rem 0.75rem;
@@ -138,7 +139,10 @@
       align-items: center;
       font-weight: bold;
       margin: 0.5rem;
-      font-family: Open Sans, Arial, Helvetica, sans-serif;
+      font-family: Open Sans,
+      Arial,
+      Helvetica,
+      sans-serif;
       line-height: 1.2;
       margin-top: auto;
     }

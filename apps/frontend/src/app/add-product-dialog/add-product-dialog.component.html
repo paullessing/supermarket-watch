@@ -1,17 +1,13 @@
 <div class="add-product-dialog">
-  <button class="add-product-dialog__close" (click)="onClose()" style="cursor: pointer">
-    Close
-  </button>
+  <button class="add-product-dialog__close" (click)="onClose()" style="cursor: pointer">Close</button>
 
   <ng-template #loading>
-    <div class="add-product-dialog__content">
-      Loading...
-    </div>
+    <div class="add-product-dialog__content">Loading...</div>
   </ng-template>
   <ng-container *ngIf="product$ | async as product; else loading">
     <div class="add-product-dialog__content">
       <h1>Add Item</h1>
-      <h2>{{ product.name }} - {{ product.price | currency:'GBP' }}</h2>
+      <h2>{{ product.name }} - {{ product.price | currency: 'GBP' }}</h2>
       <p>{{ product.supermarket }}</p>
       <div style="margin-top: 1rem">
         Combine with existing item
@@ -24,20 +20,20 @@
           />
           <ul *ngIf="results">
             <li *ngFor="let result of results">
-              <button
-                class="add-product-dialog__search-result button-link"
-                (click)="combineWithItem = result"
-              >{{ result.name }}</button>
+              <button class="add-product-dialog__search-result button-link" (click)="combineWithItem = result">
+                {{ result.name }}
+              </button>
             </li>
           </ul>
           <p *ngIf="searchComplete && !results.length">No results found</p>
         </ng-container>
         <ng-template #selectedItem>
-          <p style="margin-left: 1rem">{{ combineWithItem!.name }}
+          <p style="margin-left: 1rem">
+            {{ combineWithItem!.name }}
             <button (click)="combineWithItem = null">Clear</button>
           </p>
           <div *ngIf="mustProvideConversion">
-            <label>How does this item convert?</label><br>
+            <label>How does this item convert?</label><br />
             <input type="number" style="width: 50px" [(ngModel)]="conversion.fromQuantity" />
             <select [(ngModel)]="conversion.fromUnit">
               <option *ngFor="let unit of combineWithItem!.units" [value]="unit">

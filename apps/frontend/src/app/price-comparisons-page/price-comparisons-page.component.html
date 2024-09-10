@@ -3,47 +3,44 @@
 
   <div class="price-comparison-list">
     <app-price-comparison-card
-      *ngFor="let comparison of priceComparisons; trackBy trackById"
+      *ngFor="let comparison of priceComparisons; trackBy: trackById"
       [priceComparison]="comparison"
     >
     </app-price-comparison-card>
   </div>
 
-  <hr style="margin: 2rem 0"/>
+  <hr style="margin: 2rem 0" />
 
   <table *ngIf="priceComparisons.length">
-    <ng-container *ngFor="let comparison of priceComparisons; trackBy trackById; let index = index">
+    <ng-container *ngFor="let comparison of priceComparisons; trackBy: trackById; let index = index">
       <thead>
-      <tr>
-        <td colspan="2" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ comparison.name }}</td>
-        <td>
-          <button class="tracked-product__edit" (click)="editIndex = index">Edit</button>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2" style="padding: 0.25rem 0.5rem 0.25rem 0; font-weight: bold">{{ comparison.name }}</td>
+          <td>
+            <button class="tracked-product__edit" (click)="editIndex = index">Edit</button>
+          </td>
+        </tr>
       </thead>
       <tbody>
-      <ng-container *ngFor="let product of comparison.products; trackBy trackById">
-        <tr>
-          <td style="padding: 0.25rem 0.5rem">
-            <em [title]="product.name">{{ product.supermarket }}</em>
-          </td>
-          <td
-            style="padding: 0.25rem 0.5rem"
-            [style.color]="product.specialOffer? 'red' : null"
-          >
-            {{ product.price | currency:'GBP' }}
-          </td>
-          <td style="padding: 0.25rem 0.5rem">
-            {{ product.pricePerUnit | currency:'GBP' }}/{{ comparison.unitOfMeasurement | unitAmount }}
-          </td>
-        </tr>
-        <tr *ngIf="product.specialOffer">
-          <td colspan="1"></td>
-          <td colspan="2" style="padding: 0 0.5rem 0.25rem; color: red">
-            {{ product.specialOffer.offerText }}
-          </td>
-        </tr>
-      </ng-container>
+        <ng-container *ngFor="let product of comparison.products; trackBy: trackById">
+          <tr>
+            <td style="padding: 0.25rem 0.5rem">
+              <em [title]="product.name">{{ product.supermarket }}</em>
+            </td>
+            <td style="padding: 0.25rem 0.5rem" [style.color]="product.specialOffer ? 'red' : null">
+              {{ product.price | currency: 'GBP' }}
+            </td>
+            <td style="padding: 0.25rem 0.5rem">
+              {{ product.pricePerUnit | currency: 'GBP' }}/{{ comparison.unitOfMeasurement | unitAmount }}
+            </td>
+          </tr>
+          <tr *ngIf="product.specialOffer">
+            <td colspan="1"></td>
+            <td colspan="2" style="padding: 0 0.5rem 0.25rem; color: red">
+              {{ product.specialOffer.offerText }}
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </ng-container>
   </table>

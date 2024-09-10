@@ -63,9 +63,7 @@
           "showMultiSearchLink": true,
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -210,9 +208,7 @@
           "region": "uk",
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -449,9 +445,7 @@
           "fetchFulfilmentEstimatedArrival": true,
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -604,9 +598,7 @@
           "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -738,72 +730,26 @@
             "sdkUrl": "https:\u002F\u002Fsecurepubads.g.doubleclick.net\u002Ftag\u002Fjs\u002Fgpt.js",
             "sizeMappings": [
               [
-                [
-                  0,
-                  531
-                ],
-                [
-                  "fluid",
-                  [
-                    300,
-                    250
-                  ],
-                  [
-                    375,
-                    258
-                  ],
-                  [
-                    375,
-                    110
-                  ]
-                ]
+                [0, 531],
+                ["fluid", [300, 250], [375, 258], [375, 110]]
               ],
               [
-                [
-                  532,
-                  723
-                ],
-                [
-                  "fluid",
-                  [
-                    532,
-                    110
-                  ]
-                ]
+                [532, 723],
+                ["fluid", [532, 110]]
               ],
               [
-                [
-                  724,
-                  917
-                ],
-                [
-                  "fluid",
-                  [
-                    724,
-                    110
-                  ]
-                ]
+                [724, 917],
+                ["fluid", [724, 110]]
               ],
               [
-                [
-                  918,
-                  50000
-                ],
-                [
-                  "fluid",
-                  [
-                    918,
-                    110
-                  ]
-                ]
+                [918, 50000],
+                ["fluid", [918, 110]]
               ]
             ]
           },
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -934,9 +880,7 @@
         "client": {
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -1273,9 +1217,7 @@
               }
             ]
           },
-          "foodIcons": [
-            "Vegan"
-          ],
+          "foodIcons": ["Vegan"],
           "shelfLife": null,
           "restrictions": [],
           "distributorAddress": null,
@@ -1341,9 +1283,7 @@
               {
                 "__typename": "AllergenInfoItemType",
                 "name": "Other Allergen Info",
-                "values": [
-                  "May contain traces of Nuts (no Peanuts). For allergens, see ingredients in bold."
-                ]
+                "values": ["May contain traces of Nuts (no Peanuts). For allergens, see ingredients in bold."]
               }
             ],
             "marketing": [
@@ -1497,9 +1437,7 @@
               "chemicalName": "",
               "productName": "",
               "signalWord": "",
-              "statements": [
-                "Please speak to a healthcare professional before introducing into children's diets."
-              ],
+              "statements": ["Please speak to a healthcare professional before introducing into children's diets."],
               "symbolCodes": []
             },
             "guidelineDailyAmount": {
@@ -1561,14 +1499,8 @@
               "FSC - FSC® Mix, Board \u002F Supporting responsible forestry, FSC® C014047, www.fsc.org",
               "Tetra Pak® supports FSC®"
             ],
-            "additives": [
-              "Free From Colours",
-              "Free From Preservatives",
-              "Free From Sweeteners"
-            ],
-            "warnings": [
-              "Please speak to a healthcare professional before introducing into children's diets."
-            ],
+            "additives": ["Free From Colours", "Free From Preservatives", "Free From Sweeteners"],
+            "warnings": ["Please speak to a healthcare professional before introducing into children's diets."],
             "netContents": "1l ℮",
             "drainedWeight": null,
             "safetyWarning": null,
@@ -1900,9 +1832,7 @@
       "config": {
         "global": {
           "locale": "en-GB",
-          "supportedLocales": [
-            "en-GB"
-          ],
+          "supportedLocales": ["en-GB"],
           "timeZone": "Europe\u002FLondon",
           "devTools": {
             "apolloClient": false

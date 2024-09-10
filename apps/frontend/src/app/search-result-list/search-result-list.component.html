@@ -1,13 +1,6 @@
 <ul *ngIf="results?.length" class="results">
-  <li
-    *ngFor="let result of results; trackBy trackItem"
-    class="results__item result"
-    [attr.data-id]="result.id"
-  >
-    <div
-      class="result__image"
-      [style.backgroundImage]="'url(' + result.image + ')'"
-    ></div>
+  <li *ngFor="let result of results; trackBy: trackItem" class="results__item result" [attr.data-id]="result.id">
+    <div class="result__image" [style.backgroundImage]="'url(' + result.image + ')'"></div>
     <button
       class="result__favourite"
       [class.result__favourite--selected]="result.trackingId"
@@ -15,20 +8,18 @@
     ></button>
     <p class="result__supermarket">{{ result.supermarket }}</p>
     <p class="result__name">{{ result.name }}</p>
-    <p
-      class="result__price"
-      [class.result__price--special-offer]="result.specialOffer"
-    >{{ result.price | currency:'GBP' }}</p>
-    <p
-      *ngIf="result.specialOffer"
-      class="result__special-offer"
-    >
+    <p class="result__price" [class.result__price--special-offer]="result.specialOffer">
+      {{ result.price | currency: 'GBP' }}
+    </p>
+    <p *ngIf="result.specialOffer" class="result__special-offer">
       {{ result.specialOffer.offerText }}{{ result.specialOffer.offerText ? ',' : '' }}
-      <span
-        *ngIf="result.specialOffer.originalPrice !== result.price"
-        style="white-space: nowrap"
-      >{{ result.specialOffer.offerText ? 'was' : 'Was' }} {{ result.specialOffer.originalPrice | currency:'GBP'  }}</span>
-      <span style="color: #888; margin-left: 0.25rem; white-space: nowrap">until {{ result.specialOffer.validUntil | date: 'dd/MM' }}</span>
+      <span *ngIf="result.specialOffer.originalPrice !== result.price" style="white-space: nowrap"
+        >{{ result.specialOffer.offerText ? 'was' : 'Was' }}
+        {{ result.specialOffer.originalPrice | currency: 'GBP' }}</span
+      >
+      <span style="color: #888; margin-left: 0.25rem; white-space: nowrap"
+        >until {{ result.specialOffer.validUntil | date: 'dd/MM' }}</span
+      >
     </p>
   </li>
 </ul>

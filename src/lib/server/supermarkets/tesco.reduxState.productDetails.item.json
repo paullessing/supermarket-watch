@@ -33,9 +33,7 @@
     "isForSale": true,
     "isNew": false,
     "status": "AvailableForSale",
-    "foodIcons": [
-      "Vegan"
-    ],
+    "foodIcons": ["Vegan"],
     "shelfLife": null,
     "restrictions": [],
     "distributorAddress": null,
@@ -205,11 +203,7 @@
     },
     "multiPackDetails": null,
     "details": {
-      "ingredients": [
-        "Wholegrain Corn (86%)",
-        "Rapeseed Oil",
-        "Sea Salt"
-      ],
+      "ingredients": ["Wholegrain Corn (86%)", "Rapeseed Oil", "Sea Salt"],
       "packSize": [
         {
           "value": "60",
@@ -219,9 +213,7 @@
       "allergenInfo": [
         {
           "name": "Other Allergen Info",
-          "values": [
-            "Made in a factory that handles Milk"
-          ]
+          "values": ["Made in a factory that handles Milk"]
         }
       ],
       "marketingTextInfo": null,
@@ -303,9 +295,7 @@
         "chemicalName": "",
         "productName": "",
         "signalWord": "",
-        "statements": [
-          "Warning: May contain the occasional un-popped kernel."
-        ],
+        "statements": ["Warning: May contain the occasional un-popped kernel."],
         "symbolCodes": []
       },
       "guidelineDailyAmount": {
@@ -357,9 +347,7 @@
       ],
       "otherInformation": null,
       "additives": null,
-      "warnings": [
-        "Warning: May contain the occasional un-popped kernel."
-      ],
+      "warnings": ["Warning: May contain the occasional un-popped kernel."],
       "netContents": "6 x 10g ℮",
       "drainedWeight": null,
       "safetyWarning": null,
@@ -414,9 +402,7 @@
         "beforeDiscount": null,
         "afterDiscount": 1.79
       },
-      "attributes": [
-        "CLUBCARD_PRICING"
-      ]
+      "attributes": ["CLUBCARD_PRICING"]
     }
   ],
   "promotionMessages": {},

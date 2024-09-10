@@ -5,7 +5,8 @@
 <div class="content">
   <h1 class="title">Shopping</h1>
   <ul>
-    <li style="margin-bottom: 1rem; font-size: 1.2rem"><a href="/search">Search</a><br>
+    <li style="margin-bottom: 1rem; font-size: 1.2rem">
+      <a href="/search">Search</a><br />
       <!--      <app-search-box-->
       <!--        [isSearching]="isSearching"-->
       <!--        (search)="onSearch($event)"-->

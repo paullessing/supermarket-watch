@@ -63,9 +63,7 @@
           "showMultiSearchLink": true,
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -210,9 +208,7 @@
           "region": "uk",
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -450,9 +446,7 @@
           "fetchFulfilmentEstimatedArrival": true,
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -605,9 +599,7 @@
           "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -739,72 +731,26 @@
             "sdkUrl": "https:\u002F\u002Fsecurepubads.g.doubleclick.net\u002Ftag\u002Fjs\u002Fgpt.js",
             "sizeMappings": [
               [
-                [
-                  0,
-                  531
-                ],
-                [
-                  "fluid",
-                  [
-                    300,
-                    250
-                  ],
-                  [
-                    375,
-                    258
-                  ],
-                  [
-                    375,
-                    110
-                  ]
-                ]
+                [0, 531],
+                ["fluid", [300, 250], [375, 258], [375, 110]]
               ],
               [
-                [
-                  532,
-                  723
-                ],
-                [
-                  "fluid",
-                  [
-                    532,
-                    110
-                  ]
-                ]
+                [532, 723],
+                ["fluid", [532, 110]]
               ],
               [
-                [
-                  724,
-                  917
-                ],
-                [
-                  "fluid",
-                  [
-                    724,
-                    110
-                  ]
-                ]
+                [724, 917],
+                ["fluid", [724, 110]]
               ],
               [
-                [
-                  918,
-                  50000
-                ],
-                [
-                  "fluid",
-                  [
-                    918,
-                    110
-                  ]
-                ]
+                [918, 50000],
+                ["fluid", [918, 110]]
               ]
             ]
           },
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -935,9 +881,7 @@
         "client": {
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -1170,9 +1114,7 @@
           "description": "Buy Ellas Kitchen Smoothie Get Vegetable For 1p Clubcard Price",
           "unitSellingInfo": null,
           "price": null,
-          "attributes": [
-            "CLUBCARD_PRICING"
-          ]
+          "attributes": ["CLUBCARD_PRICING"]
         },
         "ProductType:304785423": {
           "__typename": "ProductType",
@@ -1183,9 +1125,7 @@
           "tpnb": "86020732",
           "tpnc": "304785423",
           "title": "Tesco Swede",
-          "description": [
-            "Swede."
-          ],
+          "description": ["Swede."],
           "brandName": "TESCO",
           "isInFavourites": null,
           "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fd161e62b-cf79-45b3-9ec3-b9426f7362e2\u002F523571ea-5634-4a14-8d36-c1ec7f59ed0a.jpeg?h=225&w=225",
@@ -1266,9 +1206,7 @@
               "energyClassUrl": null,
               "productInfoDoc": null
             },
-            "ingredients": [
-              "Swede"
-            ],
+            "ingredients": ["Swede"],
             "legalLabelling": [],
             "packSize": [
               {
@@ -1746,9 +1684,7 @@
       "config": {
         "global": {
           "locale": "en-GB",
-          "supportedLocales": [
-            "en-GB"
-          ],
+          "supportedLocales": ["en-GB"],
           "timeZone": "Europe\u002FLondon",
           "devTools": {
             "apolloClient": false

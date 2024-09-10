@@ -63,9 +63,7 @@
           "showMultiSearchLink": true,
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -210,9 +208,7 @@
           "region": "uk",
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -450,9 +446,7 @@
           "fetchFulfilmentEstimatedArrival": true,
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -605,9 +599,7 @@
           "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -739,72 +731,26 @@
             "sdkUrl": "https:\u002F\u002Fsecurepubads.g.doubleclick.net\u002Ftag\u002Fjs\u002Fgpt.js",
             "sizeMappings": [
               [
-                [
-                  0,
-                  531
-                ],
-                [
-                  "fluid",
-                  [
-                    300,
-                    250
-                  ],
-                  [
-                    375,
-                    258
-                  ],
-                  [
-                    375,
-                    110
-                  ]
-                ]
+                [0, 531],
+                ["fluid", [300, 250], [375, 258], [375, 110]]
               ],
               [
-                [
-                  532,
-                  723
-                ],
-                [
-                  "fluid",
-                  [
-                    532,
-                    110
-                  ]
-                ]
+                [532, 723],
+                ["fluid", [532, 110]]
               ],
               [
-                [
-                  724,
-                  917
-                ],
-                [
-                  "fluid",
-                  [
-                    724,
-                    110
-                  ]
-                ]
+                [724, 917],
+                ["fluid", [724, 110]]
               ],
               [
-                [
-                  918,
-                  50000
-                ],
-                [
-                  "fluid",
-                  [
-                    918,
-                    110
-                  ]
-                ]
+                [918, 50000],
+                ["fluid", [918, 110]]
               ]
             ]
           },
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -935,9 +881,7 @@
         "client": {
           "global": {
             "locale": "en-GB",
-            "supportedLocales": [
-              "en-GB"
-            ],
+            "supportedLocales": ["en-GB"],
             "timeZone": "Europe\u002FLondon",
             "devTools": {
               "apolloClient": false
@@ -1174,9 +1118,7 @@
             "beforeDiscount": null,
             "afterDiscount": 3
           },
-          "attributes": [
-            "CLUBCARD_PRICING"
-          ]
+          "attributes": ["CLUBCARD_PRICING"]
         },
         "ProductType:316188524": {
           "__typename": "ProductType",
@@ -1187,9 +1129,7 @@
           "tpnb": "92916545",
           "tpnc": "316188524",
           "title": "Dove Hydrate Body Wash Shower Gel 450ml",
-          "description": [
-            "DOVE HYDRATE BODY WASH 450ML "
-          ],
+          "description": ["DOVE HYDRATE BODY WASH 450ML "],
           "brandName": "DOVE",
           "isInFavourites": null,
           "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F854e7cb2-185a-4445-b21b-48b26578e2a1\u002Fd55f89c0-aced-475c-b5b8-988a21235d12_47359572.jpeg?h=225&w=225",
@@ -1482,9 +1422,7 @@
       "config": {
         "global": {
           "locale": "en-GB",
-          "supportedLocales": [
-            "en-GB"
-          ],
+          "supportedLocales": ["en-GB"],
           "timeZone": "Europe\u002FLondon",
           "devTools": {
             "apolloClient": false
