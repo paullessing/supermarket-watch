@@ -1,23 +1,23 @@
-import { Injectable } from '@nestjs/common';
 import { startOfDay } from 'date-fns';
-import { PriceComparison, SearchResultItem, SortBy, SortOrder } from '@shoppi/api-interfaces';
-import { UnreachableCaseError } from '@shoppi/util';
-import { ProductRepository } from '../db/product-repository.service';
+import { $productRepository, ProductRepository } from '../db/product-repository.service';
 import { SupermarketProduct } from '../supermarket-product.model';
-import { SearchResultItemWithoutTracking } from './supermarket';
-import { SupermarketList } from './supermarket-list.service';
+import type { SearchResultItemWithoutTracking } from './supermarket';
+import { supermarketList, SupermarketList } from './supermarket-list.service';
+import type { PriceComparison, SearchResultItem } from '$lib/models';
+import { SortBy, SortOrder } from '$lib';
+import { UnreachableCaseError } from '$lib/util/unreachable-case.error';
 
-@Injectable()
 export class SupermarketService {
   constructor(
     private readonly supermarketList: SupermarketList,
-    private readonly productRepo: ProductRepository
-  ) {}
+    private readonly productRepo: ProductRepository,
+  ) {
+  }
 
   public async search(
     query: string,
     sortBy: SortBy = SortBy.NONE,
-    sortOrder: SortOrder = SortOrder.ASCENDING
+    sortOrder: SortOrder = SortOrder.ASCENDING,
   ): Promise<SearchResultItem[]> {
     const useCache = false;
     let cachedResults: SearchResultItemWithoutTracking[] | null = null;
@@ -32,14 +32,14 @@ export class SupermarketService {
     console.log(
       'Tracked IDs',
       searchResults.map(({ id }) => id),
-      Array.from(trackedItems.entries())
+      Array.from(trackedItems.entries()),
     );
 
     const results = searchResults.map(
       (item: SearchResultItemWithoutTracking): SearchResultItem => ({
         ...item,
         trackingId: trackedItems.get(item.id) ?? null,
-      })
+      }),
     );
 
     // console.log('Search results', results);
@@ -57,29 +57,29 @@ export class SupermarketService {
         this.getSingleItem(id, now, forceFresh).catch((e) => {
           console.log('Failed to fetch item', id, e);
           throw e;
-        })
-      )
+        }),
+      ),
     );
   }
 
   public async refreshMultipleItems(
     ids: string[],
     now: Date,
-    forceFresh: boolean = false
+    forceFresh: boolean = false,
   ): Promise<PromiseSettledResult<SupermarketProduct>[]> {
     return Promise.allSettled(
       ids.map((id) =>
         this.getSingleItem(id, now, forceFresh).catch((e) => {
           console.log('Failed to fetch item', id, e);
           throw e;
-        })
-      )
+        }),
+      ),
     );
   }
 
   public async getAllPriceComparisons(
     now: Date,
-    { forceFresh = 'none', sortByPrice = true }: { forceFresh?: 'none' | 'today' | 'all'; sortByPrice?: boolean } = {}
+    { forceFresh = 'none', sortByPrice = true }: { forceFresh?: 'none' | 'today' | 'all'; sortByPrice?: boolean } = {},
   ): Promise<PriceComparison[]> {
     if (forceFresh === 'today' || forceFresh === 'all') {
       const refreshLimit = forceFresh === 'today' ? startOfDay(now) : now;
@@ -139,13 +139,18 @@ export class SupermarketService {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   private getCachedSearch(searchId: string): SearchResultItemWithoutTracking[] | null {
     return searchId ? null : null; // implement if necessary
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   private storeCachedSearch(searchId: string, results: SearchResultItemWithoutTracking[]): void {
     return searchId && results ? undefined : undefined; // implement if necessary
   }
 }
+
+export const $supermarketService = $productRepository.then((productRepository) => new SupermarketService(
+  supermarketList,
+  productRepository,
+));

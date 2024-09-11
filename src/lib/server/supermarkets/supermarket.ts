@@ -1,7 +1,5 @@
-import { SearchResult, SearchResultItem } from '@shoppi/api-interfaces';
 import { SupermarketProduct } from '../supermarket-product.model';
-
-export const Supermarkets = 'Supermarkets';
+import type { SearchResult, SearchResultItem } from '$lib/models';
 
 export type SearchResultItemWithoutTracking = Omit<SearchResultItem, 'trackingId'>;
 export type SearchResultWithoutTracking = Omit<SearchResult, 'items'> & {
