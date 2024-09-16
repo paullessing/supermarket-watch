@@ -1,12 +1,10 @@
-import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
-import { SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
-import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { isProduct, SearchResults, SingleResult } from './waitrose-search.model';
+import { type SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
+import { type SearchResultItemWithoutTracking, type SearchResultWithoutTracking, Supermarket } from './supermarket';
+import { isProduct, type SearchResults, type SingleResult } from './waitrose-search.model';
+import { standardiseUnit } from '$lib/models';
 
-@Injectable()
 export class Waitrose extends Supermarket {
   public static readonly NAME = 'Waitrose';
 
@@ -75,7 +73,7 @@ export class Waitrose extends Supermarket {
     const requestBody = {
       customerSearchRequest: {
         queryParams: {
-          size: this.config.searchResultCount,
+          size: Math.max(this.config.searchResultCount, 80),
           searchTerm: term,
           sortBy: 'RELEVANCE',
           searchTags: [],

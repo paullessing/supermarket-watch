@@ -1,14 +1,11 @@
-import * as qs from 'querystring';
-import { Injectable } from '@nestjs/common';
-import axios, { AxiosResponse } from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
-import { standardiseUnit } from '@shoppi/api-interfaces';
 import { Config } from '../config';
 import { SupermarketProduct } from '../supermarket-product.model';
-import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { ProductDetails } from './tesco-product.model';
+import { type SearchResultItemWithoutTracking, type SearchResultWithoutTracking, Supermarket } from './supermarket';
+import type { ProductDetails } from './tesco-product.model';
+import { standardiseUnit } from '$lib/models';
 
-@Injectable()
 export class Tesco extends Supermarket {
   public static readonly NAME = 'Tesco';
 
@@ -103,11 +100,11 @@ export class Tesco extends Supermarket {
   }
 
   public async search(term: string): Promise<SearchResultWithoutTracking> {
-    const params = qs.stringify({
+    const params = new URLSearchParams({
       query: term,
-      offset: 0,
-      limit: this.config.searchResultCount,
-    });
+      offset: '0',
+      limit: this.config.searchResultCount.toString(),
+    }).toString();
 
     const url = `${this.config.tescoUrl}search?${params}`;
 

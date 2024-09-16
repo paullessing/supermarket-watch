@@ -1,13 +1,10 @@
-import * as qs from 'querystring';
-import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { isBefore } from 'date-fns';
 import { Config } from '../config';
-import { SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
+import { type SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
 import * as SainsburysModels from './sainsburys-search-results.model';
-import { SearchResultItemWithoutTracking, SearchResultWithoutTracking, Supermarket } from './supermarket';
+import { type SearchResultItemWithoutTracking, type SearchResultWithoutTracking, Supermarket } from './supermarket';
 
-@Injectable()
 export class Sainsburys extends Supermarket {
   public static readonly NAME = "Sainsbury's";
 
@@ -55,10 +52,10 @@ export class Sainsburys extends Supermarket {
   }
 
   public async search(term: string): Promise<SearchResultWithoutTracking> {
-    const params = qs.stringify({
+    const params = new URLSearchParams({
       'filter[keyword]': term,
-      page_size: this.config.searchResultCount,
-    });
+      page_size: '' + this.config.searchResultCount,
+    }).toString();
 
     const url = `${this.config.sainsburysUrl}product?${params}`;
     const search = await axios.get<SainsburysModels.SearchResults>(url);
