@@ -6,11 +6,7 @@ import { Sainsburys } from '$lib/server/supermarkets/sainsburys';
 import { Waitrose } from '$lib/server/supermarkets/waitrose';
 import { standardiseUnit } from '$lib/models';
 
-const SUPERMARKETS = [
-  new Tesco(config),
-  new Sainsburys(config),
-  new Waitrose(config),
-];
+const SUPERMARKETS = [new Tesco(config), new Sainsburys(config), new Waitrose(config)];
 
 export class InvalidIdException extends Error {
   public readonly explanation: string | undefined;
@@ -26,8 +22,7 @@ export class InvalidIdException extends Error {
 }
 
 export class SupermarketList {
-  constructor(private readonly supermarkets: Supermarket[]) {
-  }
+  constructor(private readonly supermarkets: Supermarket[]) {}
 
   /**
    * @throws InvalidIdException if the ID is invalid or the product is not found
@@ -75,7 +70,7 @@ export class SupermarketList {
           console.error(e);
           return [];
         }
-      }),
+      })
     );
 
     return ([] as SearchResultItemWithoutTracking[]).concat.apply([], resultsBySupermarket);
