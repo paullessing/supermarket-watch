@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SearchResultItem } from '$lib/models';
   import { createEventDispatcher } from 'svelte';
+  import { formatCurrency, formatDate } from '$lib/util/format';
 
   export let results: SearchResultItem[] = [];
 
@@ -18,14 +19,8 @@
 {#if results?.length}
   <ul class="results">
     {#each results as result (result.id)}
-      <li
-        class="results__item result"
-        data-id={result.id}
-      >
-        <div
-          class="result__image"
-          style:background-image="url('{result.image}')"
-        ></div>
+      <li class="results__item result" data-id={result.id}>
+        <div class="result__image" style:background-image="url('{result.image}')"></div>
         <button
           class="result__favourite"
           class:result__favourite--selected={result.trackingId}
@@ -33,22 +28,20 @@
         ></button>
         <p class="result__supermarket">{result.supermarket}</p>
         <p class="result__name">{result.name}</p>
-        <p
-          class="result__price"
-          class:result__price--special-offer={result.specialOffer}
-        >TODO GBP{result.price}</p>
+        <p class="result__price" class:result__price--special-offer={result.specialOffer}>
+          {formatCurrency(result.price)}
+        </p>
         {#if result.specialOffer}
           <p class="result__special-offer">
             {result.specialOffer.offerText}{result.specialOffer.offerText ? ',' : ''}
             {#if result.specialOffer.originalPrice !== result.price}
-              <span
-                style="white-space: nowrap"
-              >{result.specialOffer.offerText ? 'was' : 'Was'} TODO GBP{result.specialOffer.originalPrice}</span
+              <span style="white-space: nowrap"
+                >{result.specialOffer.offerText ? 'was' : 'Was'}
+                {formatCurrency(result.specialOffer.originalPrice)}</span
               >
             {/if}
-            <span
-              style="color: #888; margin-left: 0.25rem; white-space: nowrap"
-            >until TODO (dd/MM){result.specialOffer.validUntil}</span
+            <span style="color: #888; margin-left: 0.25rem; white-space: nowrap"
+              >until {formatDate(result.specialOffer.validUntil, 'dd/MM')}</span
             >
           </p>
         {/if}
@@ -139,10 +132,11 @@
       align-items: center;
       font-weight: bold;
       margin: 0.5rem;
-      font-family: Open Sans,
-      Arial,
-      Helvetica,
-      sans-serif;
+      font-family:
+        Open Sans,
+        Arial,
+        Helvetica,
+        sans-serif;
       line-height: 1.2;
       margin-top: auto;
     }
