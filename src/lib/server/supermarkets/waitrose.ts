@@ -73,7 +73,7 @@ export class Waitrose extends Supermarket {
     const requestBody = {
       customerSearchRequest: {
         queryParams: {
-          size: Math.max(this.config.searchResultCount, 80),
+          size: Math.min(this.config.searchResultCount, 80),
           searchTerm: term,
           sortBy: 'RELEVANCE',
           searchTags: [],
