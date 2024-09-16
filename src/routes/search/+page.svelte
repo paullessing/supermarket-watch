@@ -12,7 +12,7 @@
     console.log('Page data', data);
   }
 
-  let results: SearchResultItem[] = [];
+  let { results } = data;
 
   let isSearching: boolean = false;
   let query: string;
@@ -85,16 +85,9 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <SearchBox
-    {isSearching}
-    searchText={query}
-    on:search={onSearch}
-  ></SearchBox>
+  <SearchBox {isSearching} searchText={query} on:search={onSearch}></SearchBox>
 
-  <SearchResultList
-    {results}
-    on:addItem={openAddItemDetailsModal}
-  ></SearchResultList>
+  <SearchResultList {results} on:addItem={openAddItemDetailsModal}></SearchResultList>
 
   <div style="display: none">Add Product Dialog {addItemDetails?.id}</div>
   <!--  <app-add-product-dialog-->

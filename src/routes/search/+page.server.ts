@@ -1,8 +1,10 @@
 import type { PageServerLoad } from './$types';
 import { SortBy } from '$lib';
 import { error } from '@sveltejs/kit';
+import { search } from './search';
+import type { SearchResultItem } from '$lib/models';
 
-export const load = (async (event): Promise<{ query: string; sortBy: SortBy }> => {
+export const load = (async (event): Promise<{ query: string; sortBy: SortBy; results: SearchResultItem[] }> => {
   const params = event.url.searchParams;
 
   const query: string = params.get('q') ?? '';
@@ -14,8 +16,11 @@ export const load = (async (event): Promise<{ query: string; sortBy: SortBy }> =
     });
   }
 
+  const results = await search(query, sortBy);
+
   return {
     query,
     sortBy,
+    results,
   };
 }) satisfies PageServerLoad;

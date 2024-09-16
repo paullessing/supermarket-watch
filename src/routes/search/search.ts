@@ -2,7 +2,7 @@ import { SortBy, SortOrder } from '$lib';
 import { error } from '@sveltejs/kit';
 import { $supermarketService } from '$lib/server/supermarkets';
 
-export async function search(query: string, sortBy: SortBy, querySortOrder: string | undefined) {
+export async function search(query: string, sortBy: SortBy, querySortOrder?: string) {
   const supermarketService = await $supermarketService;
   let sortOrder = SortOrder.ASCENDING;
 
@@ -17,5 +17,5 @@ export async function search(query: string, sortBy: SortBy, querySortOrder: stri
     error(404, 'No items found');
   }
 
-  return { items };
+  return items;
 }
