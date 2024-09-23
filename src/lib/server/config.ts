@@ -1,4 +1,4 @@
-import * as env from '$env/dynamic/private';
+import { env } from '$env/dynamic/private';
 
 export class Config {
   public readonly port!: number;
@@ -13,21 +13,23 @@ export class Config {
   }
 }
 
+type EnvKey = keyof typeof env;
+
 type ConfigEntry<T extends string | number | boolean> = readonly [
-  envValue: string,
+  envValue: EnvKey,
   typeCaster: T extends string ? typeof String : T extends number ? typeof Number : never,
   defaultValue?: T,
 ];
 
 // prettier-ignore
-const configProps: { readonly [K in keyof Config]: ConfigEntry<Config[K]> } = {
+const configProps = {
   port: ['PORT', Number, 3000],
   environment: ['NODE_ENV', String, 'development'],
   tescoUrl: ['TESCO_URL', String, 'https://www.tesco.com/groceries/en-GB/'],
   sainsburysUrl: ['SAINSBURYS_URL', String, 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/'],
   searchResultCount: ['SEARCH_RESULT_COUNT', Number, 120], // Number of results a search query will fetch from the supermarket search page
   dbDirPath: ['DB_DIR_PATH', String, ''],
-} as const;
+} as const satisfies { readonly [K in keyof Config]: ConfigEntry<Config[K]> };
 
 export function getConfig(): Config {
   // The typing here is not ideal and could be improved to be stricter
@@ -37,9 +39,7 @@ export function getConfig(): Config {
     const propKey = key as keyof Config;
     const [envValue, type, defaultValue] = configProps[propKey];
 
-    // @ts-expect-error TODO env variables are not typed
     if (env[envValue]) {
-      // @ts-expect-error TODO env variables are not typed
       config[propKey] = (type || ((x) => x))(env[envValue]);
     } else if (typeof defaultValue !== 'undefined') {
       config[propKey] = defaultValue;

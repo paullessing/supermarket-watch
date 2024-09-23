@@ -5,14 +5,14 @@
   import SearchResultList from './SearchResultList.svelte';
   import { page } from '$app/stores';
   import type { PageServerData } from './$types';
+  import { goto } from '$app/navigation'
 
   export let data: PageServerData;
 
   $: {
     console.log('Page data', data);
+    isSearching = false;
   }
-
-  let { results } = data;
 
   let isSearching: boolean = false;
   let query: string;
@@ -20,23 +20,31 @@
   let sortBy: SortBy;
 
   const urlParams = $page.url.searchParams;
-  query = urlParams.get('q') ?? '';
+  query = urlParams.get('query') ?? '';
   sortBy = ensureValidEnumValue(SortBy, urlParams.get('sortBy') ?? SortBy.NONE);
-  if (query) {
-    search({ query, sortBy });
-  }
 
   function onSearch(event: CustomEvent<SearchParams>): void {
-    search(event.detail);
+    query = event.detail.query;
+    sortBy = event.detail.sortBy;
+    search();
   }
 
-  function search({ query, sortBy }: SearchParams): void {
+  function search(): void {
     if (isSearching) {
       return;
     }
     isSearching = true;
 
     console.log('Searching', query, sortBy);
+
+    $page.url.searchParams.set('query', query);
+    if (sortBy == SortBy.NONE) {
+      $page.url.searchParams.delete('sortBy');
+    } else {
+      $page.url.searchParams.set('sortBy', sortBy);
+    }
+
+    goto(`?${$page.url.searchParams.toString()}`);
 
     // this.router.navigate([], {
     //   relativeTo: this.route,
@@ -85,9 +93,16 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <SearchBox {isSearching} searchText={query} on:search={onSearch}></SearchBox>
+  <SearchBox
+    {isSearching}
+    searchText={query}
+    on:search={onSearch}
+  ></SearchBox>
 
-  <SearchResultList {results} on:addItem={openAddItemDetailsModal}></SearchResultList>
+  <SearchResultList
+    results={data.results}
+    on:addItem={openAddItemDetailsModal}
+  ></SearchResultList>
 
   <div style="display: none">Add Product Dialog {addItemDetails?.id}</div>
   <!--  <app-add-product-dialog-->

@@ -7,7 +7,7 @@ import type { SearchResultItem } from '$lib/models';
 export const load = (async (event): Promise<{ query: string; sortBy: SortBy; results: SearchResultItem[] }> => {
   const params = event.url.searchParams;
 
-  const query: string = params.get('q') ?? '';
+  const query: string = params.get('query')?.trim() ?? '';
   const sortBy: SortBy = (params.get('sortBy') as SortBy) ?? SortBy.NONE;
 
   if (sortBy && !Object.values(SortBy).includes(sortBy)) {
@@ -16,7 +16,13 @@ export const load = (async (event): Promise<{ query: string; sortBy: SortBy; res
     });
   }
 
-  const results = await search(query, sortBy);
+  let results: SearchResultItem[];
+
+  if (query) {
+    results = await search(query, sortBy);
+  } else {
+    results = [];
+  }
 
   return {
     query,
