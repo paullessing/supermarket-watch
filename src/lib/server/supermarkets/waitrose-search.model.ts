@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/ban-types: "off" */ // This complains about the `{}` types which we don't have information for
+/* eslint @typescript-eslint/no-empty-object-type: "off" */ // This complains about the `{}` types which we don't have information for
 export interface SearchResults {
   criteria: {
     searchTags: [
@@ -60,6 +60,7 @@ interface Promotion {
   pyoPromotion: boolean; // false
   myWaitrosePromotion: boolean; // false
 }
+
 interface DetailedPromotion extends Promotion {
   groups: {
     threshold: number; // 1: number of items required to buy to fulfil promotion

@@ -1,16 +1,18 @@
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
-import prettier from 'eslint-config-prettier';
 import globals from 'globals';
+import importPlugin from 'eslint-plugin-import';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   js.configs.recommended,
   ...ts.configs.recommended,
   ...svelte.configs['flat/recommended'],
-  prettier,
+  eslintPluginPrettierRecommended,
   ...svelte.configs['flat/prettier'],
+  importPlugin.flatConfigs.recommended,
   {
     languageOptions: {
       globals: {
@@ -28,23 +30,8 @@ export default [
     },
   },
   {
-    files: ['*.ts'],
-    extends: ['plugin:@nrwl/nx/typescript', 'plugin:import/recommended', 'plugin:import/typescript'],
+    files: ['**/*.ts'],
     rules: {
-      '@nrwl/nx/enforce-module-boundaries': [
-        'error',
-        {
-          enforceBuildableLibDependency: true,
-          allow: [],
-          depConstraints: [
-            {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
-            },
-          ],
-        },
-      ],
-
       'brace-style': ['error', '1tbs'],
       curly: 'error',
       'consistent-return': 'error',
@@ -67,7 +54,7 @@ export default [
       ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-inferrable-types': 'off', // I prefer the verbosity
-      '@typescript-eslint/no-parameter-properties': ['error', { allows: ['private readonly'] }],
+      // '@typescript-eslint/parameter-properties': ['error', { prefer: 'class-property' }], // TODO re-enable
       '@typescript-eslint/no-unused-vars': 'error',
       'max-len': 'off', // checked by prettier
 
@@ -101,6 +88,11 @@ export default [
     },
   },
   {
-    ignores: ['build/', '.svelte-kit/', 'dist/'],
+    ignores: ['build/', '.svelte-kit/', 'dist/', 'proxy/', 'node_modules/', 'apps.old/**'],
+  },
+  {
+    rules: {
+      'import/no-unresolved': 'off', // Too many false positives with vite
+    },
   },
 ];

@@ -1,8 +1,9 @@
-import { SortBy, SortOrder } from '$lib';
 import { error } from '@sveltejs/kit';
+import { SortBy, SortOrder } from '$lib';
+import type { SearchResultItem } from '$lib/models';
 import { $supermarketService } from '$lib/server/supermarkets';
 
-export async function search(query: string, sortBy: SortBy, querySortOrder?: string) {
+export async function search(query: string, sortBy: SortBy, querySortOrder?: string): Promise<SearchResultItem[]> {
   const supermarketService = await $supermarketService;
   let sortOrder = SortOrder.ASCENDING;
 

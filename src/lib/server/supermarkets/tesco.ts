@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios, { type AxiosResponse, isAxiosError } from 'axios';
 import * as cheerio from 'cheerio';
 import { Config } from '../config';
 import { SupermarketProduct } from '../supermarket-product.model';
@@ -24,7 +24,7 @@ export class Tesco extends Supermarket {
     try {
       search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
     } catch (e) {
-      if (axios.isAxiosError(e) && e.response?.status === 404) {
+      if (isAxiosError(e) && e.response?.status === 404) {
         console.error(`Got a 404 while fetching tesco product "${productId}":`, e.message);
         return null;
       } else {
@@ -118,7 +118,7 @@ export class Tesco extends Supermarket {
         items: this.extractSearchResults(search),
       };
     } catch (e) {
-      if (axios.isAxiosError(e) && e.response?.status === 404) {
+      if (isAxiosError(e) && e.response?.status === 404) {
         // No results for this search term
         console.info(`Tesco: Search query "${term}" returned no results`);
         return {

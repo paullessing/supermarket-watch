@@ -3,8 +3,8 @@ import { $productRepository, ProductRepository } from '../db/product-repository.
 import { SupermarketProduct } from '../supermarket-product.model';
 import type { SearchResultItemWithoutTracking } from './supermarket';
 import { supermarketList, SupermarketList } from './supermarket-list.service';
-import type { PriceComparison, SearchResultItem } from '$lib/models';
 import { SortBy, SortOrder } from '$lib';
+import type { PriceComparison, SearchResultItem } from '$lib/models';
 import { UnreachableCaseError } from '$lib/util/unreachable-case.error';
 
 export class SupermarketService {

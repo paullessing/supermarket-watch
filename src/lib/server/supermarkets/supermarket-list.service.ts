@@ -1,10 +1,10 @@
 import { SupermarketProduct } from '../supermarket-product.model';
 import { type SearchResultItemWithoutTracking, Supermarket } from './supermarket';
-import { Tesco } from '$lib/server/supermarkets/tesco';
+import { standardiseUnit } from '$lib/models';
 import { config } from '$lib/server/config';
 import { Sainsburys } from '$lib/server/supermarkets/sainsburys';
+import { Tesco } from '$lib/server/supermarkets/tesco';
 import { Waitrose } from '$lib/server/supermarkets/waitrose';
-import { standardiseUnit } from '$lib/models';
 
 const SUPERMARKETS = [new Tesco(config), new Sainsburys(config), new Waitrose(config)];
 

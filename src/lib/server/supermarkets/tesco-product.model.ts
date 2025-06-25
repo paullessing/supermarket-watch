@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/ban-types: "off" */ // This complains about the `{}` types which we don't have information for
+/* eslint @typescript-eslint/no-empty-object-type: "off" */ // This complains about the `{}` types which we don't have information for
 
 export interface ProductDetails {
   cost: number; // 0

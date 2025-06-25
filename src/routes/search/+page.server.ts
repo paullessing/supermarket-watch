@@ -1,7 +1,7 @@
-import type { PageServerLoad } from './$types';
-import { SortBy } from '$lib';
 import { error } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 import { search } from './search';
+import { SortBy } from '$lib';
 import type { SearchResultItem } from '$lib/models';
 
 export const load = (async (event): Promise<{ query: string; sortBy: SortBy; results: SearchResultItem[] }> => {

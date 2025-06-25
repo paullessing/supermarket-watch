@@ -35,7 +35,6 @@ export function initialiseLogger(logLevel?: string): Logger {
       .join(' ');
   }
 
-  /* eslint-disable @typescript-eslint/ban-types */
   console.log = (...args: unknown[]) => logger.verbose(formatConsoleLog(...args));
   console.info = (...args: unknown[]) => logger.info(formatConsoleLog(...args));
   console.warn = (...args: unknown[]) => logger.warn(formatConsoleLog(...args));

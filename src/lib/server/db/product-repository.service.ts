@@ -15,13 +15,13 @@ import { exists, unique } from '../util';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { ProductPriceCalculator } from './product-price-calculator.service';
 import type { TimestampedDocument } from './timestamped-document';
-import { $comparisonsCollection, $historyCollection } from '$lib/server/db/db.providers';
 import {
   compareSpecialOffers,
   type ComparisonProductData,
   type ManualConversion,
   type PriceComparison,
 } from '$lib/models';
+import { $comparisonsCollection, $historyCollection } from '$lib/server/db/db.providers';
 
 export interface PriceComparisonDocument extends TimestampedDocument {
   name: string;
