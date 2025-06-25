@@ -3,7 +3,11 @@
   import { createEventDispatcher } from 'svelte';
   import { formatCurrency, formatDate } from '$lib/util/format';
 
-  export let results: SearchResultItem[] = [];
+  interface Props {
+    results?: SearchResultItem[];
+  }
+
+  let { results = [] }: Props = $props();
 
   const dispatch = createEventDispatcher<{
     addItem: SearchResultItem;
@@ -24,7 +28,8 @@
         <button
           class="result__favourite"
           class:result__favourite--selected={result.trackingId}
-          on:click={() => onAddItem(result)}
+          onclick={() => onAddItem(result)}
+          aria-label="Track this item"
         ></button>
         <p class="result__supermarket">{result.supermarket}</p>
         <p class="result__name">{result.name}</p>

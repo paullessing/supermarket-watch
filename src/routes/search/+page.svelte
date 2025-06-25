@@ -3,23 +3,22 @@
   import { SortBy } from '$lib';
   import SearchBox, { type SearchParams } from './SearchBox.svelte';
   import SearchResultList from './SearchResultList.svelte';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import type { PageServerData } from './$types';
   import { goto } from '$app/navigation';
 
-  export let data: PageServerData;
-
-  $: {
-    console.log('Page data', data);
-    isSearching = false;
+  interface Props {
+    data: PageServerData;
   }
 
-  let isSearching: boolean = false;
-  let query: string;
-  let addItemDetails: SearchResultItem | null;
+  let { data }: Props = $props();
+
+  let isSearching: boolean = $state(false);
+  let query: string = $state('');
+  let addItemDetails: SearchResultItem | null = $state(null);
   let sortBy: SortBy;
 
-  const urlParams = $page.url.searchParams;
+  const urlParams = page.url.searchParams;
   query = urlParams.get('query') ?? '';
   sortBy = ensureValidEnumValue(SortBy, urlParams.get('sortBy') ?? SortBy.NONE);
 
@@ -37,14 +36,14 @@
 
     console.log('Searching', query, sortBy);
 
-    $page.url.searchParams.set('query', query);
+    page.url.searchParams.set('query', query);
     if (sortBy == SortBy.NONE) {
-      $page.url.searchParams.delete('sortBy');
+      page.url.searchParams.delete('sortBy');
     } else {
-      $page.url.searchParams.set('sortBy', sortBy);
+      page.url.searchParams.set('sortBy', sortBy);
     }
 
-    goto(`?${$page.url.searchParams.toString()}`);
+    goto(`?${page.url.searchParams.toString()}`);
 
     // this.router.navigate([], {
     //   relativeTo: this.route,
