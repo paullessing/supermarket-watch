@@ -6,6 +6,10 @@ const $db: Promise<Db> = MongoClient.connect(`mongodb://${config.mongoHost}:2701
   (client: MongoClient): Db => client.db('shopping')
 );
 
+export function initDb(): Promise<string> {
+  return $db.then(() => config.mongoHost);
+}
+
 export const $comparisonsCollection = $db.then(async (db) => {
   const collection = db.collection<PriceComparisonDocument>('priceComparisons');
   await collection.createIndexes([

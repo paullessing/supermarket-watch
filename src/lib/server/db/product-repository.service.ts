@@ -282,7 +282,7 @@ export class ProductRepository {
       ])
       .toArray();
 
-    return new Map(trackedItems.map(({ productId, _id }) => [productId, _id]));
+    return new Map(trackedItems.map(({ productId, _id }) => [productId, _id.toString()]));
   }
 
   public async removeComparison(comparisonId: string): Promise<void> {
