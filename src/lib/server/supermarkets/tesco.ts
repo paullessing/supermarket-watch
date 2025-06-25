@@ -107,9 +107,12 @@ export class Tesco extends Supermarket {
     }).toString();
 
     const url = `${this.config.tescoUrl}search?${params}`;
+    console.log('Tesco: searching', url);
 
     try {
       const search = await axios.get(url);
+
+      console.log('Tesco search', search);
 
       return {
         items: this.extractSearchResults(search),
@@ -130,6 +133,8 @@ export class Tesco extends Supermarket {
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reduxState = $('#data-attributes').data('reduxState') as any;
+
+    console.log('Tesco', reduxState);
 
     const results: SearchResultItemWithoutTracking[] = [];
     reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {

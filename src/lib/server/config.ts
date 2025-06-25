@@ -7,6 +7,7 @@ export class Config {
   public readonly sainsburysUrl!: string;
   public readonly searchResultCount!: number;
   public readonly dbDirPath!: string;
+  public readonly mongoHost!: string;
 
   constructor(config: { [key in keyof Config]: Config[key] }) {
     Object.assign(this, config);
@@ -28,6 +29,7 @@ const configProps = {
   tescoUrl: ['TESCO_URL', String, 'https://www.tesco.com/groceries/en-GB/'],
   sainsburysUrl: ['SAINSBURYS_URL', String, 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/'],
   searchResultCount: ['SEARCH_RESULT_COUNT', Number, 120], // Number of results a search query will fetch from the supermarket search page
+  mongoHost: ['MONGODB_HOST', String, 'mongo'],
   dbDirPath: ['DB_DIR_PATH', String, ''],
 } as const satisfies { readonly [K in keyof Config]: ConfigEntry<Config[K]> };
 

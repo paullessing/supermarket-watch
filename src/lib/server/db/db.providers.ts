@@ -1,7 +1,8 @@
 import { Db, MongoClient } from 'mongodb';
 import type { PriceComparisonDocument, ProductHistoryDocument } from './product-repository.service';
+import { config } from '$lib/server/config';
 
-const $db: Promise<Db> = MongoClient.connect('mongodb://localhost:27017').then(
+const $db: Promise<Db> = MongoClient.connect(`mongodb://${config.mongoHost}:27017`).then(
   (client: MongoClient): Db => client.db('shopping')
 );
 
