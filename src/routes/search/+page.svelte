@@ -14,22 +14,23 @@
   let { data }: Props = $props();
 
   let isSearching: boolean = $state(false);
-  let query: string = $state('');
-  let addItemDetails: SearchResultItem | null = $state(null);
-  let sortBy: SortBy;
 
-  const urlParams = page.url.searchParams;
-  query = urlParams.get('query') ?? '';
-  sortBy = ensureValidEnumValue(SortBy, urlParams.get('sortBy') ?? SortBy.NONE);
+  let query: string = $derived(page.url.searchParams.get('query') ?? '');
+  let addItemDetails: SearchResultItem | null = $state(null);
+  let sortBy: SortBy = $state(SortBy.NONE);
+
+  $effect(() => {
+    sortBy = ensureValidEnumValue(SortBy, page.url.searchParams.get('sortBy') || SortBy.NONE);
+  });
 
   function onSearch(event: CustomEvent<SearchParams>): void {
-    query = event.detail.query;
     sortBy = event.detail.sortBy;
-    search();
+    search(event.detail.query);
   }
 
-  function search(): void {
+  async function search(query: string): void {
     if (isSearching) {
+      console.log('Already searching');
       return;
     }
     isSearching = true;
@@ -43,7 +44,11 @@
       page.url.searchParams.set('sortBy', sortBy);
     }
 
-    goto(`?${page.url.searchParams.toString()}`);
+    // load function on the search page will do BE calls
+    await goto(`?${page.url.searchParams.toString()}`, {
+      invalidateAll: true, // force load function to rerun
+    });
+    isSearching = false;
 
     // this.router.navigate([], {
     //   relativeTo: this.route,
@@ -92,7 +97,7 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <SearchBox {isSearching} searchText={query} on:search={onSearch}></SearchBox>
+  <SearchBox {isSearching} searchText={query} {sortBy} on:search={onSearch}></SearchBox>
 
   <SearchResultList results={data.results} on:addItem={openAddItemDetailsModal}></SearchResultList>
 
