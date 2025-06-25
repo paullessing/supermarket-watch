@@ -2,12 +2,25 @@ import { Db, MongoClient } from 'mongodb';
 import type { PriceComparisonDocument, ProductHistoryDocument } from './product-repository.service';
 import { config } from '$lib/server/config';
 
-const $db: Promise<Db> = MongoClient.connect(`mongodb://${config.mongoHost}:27017`).then(
-  (client: MongoClient): Db => client.db('shopping')
-);
+let isConnected = false;
+
+const $db: Promise<Db> = MongoClient.connect(`mongodb://${config.mongoHost}:27017`)
+  .then((client: MongoClient): Db => client.db('shopping'))
+  .finally(() => {
+    isConnected = true;
+  });
 
 export function initDb(): Promise<string> {
   return $db.then(() => config.mongoHost);
+}
+
+export async function getDbHealthcheck(): Promise<boolean> {
+  if (!isConnected) {
+    return false;
+  }
+  const db = await $db;
+  const stats = await db.stats();
+  return !!stats.ok;
 }
 
 export const $comparisonsCollection = $db.then(async (db) => {

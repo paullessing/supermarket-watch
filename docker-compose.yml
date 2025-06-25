@@ -12,7 +12,6 @@ services:
       SAINSBURYS_URL: http://proxy:3333/sainsburys/
       MONGODB_HOST: mongo
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
-      VCR_MODE: ${VCR_MODE:-}
       RUN_MIGRATION: ${RUN_MIGRATION:-}
       LOG_LEVEL: ${LOG_LEVEL:-}
     ports:
