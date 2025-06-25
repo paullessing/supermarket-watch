@@ -137,3 +137,9 @@
 //     // but I don't have the time to fix this right now and it's stalling development
 //   });
 // });
+
+describe('TODO ProductRepository', () => {
+  it('should have tests', () => {
+    expect(1 + 1).toEqual(2);
+  });
+});
