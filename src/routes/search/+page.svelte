@@ -5,7 +5,7 @@
   import SearchResultList from './SearchResultList.svelte';
   import { page } from '$app/stores';
   import type { PageServerData } from './$types';
-  import { goto } from '$app/navigation'
+  import { goto } from '$app/navigation';
 
   export let data: PageServerData;
 
@@ -93,16 +93,9 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <SearchBox
-    {isSearching}
-    searchText={query}
-    on:search={onSearch}
-  ></SearchBox>
+  <SearchBox {isSearching} searchText={query} on:search={onSearch}></SearchBox>
 
-  <SearchResultList
-    results={data.results}
-    on:addItem={openAddItemDetailsModal}
-  ></SearchResultList>
+  <SearchResultList results={data.results} on:addItem={openAddItemDetailsModal}></SearchResultList>
 
   <div style="display: none">Add Product Dialog {addItemDetails?.id}</div>
   <!--  <app-add-product-dialog-->
