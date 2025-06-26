@@ -7,7 +7,9 @@
   import { goto } from '$app/navigation';
   import { ensureValidEnumValue } from '$lib/util/util';
   import type { PageProps } from './$types';
-  import AddProductDialog, { type AddProductData } from './AddProductDialog.svelte';
+  import AddProductDialog, {
+    type AddProductData,
+  } from './AddProductDialog.svelte';
 
   let { data }: PageProps = $props();
 
@@ -18,7 +20,10 @@
   let sortBy: SortBy = $state(SortBy.NONE);
 
   $effect(() => {
-    sortBy = ensureValidEnumValue(SortBy, page.url.searchParams.get('sortBy') || SortBy.NONE);
+    sortBy = ensureValidEnumValue(
+      SortBy,
+      page.url.searchParams.get('sortBy') || SortBy.NONE
+    );
   });
 
   function onSearch(event: CustomEvent<SearchParams>): void {
@@ -79,8 +84,14 @@
     addItemDetails = event.detail;
   }
 
-  async function trackNewItem({ productId, combinedTrackingId, conversion }: AddProductData): Promise<void> {
-    const url = ['/api/price-comparisons', combinedTrackingId].filter(Boolean).join('/');
+  async function trackNewItem({
+    productId,
+    combinedTrackingId,
+    conversion,
+  }: AddProductData): Promise<void> {
+    const url = ['/api/price-comparisons', combinedTrackingId]
+      .filter(Boolean)
+      .join('/');
 
     const res = await fetch(url, {
       method: 'POST',
@@ -107,9 +118,11 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <SearchBox {isSearching} searchText={query} {sortBy} on:search={onSearch}></SearchBox>
+  <SearchBox {isSearching} searchText={query} {sortBy} on:search={onSearch}
+  ></SearchBox>
 
-  <SearchResultList results={data.results} on:addItem={openAddItemDetailsModal}></SearchResultList>
+  <SearchResultList results={data.results} on:addItem={openAddItemDetailsModal}
+  ></SearchResultList>
 
   {#if addItemDetails}
     <AddProductDialog

@@ -18,7 +18,11 @@ type EnvKey = keyof typeof env;
 
 type ConfigEntry<T extends string | number | boolean> = readonly [
   envValue: EnvKey,
-  typeCaster: T extends string ? typeof String : T extends number ? typeof Number : never,
+  typeCaster: T extends string
+    ? typeof String
+    : T extends number
+      ? typeof Number
+      : never,
   defaultValue?: T,
 ];
 

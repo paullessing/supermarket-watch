@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+} from '@angular/core';
 import {
   ComparisonProductData,
   PriceComparison,
@@ -27,13 +35,15 @@ export class EditPriceComparisonDialogComponent implements OnInit {
   public comparison!: PriceComparison;
 
   @Output()
-  public editDetails: EventEmitter<EditComparisonDetailsData> = new EventEmitter();
+  public editDetails: EventEmitter<EditComparisonDetailsData> =
+    new EventEmitter();
 
   @Output()
   public exit: EventEmitter<void> = new EventEmitter();
 
   @Output()
-  public deletePriceComparison: EventEmitter<{ id: string }> = new EventEmitter();
+  public deletePriceComparison: EventEmitter<{ id: string }> =
+    new EventEmitter();
 
   @Output()
   public removeProduct: EventEmitter<RemoveProductData> = new EventEmitter();
@@ -97,7 +107,9 @@ export class EditPriceComparisonDialogComponent implements OnInit {
   }
 
   public onDelete(): void {
-    if (window.confirm('Are you sure you want to delete this price comparison?')) {
+    if (
+      window.confirm('Are you sure you want to delete this price comparison?')
+    ) {
       this.deletePriceComparison.emit({ id: this.comparison.id });
     }
   }
@@ -105,7 +117,10 @@ export class EditPriceComparisonDialogComponent implements OnInit {
   public onRemoveProduct(product: ComparisonProductData): void {
     const prompt = `Are you sure you want to remove "${product.supermarket} - ${product.name}" from this comparison?`;
     if (window.confirm(prompt)) {
-      this.removeProduct.emit({ comparisonId: this.comparison.id, productId: product.id });
+      this.removeProduct.emit({
+        comparisonId: this.comparison.id,
+        productId: product.id,
+      });
     }
   }
 

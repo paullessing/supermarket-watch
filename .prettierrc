@@ -4,7 +4,7 @@
   "tabWidth": 2,
   "singleQuote": true,
   "trailingComma": "es5",
-  "printWidth": 120,
+  "printWidth": 80,
   "bracketSpacing": true,
   "plugins": ["prettier-plugin-svelte"],
   "overrides": [

@@ -12,7 +12,11 @@
 </script>
 
 <script lang="ts">
-  import type { ProductDetails, ProductSearchResult, SearchResultItem } from '$lib/models';
+  import type {
+    ProductDetails,
+    ProductSearchResult,
+    SearchResultItem,
+  } from '$lib/models';
   import { clickOutside } from 'svelte-outside';
   import { formatCurrency } from '$lib/util/format';
   import { onMount } from 'svelte';
@@ -55,7 +59,9 @@
   });
 
   async function search(searchText: string): Promise<void> {
-    const res = await fetch(`/api/price-comparisons/search?${new URLSearchParams({ term: searchText }).toString()}`);
+    const res = await fetch(
+      `/api/price-comparisons/search?${new URLSearchParams({ term: searchText }).toString()}`
+    );
     results = (await res.json()).results;
 
     combineWithItem = null;
@@ -95,7 +101,9 @@
       combineWithItem = item;
 
       if (combineWithItem) {
-        mustProvideConversion = !combineWithItem.units.includes(product.unitName);
+        mustProvideConversion = !combineWithItem.units.includes(
+          product.unitName
+        );
         conversion = {
           ...conversion,
           fromUnit: combineWithItem.units[0],
@@ -118,8 +126,16 @@
 </script>
 
 <div class="add-product-dialog">
-  <div class="add-product-dialog__wrapper" use:clickOutside={() => (console.log('click outside'), close())}>
-    <button class="add-product-dialog__close" onclick={close} style="cursor: pointer">Close </button>
+  <div
+    class="add-product-dialog__wrapper"
+    use:clickOutside={() => (console.log('click outside'), close())}
+  >
+    <button
+      class="add-product-dialog__close"
+      onclick={close}
+      style="cursor: pointer"
+      >Close
+    </button>
 
     {#if !product}
       <div class="add-product-dialog__content">Loading...</div>
@@ -131,7 +147,11 @@
         <div style="margin-top: 1rem">
           Combine with existing item
           {#if !combineWithItem}
-            <input type="text" placeholder="Enter item name" bind:value={searchItemName} />
+            <input
+              type="text"
+              placeholder="Enter item name"
+              bind:value={searchItemName}
+            />
             {#if results}
               <ul>
                 {#each results as result}
@@ -156,8 +176,14 @@
             </p>
             {#if mustProvideConversion}
               <div>
-                <label for="conversion.from">How does this item convert?</label><br />
-                <input id="conversion.from" type="number" style="width: 50px" bind:value={conversion.fromQuantity} />
+                <label for="conversion.from">How does this item convert?</label
+                ><br />
+                <input
+                  id="conversion.from"
+                  type="number"
+                  style="width: 50px"
+                  bind:value={conversion.fromQuantity}
+                />
                 <select bind:value={conversion.fromUnit}>
                   {#each combineWithItem.units as unit}
                     <option value={unit}>
@@ -166,7 +192,11 @@
                   {/each}
                 </select>
                 =
-                <input type="number" style="width: 50px" bind:value={conversion.toQuantity} />
+                <input
+                  type="number"
+                  style="width: 50px"
+                  bind:value={conversion.toQuantity}
+                />
                 {product.unitName}
               </div>
             {/if}
@@ -174,8 +204,15 @@
         </div>
 
         <div class="add-product-dialog__buttons">
-          <button class="add-product-dialog__button" onclick={close}>Cancel </button>
-          <button class="add-product-dialog__button" type="submit" onclick={onAdd}>Add </button>
+          <button class="add-product-dialog__button" onclick={close}
+            >Cancel
+          </button>
+          <button
+            class="add-product-dialog__button"
+            type="submit"
+            onclick={onAdd}
+            >Add
+          </button>
         </div>
       </div>
     {/if}

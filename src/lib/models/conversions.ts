@@ -20,7 +20,10 @@ const alternativeUnitsToStandardUnit = new Map<string, string>(
   Object.entries(STANDARD_UNIT_SYNONYMS).reduce<[string, string][]>(
     (acc, [standardUnit, alternatives]) => [
       ...acc,
-      ...alternatives.map((alternative): [string, string] => [alternative, standardUnit]),
+      ...alternatives.map((alternative): [string, string] => [
+        alternative,
+        standardUnit,
+      ]),
     ],
     []
   )
@@ -44,7 +47,7 @@ const GRAM_VALUES = [
 ] as const;
 export const GRAM_UNITS = GRAM_VALUES.map(([unit]) => unit);
 
-export const commonConversions: (readonly (readonly [name: string, multiplier: number])[])[] = [
-  LITRE_VALUES,
-  GRAM_VALUES,
-];
+export const commonConversions: (readonly (readonly [
+  name: string,
+  multiplier: number,
+])[])[] = [LITRE_VALUES, GRAM_VALUES];

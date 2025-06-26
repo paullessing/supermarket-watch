@@ -1,7 +1,14 @@
 <form (submit)="onSearch($event)">
   <input name="queryString" [(ngModel)]="queryString" />
-  <button type="submit" [disabled]="isSearching">{{ isSearching ? 'Searching...' : 'Search' }}</button>
-  <select name="sortBy" [(ngModel)]="searchSortBy" [disabled]="isSearching" class="sort-by">
+  <button type="submit" [disabled]="isSearching">
+    {{ isSearching ? 'Searching...' : 'Search' }}
+  </button>
+  <select
+    name="sortBy"
+    [(ngModel)]="searchSortBy"
+    [disabled]="isSearching"
+    class="sort-by"
+  >
     <option [ngValue]="SortBy.NONE">None</option>
     <option [ngValue]="SortBy.PRICE">Price</option>
     <option [ngValue]="SortBy.SPECIAL_OFFERS">Offers</option>

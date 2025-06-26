@@ -43,7 +43,9 @@ export interface SearchResults {
   componentsAndProducts: (SearchAemComponent | SearchProduct)[];
 }
 
-export function isProduct(item: SearchProduct | SearchAemComponent): item is SearchProduct {
+export function isProduct(
+  item: SearchProduct | SearchAemComponent
+): item is SearchProduct {
   return item && Object.prototype.hasOwnProperty.call(item, 'searchProduct');
 }
 

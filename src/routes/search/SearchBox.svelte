@@ -15,7 +15,11 @@
     sortBy?: SortBy;
   }
 
-  let { isSearching = false, searchText = $bindable(''), sortBy = $bindable(SortBy.NONE) }: Props = $props();
+  let {
+    isSearching = false,
+    searchText = $bindable(''),
+    sortBy = $bindable(SortBy.NONE),
+  }: Props = $props();
 
   const dispatch = createEventDispatcher<{
     search: SearchParams;
@@ -32,11 +36,18 @@
 
 <form onsubmit={onSearch}>
   <input name="queryString" bind:value={searchText} />
-  <select name="sortBy" bind:value={sortBy} disabled={isSearching} class="sort-by">
+  <select
+    name="sortBy"
+    bind:value={sortBy}
+    disabled={isSearching}
+    class="sort-by"
+  >
     <option value={SortBy.NONE}>None</option>
     <option value={SortBy.PRICE}>Price</option>
     <option value={SortBy.SPECIAL_OFFERS}>Offers</option>
     <option value={SortBy.SUPERMARKET}>Supermarket</option>
   </select>
-  <button type="submit" disabled={isSearching}>{isSearching ? 'Searching...' : 'Search'}</button>
+  <button type="submit" disabled={isSearching}
+    >{isSearching ? 'Searching...' : 'Search'}</button
+  >
 </form>

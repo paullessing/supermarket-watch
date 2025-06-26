@@ -1,12 +1,19 @@
 import { SupermarketProduct } from '../supermarket-product.model';
-import { type SearchResultItemWithoutTracking, Supermarket } from './supermarket';
+import {
+  type SearchResultItemWithoutTracking,
+  Supermarket,
+} from './supermarket';
 import { standardiseUnit } from '$lib/models';
 import { config } from '$lib/server/config';
 import { Sainsburys } from '$lib/server/supermarkets/sainsburys';
 import { Tesco } from '$lib/server/supermarkets/tesco';
 import { Waitrose } from '$lib/server/supermarkets/waitrose';
 
-const SUPERMARKETS = [new Tesco(config), new Sainsburys(config), new Waitrose(config)];
+const SUPERMARKETS = [
+  new Tesco(config),
+  new Sainsburys(config),
+  new Waitrose(config),
+];
 
 export class InvalidIdException extends Error {
   public readonly explanation: string | undefined;
@@ -39,7 +46,9 @@ export class SupermarketList {
     for (const supermarket of this.supermarkets) {
       const prefix = supermarket.getPrefix();
       if (prefix === match[1]) {
-        let product: SupermarketProduct | null = await supermarket.getProduct(match[2]);
+        let product: SupermarketProduct | null = await supermarket.getProduct(
+          match[2]
+        );
 
         if (product) {
           // console.log('PRODUCT', product);
@@ -60,7 +69,9 @@ export class SupermarketList {
     throw new InvalidIdException(id, 'ID did not match any supermarkets');
   }
 
-  public async search(query: string): Promise<SearchResultItemWithoutTracking[]> {
+  public async search(
+    query: string
+  ): Promise<SearchResultItemWithoutTracking[]> {
     if (!this.supermarkets.length) {
       return [];
     }
@@ -76,7 +87,10 @@ export class SupermarketList {
       })
     );
 
-    return ([] as SearchResultItemWithoutTracking[]).concat.apply([], resultsBySupermarket);
+    return ([] as SearchResultItemWithoutTracking[]).concat.apply(
+      [],
+      resultsBySupermarket
+    );
   }
 }
 

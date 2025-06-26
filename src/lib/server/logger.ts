@@ -35,11 +35,14 @@ export function initialiseLogger(logLevel?: string): Logger {
       .join(' ');
   }
 
-  console.log = (...args: unknown[]) => logger.verbose(formatConsoleLog(...args));
+  console.log = (...args: unknown[]) =>
+    logger.verbose(formatConsoleLog(...args));
   console.info = (...args: unknown[]) => logger.info(formatConsoleLog(...args));
   console.warn = (...args: unknown[]) => logger.warn(formatConsoleLog(...args));
-  console.error = (...args: unknown[]) => logger.error(formatConsoleLog(...args));
-  console.debug = (...args: unknown[]) => logger.debug(formatConsoleLog(...args));
+  console.error = (...args: unknown[]) =>
+    logger.error(formatConsoleLog(...args));
+  console.debug = (...args: unknown[]) =>
+    logger.debug(formatConsoleLog(...args));
 
   return logger;
 }

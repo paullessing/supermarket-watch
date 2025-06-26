@@ -1,7 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+} from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductDetails, ProductSearchResult, ProductSearchResults, SearchResultItem } from '@shoppi/api-interfaces';
+import {
+  ProductDetails,
+  ProductSearchResult,
+  ProductSearchResults,
+  SearchResultItem,
+} from '@shoppi/api-interfaces';
 
 export interface AddProductData {
   productId: string;
@@ -90,7 +103,9 @@ export class AddProductDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     // TODO move this out of this component, it should be loaded before the popup opens
-    this.product$ = this.http.get<ProductDetails>(`/api/products/${this.item.id}`);
+    this.product$ = this.http.get<ProductDetails>(
+      `/api/products/${this.item.id}`
+    );
     this.search(this.item.name);
   }
 

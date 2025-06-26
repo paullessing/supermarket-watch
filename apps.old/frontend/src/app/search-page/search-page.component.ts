@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddTrackedProduct, SearchResult, SearchResultItem, SortBy } from '@shoppi/api-interfaces';
+import {
+  AddTrackedProduct,
+  SearchResult,
+  SearchResultItem,
+  SortBy,
+} from '@shoppi/api-interfaces';
 import { environment } from '../../environments/environment';
 import { AddProductData } from '../add-product-dialog/add-product-dialog.component';
 import { SearchParams } from '../search-box/search-box.component';
@@ -36,7 +41,10 @@ export class SearchPageComponent implements OnInit {
   public ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.has('query')) {
       this.query = this.route.snapshot.queryParamMap.get('query')!;
-      this.sortBy = ensureValidEnumValue(SortBy, this.route.snapshot.queryParamMap.get('sortBy') || SortBy.NONE);
+      this.sortBy = ensureValidEnumValue(
+        SortBy,
+        this.route.snapshot.queryParamMap.get('sortBy') || SortBy.NONE
+      );
 
       if (this.query) {
         this.search({ query: this.query, sortBy: this.sortBy });
@@ -77,7 +85,11 @@ export class SearchPageComponent implements OnInit {
       });
   }
 
-  public track({ productId, combinedTrackingId, conversion }: AddProductData): void {
+  public track({
+    productId,
+    combinedTrackingId,
+    conversion,
+  }: AddProductData): void {
     const url = `${environment.apiUrl}/price-comparisons${combinedTrackingId ? `/${combinedTrackingId}` : ''}`;
 
     this.http
@@ -87,22 +99,31 @@ export class SearchPageComponent implements OnInit {
       })
       .subscribe(({ trackingId }) => {
         this.results = this.results.map(
-          (item): SearchResultItem => (item.id === productId ? { ...item, trackingId } : item)
+          (item): SearchResultItem =>
+            item.id === productId ? { ...item, trackingId } : item
         );
       });
     this.addItemDetails = null;
   }
 }
 
-function isValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): boolean {
+function isValidEnumValue<T extends string>(
+  enumClass: { [key: string]: T },
+  value: string | T
+): boolean {
   return Object.values(enumClass).indexOf(value as T) >= 0;
 }
 
-function ensureValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): T {
+function ensureValidEnumValue<T extends string>(
+  enumClass: { [key: string]: T },
+  value: string | T
+): T {
   if (isValidEnumValue(enumClass, value)) {
     return value as T;
   } else {
-    throw new Error(`Unexpected enum value "${value}" is not one of: [${Object.values(enumClass).join(', ')}]`);
+    throw new Error(
+      `Unexpected enum value "${value}" is not one of: [${Object.values(enumClass).join(', ')}]`
+    );
   }
 }
 
@@ -112,7 +133,11 @@ function getCache(query: string, sortBy: SortBy): SearchResultItem[] | null {
     return null;
   }
   try {
-    const data = JSON.parse(lsData) as { query: string; sortBy: string; results: SearchResultItem[] };
+    const data = JSON.parse(lsData) as {
+      query: string;
+      sortBy: string;
+      results: SearchResultItem[];
+    };
     if (data.query === query && data.sortBy === sortBy) {
       return data.results;
     } else {
@@ -123,6 +148,13 @@ function getCache(query: string, sortBy: SortBy): SearchResultItem[] | null {
   }
 }
 
-function setCache(query: string, sortBy: SortBy, results: SearchResultItem[]): void {
-  localStorage.setItem('queryCache', JSON.stringify({ query, sortBy, results }));
+function setCache(
+  query: string,
+  sortBy: SortBy,
+  results: SearchResultItem[]
+): void {
+  localStorage.setItem(
+    'queryCache',
+    JSON.stringify({ query, sortBy, results })
+  );
 }

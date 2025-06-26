@@ -1,12 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { startOfDay } from 'date-fns';
 import { ApexAxisChartSeries } from 'ng-apexcharts';
 import { lastValueFrom } from 'rxjs';
 import { PriceComparison } from '@shoppi/api-interfaces';
 
-type HistoryReturnValue = { history: { date: Date; price: number; pricePerUnit: number }[] };
+type HistoryReturnValue = {
+  history: { date: Date; price: number; pricePerUnit: number }[];
+};
 
 @Component({
   selector: 'app-price-comparison-card',
@@ -32,7 +40,9 @@ export class PriceComparisonCardComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.priceComparison.image})`);
+    this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle(
+      `url(${this.priceComparison.image})`
+    );
   }
 
   public getReductionPercentage(): number {
@@ -47,7 +57,9 @@ export class PriceComparisonCardComponent implements OnInit {
 
     const data = await Promise.all(
       this.priceComparison.products.map(async ({ id, name, supermarket }) => ({
-        ...(await lastValueFrom(this.http.get<HistoryReturnValue>(`/api/products/${id}/history`))),
+        ...(await lastValueFrom(
+          this.http.get<HistoryReturnValue>(`/api/products/${id}/history`)
+        )),
         name,
         supermarket,
       }))
@@ -58,7 +70,13 @@ export class PriceComparisonCardComponent implements OnInit {
     this.historyData = data.map(({ name, history, supermarket }) => ({
       name: `${name} (${supermarket})`,
       color: getSupermarketColour(supermarket),
-      data: history.map(({ date, price }) => [startOfDay(new Date(date)).getTime(), price] as [number, number | null]),
+      data: history.map(
+        ({ date, price }) =>
+          [startOfDay(new Date(date)).getTime(), price] as [
+            number,
+            number | null,
+          ]
+      ),
     }));
 
     this.cdr.markForCheck();

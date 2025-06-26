@@ -24,7 +24,10 @@
   <ul class="results">
     {#each results as result (result.id)}
       <li class="results__item result" data-id={result.id}>
-        <div class="result__image" style:background-image="url('{result.image}')"></div>
+        <div
+          class="result__image"
+          style:background-image="url('{result.image}')"
+        ></div>
         <button
           class="result__favourite"
           class:result__favourite--selected={result.trackingId}
@@ -33,12 +36,17 @@
         ></button>
         <p class="result__supermarket">{result.supermarket}</p>
         <p class="result__name">{result.name}</p>
-        <p class="result__price" class:result__price--special-offer={result.specialOffer}>
+        <p
+          class="result__price"
+          class:result__price--special-offer={result.specialOffer}
+        >
           {formatCurrency(result.price)}
         </p>
         {#if result.specialOffer}
           <p class="result__special-offer">
-            {result.specialOffer.offerText}{result.specialOffer.offerText ? ',' : ''}
+            {result.specialOffer.offerText}{result.specialOffer.offerText
+              ? ','
+              : ''}
             {#if result.specialOffer.originalPrice !== result.price}
               <span style="white-space: nowrap"
                 >{result.specialOffer.offerText ? 'was' : 'Was'}

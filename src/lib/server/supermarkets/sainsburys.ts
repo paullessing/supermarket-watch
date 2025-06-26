@@ -1,9 +1,16 @@
 import axios from 'axios';
 import { isBefore } from 'date-fns';
 import { Config } from '../config';
-import { type SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
+import {
+  type SpecialOffer,
+  SupermarketProduct,
+} from '../supermarket-product.model';
 import * as SainsburysModels from './sainsburys-search-results.model';
-import { type SearchResultItemWithoutTracking, type SearchResultWithoutTracking, Supermarket } from './supermarket';
+import {
+  type SearchResultItemWithoutTracking,
+  type SearchResultWithoutTracking,
+  Supermarket,
+} from './supermarket';
 
 export class Sainsburys extends Supermarket {
   public static readonly NAME = "Sainsbury's";
@@ -17,7 +24,9 @@ export class Sainsburys extends Supermarket {
     return 'sainsburys';
   }
 
-  public async getProduct(productUid: string): Promise<SupermarketProduct | null> {
+  public async getProduct(
+    productUid: string
+  ): Promise<SupermarketProduct | null> {
     const search = await axios.get<SainsburysModels.SearchResults>(
       `${this.config.sainsburysUrl}product?uids=${productUid}`
     );
@@ -31,7 +40,8 @@ export class Sainsburys extends Supermarket {
 
     // console.log(JSON.stringify(product, null, 2));
 
-    const { price, pricePerUnit, specialOffer, packSize } = this.getPriceData(product);
+    const { price, pricePerUnit, specialOffer, packSize } =
+      this.getPriceData(product);
 
     return SupermarketProduct({
       id: this.getId(productUid),
@@ -98,14 +108,22 @@ export class Sainsburys extends Supermarket {
   } {
     // console.log("Sainsbury's Product", product, '\n\n\n\n\n');
 
-    const promo = product.promotions.find((promotion) => promotion.original_price > product.retail_price.price);
-    const isPromoActive = promo?.start_date && isBefore(new Date(promo.start_date), new Date());
+    const promo = product.promotions.find(
+      (promotion) => promotion.original_price > product.retail_price.price
+    );
+    const isPromoActive =
+      promo?.start_date && isBefore(new Date(promo.start_date), new Date());
 
-    const price = !promo || isPromoActive ? product.retail_price.price : promo.original_price;
+    const price =
+      !promo || isPromoActive
+        ? product.retail_price.price
+        : promo.original_price;
 
     const pricePerUnit = product.unit_price.price;
     const packSize = {
-      amount: this.formatPackSizeAmount((price / pricePerUnit) * product.unit_price.measure_amount),
+      amount: this.formatPackSizeAmount(
+        (price / pricePerUnit) * product.unit_price.measure_amount
+      ),
       unit: product.unit_price.measure,
     };
 

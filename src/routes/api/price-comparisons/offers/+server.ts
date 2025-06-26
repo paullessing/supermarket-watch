@@ -11,7 +11,10 @@ export async function GET({ url: { searchParams } }): Promise<Response> {
       startDate = parseISO(since);
     } catch (e) {
       console.error(e);
-      return error(400, 'Invalid format for parameter "since", ISO-8601 string expected');
+      return error(
+        400,
+        'Invalid format for parameter "since", ISO-8601 string expected'
+      );
     }
   }
 
@@ -22,6 +25,7 @@ export async function GET({ url: { searchParams } }): Promise<Response> {
   const productRepo = await $productRepository;
 
   return json({
-    items: await productRepo.getProductsWithSpecialOffersStartingSince(startDate),
+    items:
+      await productRepo.getProductsWithSpecialOffersStartingSince(startDate),
   });
 }

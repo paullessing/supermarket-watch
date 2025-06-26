@@ -1,18 +1,28 @@
 <div class="price-comparison-card">
-  <div class="price-comparison-card__image" [style.background-image]="backgroundImage"></div>
+  <div
+    class="price-comparison-card__image"
+    [style.background-image]="backgroundImage"
+  ></div>
   <p class="price-comparison-card__name">{{ priceComparison.name }}</p>
   <div class="price-comparison-card__price-area">
     <!-- @formatter:off -->
-    <span *ngIf="getReductionPercentage() > 0" class="price-comparison-card__original-price">{{
-      priceComparison.price.usual.itemPrice | currency: 'GBP'
-    }}</span>
+    <span
+      *ngIf="getReductionPercentage() > 0"
+      class="price-comparison-card__original-price"
+      >{{ priceComparison.price.usual.itemPrice | currency: 'GBP' }}</span
+    >
     <span class="price-comparison-card__best-price">
       {{ priceComparison.price.best.itemPrice | currency: 'GBP' }}
     </span>
     <p class="price-comparison-card__price">
-      {{ priceComparison.price.best.unitPrice | currency: 'GBP' }}/{{ priceComparison.unitOfMeasurement | unitAmount }}
+      {{ priceComparison.price.best.unitPrice | currency: 'GBP' }}/{{
+        priceComparison.unitOfMeasurement | unitAmount
+      }}
     </p>
-    <p *ngIf="getReductionPercentage() > 0" class="price-comparison-card__reduction">
+    <p
+      *ngIf="getReductionPercentage() > 0"
+      class="price-comparison-card__reduction"
+    >
       -{{ getReductionPercentage() }}%
     </p>
     <!--    <span-->
@@ -28,15 +38,25 @@
     <!-- @formatter:on -->
   </div>
   <div class="price-comparison-card__items">
-    <button class="button-link" (click)="isExpanded = !isExpanded">Products {{ isExpanded ? '-' : '+' }}</button>
+    <button class="button-link" (click)="isExpanded = !isExpanded">
+      Products {{ isExpanded ? '-' : '+' }}
+    </button>
     <table *ngIf="isExpanded" style="border-collapse: collapse">
       <tbody>
         <tr *ngFor="let product of priceComparison.products">
           <td style="padding: 4px 16px 4px 0">{{ product.supermarket }}</td>
-          <td style="padding-right: 16px" [style.color]="product.specialOffer ? 'red' : null">
-            {{ product.pricePerUnit | currency: 'GBP' }}/{{ priceComparison.unitOfMeasurement | unitAmount }}
+          <td
+            style="padding-right: 16px"
+            [style.color]="product.specialOffer ? 'red' : null"
+          >
+            {{ product.pricePerUnit | currency: 'GBP' }}/{{
+              priceComparison.unitOfMeasurement | unitAmount
+            }}
           </td>
-          <td style="padding-right: 8px" [style.color]="product.specialOffer ? 'red' : null">
+          <td
+            style="padding-right: 8px"
+            [style.color]="product.specialOffer ? 'red' : null"
+          >
             {{ product.packSize.amount }}{{ product.packSize.unit }}
           </td>
           <td [style.color]="product.specialOffer ? 'red' : null">
@@ -48,7 +68,12 @@
   </div>
 
   <div class="price-comparison-card__graph">
-    <button *ngIf="!historyData" class="button-link" (click)="loadHistoryData()" [disabled]="isLoadingHistoryData">
+    <button
+      *ngIf="!historyData"
+      class="button-link"
+      (click)="loadHistoryData()"
+      [disabled]="isLoadingHistoryData"
+    >
       {{ isLoadingHistoryData ? 'Loading...' : 'View Stats' }}
     </button>
 
@@ -58,7 +83,11 @@
       [series]="historyData"
       [chart]="{ type: 'line', height: 350, animations: { enabled: false } }"
       [stroke]="{ curve: 'stepline', width: 1 }"
-      [title]="{ text: 'Price History', align: 'left', style: { fontFamily: 'inherit' } }"
+      [title]="{
+        text: 'Price History',
+        align: 'left',
+        style: { fontFamily: 'inherit' },
+      }"
       [xaxis]="{ type: 'datetime' }"
       [legend]="{ fontFamily: 'inherit' }"
     ></apx-chart>

@@ -27,33 +27,59 @@ export class PriceComparisonsPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.http
-      .get<{ items: PriceComparison[] }>(environment.apiUrl + '/price-comparisons')
+      .get<{
+        items: PriceComparison[];
+      }>(environment.apiUrl + '/price-comparisons')
       .subscribe(({ items }) => (this.priceComparisons = items));
   }
 
   public deletePriceComparison(id: string): void {
-    this.http.delete(environment.apiUrl + '/price-comparisons/' + id).subscribe(() => {
-      this.priceComparisons = this.priceComparisons.filter((item) => item.id !== id);
-    });
-  }
-
-  public removeProduct({ comparisonId: comparisonId, productId }: RemoveProductData): void {
-    this.http.delete(`${environment.apiUrl}/price-comparisons/${comparisonId}/${productId}`).subscribe(() => {
-      this.priceComparisons = this.priceComparisons.map((item) =>
-        item.id === comparisonId
-          ? { ...item, products: item.products.filter((product) => product.id !== productId) }
-          : item
-      );
-    });
-  }
-
-  public onEditComparison({ id: comparisonId, name }: EditComparisonDetailsData): void {
     this.http
-      .patch<PriceComparison>(`${environment.apiUrl}/price-comparisons/${comparisonId}`, {
-        name,
-      })
+      .delete(environment.apiUrl + '/price-comparisons/' + id)
+      .subscribe(() => {
+        this.priceComparisons = this.priceComparisons.filter(
+          (item) => item.id !== id
+        );
+      });
+  }
+
+  public removeProduct({
+    comparisonId: comparisonId,
+    productId,
+  }: RemoveProductData): void {
+    this.http
+      .delete(
+        `${environment.apiUrl}/price-comparisons/${comparisonId}/${productId}`
+      )
+      .subscribe(() => {
+        this.priceComparisons = this.priceComparisons.map((item) =>
+          item.id === comparisonId
+            ? {
+                ...item,
+                products: item.products.filter(
+                  (product) => product.id !== productId
+                ),
+              }
+            : item
+        );
+      });
+  }
+
+  public onEditComparison({
+    id: comparisonId,
+    name,
+  }: EditComparisonDetailsData): void {
+    this.http
+      .patch<PriceComparison>(
+        `${environment.apiUrl}/price-comparisons/${comparisonId}`,
+        {
+          name,
+        }
+      )
       .subscribe((comparison) => {
-        this.priceComparisons = this.priceComparisons.map((item) => (item.id === comparisonId ? comparison : item));
+        this.priceComparisons = this.priceComparisons.map((item) =>
+          item.id === comparisonId ? comparison : item
+        );
         this.editIndex = null;
       });
   }

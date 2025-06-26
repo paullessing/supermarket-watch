@@ -63,7 +63,9 @@ export class ProductPriceCalculator {
 
           return {
             unitPrice: usualPrice,
-            itemPrice: product.specialOffer ? (product.specialOffer.originalPrice ?? 0) : product.price,
+            itemPrice: product.specialOffer
+              ? (product.specialOffer.originalPrice ?? 0)
+              : product.price,
           };
         })
         .reduce(minimum('unitPrice')) ?? { itemPrice: 0, unitPrice: 0 }
@@ -71,4 +73,6 @@ export class ProductPriceCalculator {
   }
 }
 
-export const productPriceCalculator = new ProductPriceCalculator(conversionService);
+export const productPriceCalculator = new ProductPriceCalculator(
+  conversionService
+);

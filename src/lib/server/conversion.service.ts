@@ -60,7 +60,10 @@ export class ConversionService {
         }
 
         const matchingConversions = [...this.conversions, ...manualConversions]
-          .filter((conversion) => !path.some((pathUnit) => pathUnit.conversion === conversion))
+          .filter(
+            (conversion) =>
+              !path.some((pathUnit) => pathUnit.conversion === conversion)
+          )
           .filter((conversion) => conversion.some(({ name }) => name === unit));
 
         for (const conversion of matchingConversions) {
@@ -114,14 +117,20 @@ export class ConversionService {
    * @param units
    * @param manualConversions
    */
-  public getConvertableUnits(units: string[], manualConversions: ManualConversion[] = []): string[] {
+  public getConvertableUnits(
+    units: string[],
+    manualConversions: ManualConversion[] = []
+  ): string[] {
     // We know there is a conversion, so we can add the rest of the units
     const addConversions = (conversion: Conversion): void => {
       for (const convertedUnit of conversion) {
         if (!foundConversions.has(convertedUnit.name)) {
           foundConversions.add(convertedUnit.name);
 
-          const possibleConversions = this.getMatchingConversions(convertedUnit.name, manualConversions);
+          const possibleConversions = this.getMatchingConversions(
+            convertedUnit.name,
+            manualConversions
+          );
 
           for (const possibleConversion of possibleConversions) {
             addConversions(possibleConversion);
@@ -135,7 +144,10 @@ export class ConversionService {
     // add the first value
     const firstUnit = units[0];
     foundConversions.add(firstUnit);
-    const conversions = this.getMatchingConversions(firstUnit, manualConversions);
+    const conversions = this.getMatchingConversions(
+      firstUnit,
+      manualConversions
+    );
 
     for (const conversion of conversions) {
       addConversions(conversion);
@@ -155,18 +167,29 @@ export class ConversionService {
     newConversion: ManualConversion
   ): boolean {
     const units = new Set([
-      ...this.conversions.flatMap((conversion) => conversion.map(({ name }) => name)),
-      ...existingManualConversions.flatMap((conversion) => conversion.map(({ name }) => name)),
+      ...this.conversions.flatMap((conversion) =>
+        conversion.map(({ name }) => name)
+      ),
+      ...existingManualConversions.flatMap((conversion) =>
+        conversion.map(({ name }) => name)
+      ),
     ]);
 
     const newUnits = newConversion.map(({ name }) => name);
 
     while (units.size) {
       const unit = units.values().next().value;
-      const convertableUnits = this.getConvertableUnits([unit], existingManualConversions);
+      const convertableUnits = this.getConvertableUnits(
+        [unit],
+        existingManualConversions
+      );
 
       // If at least two units from our new manualConversion are in the convertable units, then the new conversion introduces a loop
-      if (convertableUnits.filter((convertableUnit) => newUnits.includes(convertableUnit)).length >= 2) {
+      if (
+        convertableUnits.filter((convertableUnit) =>
+          newUnits.includes(convertableUnit)
+        ).length >= 2
+      ) {
         return false;
       }
 
@@ -229,7 +252,10 @@ export class ConversionService {
     );
   }
 
-  private getConversionUnitByName(conversion: Conversion, name: string): Unit | null {
+  private getConversionUnitByName(
+    conversion: Conversion,
+    name: string
+  ): Unit | null {
     for (const unit of conversion) {
       if (unit.name === name) {
         return unit;
@@ -238,10 +264,15 @@ export class ConversionService {
     return null;
   }
 
-  private getMatchingConversions(targetUnit: string, conversions: ManualConversion[]): Conversion[] {
+  private getMatchingConversions(
+    targetUnit: string,
+    conversions: ManualConversion[]
+  ): Conversion[] {
     return [
       this.getSimpleConversion(targetUnit),
-      ...conversions.filter((conversion) => conversion.find((unit) => unit.name === targetUnit)),
+      ...conversions.filter((conversion) =>
+        conversion.find((unit) => unit.name === targetUnit)
+      ),
     ].filter(exists);
   }
 }

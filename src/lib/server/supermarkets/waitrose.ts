@@ -1,8 +1,19 @@
 import axios from 'axios';
 import { Config } from '../config';
-import { type SpecialOffer, SupermarketProduct } from '../supermarket-product.model';
-import { type SearchResultItemWithoutTracking, type SearchResultWithoutTracking, Supermarket } from './supermarket';
-import { isProduct, type SearchResults, type SingleResult } from './waitrose-search.model';
+import {
+  type SpecialOffer,
+  SupermarketProduct,
+} from '../supermarket-product.model';
+import {
+  type SearchResultItemWithoutTracking,
+  type SearchResultWithoutTracking,
+  Supermarket,
+} from './supermarket';
+import {
+  isProduct,
+  type SearchResults,
+  type SingleResult,
+} from './waitrose-search.model';
 import { standardiseUnit } from '$lib/models';
 
 export class Waitrose extends Supermarket {
@@ -97,18 +108,22 @@ export class Waitrose extends Supermarket {
       items: (response.data.componentsAndProducts || [])
         .filter(isProduct)
         .map(({ searchProduct: product }): SearchResultItemWithoutTracking => {
-          const promotionalPrice = product.promotion?.promotionUnitPrice?.amount;
+          const promotionalPrice =
+            product.promotion?.promotionUnitPrice?.amount;
 
           return {
             id: this.getId(product.id),
             name: product.name,
-            price: promotionalPrice || product.currentSaleUnitPrice.price.amount,
+            price:
+              promotionalPrice || product.currentSaleUnitPrice.price.amount,
             image: product.thumbnail,
             supermarket: Waitrose.NAME,
             specialOffer: product.promotion
               ? {
                   offerText: product.promotion.promotionDescription,
-                  validUntil: new Date(product.promotion.promotionExpiryDate).toISOString(),
+                  validUntil: new Date(
+                    product.promotion.promotionExpiryDate
+                  ).toISOString(),
                   originalPrice: product.currentSaleUnitPrice.price.amount,
                 }
               : null,
@@ -124,7 +139,8 @@ function getSpecialOffer(
   promotionalPrice: number,
   pricePerUnit: number
 ): SpecialOffer {
-  const originalPricePerUnit = pricePerUnit * (originalPrice / promotionalPrice);
+  const originalPricePerUnit =
+    pricePerUnit * (originalPrice / promotionalPrice);
 
   return {
     offerText: promotion.promotionDescription,
@@ -134,7 +150,10 @@ function getSpecialOffer(
   };
 }
 
-function transformSingleResult(id: string, result: SingleResult['products'][0]): SupermarketProduct {
+function transformSingleResult(
+  id: string,
+  result: SingleResult['products'][0]
+): SupermarketProduct {
   const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
 
   const defaultPrice = result.currentSaleUnitPrice.price.amount;
@@ -144,7 +163,9 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
 
   const price = promotionalPrice || defaultPrice;
 
-  const specialOffer = result.promotion ? getSpecialOffer(result.promotion, defaultPrice, price, pricePerUnit) : null;
+  const specialOffer = result.promotion
+    ? getSpecialOffer(result.promotion, defaultPrice, price, pricePerUnit)
+    : null;
 
   return SupermarketProduct({
     id,
@@ -175,13 +196,17 @@ function getPrice(result: SingleResult['products'][0]): {
 } {
   if (result.displayPriceQualifier) {
     // Format for displayPriceQualifier: "18.5p each", "£5.88/100g"
-    const match = result.displayPriceQualifier.match(/(£?[\d.]+|[\d.]+p)[/ ](.*)\)?/i);
+    const match = result.displayPriceQualifier.match(
+      /(£?[\d.]+|[\d.]+p)[/ ](.*)\)?/i
+    );
     const innerMatch = match?.[2].match(/^(\d*)([^\d].*)$/);
     if (match && innerMatch) {
       const [, unitAmountString, unitName] = innerMatch;
       const unitAmount = parseFloat(unitAmountString?.trim() || '') || 1;
       const pricePerUnit =
-        match[1][0] === '£' ? parseFloat(match[1].slice(1)) : parseFloat(match[1].slice(0, -1)) / 100;
+        match[1][0] === '£'
+          ? parseFloat(match[1].slice(1))
+          : parseFloat(match[1].slice(0, -1)) / 100;
 
       return {
         unitAmount,

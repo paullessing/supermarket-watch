@@ -2,7 +2,11 @@ import axios, { type AxiosResponse, isAxiosError } from 'axios';
 import * as cheerio from 'cheerio';
 import { Config } from '../config';
 import { SupermarketProduct } from '../supermarket-product.model';
-import { type SearchResultItemWithoutTracking, type SearchResultWithoutTracking, Supermarket } from './supermarket';
+import {
+  type SearchResultItemWithoutTracking,
+  type SearchResultWithoutTracking,
+  Supermarket,
+} from './supermarket';
 import type { ProductDetails } from './tesco-product.model';
 import { standardiseUnit } from '$lib/models';
 
@@ -18,14 +22,19 @@ export class Tesco extends Supermarket {
     return 'tesco';
   }
 
-  public async getProduct(productId: string): Promise<SupermarketProduct | null> {
+  public async getProduct(
+    productId: string
+  ): Promise<SupermarketProduct | null> {
     let search: AxiosResponse;
 
     try {
       search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
     } catch (e) {
       if (isAxiosError(e) && e.response?.status === 404) {
-        console.error(`Got a 404 while fetching tesco product "${productId}":`, e.message);
+        console.error(
+          `Got a 404 while fetching tesco product "${productId}":`,
+          e.message
+        );
         return null;
       } else {
         throw e;
@@ -60,14 +69,17 @@ export class Tesco extends Supermarket {
 
     const promotion = this.getApolloPromotion(product, apollo);
 
-    let specialOffer: Pick<SupermarketProduct, 'specialOffer'> & Partial<SupermarketProduct> = { specialOffer: null };
+    let specialOffer: Pick<SupermarketProduct, 'specialOffer'> &
+      Partial<SupermarketProduct> = { specialOffer: null };
 
     if (promotion) {
       const originalPrice = product.price;
 
       specialOffer = {
         price: promotion.price,
-        pricePerUnit: parseFloat((promotion.price * (product.unitPrice / originalPrice)).toFixed(2)),
+        pricePerUnit: parseFloat(
+          (promotion.price * (product.unitPrice / originalPrice)).toFixed(2)
+        ),
         specialOffer: {
           originalPrice,
           offerText: promotion.offerText,
@@ -129,7 +141,9 @@ export class Tesco extends Supermarket {
     }
   }
 
-  private extractSearchResults(search: AxiosResponse<string>): SearchResultItemWithoutTracking[] {
+  private extractSearchResults(
+    search: AxiosResponse<string>
+  ): SearchResultItemWithoutTracking[] {
     const $ = cheerio.load(search.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reduxState = $('#data-attributes').data('reduxState') as any;
@@ -137,32 +151,34 @@ export class Tesco extends Supermarket {
     console.log('Tesco', reduxState);
 
     const results: SearchResultItemWithoutTracking[] = [];
-    reduxState.results.pages[0].serializedData.forEach(([id, data]: [string, ProductDetails]) => {
-      const { product, promotions } = data;
+    reduxState.results.pages[0].serializedData.forEach(
+      ([id, data]: [string, ProductDetails]) => {
+        const { product, promotions } = data;
 
-      const result: SearchResultItemWithoutTracking = {
-        id: this.getId(id),
-        name: product.title,
-        image: product.defaultImageUrl,
-        price: product.price,
-        specialOffer: null,
-        supermarket: Tesco.NAME,
-      };
-
-      const promotion = this.getPromotion(promotions);
-
-      if (promotion) {
-        const originalPrice = result.price;
-        result.price = promotion.price;
-        result.specialOffer = {
-          originalPrice,
-          offerText: promotion.offerText,
-          validUntil: promotion.endDate,
+        const result: SearchResultItemWithoutTracking = {
+          id: this.getId(id),
+          name: product.title,
+          image: product.defaultImageUrl,
+          price: product.price,
+          specialOffer: null,
+          supermarket: Tesco.NAME,
         };
-      }
 
-      results.push(result);
-    });
+        const promotion = this.getPromotion(promotions);
+
+        if (promotion) {
+          const originalPrice = result.price;
+          result.price = promotion.price;
+          result.specialOffer = {
+            originalPrice,
+            offerText: promotion.offerText,
+            validUntil: promotion.endDate,
+          };
+        }
+
+        results.push(result);
+      }
+    );
 
     return results;
   }
@@ -170,7 +186,9 @@ export class Tesco extends Supermarket {
   private getPromotion(
     promotions: ProductDetails['promotions']
   ): null | { price: number; offerText: string; endDate: string } {
-    const promotion = promotions.find(({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0);
+    const promotion = promotions.find(
+      ({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0
+    );
 
     if (promotion) {
       const match = promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
@@ -201,7 +219,9 @@ export class Tesco extends Supermarket {
     const promotion = product.promotions
       .map(({ __ref }: { __ref: string }) => apolloCache[__ref])
       .filter(Boolean)
-      .filter(({ attributes }: { attributes: string[] }) => attributes.includes('CLUBCARD_PRICING'))[0];
+      .filter(({ attributes }: { attributes: string[] }) =>
+        attributes.includes('CLUBCARD_PRICING')
+      )[0];
 
     if (promotion) {
       const match = promotion.description.match(/^£(\d+\.\d{2}) (.*)$/);

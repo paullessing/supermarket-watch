@@ -1,7 +1,11 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <app-search-box [isSearching]="isSearching" [searchText]="query" (search)="search($event)"></app-search-box>
+  <app-search-box
+    [isSearching]="isSearching"
+    [searchText]="query"
+    (search)="search($event)"
+  ></app-search-box>
 
   <app-add-product-dialog
     *ngIf="addItemDetails"
@@ -10,5 +14,8 @@
     (addProduct)="track($event)"
   ></app-add-product-dialog>
 
-  <app-search-result-list [results]="results" (addItem)="addItemDetails = $event"></app-search-result-list>
+  <app-search-result-list
+    [results]="results"
+    (addItem)="addItemDetails = $event"
+  ></app-search-result-list>
 </div>

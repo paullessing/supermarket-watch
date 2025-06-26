@@ -1283,7 +1283,9 @@
               {
                 "__typename": "AllergenInfoItemType",
                 "name": "Other Allergen Info",
-                "values": ["May contain traces of Nuts (no Peanuts). For allergens, see ingredients in bold."]
+                "values": [
+                  "May contain traces of Nuts (no Peanuts). For allergens, see ingredients in bold."
+                ]
               }
             ],
             "marketing": [
@@ -1437,7 +1439,9 @@
               "chemicalName": "",
               "productName": "",
               "signalWord": "",
-              "statements": ["Please speak to a healthcare professional before introducing into children's diets."],
+              "statements": [
+                "Please speak to a healthcare professional before introducing into children's diets."
+              ],
               "symbolCodes": []
             },
             "guidelineDailyAmount": {
@@ -1499,8 +1503,14 @@
               "FSC - FSC® Mix, Board \u002F Supporting responsible forestry, FSC® C014047, www.fsc.org",
               "Tetra Pak® supports FSC®"
             ],
-            "additives": ["Free From Colours", "Free From Preservatives", "Free From Sweeteners"],
-            "warnings": ["Please speak to a healthcare professional before introducing into children's diets."],
+            "additives": [
+              "Free From Colours",
+              "Free From Preservatives",
+              "Free From Sweeteners"
+            ],
+            "warnings": [
+              "Please speak to a healthcare professional before introducing into children's diets."
+            ],
             "netContents": "1l ℮",
             "drainedWeight": null,
             "safetyWarning": null,

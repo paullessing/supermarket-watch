@@ -88,7 +88,14 @@ export default [
     },
   },
   {
-    ignores: ['build/', '.svelte-kit/', 'dist/', 'proxy/', 'node_modules/', 'apps.old/**'],
+    ignores: [
+      'build/',
+      '.svelte-kit/',
+      'dist/',
+      'proxy/',
+      'node_modules/',
+      'apps.old/**',
+    ],
   },
   {
     rules: {

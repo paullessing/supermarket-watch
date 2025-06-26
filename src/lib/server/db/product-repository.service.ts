@@ -20,7 +20,10 @@ import {
   type ManualConversion,
   type PriceComparison,
 } from '$lib/models';
-import { $comparisonsCollection, $historyCollection } from '$lib/server/db/db.providers';
+import {
+  $comparisonsCollection,
+  $historyCollection,
+} from '$lib/server/db/db.providers';
 import { exists, unique } from '$lib/util/util';
 
 export interface PriceComparisonDocument extends TimestampedDocument {
@@ -60,13 +63,19 @@ export interface ProductHistoryDocument extends TimestampedDocument {
   history: HistoryEntry[]; // Reverse chronological order
 }
 
-export const $productRepository = Promise.all([$comparisonsCollection, $historyCollection]).then(
-  ([comparisonsCollection, historyCollection]) => {
-    const priceCalculator = new ProductPriceCalculator(conversionService);
+export const $productRepository = Promise.all([
+  $comparisonsCollection,
+  $historyCollection,
+]).then(([comparisonsCollection, historyCollection]) => {
+  const priceCalculator = new ProductPriceCalculator(conversionService);
 
-    return new ProductRepository(comparisonsCollection, historyCollection, conversionService, priceCalculator);
-  }
-);
+  return new ProductRepository(
+    comparisonsCollection,
+    historyCollection,
+    conversionService,
+    priceCalculator
+  );
+});
 
 export class ProductRepository {
   constructor(
@@ -76,7 +85,10 @@ export class ProductRepository {
     private readonly priceCalculator: ProductPriceCalculator
   ) {}
 
-  public async getProduct(productId: string, updatedAfter?: Date): Promise<SupermarketProduct | null> {
+  public async getProduct(
+    productId: string,
+    updatedAfter?: Date
+  ): Promise<SupermarketProduct | null> {
     const query: Filter<PriceComparisonDocument> = {
       products: {
         $elemMatch: {
@@ -94,7 +106,10 @@ export class ProductRepository {
       },
     };
     const priceComparison = await this.priceComparisons.findOne(query);
-    return priceComparison?.products.find(({ product }) => product.id === productId)?.product ?? null;
+    return (
+      priceComparison?.products.find(({ product }) => product.id === productId)
+        ?.product ?? null
+    );
   }
 
   public async getProductIds(comparisonId: string): Promise<string[]> {
@@ -119,11 +134,20 @@ export class ProductRepository {
       'products.product.id': product.id,
     });
     if (existingComparison) {
-      console.debug('Comparison for this product already exists:', existingComparison._id.toString());
+      console.debug(
+        'Comparison for this product already exists:',
+        existingComparison._id.toString()
+      );
       throw new Error('Comparison for this product already exists');
     }
 
-    const resultComparisonId = await this.createNewPriceComparison(product, unit, unitAmount, now, manualConversion);
+    const resultComparisonId = await this.createNewPriceComparison(
+      product,
+      unit,
+      unitAmount,
+      now,
+      manualConversion
+    );
 
     await this.addProductToHistory(product, now);
 
@@ -140,11 +164,19 @@ export class ProductRepository {
       'products.product.id': product.id,
     });
     if (existingComparison) {
-      console.debug('Comparison for this product already exists:', existingComparison._id.toString());
+      console.debug(
+        'Comparison for this product already exists:',
+        existingComparison._id.toString()
+      );
       throw new Error('Comparison for this product already exists');
     }
 
-    const resultComparisonId = await this.addProductToComparison(comparisonId, product, now, manualConversion);
+    const resultComparisonId = await this.addProductToComparison(
+      comparisonId,
+      product,
+      now,
+      manualConversion
+    );
 
     await this.addProductToHistory(product, now);
 
@@ -167,7 +199,9 @@ export class ProductRepository {
 
     await this.updateProducts(comparison, updatedProducts, now);
 
-    await Promise.all(updatedProducts.map((product) => this.addProductToHistory(product, now)));
+    await Promise.all(
+      updatedProducts.map((product) => this.addProductToHistory(product, now))
+    );
   }
 
   public async updatePriceComparisonConfig(
@@ -196,7 +230,10 @@ export class ProductRepository {
     return convertToPriceComparison(value);
   }
 
-  public async addToHistory(product: SupermarketProduct, now: Date): Promise<void> {
+  public async addToHistory(
+    product: SupermarketProduct,
+    now: Date
+  ): Promise<void> {
     await this.addProductToHistory(product, now);
 
     const trackedProducts = await this.priceComparisons.findOne({
@@ -210,7 +247,15 @@ export class ProductRepository {
   public async getAllTrackedProducts(): Promise<PriceComparison[]> {
     const priceComparisons = await this.priceComparisons.find({}).toArray();
     return priceComparisons.map((priceComparison) => {
-      const { _id, name, products, image, unitOfMeasurement, price, manualConversions } = priceComparison;
+      const {
+        _id,
+        name,
+        products,
+        image,
+        unitOfMeasurement,
+        price,
+        manualConversions,
+      } = priceComparison;
 
       return {
         id: _id.toString(),
@@ -249,19 +294,27 @@ export class ProductRepository {
       })
       .toArray();
 
-    function getOutdatedProductIds(comparison: PriceComparisonDocument): string[] {
+    function getOutdatedProductIds(
+      comparison: PriceComparisonDocument
+    ): string[] {
       return comparison.products
         .filter(({ lastUpdated }) => lastUpdated < updatedAfter)
         .map(({ product }) => product.id);
     }
 
-    return comparisons.map(getOutdatedProductIds).reduce((acc: string[], curr) => acc.concat(...curr), []);
+    return comparisons
+      .map(getOutdatedProductIds)
+      .reduce((acc: string[], curr) => acc.concat(...curr), []);
   }
 
   public async getAllTrackedIds(): Promise<string[]> {
     return (await this.priceComparisons.find({}).toArray())
       .sort((a, b) => a.createdAt.getDate() - b.createdAt.getDate())
-      .reduce((acc, curr) => acc.concat(curr.products.map(({ product: { id } }) => id)), [] as string[]);
+      .reduce(
+        (acc, curr) =>
+          acc.concat(curr.products.map(({ product: { id } }) => id)),
+        [] as string[]
+      );
   }
 
   /**
@@ -288,14 +341,19 @@ export class ProductRepository {
       ])
       .toArray();
 
-    return new Map(trackedItems.map(({ productId, _id }) => [productId, _id.toString()]));
+    return new Map(
+      trackedItems.map(({ productId, _id }) => [productId, _id.toString()])
+    );
   }
 
   public async removeComparison(comparisonId: string): Promise<void> {
     await this.priceComparisons.deleteOne({ _id: toId(comparisonId) });
   }
 
-  public async removeProductFromComparison(comparisonId: string, productId: string): Promise<void> {
+  public async removeProductFromComparison(
+    comparisonId: string,
+    productId: string
+  ): Promise<void> {
     const comparison = await this.priceComparisons.findOne({
       _id: toId(comparisonId),
     } as Filter<PriceComparisonDocument>);
@@ -304,7 +362,9 @@ export class ProductRepository {
       throw new Error('Comparison does not exist');
     }
 
-    const updatedProducts = comparison.products.filter(({ product }) => product.id !== productId);
+    const updatedProducts = comparison.products.filter(
+      ({ product }) => product.id !== productId
+    );
 
     const priceComputedAt = comparison.price.computedAt;
     const price = {
@@ -369,22 +429,30 @@ export class ProductRepository {
         .toArray(),
     ]);
 
-    return [...fuzzyResults, ...regexResults].filter(unique(({ _id }) => _id.toString()));
+    return [...fuzzyResults, ...regexResults].filter(
+      unique(({ _id }) => _id.toString())
+    );
   }
 
-  public async getHistory(productId: string): Promise<{ date: Date; price: number; pricePerUnit: number }[]> {
+  public async getHistory(
+    productId: string
+  ): Promise<{ date: Date; price: number; pricePerUnit: number }[]> {
     const historyData = await this.history.findOne({ productId });
     if (!historyData) {
       throw new EntityNotFoundError(productId);
     }
-    return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({
-      date,
-      price,
-      pricePerUnit,
-    }));
+    return historyData.history.map(
+      ({ date, product: { price, pricePerUnit } }) => ({
+        date,
+        price,
+        pricePerUnit,
+      })
+    );
   }
 
-  public async getProductsWithSpecialOffersStartingSince(startDate: Date): Promise<PriceComparison[]> {
+  public async getProductsWithSpecialOffersStartingSince(
+    startDate: Date
+  ): Promise<PriceComparison[]> {
     console.log(startDate);
 
     return (
@@ -404,7 +472,9 @@ export class ProductRepository {
     const products = comparison.products.slice();
 
     for (const updatedProduct of updatedProducts) {
-      const existingProductIndex = comparison.products.findIndex(({ product }) => product.id === updatedProduct.id);
+      const existingProductIndex = comparison.products.findIndex(
+        ({ product }) => product.id === updatedProduct.id
+      );
       if (existingProductIndex < 0) {
         throw new Error('Product not found');
       }
@@ -434,13 +504,19 @@ export class ProductRepository {
         comparison.unitOfMeasurement,
         comparison.manualConversions
       ),
-      usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, comparison.manualConversions),
+      usual: this.priceCalculator.getUsualPrice(
+        products,
+        comparison.unitOfMeasurement,
+        comparison.manualConversions
+      ),
       computedAt: now,
     };
 
     let image: MatchKeysAndValues<PriceComparisonDocument> = {};
     if (!comparison.image) {
-      const images = products.map(({ product: { image } }) => image).filter(Boolean);
+      const images = products
+        .map(({ product: { image } }) => image)
+        .filter(Boolean);
       if (images.length) {
         image = {
           image: images[0],
@@ -463,7 +539,10 @@ export class ProductRepository {
     console.debug('Updated', result);
   }
 
-  private async addProductToHistory(product: SupermarketProduct, now: Date): Promise<void> {
+  private async addProductToHistory(
+    product: SupermarketProduct,
+    now: Date
+  ): Promise<void> {
     const entry = await this.history.findOne({
       productId: product.id,
     });
@@ -474,7 +553,10 @@ export class ProductRepository {
         updatedAt: now,
       };
       console.debug('Updating history entry', updatedEntry);
-      await this.history.updateOne({ _id: toId(entry._id) }, { $set: updatedEntry });
+      await this.history.updateOne(
+        { _id: toId(entry._id) },
+        { $set: updatedEntry }
+      );
     } else {
       const newEntry: OptionalId<ProductHistoryDocument> = {
         productId: product.id,
@@ -487,7 +569,11 @@ export class ProductRepository {
     }
   }
 
-  private addHistoryEntry(history: HistoryEntry[], product: SupermarketProduct, now: Date): HistoryEntry[] {
+  private addHistoryEntry(
+    history: HistoryEntry[],
+    product: SupermarketProduct,
+    now: Date
+  ): HistoryEntry[] {
     const newEntry: HistoryEntry = {
       date: now,
       product,
@@ -523,7 +609,10 @@ export class ProductRepository {
     console.debug('Existing entry:', comparison);
     if (
       manualConversion &&
-      !this.conversionService.canAddManualConversion(comparison.manualConversions, manualConversion)
+      !this.conversionService.canAddManualConversion(
+        comparison.manualConversions,
+        manualConversion
+      )
     ) {
       throw new Error('Cannot add manual conversion');
     }
@@ -533,16 +622,31 @@ export class ProductRepository {
       [...comparison.manualConversions, ...[manualConversion].filter(exists)]
     );
     if (!convertableUnits.includes(product.unitName)) {
-      throw new CannotConvertError(comparison.unitOfMeasurement.name, product.unitName);
+      throw new CannotConvertError(
+        comparison.unitOfMeasurement.name,
+        product.unitName
+      );
     }
 
-    const manualConversions = [...comparison.manualConversions, ...(manualConversion ? [manualConversion] : [])];
+    const manualConversions = [
+      ...comparison.manualConversions,
+      ...(manualConversion ? [manualConversion] : []),
+    ];
 
     const products = [...comparison.products, { product, lastUpdated: now }];
 
     const price = {
-      best: this.priceCalculator.getBestPrice(products, now, comparison.unitOfMeasurement, manualConversions),
-      usual: this.priceCalculator.getUsualPrice(products, comparison.unitOfMeasurement, manualConversions),
+      best: this.priceCalculator.getBestPrice(
+        products,
+        now,
+        comparison.unitOfMeasurement,
+        manualConversions
+      ),
+      usual: this.priceCalculator.getUsualPrice(
+        products,
+        comparison.unitOfMeasurement,
+        manualConversions
+      ),
       computedAt: now,
     };
 
@@ -610,12 +714,16 @@ export class ProductRepository {
       manualConversions: manualConversion ? [manualConversion] : [],
     };
 
-    const result = await this.priceComparisons.insertOne(newEntry as PriceComparisonDocument);
+    const result = await this.priceComparisons.insertOne(
+      newEntry as PriceComparisonDocument
+    );
     return result.insertedId.toString();
   }
 }
 
-function convertToPriceComparison(value: PriceComparisonDocument): PriceComparison {
+function convertToPriceComparison(
+  value: PriceComparisonDocument
+): PriceComparison {
   return {
     id: value._id.toString(),
     name: value.name,

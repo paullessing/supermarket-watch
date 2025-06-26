@@ -1,10 +1,15 @@
 import { Db, MongoClient } from 'mongodb';
-import type { PriceComparisonDocument, ProductHistoryDocument } from './product-repository.service';
+import type {
+  PriceComparisonDocument,
+  ProductHistoryDocument,
+} from './product-repository.service';
 import { config } from '$lib/server/config';
 
 let isConnected = false;
 
-const $db: Promise<Db> = MongoClient.connect(`mongodb://${config.mongoHost}:27017`)
+const $db: Promise<Db> = MongoClient.connect(
+  `mongodb://${config.mongoHost}:27017`
+)
   .then((client: MongoClient): Db => client.db('shopping'))
   .finally(() => {
     isConnected = true;
