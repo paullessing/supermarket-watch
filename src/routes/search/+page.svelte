@@ -4,15 +4,12 @@
   import SearchBox, { type SearchParams } from './SearchBox.svelte';
   import SearchResultList from './SearchResultList.svelte';
   import { page } from '$app/state';
-  import type { PageServerData } from './$types';
   import { goto } from '$app/navigation';
   import { ensureValidEnumValue } from '$lib/util/util';
+  import type { PageProps } from './$types';
+  import AddProductDialog, { type AddProductData } from './AddProductDialog.svelte';
 
-  interface Props {
-    data: PageServerData;
-  }
-
-  let { data }: Props = $props();
+  let { data }: PageProps = $props();
 
   let isSearching: boolean = $state(false);
 
@@ -29,7 +26,7 @@
     search(event.detail.query);
   }
 
-  async function search(query: string): void {
+  async function search(query: string): Promise<void> {
     if (isSearching) {
       console.log('Already searching');
       return;
@@ -81,6 +78,30 @@
   function openAddItemDetailsModal(event: CustomEvent<SearchResultItem>): void {
     addItemDetails = event.detail;
   }
+
+  async function trackNewItem({ productId, combinedTrackingId, conversion }: AddProductData): Promise<void> {
+    const url = ['/api/price-comparisons', combinedTrackingId].filter(Boolean).join('/');
+
+    const res = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        productId,
+        manualConversion: conversion ?? undefined,
+      }),
+    });
+    const { trackingId } = (await res.json()) as { trackingId: string };
+
+    data.results = data.results.map(
+      (item): SearchResultItem =>
+        item.id === productId
+          ? {
+              ...item,
+              trackingId,
+            }
+          : item
+    );
+    addItemDetails = null;
+  }
 </script>
 
 <div class="content search-page">
@@ -90,11 +111,11 @@
 
   <SearchResultList results={data.results} on:addItem={openAddItemDetailsModal}></SearchResultList>
 
-  <div style="display: none">Add Product Dialog {addItemDetails?.id}</div>
-  <!--  <app-add-product-dialog-->
-  <!--    *ngIf="addItemDetails"-->
-  <!--    [item]="addItemDetails"-->
-  <!--    (exit)="addItemDetails = null"-->
-  <!--    (addProduct)="track($event)"-->
-  <!--  ></app-add-product-dialog>-->
+  {#if addItemDetails}
+    <AddProductDialog
+      item={addItemDetails}
+      onExit={() => (console.log('exit'), (addItemDetails = null))}
+      onAddProduct={trackNewItem}
+    ></AddProductDialog>
+  {/if}
 </div>

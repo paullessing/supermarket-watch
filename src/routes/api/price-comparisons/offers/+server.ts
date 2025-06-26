@@ -21,5 +21,7 @@ export async function GET({ url: { searchParams } }): Promise<Response> {
 
   const productRepo = await $productRepository;
 
-  return json({ items: await productRepo.getProductsWithSpecialOffersStartingSince(startDate) });
+  return json({
+    items: await productRepo.getProductsWithSpecialOffersStartingSince(startDate),
+  });
 }

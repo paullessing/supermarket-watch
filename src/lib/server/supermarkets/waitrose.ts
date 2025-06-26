@@ -168,7 +168,11 @@ function transformSingleResult(id: string, result: SingleResult['products'][0]):
   });
 }
 
-function getPrice(result: SingleResult['products'][0]): { pricePerUnit: number; unitAmount: number; unitName: string } {
+function getPrice(result: SingleResult['products'][0]): {
+  pricePerUnit: number;
+  unitAmount: number;
+  unitName: string;
+} {
   if (result.displayPriceQualifier) {
     // Format for displayPriceQualifier: "18.5p each", "£5.88/100g"
     const match = result.displayPriceQualifier.match(/(£?[\d.]+|[\d.]+p)[/ ](.*)\)?/i);

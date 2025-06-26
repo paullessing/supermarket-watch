@@ -3,7 +3,13 @@ import type { PageLoad } from './$types';
 import { SortBy } from '$lib';
 import type { SearchResultItem } from '$lib/models';
 
-export const load = (async (event): Promise<{ query: string; sortBy: SortBy; results: SearchResultItem[] }> => {
+export const load: PageLoad = async (
+  event
+): Promise<{
+  query: string;
+  sortBy: SortBy;
+  results: SearchResultItem[];
+}> => {
   const params = event.url.searchParams;
 
   const query: string = params.get('query')?.trim() ?? '';
@@ -35,4 +41,4 @@ export const load = (async (event): Promise<{ query: string; sortBy: SortBy; res
     sortBy,
     results,
   };
-}) satisfies PageLoad;
+};

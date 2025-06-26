@@ -98,7 +98,9 @@ export class ProductRepository {
   }
 
   public async getProductIds(comparisonId: string): Promise<string[]> {
-    const priceComparison = await this.priceComparisons.findOne({ _id: toId(comparisonId) });
+    const priceComparison = await this.priceComparisons.findOne({
+      _id: toId(comparisonId),
+    });
     if (!priceComparison) {
       return [];
     }
@@ -113,7 +115,9 @@ export class ProductRepository {
     now: Date,
     manualConversion?: ManualConversion
   ): Promise<string> {
-    const existingComparison = await this.priceComparisons.findOne({ 'products.product.id': product.id });
+    const existingComparison = await this.priceComparisons.findOne({
+      'products.product.id': product.id,
+    });
     if (existingComparison) {
       console.debug('Comparison for this product already exists:', existingComparison._id.toString());
       throw new Error('Comparison for this product already exists');
@@ -132,7 +136,9 @@ export class ProductRepository {
     now: Date,
     manualConversion?: ManualConversion
   ): Promise<string> {
-    const existingComparison = await this.priceComparisons.findOne({ 'products.product.id': product.id });
+    const existingComparison = await this.priceComparisons.findOne({
+      'products.product.id': product.id,
+    });
     if (existingComparison) {
       console.debug('Comparison for this product already exists:', existingComparison._id.toString());
       throw new Error('Comparison for this product already exists');
@@ -346,7 +352,11 @@ export class ProductRepository {
     const [fuzzyResults, regexResults] = await Promise.all([
       this.priceComparisons
         .find({
-          $text: { $search: searchTerm, $caseSensitive: false, $language: 'english' },
+          $text: {
+            $search: searchTerm,
+            $caseSensitive: false,
+            $language: 'english',
+          },
         })
         .toArray(),
       this.priceComparisons
@@ -367,7 +377,11 @@ export class ProductRepository {
     if (!historyData) {
       throw new EntityNotFoundError(productId);
     }
-    return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({ date, price, pricePerUnit }));
+    return historyData.history.map(({ date, product: { price, pricePerUnit } }) => ({
+      date,
+      price,
+      pricePerUnit,
+    }));
   }
 
   public async getProductsWithSpecialOffersStartingSince(startDate: Date): Promise<PriceComparison[]> {
@@ -584,7 +598,13 @@ export class ProductRepository {
             },
         computedAt: now,
       },
-      products: [{ product, specialOfferStartedAt: product.specialOffer ? now : null, lastUpdated: now }],
+      products: [
+        {
+          product,
+          specialOfferStartedAt: product.specialOffer ? now : null,
+          lastUpdated: now,
+        },
+      ],
       createdAt: now,
       updatedAt: now,
       manualConversions: manualConversion ? [manualConversion] : [],

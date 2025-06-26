@@ -27,8 +27,14 @@ export async function POST({ params: { comparisonId }, request }): Promise<Respo
 
   const manualConversion: ManualConversion | undefined = manualConversionData
     ? [
-        { name: standardiseUnit(manualConversionData.fromUnit), multiplier: manualConversionData.fromQuantity },
-        { name: standardiseUnit(manualConversionData.toUnit), multiplier: manualConversionData.toQuantity },
+        {
+          name: standardiseUnit(manualConversionData.fromUnit),
+          multiplier: manualConversionData.fromQuantity,
+        },
+        {
+          name: standardiseUnit(manualConversionData.toUnit),
+          multiplier: manualConversionData.toQuantity,
+        },
       ]
     : undefined;
 

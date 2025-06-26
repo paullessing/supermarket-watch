@@ -12,6 +12,8 @@
       <!--        (search)="onSearch($event)"-->
       <!--      ></app-search-box>-->
     </li>
-    <li style="margin-bottom: 1rem; font-size: 1.2rem"><a href="/tracked-items">Tracked Items</a></li>
+    <li style="margin-bottom: 1rem; font-size: 1.2rem">
+      <a href="/tracked-items">Tracked Items</a>
+    </li>
   </ul>
 </div>
