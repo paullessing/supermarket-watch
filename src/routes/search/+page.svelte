@@ -6,7 +6,7 @@
   import { page } from '$app/state';
   import type { PageServerData } from './$types';
   import { goto } from '$app/navigation';
-  import { ensureValidEnumValue } from '$lib/server/util';
+  import { ensureValidEnumValue } from '$lib/util/util';
 
   interface Props {
     data: PageServerData;

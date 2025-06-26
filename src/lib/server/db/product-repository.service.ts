@@ -11,7 +11,6 @@ import {
 import { CannotConvertError } from '../cannot-convert.error';
 import { conversionService, ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarket-product.model';
-import { exists, unique } from '../util';
 import { EntityNotFoundError } from './entity-not-found.error';
 import { ProductPriceCalculator } from './product-price-calculator.service';
 import type { TimestampedDocument } from './timestamped-document';
@@ -22,6 +21,7 @@ import {
   type PriceComparison,
 } from '$lib/models';
 import { $comparisonsCollection, $historyCollection } from '$lib/server/db/db.providers';
+import { exists, unique } from '$lib/util/util';
 
 export interface PriceComparisonDocument extends TimestampedDocument {
   name: string;

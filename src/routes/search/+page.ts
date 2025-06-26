@@ -1,8 +1,7 @@
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 import { SortBy } from '$lib';
 import type { SearchResultItem } from '$lib/models';
-import { search } from '$lib/server/search';
 
 export const load = (async (event): Promise<{ query: string; sortBy: SortBy; results: SearchResultItem[] }> => {
   const params = event.url.searchParams;
@@ -19,7 +18,14 @@ export const load = (async (event): Promise<{ query: string; sortBy: SortBy; res
   let results: SearchResultItem[];
 
   if (query) {
-    results = await search(query, sortBy);
+    const params = new URLSearchParams();
+    params.set('q', query);
+    if (sortBy !== SortBy.NONE) {
+      params.set('sortBy', sortBy);
+    }
+
+    const res = await event.fetch(`/api/search?${params.toString()}`);
+    results = (await res.json())?.items;
   } else {
     results = [];
   }
@@ -29,4 +35,4 @@ export const load = (async (event): Promise<{ query: string; sortBy: SortBy; res
     sortBy,
     results,
   };
-}) satisfies PageServerLoad;
+}) satisfies PageLoad;

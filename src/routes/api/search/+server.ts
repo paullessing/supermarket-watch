@@ -1,7 +1,7 @@
 import { error, json, type RequestEvent } from '@sveltejs/kit';
 import { SortBy } from '$lib';
 import { search } from '$lib/server/search';
-import { ensureValidEnumValue } from '$lib/server/util';
+import { ensureValidEnumValue } from '$lib/util/util';
 
 export async function GET({ url: { searchParams } }: RequestEvent): Promise<Response> {
   const query = searchParams.get('q');

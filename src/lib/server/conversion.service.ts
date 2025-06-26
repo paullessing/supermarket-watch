@@ -1,7 +1,7 @@
 import { CannotConvertError } from './cannot-convert.error';
-import { exists } from './util';
 import type { Conversion, ManualConversion, Unit } from '$lib/models';
 import { commonConversions } from '$lib/models';
+import { exists } from '$lib/util/util';
 
 export class ConversionService {
   private conversions: Conversion[] = [];

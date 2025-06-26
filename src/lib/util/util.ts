@@ -49,7 +49,7 @@ export function minimum<T = unknown>(
 ): (acc: T | undefined, current: T) => T {
   if (typeof predicateOrKey === 'string') {
     const key = predicateOrKey;
-    return (min, current) => (min === undefined || current[key] < min[key] ? current : min);
+    return (min, current) => (min === undefined || min === null || current[key] < min[key] ? current : min);
   } else if (typeof predicateOrKey === 'function') {
     const predicate = predicateOrKey;
     return (min, current) => (min === undefined || predicate(current) < predicate(min) ? current : min);

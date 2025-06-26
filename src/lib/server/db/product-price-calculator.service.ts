@@ -1,8 +1,8 @@
 import { isAfter, startOfDay } from 'date-fns';
 import { conversionService, ConversionService } from '../conversion.service';
 import { SupermarketProduct } from '../supermarket-product.model';
-import { minimum } from '../util';
 import type { ManualConversion } from '$lib/models';
+import { minimum } from '$lib/util/util';
 
 export class ProductPriceCalculator {
   constructor(private readonly conversionService: ConversionService) {}
