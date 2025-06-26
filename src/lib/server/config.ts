@@ -24,13 +24,13 @@ type ConfigEntry<T extends string | number | boolean> = readonly [
 
 // prettier-ignore
 const configProps = {
-  port: ['PORT', Number, 3000],
-  environment: ['NODE_ENV', String, 'development'],
-  tescoUrl: ['TESCO_URL', String, 'https://www.tesco.com/groceries/en-GB/'],
-  sainsburysUrl: ['SAINSBURYS_URL', String, 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/'],
+  port:              ['PORT', Number, 3000],
+  environment:       ['NODE_ENV', String, 'development'],
+  tescoUrl:          ['TESCO_URL', String, 'https://www.tesco.com/groceries/en-GB/'],
+  sainsburysUrl:     ['SAINSBURYS_URL', String, 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/'],
   searchResultCount: ['SEARCH_RESULT_COUNT', Number, 120], // Number of results a search query will fetch from the supermarket search page
-  mongoHost: ['MONGODB_HOST', String, 'mongo'],
-  dbDirPath: ['DB_DIR_PATH', String, ''],
+  mongoHost:         ['MONGODB_HOST', String, 'mongo'],
+  dbDirPath:         ['DB_DIR_PATH', String, ''],
 } as const satisfies { readonly [K in keyof Config]: ConfigEntry<Config[K]> };
 
 export function getConfig(): Config {
