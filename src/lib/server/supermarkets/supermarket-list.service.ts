@@ -11,7 +11,10 @@ const SUPERMARKETS = [new Tesco(config), new Sainsburys(config), new Waitrose(co
 export class InvalidIdException extends Error {
   public readonly explanation: string | undefined;
 
-  constructor(id: string, explanation?: string) {
+  constructor(
+    public readonly id: string,
+    explanation?: string
+  ) {
     super('Invalid ID or Product not found: ' + id);
 
     // Set the prototype explicitly.
