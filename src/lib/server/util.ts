@@ -62,3 +62,15 @@ export function minimum<T = unknown>(
 export function exists<T>(value: T | undefined | null): value is T {
   return value !== undefined && value !== null;
 }
+
+export function ensureValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): T {
+  if (isValidEnumValue(enumClass, value)) {
+    return value as T;
+  } else {
+    throw new Error(`Unexpected enum value "${value}" is not one of: [${Object.values(enumClass).join(', ')}]`);
+  }
+}
+
+export function isValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): boolean {
+  return Object.values(enumClass).indexOf(value as T) >= 0;
+}

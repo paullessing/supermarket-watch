@@ -6,6 +6,7 @@
   import { page } from '$app/state';
   import type { PageServerData } from './$types';
   import { goto } from '$app/navigation';
+  import { ensureValidEnumValue } from '$lib/server/util';
 
   interface Props {
     data: PageServerData;
@@ -79,18 +80,6 @@
 
   function openAddItemDetailsModal(event: CustomEvent<SearchResultItem>): void {
     addItemDetails = event.detail;
-  }
-
-  function ensureValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): T {
-    if (isValidEnumValue(enumClass, value)) {
-      return value as T;
-    } else {
-      throw new Error(`Unexpected enum value "${value}" is not one of: [${Object.values(enumClass).join(', ')}]`);
-    }
-  }
-
-  function isValidEnumValue<T extends string>(enumClass: { [key: string]: T }, value: string | T): boolean {
-    return Object.values(enumClass).indexOf(value as T) >= 0;
   }
 </script>
 

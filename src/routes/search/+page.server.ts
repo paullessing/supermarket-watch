@@ -1,8 +1,8 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { search } from './search';
 import { SortBy } from '$lib';
 import type { SearchResultItem } from '$lib/models';
+import { search } from '$lib/server/search';
 
 export const load = (async (event): Promise<{ query: string; sortBy: SortBy; results: SearchResultItem[] }> => {
   const params = event.url.searchParams;
