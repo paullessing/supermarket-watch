@@ -2,15 +2,13 @@
   import type { PriceComparison } from '$lib/models';
   import { fetchJson } from '$lib/util/fetch';
   import { formatCurrency, formatUnitAmount } from '$lib/util/format.js';
+  import PriceComparisonCard from './PriceComparisonCard.svelte';
+  import type { PageProps } from './$types';
 
-  let priceComparisons: PriceComparison[] = $state([]);
+  let { data }: PageProps = $props();
   let editIndex: number | null = $state(null);
 
-  fetchJson<{ items: PriceComparison[] }>('/api/price-comparisons').then(
-    ({ items }) => {
-      priceComparisons = items;
-    }
-  );
+  let priceComparisons: PriceComparison[] = $state(data.priceComparisons);
 
   async function deletePriceComparison(id: string): Promise<void> {
     await fetch(`/api/price-comparisons/${id}`, {
@@ -72,14 +70,9 @@
   <h2 class="title">Compare Prices</h2>
 
   <div class="price-comparison-list">
-    {#each priceComparisons as comparison (comparison.id)}
-      {JSON.stringify(comparison)}
+    {#each priceComparisons as priceComparison (priceComparison.id)}
+      <PriceComparisonCard {priceComparison}></PriceComparisonCard>
     {/each}
-    <!--    <app-price-comparison-card-->
-    <!--      *ngFor="let comparison of priceComparisons; trackBy: trackById"-->
-    <!--      [priceComparison]="comparison"-->
-    <!--    >-->
-    <!--    </app-price-comparison-card>-->
   </div>
 
   <hr style="margin: 2rem 0" />
