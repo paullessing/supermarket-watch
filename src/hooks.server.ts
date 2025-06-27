@@ -1,3 +1,4 @@
+import { cronService } from '$lib/server/cron.service';
 import { initDb } from '$lib/server/db/db.providers';
 
 /**
@@ -10,3 +11,5 @@ async function initMongoDb(): Promise<void> {
   const serverName = await initDb();
   console.info(`Connected to MongoDB at ${serverName}`);
 }
+
+cronService.setupCronjobs();

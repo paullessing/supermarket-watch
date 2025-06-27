@@ -1,29 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { ProductRepository } from './db/product-repository.service';
-import { SupermarketService } from './supermarkets';
+import { RecurrenceRule, scheduleJob } from 'node-schedule';
+import { $productRepository } from './db/product-repository.service';
+import { $supermarketService } from './supermarkets';
+import { env } from '$env/dynamic/private';
 
-@Injectable()
+const EVERY_DAY_AT_1AM = new RecurrenceRule();
+EVERY_DAY_AT_1AM.hour = 1;
+EVERY_DAY_AT_1AM.tz = 'Etc/UTC';
+
 export class CronService {
-  constructor(
-    private readonly supermarketService: SupermarketService,
-    private readonly productRepo: ProductRepository
-  ) {
-    if (process.env['RUN_MIGRATION'] === 'true') {
+  constructor() {
+    if (env['RUN_MIGRATION'] === 'true') {
+      console.log('Running Migration...');
       this.regenerateFavouriteData();
     }
   }
 
-  @Cron(CronExpression.EVERY_DAY_AT_1AM, {
-    name: 'regenerateFavouritesData',
-    timeZone: 'Europe/London',
-  })
+  public setupCronjobs(): void {
+    console.log('Initialising cron');
+    scheduleJob('regenerateFavouriteData', EVERY_DAY_AT_1AM, () => {
+      this.regenerateFavouriteData();
+    });
+  }
+
   public async regenerateFavouriteData(): Promise<void> {
+    const productRepo = await $productRepository;
+    const supermarketService = await $supermarketService;
+
     console.log('Starting cronjob to refresh favourites data');
-    const favourites = await this.productRepo.getAllTrackedIds();
+    const favourites = await productRepo.getAllTrackedIds();
     console.log(`Refreshing ${favourites.length} items...`);
 
-    const results = await this.supermarketService.refreshMultipleItems(
+    const results = await supermarketService.refreshMultipleItems(
       favourites,
       new Date(),
       true
@@ -36,3 +43,5 @@ export class CronService {
     console.log(`Cronjob completed.`);
   }
 }
+
+export const cronService = new CronService();

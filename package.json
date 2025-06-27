@@ -24,6 +24,7 @@
     "cheerio": "^1.0.0",
     "date-fns": "^3.6.0",
     "mongodb": "^6.8.1",
+    "node-schedule": "^2.1.1",
     "svelte-outside": "^0.0.3"
   },
   "devDependencies": {
@@ -31,6 +32,7 @@
     "@sveltejs/kit": "^2.22.0",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@types/eslint": "^9.6.0",
+    "@types/node-schedule": "^2.1.7",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.32.0",
