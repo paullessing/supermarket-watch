@@ -18,12 +18,17 @@
   let query: string = $derived(page.url.searchParams.get('query') ?? '');
   let addItemDetails: SearchResultItem | null = $state(null);
   let sortBy: SortBy = $state(SortBy.NONE);
+  let results: SearchResultItem[] = $state(data.results);
 
   $effect(() => {
     sortBy = ensureValidEnumValue(
       SortBy,
       page.url.searchParams.get('sortBy') || SortBy.NONE
     );
+  });
+
+  $effect(() => {
+    results = data.results;
   });
 
   function onSearch(event: CustomEvent<SearchParams>): void {
@@ -102,7 +107,7 @@
     });
     const { trackingId } = (await res.json()) as { trackingId: string };
 
-    data.results = data.results.map(
+    results = results.map(
       (item): SearchResultItem =>
         item.id === productId
           ? {
@@ -111,6 +116,7 @@
             }
           : item
     );
+    console.log(JSON.parse(JSON.stringify(results)));
     addItemDetails = null;
   }
 </script>
@@ -121,7 +127,7 @@
   <SearchBox {isSearching} searchText={query} {sortBy} on:search={onSearch}
   ></SearchBox>
 
-  <SearchResultList results={data.results} on:addItem={openAddItemDetailsModal}
+  <SearchResultList {results} on:addItem={openAddItemDetailsModal}
   ></SearchResultList>
 
   {#if addItemDetails}
