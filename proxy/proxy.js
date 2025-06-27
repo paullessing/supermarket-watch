@@ -7,7 +7,8 @@ const express = require('express');
 const port = 3333;
 
 const tescoUrl = 'https://www.tesco.com/groceries/en-GB/';
-const sainsburysUrl = 'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
+const sainsburysUrl =
+  'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
 
 const curlHeaders = [
   'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
@@ -67,7 +68,9 @@ app.get('/tesco/product/:id', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Fetching ${productId}`);
-    const result = await loadPage(`${tescoUrl}products/${encodeURIComponent(productId)}`);
+    const result = await loadPage(
+      `${tescoUrl}products/${encodeURIComponent(productId)}`
+    );
 
     res.send(result);
 
@@ -87,7 +90,10 @@ app.get('/tesco/search', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Tesco: Searching "${queryString}"`);
-    const result = await streamFromUrl(`${tescoUrl}search?query=${encodeURIComponent(queryString)}`, res);
+    const result = await streamFromUrl(
+      `${tescoUrl}search?query=${encodeURIComponent(queryString)}`,
+      res
+    );
 
     console.log(`Tesco: Got ${result} bytes`);
     res.end();
@@ -100,14 +106,18 @@ app.get('/tesco/search', async (req, res) => {
 app.get('/sainsburys/product', async (req, res) => {
   try {
     const queryIndex = req.originalUrl.indexOf('?');
-    const queryString = queryIndex >= 0 ? req.originalUrl.slice(queryIndex + 1) : '';
+    const queryString =
+      queryIndex >= 0 ? req.originalUrl.slice(queryIndex + 1) : '';
 
     if (!queryString) {
       console.log('Sainsburys: Query string not found');
       return res.status(400).end();
     }
     console.log(`Sainsburys: Searching "${queryString}"`);
-    const result = await streamFromUrl(`${sainsburysUrl}product?${queryString}`, res);
+    const result = await streamFromUrl(
+      `${sainsburysUrl}product?${queryString}`,
+      res
+    );
 
     console.log(`Sainsburys: Got ${result} bytes`);
     res.end();

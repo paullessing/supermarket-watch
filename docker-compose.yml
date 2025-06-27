@@ -1,54 +1,44 @@
-version: '3'
-
 services:
   api:
     build:
       context: ./
       dockerfile: docker/dev.Dockerfile
-    command: 'yarn serve:all'
+    command: 'sh -c "npm install && npm run dev -- --host 0.0.0.0"'
     depends_on:
       - mongo
     environment:
       NODE_ENV: dev
-      PORT: ${PORT:-3333}
-      TESCO_URL: ${TESCO_URL}
-      SAINSBURYS_URL: ${SAINSBURYS_URL}
+      TESCO_URL: http://proxy:3333/tesco/
+      SAINSBURYS_URL: http://proxy:3333/sainsburys/
+      MONGODB_HOST: mongo
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
-      VCR_MODE: ${VCR_MODE:-}
       RUN_MIGRATION: ${RUN_MIGRATION:-}
       LOG_LEVEL: ${LOG_LEVEL:-}
     ports:
-      - ${PORT:-3333}:${PORT:-3333}
-      - 4200:4200
+      - ${PORT:-5173}:5173
     networks:
       webnet:
       mongo_network:
       proxy_network:
     volumes:
-      - ./apps:/usr/src/app/apps
-      - ./config:/usr/src/app/config
-      - ./libs:/usr/src/app/libs
-      - ./tools:/usr/src/app/tools
       - ./node_modules:/usr/src/app/node_modules
-      - ./angular.json:/usr/src/app/angular.json:ro
-      - ./decorate-angular-cli.js:/usr/src/app/decorate-angular-cli.js:ro
-      - ./jest.preset.js:/usr/src/app/jest.preset.js:ro
-      - ./nx.json:/usr/src/app/nx.json:ro
-      #- ./nest-cli.json:/usr/src/app/nest-cli.json:ro
-      - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json:ro
+      - ./.svelte-kit:/usr/src/app/.svelte-kit
       - ./package.json:/usr/src/app/package.json:ro
-      - ./yarn.lock:/usr/src/app/yarn.lock:ro
-      - ./.cache:/tmp/cache
-      - ./.cache/fixtures:/usr/src/app/fixtures
+      - ./package-lock.json:/usr/src/app/package-lock.json
+      - ./svelte.config.js:/usr/src/app/svelte.config.js:ro
+      - ./tsconfig.json:/usr/src/app/tsconfig.json:ro
+      - ./vite.config.ts:/usr/src/app/vite.config.ts:ro
+      - ./src:/usr/src/app/src:ro
+      - ./static:/usr/src/app/static:ro
     restart: on-failure
   proxy:
     build:
       context: ./
       dockerfile: docker/proxy.Dockerfile
     expose:
-      - ${PORT:-3333}
+      - 3333
     ports:
-      - 3334:${PORT:-3333}
+      - '3333:3333'
     volumes:
       - ./proxy/proxy.js:/usr/src/app/proxy.js
     restart: always
@@ -59,8 +49,10 @@ services:
     image: mongo:5
     command: mongod --quiet --logpath /dev/null
     restart: always
+    expose:
+      - 27017
     ports:
-      - 27017:27017
+      - '27017:27017'
     networks:
       mongo_network:
 

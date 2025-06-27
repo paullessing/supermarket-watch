@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "api": "apps/api",
-    "api-interfaces": "libs/api-interfaces",
-    "frontend": "apps/frontend",
-    "util": "libs/util"
-  }
-}
