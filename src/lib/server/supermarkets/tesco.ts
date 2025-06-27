@@ -91,6 +91,8 @@ export class Tesco extends Supermarket {
 
     const packSize = product.details.packSize[0];
 
+    console.log(product);
+
     return SupermarketProduct({
       id: this.getId(productId),
       name: product.title,

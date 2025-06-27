@@ -17,26 +17,66 @@ const curlHeaders = [
 
 const app = express();
 /**
- * @type puppeteer.Browser
+ * @type {BrowserWrapper[]}
  */
-let browser;
+let browsers = [];
+
+/**
+ * @returns {Promise<BrowserWrapper>}
+ */
+async function getBrowser() {
+  return Promise.any(browsers.map((wrapper) => wrapper.wait()));
+}
+
+class BrowserWrapper {
+  constructor(browser, index) {
+    this.browser = browser;
+    this.index = index;
+  }
+  use() {
+    this.pendingPromise = createPendingPromise();
+    return this.browser;
+  }
+  done() {
+    this.pendingPromise = null;
+  }
+  async wait() {
+    await this.pendingPromise?.promise;
+    return this;
+  }
+}
+
+function createPendingPromise() {
+  let result = {};
+  result.promise = new Promise((resolve, reject) => {
+    result.resolve = resolve;
+    result.reject = reject;
+  });
+  return result;
+}
 
 async function loadPage(url) {
-  if (!browser) {
-    throw new Error('NO_BROWSER');
+  const browserWrapper = await getBrowser();
+  console.log(`Using browser #${browserWrapper.index}`);
+  const browser = browserWrapper.use();
+  try {
+    const start = new Date().getTime();
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'
+    );
+    await page.goto(url);
+
+    const data = await page.content();
+
+    console.info(`Loaded page in ${new Date().getTime() - start}ms.`);
+
+    return data;
+  } finally {
+    const cookies = await browser.cookies();
+    await browser.deleteCookie(...cookies);
+    browserWrapper.done();
   }
-  const start = new Date().getTime();
-  const page = await browser.newPage();
-  await page.setUserAgent(
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'
-  );
-  await page.goto(url);
-
-  const data = await page.content();
-
-  console.info(`Loaded page in ${new Date().getTime() - start}ms.`);
-
-  return data;
 }
 
 async function streamFromUrl(url, res) {
@@ -128,22 +168,31 @@ app.get('/sainsburys/product', async (req, res) => {
 });
 
 console.log('Launching Puppeteer...');
-puppeteer
-  .launch({
-    product: 'firefox',
-    executablePath: '/usr/bin/firefox',
-    // protocol: 'webDriverBiDi', // Not working in this version of Firefox
-  })
-  .then(
-    (_browser) => {
-      browser = _browser;
-      console.log('Puppeteer is started');
-    },
-    (e) => {
-      console.log('Failed to start Puppeteer');
-      console.error(e);
-    }
+Promise.all(
+  new Array(5).fill(null).map((_, i) =>
+    puppeteer
+      .launch({
+        browser: 'firefox',
+        executablePath: '/usr/bin/firefox',
+        headless: true,
+        defaultViewport: null,
+      })
+      .then(
+        (browser) => {
+          console.log(`Puppeteer #${i} is started`);
+          return new BrowserWrapper(browser, i);
+        },
+        (e) => {
+          console.log(`Failed to start Puppeteer #${i}`);
+          console.error(e);
+          throw e;
+        }
+      )
   )
+)
+  .then((_browsers) => {
+    browsers = _browsers;
+  })
   .then(() => {
     console.log('Starting express...');
     app.listen(port, () => {
