@@ -60,3 +60,5 @@ Thumbs.db
 /db
 .cache/
 /db_backups/
+
+/*.http

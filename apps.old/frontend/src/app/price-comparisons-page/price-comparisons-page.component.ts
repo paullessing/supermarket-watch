@@ -25,24 +25,6 @@ export class PriceComparisonsPageComponent implements OnInit {
     this.editIndex = null;
   }
 
-  public ngOnInit(): void {
-    this.http
-      .get<{
-        items: PriceComparison[];
-      }>(environment.apiUrl + '/price-comparisons')
-      .subscribe(({ items }) => (this.priceComparisons = items));
-  }
-
-  public deletePriceComparison(id: string): void {
-    this.http
-      .delete(environment.apiUrl + '/price-comparisons/' + id)
-      .subscribe(() => {
-        this.priceComparisons = this.priceComparisons.filter(
-          (item) => item.id !== id
-        );
-      });
-  }
-
   public removeProduct({
     comparisonId: comparisonId,
     productId,
