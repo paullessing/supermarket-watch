@@ -185,7 +185,7 @@
     overflow: hidden;
     z-index: 1000;
 
-    & __wrapper {
+    &__wrapper {
       $spacing: 1rem;
       width: 100%;
       max-width: 800px;
@@ -287,15 +287,6 @@
         top: -0.5rem;
         bottom: -0.5rem;
       }
-    }
-
-    &__search-result {
-      border: 0;
-      background-color: transparent;
-      display: inline-block;
-      color: blue;
-      text-decoration: underline;
-      cursor: pointer;
     }
   }
 </style>

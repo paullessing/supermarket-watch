@@ -2,16 +2,16 @@ interface FetchFunction {
   (input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
 }
 
-export function fetchJson<T = any>(
+export function fetchJson<T = unknown>(
   fetch: FetchFunction,
   input: RequestInfo | URL,
   init?: RequestInit
 ): Promise<T>;
-export function fetchJson<T = any>(
+export function fetchJson<T = unknown>(
   input: RequestInfo | URL,
   init?: RequestInit
 ): Promise<T>;
-export async function fetchJson<T = any>(
+export async function fetchJson<T = unknown>(
   inputOrFetch: FetchFunction | RequestInfo | URL,
   inputOrInit?: RequestInit | RequestInfo | URL,
   init?: RequestInit
