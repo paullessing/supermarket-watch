@@ -7,34 +7,31 @@
 
 <script lang="ts">
   import { SortBy } from '$lib';
-  import { createEventDispatcher } from 'svelte';
 
   interface Props {
     isSearching?: boolean;
     searchText?: string;
     sortBy?: SortBy;
+    onSearch: (data: SearchParams) => void;
   }
 
   let {
     isSearching = false,
     searchText = $bindable(''),
     sortBy = $bindable(SortBy.NONE),
+    onSearch,
   }: Props = $props();
 
-  const dispatch = createEventDispatcher<{
-    search: SearchParams;
-  }>();
-
-  let onSearch = (event: SubmitEvent): void => {
+  function onSubmit(event: SubmitEvent): void {
     event.preventDefault();
-    dispatch('search', {
+    onSearch({
       query: searchText,
       sortBy,
     });
-  };
+  }
 </script>
 
-<form onsubmit={onSearch}>
+<form onsubmit={onSubmit}>
   <input name="queryString" bind:value={searchText} />
   <select
     name="sortBy"

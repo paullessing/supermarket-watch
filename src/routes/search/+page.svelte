@@ -31,9 +31,9 @@
     results = data.results;
   });
 
-  function onSearch(event: CustomEvent<SearchParams>): void {
-    sortBy = event.detail.sortBy;
-    search(event.detail.query);
+  function onSearch(event: SearchParams): void {
+    sortBy = event.sortBy;
+    search(event.query);
   }
 
   async function search(query: string): Promise<void> {
@@ -124,8 +124,7 @@
 <div class="content search-page">
   <h2 class="title">Search</h2>
 
-  <SearchBox {isSearching} searchText={query} {sortBy} on:search={onSearch}
-  ></SearchBox>
+  <SearchBox {isSearching} searchText={query} {sortBy} {onSearch}></SearchBox>
 
   <SearchResultList {results} on:addItem={openAddItemDetailsModal}
   ></SearchResultList>
