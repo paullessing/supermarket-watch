@@ -46,7 +46,7 @@ export class Sainsburys extends Supermarket {
     return SupermarketProduct({
       id: this.getId(productUid),
       name: product.name,
-      image: product.image,
+      image: product.image ?? product.assets?.plp_image,
       url: product.full_url,
 
       price,
