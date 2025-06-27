@@ -68,6 +68,12 @@
     searchComplete = true;
   }
 
+  onMount(() => {
+    setTimeout(() => {
+      isMounted = true;
+    });
+  });
+
   function close(): void {
     if (isMounted) {
       onExit();
@@ -83,13 +89,6 @@
     }
 
     search(searchItemName);
-  });
-
-  onMount(() => {
-    setTimeout(() => {
-      isMounted = true;
-      console.log('is mounted');
-    });
   });
 
   function setCombineWithItem(item: ProductSearchResult | null): void {
@@ -126,10 +125,7 @@
 </script>
 
 <div class="add-product-dialog">
-  <div
-    class="add-product-dialog__wrapper"
-    use:clickOutside={() => (console.log('click outside'), close())}
-  >
+  <div class="add-product-dialog__wrapper" use:clickOutside={close}>
     <button
       class="add-product-dialog__close"
       onclick={close}

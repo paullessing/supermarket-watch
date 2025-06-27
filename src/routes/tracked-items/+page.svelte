@@ -4,6 +4,10 @@
   import { formatCurrency, formatUnitAmount } from '$lib/util/format.js';
   import PriceComparisonCard from './PriceComparisonCard.svelte';
   import type { PageProps } from './$types';
+  import EditPriceComparisonDialog, {
+    type EditComparisonDetailsData,
+    type RemoveProductData,
+  } from './EditPriceComparisonDialog.svelte';
 
   let { data }: PageProps = $props();
   let editIndex: number | null = $state(null);
@@ -54,15 +58,6 @@
       item.id === comparisonId ? comparison : item
     );
     editIndex = null;
-  }
-
-  interface RemoveProductData {
-    productId: string;
-    comparisonId: string;
-  }
-  interface EditComparisonDetailsData {
-    id: string;
-    name: string;
   }
 </script>
 
@@ -131,14 +126,15 @@
   {/if}
 </div>
 
-<!--<app-edit-price-comparison-dialog-->
-<!--  *ngIf="editIndex !== null"-->
-<!--  [comparison]="priceComparisons[editIndex]"-->
-<!--  (editDetails)="onEditComparison($event)"-->
-<!--  (exit)="editIndex = null"-->
-<!--  (deletePriceComparison)="deletePriceComparison($event.id); editIndex = null"-->
-<!--  (removeProduct)="removeProduct($event)"-->
-<!--&gt;</app-edit-price-comparison-dialog>-->
+{#if editIndex !== null}
+  <EditPriceComparisonDialog
+    comparison={priceComparisons[editIndex]}
+    onEditDetails={onEditComparison}
+    onDelete={({ id }) => deletePriceComparison(id)}
+    onRemoveProduct={removeProduct}
+    onExit={() => (editIndex = null)}
+  ></EditPriceComparisonDialog>
+{/if}
 
 <style lang="scss">
   .tracked-product {
