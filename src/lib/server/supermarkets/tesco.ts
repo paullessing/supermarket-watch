@@ -124,9 +124,10 @@ export class Tesco extends Supermarket {
     console.log('Tesco: searching', url);
 
     try {
-      const search = await axios.get(url);
+      const search = (await axios.get<string>(url)).data;
+      // const search = getTempTescoSearchData();
 
-      console.log('Tesco search', search);
+      // console.log('Tesco search', search);
 
       return {
         items: this.extractSearchResults(search),
@@ -144,48 +145,70 @@ export class Tesco extends Supermarket {
   }
 
   private extractSearchResults(
-    search: AxiosResponse<string>
+    searchPageHtml: string
   ): SearchResultItemWithoutTracking[] {
-    const $ = cheerio.load(search.data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const reduxState = $('#data-attributes').data('reduxState') as any;
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const $ = cheerio.load(searchPageHtml);
 
-    console.log('Tesco', reduxState);
+    const data = JSON.parse(
+      $('script[type="application/discover+json"]').html() ?? ''
+    );
 
-    const results: SearchResultItemWithoutTracking[] = [];
-    reduxState.results.pages[0].serializedData.forEach(
-      ([id, data]: [string, ProductDetails]) => {
-        const { product, promotions } = data;
+    // console.log(data);
+    const apolloCache = data['mfe-orchestrator'].props.apolloCache;
 
+    const searchKey = Object.keys(apolloCache.ROOT_QUERY).find((key) =>
+      key.match(/^search\b/)
+    );
+    if (!searchKey) {
+      console.warn('No search data found in result data from Tesco');
+      return [];
+    }
+
+    const resultKeys = apolloCache.ROOT_QUERY[searchKey].results
+      .filter((result: any) => result.__typename === 'CompositeResultType')
+      .map((result: any): string => result.node.__ref);
+
+    const resultObjects = resultKeys.map((key: string) => apolloCache[key]);
+
+    const results = resultObjects.map(
+      (resultObject: any): SearchResultItemWithoutTracking => {
         const result: SearchResultItemWithoutTracking = {
-          id: this.getId(id),
-          name: product.title,
-          image: product.defaultImageUrl,
-          price: product.price,
+          id: this.getId(resultObject.id),
+          name: resultObject.title,
+          image: resultObject.defaultImageUrl,
+          price: resultObject.price.actual,
           specialOffer: null,
           supermarket: Tesco.NAME,
         };
 
-        const promotion = this.getPromotion(promotions);
+        if (resultObject.promotions) {
+          const promotions = resultObject.promotions.map(
+            (promoData: any) => apolloCache[promoData?.__ref]
+          );
+          const promotion = this.getPromotion(promotions);
 
-        if (promotion) {
-          const originalPrice = result.price;
-          result.price = promotion.price;
-          result.specialOffer = {
-            originalPrice,
-            offerText: promotion.offerText,
-            validUntil: promotion.endDate,
-          };
+          if (promotion) {
+            const originalPrice = result.price;
+            result.price = promotion.price;
+            result.specialOffer = {
+              originalPrice,
+              offerText: promotion.offerText,
+              validUntil: promotion.endDate,
+            };
+          }
         }
 
-        results.push(result);
+        return result;
       }
     );
 
     return results;
+    /* eslint-enable @typescript-eslint/no-explicit-any */
   }
 
   private getPromotion(
+    // TODO: type this properly again, since it changed
     promotions: ProductDetails['promotions']
   ): null | { price: number; offerText: string; endDate: string } {
     const promotion = promotions.find(
@@ -193,7 +216,10 @@ export class Tesco extends Supermarket {
     );
 
     if (promotion) {
-      const match = promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const match = (promotion as any).description.match(
+        /^Â?£(\d+\.\d{2}) (.*)$/
+      );
       if (match) {
         return {
           price: parseFloat(match[1]),
