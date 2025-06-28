@@ -1,0 +1,15707 @@
+/* eslint-disable */
+export function getTempTescoSearchData() {
+  return `
+  <!DOCTYPE html>
+<!-- VERSION: {"mfe-orchestrator":"2025.06.26-2e19f439","mfe-header":"2025.06.19-25cb3726","mfe-plp":"2025.06.26-cd8ff1ba","mfe-basket":"2025.06.16-b4c03-main","mfe-footer":"2025.06.13-fbfb7b22","mfe-global-scripts":"2025.06.18-57236975","mfe-analytics":"2025.06.25-3a411f1e","mfe-basket-manager":"2025.06.25-b2c57da1"} -->
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="ie=edge"
+  />
+  <meta
+    http-equiv="content-language"
+    content="en-GB"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/assets/mfe-orchestrator/favicon.ico"
+    sizes="48x48"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/assets/mfe-orchestrator/favicon-16x16.73e9627387d3a7a046c9.png"
+    sizes="16x16"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/assets/mfe-orchestrator/favicon-32x32.e9b6667b56d1dc299eda.png"
+    sizes="32x32"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/assets/mfe-orchestrator/apple-touch-icon.229682dcf4b1a36c9a19.png"
+  />
+  <link
+    rel="preconnect"
+    href="https://digitalcontent.api.tesco.com"
+  />
+  <link
+    rel="preload"
+    href="/assets/mfe-orchestrator/4b998ddf.html"
+    as="fetch"
+  />
+  <script
+    src="/assets/mfe-orchestrator/059712bed6ecfad0b2b8.js"
+    integrity="sha256-44lfE1M3Mn80kQqzRnS9Mx+2c0mbNwkL25rVdBN8JLQ="
+    defer
+  ></script>
+  <script
+    type="application/json"
+    id="NREUM.loader_config"
+  >
+    {
+      "accountID": "3512954",
+      "trustKey": "3296235",
+      "agentID": "998931493",
+      "licenseKey": "NRBR-57da5fb7bf95b4c811c",
+      "applicationID": "1134228794"
+    }
+  </script>
+  <script
+    type="application/json"
+    id="NREUM.info"
+  >
+    {
+      "beacon": "bam.nr-data.net",
+      "errorBeacon": "bam.nr-data.net",
+      "licenseKey": "NRBR-57da5fb7bf95b4c811c",
+      "applicationID": "1134228794",
+      "sa": 1
+    }
+  </script>
+  <script type="text/javascript">
+    ;
+    window.NREUM || (NREUM = {});
+    NREUM.init = {
+      distributed_tracing: {
+        enabled: true,
+      },
+      privacy: {
+        cookies_enabled: true,
+      },
+      feature_flags: ['disable-spa-fix'],
+      ajax: {
+        deny_list: ['analytics.foresee.com', 'bam.nr-data.net', 'brain.foresee.com', 'collection.decibelinsight.net', 'sstm.tesco.com/g/collect', 'www.tesco.com/userinteraction/v1/events/route/custonline', 'www.tesco.com/userinteraction/v1/events/route/custonline-nc'],
+      },
+    };
+    ; /*! For license information please see nr-loader-spa-1.277.0.min.js.LICENSE.txt */
+    (() => {
+      var e, t, r = {
+          8122: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              a: () => i,
+            });
+            var n = r(944);
+
+            function i(e, t) {
+              try {
+                if (!e || 'object' != typeof e) return (0, n.R)(3);
+                if (!t || 'object' != typeof t) return (0, n.R)(4);
+                const r = Object.create(Object.getPrototypeOf(t), Object.getOwnPropertyDescriptors(t)),
+                  o = 0 === Object.keys(r).length ? e : r;
+                for (let a in o)
+                  if (void 0 !== e[a]) try {
+                    if (null === e[a]) {
+                      r[a] = null;
+                      continue;
+                    }
+                    Array.isArray(e[a]) && Array.isArray(t[a]) ? r[a] = Array.from(new Set([...e[a], ...t[a]])) : 'object' == typeof e[a] && 'object' == typeof t[a] ? r[a] = i(e[a], t[a]) : r[a] = e[a];
+                  } catch (e) {
+                    (0, n.R)(1, e);
+                  }
+                return r;
+              } catch (e) {
+                (0, n.R)(2, e);
+              }
+            }
+          },
+          2555: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              Vp: () => c,
+              fn: () => s,
+              x1: () => u,
+            });
+            var n = r(384),
+              i = r(8122);
+            const o = {
+                beacon: n.NT.beacon,
+                errorBeacon: n.NT.errorBeacon,
+                licenseKey: void 0,
+                applicationID: void 0,
+                sa: void 0,
+                queueTime: void 0,
+                applicationTime: void 0,
+                ttGuid: void 0,
+                user: void 0,
+                account: void 0,
+                product: void 0,
+                extra: void 0,
+                jsAttributes: {},
+                userAttributes: void 0,
+                atts: void 0,
+                transactionName: void 0,
+                tNamePlain: void 0,
+              },
+              a = {};
+
+            function s(e) {
+              try {
+                const t = c(e);
+                return !!t.licenseKey && !!t.errorBeacon && !!t.applicationID;
+              } catch (e) {
+                return !1;
+              }
+            }
+
+            function c(e) {
+              if (!e) throw new Error('All info objects require an agent identifier!');
+              if (!a[e]) throw new Error('Info for '.concat(e, ' was never set'));
+              return a[e];
+            }
+
+            function u(e, t) {
+              if (!e) throw new Error('All info objects require an agent identifier!');
+              a[e] = (0, i.a)(t, o);
+              const r = (0, n.nY)(e);
+              r && (r.info = a[e]);
+            }
+          },
+          9417: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              D0: () => p,
+              gD: () => m,
+              xN: () => g,
+            });
+            var n = r(3333),
+              i = r(993);
+            const o = e => {
+              if (!e || 'string' != typeof e) return !1;
+              try {
+                document.createDocumentFragment().querySelector(e);
+              } catch {
+                return !1;
+              }
+              return !0;
+            };
+            var a = r(2614),
+              s = r(944),
+              c = r(384),
+              u = r(8122);
+            const d = '[data-nr-mask]',
+              l = () => {
+                const e = {
+                  feature_flags: [],
+                  experimental: {
+                    marks: !1,
+                    measures: !1,
+                    resources: !1,
+                  },
+                  mask_selector: '*',
+                  block_selector: '[data-nr-block]',
+                  mask_input_options: {
+                    color: !1,
+                    date: !1,
+                    'datetime-local': !1,
+                    email: !1,
+                    month: !1,
+                    number: !1,
+                    range: !1,
+                    search: !1,
+                    tel: !1,
+                    text: !1,
+                    time: !1,
+                    url: !1,
+                    week: !1,
+                    textarea: !1,
+                    select: !1,
+                    password: !0,
+                  },
+                };
+                return {
+                  ajax: {
+                    deny_list: void 0,
+                    block_internal: !0,
+                    enabled: !0,
+                    harvestTimeSeconds: 10,
+                    autoStart: !0,
+                  },
+                  distributed_tracing: {
+                    enabled: void 0,
+                    exclude_newrelic_header: void 0,
+                    cors_use_newrelic_header: void 0,
+                    cors_use_tracecontext_headers: void 0,
+                    allowed_origins: void 0,
+                  },
+                  get feature_flags() {
+                    return e.feature_flags;
+                  },
+                  set feature_flags(t) {
+                    e.feature_flags = t;
+                  },
+                  generic_events: {
+                    enabled: !0,
+                    harvestTimeSeconds: 30,
+                    autoStart: !0,
+                  },
+                  harvest: {
+                    tooManyRequestsDelay: 60,
+                  },
+                  jserrors: {
+                    enabled: !0,
+                    harvestTimeSeconds: 10,
+                    autoStart: !0,
+                  },
+                  logging: {
+                    enabled: !0,
+                    harvestTimeSeconds: 10,
+                    autoStart: !0,
+                    level: i.p_.INFO,
+                  },
+                  metrics: {
+                    enabled: !0,
+                    autoStart: !0,
+                  },
+                  obfuscate: void 0,
+                  page_action: {
+                    enabled: !0,
+                  },
+                  page_view_event: {
+                    enabled: !0,
+                    autoStart: !0,
+                  },
+                  page_view_timing: {
+                    enabled: !0,
+                    harvestTimeSeconds: 30,
+                    autoStart: !0,
+                  },
+                  performance: {
+                    get capture_marks() {
+                      return e.feature_flags.includes(n.$v.MARKS) || e.experimental.marks;
+                    },
+                    set capture_marks(t) {
+                      e.experimental.marks = t;
+                    },
+                    get capture_measures() {
+                      return e.feature_flags.includes(n.$v.MEASURES) || e.experimental.measures;
+                    },
+                    set capture_measures(t) {
+                      e.experimental.measures = t;
+                    },
+                    resources: {
+                      get enabled() {
+                        return e.feature_flags.includes(n.$v.RESOURCES) || e.experimental.resources;
+                      },
+                      set enabled(t) {
+                        e.experimental.resources = t;
+                      },
+                      asset_types: [],
+                      first_party_domains: [],
+                      ignore_newrelic: !0,
+                    },
+                  },
+                  privacy: {
+                    cookies_enabled: !0,
+                  },
+                  proxy: {
+                    assets: void 0,
+                    beacon: void 0,
+                  },
+                  session: {
+                    expiresMs: a.wk,
+                    inactiveMs: a.BB,
+                  },
+                  session_replay: {
+                    autoStart: !0,
+                    enabled: !1,
+                    harvestTimeSeconds: 60,
+                    preload: !1,
+                    sampling_rate: 10,
+                    error_sampling_rate: 100,
+                    collect_fonts: !1,
+                    inline_images: !1,
+                    fix_stylesheets: !0,
+                    mask_all_inputs: !0,
+                    get mask_text_selector() {
+                      return e.mask_selector;
+                    },
+                    set mask_text_selector(t) {
+                      o(t) ? e.mask_selector = ''.concat(t, ',').concat(d) : '' === t || null === t ? e.mask_selector = d : (0, s.R)(5, t);
+                    },
+                    get block_class() {
+                      return 'nr-block';
+                    },
+                    get ignore_class() {
+                      return 'nr-ignore';
+                    },
+                    get mask_text_class() {
+                      return 'nr-mask';
+                    },
+                    get block_selector() {
+                      return e.block_selector;
+                    },
+                    set block_selector(t) {
+                      o(t) ? e.block_selector += ','.concat(t) : '' !== t && (0, s.R)(6, t);
+                    },
+                    get mask_input_options() {
+                      return e.mask_input_options;
+                    },
+                    set mask_input_options(t) {
+                      t && 'object' == typeof t ? e.mask_input_options = {
+                        ...t,
+                        password: !0,
+                      } : (0, s.R)(7, t);
+                    },
+                  },
+                  session_trace: {
+                    enabled: !0,
+                    harvestTimeSeconds: 10,
+                    autoStart: !0,
+                  },
+                  soft_navigations: {
+                    enabled: !0,
+                    harvestTimeSeconds: 10,
+                    autoStart: !0,
+                  },
+                  spa: {
+                    enabled: !0,
+                    harvestTimeSeconds: 10,
+                    autoStart: !0,
+                  },
+                  ssl: void 0,
+                  user_actions: {
+                    enabled: !0,
+                  },
+                };
+              },
+              f = {},
+              h = 'All configuration objects require an agent identifier!';
+
+            function p(e) {
+              if (!e) throw new Error(h);
+              if (!f[e]) throw new Error('Configuration for '.concat(e, ' was never set'));
+              return f[e];
+            }
+
+            function g(e, t) {
+              if (!e) throw new Error(h);
+              f[e] = (0, u.a)(t, l());
+              const r = (0, c.nY)(e);
+              r && (r.init = f[e]);
+            }
+
+            function m(e, t) {
+              if (!e) throw new Error(h);
+              var r = p(e);
+              if (r) {
+                for (var n = t.split('.'), i = 0; i < n.length - 1; i++)
+                  if ('object' != typeof (r = r[n[i]])) return;
+                r = r[n[n.length - 1]];
+              }
+              return r;
+            }
+          },
+          5603: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              a: () => c,
+              o: () => s,
+            });
+            var n = r(384),
+              i = r(8122);
+            const o = {
+                accountID: void 0,
+                trustKey: void 0,
+                agentID: void 0,
+                licenseKey: void 0,
+                applicationID: void 0,
+                xpid: void 0,
+              },
+              a = {};
+
+            function s(e) {
+              if (!e) throw new Error('All loader-config objects require an agent identifier!');
+              if (!a[e]) throw new Error('LoaderConfig for '.concat(e, ' was never set'));
+              return a[e];
+            }
+
+            function c(e, t) {
+              if (!e) throw new Error('All loader-config objects require an agent identifier!');
+              a[e] = (0, i.a)(t, o);
+              const r = (0, n.nY)(e);
+              r && (r.loader_config = a[e]);
+            }
+          },
+          3371: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              V: () => f,
+              f: () => l,
+            });
+            var n = r(8122),
+              i = r(384),
+              o = r(6154),
+              a = r(9324);
+            let s = 0;
+            const c = {
+                buildEnv: a.F3,
+                distMethod: a.Xs,
+                version: a.xv,
+                originTime: o.WN,
+              },
+              u = {
+                customTransaction: void 0,
+                disabled: !1,
+                isolatedBacklog: !1,
+                loaderType: void 0,
+                maxBytes: 3e4,
+                onerror: void 0,
+                ptid: void 0,
+                releaseIds: {},
+                appMetadata: {},
+                session: void 0,
+                denyList: void 0,
+                timeKeeper: void 0,
+                obfuscator: void 0,
+              },
+              d = {};
+
+            function l(e) {
+              if (!e) throw new Error('All runtime objects require an agent identifier!');
+              if (!d[e]) throw new Error('Runtime for '.concat(e, ' was never set'));
+              return d[e];
+            }
+
+            function f(e, t) {
+              if (!e) throw new Error('All runtime objects require an agent identifier!');
+              d[e] = {
+                ...(0, n.a)(t, u),
+                ...c,
+              }, Object.hasOwnProperty.call(d[e], 'harvestCount') || Object.defineProperty(d[e], 'harvestCount', {
+                get: () => ++s,
+              });
+              const r = (0, i.nY)(e);
+              r && (r.runtime = d[e]);
+            }
+          },
+          9324: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              F3: () => i,
+              Xs: () => o,
+              Yq: () => a,
+              xv: () => n,
+            });
+            const n = '1.277.0',
+              i = 'PROD',
+              o = 'CDN',
+              a = '^2.0.0-alpha.17';
+          },
+          6154: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              A4: () => s,
+              OF: () => d,
+              RI: () => i,
+              WN: () => h,
+              bv: () => o,
+              gm: () => a,
+              lR: () => f,
+              m: () => u,
+              mw: () => c,
+              sb: () => l,
+            });
+            var n = r(1863);
+            const i = 'undefined' != typeof window && !!window.document,
+              o = 'undefined' != typeof WorkerGlobalScope && ('undefined' != typeof self && self instanceof WorkerGlobalScope && self.navigator instanceof WorkerNavigator || 'undefined' != typeof globalThis && globalThis instanceof WorkerGlobalScope && globalThis.navigator instanceof WorkerNavigator),
+              a = i ? window : 'undefined' != typeof WorkerGlobalScope && ('undefined' != typeof self && self instanceof WorkerGlobalScope && self || 'undefined' != typeof globalThis && globalThis instanceof WorkerGlobalScope && globalThis),
+              s = 'complete' === a?.document?.readyState,
+              c = Boolean('hidden' === a?.document?.visibilityState),
+              u = '' + a?.location,
+              d = /iPad|iPhone|iPod/.test(a.navigator?.userAgent),
+              l = d && 'undefined' == typeof SharedWorker,
+              f = (() => {
+                const e = a.navigator?.userAgent?.match(/Firefox[/\\s](\\d+\\.\\d+)/);
+                return Array.isArray(e) && e.length >= 2 ? +e[1] : 0;
+              })(),
+              h = Date.now() - (0, n.t)();
+          },
+          7295: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              Xv: () => a,
+              gX: () => i,
+              iW: () => o,
+            });
+            var n = [];
+
+            function i(e) {
+              if (!e || o(e)) return !1;
+              if (0 === n.length) return !0;
+              for (var t = 0; t < n.length; t++) {
+                var r = n[t];
+                if ('*' === r.hostname) return !1;
+                if (s(r.hostname, e.hostname) && c(r.pathname, e.pathname)) return !1;
+              }
+              return !0;
+            }
+
+            function o(e) {
+              return void 0 === e.hostname;
+            }
+
+            function a(e) {
+              if (n = [], e && e.length)
+                for (var t = 0; t < e.length; t++) {
+                  let r = e[t];
+                  if (!r) continue;
+                  0 === r.indexOf('http://') ? r = r.substring(7) : 0 === r.indexOf('https://') && (r = r.substring(8));
+                  const i = r.indexOf('/');
+                  let o, a;
+                  i > 0 ? (o = r.substring(0, i), a = r.substring(i)) : (o = r, a = '');
+                  let [s] = o.split(':');
+                  n.push({
+                    hostname: s,
+                    pathname: a,
+                  });
+                }
+            }
+
+            function s(e, t) {
+              return !(e.length > t.length) && t.indexOf(e) === t.length - e.length;
+            }
+
+            function c(e, t) {
+              return 0 === e.indexOf('/') && (e = e.substring(1)), 0 === t.indexOf('/') && (t = t.substring(1)), '' === e || e === t;
+            }
+          },
+          1687: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              Ak: () => c,
+              Ze: () => l,
+              x3: () => u,
+            });
+            var n = r(7836),
+              i = r(3606),
+              o = r(860),
+              a = r(2646);
+            const s = {};
+
+            function c(e, t) {
+              const r = {
+                staged: !1,
+                priority: o.P3[t] || 0,
+              };
+              d(e), s[e].get(t) || s[e].set(t, r);
+            }
+
+            function u(e, t) {
+              e && s[e] && (s[e].get(t) && s[e].delete(t), h(e, t, !1), s[e].size && f(e));
+            }
+
+            function d(e) {
+              if (!e) throw new Error('agentIdentifier required');
+              s[e] || (s[e] = new Map);
+            }
+
+            function l(e = '', t = 'feature', r = !1) {
+              if (d(e), !e || !s[e].get(t) || r) return h(e, t);
+              s[e].get(t).staged = !0, f(e);
+            }
+
+            function f(e) {
+              const t = Array.from(s[e]);
+              t.every((([e, t]) => t.staged)) && (t.sort(((e, t) => e[1].priority - t[1].priority)), t.forEach((([t]) => {
+                s[e].delete(t), h(e, t);
+              })));
+            }
+
+            function h(e, t, r = !0) {
+              const o = e ? n.ee.get(e) : n.ee,
+                s = i.i.handlers;
+              if (!o.aborted && o.backlog && s) {
+                if (r) {
+                  const e = o.backlog[t],
+                    r = s[t];
+                  if (r) {
+                    for (let t = 0; e && t < e.length; ++t) p(e[t], r);
+                    Object.entries(r).forEach((([e, t]) => {
+                      Object.values(t || {}).forEach((t => {
+                        t[0]?.on && t[0]?.context() instanceof a.y && t[0].on(e, t[1]);
+                      }));
+                    }));
+                  }
+                }
+                o.isolatedBacklog || delete s[t], o.backlog[t] = null, o.emit('drain-' + t, []);
+              }
+            }
+
+            function p(e, t) {
+              var r = e[1];
+              Object.values(t[r] || {}).forEach((t => {
+                var r = e[0];
+                if (t[0] === r) {
+                  var n = t[1],
+                    i = e[3],
+                    o = e[2];
+                  n.apply(i, o);
+                }
+              }));
+            }
+          },
+          7836: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              P: () => c,
+              ee: () => u,
+            });
+            var n = r(384),
+              i = r(8990),
+              o = r(3371),
+              a = r(2646),
+              s = r(5607);
+            const c = 'nr@context:'.concat(s.W),
+              u = function e(t, r) {
+                var n = {},
+                  s = {},
+                  d = {},
+                  l = !1;
+                try {
+                  l = 16 === r.length && (0, o.f)(r).isolatedBacklog;
+                } catch (e) {
+                }
+                var f = {
+                  on: p,
+                  addEventListener: p,
+                  removeEventListener: function(e, t) {
+                    var r = n[e];
+                    if (!r) return;
+                    for (var i = 0; i < r.length; i++) r[i] === t && r.splice(i, 1);
+                  },
+                  emit: function(e, r, n, i, o) {
+                    !1 !== o && (o = !0);
+                    if (u.aborted && !i) return;
+                    t && o && t.emit(e, r, n);
+                    for (var a = h(n), c = g(e), d = c.length, l = 0; l < d; l++) c[l].apply(a, r);
+                    var p = v()[s[e]];
+                    p && p.push([f, e, r, a]);
+                    return a;
+                  },
+                  get: m,
+                  listeners: g,
+                  context: h,
+                  buffer: function(e, t) {
+                    const r = v();
+                    if (t = t || 'feature', f.aborted) return;
+                    Object.entries(e || {}).forEach((([e, n]) => {
+                      s[n] = t, t in r || (r[t] = []);
+                    }));
+                  },
+                  abort: function() {
+                    f._aborted = !0, Object.keys(f.backlog).forEach((e => {
+                      delete f.backlog[e];
+                    }));
+                  },
+                  isBuffering: function(e) {
+                    return !!v()[s[e]];
+                  },
+                  debugId: r,
+                  backlog: l ? {} : t && 'object' == typeof t.backlog ? t.backlog : {},
+                  isolatedBacklog: l,
+                };
+                return Object.defineProperty(f, 'aborted', {
+                  get: () => {
+                    let e = f._aborted || !1;
+                    return e || (t && (e = t.aborted), e);
+                  },
+                }), f;
+
+                function h(e) {
+                  return e && e instanceof a.y ? e : e ? (0, i.I)(e, c, (() => new a.y(c))) : new a.y(c);
+                }
+
+                function p(e, t) {
+                  n[e] = g(e).concat(t);
+                }
+
+                function g(e) {
+                  return n[e] || [];
+                }
+
+                function m(t) {
+                  return d[t] = d[t] || e(f, t);
+                }
+
+                function v() {
+                  return f.backlog;
+                }
+              }(void 0, 'globalEE'),
+              d = (0, n.Zm)();
+            d.ee || (d.ee = u);
+          },
+          2646: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              y: () => n,
+            });
+
+            class n {
+              constructor(e) {
+                this.contextId = e;
+              }
+            }
+          },
+          9908: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              d: () => n,
+              p: () => i,
+            });
+            var n = r(7836).ee.get('handle');
+
+            function i(e, t, r, i, o) {
+              o ? (o.buffer([e], i), o.emit(e, t, r)) : (n.buffer([e], i), n.emit(e, t, r));
+            }
+          },
+          3606: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              i: () => o,
+            });
+            var n = r(9908);
+            o.on = a;
+            var i = o.handlers = {};
+
+            function o(e, t, r, o) {
+              a(o || n.d, i, e, t, r);
+            }
+
+            function a(e, t, r, i, o) {
+              o || (o = 'feature'), e || (e = n.d);
+              var a = t[o] = t[o] || {};
+              (a[r] = a[r] || []).push([e, i]);
+            }
+          },
+          3878: (e, t, r) => {
+            'use strict';
+
+            function n(e, t) {
+              return {
+                capture: e,
+                passive: !1,
+                signal: t,
+              };
+            }
+
+            function i(e, t, r = !1, i) {
+              window.addEventListener(e, t, n(r, i));
+            }
+
+            function o(e, t, r = !1, i) {
+              document.addEventListener(e, t, n(r, i));
+            }
+
+            r.d(t, {
+              DD: () => o,
+              jT: () => n,
+              sp: () => i,
+            });
+          },
+          5607: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              W: () => n,
+            });
+            const n = (0, r(9566).bz)();
+          },
+          9566: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              LA: () => s,
+              ZF: () => c,
+              bz: () => a,
+              el: () => u,
+            });
+            var n = r(6154);
+            const i = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+
+            function o(e, t) {
+              return e ? 15 & e[t] : 16 * Math.random() | 0;
+            }
+
+            function a() {
+              const e = n.gm?.crypto || n.gm?.msCrypto;
+              let t, r = 0;
+              return e && e.getRandomValues && (t = e.getRandomValues(new Uint8Array(30))), i.split('').map((e => 'x' === e ? o(t, r++).toString(16) : 'y' === e ? (3 & o() | 8).toString(16) : e)).join('');
+            }
+
+            function s(e) {
+              const t = n.gm?.crypto || n.gm?.msCrypto;
+              let r, i = 0;
+              t && t.getRandomValues && (r = t.getRandomValues(new Uint8Array(e)));
+              const a = [];
+              for (var s = 0; s < e; s++) a.push(o(r, i++).toString(16));
+              return a.join('');
+            }
+
+            function c() {
+              return s(16);
+            }
+
+            function u() {
+              return s(32);
+            }
+          },
+          2614: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              BB: () => a,
+              H3: () => n,
+              g: () => u,
+              iL: () => c,
+              tS: () => s,
+              uh: () => i,
+              wk: () => o,
+            });
+            const n = 'NRBA',
+              i = 'SESSION',
+              o = 144e5,
+              a = 18e5,
+              s = {
+                STARTED: 'session-started',
+                PAUSE: 'session-pause',
+                RESET: 'session-reset',
+                RESUME: 'session-resume',
+                UPDATE: 'session-update',
+              },
+              c = {
+                SAME_TAB: 'same-tab',
+                CROSS_TAB: 'cross-tab',
+              },
+              u = {
+                OFF: 0,
+                FULL: 1,
+                ERROR: 2,
+              };
+          },
+          1863: (e, t, r) => {
+            'use strict';
+
+            function n() {
+              return Math.floor(performance.now());
+            }
+
+            r.d(t, {
+              t: () => n,
+            });
+          },
+          7485: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              D: () => i,
+            });
+            var n = r(6154);
+
+            function i(e) {
+              if (0 === (e || '').indexOf('data:')) return {
+                protocol: 'data',
+              };
+              try {
+                const t = new URL(e, location.href),
+                  r = {
+                    port: t.port,
+                    hostname: t.hostname,
+                    pathname: t.pathname,
+                    search: t.search,
+                    protocol: t.protocol.slice(0, t.protocol.indexOf(':')),
+                    sameOrigin: t.protocol === n.gm?.location?.protocol && t.host === n.gm?.location?.host,
+                  };
+                return r.port && '' !== r.port || ('http:' === t.protocol && (r.port = '80'), 'https:' === t.protocol && (r.port = '443')), r.pathname && '' !== r.pathname ? r.pathname.startsWith('/') || (r.pathname = '/'.concat(r.pathname)) : r.pathname = '/', r;
+              } catch (e) {
+                return {};
+              }
+            }
+          },
+          944: (e, t, r) => {
+            'use strict';
+
+            function n(e, t) {
+              'function' == typeof console.debug && console.debug('New Relic Warning: https://github.com/newrelic/newrelic-browser-agent/blob/main/docs/warning-codes.md#'.concat(e), t);
+            }
+
+            r.d(t, {
+              R: () => n,
+            });
+          },
+          5284: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              t: () => c,
+              B: () => s,
+            });
+            var n = r(7836),
+              i = r(6154);
+            const o = 'newrelic';
+            const a = new Set,
+              s = {};
+
+            function c(e, t) {
+              const r = n.ee.get(t);
+              s[t] ?? = {}, e && 'object' == typeof e && (a.has(t) || (r.emit('rumresp', [e]), s[t] = e, a.add(t), function(e = {}) {
+                try {
+                  i.gm.dispatchEvent(new CustomEvent(o, {
+                    detail: e,
+                  }));
+                } catch (e) {
+                }
+              }({
+                loaded: !0,
+              })));
+            }
+          },
+          8990: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              I: () => i,
+            });
+            var n = Object.prototype.hasOwnProperty;
+
+            function i(e, t, r) {
+              if (n.call(e, t)) return e[t];
+              var i = r();
+              if (Object.defineProperty && Object.keys) try {
+                return Object.defineProperty(e, t, {
+                  value: i,
+                  writable: !0,
+                  enumerable: !1,
+                }), i;
+              } catch (e) {
+              }
+              return e[t] = i, i;
+            }
+          },
+          6389: (e, t, r) => {
+            'use strict';
+
+            function n(e, t = 500, r = {}) {
+              const n = r?.leading || !1;
+              let i;
+              return (...r) => {
+                n && void 0 === i && (e.apply(this, r), i = setTimeout((() => {
+                  i = clearTimeout(i);
+                }), t)), n || (clearTimeout(i), i = setTimeout((() => {
+                  e.apply(this, r);
+                }), t));
+              };
+            }
+
+            function i(e) {
+              let t = !1;
+              return (...r) => {
+                t || (t = !0, e.apply(this, r));
+              };
+            }
+
+            r.d(t, {
+              J: () => i,
+              s: () => n,
+            });
+          },
+          3304: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              A: () => o,
+            });
+            var n = r(7836);
+            const i = () => {
+              const e = new WeakSet;
+              return (t, r) => {
+                if ('object' == typeof r && null !== r) {
+                  if (e.has(r)) return;
+                  e.add(r);
+                }
+                return r;
+              };
+            };
+
+            function o(e) {
+              try {
+                return JSON.stringify(e, i()) ?? '';
+              } catch (e) {
+                try {
+                  n.ee.emit('internal-error', [e]);
+                } catch (e) {
+                }
+                return '';
+              }
+            }
+          },
+          5289: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              GG: () => o,
+              sB: () => a,
+            });
+            var n = r(3878);
+
+            function i() {
+              return 'undefined' == typeof document || 'complete' === document.readyState;
+            }
+
+            function o(e, t) {
+              if (i()) return e();
+              (0, n.sp)('load', e, t);
+            }
+
+            function a(e) {
+              if (i()) return e();
+              (0, n.DD)('DOMContentLoaded', e);
+            }
+          },
+          384: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              NT: () => o,
+              US: () => d,
+              Zm: () => a,
+              bQ: () => c,
+              dV: () => s,
+              nY: () => u,
+              pV: () => l,
+            });
+            var n = r(6154),
+              i = r(1863);
+            const o = {
+              beacon: 'bam.nr-data.net',
+              errorBeacon: 'bam.nr-data.net',
+            };
+
+            function a() {
+              return n.gm.NREUM || (n.gm.NREUM = {}), void 0 === n.gm.newrelic && (n.gm.newrelic = n.gm.NREUM), n.gm.NREUM;
+            }
+
+            function s() {
+              let e = a();
+              return e.o || (e.o = {
+                ST: n.gm.setTimeout,
+                SI: n.gm.setImmediate,
+                CT: n.gm.clearTimeout,
+                XHR: n.gm.XMLHttpRequest,
+                REQ: n.gm.Request,
+                EV: n.gm.Event,
+                PR: n.gm.Promise,
+                MO: n.gm.MutationObserver,
+                FETCH: n.gm.fetch,
+                WS: n.gm.WebSocket,
+              }), e;
+            }
+
+            function c(e, t) {
+              let r = a();
+              r.initializedAgents ?? = {}, t.initializedAt = {
+                ms: (0, i.t)(),
+                date: new Date,
+              }, r.initializedAgents[e] = t;
+            }
+
+            function u(e) {
+              let t = a();
+              return t.initializedAgents?.[e];
+            }
+
+            function d(e, t) {
+              a()[e] = t;
+            }
+
+            function l() {
+              return function() {
+                let e = a();
+                const t = e.info || {};
+                e.info = {
+                  beacon: o.beacon,
+                  errorBeacon: o.errorBeacon,
+                  ...t,
+                };
+              }(),
+                function() {
+                  let e = a();
+                  const t = e.init || {};
+                  e.init = {
+                    ...t,
+                  };
+                }(), s(),
+                function() {
+                  let e = a();
+                  const t = e.loader_config || {};
+                  e.loader_config = {
+                    ...t,
+                  };
+                }(), a();
+            }
+          },
+          2843: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              u: () => i,
+            });
+            var n = r(3878);
+
+            function i(e, t = !1, r, i) {
+              (0, n.DD)('visibilitychange', (function() {
+                if (t) return void ('hidden' === document.visibilityState && e());
+                e(document.visibilityState);
+              }), r, i);
+            }
+          },
+          8139: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              u: () => f,
+            });
+            var n = r(7836),
+              i = r(3434),
+              o = r(8990),
+              a = r(6154);
+            const s = {},
+              c = a.gm.XMLHttpRequest,
+              u = 'addEventListener',
+              d = 'removeEventListener',
+              l = 'nr@wrapped:'.concat(n.P);
+
+            function f(e) {
+              var t = function(e) {
+                return (e || n.ee).get('events');
+              }(e);
+              if (s[t.debugId]++) return t;
+              s[t.debugId] = 1;
+              var r = (0, i.YM)(t, !0);
+
+              function f(e) {
+                r.inPlace(e, [u, d], '-', p);
+              }
+
+              function p(e, t) {
+                return e[1];
+              }
+
+              return 'getPrototypeOf' in Object && (a.RI && h(document, f), c && h(c.prototype, f), h(a.gm, f)), t.on(u + '-start', (function(e, t) {
+                var n = e[1];
+                if (null !== n && ('function' == typeof n || 'object' == typeof n)) {
+                  var i = (0, o.I)(n, l, (function() {
+                    var e = {
+                      object: function() {
+                        if ('function' != typeof n.handleEvent) return;
+                        return n.handleEvent.apply(n, arguments);
+                      },
+                      function: n,
+                    } [typeof n];
+                    return e ? r(e, 'fn-', null, e.name || 'anonymous') : n;
+                  }));
+                  this.wrapped = e[1] = i;
+                }
+              })), t.on(d + '-start', (function(e) {
+                e[1] = this.wrapped || e[1];
+              })), t;
+            }
+
+            function h(e, t, ...r) {
+              let n = e;
+              for (;
+                "object" == typeof n && !Object.prototype.hasOwnProperty.call(n, u);) n = Object.getPrototypeOf(n);
+              n && t(n, ...r);
+            }
+          },
+          3434: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              Jt: () => o,
+              YM: () => c,
+            });
+            var n = r(7836),
+              i = r(5607);
+            const o = 'nr@original:'.concat(i.W);
+            var a = Object.prototype.hasOwnProperty,
+              s = !1;
+
+            function c(e, t) {
+              return e || (e = n.ee), r.inPlace = function(e, t, n, i, o) {
+                n || (n = '');
+                const a = '-' === n.charAt(0);
+                for (let s = 0; s < t.length; s++) {
+                  const c = t[s],
+                    u = e[c];
+                  d(u) || (e[c] = r(u, a ? c + n : n, i, c, o));
+                }
+              }, r.flag = o, r;
+
+              function r(t, r, n, s, c) {
+                return d(t) ? t : (r || (r = ''), nrWrapper[o] = t, function(e, t, r) {
+                  if (Object.defineProperty && Object.keys) try {
+                    return Object.keys(e).forEach((function(r) {
+                      Object.defineProperty(t, r, {
+                        get: function() {
+                          return e[r];
+                        },
+                        set: function(t) {
+                          return e[r] = t, t;
+                        },
+                      });
+                    })), t;
+                  } catch (e) {
+                    u([e], r);
+                  }
+                  for (var n in e) a.call(e, n) && (t[n] = e[n]);
+                }(t, nrWrapper, e), nrWrapper);
+
+                function nrWrapper() {
+                  var o, a, d, l;
+                  try {
+                    a = this, o = [...arguments], d = 'function' == typeof n ? n(o, a) : n || {};
+                  } catch (t) {
+                    u([t, '', [o, a, s], d], e);
+                  }
+                  i(r + 'start', [o, a, s], d, c);
+                  try {
+                    return l = t.apply(a, o);
+                  } catch (e) {
+                    throw i(r + 'err', [o, a, e], d, c), e;
+                  } finally {
+                    i(r + 'end', [o, a, l], d, c);
+                  }
+                }
+              }
+
+              function i(r, n, i, o) {
+                if (!s || t) {
+                  var a = s;
+                  s = !0;
+                  try {
+                    e.emit(r, n, i, t, o);
+                  } catch (t) {
+                    u([t, r, n, i], e);
+                  }
+                  s = a;
+                }
+              }
+            }
+
+            function u(e, t) {
+              t || (t = n.ee);
+              try {
+                t.emit('internal-error', e);
+              } catch (e) {
+              }
+            }
+
+            function d(e) {
+              return !(e && 'function' == typeof e && e.apply && !e[o]);
+            }
+          },
+          9300: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              T: () => n,
+            });
+            const n = r(860).K7.ajax;
+          },
+          3333: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              $v: () => u,
+              TZ: () => n,
+              Zp: () => i,
+              kd: () => c,
+              mq: () => s,
+              nf: () => a,
+              qN: () => o,
+            });
+            const n = r(860).K7.genericEvents,
+              i = ['auxclick', 'click', 'copy', 'keydown', 'paste', 'scrollend'],
+              o = ['focus', 'blur'],
+              a = 4,
+              s = 1e3,
+              c = ['PageAction', 'UserAction', 'BrowserPerformance'],
+              u = {
+                MARKS: 'experimental.marks',
+                MEASURES: 'experimental.measures',
+                RESOURCES: 'experimental.resources',
+              };
+          },
+          6774: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              T: () => n,
+            });
+            const n = r(860).K7.jserrors;
+          },
+          993: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              ET: () => o,
+              TZ: () => a,
+              p_: () => i,
+            });
+            var n = r(860);
+            const i = {
+                ERROR: 'ERROR',
+                WARN: 'WARN',
+                INFO: 'INFO',
+                DEBUG: 'DEBUG',
+                TRACE: 'TRACE',
+              },
+              o = 'log',
+              a = n.K7.logging;
+          },
+          3785: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              R: () => c,
+              b: () => u,
+            });
+            var n = r(9908),
+              i = r(1863),
+              o = r(860),
+              a = r(3969),
+              s = r(993);
+
+            function c(e, t, r = {}, c = s.p_.INFO) {
+              (0, n.p)(a.xV, ['API/logging/'.concat(c.toLowerCase(), '/called')], void 0, o.K7.metrics, e), (0, n.p)(s.ET, [(0, i.t)(), t, r, c], void 0, o.K7.logging, e);
+            }
+
+            function u(e) {
+              return 'string' == typeof e && Object.values(s.p_).some((t => t === e.toUpperCase().trim()));
+            }
+          },
+          3969: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              TZ: () => n,
+              XG: () => s,
+              rs: () => i,
+              xV: () => a,
+              z_: () => o,
+            });
+            const n = r(860).K7.metrics,
+              i = 'sm',
+              o = 'cm',
+              a = 'storeSupportabilityMetrics',
+              s = 'storeEventMetrics';
+          },
+          6630: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              T: () => n,
+            });
+            const n = r(860).K7.pageViewEvent;
+          },
+          782: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              T: () => n,
+            });
+            const n = r(860).K7.pageViewTiming;
+          },
+          6344: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              BB: () => d,
+              G4: () => o,
+              Qb: () => l,
+              TZ: () => i,
+              Ug: () => a,
+              _s: () => s,
+              bc: () => u,
+              yP: () => c,
+            });
+            var n = r(2614);
+            const i = r(860).K7.sessionReplay,
+              o = {
+                RECORD: 'recordReplay',
+                PAUSE: 'pauseReplay',
+                REPLAY_RUNNING: 'replayRunning',
+                ERROR_DURING_REPLAY: 'errorDuringReplay',
+              },
+              a = .12,
+              s = {
+                DomContentLoaded: 0,
+                Load: 1,
+                FullSnapshot: 2,
+                IncrementalSnapshot: 3,
+                Meta: 4,
+                Custom: 5,
+              },
+              c = {
+                [n.g.ERROR]: 15e3,
+                [n.g.FULL]: 3e5,
+                [n.g.OFF]: 0,
+              },
+              u = {
+                RESET: {
+                  message: 'Session was reset',
+                  sm: 'Reset',
+                },
+                IMPORT: {
+                  message: 'Recorder failed to import',
+                  sm: 'Import',
+                },
+                TOO_MANY: {
+                  message: '429: Too Many Requests',
+                  sm: 'Too-Many',
+                },
+                TOO_BIG: {
+                  message: 'Payload was too large',
+                  sm: 'Too-Big',
+                },
+                CROSS_TAB: {
+                  message: 'Session Entity was set to OFF on another tab',
+                  sm: 'Cross-Tab',
+                },
+                ENTITLEMENTS: {
+                  message: 'Session Replay is not allowed and will not be started',
+                  sm: 'Entitlement',
+                },
+              },
+              d = 5e3,
+              l = {
+                API: 'api',
+              };
+          },
+          5270: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              Aw: () => c,
+              CT: () => u,
+              SR: () => s,
+            });
+            var n = r(384),
+              i = r(9417),
+              o = r(7767),
+              a = r(6154);
+
+            function s(e) {
+              return !!(0, n.dV)().o.MO && (0, o.V)(e) && !0 === (0, i.gD)(e, 'session_trace.enabled');
+            }
+
+            function c(e) {
+              return !0 === (0, i.gD)(e, 'session_replay.preload') && s(e);
+            }
+
+            function u(e, t) {
+              const r = t.correctAbsoluteTimestamp(e);
+              return {
+                originalTimestamp: e,
+                correctedTimestamp: r,
+                timestampDiff: e - r,
+                originTime: a.WN,
+                correctedOriginTime: t.correctedOriginTime,
+                originTimeDiff: Math.floor(a.WN - t.correctedOriginTime),
+              };
+            }
+          },
+          3738: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              He: () => i,
+              Kp: () => s,
+              Lc: () => u,
+              Rz: () => d,
+              TZ: () => n,
+              bD: () => o,
+              d3: () => a,
+              jx: () => l,
+              uP: () => c,
+            });
+            const n = r(860).K7.sessionTrace,
+              i = 'bstResource',
+              o = 'resource',
+              a = '-start',
+              s = '-end',
+              c = 'fn' + a,
+              u = 'fn' + s,
+              d = 'pushState',
+              l = 1e3;
+          },
+          3962: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              AM: () => o,
+              O2: () => c,
+              Qu: () => u,
+              TZ: () => s,
+              ih: () => d,
+              pP: () => a,
+              tC: () => i,
+            });
+            var n = r(860);
+            const i = ['click', 'keydown', 'submit', 'popstate'],
+              o = 'api',
+              a = 'initialPageLoad',
+              s = n.K7.softNav,
+              c = {
+                INITIAL_PAGE_LOAD: '',
+                ROUTE_CHANGE: 1,
+                UNSPECIFIED: 2,
+              },
+              u = {
+                INTERACTION: 1,
+                AJAX: 2,
+                CUSTOM_END: 3,
+                CUSTOM_TRACER: 4,
+              },
+              d = {
+                IP: 'in progress',
+                FIN: 'finished',
+                CAN: 'cancelled',
+              };
+          },
+          7378: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              $p: () => x,
+              BR: () => b,
+              Kp: () => R,
+              L3: () => y,
+              Lc: () => c,
+              NC: () => o,
+              SG: () => d,
+              TZ: () => i,
+              U6: () => p,
+              UT: () => m,
+              d3: () => w,
+              dT: () => f,
+              e5: () => E,
+              gx: () => v,
+              l9: () => l,
+              oW: () => h,
+              op: () => g,
+              rw: () => u,
+              tH: () => A,
+              uP: () => s,
+              wW: () => T,
+              xq: () => a,
+            });
+            var n = r(384);
+            const i = r(860).K7.spa,
+              o = ['click', 'submit', 'keypress', 'keydown', 'keyup', 'change'],
+              a = 999,
+              s = 'fn-start',
+              c = 'fn-end',
+              u = 'cb-start',
+              d = 'api-ixn-',
+              l = 'remaining',
+              f = 'interaction',
+              h = 'spaNode',
+              p = 'jsonpNode',
+              g = 'fetch-start',
+              m = 'fetch-done',
+              v = 'fetch-body-',
+              b = 'jsonp-end',
+              y = (0, n.dV)().o.ST,
+              w = '-start',
+              R = '-end',
+              x = '-body',
+              T = 'cb' + R,
+              E = 'jsTime',
+              A = 'fetch';
+          },
+          4234: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              W: () => o,
+            });
+            var n = r(7836),
+              i = r(1687);
+
+            class o {
+              constructor(e, t) {
+                this.agentIdentifier = e, this.ee = n.ee.get(e), this.featureName = t, this.blocked = !1;
+              }
+
+              deregisterDrain() {
+                (0, i.x3)(this.agentIdentifier, this.featureName);
+              }
+            }
+          },
+          7767: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              V: () => o,
+            });
+            var n = r(9417),
+              i = r(6154);
+            const o = e => i.RI && !0 === (0, n.gD)(e, 'privacy.cookies_enabled');
+          },
+          425: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              j: () => j,
+            });
+            var n = r(860),
+              i = r(2555),
+              o = r(3371),
+              a = r(9908),
+              s = r(7836),
+              c = r(1687),
+              u = r(5289),
+              d = r(6154),
+              l = r(944),
+              f = r(3969),
+              h = r(384),
+              p = r(6344);
+            const g = ['setErrorHandler', 'finished', 'addToTrace', 'addRelease', 'recordCustomEvent', 'addPageAction', 'setCurrentRouteName', 'setPageViewName', 'setCustomAttribute', 'interaction', 'noticeError', 'setUserId', 'setApplicationVersion', 'start', p.G4.RECORD, p.G4.PAUSE, 'log', 'wrapLogger'],
+              m = ['setErrorHandler', 'finished', 'addToTrace', 'addRelease'];
+            var v = r(1863),
+              b = r(2614),
+              y = r(993),
+              w = r(3785),
+              R = r(2646),
+              x = r(3434);
+            const T = new Map;
+
+            function E(e, t, r, n) {
+              if ('object' != typeof t || !t || 'string' != typeof r || !r || 'function' != typeof t[r]) return (0, l.R)(29);
+              const i = function(e) {
+                  return (e || s.ee).get('logger');
+                }(e),
+                o = (0, x.YM)(i),
+                a = new R.y(s.P);
+              a.level = n.level, a.customAttributes = n.customAttributes;
+              const c = t[r]?.[x.Jt] || t[r];
+              return T.set(c, a), o.inPlace(t, [r], 'wrap-logger-', (() => T.get(c))), i;
+            }
+
+            function A() {
+              const e = (0, h.pV)();
+              g.forEach((t => {
+                e[t] = (...r) => function(t, ...r) {
+                  let n = [];
+                  return Object.values(e.initializedAgents).forEach((e => {
+                    e && e.api ? e.exposed && e.api[t] && n.push(e.api[t](...r)) : (0, l.R)(38, t);
+                  })), n.length > 1 ? n : n[0];
+                }(t, ...r);
+              }));
+            }
+
+            const S = {};
+            var N = r(9417),
+              _ = r(5603),
+              O = r(5284);
+            const I = e => {
+              const t = e.startsWith('http');
+              e += '/', r.p = t ? e : 'https://' + e;
+            };
+            let P = !1;
+
+            function j(e, t = {}, g, R) {
+              let {
+                init: x,
+                info: T,
+                loader_config: j,
+                runtime: C = {},
+                exposed: k = !0,
+              } = t;
+              C.loaderType = g;
+              const L = (0, h.pV)();
+              T || (x = L.init, T = L.info, j = L.loader_config), (0, N.xN)(e.agentIdentifier, x || {}), (0, _.a)(e.agentIdentifier, j || {}), T.jsAttributes ?? = {}, d.bv && (T.jsAttributes.isWorker = !0), (0, i.x1)(e.agentIdentifier, T);
+              const H = (0, N.D0)(e.agentIdentifier),
+                M = [T.beacon, T.errorBeacon];
+              P || (H.proxy.assets && (I(H.proxy.assets), M.push(H.proxy.assets)), H.proxy.beacon && M.push(H.proxy.beacon), A(), (0, h.US)('activatedFeatures', O.B), e.runSoftNavOverSpa && = !0 === H.soft_navigations.enabled && H.feature_flags.includes('soft_nav')), C.denyList = [...H.ajax.deny_list || [], ...H.ajax.block_internal ? M : []], C.ptid = e.agentIdentifier, (0, o.V)(e.agentIdentifier, C), e.ee = s.ee.get(e.agentIdentifier), void 0 === e.api && (e.api = function(e, t, h = !1) {
+                t || (0, c.Ak)(e, 'api');
+                const g = {};
+                var R = s.ee.get(e),
+                  x = R.get('tracer');
+                S[e] = b.g.OFF, R.on(p.G4.REPLAY_RUNNING, (t => {
+                  S[e] = t;
+                }));
+                var T = 'api-',
+                  A = T + 'ixn-';
+
+                function N(t, r, n, o) {
+                  const a = (0, i.Vp)(e);
+                  return null === r ? delete a.jsAttributes[t] : (0, i.x1)(e, {
+                    ...a,
+                    jsAttributes: {
+                      ...a.jsAttributes,
+                      [t]: r,
+                    },
+                  }), I(T, n, !0, o || null === r ? 'session' : void 0)(t, r);
+                }
+
+                function _() {
+                }
+
+                g.log = function(e, {
+                  customAttributes: t = {},
+                  level: r = y.p_.INFO,
+                } = {}) {
+                  (0, a.p)(f.xV, ['API/log/called'], void 0, n.K7.metrics, R), (0, w.R)(R, e, t, r);
+                }, g.wrapLogger = (e, t, {
+                  customAttributes: r = {},
+                  level: i = y.p_.INFO,
+                } = {}) => {
+                  (0, a.p)(f.xV, ['API/wrapLogger/called'], void 0, n.K7.metrics, R), E(R, e, t, {
+                    customAttributes: r,
+                    level: i,
+                  });
+                }, m.forEach((e => {
+                  g[e] = I(T, e, !0, 'api');
+                })), g.addPageAction = I(T, 'addPageAction', !0, n.K7.genericEvents), g.recordCustomEvent = I(T, 'recordCustomEvent', !0, n.K7.genericEvents), g.setPageViewName = function(t, r) {
+                  if ('string' == typeof t) return '/' !== t.charAt(0) && (t = '/' + t), (0, o.f)(e).customTransaction = (r || 'http://custom.transaction') + t, I(T, 'setPageViewName', !0)();
+                }, g.setCustomAttribute = function(e, t, r = !1) {
+                  if ('string' == typeof e) {
+                    if (['string', 'number', 'boolean'].includes(typeof t) || null === t) return N(e, t, 'setCustomAttribute', r);
+                    (0, l.R)(40, typeof t);
+                  } else (0, l.R)(39, typeof e);
+                }, g.setUserId = function(e) {
+                  if ('string' == typeof e || null === e) return N('enduser.id', e, 'setUserId', !0);
+                  (0, l.R)(41, typeof e);
+                }, g.setApplicationVersion = function(e) {
+                  if ('string' == typeof e || null === e) return N('application.version', e, 'setApplicationVersion', !1);
+                  (0, l.R)(42, typeof e);
+                }, g.start = () => {
+                  try {
+                    (0, a.p)(f.xV, ['API/start/called'], void 0, n.K7.metrics, R), R.emit('manual-start-all');
+                  } catch (e) {
+                    (0, l.R)(23, e);
+                  }
+                }, g[p.G4.RECORD] = function() {
+                  (0, a.p)(f.xV, ['API/recordReplay/called'], void 0, n.K7.metrics, R), (0, a.p)(p.G4.RECORD, [], void 0, n.K7.sessionReplay, R);
+                }, g[p.G4.PAUSE] = function() {
+                  (0, a.p)(f.xV, ['API/pauseReplay/called'], void 0, n.K7.metrics, R), (0, a.p)(p.G4.PAUSE, [], void 0, n.K7.sessionReplay, R);
+                }, g.interaction = function(e) {
+                  return (new _).get('object' == typeof e ? e : {});
+                };
+                const O = _.prototype = {
+                  createTracer: function(e, t) {
+                    var r = {},
+                      i = this,
+                      o = 'function' == typeof t;
+                    return (0, a.p)(f.xV, ['API/createTracer/called'], void 0, n.K7.metrics, R), h || (0, a.p)(A + 'tracer', [(0, v.t)(), e, r], i, n.K7.spa, R),
+                      function() {
+                        if (x.emit((o ? '' : 'no-') + 'fn-start', [(0, v.t)(), i, o], r), o) try {
+                          return t.apply(this, arguments);
+                        } catch (e) {
+                          const t = 'string' == typeof e ? new Error(e) : e;
+                          throw x.emit('fn-err', [arguments, this, t], r), t;
+                        } finally {
+                          x.emit('fn-end', [(0, v.t)()], r);
+                        }
+                      };
+                  },
+                };
+
+                function I(e, t, r, i) {
+                  return function() {
+                    return (0, a.p)(f.xV, ['API/' + t + '/called'], void 0, n.K7.metrics, R), i && (0, a.p)(e + t, [r ? (0, v.t)() : performance.now(), ...arguments], r ? null : this, i, R), r ? void 0 : this;
+                  };
+                }
+
+                function P() {
+                  r.e(478).then(r.bind(r, 8778)).then((({
+                                                          setAPI: t,
+                                                        }) => {
+                    t(e), (0, c.Ze)(e, 'api');
+                  })).catch((e => {
+                    (0, l.R)(27, e), R.abort();
+                  }));
+                }
+
+                return ['actionText', 'setName', 'setAttribute', 'save', 'ignore', 'onEnd', 'getContext', 'end', 'get'].forEach((e => {
+                  O[e] = I(A, e, void 0, h ? n.K7.softNav : n.K7.spa);
+                })), g.setCurrentRouteName = h ? I(A, 'routeName', void 0, n.K7.softNav) : I(T, 'routeName', !0, n.K7.spa), g.noticeError = function(t, r) {
+                  'string' == typeof t && (t = new Error(t)), (0, a.p)(f.xV, ['API/noticeError/called'], void 0, n.K7.metrics, R), (0, a.p)('err', [t, (0, v.t)(), !1, r, !!S[e]], void 0, n.K7.jserrors, R);
+                }, d.RI ? (0, u.GG)((() => P()), !0) : P(), g;
+              }(e.agentIdentifier, R, e.runSoftNavOverSpa)), void 0 === e.exposed && (e.exposed = k), P = !0;
+            }
+          },
+          8374: (e, t, r) => {
+            r.nc = (() => {
+              try {
+                return document?.currentScript?.nonce;
+              } catch (e) {
+              }
+              return '';
+            })();
+          },
+          860: (e, t, r) => {
+            'use strict';
+            r.d(t, {
+              $J: () => o,
+              K7: () => n,
+              P3: () => i,
+            });
+            const n = {
+                ajax: 'ajax',
+                genericEvents: 'generic_events',
+                jserrors: 'jserrors',
+                logging: 'logging',
+                metrics: 'metrics',
+                pageAction: 'page_action',
+                pageViewEvent: 'page_view_event',
+                pageViewTiming: 'page_view_timing',
+                sessionReplay: 'session_replay',
+                sessionTrace: 'session_trace',
+                softNav: 'soft_navigations',
+                spa: 'spa',
+              },
+              i = {
+                [n.pageViewEvent]: 1,
+                [n.pageViewTiming]: 2,
+                [n.metrics]: 3,
+                [n.jserrors]: 4,
+                [n.spa]: 5,
+                [n.ajax]: 6,
+                [n.sessionTrace]: 7,
+                [n.softNav]: 8,
+                [n.sessionReplay]: 9,
+                [n.logging]: 10,
+                [n.genericEvents]: 11,
+              },
+              o = {
+                [n.pageViewTiming]: 'events',
+                [n.ajax]: 'events',
+                [n.spa]: 'events',
+                [n.softNav]: 'events',
+                [n.metrics]: 'jserrors',
+                [n.jserrors]: 'jserrors',
+                [n.sessionTrace]: 'browser/blobs',
+                [n.sessionReplay]: 'browser/blobs',
+                [n.logging]: 'browser/logs',
+                [n.genericEvents]: 'ins',
+              };
+          },
+        },
+        n = {};
+
+      function i(e) {
+        var t = n[e];
+        if (void 0 !== t) return t.exports;
+        var o = n[e] = {
+          exports: {},
+        };
+        return r[e](o, o.exports, i), o.exports;
+      }
+
+      i.m = r, i.d = (e, t) => {
+        for (var r in t) i.o(t, r) && !i.o(e, r) && Object.defineProperty(e, r, {
+          enumerable: !0,
+          get: t[r],
+        });
+      }, i.f = {}, i.e = e => Promise.all(Object.keys(i.f).reduce(((t, r) => (i.f[r](e, t), t)), [])), i.u = e => ({
+        212: 'nr-spa-compressor',
+        249: 'nr-spa-recorder',
+        478: 'nr-spa',
+      } [e] + '-1.277.0.min.js'), i.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t), e = {}, t = 'NRBA-1.277.0.PROD:', i.l = (r, n, o, a) => {
+        if (e[r]) e[r].push(n);
+        else {
+          var s, c;
+          if (void 0 !== o)
+            for (var u = document.getElementsByTagName('script'), d = 0; d < u.length; d++) {
+              var l = u[d];
+              if (l.getAttribute('src') == r || l.getAttribute('data-webpack') == t + o) {
+                s = l;
+                break;
+              }
+            }
+          if (!s) {
+            c = !0;
+            var f = {
+              478: 'sha512-AgX6f6qOxyV4l/Fg8saiNsK37oY3qvFRTOkwua+LDBTL7KUv+eoUSnunEaP3OvjJ1ZiSn43xQyjf9TWbqq8FVQ==',
+              249: 'sha512-43TwsElpnwfBCx+EERv4zX5fDsbQLB0w+NTEOt/flpNK9wKjMch+SQIUgLVqaF8jJt5qUeNPsDi/Zk+jgt3SLw==',
+              212: 'sha512-/Y+2vKPi087MH5FY89Cw9ahyQ2qnbVj7M2MganYRhmEg4Xos9v/cFPZviY2a1m17D9zpXkOtPsycYXk2AV0huA==',
+            };
+            (s = document.createElement('script')).charset = 'utf-8', s.timeout = 120, i.nc && s.setAttribute('nonce', i.nc), s.setAttribute('data-webpack', t + o), s.src = r, 0 !== s.src.indexOf(window.location.origin + '/') && (s.crossOrigin = 'anonymous'), f[a] && (s.integrity = f[a]);
+          }
+          e[r] = [n];
+          var h = (t, n) => {
+              s.onerror = s.onload = null, clearTimeout(p);
+              var i = e[r];
+              if (delete e[r], s.parentNode && s.parentNode.removeChild(s), i && i.forEach((e => e(n))), t) return t(n);
+            },
+            p = setTimeout(h.bind(null, void 0, {
+              type: 'timeout',
+              target: s,
+            }), 12e4);
+          s.onerror = h.bind(null, s.onerror), s.onload = h.bind(null, s.onload), c && document.head.appendChild(s);
+        }
+      }, i.r = e => {
+        'undefined' != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+          value: 'Module',
+        }), Object.defineProperty(e, '__esModule', {
+          value: !0,
+        });
+      }, i.p = 'https://js-agent.newrelic.com/', (() => {
+        var e = {
+          38: 0,
+          788: 0,
+        };
+        i.f.j = (t, r) => {
+          var n = i.o(e, t) ? e[t] : void 0;
+          if (0 !== n)
+            if (n) r.push(n[2]);
+            else {
+              var o = new Promise(((r, i) => n = e[t] = [r, i]));
+              r.push(n[2] = o);
+              var a = i.p + i.u(t),
+                s = new Error;
+              i.l(a, (r => {
+                if (i.o(e, t) && (0 !== (n = e[t]) && (e[t] = void 0), n)) {
+                  var o = r && ('load' === r.type ? 'missing' : r.type),
+                    a = r && r.target && r.target.src;
+                  s.message = 'Loading chunk ' + t + ' failed.\\n(' + o + ': ' + a + ')', s.name = 'ChunkLoadError', s.type = o, s.request = a, n[1](s);
+                }
+              }), 'chunk-' + t, t);
+            }
+        };
+        var t = (t, r) => {
+            var n, o, [a, s, c] = r,
+              u = 0;
+            if (a.some((t => 0 !== e[t]))) {
+              for (n in s) i.o(s, n) && (i.m[n] = s[n]);
+              if (c) c(i);
+            }
+            for (t && t(r); u < a.length; u++) o = a[u], i.o(e, o) && e[o] && e[o][0](), e[o] = 0;
+          },
+          r = self['webpackChunk:NRBA-1.277.0.PROD'] = self['webpackChunk:NRBA-1.277.0.PROD'] || [];
+        r.forEach(t.bind(null, 0)), r.push = t.bind(null, r.push.bind(r));
+      })(), (() => {
+        'use strict';
+        i(8374);
+        var e = i(944),
+          t = i(6344),
+          r = i(9566);
+
+        class n {
+          agentIdentifier;
+
+          constructor(e = (0, r.LA)(16)) {
+            this.agentIdentifier = e;
+          }
+
+          #e(t, ...r) {
+            if ('function' == typeof this.api?.[t]) return this.api[t](...r);
+            (0, e.R)(35, t);
+          }
+
+          addPageAction(e, t) {
+            return this.#e('addPageAction', e, t);
+          }
+
+          recordCustomEvent(e, t) {
+            return this.#e('recordCustomEvent', e, t);
+          }
+
+          setPageViewName(e, t) {
+            return this.#e('setPageViewName', e, t);
+          }
+
+          setCustomAttribute(e, t, r) {
+            return this.#e('setCustomAttribute', e, t, r);
+          }
+
+          noticeError(e, t) {
+            return this.#e('noticeError', e, t);
+          }
+
+          setUserId(e) {
+            return this.#e('setUserId', e);
+          }
+
+          setApplicationVersion(e) {
+            return this.#e('setApplicationVersion', e);
+          }
+
+          setErrorHandler(e) {
+            return this.#e('setErrorHandler', e);
+          }
+
+          addRelease(e, t) {
+            return this.#e('addRelease', e, t);
+          }
+
+          log(e, t) {
+            return this.#e('log', e, t);
+          }
+        }
+
+        class o extends n {
+          #e(t, ...r) {
+            if ('function' == typeof this.api?.[t]) return this.api[t](...r);
+            (0, e.R)(35, t);
+          }
+
+          start() {
+            return this.#e('start');
+          }
+
+          finished(e) {
+            return this.#e('finished', e);
+          }
+
+          recordReplay() {
+            return this.#e(t.G4.RECORD);
+          }
+
+          pauseReplay() {
+            return this.#e(t.G4.PAUSE);
+          }
+
+          addToTrace(e) {
+            return this.#e('addToTrace', e);
+          }
+
+          setCurrentRouteName(e) {
+            return this.#e('setCurrentRouteName', e);
+          }
+
+          interaction() {
+            return this.#e('interaction');
+          }
+
+          wrapLogger(e, t, r) {
+            return this.#e('wrapLogger', e, t, r);
+          }
+        }
+
+        var a = i(860),
+          s = i(9417);
+        const c = Object.values(a.K7);
+
+        function u(e) {
+          const t = {};
+          return c.forEach((r => {
+            t[r] = function(e, t) {
+              return !0 === (0, s.gD)(t, ''.concat(e, '.enabled'));
+            }(r, e);
+          })), t;
+        }
+
+        var d = i(425);
+        var l = i(1687),
+          f = i(4234),
+          h = i(5289),
+          p = i(6154),
+          g = i(5270),
+          m = i(7767),
+          v = i(6389);
+
+        class b extends f.W {
+          constructor(e, t, r = !0) {
+            super(e.agentIdentifier, t), this.auto = r, this.abortHandler = void 0, this.featAggregate = void 0, this.onAggregateImported = void 0, !1 === e.init[this.featureName].autoStart && (this.auto = !1), this.auto ? (0, l.Ak)(e.agentIdentifier, t) : this.ee.on('manual-start-all', (0, v.J)((() => {
+              (0, l.Ak)(e.agentIdentifier, this.featureName), this.auto = !0, this.importAggregator(e);
+            })));
+          }
+
+          importAggregator(t, r = {}) {
+            if (this.featAggregate || !this.auto) return;
+            let n;
+            this.onAggregateImported = new Promise((e => {
+              n = e;
+            }));
+            const o = async () => {
+              let o;
+              try {
+                if ((0, m.V)(this.agentIdentifier)) {
+                  const {
+                    setupAgentSession: e,
+                  } = await i.e(478).then(i.bind(i, 6526));
+                  o = e(t);
+                }
+              } catch (t) {
+                (0, e.R)(20, t), this.ee.emit('internal-error', [t]), this.featureName === a.K7.sessionReplay && this.abortHandler?.();
+              }
+              try {
+                if (t.sharedAggregator) await t.sharedAggregator;
+                else {
+                  t.sharedAggregator = i.e(478).then(i.bind(i, 9337));
+                  const {
+                    EventAggregator: e,
+                  } = await t.sharedAggregator;
+                  t.sharedAggregator = new e;
+                }
+                if (!this.#t(this.featureName, o)) return (0, l.Ze)(this.agentIdentifier, this.featureName), void n(!1);
+                const {
+                  lazyFeatureLoader: e,
+                } = await i.e(478).then(i.bind(i, 6103)), {
+                  Aggregate: a,
+                } = await e(this.featureName, 'aggregate');
+                this.featAggregate = new a(t, r), n(!0);
+              } catch (t) {
+                (0, e.R)(34, t), this.abortHandler?.(), (0, l.Ze)(this.agentIdentifier, this.featureName, !0), n(!1), this.ee && this.ee.abort();
+              }
+            };
+            p.RI ? (0, h.GG)((() => o()), !0) : o();
+          }
+
+          #t(e, t) {
+            switch (e) {
+              case a.K7.sessionReplay:
+                return (0, g.SR)(this.agentIdentifier) && !!t;
+              case a.K7.sessionTrace:
+                return !!t;
+              default:
+                return !0;
+            }
+          }
+        }
+
+        var y = i(6630);
+
+        class w extends b {
+          static featureName = y.T;
+
+          constructor(e, t = !0) {
+            super(e, y.T, t), this.importAggregator(e);
+          }
+        }
+
+        var R = i(384);
+        var x = i(9908),
+          T = i(2843),
+          E = i(3878),
+          A = i(782),
+          S = i(1863);
+
+        class N extends b {
+          static featureName = A.T;
+
+          constructor(e, t = !0) {
+            super(e, A.T, t), p.RI && ((0, T.u)((() => (0, x.p)('docHidden', [(0, S.t)()], void 0, A.T, this.ee)), !0), (0, E.sp)('pagehide', (() => (0, x.p)('winPagehide', [(0, S.t)()], void 0, A.T, this.ee))), this.importAggregator(e));
+          }
+        }
+
+        var _ = i(3969);
+
+        class O extends b {
+          static featureName = _.TZ;
+
+          constructor(e, t = !0) {
+            super(e, _.TZ, t), this.importAggregator(e);
+          }
+        }
+
+        var I = i(6774),
+          P = i(3304);
+
+        class j {
+          constructor(e, t, r, n, i) {
+            this.name = 'UncaughtError', this.message = 'string' == typeof e ? e : (0, P.A)(e), this.sourceURL = t, this.line = r, this.column = n, this.__newrelic = i;
+          }
+        }
+
+        function C(e) {
+          return H(e) ? e : new j(void 0 !== e?.message ? e.message : e, e?.filename || e?.sourceURL, e?.lineno || e?.line, e?.colno || e?.col, e?.__newrelic);
+        }
+
+        function k(e) {
+          const t = 'Unhandled Promise Rejection';
+          if (!e?.reason) return;
+          if (H(e.reason)) try {
+            return e.reason.message = t + ': ' + e.reason.message, C(e.reason);
+          } catch (t) {
+            return C(e.reason);
+          }
+          const r = C(e.reason);
+          return r.message = t + ': ' + r?.message, r;
+        }
+
+        function L(e) {
+          if (e.error instanceof SyntaxError && !/:\\d+$/.test(e.error.stack?.trim())) {
+            const t = new j(e.message, e.filename, e.lineno, e.colno, e.error.__newrelic);
+            return t.name = SyntaxError.name, t;
+          }
+          return H(e.error) ? e.error : C(e);
+        }
+
+        function H(e) {
+          return e instanceof Error && !!e.stack;
+        }
+
+        class M extends b {
+          static featureName = I.T;
+          #r = !1;
+
+          constructor(e, r = !0) {
+            super(e, I.T, r);
+            try {
+              this.removeOnAbort = new AbortController;
+            } catch (e) {
+            }
+            this.ee.on('internal-error', ((e, t) => {
+              this.abortHandler && (0, x.p)('ierr', [C(e), (0, S.t)(), !0, {}, this.#r, t], void 0, this.featureName, this.ee);
+            })), this.ee.on(t.G4.REPLAY_RUNNING, (e => {
+              this.#r = e;
+            })), p.gm.addEventListener('unhandledrejection', (e => {
+              this.abortHandler && (0, x.p)('err', [k(e), (0, S.t)(), !1, {
+                unhandledPromiseRejection: 1,
+              }, this.#r], void 0, this.featureName, this.ee);
+            }), (0, E.jT)(!1, this.removeOnAbort?.signal)), p.gm.addEventListener('error', (e => {
+              this.abortHandler && (0, x.p)('err', [L(e), (0, S.t)(), !1, {}, this.#r], void 0, this.featureName, this.ee);
+            }), (0, E.jT)(!1, this.removeOnAbort?.signal)), this.abortHandler = this.#n, this.importAggregator(e);
+          }
+
+          #n() {
+            this.removeOnAbort?.abort(), this.abortHandler = void 0;
+          }
+        }
+
+        var D = i(8990);
+        let K = 1;
+        const U = 'nr@id';
+
+        function V(e) {
+          const t = typeof e;
+          return !e || 'object' !== t && 'function' !== t ? -1 : e === p.gm ? 0 : (0, D.I)(e, U, (function() {
+            return K++;
+          }));
+        }
+
+        function G(e) {
+          if ('string' == typeof e && e.length) return e.length;
+          if ('object' == typeof e) {
+            if ('undefined' != typeof ArrayBuffer && e instanceof ArrayBuffer && e.byteLength) return e.byteLength;
+            if ('undefined' != typeof Blob && e instanceof Blob && e.size) return e.size;
+            if (!('undefined' != typeof FormData && e instanceof FormData)) try {
+              return (0, P.A)(e).length;
+            } catch (e) {
+              return;
+            }
+          }
+        }
+
+        var F = i(8139),
+          B = i(7836),
+          W = i(3434);
+        const z = {},
+          q = ['open', 'send'];
+
+        function Z(t) {
+          var r = t || B.ee;
+          const n = function(e) {
+            return (e || B.ee).get('xhr');
+          }(r);
+          if (void 0 === p.gm.XMLHttpRequest) return n;
+          if (z[n.debugId]++) return n;
+          z[n.debugId] = 1, (0, F.u)(r);
+          var i = (0, W.YM)(n),
+            o = p.gm.XMLHttpRequest,
+            a = p.gm.MutationObserver,
+            s = p.gm.Promise,
+            c = p.gm.setInterval,
+            u = 'readystatechange',
+            d = ['onload', 'onerror', 'onabort', 'onloadstart', 'onloadend', 'onprogress', 'ontimeout'],
+            l = [],
+            f = p.gm.XMLHttpRequest = function(t) {
+              const r = new o(t),
+                a = n.context(r);
+              try {
+                n.emit('new-xhr', [r], a), r.addEventListener(u, (s = a, function() {
+                  var e = this;
+                  e.readyState > 3 && !s.resolved && (s.resolved = !0, n.emit('xhr-resolved', [], e)), i.inPlace(e, d, 'fn-', y);
+                }), (0, E.jT)(!1));
+              } catch (t) {
+                (0, e.R)(15, t);
+                try {
+                  n.emit('internal-error', [t]);
+                } catch (e) {
+                }
+              }
+              var s;
+              return r;
+            };
+
+          function h(e, t) {
+            i.inPlace(t, ['onreadystatechange'], 'fn-', y);
+          }
+
+          if (function(e, t) {
+            for (var r in e) t[r] = e[r];
+          }(o, f), f.prototype = o.prototype, i.inPlace(f.prototype, q, '-xhr-', y), n.on('send-xhr-start', (function(e, t) {
+            h(e, t),
+              function(e) {
+                l.push(e), a && (g ? g.then(b) : c ? c(b) : (m = -m, v.data = m));
+              }(t);
+          })), n.on('open-xhr-start', h), a) {
+            var g = s && s.resolve();
+            if (!c && !s) {
+              var m = 1,
+                v = document.createTextNode(m);
+              new a(b).observe(v, {
+                characterData: !0,
+              });
+            }
+          } else r.on('fn-end', (function(e) {
+            e[0] && e[0].type === u || b();
+          }));
+
+          function b() {
+            for (var e = 0; e < l.length; e++) h(0, l[e]);
+            l.length && (l = []);
+          }
+
+          function y(e, t) {
+            return t;
+          }
+
+          return n;
+        }
+
+        var Y = 'fetch-',
+          X = Y + 'body-',
+          J = ['arrayBuffer', 'blob', 'json', 'text', 'formData'],
+          Q = p.gm.Request,
+          ee = p.gm.Response,
+          te = 'prototype';
+        const re = {};
+
+        function ne(e) {
+          const t = function(e) {
+            return (e || B.ee).get('fetch');
+          }(e);
+          if (!(Q && ee && p.gm.fetch)) return t;
+          if (re[t.debugId]++) return t;
+
+          function r(e, r, n) {
+            var i = e[r];
+            'function' == typeof i && (e[r] = function() {
+              var e, r = [...arguments],
+                o = {};
+              t.emit(n + 'before-start', [r], o), o[B.P] && o[B.P].dt && (e = o[B.P].dt);
+              var a = i.apply(this, r);
+              return t.emit(n + 'start', [r, e], a), a.then((function(e) {
+                return t.emit(n + 'end', [null, e], a), e;
+              }), (function(e) {
+                throw t.emit(n + 'end', [e], a), e;
+              }));
+            });
+          }
+
+          return re[t.debugId] = 1, J.forEach((e => {
+            r(Q[te], e, X), r(ee[te], e, X);
+          })), r(p.gm, 'fetch', Y), t.on(Y + 'end', (function(e, r) {
+            var n = this;
+            if (r) {
+              var i = r.headers.get('content-length');
+              null !== i && (n.rxSize = i), t.emit(Y + 'done', [null, r], n);
+            } else t.emit(Y + 'done', [e], n);
+          })), t;
+        }
+
+        var ie = i(7485),
+          oe = i(5603);
+
+        class ae {
+          constructor(e) {
+            this.agentIdentifier = e;
+          }
+
+          generateTracePayload(e) {
+            if (!this.shouldGenerateTrace(e)) return null;
+            var t = (0, oe.o)(this.agentIdentifier);
+            if (!t) return null;
+            var n = (t.accountID || '').toString() || null,
+              i = (t.agentID || '').toString() || null,
+              o = (t.trustKey || '').toString() || null;
+            if (!n || !i) return null;
+            var a = (0, r.ZF)(),
+              s = (0, r.el)(),
+              c = Date.now(),
+              u = {
+                spanId: a,
+                traceId: s,
+                timestamp: c,
+              };
+            return (e.sameOrigin || this.isAllowedOrigin(e) && this.useTraceContextHeadersForCors()) && (u.traceContextParentHeader = this.generateTraceContextParentHeader(a, s), u.traceContextStateHeader = this.generateTraceContextStateHeader(a, c, n, i, o)), (e.sameOrigin && !this.excludeNewrelicHeader() || !e.sameOrigin && this.isAllowedOrigin(e) && this.useNewrelicHeaderForCors()) && (u.newrelicHeader = this.generateTraceHeader(a, s, c, n, i, o)), u;
+          }
+
+          generateTraceContextParentHeader(e, t) {
+            return '00-' + t + '-' + e + '-01';
+          }
+
+          generateTraceContextStateHeader(e, t, r, n, i) {
+            return i + '@nr=0-1-' + r + '-' + n + '-' + e + '----' + t;
+          }
+
+          generateTraceHeader(e, t, r, n, i, o) {
+            if (!('function' == typeof p.gm?.btoa)) return null;
+            var a = {
+              v: [0, 1],
+              d: {
+                ty: 'Browser',
+                ac: n,
+                ap: i,
+                id: e,
+                tr: t,
+                ti: r,
+              },
+            };
+            return o && n !== o && (a.d.tk = o), btoa((0, P.A)(a));
+          }
+
+          shouldGenerateTrace(e) {
+            return this.isDtEnabled() && this.isAllowedOrigin(e);
+          }
+
+          isAllowedOrigin(e) {
+            var t = !1,
+              r = {};
+            if ((0, s.gD)(this.agentIdentifier, 'distributed_tracing') && (r = (0, s.D0)(this.agentIdentifier).distributed_tracing), e.sameOrigin) t = !0;
+            else if (r.allowed_origins instanceof Array)
+              for (var n = 0; n < r.allowed_origins.length; n++) {
+                var i = (0, ie.D)(r.allowed_origins[n]);
+                if (e.hostname === i.hostname && e.protocol === i.protocol && e.port === i.port) {
+                  t = !0;
+                  break;
+                }
+              }
+            return t;
+          }
+
+          isDtEnabled() {
+            var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing');
+            return !!e && !!e.enabled;
+          }
+
+          excludeNewrelicHeader() {
+            var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing');
+            return !!e && !!e.exclude_newrelic_header;
+          }
+
+          useNewrelicHeaderForCors() {
+            var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing');
+            return !!e && !1 !== e.cors_use_newrelic_header;
+          }
+
+          useTraceContextHeadersForCors() {
+            var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing');
+            return !!e && !!e.cors_use_tracecontext_headers;
+          }
+        }
+
+        var se = i(9300),
+          ce = i(7295),
+          ue = ['load', 'error', 'abort', 'timeout'],
+          de = ue.length,
+          le = (0, R.dV)().o.REQ,
+          fe = (0, R.dV)().o.XHR;
+
+        class he extends b {
+          static featureName = se.T;
+
+          constructor(e, t = !0) {
+            super(e, se.T, t), this.dt = new ae(e.agentIdentifier), this.handler = (e, t, r, n) => (0, x.p)(e, t, r, n, this.ee);
+            try {
+              const e = {
+                xmlhttprequest: 'xhr',
+                fetch: 'fetch',
+                beacon: 'beacon',
+              };
+              p.gm?.performance?.getEntriesByType('resource').forEach((t => {
+                if (t.initiatorType in e && 0 !== t.responseStatus) {
+                  const r = {
+                      status: t.responseStatus,
+                    },
+                    n = {
+                      rxSize: t.transferSize,
+                      duration: Math.floor(t.duration),
+                      cbTime: 0,
+                    };
+                  pe(r, t.name), this.handler('xhr', [r, n, t.startTime, t.responseEnd, e[t.initiatorType]], void 0, a.K7.ajax);
+                }
+              }));
+            } catch (e) {
+            }
+            ne(this.ee), Z(this.ee),
+              function(e, t, r, n) {
+                function i(e) {
+                  var t = this;
+                  t.totalCbs = 0, t.called = 0, t.cbTime = 0, t.end = R, t.ended = !1, t.xhrGuids = {}, t.lastSize = null, t.loadCaptureCalled = !1, t.params = this.params || {}, t.metrics = this.metrics || {}, e.addEventListener('load', (function(r) {
+                    T(t, e);
+                  }), (0, E.jT)(!1)), p.lR || e.addEventListener('progress', (function(e) {
+                    t.lastSize = e.loaded;
+                  }), (0, E.jT)(!1));
+                }
+
+                function o(e) {
+                  this.params = {
+                    method: e[0],
+                  }, pe(this, e[1]), this.metrics = {};
+                }
+
+                function s(t, r) {
+                  e.loader_config.xpid && this.sameOrigin && r.setRequestHeader('X-NewRelic-ID', e.loader_config.xpid);
+                  var i = n.generateTracePayload(this.parsedOrigin);
+                  if (i) {
+                    var o = !1;
+                    i.newrelicHeader && (r.setRequestHeader('newrelic', i.newrelicHeader), o = !0), i.traceContextParentHeader && (r.setRequestHeader('traceparent', i.traceContextParentHeader), i.traceContextStateHeader && r.setRequestHeader('tracestate', i.traceContextStateHeader), o = !0), o && (this.dt = i);
+                  }
+                }
+
+                function c(e, r) {
+                  var n = this.metrics,
+                    i = e[0],
+                    o = this;
+                  if (n && i) {
+                    var a = G(i);
+                    a && (n.txSize = a);
+                  }
+                  this.startTime = (0, S.t)(), this.body = i, this.listener = function(e) {
+                    try {
+                      'abort' !== e.type || o.loadCaptureCalled || (o.params.aborted = !0), ('load' !== e.type || o.called === o.totalCbs && (o.onloadCalled || 'function' != typeof r.onload) && 'function' == typeof o.end) && o.end(r);
+                    } catch (e) {
+                      try {
+                        t.emit('internal-error', [e]);
+                      } catch (e) {
+                      }
+                    }
+                  };
+                  for (var s = 0; s < de; s++) r.addEventListener(ue[s], this.listener, (0, E.jT)(!1));
+                }
+
+                function u(e, t, r) {
+                  this.cbTime += e, t ? this.onloadCalled = !0 : this.called += 1, this.called !== this.totalCbs || !this.onloadCalled && 'function' == typeof r.onload || 'function' != typeof this.end || this.end(r);
+                }
+
+                function d(e, t) {
+                  var r = '' + V(e) + !!t;
+                  this.xhrGuids && !this.xhrGuids[r] && (this.xhrGuids[r] = !0, this.totalCbs += 1);
+                }
+
+                function l(e, t) {
+                  var r = '' + V(e) + !!t;
+                  this.xhrGuids && this.xhrGuids[r] && (delete this.xhrGuids[r], this.totalCbs -= 1);
+                }
+
+                function f() {
+                  this.endTime = (0, S.t)();
+                }
+
+                function h(e, r) {
+                  r instanceof fe && 'load' === e[0] && t.emit('xhr-load-added', [e[1], e[2]], r);
+                }
+
+                function g(e, r) {
+                  r instanceof fe && 'load' === e[0] && t.emit('xhr-load-removed', [e[1], e[2]], r);
+                }
+
+                function m(e, t, r) {
+                  t instanceof fe && ('onload' === r && (this.onload = !0), ('load' === (e[0] && e[0].type) || this.onload) && (this.xhrCbStart = (0, S.t)()));
+                }
+
+                function v(e, r) {
+                  this.xhrCbStart && t.emit('xhr-cb-time', [(0, S.t)() - this.xhrCbStart, this.onload, r], r);
+                }
+
+                function b(e) {
+                  var t, r = e[1] || {};
+                  if ('string' == typeof e[0] ? 0 === (t = e[0]).length && p.RI && (t = '' + p.gm.location.href) : e[0] && e[0].url ? t = e[0].url : p.gm?.URL && e[0] && e[0] instanceof URL ? t = e[0].href : 'function' == typeof e[0].toString && (t = e[0].toString()), 'string' == typeof t && 0 !== t.length) {
+                    t && (this.parsedOrigin = (0, ie.D)(t), this.sameOrigin = this.parsedOrigin.sameOrigin);
+                    var i = n.generateTracePayload(this.parsedOrigin);
+                    if (i && (i.newrelicHeader || i.traceContextParentHeader))
+                      if (e[0] && e[0].headers) s(e[0].headers, i) && (this.dt = i);
+                      else {
+                        var o = {};
+                        for (var a in r) o[a] = r[a];
+                        o.headers = new Headers(r.headers || {}), s(o.headers, i) && (this.dt = i), e.length > 1 ? e[1] = o : e.push(o);
+                      }
+                  }
+
+                  function s(e, t) {
+                    var r = !1;
+                    return t.newrelicHeader && (e.set('newrelic', t.newrelicHeader), r = !0), t.traceContextParentHeader && (e.set('traceparent', t.traceContextParentHeader), t.traceContextStateHeader && e.set('tracestate', t.traceContextStateHeader), r = !0), r;
+                  }
+                }
+
+                function y(e, t) {
+                  this.params = {}, this.metrics = {}, this.startTime = (0, S.t)(), this.dt = t, e.length >= 1 && (this.target = e[0]), e.length >= 2 && (this.opts = e[1]);
+                  var r, n = this.opts || {},
+                    i = this.target;
+                  'string' == typeof i ? r = i : 'object' == typeof i && i instanceof le ? r = i.url : p.gm?.URL && 'object' == typeof i && i instanceof URL && (r = i.href), pe(this, r);
+                  var o = ('' + (i && i instanceof le && i.method || n.method || 'GET')).toUpperCase();
+                  this.params.method = o, this.body = n.body, this.txSize = G(n.body) || 0;
+                }
+
+                function w(e, t) {
+                  if (this.endTime = (0, S.t)(), this.params || (this.params = {}), (0, ce.iW)(this.params)) return;
+                  let n;
+                  this.params.status = t ? t.status : 0, 'string' == typeof this.rxSize && this.rxSize.length > 0 && (n = +this.rxSize);
+                  const i = {
+                    txSize: this.txSize,
+                    rxSize: n,
+                    duration: (0, S.t)() - this.startTime,
+                  };
+                  r('xhr', [this.params, i, this.startTime, this.endTime, 'fetch'], this, a.K7.ajax);
+                }
+
+                function R(e) {
+                  const t = this.params,
+                    n = this.metrics;
+                  if (!this.ended) {
+                    this.ended = !0;
+                    for (let t = 0; t < de; t++) e.removeEventListener(ue[t], this.listener, !1);
+                    t.aborted || (0, ce.iW)(t) || (n.duration = (0, S.t)() - this.startTime, this.loadCaptureCalled || 4 !== e.readyState ? null == t.status && (t.status = 0) : T(this, e), n.cbTime = this.cbTime, r('xhr', [t, n, this.startTime, this.endTime, 'xhr'], this, a.K7.ajax));
+                  }
+                }
+
+                function T(e, r) {
+                  e.params.status = r.status;
+                  var n = function(e, t) {
+                    var r = e.responseType;
+                    return 'json' === r && null !== t ? t : 'arraybuffer' === r || 'blob' === r || 'json' === r ? G(e.response) : 'text' === r || '' === r || void 0 === r ? G(e.responseText) : void 0;
+                  }(r, e.lastSize);
+                  if (n && (e.metrics.rxSize = n), e.sameOrigin) {
+                    var i = r.getResponseHeader('X-NewRelic-App-Data');
+                    i && ((0, x.p)(_.rs, ['Ajax/CrossApplicationTracing/Header/Seen'], void 0, a.K7.metrics, t), e.params.cat = i.split(', ').pop());
+                  }
+                  e.loadCaptureCalled = !0;
+                }
+
+                t.on('new-xhr', i), t.on('open-xhr-start', o), t.on('open-xhr-end', s), t.on('send-xhr-start', c), t.on('xhr-cb-time', u), t.on('xhr-load-added', d), t.on('xhr-load-removed', l), t.on('xhr-resolved', f), t.on('addEventListener-end', h), t.on('removeEventListener-end', g), t.on('fn-end', v), t.on('fetch-before-start', b), t.on('fetch-start', y), t.on('fn-start', m), t.on('fetch-done', w);
+              }(e, this.ee, this.handler, this.dt), this.importAggregator(e);
+          }
+        }
+
+        function pe(e, t) {
+          var r = (0, ie.D)(t),
+            n = e.params || e;
+          n.hostname = r.hostname, n.port = r.port, n.protocol = r.protocol, n.host = r.hostname + ':' + r.port, n.pathname = r.pathname, e.parsedOrigin = r, e.sameOrigin = r.sameOrigin;
+        }
+
+        const ge = {},
+          me = ['pushState', 'replaceState'];
+
+        function ve(e) {
+          const t = function(e) {
+            return (e || B.ee).get('history');
+          }(e);
+          return !p.RI || ge[t.debugId]++ || (ge[t.debugId] = 1, (0, W.YM)(t).inPlace(window.history, me, '-')), t;
+        }
+
+        var be = i(3738);
+        const {
+          He: ye,
+          bD: we,
+          d3: Re,
+          Kp: xe,
+          TZ: Te,
+          Lc: Ee,
+          uP: Ae,
+          Rz: Se,
+        } = be;
+
+        class Ne extends b {
+          static featureName = Te;
+
+          constructor(e, t = !0) {
+            super(e, Te, t);
+            if (!(0, m.V)(this.agentIdentifier)) return void this.deregisterDrain();
+            const r = this.ee;
+            let n;
+            ve(r), this.eventsEE = (0, F.u)(r), this.eventsEE.on(Ae, (function(e, t) {
+              this.bstStart = (0, S.t)();
+            })), this.eventsEE.on(Ee, (function(e, t) {
+              (0, x.p)('bst', [e[0], t, this.bstStart, (0, S.t)()], void 0, a.K7.sessionTrace, r);
+            })), r.on(Se + Re, (function(e) {
+              this.time = (0, S.t)(), this.startPath = location.pathname + location.hash;
+            })), r.on(Se + xe, (function(e) {
+              (0, x.p)('bstHist', [location.pathname + location.hash, this.startPath, this.time], void 0, a.K7.sessionTrace, r);
+            }));
+            try {
+              n = new PerformanceObserver((e => {
+                const t = e.getEntries();
+                (0, x.p)(ye, [t], void 0, a.K7.sessionTrace, r);
+              })), n.observe({
+                type: we,
+                buffered: !0,
+              });
+            } catch (e) {
+            }
+            this.importAggregator(e, {
+              resourceObserver: n,
+            });
+          }
+        }
+
+        var _e = i(2614);
+
+        class Oe extends b {
+          static featureName = t.TZ;
+          #i;
+          #o;
+
+          constructor(e, r = !0) {
+            let n;
+            super(e, t.TZ, r), this.replayRunning = !1, this.#o = e;
+            try {
+              n = JSON.parse(localStorage.getItem(''.concat(_e.H3, '_').concat(_e.uh)));
+            } catch (e) {
+            }
+            (0, g.SR)(e.agentIdentifier) && this.ee.on(t.G4.RECORD, (() => this.#a())), this.#s(n) ? (this.#i = n?.sessionReplayMode, this.#c()) : this.importAggregator(e), this.ee.on('err', (e => {
+              this.replayRunning && (this.errorNoticed = !0, (0, x.p)(t.G4.ERROR_DURING_REPLAY, [e], void 0, this.featureName, this.ee));
+            })), this.ee.on(t.G4.REPLAY_RUNNING, (e => {
+              this.replayRunning = e;
+            }));
+          }
+
+          #s(e) {
+            return e && (e.sessionReplayMode === _e.g.FULL || e.sessionReplayMode === _e.g.ERROR) || (0, g.Aw)(this.agentIdentifier);
+          }
+
+          #u = !1;
+
+          async #c(e) {
+            if (!this.#u) {
+              this.#u = !0;
+              try {
+                const {
+                  Recorder: t,
+                } = await Promise.all([i.e(478), i.e(249)]).then(i.bind(i, 8589));
+                this.recorder ?? = new t({
+                  mode: this.#i,
+                  agentIdentifier: this.agentIdentifier,
+                  trigger: e,
+                  ee: this.ee,
+                }), this.recorder.startRecording(), this.abortHandler = this.recorder.stopRecording;
+              } catch (e) {
+              }
+              this.importAggregator(this.#o, {
+                recorder: this.recorder,
+                errorNoticed: this.errorNoticed,
+              });
+            }
+          }
+
+          #a() {
+            this.featAggregate ? this.featAggregate.mode !== _e.g.FULL && this.featAggregate.initializeRecording(_e.g.FULL, !0) : (this.#i = _e.g.FULL, this.#c(t.Qb.API), this.recorder && this.recorder.parent.mode !== _e.g.FULL && (this.recorder.parent.mode = _e.g.FULL, this.recorder.stopRecording(), this.recorder.startRecording(), this.abortHandler = this.recorder.stopRecording));
+          }
+        }
+
+        var Ie = i(3962);
+
+        class Pe extends b {
+          static featureName = Ie.TZ;
+
+          constructor(e, t = !0) {
+            if (super(e, Ie.TZ, t), !p.RI || !(0, R.dV)().o.MO) return;
+            const r = ve(this.ee);
+            Ie.tC.forEach((e => {
+              (0, E.sp)(e, (e => {
+                a(e);
+              }), !0);
+            }));
+            const n = () => (0, x.p)('newURL', [(0, S.t)(), '' + window.location], void 0, this.featureName, this.ee);
+            r.on('pushState-end', n), r.on('replaceState-end', n);
+            try {
+              this.removeOnAbort = new AbortController;
+            } catch (e) {
+            }
+            (0, E.sp)('popstate', (e => (0, x.p)('newURL', [e.timeStamp, '' + window.location], void 0, this.featureName, this.ee)), !0, this.removeOnAbort?.signal);
+            let i = !1;
+            const o = new ((0, R.dV)().o.MO)(((e, t) => {
+                i || (i = !0, requestAnimationFrame((() => {
+                  (0, x.p)('newDom', [(0, S.t)()], void 0, this.featureName, this.ee), i = !1;
+                })));
+              })),
+              a = (0, v.s)((e => {
+                (0, x.p)('newUIEvent', [e], void 0, this.featureName, this.ee), o.observe(document.body, {
+                  attributes: !0,
+                  childList: !0,
+                  subtree: !0,
+                  characterData: !0,
+                });
+              }), 100, {
+                leading: !0,
+              });
+            this.abortHandler = function() {
+              this.removeOnAbort?.abort(), o.disconnect(), this.abortHandler = void 0;
+            }, this.importAggregator(e, {
+              domObserver: o,
+            });
+          }
+        }
+
+        var je = i(7378);
+        const Ce = {},
+          ke = ['appendChild', 'insertBefore', 'replaceChild'];
+
+        function Le(e) {
+          const t = function(e) {
+            return (e || B.ee).get('jsonp');
+          }(e);
+          if (!p.RI || Ce[t.debugId]) return t;
+          Ce[t.debugId] = !0;
+          var r = (0, W.YM)(t),
+            n = /[?&](?:callback|cb)=([^&#]+)/,
+            i = /(.*)\\.([^.]+)/,
+            o = /^(\\w+)(\\.|$)(.*)$/;
+
+          function a(e, t) {
+            if (!e) return t;
+            const r = e.match(o),
+              n = r[1];
+            return a(r[3], t[n]);
+          }
+
+          return r.inPlace(Node.prototype, ke, 'dom-'), t.on('dom-start', (function(e) {
+            !function(e) {
+              if (!e || 'string' != typeof e.nodeName || 'script' !== e.nodeName.toLowerCase()) return;
+              if ('function' != typeof e.addEventListener) return;
+              var o = (s = e.src, c = s.match(n), c ? c[1] : null);
+              var s, c;
+              if (!o) return;
+              var u = function(e) {
+                var t = e.match(i);
+                if (t && t.length >= 3) return {
+                  key: t[2],
+                  parent: a(t[1], window),
+                };
+                return {
+                  key: e,
+                  parent: window,
+                };
+              }(o);
+              if ('function' != typeof u.parent[u.key]) return;
+              var d = {};
+
+              function l() {
+                t.emit('jsonp-end', [], d), e.removeEventListener('load', l, (0, E.jT)(!1)), e.removeEventListener('error', f, (0, E.jT)(!1));
+              }
+
+              function f() {
+                t.emit('jsonp-error', [], d), t.emit('jsonp-end', [], d), e.removeEventListener('load', l, (0, E.jT)(!1)), e.removeEventListener('error', f, (0, E.jT)(!1));
+              }
+
+              r.inPlace(u.parent, [u.key], 'cb-', d), e.addEventListener('load', l, (0, E.jT)(!1)), e.addEventListener('error', f, (0, E.jT)(!1)), t.emit('new-jsonp', [e.src], d);
+            }(e[0]);
+          })), t;
+        }
+
+        const He = {};
+
+        function Me(e) {
+          const t = function(e) {
+            return (e || B.ee).get('promise');
+          }(e);
+          if (He[t.debugId]) return t;
+          He[t.debugId] = !0;
+          var r = t.context,
+            n = (0, W.YM)(t),
+            i = p.gm.Promise;
+          return i && function() {
+            function e(r) {
+              var o = t.context(),
+                a = n(r, 'executor-', o, null, !1);
+              const s = Reflect.construct(i, [a], e);
+              return t.context(s).getCtx = function() {
+                return o;
+              }, s;
+            }
+
+            p.gm.Promise = e, Object.defineProperty(e, 'name', {
+              value: 'Promise',
+            }), e.toString = function() {
+              return i.toString();
+            }, Object.setPrototypeOf(e, i), ['all', 'race'].forEach((function(r) {
+              const n = i[r];
+              e[r] = function(e) {
+                let i = !1;
+                [...e || []].forEach((e => {
+                  this.resolve(e).then(a('all' === r), a(!1));
+                }));
+                const o = n.apply(this, arguments);
+                return o;
+
+                function a(e) {
+                  return function() {
+                    t.emit('propagate', [null, !i], o, !1, !1), i = i || !e;
+                  };
+                }
+              };
+            })), ['resolve', 'reject'].forEach((function(r) {
+              const n = i[r];
+              e[r] = function(e) {
+                const r = n.apply(this, arguments);
+                return e !== r && t.emit('propagate', [e, !0], r, !1, !1), r;
+              };
+            })), e.prototype = i.prototype;
+            const o = i.prototype.then;
+            i.prototype.then = function(...e) {
+              var i = this,
+                a = r(i);
+              a.promise = i, e[0] = n(e[0], 'cb-', a, null, !1), e[1] = n(e[1], 'cb-', a, null, !1);
+              const s = o.apply(this, e);
+              return a.nextPromise = s, t.emit('propagate', [i, !0], s, !1, !1), s;
+            }, i.prototype.then[W.Jt] = o, t.on('executor-start', (function(e) {
+              e[0] = n(e[0], 'resolve-', this, null, !1), e[1] = n(e[1], 'resolve-', this, null, !1);
+            })), t.on('executor-err', (function(e, t, r) {
+              e[1](r);
+            })), t.on('cb-end', (function(e, r, n) {
+              t.emit('propagate', [n, !0], this.nextPromise, !1, !1);
+            })), t.on('propagate', (function(e, r, n) {
+              this.getCtx && !r || (this.getCtx = function() {
+                if (e instanceof Promise) var r = t.context(e);
+                return r && r.getCtx ? r.getCtx() : this;
+              });
+            }));
+          }(), t;
+        }
+
+        const De = {},
+          Ke = 'setTimeout',
+          Ue = 'setInterval',
+          Ve = 'clearTimeout',
+          Ge = '-start',
+          Fe = [Ke, 'setImmediate', Ue, Ve, 'clearImmediate'];
+
+        function Be(e) {
+          const t = function(e) {
+            return (e || B.ee).get('timer');
+          }(e);
+          if (De[t.debugId]++) return t;
+          De[t.debugId] = 1;
+          var r = (0, W.YM)(t);
+          return r.inPlace(p.gm, Fe.slice(0, 2), Ke + '-'), r.inPlace(p.gm, Fe.slice(2, 3), Ue + '-'), r.inPlace(p.gm, Fe.slice(3), Ve + '-'), t.on(Ue + Ge, (function(e, t, n) {
+            e[0] = r(e[0], 'fn-', null, n);
+          })), t.on(Ke + Ge, (function(e, t, n) {
+            this.method = n, this.timerDuration = isNaN(e[1]) ? 0 : +e[1], e[0] = r(e[0], 'fn-', this, n);
+          })), t;
+        }
+
+        const We = {};
+
+        function ze(e) {
+          const t = function(e) {
+            return (e || B.ee).get('mutation');
+          }(e);
+          if (!p.RI || We[t.debugId]) return t;
+          We[t.debugId] = !0;
+          var r = (0, W.YM)(t),
+            n = p.gm.MutationObserver;
+          return n && (window.MutationObserver = function(e) {
+            return this instanceof n ? new n(r(e, 'fn-')) : n.apply(this, arguments);
+          }, MutationObserver.prototype = n.prototype), t;
+        }
+
+        const {
+          TZ: qe,
+          d3: Ze,
+          Kp: Ye,
+          $p: Xe,
+          wW: $e,
+          e5: Je,
+          tH: Qe,
+          uP: et,
+          rw: tt,
+          Lc: rt,
+        } = je;
+
+        class nt extends b {
+          static featureName = qe;
+
+          constructor(e, t = !0) {
+            if (super(e, qe, t), !p.RI) return;
+            try {
+              this.removeOnAbort = new AbortController;
+            } catch (e) {
+            }
+            let r, n = 0;
+            const i = this.ee.get('tracer'),
+              o = Le(this.ee),
+              a = Me(this.ee),
+              s = Be(this.ee),
+              c = Z(this.ee),
+              u = this.ee.get('events'),
+              d = ne(this.ee),
+              l = ve(this.ee),
+              f = ze(this.ee);
+
+            function h(e, t) {
+              l.emit('newURL', ['' + window.location, t]);
+            }
+
+            function g() {
+              n++, r = window.location.hash, this[et] = (0, S.t)();
+            }
+
+            function m() {
+              n--, window.location.hash !== r && h(0, !0);
+              var e = (0, S.t)();
+              this[Je] = ~~this[Je] + e - this[et], this[rt] = e;
+            }
+
+            function v(e, t) {
+              e.on(t, (function() {
+                this[t] = (0, S.t)();
+              }));
+            }
+
+            this.ee.on(et, g), a.on(tt, g), o.on(tt, g), this.ee.on(rt, m), a.on($e, m), o.on($e, m), this.ee.on('fn-err', ((...t) => {
+              t[2]?.__newrelic?.[e.agentIdentifier] || (0, x.p)('function-err', [...t], void 0, this.featureName, this.ee);
+            })), this.ee.buffer([et, rt, 'xhr-resolved'], this.featureName), u.buffer([et], this.featureName), s.buffer(['setTimeout' + Ye, 'clearTimeout' + Ze, et], this.featureName), c.buffer([et, 'new-xhr', 'send-xhr' + Ze], this.featureName), d.buffer([Qe + Ze, Qe + '-done', Qe + Xe + Ze, Qe + Xe + Ye], this.featureName), l.buffer(['newURL'], this.featureName), f.buffer([et], this.featureName), a.buffer(['propagate', tt, $e, 'executor-err', 'resolve' + Ze], this.featureName), i.buffer([et, 'no-' + et], this.featureName), o.buffer(['new-jsonp', 'cb-start', 'jsonp-error', 'jsonp-end'], this.featureName), v(d, Qe + Ze), v(d, Qe + '-done'), v(o, 'new-jsonp'), v(o, 'jsonp-end'), v(o, 'cb-start'), l.on('pushState-end', h), l.on('replaceState-end', h), window.addEventListener('hashchange', h, (0, E.jT)(!0, this.removeOnAbort?.signal)), window.addEventListener('load', h, (0, E.jT)(!0, this.removeOnAbort?.signal)), window.addEventListener('popstate', (function() {
+              h(0, n > 1);
+            }), (0, E.jT)(!0, this.removeOnAbort?.signal)), this.abortHandler = this.#n, this.importAggregator(e);
+          }
+
+          #n() {
+            this.removeOnAbort?.abort(), this.abortHandler = void 0;
+          }
+        }
+
+        var it = i(3333);
+
+        class ot extends b {
+          static featureName = it.TZ;
+
+          constructor(e, t = !0) {
+            super(e, it.TZ, t);
+            const r = [e.init.page_action.enabled, e.init.performance.capture_marks, e.init.performance.capture_measures, e.init.user_actions.enabled, e.init.performance.resources.enabled];
+            if (p.RI && (e.init.user_actions.enabled && (it.Zp.forEach((e => (0, E.sp)(e, (e => (0, x.p)('ua', [e], void 0, this.featureName, this.ee)), !0))), it.qN.forEach((e => (0, E.sp)(e, (e => (0, x.p)('ua', [e], void 0, this.featureName, this.ee)))))), e.init.performance.resources.enabled && p.gm.PerformanceObserver?.supportedEntryTypes.includes('resource'))) {
+              new PerformanceObserver((e => {
+                e.getEntries().forEach((e => {
+                  (0, x.p)('browserPerformance.resource', [e], void 0, this.featureName, this.ee);
+                }));
+              })).observe({
+                type: 'resource',
+                buffered: !0,
+              });
+            }
+            r.some((e => e)) ? this.importAggregator(e) : this.deregisterDrain();
+          }
+        }
+
+        var at = i(993),
+          st = i(3785);
+
+        class ct extends b {
+          static featureName = at.TZ;
+
+          constructor(e, t = !0) {
+            super(e, at.TZ, t);
+            const r = this.ee;
+            this.ee.on('wrap-logger-end', (function([e]) {
+              const {
+                level: t,
+                customAttributes: n,
+              } = this;
+              (0, st.R)(r, e, n, t);
+            })), this.importAggregator(e);
+          }
+        }
+
+        new class extends o {
+          constructor(t, r) {
+            super(r), p.gm ? (this.features = {}, (0, R.bQ)(this.agentIdentifier, this), this.desiredFeatures = new Set(t.features || []), this.desiredFeatures.add(w), this.runSoftNavOverSpa = [...this.desiredFeatures].some((e => e.featureName === a.K7.softNav)), (0, d.j)(this, t, t.loaderType || 'agent'), this.run()) : (0, e.R)(21);
+          }
+
+          get config() {
+            return {
+              info: this.info,
+              init: this.init,
+              loader_config: this.loader_config,
+              runtime: this.runtime,
+            };
+          }
+
+          run() {
+            try {
+              const t = u(this.agentIdentifier),
+                r = [...this.desiredFeatures];
+              r.sort(((e, t) => a.P3[e.featureName] - a.P3[t.featureName])), r.forEach((r => {
+                if (!t[r.featureName] && r.featureName !== a.K7.pageViewEvent) return;
+                if (this.runSoftNavOverSpa && r.featureName === a.K7.spa) return;
+                if (!this.runSoftNavOverSpa && r.featureName === a.K7.softNav) return;
+                const n = function(e) {
+                  switch (e) {
+                    case a.K7.ajax:
+                      return [a.K7.jserrors];
+                    case a.K7.sessionTrace:
+                      return [a.K7.ajax, a.K7.pageViewEvent];
+                    case a.K7.sessionReplay:
+                      return [a.K7.sessionTrace];
+                    case a.K7.pageViewTiming:
+                      return [a.K7.pageViewEvent];
+                    default:
+                      return [];
+                  }
+                }(r.featureName).filter((e => !(e in this.features)));
+                n.length > 0 && (0, e.R)(36, {
+                  targetFeature: r.featureName,
+                  missingDependencies: n,
+                }), this.features[r.featureName] = new r(this);
+              }));
+            } catch (t) {
+              (0, e.R)(22, t);
+              for (const e in this.features) this.features[e].abortHandler?.();
+              const r = (0, R.Zm)();
+              delete r.initializedAgents[this.agentIdentifier]?.api, delete r.initializedAgents[this.agentIdentifier]?.features, delete this.sharedAggregator;
+              return r.ee.get(this.agentIdentifier).abort(), !1;
+            }
+          }
+        }({
+          features: [he, w, N, Ne, Oe, O, M, ot, ct, Pe, nt],
+          loaderType: 'spa',
+        });
+      })();
+    })();
+    ;
+    NREUM.loader_config = JSON.parse(document.getElementById('NREUM.loader_config').textContent);
+    NREUM.info = JSON.parse(document.getElementById('NREUM.info').textContent);
+  </script>
+  <script
+    src="/assets/cmp/202408.1.0_v2/scripttemplates/otSDKStub.js"
+    data-document-language="true"
+    type="text/javascript"
+    charset="UTF-8"
+    data-domain-script="018f777e-9e18-7e22-8a1f-9fa4a7613770"
+    defer
+  ></script>
+  <style>
+    @font-face {
+      font-display: swap;
+      font-family: TESCO Modern;
+      src: url(/fonts/TESCOModern-Regular.woff2)
+    }
+
+    @font-face {
+      font-display: swap;
+      font-family: TESCO Modern;
+      font-weight: 700;
+      src: url(/fonts/TESCOModern-Bold.woff2)
+    }
+
+    @font-face {
+      font-family: Arial;
+      font-size-adjust: .516;
+      line-height: 1.42;
+      src: local("Arial")
+    }
+
+    @font-face {
+      font-family: Arial;
+      font-size-adjust: .5;
+      font-weight: 700;
+      line-height: 1.42;
+      src: local("Arial")
+    }
+
+    @font-face {
+      font-family: Roboto;
+      font-size-adjust: .535;
+      line-height: 1.42;
+      src: local("Roboto")
+    }
+
+    @font-face {
+      font-family: Roboto;
+      font-size-adjust: .544;
+      font-weight: 700;
+      line-height: 1.42;
+      src: local("Roboto")
+    }
+
+    *,
+    :after,
+    :before {
+      box-sizing: border-box
+    }
+
+    body,
+    html {
+      font-family: Arial, sans-serif
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      margin: 0
+    }
+
+    .has-mfe-children {
+      display: grid;
+      place-items: stretch
+    }
+
+    .template-wrapper {
+      display: flex;
+      flex: 1 0 auto;
+      flex-flow: row nowrap;
+      margin: 0 auto;
+      max-width: 1260px;
+      width: 100%
+    }
+
+    .template-content {
+      flex: 1
+    }
+
+    .template-content-full-height {
+      min-height: 100vh
+    }
+
+    @media (orientation: portrait) {
+      .template-content-full-height {
+        min-height: 1280px
+      }
+    }
+
+    .template-sidecolumn {
+      display: none
+    }
+
+    @media screen and (min-width: 756px) {
+      .template-content {
+        flex: 1 0 518px
+      }
+
+      .template-sidecolumn {
+        display: grid;
+        max-width: 238px
+      }
+    }
+
+    .template-footer,
+    .template-header {
+      flex: none
+    }
+
+    /*# sourceMappingURL=/assets/mfe-orchestrator/207930ddb48af5db2beb.css.map*/
+  </style>
+  <title>Results for &quot;alpro almond&quot; - Tesco Groceries</title>
+  <link
+    data-mfe-head="data-mfe-head"
+    href="https://www.tesco.com/groceries/en-GB"
+    rel="canonical"
+  >
+  <script
+    data-mfe-head="data-mfe-head"
+    type="application/ld+json"
+  >
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Corporation",
+          "url": "https://www.tesco.com/groceries/en-GB",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+41-0800 323 4040",
+              "contactType": "customer service",
+              "availableLanguage": "English",
+              "contactOption": "TollFree",
+              "areaServed": "UK"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://www.tesco.com/groceries/en-GB",
+          "name": "Tesco Groceries"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "url": "https://www.tesco.com/groceries/en-GB/products/276761995"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "url": "https://www.tesco.com/groceries/en-GB/products/275067782"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "url": "https://www.tesco.com/groceries/en-GB/products/272012512"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "url": "https://www.tesco.com/groceries/en-GB/products/272103255"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "url": "https://www.tesco.com/groceries/en-GB/products/304783080"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "url": "https://www.tesco.com/groceries/en-GB/products/316547434"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+  <meta
+    data-mfe-head="data-mfe-head"
+    content="noindex"
+    name="robots"
+  >
+  <link
+    href="/assets/mfe-header/ac406279bafcdb67c3f0.css"
+    rel="stylesheet"
+    data-hash="ac406279bafcdb67c3f0.css"
+  >
+  <link
+    href="/assets/mfe-header/e66eae8d7993b960851a.css"
+    rel="stylesheet"
+    data-hash="e66eae8d7993b960851a.css"
+  >
+  <link
+    href="/assets/mfe-plp/8a1a1b6cbfd1d3aa6052.css"
+    rel="stylesheet"
+    data-hash="8a1a1b6cbfd1d3aa6052.css"
+  >
+  <link
+    href="/assets/mfe-plp/74a567a6674acbb614df.css"
+    rel="stylesheet"
+    data-hash="74a567a6674acbb614df.css"
+  >
+  <link
+    href="/assets/mfe-plp/c93e5858cc415c15e9e8.css"
+    rel="stylesheet"
+    data-hash="c93e5858cc415c15e9e8.css"
+  >
+  <link
+    href="/assets/mfe-plp/b74e0b000d52c5101f77.css"
+    rel="stylesheet"
+    data-hash="b74e0b000d52c5101f77.css"
+  >
+  <link
+    href="/assets/mfe-plp/bac57663409d08a2d432.css"
+    rel="stylesheet"
+    data-hash="bac57663409d08a2d432.css"
+  >
+  <link
+    href="/assets/mfe-plp/4a1b0fc0555491d14d77.css"
+    rel="stylesheet"
+    data-hash="4a1b0fc0555491d14d77.css"
+  >
+  <link
+    href="/assets/mfe-plp/f9e379a7cbc49813abf4.css"
+    rel="stylesheet"
+    data-hash="f9e379a7cbc49813abf4.css"
+  >
+  <link
+    href="/assets/mfe-plp/0fd2c6f539d65af88dd4.css"
+    rel="stylesheet"
+    data-hash="0fd2c6f539d65af88dd4.css"
+  >
+  <link
+    href="/assets/mfe-plp/d5da273a562617e94bf6.css"
+    rel="stylesheet"
+    data-hash="d5da273a562617e94bf6.css"
+  >
+  <link
+    href="/assets/mfe-plp/9d9cf29ed5a83a2c6afa.css"
+    rel="stylesheet"
+    data-hash="9d9cf29ed5a83a2c6afa.css"
+  >
+  <link
+    href="/assets/mfe-plp/af0073cbf6573fd69325.css"
+    rel="stylesheet"
+    data-hash="af0073cbf6573fd69325.css"
+  >
+  <link
+    href="/assets/mfe-plp/4acb719203db8d06faf5.css"
+    rel="stylesheet"
+    data-hash="4acb719203db8d06faf5.css"
+  >
+  <link
+    href="/assets/mfe-plp/8d9aecd172179dda3e51.css"
+    rel="stylesheet"
+    data-hash="8d9aecd172179dda3e51.css"
+  >
+  <link
+    href="/assets/mfe-plp/27d635df485763516380.css"
+    rel="stylesheet"
+    data-hash="27d635df485763516380.css"
+  >
+  <link
+    href="/assets/mfe-plp/cebf2fd89eb07bae1270.css"
+    rel="stylesheet"
+    data-hash="cebf2fd89eb07bae1270.css"
+  >
+  <link
+    href="/assets/mfe-plp/73722a97eaf9904015ed.css"
+    rel="stylesheet"
+    data-hash="73722a97eaf9904015ed.css"
+  >
+  <link
+    href="/assets/mfe-plp/1858f842cd1fc7f1223b.css"
+    rel="stylesheet"
+    data-hash="1858f842cd1fc7f1223b.css"
+  >
+  <link
+    href="/assets/mfe-plp/034ea338b72fc04f0c9a.css"
+    rel="stylesheet"
+    data-hash="034ea338b72fc04f0c9a.css"
+  >
+  <link
+    href="/assets/mfe-plp/66e3516a212d6aacf921.css"
+    rel="stylesheet"
+    data-hash="66e3516a212d6aacf921.css"
+  >
+  <link
+    href="/assets/mfe-plp/2edbedcb6759c30098cf.css"
+    rel="stylesheet"
+    data-hash="2edbedcb6759c30098cf.css"
+  >
+  <link
+    href="/assets/mfe-plp/70fffd2420fb96099812.css"
+    rel="stylesheet"
+    data-hash="70fffd2420fb96099812.css"
+  >
+  <link
+    href="/assets/mfe-plp/a64b2e0df04b6de93012.css"
+    rel="stylesheet"
+    data-hash="a64b2e0df04b6de93012.css"
+  >
+  <link
+    href="/assets/mfe-plp/22199a54ae3174cce039.css"
+    rel="stylesheet"
+    data-hash="22199a54ae3174cce039.css"
+  >
+  <link
+    href="/assets/mfe-plp/df35f8526c32c4868e6f.css"
+    rel="stylesheet"
+    data-hash="df35f8526c32c4868e6f.css"
+  >
+  <link
+    href="/assets/mfe-plp/d34b5b7bb3c2a1356411.css"
+    rel="stylesheet"
+    data-hash="d34b5b7bb3c2a1356411.css"
+  >
+  <link
+    href="/assets/mfe-footer/0be0104a8282936fe42b.css"
+    rel="stylesheet"
+    data-hash="0be0104a8282936fe42b.css"
+  >
+  <link
+    href="/assets/mfe-plp/4d891b0382bb300ba6be.css"
+    rel="stylesheet"
+    data-hash="4d891b0382bb300ba6be.css"
+  >
+  <link
+    href="/assets/mfe-plp/5f4d16257acaed3885f6.css"
+    rel="stylesheet"
+    data-hash="5f4d16257acaed3885f6.css"
+  >
+  <link
+    href="/assets/mfe-plp/80ec98861137ef62ef00.css"
+    rel="stylesheet"
+    data-hash="80ec98861137ef62ef00.css"
+  >
+  <link
+    href="/assets/mfe-plp/e01dbde2b3b3ab6e2d8a.css"
+    rel="stylesheet"
+    data-hash="e01dbde2b3b3ab6e2d8a.css"
+  >
+  <link
+    href="/assets/mfe-plp/acdfca8cd2e8bb18f002.css"
+    rel="stylesheet"
+    data-hash="acdfca8cd2e8bb18f002.css"
+  >
+  <link
+    href="/assets/mfe-plp/1656447ff334f1b5945a.css"
+    rel="stylesheet"
+    data-hash="1656447ff334f1b5945a.css"
+  >
+  <link
+    href="/assets/mfe-plp/3a1d9109499e12ae6cf2.css"
+    rel="stylesheet"
+    data-hash="3a1d9109499e12ae6cf2.css"
+  >
+  <link
+    href="/assets/mfe-plp/2c54cedc2301671fd3cc.css"
+    rel="stylesheet"
+    data-hash="2c54cedc2301671fd3cc.css"
+  >
+  <link
+    href="/assets/mfe-plp/a50c0b041d0c1275ff5e.css"
+    rel="stylesheet"
+    data-hash="a50c0b041d0c1275ff5e.css"
+  >
+  <link
+    href="/assets/mfe-plp/8a546366acea8ab17a60.css"
+    rel="stylesheet"
+    data-hash="8a546366acea8ab17a60.css"
+  >
+  <link
+    href="/assets/mfe-plp/37abfaa148359436477d.css"
+    rel="stylesheet"
+    data-hash="37abfaa148359436477d.css"
+  >
+  <link
+    href="/assets/mfe-plp/5528de7e887c0b638457.css"
+    rel="stylesheet"
+    data-hash="5528de7e887c0b638457.css"
+  >
+  <link
+    href="/assets/mfe-plp/b2deacae255e48259af3.css"
+    rel="stylesheet"
+    data-hash="b2deacae255e48259af3.css"
+  >
+  <link
+    href="/assets/mfe-plp/fa82f45eb8fa47a558e2.css"
+    rel="stylesheet"
+    data-hash="fa82f45eb8fa47a558e2.css"
+  >
+  <link
+    href="/assets/mfe-plp/432a6b9951ec9f06c90e.css"
+    rel="stylesheet"
+    data-hash="432a6b9951ec9f06c90e.css"
+  >
+  <link
+    href="/assets/mfe-plp/a958f65dbc8d8ef0a7a6.css"
+    rel="stylesheet"
+    data-hash="a958f65dbc8d8ef0a7a6.css"
+  >
+  <link
+    href="/assets/mfe-plp/093f2fbfe463317956ef.css"
+    rel="stylesheet"
+    data-hash="093f2fbfe463317956ef.css"
+  >
+  <link
+    href="/assets/mfe-plp/59b5b06474a6045881a8.css"
+    rel="stylesheet"
+    data-hash="59b5b06474a6045881a8.css"
+  >
+  <link
+    href="/assets/mfe-plp/2ea09d7b2166df28e22d.css"
+    rel="stylesheet"
+    data-hash="2ea09d7b2166df28e22d.css"
+  >
+  <link
+    href="/assets/mfe-plp/a5ddeda8cc15f4a99a6f.css"
+    rel="stylesheet"
+    data-hash="a5ddeda8cc15f4a99a6f.css"
+  >
+  <link
+    href="/assets/mfe-plp/1060401b53c9d934d064.css"
+    rel="stylesheet"
+    data-hash="1060401b53c9d934d064.css"
+  >
+  <link
+    href="/assets/mfe-plp/f347d4d35a94aab0078f.css"
+    rel="stylesheet"
+    data-hash="f347d4d35a94aab0078f.css"
+  >
+  <link
+    href="/assets/mfe-plp/f5bd4c3c301756e09d85.css"
+    rel="stylesheet"
+    data-hash="f5bd4c3c301756e09d85.css"
+  >
+  <link
+    href="/assets/mfe-plp/fc687230d794e86ed1bd.css"
+    rel="stylesheet"
+    data-hash="fc687230d794e86ed1bd.css"
+  >
+  <link
+    href="/assets/mfe-plp/f865431fa3a56fe9dec5.css"
+    rel="stylesheet"
+    data-hash="f865431fa3a56fe9dec5.css"
+  >
+  <link
+    href="/assets/mfe-plp/f7a48e0a3a2e6767b9d9.css"
+    rel="stylesheet"
+    data-hash="f7a48e0a3a2e6767b9d9.css"
+  >
+  <link
+    href="/assets/mfe-plp/b7f9e181b60720478bdb.css"
+    rel="stylesheet"
+    data-hash="b7f9e181b60720478bdb.css"
+  >
+  <link
+    href="/assets/mfe-plp/4d06ea5f7e79789ce03d.css"
+    rel="stylesheet"
+    data-hash="4d06ea5f7e79789ce03d.css"
+  >
+  <link
+    href="/assets/mfe-plp/d205e4a2da506302fefa.css"
+    rel="stylesheet"
+    data-hash="d205e4a2da506302fefa.css"
+  >
+  <link
+    href="/assets/mfe-plp/7850b31263ba30af55b1.css"
+    rel="stylesheet"
+    data-hash="7850b31263ba30af55b1.css"
+  >
+  <link
+    href="/assets/mfe-plp/05b0d00cc8f94c585c0a.css"
+    rel="stylesheet"
+    data-hash="05b0d00cc8f94c585c0a.css"
+  >
+  <link
+    href="/assets/mfe-plp/0ffb20a2dcc0ed51dbb3.css"
+    rel="stylesheet"
+    data-hash="0ffb20a2dcc0ed51dbb3.css"
+  >
+  <link
+    href="/assets/mfe-plp/4e01dcfe23b391562d9e.css"
+    rel="stylesheet"
+    data-hash="4e01dcfe23b391562d9e.css"
+  >
+  <link
+    href="/assets/mfe-plp/b2a7d0c9741760f9f3b3.css"
+    rel="stylesheet"
+    data-hash="b2a7d0c9741760f9f3b3.css"
+  >
+  <link
+    href="/assets/mfe-plp/5b7bcab46cb1f3e2ded0.css"
+    rel="stylesheet"
+    data-hash="5b7bcab46cb1f3e2ded0.css"
+  >
+  <link
+    href="/assets/mfe-plp/fb49d30dab0e725bbe72.css"
+    rel="stylesheet"
+    data-hash="fb49d30dab0e725bbe72.css"
+  >
+  <link
+    href="/assets/mfe-plp/9a1cdc7081b1fcf848ae.css"
+    rel="stylesheet"
+    data-hash="9a1cdc7081b1fcf848ae.css"
+  >
+  <link
+    href="/assets/mfe-plp/f9d73d908bbb586a99f0.css"
+    rel="stylesheet"
+    data-hash="f9d73d908bbb586a99f0.css"
+  >
+  <link
+    href="/assets/mfe-plp/d94dc03040448f724447.css"
+    rel="stylesheet"
+    data-hash="d94dc03040448f724447.css"
+  >
+  <link
+    href="/assets/mfe-plp/103ca130a9ffac449fc0.css"
+    rel="stylesheet"
+    data-hash="103ca130a9ffac449fc0.css"
+  >
+  <link
+    href="/assets/mfe-plp/53380a5fbfd7169e4182.css"
+    rel="stylesheet"
+    data-hash="53380a5fbfd7169e4182.css"
+  >
+  <link
+    href="/assets/mfe-plp/5b556c6431a87d3d0f4c.css"
+    rel="stylesheet"
+    data-hash="5b556c6431a87d3d0f4c.css"
+  >
+  <link
+    href="/assets/mfe-plp/0e544e305ad0ecd64a7b.css"
+    rel="stylesheet"
+    data-hash="0e544e305ad0ecd64a7b.css"
+  >
+  <link
+    href="/assets/mfe-plp/4c146983f03fb6515cbb.css"
+    rel="stylesheet"
+    data-hash="4c146983f03fb6515cbb.css"
+  >
+  <link
+    href="/assets/mfe-plp/a407356ac2be306774e1.css"
+    rel="stylesheet"
+    data-hash="a407356ac2be306774e1.css"
+  >
+  <link
+    href="/assets/mfe-plp/0d7cbf7deafe66cf27cf.css"
+    rel="stylesheet"
+    data-hash="0d7cbf7deafe66cf27cf.css"
+  >
+  <link
+    href="/assets/mfe-plp/a14821254200228688b6.css"
+    rel="stylesheet"
+    data-hash="a14821254200228688b6.css"
+  >
+  <link
+    href="/assets/mfe-plp/814c225b85b705739e1e.css"
+    rel="stylesheet"
+    data-hash="814c225b85b705739e1e.css"
+  >
+  <link
+    href="/assets/mfe-plp/b7c895a63a65837d7186.css"
+    rel="stylesheet"
+    data-hash="b7c895a63a65837d7186.css"
+  >
+  <link
+    href="/assets/mfe-plp/fb0df226ccd8cefe3870.css"
+    rel="stylesheet"
+    data-hash="fb0df226ccd8cefe3870.css"
+  >
+  <link
+    href="/assets/mfe-plp/991ba1dd5e3a988360bb.css"
+    rel="stylesheet"
+    data-hash="991ba1dd5e3a988360bb.css"
+  >
+  <link
+    href="/assets/mfe-plp/a2b391f22ecc365e73b5.css"
+    rel="stylesheet"
+    data-hash="a2b391f22ecc365e73b5.css"
+  >
+  <link
+    href="/assets/mfe-plp/db8876c9b2412131adca.css"
+    rel="stylesheet"
+    data-hash="db8876c9b2412131adca.css"
+  >
+  <link
+    href="/assets/mfe-plp/5dc135b21eef4ae1264a.css"
+    rel="stylesheet"
+    data-hash="5dc135b21eef4ae1264a.css"
+  >
+  <link
+    href="/assets/mfe-plp/0c9a00188d838cad5bed.css"
+    rel="stylesheet"
+    data-hash="0c9a00188d838cad5bed.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-plp/88f58fe7520c979d523f.css"
+    rel="stylesheet"
+    data-hash="88f58fe7520c979d523f.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-plp/38162f03b94d4e325261.css"
+    rel="stylesheet"
+    data-hash="38162f03b94d4e325261.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/4c28575b7a084346415f.css"
+    rel="stylesheet"
+    data-hash="4c28575b7a084346415f.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/595a6d28045ed67bdea5.css"
+    rel="stylesheet"
+    data-hash="595a6d28045ed67bdea5.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/0bfd25fa74978845bced.css"
+    rel="stylesheet"
+    data-hash="0bfd25fa74978845bced.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/36e53f7c3300d95ecaf3.css"
+    rel="stylesheet"
+    data-hash="36e53f7c3300d95ecaf3.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/5c2230407a5bc249b3a0.css"
+    rel="stylesheet"
+    data-hash="5c2230407a5bc249b3a0.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/10a47be0d3a2dcea6b51.css"
+    rel="stylesheet"
+    data-hash="10a47be0d3a2dcea6b51.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/fe48fa8c73ef560fdd2d.css"
+    rel="stylesheet"
+    data-hash="fe48fa8c73ef560fdd2d.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/a78af0b9803f1504dfe1.css"
+    rel="stylesheet"
+    data-hash="a78af0b9803f1504dfe1.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/97a297108945530be4fb.css"
+    rel="stylesheet"
+    data-hash="97a297108945530be4fb.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/f5c2639d5fa4da091e09.css"
+    rel="stylesheet"
+    data-hash="f5c2639d5fa4da091e09.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/8450a317fd4cb70c816d.css"
+    rel="stylesheet"
+    data-hash="8450a317fd4cb70c816d.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/454ff9ad826c3fe3ba1a.css"
+    rel="stylesheet"
+    data-hash="454ff9ad826c3fe3ba1a.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/5c76256996d92b0ca547.css"
+    rel="stylesheet"
+    data-hash="5c76256996d92b0ca547.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/b9f6b99505217ac9dc1b.css"
+    rel="stylesheet"
+    data-hash="b9f6b99505217ac9dc1b.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/634db86fc14136e1c9ce.css"
+    rel="stylesheet"
+    data-hash="634db86fc14136e1c9ce.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/2b0da4e549af3919f1ec.css"
+    rel="stylesheet"
+    data-hash="2b0da4e549af3919f1ec.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/bf1000c90340a9f4738f.css"
+    rel="stylesheet"
+    data-hash="bf1000c90340a9f4738f.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/0e46272cf2a880c5dbc0.css"
+    rel="stylesheet"
+    data-hash="0e46272cf2a880c5dbc0.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-basket/d0b17c37b6ae5d56821d.css"
+    rel="stylesheet"
+    data-hash="d0b17c37b6ae5d56821d.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/7f5289de374681d02134.css"
+    rel="stylesheet"
+    data-hash="7f5289de374681d02134.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/1fe47447f14a77b7dcf2.css"
+    rel="stylesheet"
+    data-hash="1fe47447f14a77b7dcf2.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/22d6466542802f4a3a3c.css"
+    rel="stylesheet"
+    data-hash="22d6466542802f4a3a3c.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/90140d7fe5ca412eaa19.css"
+    rel="stylesheet"
+    data-hash="90140d7fe5ca412eaa19.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/b57cb0b7d4a9ec59d2c5.css"
+    rel="stylesheet"
+    data-hash="b57cb0b7d4a9ec59d2c5.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/e4a68063f4a123bc7cb2.css"
+    rel="stylesheet"
+    data-hash="e4a68063f4a123bc7cb2.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/307afda9e9227bd669fc.css"
+    rel="stylesheet"
+    data-hash="307afda9e9227bd669fc.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/65e13e0e2d8e52ee0308.css"
+    rel="stylesheet"
+    data-hash="65e13e0e2d8e52ee0308.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/679418079da3d21b9f5c.css"
+    rel="stylesheet"
+    data-hash="679418079da3d21b9f5c.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/f81393190eb97018cf37.css"
+    rel="stylesheet"
+    data-hash="f81393190eb97018cf37.css"
+  >
+  undefined
+  <link
+    href="/assets/mfe-footer/f10466006cb4738034df.css"
+    rel="stylesheet"
+    data-hash="f10466006cb4738034df.css"
+  >
+  undefined
+  <style
+    data-styled="true"
+    data-styled-version="5.3.5"
+  >
+    [data-mfe="mfe-header"] .gVYFHR {
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: calc(1em + 0.5rem);
+      margin: 0;
+      --ddsweb-text-color: #666666;
+      color: var(--ddsweb-text-color, inherit);
+    }
+
+    /*!sc*/
+    data-styled.g5[id="text__StyledText-sc-1jpzi8m-0"] {
+      content: "gVYFHR,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .kIIJuI {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+    }
+
+    /*!sc*/
+    data-styled.g6[id="base-components__BaseElement-sc-150pv2j-0"] {
+      content: "kIIJuI,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iKYMCI {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gpETyF {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 1.25;
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+    }
+
+    /*!sc*/
+    data-styled.g7[id="base-components__RootElement-sc-150pv2j-1"] {
+      content: "iKYMCI,gpETyF,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iOvBIY {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    /*!sc*/
+    data-styled.g8[id="base-components__BaseList-sc-150pv2j-2"] {
+      content: "iOvBIY,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm {
+      --ddsweb-button-min-hit-area: 44px;
+      --ddsweb-button-border-radius: 99px;
+      --ddsweb-button-font-family: "TESCO Modern", Arial, sans-serif;
+      --ddsweb-button-font-size: xxx: 12px;
+      xx: 14px;
+      xs: 16px;
+      sm: 20px;
+      md: 24px;
+      lg: 28px;
+      xl: 32px;
+      xxl: 36px;
+      xxxl: 40px;
+      --ddsweb-button-font-weight: 700;
+      --ddsweb-button-transition-duration: 0.3s;
+      --ddsweb-button-shadow-width: 3px;
+      --ddsweb-button-shadow-position-inset: -3px;
+      --ddsweb-button-shadow-color: #00539f;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--ddsweb-button-font-family);
+      font-size: var(--ddsweb-button-font-size);
+      line-height: var(--ddsweb-button-line-height);
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      padding: 0;
+      cursor: pointer;
+      display: block;
+      font-weight: var(--ddsweb-button-font-weight);
+      background: var(--ddsweb-button-background);
+      border: var(--ddsweb-button-border-width) solid var(--ddsweb-button-border-color);
+      color: var(--ddsweb-button-color);
+      --ddsweb-button-color: #00539f;
+      --ddsweb-button-background: #ffffff;
+      --ddsweb-button-border-color: #00539f;
+      --ddsweb-button-border-width: 2px;
+      --ddsweb-button-padding-vertical: 8px;
+      --ddsweb-button-padding-horizontal: 18px;
+      display: block;
+      border-radius: var(--ddsweb-button-border-radius);
+      padding: var(--ddsweb-button-padding-vertical) var(--ddsweb-button-padding-horizontal);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm --ddsweb-button-line-height:heading {
+      xs: 1.25;
+      sm: 1.2;
+      md: 1.17;
+      lg: 1.14;
+      xl: 1.13;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm text {
+      xx: 1.57;
+      xs: 1.5;
+      sm: 1.4;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm::-moz-focus-inner {
+      border: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:disabled,
+    [data-mfe="mfe-header"] .eOURfm[aria-disabled='true'] {
+      cursor: not-allowed;
+      opacity: 40%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:before {
+      display: block;
+      z-index: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      min-width: var(--ddsweb-button-min-hit-area);
+      height: 100%;
+      min-height: var(--ddsweb-button-min-hit-area);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      content: '';
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:hover,
+    [data-mfe="mfe-header"] .eOURfm:focus {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:disabled {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:after {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      top: var(--ddsweb-button-shadow-position-inset);
+      right: var(--ddsweb-button-shadow-position-inset);
+      bottom: var(--ddsweb-button-shadow-position-inset);
+      left: var(--ddsweb-button-shadow-position-inset);
+      inset: var(--ddsweb-button-shadow-position-inset);
+      border-radius: var(--ddsweb-button-border-radius);
+      box-shadow: 0 0 0 var(--ddsweb-button-shadow-width) var(--ddsweb-button-shadow-color);
+      opacity: 0;
+      -webkit-transition: opacity var(--ddsweb-button-transition-duration);
+      transition: opacity var(--ddsweb-button-transition-duration);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:hover:after,
+    [data-mfe="mfe-header"] .eOURfm:focus:after {
+      opacity: 1;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eOURfm:disabled:after {
+      display: none;
+    }
+
+    /*!sc*/
+    data-styled.g18[id="styled__StyledTextButton-sc-8hxn3m-0"] {
+      content: "eOURfm,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hyYFWS {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+
+    /*!sc*/
+    data-styled.g21[id="shared-containers__StyledInnerContainer-sc-93ev6e-2"] {
+      content: "hyYFWS,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH {
+      --ddsweb-button-min-hit-area: 44px;
+      --ddsweb-button-border-radius: 99px;
+      --ddsweb-button-font-family: "TESCO Modern", Arial, sans-serif;
+      --ddsweb-button-font-size: xxx: 12px;
+      xx: 14px;
+      xs: 16px;
+      sm: 20px;
+      md: 24px;
+      lg: 28px;
+      xl: 32px;
+      xxl: 36px;
+      xxxl: 40px;
+      --ddsweb-button-font-weight: 700;
+      --ddsweb-button-transition-duration: 0.3s;
+      --ddsweb-button-shadow-width: 3px;
+      --ddsweb-button-shadow-position-inset: -3px;
+      --ddsweb-button-shadow-color: #00539f;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--ddsweb-button-font-family);
+      font-size: var(--ddsweb-button-font-size);
+      line-height: var(--ddsweb-button-line-height);
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      padding: 0;
+      cursor: pointer;
+      display: block;
+      font-weight: var(--ddsweb-button-font-weight);
+      background: var(--ddsweb-button-background);
+      border: var(--ddsweb-button-border-width) solid var(--ddsweb-button-border-color);
+      color: var(--ddsweb-button-color);
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      --ddsweb-button-color: #007eb3;
+      padding: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH --ddsweb-button-line-height:heading {
+      xs: 1.25;
+      sm: 1.2;
+      md: 1.17;
+      lg: 1.14;
+      xl: 1.13;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH text {
+      xx: 1.57;
+      xs: 1.5;
+      sm: 1.4;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH::-moz-focus-inner {
+      border: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH:disabled,
+    [data-mfe="mfe-header"] .eHuJdH[aria-disabled='true'] {
+      cursor: not-allowed;
+      opacity: 40%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH:before {
+      display: block;
+      z-index: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      min-width: var(--ddsweb-button-min-hit-area);
+      height: 100%;
+      min-height: var(--ddsweb-button-min-hit-area);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      content: '';
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH.with-icon {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH.with-icon:focus,
+    [data-mfe="mfe-header"] .eHuJdH.with-icon:hover {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH:focus,
+    [data-mfe="mfe-header"] .eHuJdH:hover {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH:focus-visible {
+      outline: #007eb3 solid 3px;
+      outline-offset: 1px;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHuJdH[disabled] {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      opacity: 40%;
+    }
+
+    /*!sc*/
+    data-styled.g22[id="styled__StyledLinkButton-sc-mm2jkj-0"] {
+      content: "eHuJdH,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iYIQXI {
+      display: contents;
+    }
+
+    /*!sc*/
+    data-styled.g23[id="styled__StyledIconContainer-sc-rnkc1-0"] {
+      content: "iYIQXI,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX {
+      --ddsweb-button-min-hit-area: 44px;
+      --ddsweb-button-border-radius: 99px;
+      --ddsweb-button-font-family: "TESCO Modern", Arial, sans-serif;
+      --ddsweb-button-font-size: xxx: 12px;
+      xx: 14px;
+      xs: 16px;
+      sm: 20px;
+      md: 24px;
+      lg: 28px;
+      xl: 32px;
+      xxl: 36px;
+      xxxl: 40px;
+      --ddsweb-button-font-weight: 700;
+      --ddsweb-button-transition-duration: 0.3s;
+      --ddsweb-button-shadow-width: 3px;
+      --ddsweb-button-shadow-position-inset: -3px;
+      --ddsweb-button-shadow-color: #00539f;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--ddsweb-button-font-family);
+      font-size: var(--ddsweb-button-font-size);
+      line-height: var(--ddsweb-button-line-height);
+      text-align: left;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      padding: 0;
+      cursor: pointer;
+      display: block;
+      font-weight: var(--ddsweb-button-font-weight);
+      background: var(--ddsweb-button-background);
+      border: var(--ddsweb-button-border-width) solid var(--ddsweb-button-border-color);
+      color: var(--ddsweb-button-color);
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      --ddsweb-button-color: #007eb3;
+      --ddsweb-button-background: transparent;
+      --ddsweb-button-border-color: transparent;
+      --ddsweb-button-border-width: 2px;
+      --ddsweb-button-shadow-width: 3px;
+      --ddsweb-button-icon-container-size: 40px;
+      --ddsweb-button-shadow-color: #00539f;
+      --ddsweb-button-border-radius: 100%;
+      border-radius: var(--ddsweb-button-border-radius);
+      height: var(--ddsweb-button-icon-container-size);
+      width: var(--ddsweb-button-icon-container-size);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX --ddsweb-button-line-height:heading {
+      xs: 1.25;
+      sm: 1.2;
+      md: 1.17;
+      lg: 1.14;
+      xl: 1.13;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX text {
+      xx: 1.57;
+      xs: 1.5;
+      sm: 1.4;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX::-moz-focus-inner {
+      border: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX:disabled,
+    [data-mfe="mfe-header"] .hjXdIX[aria-disabled='true'] {
+      cursor: not-allowed;
+      opacity: 40%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX:before {
+      display: block;
+      z-index: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      min-width: var(--ddsweb-button-min-hit-area);
+      height: 100%;
+      min-height: var(--ddsweb-button-min-hit-area);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      content: '';
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX:after {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      top: var(--ddsweb-button-shadow-position-inset);
+      right: var(--ddsweb-button-shadow-position-inset);
+      bottom: var(--ddsweb-button-shadow-position-inset);
+      left: var(--ddsweb-button-shadow-position-inset);
+      inset: var(--ddsweb-button-shadow-position-inset);
+      border-radius: var(--ddsweb-button-border-radius);
+      box-shadow: 0 0 0 var(--ddsweb-button-shadow-width) var(--ddsweb-button-shadow-color);
+      opacity: 0;
+      -webkit-transition: opacity var(--ddsweb-button-transition-duration);
+      transition: opacity var(--ddsweb-button-transition-duration);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX:hover:after,
+    [data-mfe="mfe-header"] .hjXdIX:focus:after {
+      opacity: 1;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hjXdIX:disabled:after {
+      display: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI {
+      --ddsweb-button-min-hit-area: 44px;
+      --ddsweb-button-border-radius: 99px;
+      --ddsweb-button-font-family: "TESCO Modern", Arial, sans-serif;
+      --ddsweb-button-font-size: xxx: 12px;
+      xx: 14px;
+      xs: 16px;
+      sm: 20px;
+      md: 24px;
+      lg: 28px;
+      xl: 32px;
+      xxl: 36px;
+      xxxl: 40px;
+      --ddsweb-button-font-weight: 700;
+      --ddsweb-button-transition-duration: 0.3s;
+      --ddsweb-button-shadow-width: 3px;
+      --ddsweb-button-shadow-position-inset: -3px;
+      --ddsweb-button-shadow-color: #00539f;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--ddsweb-button-font-family);
+      font-size: var(--ddsweb-button-font-size);
+      line-height: var(--ddsweb-button-line-height);
+      text-align: left;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      padding: 0;
+      cursor: pointer;
+      display: block;
+      font-weight: var(--ddsweb-button-font-weight);
+      background: var(--ddsweb-button-background);
+      border: var(--ddsweb-button-border-width) solid var(--ddsweb-button-border-color);
+      color: var(--ddsweb-button-color);
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      --ddsweb-button-color: #ffffff;
+      --ddsweb-button-background: #00539f;
+      --ddsweb-button-border-color: transparent;
+      --ddsweb-button-border-width: 2px;
+      --ddsweb-button-shadow-width: 3px;
+      --ddsweb-button-icon-container-size: 40px;
+      --ddsweb-button-shadow-color: #00539f;
+      --ddsweb-button-border-radius: 100%;
+      border-radius: var(--ddsweb-button-border-radius);
+      height: var(--ddsweb-button-icon-container-size);
+      width: var(--ddsweb-button-icon-container-size);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI --ddsweb-button-line-height:heading {
+      xs: 1.25;
+      sm: 1.2;
+      md: 1.17;
+      lg: 1.14;
+      xl: 1.13;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI text {
+      xx: 1.57;
+      xs: 1.5;
+      sm: 1.4;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI::-moz-focus-inner {
+      border: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI:disabled,
+    [data-mfe="mfe-header"] .dXJUPI[aria-disabled='true'] {
+      cursor: not-allowed;
+      opacity: 40%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI:before {
+      display: block;
+      z-index: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      min-width: var(--ddsweb-button-min-hit-area);
+      height: 100%;
+      min-height: var(--ddsweb-button-min-hit-area);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      content: '';
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI:after {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      top: var(--ddsweb-button-shadow-position-inset);
+      right: var(--ddsweb-button-shadow-position-inset);
+      bottom: var(--ddsweb-button-shadow-position-inset);
+      left: var(--ddsweb-button-shadow-position-inset);
+      inset: var(--ddsweb-button-shadow-position-inset);
+      border-radius: var(--ddsweb-button-border-radius);
+      box-shadow: 0 0 0 var(--ddsweb-button-shadow-width) var(--ddsweb-button-shadow-color);
+      opacity: 0;
+      -webkit-transition: opacity var(--ddsweb-button-transition-duration);
+      transition: opacity var(--ddsweb-button-transition-duration);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI:hover:after,
+    [data-mfe="mfe-header"] .dXJUPI:focus:after {
+      opacity: 1;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dXJUPI:disabled:after {
+      display: none;
+    }
+
+    /*!sc*/
+    data-styled.g24[id="styled__StyledIconButton-sc-rnkc1-1"] {
+      content: "hjXdIX,dXJUPI,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .kFHSAj {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      overflow: visible;
+      stroke-width: 1.2;
+      -webkit-transform: rotate(0);
+      -ms-transform: rotate(0);
+      transform: rotate(0);
+      -webkit-transition: -webkit-transform 0.3s;
+      -webkit-transition: transform 0.3s;
+      transition: transform 0.3s;
+    }
+
+    /*!sc*/
+    data-styled.g31[id="styled__SVG-sc-1fqfvah-1"] {
+      content: "kFHSAj,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fnQEdV {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #00539f;
+      cursor: pointer;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fnQEdV:focus,
+    [data-mfe="mfe-header"] .fnQEdV:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fnQEdV:visited {
+      color: #00539f;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fnQEdV:visited:focus,
+    [data-mfe="mfe-header"] .fnQEdV:visited:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    data-styled.g35[id="styled__Anchor-sc-1uo0wmj-0"] {
+      content: "fnQEdV,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh {
+      -webkit-font-smoothing: antialiased;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: inherit;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #00539f;
+      cursor: pointer;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      line-height: inherit;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      display: inline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh:focus,
+    [data-mfe="mfe-header"] .dJmvIh:hover,
+    [data-mfe="mfe-header"] .dJmvIh:focus-visible {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh:visited:focus,
+    [data-mfe="mfe-header"] .dJmvIh:visited:hover {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh:not([aria-disabled]):focus-visible {
+      outline: 3px solid #00539f;
+      outline-offset: 1px;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh:focus,
+    [data-mfe="mfe-header"] .dJmvIh:hover {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 1px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dJmvIh[aria-disabled] {
+      color: #cccccc;
+    }
+
+    /*!sc*/
+    data-styled.g36[id="styled__Anchor-sc-10ozqhd-0"] {
+      content: "dJmvIh,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: bold;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      font-weight: 700;
+      display: inline-block;
+      padding-right: 0;
+      --ddsweb-button-font-size: 14px;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      height: 100%;
+      white-space: nowrap;
+      padding: 0 20px;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW:focus,
+    [data-mfe="mfe-header"] .eHmxzW:hover {
+      color: #ffffff;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW:visited {
+      color: #ffffff;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW:visited:focus,
+    [data-mfe="mfe-header"] .eHmxzW:visited:hover {
+      color: #ffffff;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .eHmxzW:hover .ddsweb-link__text {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW[disabled],
+    [data-mfe="mfe-header"] .eHmxzW:disabled {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW .ddsweb-button__container {
+      padding: 0 20px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW .ddsweb-button__icon-container {
+      --ddsweb-button-icon-margin: 8px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW svg * {
+      stroke: currentcolor;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHmxzW:focus,
+    [data-mfe="mfe-header"] .eHmxzW:hover {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #00539f;
+      cursor: pointer;
+      font-weight: bold;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      font-weight: 700;
+      display: inline-block;
+      padding-right: 22px;
+      border-bottom: 4px solid transparent;
+      line-height: 1.3;
+      padding-bottom: 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-top: 12px;
+      -webkit-transition: border 0.3s;
+      transition: border 0.3s;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      padding-right: 36px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN:focus,
+    [data-mfe="mfe-header"] .ditbzN:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN:visited {
+      color: #00539f;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN:visited:focus,
+    [data-mfe="mfe-header"] .ditbzN:visited:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .ditbzN:hover .ddsweb-link__text {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN[disabled],
+    [data-mfe="mfe-header"] .ditbzN:disabled {
+      color: #666666;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN:focus,
+    [data-mfe="mfe-header"] .ditbzN:hover {
+      border-bottom-color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ditbzN:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .ditbzN:hover .ddsweb-link__text {
+      color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #007eb3;
+      cursor: pointer;
+      font-weight: bold;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      font-weight: 700;
+      display: inline-block;
+      padding-right: 22px;
+      border-bottom: 4px solid transparent;
+      line-height: 1.3;
+      padding-bottom: 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-top: 12px;
+      -webkit-transition: border 0.3s;
+      transition: border 0.3s;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      border-bottom-color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp:focus,
+    [data-mfe="mfe-header"] .eNVEHp:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp:visited {
+      color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp:visited:focus,
+    [data-mfe="mfe-header"] .eNVEHp:visited:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .eNVEHp:hover .ddsweb-link__text {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp[disabled],
+    [data-mfe="mfe-header"] .eNVEHp:disabled {
+      color: #666666;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp .ddsweb-link__text {
+      color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp:focus,
+    [data-mfe="mfe-header"] .eNVEHp:hover {
+      border-bottom-color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNVEHp:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .eNVEHp:hover .ddsweb-link__text {
+      color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #00539f;
+      cursor: pointer;
+      font-weight: bold;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      font-weight: 700;
+      display: inline-block;
+      padding-right: 22px;
+      border-bottom: 4px solid transparent;
+      line-height: 1.3;
+      padding-bottom: 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-top: 12px;
+      -webkit-transition: border 0.3s;
+      transition: border 0.3s;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN:focus,
+    [data-mfe="mfe-header"] .cqVSrN:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN:visited {
+      color: #00539f;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN:visited:focus,
+    [data-mfe="mfe-header"] .cqVSrN:visited:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .cqVSrN:hover .ddsweb-link__text {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN[disabled],
+    [data-mfe="mfe-header"] .cqVSrN:disabled {
+      color: #666666;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN:focus,
+    [data-mfe="mfe-header"] .cqVSrN:hover {
+      border-bottom-color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cqVSrN:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .cqVSrN:hover .ddsweb-link__text {
+      color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      color: #00539f;
+      cursor: pointer;
+      font-weight: bold;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+      font-weight: 700;
+      display: inline-block;
+      padding-right: 0;
+      border-bottom: 4px solid transparent;
+      line-height: 1.3;
+      padding-bottom: 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-top: 12px;
+      -webkit-transition: border 0.3s;
+      transition: border 0.3s;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF:focus,
+    [data-mfe="mfe-header"] .cMaHPF:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF:visited {
+      color: #00539f;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF:visited:focus,
+    [data-mfe="mfe-header"] .cMaHPF:visited:hover {
+      color: #007eb3;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .cMaHPF:hover .ddsweb-link__text {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF[disabled],
+    [data-mfe="mfe-header"] .cMaHPF:disabled {
+      color: #666666;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF:focus,
+    [data-mfe="mfe-header"] .cMaHPF:hover {
+      border-bottom-color: #007eb3;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cMaHPF:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .cMaHPF:hover .ddsweb-link__text {
+      color: #007eb3;
+    }
+
+    /*!sc*/
+    data-styled.g37[id="styled__Anchor-sc-1i711qa-0"] {
+      content: "eHmxzW,ditbzN,eNVEHp,cqVSrN,cMaHPF,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .leWqRc {
+      display: inline;
+    }
+
+    /*!sc*/
+    data-styled.g38[id="styled__Text-sc-1i711qa-1"] {
+      content: "leWqRc,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gjzZGx {
+      -webkit-font-smoothing: antialiased;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: inherit;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      background-color: #00539f;
+      border: none;
+      color: #ffffff;
+      font-weight: bold;
+      max-width: 100%;
+      height: 40px;
+      border-radius: 24px;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gjzZGx:focus,
+    [data-mfe="mfe-header"] .gjzZGx:hover {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gjzZGx:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .gjzZGx:hover .ddsweb-link__text {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gjzZGx:after {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      --ddsweb-link-shadow-position-inset: -1px;
+      top: var(--ddsweb-link-shadow-position-inset);
+      right: var(--ddsweb-link-shadow-position-inset);
+      bottom: var(--ddsweb-link-shadow-position-inset);
+      left: var(--ddsweb-link-shadow-position-inset);
+      inset: var(--ddsweb-link-shadow-position-inset);
+      border-radius: 99px;
+      box-shadow: 0 0 0 3px #00539f;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gjzZGx:hover:after {
+      opacity: 1;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gjzZGx:disabled:after {
+      display: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jLaWMA {
+      -webkit-font-smoothing: antialiased;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: inherit;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      pointer-events: auto;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      background-color: #ffffff;
+      border: 2px solid #00539f;
+      color: #00539f;
+      font-weight: bold;
+      max-width: 100%;
+      height: 40px;
+      border-radius: 24px;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jLaWMA:focus,
+    [data-mfe="mfe-header"] .jLaWMA:hover {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jLaWMA:focus .ddsweb-link__text,
+    [data-mfe="mfe-header"] .jLaWMA:hover .ddsweb-link__text {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jLaWMA:after {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      --ddsweb-link-shadow-position-inset: -3px;
+      top: var(--ddsweb-link-shadow-position-inset);
+      right: var(--ddsweb-link-shadow-position-inset);
+      bottom: var(--ddsweb-link-shadow-position-inset);
+      left: var(--ddsweb-link-shadow-position-inset);
+      inset: var(--ddsweb-link-shadow-position-inset);
+      border-radius: 99px;
+      box-shadow: 0 0 0 3px #00539f;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jLaWMA:hover:after {
+      opacity: 1;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jLaWMA:disabled:after {
+      display: none;
+    }
+
+    /*!sc*/
+    data-styled.g40[id="styled__Anchor-sc-1h9djka-0"] {
+      content: "gjzZGx,jLaWMA,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .xDfEc {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline;
+      max-width: calc(100% + 1px);
+    }
+
+    /*!sc*/
+    data-styled.g41[id="styled__Text-sc-1h9djka-1"] {
+      content: "xDfEc,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fTCegf {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      display: inline-block;
+      font-size: 14px;
+      height: 100%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fTCegf:nth-child(0) {
+      margin-right: auto;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fTCegf:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bNAsHU {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: inline;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bNAsHU:nth-child(1) {
+      margin-right: auto;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bNAsHU .ddsweb-menu__menu-item-popup-icon-container {
+      right: 16px;
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .bNAsHU {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .bNAsHU {
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .bNAsHU {
+        display: none !important;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bEiibM {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: inline;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bEiibM:nth-child(1) {
+      margin-right: auto;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bEiibM .ddsweb-menu__menu-item-popup-icon-container {
+      right: 16px;
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .bEiibM {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .esFBEz {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: inline;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .esFBEz:nth-child(1) {
+      margin-right: auto;
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .esFBEz {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hfbuxt {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: inline;
+      padding-left: 8px;
+      padding-right: 8px;
+      display: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hfbuxt:nth-child(1) {
+      margin-right: auto;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hfbuxt .ddsweb-menu__menu-item-popup-icon-container {
+      right: 16px;
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .hfbuxt {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .hfbuxt {
+        display: none !important;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g43[id="styled__ListItem-sc-1kz2bv3-0"] {
+      content: "fTCegf,bNAsHU,bEiibM,esFBEz,hfbuxt,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .coJPfO {
+      right: 8px;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+    }
+
+    /*!sc*/
+    data-styled.g45[id="styled__PopupIconContainer-sc-1kz2bv3-2"] {
+      content: "coJPfO,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gwdBPV {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      height: 100%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bPKRyp {
+      background-color: #ffffff;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+      overflow: hidden;
+      z-index: auto;
+    }
+
+    /*!sc*/
+    @media (max-width: 1259px) {
+      [data-mfe="mfe-header"] .bPKRyp li:nth-child(n + 7) {
+        display: none;
+      }
+
+      [data-mfe="mfe-header"] .bPKRyp li:last-child {
+        display: inline;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .bPKRyp {
+        height: 44px;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .lfnTQX {
+      background-color: #ffffff;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+      overflow: hidden;
+      z-index: auto;
+    }
+
+    /*!sc*/
+    @media (min-width: 1512px) {
+      [data-mfe="mfe-header"] .lfnTQX li:nth-child(n + 14) {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (max-width: 1259px) {
+      [data-mfe="mfe-header"] .lfnTQX li:nth-child(n + 9) {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (max-width: 1511px) {
+      [data-mfe="mfe-header"] .lfnTQX li:nth-child(n + 11) {
+        display: none;
+      }
+
+      [data-mfe="mfe-header"] .lfnTQX li:last-child {
+        display: inline;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .lfnTQX {
+        height: 44px;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g46[id="styled__UnorderedList-sc-l5k0kv-0"] {
+      content: "gwdBPV,bPKRyp,lfnTQX,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cEIMOy {
+      box-sizing: border-box;
+      display: table-row;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-left: -12px;
+      margin-right: -12px;
+      position: relative;
+    }
+
+    /*!sc*/
+    data-styled.g47[id="styled-sc-py8efq-0"] {
+      content: "cEIMOy,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gBDfFx {
+      box-sizing: border-box;
+      min-height: 1px;
+      padding-left: 0;
+      padding-right: 0;
+      position: relative;
+      width: 100%;
+    }
+
+    /*!sc*/
+    @media (min-width: 320px) {
+    }
+
+    /*!sc*/
+    @media (min-width: 504px) {
+      [data-mfe="mfe-header"] .gBDfFx {
+        width: 100.00008%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .gBDfFx {
+        width: 100.00008%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .gBDfFx {
+        width: 100.00008%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1260px) {
+      [data-mfe="mfe-header"] .gBDfFx {
+        width: 100.00008%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1512px) {
+      [data-mfe="mfe-header"] .gBDfFx {
+        width: 100.00008%;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g48[id="styled-sc-qn2y0o-0"] {
+      content: "gBDfFx,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .imHKcE {
+      box-sizing: border-box;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 12px;
+      padding-right: 12px;
+      position: relative;
+      width: 100%;
+    }
+
+    /*!sc*/
+    @media (min-width: 320px) {
+      [data-mfe="mfe-header"] .imHKcE {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 504px) {
+      [data-mfe="mfe-header"] .imHKcE {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .imHKcE {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .imHKcE {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1260px) {
+      [data-mfe="mfe-header"] .imHKcE {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1512px) {
+      [data-mfe="mfe-header"] .imHKcE {
+        width: 1512px;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .haBjuD {
+      box-sizing: border-box;
+      padding-left: 12px;
+      padding-right: 12px;
+      position: relative;
+      width: 100%;
+    }
+
+    /*!sc*/
+    @media (min-width: 320px) {
+      [data-mfe="mfe-header"] .haBjuD {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 504px) {
+      [data-mfe="mfe-header"] .haBjuD {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .haBjuD {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .haBjuD {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1260px) {
+      [data-mfe="mfe-header"] .haBjuD {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1512px) {
+      [data-mfe="mfe-header"] .haBjuD {
+        width: 100%;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g49[id="styled-sc-5ny0fy-0"] {
+      content: "imHKcE,haBjuD,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hDzYZz {
+      background-color: #00539f;
+      height: 4px;
+      width: 100%;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hDzYZz::after {
+      clear: both;
+      content: ' ';
+      display: table;
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .hDzYZz {
+        height: 32px;
+      }
+    }
+
+    /*!sc*/
+    @media (max-width: 1007px) {
+      [data-mfe="mfe-header"] .hDzYZz {
+        height: 4px;
+      }
+
+      [data-mfe="mfe-header"] .hDzYZz .ddsweb-global-header__grid {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hDzYZz.hDzYZz.hDzYZz a:focus,
+    [data-mfe="mfe-header"] .hDzYZz.hDzYZz.hDzYZz a:visited {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    data-styled.g50[id="styled__Container-sc-vs6ond-0"] {
+      content: "hDzYZz,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fYYMAX {
+      height: 100%;
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .fYYMAX {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g51[id="styled__StyledGrid-sc-vs6ond-1"] {
+      content: "fYYMAX,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .kueLGr {
+      height: 100%;
+    }
+
+    /*!sc*/
+    data-styled.g52[id="styled__StyledRow-sc-vs6ond-2"] {
+      content: "kueLGr,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .haREdz {
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      height: 100%;
+      -webkit-box-pack: end;
+      -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .haREdz {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g53[id="styled__StyledColumn-sc-vs6ond-3"] {
+      content: "haREdz,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dvzzQp {
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: calc(1em + 0.25rem);
+      margin: 0;
+      --ddsweb-heading-color: #333333;
+      color: var(--ddsweb-heading-color, inherit);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eLRLmI {
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: calc(1em + 0.25rem);
+      margin: 0;
+      --ddsweb-heading-color: #333333;
+      color: var(--ddsweb-heading-color, inherit);
+    }
+
+    /*!sc*/
+    data-styled.g64[id="component__StyledHeading-sc-1t0ixqu-0"] {
+      content: "dvzzQp,eLRLmI,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hcLDKj {
+      box-sizing: border-box;
+      padding: 20px 16px;
+      background-color: #f6f6f6;
+    }
+
+    /*!sc*/
+    data-styled.g65[id="styled__TopContainer-sc-rtapk4-0"] {
+      content: "hcLDKj,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .kjafSw {
+      box-sizing: border-box;
+      display: grid;
+      width: 100%;
+      padding: 0;
+      grid-row-gap: 20px;
+      grid-template-rows: repeat(2, auto);
+      grid-template-columns: 100%;
+      max-width: 1512px;
+      margin: 0 auto;
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .kjafSw {
+        grid-template-rows: 100%;
+        grid-template-columns: repeat(2, auto);
+        grid-row-gap: unset;
+        grid-column-gap: 20px;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g66[id="styled__Container-sc-rtapk4-1"] {
+      content: "kjafSw,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jsITqr {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 100%;
+      grid-row-gap: 16px;
+    }
+
+    /*!sc*/
+    data-styled.g67[id="styled__InnerContainer-sc-rtapk4-2"] {
+      content: "jsITqr,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iLWIOb {
+      display: grid;
+      grid-template-rows: repeat(2, auto);
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas: 'accept reject''purpose purpose';
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0;
+      grid-column-gap: 10px;
+      grid-row-gap: 12px;
+      padding-top: 4px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iLWIOb > :nth-child(1) {
+      grid-area: accept;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iLWIOb > :nth-child(2) {
+      grid-area: reject;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iLWIOb > :nth-child(3) {
+      grid-area: purpose;
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .iLWIOb {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        row-gap: 12px;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        justify-self: flex-end;
+        width: 100%;
+        padding-top: 0;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g68[id="styled__ButtonContainer-sc-rtapk4-3"] {
+      content: "iLWIOb,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .imQmJm {
+      min-width: 140px;
+      width: 100%;
+      min-height: 40px;
+      margin: 0 auto;
+    }
+
+    /*!sc*/
+    data-styled.g69[id="styled__ActionButton-sc-rtapk4-4"] {
+      content: "imQmJm,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iVzTce {
+      padding: 0;
+      padding-top: 12px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .ieDsWN {
+      padding: 0;
+      padding-top: 8px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    /*!sc*/
+    data-styled.g70[id="styled__BodyContent-sc-rtapk4-5"] {
+      content: "iVzTce,ieDsWN,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dYOoZq {
+      margin: 0 auto;
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dYOoZq:hover {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dYOoZq:focus {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dYOoZq:disabled {
+      -webkit-text-decoration: underline;
+      text-decoration: underline;
+    }
+
+    /*!sc*/
+    data-styled.g71[id="styled__ShowPurposes-sc-rtapk4-6"] {
+      content: "dYOoZq,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jlJmWG {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jlJmWG[aria-disabled] {
+      color: #666666;
+    }
+
+    /*!sc*/
+    data-styled.g72[id="styled__StyledInlineLink-sc-rtapk4-7"] {
+      content: "jlJmWG,"
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .cdNjnW {
+        min-height: var(--cookie-banner-height);
+      }
+    }
+
+    /*!sc*/
+    data-styled.g73[id="CookieBanner__Sizer-mfe-header__sc-11yf6yg-0"] {
+      content: "cdNjnW,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cJDOSC {
+      position: relative;
+      z-index: 0;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px -2px 12px 0px;
+      width: 100%;
+      width: 100%;
+      bottom: calc(var(--amend-order-banner-visible) * var(--amend-order-banner-height));
+    }
+
+    /*!sc*/
+    @media (max-width: 755px) {
+      [data-mfe="mfe-header"] .cJDOSC {
+        position: fixed;
+        z-index: 2;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .cJDOSC {
+        top: 0;
+        bottom: initial;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cJDOSC .ddsweb-cookies-notification__buttons-container {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cJDOSC section {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    /*!sc*/
+    data-styled.g74[id="CookieBanner__Container-mfe-header__sc-11yf6yg-1"] {
+      content: "cJDOSC,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jTBIHP {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      color: #333333;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-block;
+      border: 0;
+      -webkit-clip: rect(0 0 0 0);
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    /*!sc*/
+    data-styled.g75[id="styled__StyledLabel-sc-1bpek9-0"] {
+      content: "jTBIHP,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hZAReM {
+      margin-top: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hZAReM > * {
+      margin-bottom: 8px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hZAReM > *:last-child {
+      margin-bottom: 0;
+    }
+
+    /*!sc*/
+    data-styled.g79[id="styled__Children-sc-1rbigln-3"] {
+      content: "hZAReM,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .boPBPS {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    /*!sc*/
+    data-styled.g82[id="styled__RootContainer-sc-rn4nje-0"] {
+      content: "boPBPS,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .Fygov {
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    /*!sc*/
+    data-styled.g83[id="styled__SearchContainer-sc-rn4nje-1"] {
+      content: "Fygov,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bBDpCn {
+      display: inline-block;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      margin-right: 12px;
+    }
+
+    /*!sc*/
+    data-styled.g85[id="styled__InputContainer-sc-rn4nje-3"] {
+      content: "bBDpCn,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .kHQfXT {
+      -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+      align-self: flex-start;
+      display: inline-block;
+      margin-top: 0;
+    }
+
+    /*!sc*/
+    data-styled.g86[id="styled__ButtonContainer-sc-rn4nje-4"] {
+      content: "kHQfXT,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 1.25;
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: #ffffff;
+      background-image: none;
+      border-radius: 0;
+      color: #666666;
+      width: 100%;
+      border: 1px solid #666666;
+      -webkit-transition: border 0.3s, box-shadow 0.3s;
+      transition: border 0.3s, box-shadow 0.3s;
+      line-height: normal;
+      height: 40px;
+      padding: 0 12px;
+      padding-right: 48px;
+      color: #666666;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL::-moz-focus-inner {
+      border: 0;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL:invalid,
+    [data-mfe="mfe-header"] .gSZJOL:-moz-submit-invalid,
+    [data-mfe="mfe-header"] .gSZJOL:-moz-ui-invalid {
+      box-shadow: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL[disabled],
+    [data-mfe="mfe-header"] .gSZJOL:disabled {
+      cursor: default;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL::-webkit-input-placeholder {
+      color: #666666;
+      font-family: inherit;
+      font-style: italic;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL::-moz-placeholder {
+      color: #666666;
+      font-family: inherit;
+      font-style: italic;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL:-ms-input-placeholder {
+      color: #666666;
+      font-family: inherit;
+      font-style: italic;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL::placeholder {
+      color: #666666;
+      font-family: inherit;
+      font-style: italic;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL::selection {
+      background-color: rgba(0, 126, 179, 0.4);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .gSZJOL:focus {
+      border: 1px solid #007eb3;
+      box-shadow: 0 0 0 4px rgba(0, 126, 179, 0.4);
+    }
+
+    /*!sc*/
+    data-styled.g87[id="styled__StyledInput-sc-7h0jvk-0"] {
+      content: "gSZJOL,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jATFwd {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      z-index: 1;
+      height: 24px;
+      width: 24px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jATFwd svg {
+      height: 100%;
+      width: 100%;
+    }
+
+    /*!sc*/
+    data-styled.g89[id="component__Icon-sc-19wd3h0-0"] {
+      content: "jATFwd,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iDhbjP {
+      right: 12px;
+    }
+
+    /*!sc*/
+    data-styled.g91[id="component__RightComponent-sc-19wd3h0-2"] {
+      content: "iDhbjP,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .kMySUy {
+      position: relative;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+    }
+
+    /*!sc*/
+    data-styled.g92[id="component__Wrapper-sc-19wd3h0-3"] {
+      content: "kMySUy,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fOTwss .ddsweb-search-input__input:focus {
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fOTwss .ddsweb-search-input__results-dropdown-container {
+      background-color: transparent;
+      left: 0;
+      padding-top: 40px;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      -webkit-transition: border 0.3s, box-shadow 0.3s;
+      transition: border 0.3s, box-shadow 0.3s;
+      width: 100%;
+    }
+
+    /*!sc*/
+    data-styled.g94[id="styled__RootContainer-sc-14pzv9j-0"] {
+      content: "fOTwss,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jzklnU {
+      padding-right: 28px;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jzklnU::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jzklnU::-webkit-search-decoration {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jzklnU::-ms-clear {
+      display: none;
+    }
+
+    /*!sc*/
+    data-styled.g95[id="styled__StyledInput-sc-14pzv9j-1"] {
+      content: "jzklnU,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .WgNjT:has(.globalSearchBar) + form .ddsweb-button--link-button {
+      font-weight: 700;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .WgNjT:has(.globalSearchBar) + form .ddsweb-button--link-button:focus {
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+
+    /*!sc*/
+    data-styled.g101[id="search__BaseSearchForm-mfe-header__sc-bp4hj5-0"] {
+      content: "WgNjT,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .RqzNK {
+      font-family: "TESCO Modern", Arial, sans-serif;
+      display: none;
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .RqzNK {
+        display: block;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g102[id="search__MultiSearch-mfe-header__sc-bp4hj5-1"] {
+      content: "RqzNK,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eHQLNt {
+      color: var(--ddsweb-theme-colors-tesco-blue);
+    }
+
+    /*!sc*/
+    data-styled.g103[id="search__MultiSearchButton-mfe-header__sc-bp4hj5-2"] {
+      content: "eHQLNt,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hmZQHl {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      gap: 4px;
+      width: calc(100vw - 494px);
+      max-width: 749px;
+      min-width: 540px;
+    }
+
+    /*!sc*/
+    @media (max-width: 1007px) {
+      [data-mfe="mfe-header"] .hmZQHl {
+        grid-area: search;
+      }
+    }
+
+    /*!sc*/
+    @media (max-width: 1007px) {
+      [data-mfe="mfe-header"] .hmZQHl {
+        width: 100%;
+        max-width: 100%;
+        min-width: initial;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g106[id="search__StyledSearchBarMultiSearchLinkWrapper-mfe-header__sc-bp4hj5-5"] {
+      content: "hmZQHl,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .HoZiN,
+    [data-mfe="mfe-header"] .HoZiN svg {
+      width: 68px;
+      height: 19px;
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+
+      [data-mfe="mfe-header"] .HoZiN,
+      [data-mfe="mfe-header"] .HoZiN svg {
+        width: 121px;
+        height: 36px;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g111[id="menu-button-and-logo__LogoLinkBase-mfe-header__sc-1raaa1i-0"] {
+      content: "HoZiN,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bLIKKB svg g > g:nth-child(6) > path {
+      fill: #ff8f1c;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bLIKKB svg g > g:nth-child(5) > path {
+      fill: #f3e600;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bLIKKB svg g > g:nth-child(4) > path {
+      fill: #3a913f;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bLIKKB svg g > g:nth-child(3) > path {
+      fill: #1e22aa;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bLIKKB svg g > g:nth-child(2) > path {
+      fill: #87189d;
+    }
+
+    /*!sc*/
+    data-styled.g112[id="menu-button-and-logo__LogoLinkPrideVersion-mfe-header__sc-1raaa1i-1"] {
+      content: "bLIKKB,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eRxlhy {
+      grid-area: logo-and-menu-button;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 8px;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eRxlhy .tablet-menu-button,
+    [data-mfe="mfe-header"] .eRxlhy .tablet-large-menu-button {
+      display: inherit;
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .eRxlhy .tablet-menu-button {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .eRxlhy .tablet-large-menu-button {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g113[id="menu-button-and-logo__StyledMenuButtonLogoWrapper-mfe-header__sc-1raaa1i-2"] {
+      content: "eRxlhy,"
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .gZeLWO {
+        display: block;
+        margin-top: 44px;
+        border-top: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        background-color: #f6f6f6;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g114[id="mast-grid-wrapper__GridEmptyPanel-mfe-header__sc-1dktiw4-0"] {
+      content: "gZeLWO,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .KKlnf {
+      grid-area: empty-panel-right;
+    }
+
+    /*!sc*/
+    data-styled.g115[id="mast-grid-wrapper__GridEmptyPanelRight-mfe-header__sc-1dktiw4-1"] {
+      content: "KKlnf,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .FKRfT {
+      grid-area: empty-panel-left;
+    }
+
+    /*!sc*/
+    data-styled.g116[id="mast-grid-wrapper__GridEmptyPanelLeft-mfe-header__sc-1dktiw4-2"] {
+      content: "FKRfT,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .etepZl {
+      position: relative;
+      width: 100%;
+      display: grid;
+      grid-template-areas: '. responsiveGrid .''empty-panel-left desktopMenu empty-panel-right';
+    }
+
+    /*!sc*/
+    @media all {
+      [data-mfe="mfe-header"] .etepZl {
+        grid-template-columns: 0 auto 0;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1260px) {
+      [data-mfe="mfe-header"] .etepZl {
+        grid-template-columns: 1fr minmax(0, var(--header-desktop-large-max-width)) 1fr;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g117[id="mast-grid-wrapper__CenteredMaxWidthGrid-mfe-header__sc-1dktiw4-3"] {
+      content: "etepZl,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .bJJACo {
+      display: grid;
+      grid-area: desktopMenu;
+    }
+
+    /*!sc*/
+    data-styled.g118[id="styled__DesktopMenuWrapper-mfe-header__sc-9t6bs6-0"] {
+      content: "bJJACo,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .eNvXC {
+      grid-area: responsiveGrid;
+      display: grid;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 8px 12px 12px;
+      gap: 12px;
+      grid-template-areas: 'logo-and-menu-button . auth-basket icon''search search search search';
+      grid-template-columns: auto 1fr auto auto;
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .eNvXC {
+        padding: 16px;
+        gap: 24px;
+        grid-template-areas: 'logo-and-menu-button search auth-basket';
+        grid-template-columns: 1fr minmax(0, var(--header-desktop-max-width)) 1fr;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g119[id="styled__MastheadGrid-mfe-header__sc-9t6bs6-1"] {
+      content: "eNvXC,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hqrrGC {
+      display: none;
+    }
+
+    /*!sc*/
+    @media (max-width: 503px) {
+      [data-mfe="mfe-header"] .hqrrGC {
+        grid-area: auth-basket;
+        display: block;
+        border-width: 0;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g120[id="styled__AccountIcon-mfe-header__sc-9t6bs6-2"] {
+      content: "hqrrGC,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .jzaXxp {
+      display: none;
+    }
+
+    /*!sc*/
+    @media (max-width: 1007px) {
+      [data-mfe="mfe-header"] .jzaXxp {
+        grid-area: icon;
+        display: block;
+        border-width: 1px;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g121[id="styled__StoreLocatorIcon-mfe-header__sc-9t6bs6-3"] {
+      content: "jzaXxp,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .cFFoqV {
+      display: none;
+      grid-area: none;
+    }
+
+    /*!sc*/
+    @media (min-width: 504px) {
+      [data-mfe="mfe-header"] .cFFoqV {
+        grid-area: auth-basket;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 12px;
+        -webkit-align-self: start;
+        -ms-flex-item-align: start;
+        align-self: start;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g122[id="styled__StyledAuthWrapper-mfe-header__sc-9t6bs6-4"] {
+      content: "cFFoqV,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dyuRdD {
+      border-bottom: 1px solid #cccccc;
+      font-family: "TESCO Modern", Arial, sans-serif;
+      display: none;
+    }
+
+    /*!sc*/
+    @media (min-width: 1512px) {
+      [data-mfe="mfe-header"] .dyuRdD .ddsweb-menu__menu-item:has(#ddsweb-main-menu-more-link) {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1008px) {
+      [data-mfe="mfe-header"] .dyuRdD {
+        display: block;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dyuRdD .ddsweb-modal__mask {
+      background: transparent;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dyuRdD .ddsweb-modal__modal-container {
+      position: absolute;
+      left: 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dyuRdD .ddsweb-modal__inner-container {
+      margin: auto;
+      border-bottom: none;
+      max-width: var(--header-desktop-large-max-width);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dyuRdD [id$='utility-direct-clothing'] {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      gap: var(--ddsweb-theme-spacing-xs);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .dyuRdD [id$='utility-direct-clothing']:before {
+      content: 'New';
+      font-weight: var(--ddsweb-theme-font-weight-heading);
+      font-size: var(--ddsweb-theme-font-size-next-text-xs);
+      line-height: var(--ddsweb-theme-line-height-next-heading);
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      height: var(--ddsweb-tc-tag-height, 20px);
+      margin: 0;
+      padding: 0 var(--ddsweb-theme-spacing-xs);
+      padding-bottom: 1px;
+      background-color: var(--ddsweb-theme-colors-black);
+      color: var(--ddsweb-theme-colors-white);
+    }
+
+    /*!sc*/
+    data-styled.g166[id="NavigationMenu__StyledNavigationMenu-mfe-header__sc-1avyd18-0"] {
+      content: "dyuRdD,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fhrfVD {
+      font-family: "TESCO Modern", Arial, sans-serif;
+      background-color: #f6f6f6;
+      font-size: 14px;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fhrfVD ul {
+      background-color: #f6f6f6;
+      height: 40px;
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fhrfVD li {
+      background-color: inherit;
+      white-space: nowrap;
+    }
+
+    /*!sc*/
+    @media (max-width: 1007px) {
+      [data-mfe="mfe-header"] .fhrfVD {
+        display: none;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 1512px) {
+      [data-mfe="mfe-header"] .fhrfVD li:last-child {
+        display: inline;
+      }
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fhrfVD .ddsweb-modal__mask {
+      background: transparent;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fhrfVD .ddsweb-modal__modal-container {
+      position: absolute;
+      left: 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .fhrfVD .ddsweb-modal__inner-container {
+      margin: auto;
+      border-bottom: none;
+      max-width: var(--header-desktop-large-max-width);
+    }
+
+    /*!sc*/
+    data-styled.g171[id="styles__StyledMainMenu-mfe-header__sc-1a1xoqy-0"] {
+      content: "fhrfVD,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .iiUAx {
+      position: fixed;
+      z-index: 30;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    /*!sc*/
+    data-styled.g173[id="Overlay__StyledDialogOverlay-mfe-header__sc-138jr6s-0"] {
+      content: "iiUAx,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .CvuaZ {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      border-top: 2px solid #007eb3;
+      background: #ffffff;
+      border-bottom: 4px solid #007eb3;
+    }
+
+    /*!sc*/
+    data-styled.g181[id="styles__StyledOverlay-mfe-header__sc-1ymia4p-0"] {
+      content: "CvuaZ,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .hPEIUn {
+      --amend-order-banner-visible: 0;
+      --amend-order-banner-height: 197px;
+      --cookie-banner-visible: 1;
+    }
+
+    /*!sc*/
+    @media (min-width: 504px) {
+      [data-mfe="mfe-header"] .hPEIUn {
+        --amend-order-banner-height: 137px;
+      }
+    }
+
+    /*!sc*/
+    @media (min-width: 756px) {
+      [data-mfe="mfe-header"] .hPEIUn {
+        --amend-order-banner-height: 65px;
+        --cookie-banner-height: 192px;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g199[id="BannerContainer__Container-mfe-header__sc-1aw43yw-0"] {
+      content: "hPEIUn,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-header"] .luKfC {
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: none;
+      max-width: var(--header-desktop-large-max-width);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    /*!sc*/
+    data-styled.g200[id="CookieBanner__StyledConsentBanner-mfe-header__sc-11yf6yg-2"] {
+      content: "luKfC,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .cMXoHV {
+      padding: 12px;
+      border-bottom: 1px solid #cccccc;
+      background-color: #ffffff;
+    }
+
+    /*!sc*/
+    data-styled.g4[id="style__BasketSummaryWrapper-mfe-basket__sc-1kctg46-0"] {
+      content: "cMXoHV,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .dOpBHu {
+      display: grid;
+      grid-template-columns: min-content 1fr;
+      white-space: nowrap;
+      min-height: calc(2 * 20px);
+    }
+
+    /*!sc*/
+    data-styled.g5[id="style__HeadingsWrapper-mfe-basket__sc-1kctg46-1"] {
+      content: "dOpBHu,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .bZJGhb {
+      display: grid;
+      margin-left: 8px;
+    }
+
+    /*!sc*/
+    data-styled.g6[id="style__GuidePriceWrapper-mfe-basket__sc-1kctg46-2"] {
+      content: "bZJGhb,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .frIJmE {
+      font-size: 16px;
+      color: #00539f;
+      line-height: 1;
+      font-weight: bold;
+    }
+
+    /*!sc*/
+    data-styled.g7[id="style__PriceBodyText-mfe-basket__sc-1kctg46-3"] {
+      content: "frIJmE,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .hITafP {
+      line-height: 20px;
+    }
+
+    /*!sc*/
+    data-styled.g8[id="style__GuidePriceBodyHeader-mfe-basket__sc-1kctg46-4"] {
+      content: "hITafP,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .hGyNAT {
+      font-size: 12px;
+      color: #666666;
+      font-weight: normal;
+      line-height: 16px;
+    }
+
+    /*!sc*/
+    data-styled.g9[id="style__GuidePriceBodyText-mfe-basket__sc-1kctg46-5"] {
+      content: "hGyNAT,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .kseQNV {
+      width: 100%;
+      margin-top: 12px;
+      font-size: 16px;
+    }
+
+    /*!sc*/
+    data-styled.g13[id="style__CheckoutButton-mfe-basket__sc-1kctg46-9"] {
+      content: "kseQNV,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .kdNEDv {
+      border-left: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      height: 100vh;
+      max-height: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-flow: column;
+      -ms-flex-flow: column;
+      flex-flow: column;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      max-width: 238px;
+    }
+
+    /*!sc*/
+    data-styled.g21[id="styles__BasketWrapper-mfe-basket__sc-1wbzsxp-0"] {
+      content: "kdNEDv,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .gAhOVn {
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      background: #f6f6f6;
+      word-break: break-word;
+    }
+
+    /*!sc*/
+    data-styled.g22[id="styles__BasketItemListWrapper-mfe-basket__sc-1wbzsxp-1"] {
+      content: "gAhOVn,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .iWrprx.iWrprx {
+      margin-top: 16px;
+      background-color: #e5e5e5;
+    }
+
+    /*!sc*/
+    data-styled.g24[id="styles__StyledDivider-mfe-basket__sc-1wbzsxp-3"] {
+      content: "iWrprx,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .jCCaNo {
+      padding: 20px 12px 0 12px;
+      background: #ffffff;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .jCCaNo > h2 {
+      color: #333333;
+    }
+
+    /*!sc*/
+    data-styled.g27[id="styles__HeadingWrapper-mfe-basket__sc-1wbzsxp-6"] {
+      content: "jCCaNo,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .henqUv.henqUv {
+      color: #666666;
+      font-weight: normal;
+      margin-top: 12px;
+    }
+
+    /*!sc*/
+    data-styled.g38[id="style__StyledHeading-mfe-basket__sc-1yf48n3-1"] {
+      content: "henqUv,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .khdnwf {
+      background-color: #f6f6f6;
+    }
+
+    /*!sc*/
+    data-styled.g45[id="style__StyledSubBasketContainer-mfe-basket__sc-1yf48n3-8"] {
+      content: "khdnwf,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .ePJLYE {
+      border-bottom: 1px solid #cccccc;
+      padding: 20px 12px 12px 12px;
+      background: #ffffff;
+      color: #333333;
+      border-top: 1px solid #cccccc;
+      margin-top: 12px;
+    }
+
+    /*!sc*/
+    data-styled.g46[id="style__StyledHeaderContainer-mfe-basket__sc-1yf48n3-9"] {
+      content: "ePJLYE,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .bYhcLQ.bYhcLQ {
+      color: #333333;
+    }
+
+    /*!sc*/
+    data-styled.g47[id="style__StyledTopHeading-mfe-basket__sc-1yf48n3-10"] {
+      content: "bYhcLQ,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .iyzYDu {
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+
+    /*!sc*/
+    data-styled.g54[id="styles__Subheading-mfe-basket__sc-1bm2vf-0"] {
+      content: "iyzYDu,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .cZsOKk {
+      margin-bottom: 20px;
+      padding: 0 12px;
+      font-weight: 300;
+      font-size: 14px;
+    }
+
+    /*!sc*/
+    data-styled.g55[id="styles__BodyText-mfe-basket__sc-1bm2vf-1"] {
+      content: "cZsOKk,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-basket"] .jFRAPg {
+      text-align: center;
+      padding: 48px 12px 12px 12px;
+    }
+
+    /*!sc*/
+    data-styled.g56[id="styles__EmptyBasketContainer-mfe-basket__sc-1bm2vf-2"] {
+      content: "jFRAPg,"
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-global-scripts"] .iCpXYM .ddsweb-modal__button-container {
+      border: none;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-global-scripts"] .iCpXYM .ddsweb-modal__content-container {
+      overflow: hidden;
+    }
+
+    /*!sc*/
+    [data-mfe="mfe-global-scripts"] .iCpXYM .ddsweb-modal__modal-container {
+      border: 1px solid #cccccc;
+      height: auto;
+      max-height: unset;
+      width: 756px;
+    }
+
+    /*!sc*/
+    @media (min-width: 504px) {
+      [data-mfe="mfe-global-scripts"] .iCpXYM .ddsweb-modal__modal-container {
+        width: 480px;
+      }
+    }
+
+    /*!sc*/
+    data-styled.g71[id="styled__StyledModal-mfe-global-scripts__sc-1hpydkw-0"] {
+      content: "iCpXYM,"
+    }
+
+    /*!sc*/
+  </style>
+  undefined
+  <script nonce="74accc47f103525293f61b5971409533">
+    bazadebezolkohpepadr = '920851958';
+  </script>
+  undefined
+  <script
+    type="text/javascript"
+    src="https://www.tesco.com/akam/13/36e31778"
+    nonce="74accc47f103525293f61b5971409533"
+    defer
+  ></script>
+  undefined
+</head>
+undefined
+<body>undefined
+<div id="asparagus-root">undefined
+  <div>undefined
+    <!-- Will remove sticky-header id, when moved to a conditional layout -->undefined
+    <div
+      class="template-header has-mfe-children"
+      id="sticky-header"
+    >undefined
+      <div data-mfe="mfe-header">undefined
+        <div class="JJpE2">undefined
+          <header aria-label="Global Header">undefined
+            <div class="BannerContainer__Container-mfe-header__sc-1aw43yw-0 hPEIUn">undefined
+              <div class="CookieBanner__Sizer-mfe-header__sc-11yf6yg-0 cdNjnW">undefined
+                <div class="CookieBanner__Container-mfe-header__sc-11yf6yg-1 cJDOSC">undefined
+                  <section
+                    aria-label="consent-banner"
+                    data-nosnippet="data-nosnippet"
+                    class="base-components__RootElement-sc-150pv2j-1 styled__TopContainer-sc-rtapk4-0 iKYMCI hcLDKj"
+                  >undefined
+                    <div class="base-components__RootElement-sc-150pv2j-1 styled__Container-sc-rtapk4-1 iKYMCI kjafSw CookieBanner__StyledConsentBanner-mfe-header__sc-11yf6yg-2 luKfC ddsweb-consent-banner__container">
+                      undefined
+                      <div class="base-components__BaseElement-sc-150pv2j-0 styled__InnerContainer-sc-rtapk4-2 kIIJuI jsITqr ddsweb-consent-banner__inner-container">
+                        undefined
+                        <div class="ddsweb-consent-banner__text-container">undefined<h2
+                          id="ddsweb-consent-banner-main-headline"
+                          class="component__StyledHeading-sc-1t0ixqu-0 dvzzQp ddsweb-heading ddsweb-consent-banner__sub-heading"
+                        >Your privacy settings</h2>undefined<p
+                          id="ddsweb-consent-banner-main-body"
+                          class="text__StyledText-sc-1jpzi8m-0 gVYFHR ddsweb-text styled__BodyContent-sc-rtapk4-5 iVzTce ddsweb-consent-banner__body-container"
+                        >We and our 1 partners store and/or access information on a device, such as unique IDs in
+                          cookies to process personal data. You may accept or manage your choices by selecting accept or
+                          reject all, or at any time in the undefined<a
+                            class="styled__Anchor-sc-10ozqhd-0 dJmvIh ddsweb-link__anchor"
+                            href="https://www.tesco.com/help/privacy-and-cookies/privacy-centre/privacy-policy-information/privacy-policy/"
+                          >privacy policy page</a>. These choices will be signalled to our partners and will not affect
+                          browsing data.undefined</p>undefined
+                        </div>
+                        undefined
+                        <div class="ddsweb-consent-banner__text-container">undefined<h3
+                          id="ddsweb-consent-banner-secondary-headline"
+                          class="component__StyledHeading-sc-1t0ixqu-0 eLRLmI ddsweb-heading ddsweb-consent-banner__sub-heading"
+                        >We and our partners process data to</h3>undefined<p
+                          id="ddsweb-consent-banner-secondary-body"
+                          class="text__StyledText-sc-1jpzi8m-0 gVYFHR ddsweb-text styled__BodyContent-sc-rtapk4-5 ieDsWN ddsweb-consent-banner__body-container"
+                        >Use precise geolocation data. Actively scan device characteristics for identification. Store
+                          and/or access information on a device. Personalised advertising and content, advertising and
+                          content measurement, audience research and services development. undefined<a
+                            class="styled__Anchor-sc-10ozqhd-0 dJmvIh styled__StyledInlineLink-sc-rtapk4-7 jlJmWG ddsweb-link__anchor"
+                            role="link"
+                          >List of vendors</a>.undefined</p>undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                      <div class="base-components__BaseElement-sc-150pv2j-0 styled__ButtonContainer-sc-rtapk4-3 kIIJuI iLWIOb ddsweb-consent-banner__buttons-container">
+                        undefined
+                        <button
+                          class="styled__StyledTextButton-sc-8hxn3m-0 eOURfm styled__ActionButton-sc-rtapk4-4 imQmJm ddsweb-consent-banner__button ddsweb-button ddsweb-button--text-button"
+                          aria-disabled="false"
+                          aria-live="polite"
+                          type="button"
+                        >
+                          undefined<span class="shared-containers__StyledInnerContainer-sc-93ev6e-2 hyYFWS ddsweb-button__inner-container">Accept all</span>undefined
+                        </button>
+                        undefined
+                        <button
+                          class="styled__StyledTextButton-sc-8hxn3m-0 eOURfm styled__ActionButton-sc-rtapk4-4 imQmJm ddsweb-consent-banner__button ddsweb-button ddsweb-button--text-button"
+                          aria-disabled="false"
+                          aria-live="polite"
+                          type="button"
+                        >
+                          undefined<span class="shared-containers__StyledInnerContainer-sc-93ev6e-2 hyYFWS ddsweb-button__inner-container">Reject all</span>undefined
+                        </button>
+                        undefined
+                        <button
+                          class="styled__StyledLinkButton-sc-mm2jkj-0 eHuJdH styled__ShowPurposes-sc-rtapk4-6 dYOoZq ddsweb-consent-banner__link ddsweb-button ddsweb-button--link-button"
+                          aria-disabled="false"
+                          aria-live="polite"
+                          type="button"
+                        >
+                          undefined<span class="shared-containers__StyledInnerContainer-sc-93ev6e-2 hyYFWS ddsweb-button__container">Show purposes</span>undefined
+                        </button>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </section>
+                  undefined
+                </div>
+                undefined
+              </div>
+              undefined
+            </div>
+            undefined
+            <nav
+              aria-label="Useful Links"
+              class="base-components__RootElement-sc-150pv2j-1 styled__Container-sc-vs6ond-0 gpETyF hDzYZz app-bar ddsweb-global-header__container"
+              role="navigation"
+            >undefined
+              <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-5ny0fy-0 iKYMCI imHKcE styled__StyledGrid-sc-vs6ond-1 fYYMAX ddsweb-global-header__grid ddsweb-grid__container">
+                undefined
+                <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-py8efq-0 iKYMCI cEIMOy styled__StyledRow-sc-vs6ond-2 kueLGr ddsweb-global-header__row ddsweb-grid__row">
+                  undefined
+                  <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-qn2y0o-0 iKYMCI gBDfFx styled__StyledColumn-sc-vs6ond-3 haREdz ddsweb-global-header__column ddsweb-grid__column">
+                    undefined
+                    <ul
+                      aria-orientation="horizontal"
+                      class="base-components__BaseList-sc-150pv2j-2 styled__UnorderedList-sc-l5k0kv-0 iOvBIY gwdBPV ddsweb-global-header__menu-list ddsweb-menu__menu-list"
+                      direction="leftToRight"
+                      orientation="horizontal"
+                      role="menubar"
+                      tabindex="-1"
+                    >undefined
+                      <li
+                        class="styled__ListItem-sc-1kz2bv3-0 fTCegf ddsweb-global-header__menu-item ddsweb-menu__menu-item"
+                        orientation="horizontal"
+                        role="menuitem"
+                        target="_blank"
+                      >undefined<a
+                        class="styled__Anchor-sc-1i711qa-0 eHmxzW ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                        role="button"
+                        href="https://www.tescobank.com/?referrerid=tesco/redirect"
+                        id="app-bar-tesco-bank"
+                        target="_blank"
+                        aria-current="false"
+                        aria-haspopup="false"
+                      >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Tesco Bank</span>undefined</a>undefined
+                      </li>
+                      undefined
+                      <li
+                        class="styled__ListItem-sc-1kz2bv3-0 fTCegf ddsweb-global-header__menu-item ddsweb-menu__menu-item"
+                        orientation="horizontal"
+                        role="menuitem"
+                        target="_blank"
+                      >undefined<a
+                        class="styled__Anchor-sc-1i711qa-0 eHmxzW ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                        role="button"
+                        href="https://www.tescomobile.com"
+                        id="app-bar-tesco-mobile"
+                        target="_blank"
+                        aria-current="false"
+                        aria-haspopup="false"
+                      >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Tesco Mobile</span>undefined</a>undefined
+                      </li>
+                      undefined
+                      <li
+                        class="styled__ListItem-sc-1kz2bv3-0 fTCegf ddsweb-global-header__menu-item ddsweb-menu__menu-item"
+                        orientation="horizontal"
+                        role="menuitem"
+                      >undefined<a
+                        class="styled__Anchor-sc-1i711qa-0 eHmxzW ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                        role="button"
+                        href="/deliverysaver/"
+                        id="app-bar-delivery-saver"
+                        aria-current="false"
+                        aria-haspopup="false"
+                      >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Delivery Saver</span>undefined</a>undefined
+                      </li>
+                      undefined
+                      <li
+                        class="styled__ListItem-sc-1kz2bv3-0 fTCegf ddsweb-global-header__menu-item ddsweb-menu__menu-item"
+                        orientation="horizontal"
+                        role="menuitem"
+                      >undefined<a
+                        class="styled__Anchor-sc-1i711qa-0 eHmxzW ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                        role="button"
+                        href="/store-locator"
+                        id="app-bar-store-locator"
+                        aria-current="false"
+                        aria-haspopup="false"
+                      >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Store locator</span>undefined</a>undefined
+                      </li>
+                      undefined
+                      <li
+                        class="styled__ListItem-sc-1kz2bv3-0 fTCegf ddsweb-global-header__menu-item ddsweb-menu__menu-item"
+                        orientation="horizontal"
+                        role="menuitem"
+                        target="_blank"
+                      >undefined<a
+                        class="styled__Anchor-sc-1i711qa-0 eHmxzW ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                        role="button"
+                        href="https://www.tesco.com/help/pages/online-grocery-faqs"
+                        id="app-bar-help"
+                        target="_blank"
+                        aria-current="false"
+                        aria-haspopup="false"
+                      >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Help</span>undefined</a>undefined
+                      </li>
+                      undefined
+                    </ul>
+                    undefined
+                  </div>
+                  undefined
+                </div>
+                undefined
+              </div>
+              undefined
+            </nav>
+            undefined
+            <div class="mast-grid-wrapper__CenteredMaxWidthGrid-mfe-header__sc-1dktiw4-3 etepZl">undefined
+              <div
+                data-testid="masthead"
+                class="styled__MastheadGrid-mfe-header__sc-9t6bs6-1 eNvXC"
+              >undefined
+                <div class="menu-button-and-logo__StyledMenuButtonLogoWrapper-mfe-header__sc-1raaa1i-2 eRxlhy">undefined
+                  <button
+                    class="styled__StyledIconButton-sc-rnkc1-1 hjXdIX tablet-large-menu-button ddsweb-button ddsweb-button--icon-button"
+                    aria-disabled="false"
+                    aria-live="polite"
+                    type="button"
+                    aria-label="Menu"
+                    data-testid="Menu Button"
+                  >undefined
+                    <div class="styled__StyledIconContainer-sc-rnkc1-0 iYIQXI">undefined
+                      <svgundefinedxmlns
+                      ="http: //www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"
+                      aria-hidden="true" class="ddsweb-icon">undefined
+                      <g fill="currentColor">undefined
+                        <path d="M18 4.25H2v-1.5h16zM18 10.75H2v-1.5h16zM18 17.25H2v-1.5h16z"></path>
+                        undefined
+                      </g>
+                      undefined</svg>undefined
+                    </div>
+                    undefined
+                  </button>
+                  undefined<a
+                    href="/"
+                    aria-label="Tesco Home page"
+                    data-testid="pride-home-link"
+                    class="menu-button-and-logo__LogoLinkBase-mfe-header__sc-1raaa1i-0 menu-button-and-logo__LogoLinkPrideVersion-mfe-header__sc-1raaa1i-1 HoZiN bLIKKB"
+                  >undefined
+                    <svg
+                      class="ddsweb-tesco-logo__svg"
+                      preserveAspectRatio="xMinYMax meet"
+                      viewBox="0 0 121 35"
+                      undefinedxmlns="http://www.w3.org/2000/svg"
+                      width="121px"
+                      height="35px"
+                    >undefined<title>Tesco Home</title>undefined
+                      <defs>undefined
+                        <path
+                          d="M.218 6.389h23.973V.366H.218v6.023z"
+                          id="tesco-logo-a"
+                        ></path>
+                        undefined
+                        <path
+                          d="M.376 6.389h23.973V.366H.376z"
+                          id="tesco-logo-c"
+                        ></path>
+                        undefined
+                        <path
+                          d="M.11 6.389h23.972V.366H.11v6.023z"
+                          id="tesco-logo-e"
+                        ></path>
+                        undefined
+                        <path
+                          d="M.267 6.389H24.24V.366H.267v6.023z"
+                          id="tesco-logo-g"
+                        ></path>
+                        undefined
+                        <path
+                          d="M0 6.389h23.973V.366H0v6.023z"
+                          id="tesco-logo-i"
+                        ></path>
+                        undefined
+                      </defs>
+                      undefined
+                      <g
+                        fill="none"
+                        fill-rule="evenodd"
+                      >undefined
+                        <path
+                          d="M84.647 0c2.538 0 4.735.31 6.5.777v5.405c-1.734-1.77-3.776-2.889-6.47-2.889-4.92 0-8.201 3.449-8.201 8.047 0 4.598 3.28 8.046 8.202 8.046 2.693 0 4.735-1.118 6.469-2.889v5.406c-1.765.466-3.962.807-6.5.807-8.512 0-14.671-4.256-14.671-11.37 0-7.115 6.16-11.34 14.67-11.34zM60.474 8.823c4.24.59 7.768 2.082 7.768 6.71 0 5.438-5.138 7.177-10.678 7.147-3.869-.032-7.15-.404-9.564-1.368v-4.877c3.436 2.237 6.964 2.951 9.564 2.951 2.693 0 5.17-.652 5.17-2.702s-2.291-2.548-6.996-3.263C51.683 12.8 48 11.06 47.968 7.052 47.939 1.647 53.046 0 57.936 0c3.158 0 6.222.373 9.038 1.305v5.25c-2.352-2.081-5.85-3.262-9.285-3.262-2.322 0-4.52.746-4.52 2.486 0 2.174 3.25 2.485 7.306 3.044zM37.136 18.92c2.507 0 6.685-.59 8.326-2.05v5.343H27.665c.866-1.025 1.02-1.709 1.02-3.79V4.256c0-2.081-.154-2.765-1.02-3.79h16.868V5.81c-1.64-1.46-5.819-2.05-8.326-2.05h-1.98v5.778h1.454c1.424 0 3.621-.062 5.076-.59v4.287c-1.455-.528-3.652-.59-5.076-.59h-1.455v6.275h2.91zM.984.466h24.42V5.81c-1.733-1.46-5.416-2.05-9.346-2.05v14.57c0 2.175.185 2.765 1.021 3.883h-7.77c.837-1.118 1.022-1.709 1.022-3.883V3.76c-3.93 0-7.614.59-9.347 2.05V.466zM106.48 19.386c-4.426 0-7.304-3.666-7.304-8.046 0-4.412 2.878-8.047 7.305-8.047 4.425 0 7.304 3.635 7.304 8.047 0 4.38-2.879 8.046-7.304 8.046m0-19.386C97.69 0 92.676 5.126 92.676 11.34c0 6.182 5.014 11.34 13.805 11.34 8.79 0 13.804-5.158 13.804-11.34 0-6.214-5.014-11.34-13.804-11.34"
+                          fill="#ee1c2e"
+                        ></path>
+                        undefined
+                        <g transform="translate(95.9 27.755)">undefined
+                          <mask
+                            fill="#fff"
+                            id="tesco-logo-b"
+                          >undefined
+                            <use xlink:href="#tesco-logo-a"></use>
+                            undefined
+                          </mask>
+                          undefined
+                          <path
+                            d="M9.37.366h14.747a.08.08 0 0 1 .04.01l.004.001a.055.055 0 0 1 .01.008c.028.028.03.085-.013.126a.153.153 0 0 1-.037.025l-.026.012c-1.713.784-4.008 3.173-4.008 3.173-1.715 1.636-3.001 2.668-5.744 2.668H.283C.24 6.39.22 6.35.217 6.31c0 0 0 .002 0 0a.09.09 0 0 1 .03-.066.422.422 0 0 1 .044-.032C1.835 5.346 4.14 2.948 4.14 2.948 5.084 1.828 6.969.366 9.37.366"
+                            fill="#00539f"
+                            mask="url(#tesco-logo-b)"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <g transform="translate(71.713 27.755)">undefined
+                          <mask
+                            fill="#fff"
+                            id="tesco-logo-d"
+                          >undefined
+                            <use xlink:href="#tesco-logo-c"></use>
+                            undefined
+                          </mask>
+                          undefined
+                          <path
+                            d="M9.527.366h14.748a.08.08 0 0 1 .04.01l.003.001a.055.055 0 0 1 .01.008c.029.028.031.085-.013.126a.153.153 0 0 1-.036.025l-.026.012c-1.714.784-4.008 3.173-4.008 3.173C18.529 5.357 17.244 6.39 14.5 6.39H.44c-.04 0-.062-.039-.064-.08 0 0 0 .002 0 0a.09.09 0 0 1 .03-.066.422.422 0 0 1 .044-.032c1.543-.865 3.847-3.263 3.847-3.263.944-1.12 2.83-2.582 5.23-2.582"
+                            fill="#00539f"
+                            mask="url(#tesco-logo-d)"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <g transform="translate(47.95 27.755)">undefined
+                          <mask
+                            fill="#fff"
+                            id="tesco-logo-f"
+                          >undefined
+                            <use xlink:href="#tesco-logo-e"></use>
+                            undefined
+                          </mask>
+                          undefined
+                          <path
+                            d="M9.26.366h14.748a.08.08 0 0 1 .04.01l.004.001a.055.055 0 0 1 .01.008c.028.028.03.085-.013.126a.153.153 0 0 1-.036.025l-.027.012c-1.713.784-4.008 3.173-4.008 3.173-1.715 1.636-3.001 2.668-5.744 2.668H.174c-.042 0-.063-.039-.065-.08 0 0 0 .002 0 0a.09.09 0 0 1 .03-.066.471.471 0 0 1 .044-.032c1.543-.865 3.848-3.263 3.848-3.263C4.975 1.828 6.86.366 9.261.366"
+                            fill="#00539f"
+                            mask="url(#tesco-logo-f)"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <g transform="translate(23.763 27.755)">undefined
+                          <mask
+                            fill="#fff"
+                            id="tesco-logo-h"
+                          >undefined
+                            <use xlink:href="#tesco-logo-g"></use>
+                            undefined
+                          </mask>
+                          undefined
+                          <path
+                            d="M9.418.366h14.747a.08.08 0 0 1 .04.01l.004.001a.055.055 0 0 1 .01.008c.029.028.031.085-.013.126a.153.153 0 0 1-.036.025l-.026.012c-1.714.784-4.008 3.173-4.008 3.173-1.716 1.636-3.002 2.668-5.745 2.668H.331c-.04 0-.062-.039-.064-.08 0 0 0 .002 0 0a.09.09 0 0 1 .03-.066.422.422 0 0 1 .044-.032c1.543-.865 3.847-3.263 3.847-3.263.944-1.12 2.83-2.582 5.23-2.582"
+                            fill="#00539f"
+                            mask="url(#tesco-logo-h)"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <g transform="translate(0 27.755)">undefined
+                          <mask
+                            fill="#fff"
+                            id="tesco-logo-j"
+                          >undefined
+                            <use xlink:href="#tesco-logo-i"></use>
+                            undefined
+                          </mask>
+                          undefined
+                          <path
+                            d="M9.152.366h14.747a.08.08 0 0 1 .04.01l.004.001a.055.055 0 0 1 .01.008c.028.028.03.085-.013.126a.153.153 0 0 1-.036.025l-.027.012c-1.713.784-4.008 3.173-4.008 3.173-1.715 1.636-3.001 2.668-5.744 2.668H.065C.022 6.39.001 6.35 0 6.31c0 0 0 .002 0 0a.09.09 0 0 1 .03-.066.422.422 0 0 1 .044-.032c1.543-.865 3.848-3.263 3.848-3.263C4.866 1.828 6.75.366 9.152.366"
+                            fill="#00539f"
+                            mask="url(#tesco-logo-j)"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                      </g>
+                      undefined
+                    </svg>
+                    undefined</a>undefined
+                </div>
+                undefined
+                <div class="search__StyledSearchBarMultiSearchLinkWrapper-mfe-header__sc-bp4hj5-5 hmZQHl">undefined
+                  <form
+                    class="search__BaseSearchForm-mfe-header__sc-bp4hj5-0 WgNjT search-form"
+                    data-testid="searchForm"
+                  >undefined
+                    <div class="base-components__RootElement-sc-150pv2j-1 styled__RootContainer-sc-rn4nje-0 iKYMCI boPBPS globalSearchBar ddsweb-search__container">
+                      undefined
+                      <div class="base-components__BaseElement-sc-150pv2j-0 styled__SearchContainer-sc-rn4nje-1 kIIJuI Fygov ddsweb-search__search-container">
+                        undefined
+                        <div class="base-components__BaseElement-sc-150pv2j-0 styled__InputContainer-sc-rn4nje-3 kIIJuI bBDpCn ddsweb-search__input-container">
+                          undefined
+                          <div class="base-components__RootElement-sc-150pv2j-1 styled__Container-sc-1rbigln-0 iKYMCI jGZAlu ddsweb-search__input-form-group ddsweb-form-group__container">
+                            undefined<label
+                            class="styled__StyledLabel-sc-1bpek9-0 jTBIHP styled__StyledLabel-sc-1rbigln-5 ddsweb-form-group__label ddsweb-label"
+                            for="search-input-1"
+                          >Enter a product to search forundefined
+                            <!-- -->undefined
+                          </label>undefined
+                            <div class="base-components__BaseElement-sc-150pv2j-0 styled__Children-sc-1rbigln-3 kIIJuI hZAReM ddsweb-form-group__children">
+                              undefined
+                              <div class="base-components__RootElement-sc-150pv2j-1 styled__RootContainer-sc-14pzv9j-0 iKYMCI fOTwss ddsweb-search__input ddsweb-search-input__container">
+                                undefined
+                                <div class="base-components__BaseElement-sc-150pv2j-0 kIIJuI ddsweb-search-input__input-container">
+                                  undefined
+                                  <div class="component__Wrapper-sc-19wd3h0-3 kMySUy input-wrapper">undefined<input
+                                    type="search"
+                                    class="base-components__RootElement-sc-150pv2j-1 styled__StyledInput-sc-7h0jvk-0 component__StyledAsInput-sc-19wd3h0-4 iKYMCI gSZJOL styled__StyledInput-sc-14pzv9j-1 jzklnU ddsweb-search-input__input ddsweb-input"
+                                    aria-label="Search"
+                                    data-testid="searchField"
+                                    placeholder="Search"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    title="Search"
+                                    name="search-input-1"
+                                    id="search-input-1"
+                                    required=""
+                                    value="alpro almond"
+                                  />undefined<span class="component__Icon-sc-19wd3h0-0 component__RightComponent-sc-19wd3h0-2 jATFwd iDhbjP">undefined<a
+                                    aria-label="Clear search field"
+                                    class="styled__Anchor-sc-1uo0wmj-0 fnQEdV ddsweb-search-input__clear-icon"
+                                    href="/"
+                                  >undefined<svg
+                                    class="close-icon"
+                                    undefinedxmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24px"
+                                    height="24px"
+                                    fill="currentColor"
+                                  >undefined<path d="m12 12.85 6.58 6.57.84-.84L12.85 12l6.57-6.58-.84-.84L12 11.15 5.42 4.58l-.84.84L11.15 12l-6.57 6.58.84.84L12 12.85Z"></path>undefined</svg>undefined</a>undefined</span>undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                                <div class="base-components__BaseElement-sc-150pv2j-0 kIIJuI ddsweb-search-input__results-dropdown-container"></div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="base-components__BaseElement-sc-150pv2j-0 styled__ButtonContainer-sc-rn4nje-4 kIIJuI kHQfXT ddsweb-search__button-container">
+                          undefined
+                          <button
+                            class="styled__StyledIconButton-sc-rnkc1-1 dXJUPI ddsweb-search__button ddsweb-button ddsweb-button--icon-button"
+                            aria-disabled="false"
+                            aria-live="polite"
+                            type="submit"
+                            aria-label="Search for products"
+                            data-testid="searchButton"
+                          >undefined
+                            <div class="styled__StyledIconContainer-sc-rnkc1-0 iYIQXI">undefined
+                              <svgundefinedxmlns
+                              ="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+                              aria-hidden="true" class="ddsweb-icon">undefined
+                              <path
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                                d="M1.75 9a7.25 7.25 0 1 1 12.88 4.569l7.4 7.4-1.06 1.061-7.401-7.4A7.25 7.25 0 0 1 1.75 9M9 3.25a5.75 5.75 0 1 0 0 11.5 5.75 5.75 0 0 0 0-11.5"
+                                clip-rule="evenodd"
+                              ></path>
+                              undefined</svg>undefined
+                            </div>
+                            undefined
+                          </button>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </form>
+                  undefined
+                  <form
+                    data-testid="multi-searchForm"
+                    class="search__MultiSearch-mfe-header__sc-bp4hj5-1 RqzNK"
+                  >undefined
+                    <button
+                      class="styled__StyledLinkButton-sc-mm2jkj-0 eHuJdH search__MultiSearchButton-mfe-header__sc-bp4hj5-2 eHQLNt ddsweb-button ddsweb-button--link-button"
+                      aria-disabled="false"
+                      aria-live="polite"
+                      type="button"
+                      data-testid="multi-search"
+                    >
+                      undefined<span class="shared-containers__StyledInnerContainer-sc-93ev6e-2 hyYFWS ddsweb-button__container">Search with a list of items</span>undefined
+                    </button>
+                    undefined
+                  </form>
+                  undefined
+                </div>
+                undefined<a
+                  href="https://www.tesco.com/account/auth/en-GB/login?from=https%3A%2F%2Fwww.tesco.com%2Fgroceries%2Fen-GB%2Fsearch"
+                  aria-label="My account"
+                  class="styled__AccountIcon-mfe-header__sc-9t6bs6-2 hqrrGC"
+                >undefined
+                  <button
+                    class="styled__StyledIconButton-sc-rnkc1-1 dXJUPI ddsweb-button ddsweb-button--icon-button"
+                    aria-disabled="false"
+                    aria-live="polite"
+                    type="button"
+                    data-testid="account-icon"
+                    aria-label="My account"
+                  >undefined
+                    <div class="styled__StyledIconContainer-sc-rnkc1-0 iYIQXI">undefined
+                      <svgundefinedxmlns
+                      ="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+                      aria-hidden="true" class="ddsweb-icon">undefined
+                      <g
+                        fill="currentColor"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                      >undefined
+                        <path d="M7.75 7a4.25 4.25 0 1 1 8.5 0 4.25 4.25 0 0 1-8.5 0M12 4.25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5M2.772 20.319C3.866 15.924 7.702 12.75 12 12.75c4.299 0 8.134 3.174 9.228 7.569l.231.931H2.541zm16.714-.569c-1.21-3.282-4.236-5.5-7.486-5.5s-6.276 2.218-7.486 5.5z"></path>
+                        undefined
+                      </g>
+                      undefined</svg>undefined
+                    </div>
+                    undefined
+                  </button>
+                  undefined</a>undefined<a
+                  href="https://www.tesco.com/store-locator/uk/?stop_mobi=yes"
+                  aria-label="Store locator"
+                  class="styled__StoreLocatorIcon-mfe-header__sc-9t6bs6-3 jzaXxp"
+                >undefined
+                  <button
+                    class="styled__StyledIconButton-sc-rnkc1-1 dXJUPI ddsweb-button ddsweb-button--icon-button"
+                    aria-disabled="false"
+                    aria-live="polite"
+                    type="button"
+                    data-testid="store-locator-icon"
+                    aria-label="Store locator"
+                  >undefined
+                    <div class="styled__StyledIconContainer-sc-rnkc1-0 iYIQXI">undefined
+                      <svgundefinedxmlns
+                      ="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+                      aria-hidden="true" class="ddsweb-icon">undefined
+                      <g
+                        fill="currentColor"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                      >undefined
+                        <path d="M7.75 10.5a4.25 4.25 0 1 1 8.5 0 4.25 4.25 0 0 1-8.5 0M12 7.75a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5"></path>
+                        undefined
+                        <path d="M2.75 10.5c0-5.101 4.149-9.25 9.25-9.25 5.102 0 9.25 4.149 9.25 9.25 0 1.223-.13 2.327-.57 3.423-.44 1.095-1.167 2.128-2.28 3.246l-.002.002L12 23.56l-6.385-6.377-.001-.002c-1.12-1.123-1.85-2.16-2.292-3.256-.441-1.098-.572-2.203-.572-3.425M12 2.75c-4.273 0-7.75 3.477-7.75 7.75 0 1.113.12 2.008.464 2.865s.938 1.73 1.962 2.758L12 21.44l5.337-5.33c1.018-1.021 1.607-1.89 1.95-2.745.344-.855.463-1.75.463-2.865 0-4.273-3.476-7.75-7.75-7.75"></path>
+                        undefined
+                      </g>
+                      undefined</svg>undefined
+                    </div>
+                    undefined
+                  </button>
+                  undefined</a>undefined
+                <div
+                  data-testid="auth-cta-container"
+                  class="styled__StyledAuthWrapper-mfe-header__sc-9t6bs6-4 cFFoqV"
+                >undefined<a
+                  class="styled__Anchor-sc-1h9djka-0 gjzZGx ddsweb-link__anchor"
+                  href="https://www.tesco.com/account/auth/en-GB/login?from=https%3A%2F%2Fwww.tesco.com%2Fgroceries%2Fen-GB%2Fsearch%3F0%3Dgroceries%26query%3Dalpro%2Balmond"
+                  data-testid="sign-in"
+                >undefined<span class="styled__Text-sc-1h9djka-1 xDfEc ddsweb-link__text">Sign in</span>undefined</a>undefined<a
+                  class="styled__Anchor-sc-1h9djka-0 jLaWMA ddsweb-link__anchor"
+                  href="https://secure.tesco.com/account/en-GB/register?newReg=true&amp;from=https%3A%2F%2Fwww.tesco.com%2Fgroceries%2Fen-GB%2Fsearch"
+                  data-testid="register"
+                >undefined<span class="styled__Text-sc-1h9djka-1 xDfEc ddsweb-link__text">Register</span>undefined</a>undefined
+                </div>
+                undefined
+              </div>
+              undefined
+              <div class="mast-grid-wrapper__GridEmptyPanel-mfe-header__sc-1dktiw4-0 mast-grid-wrapper__GridEmptyPanelLeft-mfe-header__sc-1dktiw4-2 gZeLWO FKRfT"></div>
+              undefined
+              <div class="styled__DesktopMenuWrapper-mfe-header__sc-9t6bs6-0 bJJACo">undefined
+                <div>undefined
+                  <nav
+                    aria-label="Main"
+                    class="base-components__RootElement-sc-150pv2j-1 styled__NavContainer-sc-1op2qax-0 iKYMCI bTPLzY NavigationMenu__StyledNavigationMenu-mfe-header__sc-1avyd18-0 dyuRdD ddsweb-main-menu__container"
+                    role="navigation"
+                  >undefined
+                    <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-5ny0fy-0 iKYMCI haBjuD ddsweb-main-menu__grid ddsweb-grid__container">
+                      undefined
+                      <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-py8efq-0 iKYMCI cEIMOy ddsweb-main-menu__row ddsweb-grid__row">
+                        undefined
+                        <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-qn2y0o-0 iKYMCI gBDfFx ddsweb-main-menu__column ddsweb-grid__column">
+                          undefined
+                          <ul
+                            aria-orientation="horizontal"
+                            class="base-components__BaseList-sc-150pv2j-2 styled__UnorderedList-sc-l5k0kv-0 iOvBIY bPKRyp ddsweb-main-menu__menu-list ddsweb-menu__menu-list"
+                            direction="leftToRight"
+                            orientation="horizontal"
+                            role="menubar"
+                            tabindex="-1"
+                          >undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 bNAsHU ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined
+                              <div class="base-components__BaseElement-sc-150pv2j-0 styled__PopupIconContainer-sc-1kz2bv3-2 kIIJuI coJPfO ddsweb-menu__menu-item-popup-icon-container">
+                                undefined
+                                <svg
+                                  aria-hidden="true"
+                                  class="styled__SVG-sc-1fqfvah-1 kFHSAj ddsweb-menu__menu-item-popup-icon ddsweb-icon__svg"
+                                  height="12"
+                                  preserveAspectRatio="xMinYMax meet"
+                                  viewBox="0 -1 20 12"
+                                  width="20"
+                                  undefinedxmlns="http://www.w3.org/2000/svg"
+                                  color="currentColor"
+                                >undefined
+                                  <path
+                                    d="M18.652 1.312L10 10.276 1.356 1.312"
+                                    fill="none"
+                                    stroke="#00539f"
+                                  ></path>
+                                  undefined
+                                </svg>
+                                undefined
+                              </div>
+                              undefined<a
+                                class="styled__Anchor-sc-1i711qa-0 ditbzN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                                role="button"
+                                href="/groceries#"
+                                id="ddsweb-main-menu-mobile-link"
+                                aria-controls="ddsweb-main-menu-slidedown-modal"
+                                aria-current="false"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                              >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Menu</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 bEiibM ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined
+                              <div class="base-components__BaseElement-sc-150pv2j-0 styled__PopupIconContainer-sc-1kz2bv3-2 kIIJuI coJPfO ddsweb-menu__menu-item-popup-icon-container">
+                                undefined
+                                <svg
+                                  aria-hidden="true"
+                                  class="styled__SVG-sc-1fqfvah-1 kFHSAj ddsweb-menu__menu-item-popup-icon ddsweb-icon__svg"
+                                  height="12"
+                                  preserveAspectRatio="xMinYMax meet"
+                                  viewBox="0 -1 20 12"
+                                  width="20"
+                                  undefinedxmlns="http://www.w3.org/2000/svg"
+                                  color="currentColor"
+                                >undefined
+                                  <path
+                                    d="M18.652 1.312L10 10.276 1.356 1.312"
+                                    fill="none"
+                                    stroke="#00539f"
+                                  ></path>
+                                  undefined
+                                </svg>
+                                undefined
+                              </div>
+                              undefined<a
+                                class="styled__Anchor-sc-1i711qa-0 ditbzN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                                role="button"
+                                href="/groceries#"
+                                id="primary-nav-all-departments"
+                                aria-controls="ddsweb-main-menu-slidedown-modal"
+                                aria-current="false"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                                aria-label="All Departments, expand to view options"
+                              >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">All Departments</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              selected=""
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 eNVEHp ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              selected=""
+                              href="/groceries/en-GB"
+                              id="primary-nav-groceries-and-essentials"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Groceries &amp; Essentials</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cqVSrN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="/groceries/en-GB/favorites"
+                              id="primary-nav-favourites"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">My Favourites</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cqVSrN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="/groceries/en-GB/promotions"
+                              id="primary-nav-promotions"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Special Offers</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              target="_blank"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cqVSrN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://secure.tesco.com/clubcard"
+                              id="primary-nav-tesco-clubcard"
+                              target="_blank"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Tesco Clubcard</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cqVSrN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="/shop/en-GB/landing/f-f"
+                              id="utility-direct-clothing"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">F&amp;F Clothing</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cqVSrN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/buylists/marketplace-deals/top-deals?Nav_ID_MP_deals"
+                              id="primary-nav-cms-driven"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Top Deals</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              target="_blank"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cqVSrN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/realfood"
+                              id="primary-nav-recipes"
+                              target="_blank"
+                              aria-current="false"
+                              aria-haspopup="false"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Recipes</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 hfbuxt ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined
+                              <div class="base-components__BaseElement-sc-150pv2j-0 styled__PopupIconContainer-sc-1kz2bv3-2 kIIJuI coJPfO ddsweb-menu__menu-item-popup-icon-container">
+                                undefined
+                                <svg
+                                  aria-hidden="true"
+                                  class="styled__SVG-sc-1fqfvah-1 kFHSAj ddsweb-menu__menu-item-popup-icon ddsweb-icon__svg"
+                                  height="12"
+                                  preserveAspectRatio="xMinYMax meet"
+                                  viewBox="0 -1 20 12"
+                                  width="20"
+                                  undefinedxmlns="http://www.w3.org/2000/svg"
+                                  color="currentColor"
+                                >undefined
+                                  <path
+                                    d="M18.652 1.312L10 10.276 1.356 1.312"
+                                    fill="none"
+                                    stroke="#00539f"
+                                  ></path>
+                                  undefined
+                                </svg>
+                                undefined
+                              </div>
+                              undefined<a
+                                class="styled__Anchor-sc-1i711qa-0 ditbzN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                                role="button"
+                                href="/groceries#"
+                                id="ddsweb-main-menu-more-link"
+                                aria-controls="ddsweb-main-menu-slidedown-modal"
+                                aria-current="false"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                                aria-label="More, expand to view options"
+                              >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">More</span>undefined</a>undefined
+                            </li>
+                            undefined
+                          </ul>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </nav>
+                  undefined
+                  <nav
+                    aria-label="Main"
+                    class="base-components__RootElement-sc-150pv2j-1 styled__NavContainer-sc-1op2qax-0 iKYMCI bTPLzY styles__StyledMainMenu-mfe-header__sc-1a1xoqy-0 fhrfVD ddsweb-main-menu__container"
+                    role="navigation"
+                  >undefined
+                    <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-5ny0fy-0 iKYMCI haBjuD ddsweb-main-menu__grid ddsweb-grid__container">
+                      undefined
+                      <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-py8efq-0 iKYMCI cEIMOy ddsweb-main-menu__row ddsweb-grid__row">
+                        undefined
+                        <div class="base-components__RootElement-sc-150pv2j-1 styled-sc-qn2y0o-0 iKYMCI gBDfFx ddsweb-main-menu__column ddsweb-grid__column">
+                          undefined
+                          <ul
+                            aria-orientation="horizontal"
+                            class="base-components__BaseList-sc-150pv2j-2 styled__UnorderedList-sc-l5k0kv-0 iOvBIY lfnTQX ddsweb-main-menu__menu-list ddsweb-menu__menu-list"
+                            direction="leftToRight"
+                            orientation="horizontal"
+                            role="menubar"
+                            tabindex="-1"
+                          >undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 bNAsHU ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined
+                              <div class="base-components__BaseElement-sc-150pv2j-0 styled__PopupIconContainer-sc-1kz2bv3-2 kIIJuI coJPfO ddsweb-menu__menu-item-popup-icon-container">
+                                undefined
+                                <svg
+                                  aria-hidden="true"
+                                  class="styled__SVG-sc-1fqfvah-1 kFHSAj ddsweb-menu__menu-item-popup-icon ddsweb-icon__svg"
+                                  height="12"
+                                  preserveAspectRatio="xMinYMax meet"
+                                  viewBox="0 -1 20 12"
+                                  width="20"
+                                  undefinedxmlns="http://www.w3.org/2000/svg"
+                                  color="currentColor"
+                                >undefined
+                                  <path
+                                    d="M18.652 1.312L10 10.276 1.356 1.312"
+                                    fill="none"
+                                    stroke="#00539f"
+                                  ></path>
+                                  undefined
+                                </svg>
+                                undefined
+                              </div>
+                              undefined<a
+                                class="styled__Anchor-sc-1i711qa-0 ditbzN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                                role="button"
+                                href="/groceries#"
+                                id="ddsweb-main-menu-mobile-link"
+                                aria-controls="ddsweb-main-menu-slidedown-modal"
+                                aria-current="false"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                                aria-label="Menu"
+                              >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Menu</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Marketplace"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/marketplace/all"
+                              id="Marketplace"
+                              name="Marketplace"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Marketplace"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Marketplace</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Clothing &amp; Accessories"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/clothing-and-accessories/all"
+                              id="Clothing &amp; Accessories"
+                              name="Clothing &amp; Accessories"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Clothing &amp; Accessories"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Clothing &amp; Accessories</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Summer"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/summer/all"
+                              id="Summer"
+                              name="Summer"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Summer"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Summer</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Fresh Food"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/fresh-food/all"
+                              id="Fresh Food"
+                              name="Fresh Food"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Fresh Food"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Fresh Food</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Bakery"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/bakery/all"
+                              id="Bakery"
+                              name="Bakery"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Bakery"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Bakery</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Frozen Food"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/frozen-food/all"
+                              id="Frozen Food"
+                              name="Frozen Food"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Frozen Food"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Frozen Food</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Treats &amp; Snacks"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/treats-and-snacks/all"
+                              id="Treats &amp; Snacks"
+                              name="Treats &amp; Snacks"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Treats &amp; Snacks"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Treats &amp; Snacks</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Food Cupboard"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/food-cupboard/all"
+                              id="Food Cupboard"
+                              name="Food Cupboard"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Food Cupboard"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Food Cupboard</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Drinks"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/drinks/all"
+                              id="Drinks"
+                              name="Drinks"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Drinks"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Drinks</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Baby &amp; Toddler"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/baby-and-toddler/all"
+                              id="Baby &amp; Toddler"
+                              name="Baby &amp; Toddler"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Baby &amp; Toddler"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Baby &amp; Toddler</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Health &amp; Beauty"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/health-and-beauty/all"
+                              id="Health &amp; Beauty"
+                              name="Health &amp; Beauty"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Health &amp; Beauty"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Health &amp; Beauty</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Pets"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/pets/all"
+                              id="Pets"
+                              name="Pets"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Pets"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Pets</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Household"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/household/all"
+                              id="Household"
+                              name="Household"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Household"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Household</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Home &amp; Ents"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/home-and-ents/all"
+                              id="Home &amp; Ents"
+                              name="Home &amp; Ents"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Home &amp; Ents"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Home &amp; Ents</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 esFBEz ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                              name="Electronics &amp; Gaming"
+                              label="superDepartment"
+                            >undefined<a
+                              class="styled__Anchor-sc-1i711qa-0 cMaHPF ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                              role="button"
+                              href="https://www.tesco.com/groceries/en-GB/shop/electronics-and-gaming/all"
+                              id="Electronics &amp; Gaming"
+                              name="Electronics &amp; Gaming"
+                              label="superDepartment"
+                              aria-current="false"
+                              aria-haspopup="false"
+                              aria-label="Electronics &amp; Gaming"
+                            >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">Electronics &amp; Gaming</span>undefined</a>undefined
+                            </li>
+                            undefined
+                            <li
+                              class="styled__ListItem-sc-1kz2bv3-0 hfbuxt ddsweb-main-menu__menu-item ddsweb-menu__menu-item"
+                              orientation="horizontal"
+                              role="menuitem"
+                            >undefined
+                              <div class="base-components__BaseElement-sc-150pv2j-0 styled__PopupIconContainer-sc-1kz2bv3-2 kIIJuI coJPfO ddsweb-menu__menu-item-popup-icon-container">
+                                undefined
+                                <svg
+                                  aria-hidden="true"
+                                  class="styled__SVG-sc-1fqfvah-1 kFHSAj ddsweb-menu__menu-item-popup-icon ddsweb-icon__svg"
+                                  height="12"
+                                  preserveAspectRatio="xMinYMax meet"
+                                  viewBox="0 -1 20 12"
+                                  width="20"
+                                  undefinedxmlns="http://www.w3.org/2000/svg"
+                                  color="currentColor"
+                                >undefined
+                                  <path
+                                    d="M18.652 1.312L10 10.276 1.356 1.312"
+                                    fill="none"
+                                    stroke="#00539f"
+                                  ></path>
+                                  undefined
+                                </svg>
+                                undefined
+                              </div>
+                              undefined<a
+                                class="styled__Anchor-sc-1i711qa-0 ditbzN ddsweb-menu__menu-item-node ddsweb-link__anchor"
+                                role="button"
+                                href="/groceries#"
+                                id="ddsweb-main-menu-more-link"
+                                aria-controls="ddsweb-main-menu-slidedown-modal"
+                                aria-current="false"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                                aria-label="More, expand to view options"
+                              >undefined<span class="styled__Text-sc-1i711qa-1 leWqRc ddsweb-link__text">More</span>undefined</a>undefined
+                            </li>
+                            undefined
+                          </ul>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </nav>
+                  undefined
+                </div>
+                undefined
+              </div>
+              undefined
+              <div class="mast-grid-wrapper__GridEmptyPanel-mfe-header__sc-1dktiw4-0 mast-grid-wrapper__GridEmptyPanelRight-mfe-header__sc-1dktiw4-1 gZeLWO KKlnf"></div>
+              undefined
+            </div>
+            undefined
+          </header>
+          undefined
+        </div>
+        undefined
+      </div>
+      undefined
+    </div>
+    undefined
+    <div class="template-wrapper">undefined
+      <main
+        id="main-content"
+        class="template-content has-mfe-children"
+      >undefined
+        <div data-mfe="mfe-plp">undefined
+          <div class="Msjnn8OI4hl13LJ">undefined
+            <div class="YuGp9eOLpOJgn7u">undefined
+              <div class="Yh2Klkt2FluTtOp">undefined
+                <div>undefined
+                  <div class="xG2Co0SJbaijdHA">undefined
+                    <h2 class="ddsweb-heading vUuMJUBophKiMQK fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXxl">
+                      Filters</h2>undefined
+                    <button
+                      class="ddsweb-button ddsweb-button--link-button e897bf_8WKJvW_base e897bf_8WKJvW_linkButton e897bf_8WKJvW_linkWithIcon e897bf_8WKJvW_textRight e897bf_8WKJvW_md"
+                      type="button"
+                      aria-label="Close Filters"
+                      data-testid="close-filter-btn"
+                      id="close-filter-btn"
+                    >
+                      undefined<span class="ddsweb-button__container e897bf_8WKJvW_container">Closeundefined<span class="ddsweb-button__icon-container e897bf_8WKJvW_iconContainer e897bf_8WKJvW_iconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                      fill="currentColor"
+                      d="M18.47 19.53 12 13.06l-6.47 6.47-1.06-1.06L10.94 12 4.47 5.53l1.06-1.06L12 10.94l6.47-6.47 1.06 1.06L13.06 12l6.47 6.47z"
+                    ></path>undefined</svg>undefined</span>undefined</span>undefined
+                    </button>
+                    undefined
+                  </div>
+                  undefined
+                  <div>undefined
+                    <div class="OLZBJPVDDuPocux">undefined
+                      <h2 class="ddsweb-heading fo2trEU1Sz1ykgG fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXxl">Filter
+                        by</h2>undefined
+                      <div class="cuQRclP_EK2jNf8">undefined
+                        <ul>undefined
+                          <li>undefined
+                            <div class="kuwbaJs80GzWg4v qYn7yJUoC2hEZcv ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer">undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Special Offers (3)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                        </ul>
+                        undefined
+                      </div>
+                      undefined
+                      <div class="bubEiCaWreJqI_A">undefined
+                        <h3 class="ddsweb-heading uKeFD6TNi4vS0eS fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXl">
+                          Categories</h3>undefined
+                        <ul
+                          data-testid="filter-Categories-list-item"
+                          class="Ol1ZAv3rlWTie99"
+                        >undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Fresh Food-Fresh Food-0"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Fresh Food-Fresh Food-0"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Fresh Food (21)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Drinks-Drinks-1"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Drinks-Drinks-1"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Drinks (11)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Food Cupboard-Food Cupboard-2"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Food Cupboard-Food Cupboard-2"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Food Cupboard (3)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                        </ul>
+                        undefined
+                      </div>
+                      undefined
+                      <div class="bubEiCaWreJqI_A">undefined
+                        <h3 class="ddsweb-heading uKeFD6TNi4vS0eS fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXl">
+                          Lifestyle &amp; Dietary</h3>undefined
+                        <div class="t87HHVFJuF0TBWR">undefined
+                          <p class="ddsweb-text aba71b_GlysEa_text aba71b_GlysEa_shortFormMd">Filters should not be used
+                            as an alternative to medical advice. Always check the label.</p>undefined
+                        </div>
+                        undefined
+                        <ul
+                          data-testid="filter-Lifestyle &amp; Dietary-list-item"
+                          class="Ol1ZAv3rlWTie99"
+                        >undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Halal-Halal-0"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Halal-Halal-0"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Halal (6)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Lacto-vegetarian-Lacto-vegetarian-1"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Lacto-vegetarian-Lacto-vegetarian-1"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Lacto-vegetarian (6)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Low fat-Low fat-2"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Low fat-Low fat-2"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Low fat (6)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                          <li class="wVjmNfEkgi3bvXI">undefined
+                            <div class="ddsweb-checkbox-with-label__container a7763a_3F9ECG_container">
+                              undefined<span class="ddsweb-checkbox-with-label__checkbox a7763a_3F9ECG_checkbox ddsweb-checkbox__container a5f501_1sGP9G_container a5f501_1sGP9G_sm">undefined<input
+                              type="checkbox"
+                              aria-checked="false"
+                              aria-disabled="false"
+                              class="ddsweb-checkbox__checkbox a5f501_1sGP9G_checkbox"
+                              id="Low salt-Low salt-3"
+                            />undefined<span class="ddsweb-checkbox__visible a5f501_1sGP9G_span">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon a5f501_1sGP9G_iconBenefits">undefined<path
+                              fill="currentColor"
+                              d="m5.667 13.394 9.197-9.197-1.061-1.06-8.136 8.136-3.47-3.47-1.06 1.06z"
+                            ></path>undefined</svg>undefined</span>undefined</span>undefined
+                              <div class="ddsweb-checkbox-with-label__label-and-description a7763a_3F9ECG_labelAndDescription">
+                                undefined<label
+                                class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_labelAndDescription a7763a_3F9ECG_sm ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_normal e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                                for="Low salt-Low salt-3"
+                              >undefined<span class="ddsweb-checkbox-with-label__label a7763a_3F9ECG_label">Low salt (6)</span>undefined</label>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </li>
+                          undefined
+                        </ul>
+                        undefined
+                        <div class="t87HHVFJuF0TBWR">undefined
+                          <p class="ddsweb-text aba71b_GlysEa_text aba71b_GlysEa_shortFormMd">In partnership with
+                            SpoonGuru.undefined<a
+                              class="ddsweb-link ddsweb-link__anchor ddsweb-link__standalone c2c5ac_8WKJvW_link c2c5ac_8WKJvW_standaloneLink c2c5ac_8WKJvW_md c2c5ac_8WKJvW_hasIcon c2c5ac_8WKJvW_iconContainerRight"
+                              style="--text-align-global:left"
+                              href="https://www.tesco.com/groceries/zone/general-terms-and-conditions#Dietary"
+                              rel="noopener"
+                              target="_blank"
+                            >undefined<span
+                              class="ddsweb-link__text c2c5ac_8WKJvW_linkText"
+                              style="--order-global-left:0"
+                            >Find out more about each filter</span>undefined<span
+                              class="ddsweb-link__icon-container c2c5ac_8WKJvW_iconContainer"
+                              style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                            >undefined<svg
+                              aria-hidden="true"
+                              color="currentColor"
+                              class="ddsweb-link__icon c2c5ac_8WKJvW_iconScale ddsweb-icon__svg a98401_dFtksG_svg"
+                              height="13.33"
+                              preserveAspectRatio="xMinYMax meet"
+                              stroke="currentColor"
+                              style="--svg-width:12px;--svg-height:20px"
+                              viewBox="-1 0 12 20"
+                              width="8"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                            >undefined<path
+                              d="M1.312 1.348L10.276 10l-8.964 8.644"
+                              fill="none"
+                              stroke="currentColor"
+                            ></path>undefined</svg>undefined</span>undefined</a>undefined
+                          </p>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="oMvXWq7CACE4WnY">undefined
+                          <button
+                            class="ddsweb-button ddsweb-button--text-button e897bf_8WKJvW_textButton e897bf_8WKJvW_base e897bf_8WKJvW_hasOutline e897bf_8WKJvW_textRight e897bf_8WKJvW_secondary e897bf_8WKJvW_sm e897bf_8WKJvW_textButtonSm"
+                            type="button"
+                            data-testid="show-more-lifestyle &amp; dietary-btn"
+                            id="show-more-lifestyle &amp; dietary"
+                            aria-label="More lifestyle &amp; dietary"
+                            aria-expanded="false"
+                          >undefined<span class="ddsweb-button__inner-container e897bf_8WKJvW_container">More lifestyle &amp; dietaryundefined<span class="ddsweb-button__icon-container e897bf_8WKJvW_iconContainer e897bf_8WKJvW_iconRight">undefined<svg
+                            aria-hidden="true"
+                            color="currentColor"
+                            class="ddsweb-icon__svg a98401_dFtksG_svg"
+                            height="12"
+                            preserveAspectRatio="xMinYMax meet"
+                            style="--svg-width:20px;--svg-height:12px"
+                            viewBox="0 -1 20 12"
+                            width="20"
+                            undefinedxmlns="http://www.w3.org/2000/svg"
+                            data-testid="icon"
+                          >undefined<path
+                            d="M18.652 1.312L10 10.276 1.356 1.312"
+                            fill="none"
+                            stroke="#00539f"
+                          ></path>undefined</svg>undefined</span>undefined</span>undefined
+                          </button>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </div>
+                  undefined
+                </div>
+                undefined
+              </div>
+              undefined
+              <div class="J9cp1rmlUCO6_DR">undefined
+                <div
+                  id="plp-dfp-banner"
+                  data-testid="plp-dfp-banner"
+                  class="j8pQIhopkTUaXiw"
+                ></div>
+                undefined<h1
+                  class="ddsweb-heading lY4ydyKq_yKgFnq fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXxxl"
+                  data-auto="search-results-page-heading"
+                >Results for âalpro almondâ</h1>undefined
+                <div class="IUDbBkc0yEiuICL">undefined
+                  <h2 class="ddsweb-heading zuk4qdN3IBmaj1Y fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXxl">Popular
+                    Filters</h2>undefined
+                  <ul class="ReLS_qtlfSAsHds">undefined
+                    <li class="gHI9R_O5evjOPym">undefined
+                      <button
+                        class="ddsweb-chip__button d157ff_XrmOxq_chip ddsweb-button ddsweb-button--text-button e897bf_8WKJvW_textButton e897bf_8WKJvW_base e897bf_8WKJvW_hasOutline e897bf_8WKJvW_textRight e897bf_8WKJvW_secondary e897bf_8WKJvW_sm e897bf_8WKJvW_textButtonSm"
+                        type="button"
+                      >
+                        undefined<span class="ddsweb-button__inner-container e897bf_8WKJvW_container">undefined<span class="ddsweb-chip__sr-button-icon a61aa9_8WKJvW_visuallyHidden">Add</span>Dairy Free Drinksundefined<span class="ddsweb-button__icon-container e897bf_8WKJvW_iconContainer e897bf_8WKJvW_iconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon ddsweb-chip__button-icon">undefined<path
+                        fill="currentColor"
+                        d="M7.25 14V8.75H2v-1.5h5.25V2h1.5v5.25H14v1.5H8.75V14z"
+                      ></path>undefined</svg>undefined</span>undefined</span>undefined
+                      </button>
+                      undefined
+                    </li>
+                    undefined
+                  </ul>
+                  undefined
+                </div>
+                undefined
+                <div class="uNVlVdwfHu8LG2g">undefined
+                  <div class="OONzJx8y1BVealO">undefined
+                    <button
+                      class="p3IRX1TWPvPoYbA ddsweb-button ddsweb-button--text-button e897bf_8WKJvW_textButton e897bf_8WKJvW_base e897bf_8WKJvW_hasOutline e897bf_8WKJvW_textRight e897bf_8WKJvW_primary e897bf_8WKJvW_md"
+                      type="button"
+                      data-testid="show-filter-btn"
+                      aria-label="Open Filters"
+                    >
+                      undefined<span class="ddsweb-button__inner-container e897bf_8WKJvW_container">Filtersundefined<span class="ddsweb-button__icon-container e897bf_8WKJvW_iconContainer e897bf_8WKJvW_iconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<g
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    >undefined<path d="M6.045 7.343A2.54 2.54 0 0 1 3.62 5.555H2.47v-1.5h1.15a2.54 2.54 0 0 1 2.425-1.788c1.139 0 2.104.753 2.425 1.788h13.06v1.5H8.47a2.54 2.54 0 0 1-2.425 1.788M5.007 4.805a1.04 1.04 0 0 1 1.038-1.038 1.04 1.04 0 0 1 1.038 1.038 1.04 1.04 0 0 1-1.038 1.038 1.04 1.04 0 0 1-1.038-1.038M16.812 14.537a2.54 2.54 0 0 0 2.425-1.787h2.294v-1.5h-2.294a2.54 2.54 0 0 0-2.425-1.789c-1.14 0-2.105.754-2.425 1.789H2.47v1.5h11.917a2.54 2.54 0 0 0 2.425 1.787m0-3.576A1.04 1.04 0 0 0 15.774 12a1.04 1.04 0 0 0 1.038 1.038A1.04 1.04 0 0 0 17.85 12a1.04 1.04 0 0 0-1.038-1.038M12.032 21.733c1.14 0 2.105-.753 2.425-1.788h7.074v-1.5h-7.074a2.54 2.54 0 0 0-2.425-1.788 2.54 2.54 0 0 0-2.425 1.788H2.47v1.5h7.137a2.54 2.54 0 0 0 2.425 1.788m0-3.576a1.04 1.04 0 0 0-1.038 1.038 1.04 1.04 0 0 0 1.038 1.038 1.04 1.04 0 0 0 1.038-1.038 1.04 1.04 0 0 0-1.038-1.038"></path>undefined</g>undefined</svg>
+                      undefined</span>undefined</span>undefined
+                    </button>
+                    undefined
+                    <div class="jUqf5bK2eDKYj7G">undefined<label
+                      class="ddsweb-label e51696_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_emphasized e51696_3F9ECG_lineHeightShort a61aa9_8WKJvW_cursorPointer"
+                      for="sortBy"
+                    >Sort by</label>undefined
+                      <div class="vzf97lC05yrNOAf">undefined
+                        <div class="ddsweb-dropdown__container a61aa9_8WKJvW_root a61aa9_8WKJvW_base da9a71_XrmOxq_container">
+                          undefined<select
+                          aria-label="Sort by"
+                          class="ddsweb-dropdown__hidden-select a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_base a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_baseForm da9a71_XrmOxq_hiddenSelect da9a71_XrmOxq_baseSelect"
+                          id="sortBy"
+                        >undefined
+                          <option
+                            selected=""
+                            value="relevance"
+                          >Relevance
+                          </option>
+                          undefined
+                          <option value="price-ascending">Price: Low to High</option>
+                          undefined
+                          <option value="price-descending">Price: High to Low</option>
+                          undefined</select>undefined<span
+                          aria-hidden="true"
+                          class="ddsweb-dropdown__select-span a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_base a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_baseForm a61aa9_8WKJvW_cover a61aa9_8WKJvW_truncate da9a71_XrmOxq_selectSpan da9a71_XrmOxq_baseSelect"
+                        >undefined<span class="da9a71_XrmOxq_selectSpanOverflow">Relevance</span>undefined</span>undefined
+                          <svgundefinedxmlns
+                          ="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+                          aria-hidden="true" class="ddsweb-icon a61aa9_8WKJvW_verticallyAlign
+                          da9a71_XrmOxq_alignedIcon">undefined
+                          <path
+                            fill="currentColor"
+                            d="M20.113 6.791 12 15.196 3.896 6.79l-1.08 1.042L12 17.356l9.192-9.523z"
+                          ></path>
+                          undefined</svg>undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </div>
+                  undefined
+                  <div
+                    class="Vut_gnyOzVwvMur"
+                    data-testid="pagination-result-count"
+                  >undefined
+                    <div>Showing undefined<strong class="w8aYcKeBSbkryDt">1 to 6</strong> of
+                      undefined<strong class="w8aYcKeBSbkryDt">6</strong> itemsundefined
+                    </div>
+                    undefined
+                  </div>
+                  undefined
+                </div>
+                undefined
+                <div class="UhLlDr2VPe8ouwv"></div>
+                undefined
+                <div class="X0cWC6jXa2cPzAr">undefined
+                  <button
+                    class="HEEeVyBmP5_WC_6 ddsweb-button ddsweb-button--text-button e897bf_8WKJvW_textButton e897bf_8WKJvW_base e897bf_8WKJvW_hasOutline e897bf_8WKJvW_textLeft e897bf_8WKJvW_secondary e897bf_8WKJvW_md"
+                    type="button"
+                  >
+                    undefined<span class="ddsweb-button__inner-container e897bf_8WKJvW_container">undefined<span class="ddsweb-button__icon-container e897bf_8WKJvW_iconContainer e897bf_8WKJvW_iconLeft">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<g
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                  >undefined<path d="M6.045 7.343A2.54 2.54 0 0 1 3.62 5.555H2.47v-1.5h1.15a2.54 2.54 0 0 1 2.425-1.788c1.139 0 2.104.753 2.425 1.788h13.06v1.5H8.47a2.54 2.54 0 0 1-2.425 1.788M5.007 4.805a1.04 1.04 0 0 1 1.038-1.038 1.04 1.04 0 0 1 1.038 1.038 1.04 1.04 0 0 1-1.038 1.038 1.04 1.04 0 0 1-1.038-1.038M16.812 14.537a2.54 2.54 0 0 0 2.425-1.787h2.294v-1.5h-2.294a2.54 2.54 0 0 0-2.425-1.789c-1.14 0-2.105.754-2.425 1.789H2.47v1.5h11.917a2.54 2.54 0 0 0 2.425 1.787m0-3.576A1.04 1.04 0 0 0 15.774 12a1.04 1.04 0 0 0 1.038 1.038A1.04 1.04 0 0 0 17.85 12a1.04 1.04 0 0 0-1.038-1.038M12.032 21.733c1.14 0 2.105-.753 2.425-1.788h7.074v-1.5h-7.074a2.54 2.54 0 0 0-2.425-1.788 2.54 2.54 0 0 0-2.425 1.788H2.47v1.5h7.137a2.54 2.54 0 0 0 2.425 1.788m0-3.576a1.04 1.04 0 0 0-1.038 1.038 1.04 1.04 0 0 0 1.038 1.038 1.04 1.04 0 0 0 1.038-1.038 1.04 1.04 0 0 0-1.038-1.038"></path>undefined</g>undefined</svg>
+                    undefined</span>Sort and filter (6)undefined</span>undefined
+                  </button>
+                  undefined
+                </div>
+                undefined
+                <ul
+                  id="list-content"
+                  class="YObNe06WwtziWvx"
+                >undefined
+                  <li
+                    data-testid="276761995"
+                    class="WL_DZkV_Rvg0WJi"
+                    data-auto-available="true"
+                  >undefined
+                    <div class="_ecrjxvBD_ol38Z">undefined
+                      <div class="b74ac0_VtpGGW_verticalTile">undefined
+                        <div class="woiNVEfMHMoKFq_"></div>
+                        undefined
+                        <div class="KZ_O18bCgiFApFM b74ac0_yqjFKG_imageContainer">undefined<a
+                          class="b74ac0_dUMb6G_imageContainer"
+                          href="/groceries/en-GB/products/276761995"
+                          aria-hidden="true"
+                          tabindex="-1"
+                          data-testid="imageContainer_276761995"
+                        >undefined<img
+                          class="b74ac0_dUMb6G_baseImage b74ac0_dUMb6G_orientationVertical"
+                          alt=""
+                          aria-label=""
+                          src="https://digitalcontent.api.tesco.com/v2/media/ghs/c2197781-de6b-4601-9c12-4c0dd9cf9cbb/7ef68106-f8b5-4b0b-8ace-cfb3998a2d9c.jpeg?h=225&amp;w=225"
+                          loading="lazy"
+                          data-testid="imageElement_276761995"
+                        />undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_titleContainer">undefined
+                          <h2 class="ddsweb-heading b_hC4jHw06HMmj4 b74ac0_Iwyiba_title a011e9_3F9ECG_heading a011e9_3F9ECG_headlineMd">
+                            undefined<a
+                            class="b74ac0_Iwyiba_titleLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline fb7694_8WKJvW_inlineLink fb7694_8WKJvW_link"
+                            href="/groceries/en-GB/products/276761995"
+                          >Alpro Almond No Sugar Long Life Dairy Free Drink 1L</a>undefined</h2>undefined
+                        </div>
+                        undefined
+                        <div class="zWmtMMlajUtTHAW">undefined
+                          <div
+                            class="b794f2_XrmOxq_nonInteractive ddsweb-rating__container"
+                            data-testid="star-rating"
+                            aria-label="Average customer rating 4.3 out of 5 stars"
+                          >undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-half-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <g clip-path="url(#clip0_1_2)">undefined
+                                <path
+                                  d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74036L9.0369 11.0633L6.24228 9.51529Z"
+                                  fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                ></path>
+                                undefined
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6 9.95267V0L7.842 3.932L12 4.56867L8.98933 7.66L9.696 12L6 9.95267Z"
+                                  fill="var(--ddsweb-theme-colors-white, #ffffff)"
+                                ></path>
+                                undefined
+                              </g>
+                              undefined
+                              <path
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                              <defs>undefined
+                                <clipPath id="clip0_1_2">undefined
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                  undefined
+                                </clipPath>
+                                undefined
+                              </defs>
+                              undefined
+                            </svg>
+                            undefined
+                            <p class="ddsweb-text b794f2_XrmOxq_hint ddsweb-rating__hint aba71b_GlysEa_text aba71b_GlysEa_shortFormSm">
+                              4.3 (65)</p>undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_variationsContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_deliveryMessageContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_detailsContainer">undefined<a
+                          class="b74ac0_WDok8a_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/reviews/submission/276761995"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Write a review</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined<a
+                          aria-label="Rest of shelf Almond Drinks"
+                          class="b74ac0_58qGOW_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/shop/fresh-food/dairy-free-and-dairy-alternatives/dairy-free-drinks/almond-drinks"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Rest of shelf</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_promotionsContainer">undefined
+                          <div class="b74ac0_AgCE_W_promotionsContainer">undefined
+                            <div>undefined
+                              <div class="b74ac0_W_3NaW_promotionsWithClubcardPriceContainer">undefined<a
+                                href="/groceries/en-GB/promotions/93042295"
+                                class="ddsweb-value-bar__container e96549_l011wq_container"
+                              >undefined
+                                <div class="ddsweb-value-bar__inner-container e96549_l011wq_innerContainer e96549_l011wq_roundedCorners">
+                                  undefined
+                                  <div class="ddsweb-value-bar__clubcard-logo ddsweb-value-bar__clubcard-logo-uk">
+                                    undefined
+                                    <svg
+                                      width="56"
+                                      height="56"
+                                      fill="none"
+                                      undefinedxmlns="http://www.w3.org/2000/svg"
+                                    >undefined<title>Clubcard Price</title>undefined
+                                      <path
+                                        d="M0 12C0 5.373 5.373 0 12 0h44v56H12C5.373 56 0 50.627 0 44V12Z"
+                                        fill="#00539F"
+                                      ></path>
+                                      undefined
+                                      <path
+                                        d="M10.315 27.08c-.6 0-1.157-.137-1.67-.41a3.185 3.185 0 0 1-1.24-1.23c-.313-.547-.47-1.193-.47-1.94 0-.747.157-1.39.47-1.93a3.097 3.097 0 0 1 1.24-1.23c.513-.28 1.07-.42 1.67-.42.727 0 1.344.17 1.85.51.514.34.874.827 1.08 1.46l-1.13.45a1.638 1.638 0 0 0-.64-.88c-.306-.227-.693-.34-1.16-.34-.373 0-.717.09-1.03.27a1.86 1.86 0 0 0-.75.8c-.187.353-.28.79-.28 1.31s.093.96.28 1.32c.187.353.437.62.75.8.313.173.657.26 1.03.26.467 0 .854-.11 1.16-.33.314-.22.527-.517.64-.89l1.13.45c-.206.633-.566 1.12-1.08 1.46-.506.34-1.123.51-1.85.51Zm5.153-.08h-1.24v-7.08h1.24V27Zm5.927 0h-1.24v-.81c-.174.28-.397.5-.67.66-.274.153-.577.23-.91.23-.547 0-.974-.163-1.28-.49-.3-.327-.45-.777-.45-1.35v-3.4h1.24v3.1c0 .667.29 1 .87 1 .38 0 .673-.163.88-.49.213-.333.32-.787.32-1.36v-2.25h1.24V27Zm4.156.08a1.99 1.99 0 0 1-.9-.19 1.503 1.503 0 0 1-.58-.51V27h-1.24v-7.08h1.24v2.55c.167-.22.38-.393.64-.52s.55-.19.87-.19c.44 0 .83.113 1.17.34.34.227.604.543.79.95.194.4.29.857.29 1.37 0 .507-.103.963-.31 1.37-.2.4-.473.717-.82.95-.346.227-.73.34-1.15.34Zm-.28-1.14c.367 0 .67-.137.91-.41.247-.273.37-.643.37-1.11 0-.467-.123-.837-.37-1.11a1.159 1.159 0 0 0-.91-.41 1.19 1.19 0 0 0-.92.41c-.24.273-.36.643-.36 1.11 0 .467.12.837.36 1.11.247.273.554.41.92.41Zm6.08 1.14c-.507 0-.957-.113-1.35-.34-.394-.227-.7-.54-.92-.94a2.853 2.853 0 0 1-.33-1.38c0-.513.11-.97.33-1.37.22-.407.526-.723.92-.95.393-.227.843-.34 1.35-.34 1.146 0 1.923.47 2.33 1.41l-1.13.51c-.26-.52-.66-.78-1.2-.78-.387 0-.707.14-.96.42-.254.28-.38.647-.38 1.1 0 .453.126.82.38 1.1.253.28.573.42.96.42.54 0 .94-.26 1.2-.78l1.13.51c-.407.94-1.184 1.41-2.33 1.41Zm4.666 0c-.3 0-.583-.06-.85-.18a1.538 1.538 0 0 1-.64-.52c-.16-.233-.24-.51-.24-.83 0-.507.19-.913.57-1.22.38-.313.894-.47 1.54-.47h1.11v-.18c0-.26-.09-.467-.27-.62-.18-.16-.423-.24-.73-.24-.246 0-.47.067-.67.2-.2.127-.35.277-.45.45l-.95-.57c.18-.327.447-.597.8-.81.354-.22.777-.33 1.27-.33.707 0 1.257.17 1.65.51.394.34.59.83.59 1.47V27h-1.02l-.17-.66c-.166.227-.38.407-.64.54-.253.133-.553.2-.9.2Zm.3-1.06c.334 0 .614-.1.84-.3.234-.2.35-.447.35-.74v-.14h-.98c-.286 0-.516.057-.69.17a.506.506 0 0 0-.25.45c0 .18.06.32.18.42.127.093.31.14.55.14Zm3.653-4.18h1.24v.78c.147-.28.353-.493.62-.64.267-.147.563-.22.89-.22.34 0 .607.077.8.23l-.42 1.05a1.144 1.144 0 0 0-.55-.14c-.387 0-.707.167-.96.5-.253.333-.38.847-.38 1.54V27h-1.24v-5.16ZM46 27.08c-.42 0-.803-.113-1.15-.34a2.337 2.337 0 0 1-.82-.95 3.15 3.15 0 0 1-.29-1.37c0-.513.094-.97.28-1.37.194-.407.46-.723.8-.95.34-.227.73-.34 1.17-.34.347 0 .65.063.91.19.26.12.46.293.6.52v-2.55h1.24V27H47.5v-.62a1.676 1.676 0 0 1-.6.51 1.99 1.99 0 0 1-.9.19Zm.3-1.14c.367 0 .67-.137.91-.41.248-.273.37-.643.37-1.11 0-.467-.122-.837-.37-1.11a1.159 1.159 0 0 0-.91-.41c-.366 0-.672.137-.92.41-.24.273-.36.643-.36 1.11 0 .467.12.837.36 1.11.247.273.554.41.92.41ZM17.957 37h-1.3v-7h2.57c.467 0 .87.097 1.21.29.34.187.6.447.78.78.18.327.27.693.27 1.1 0 .407-.09.777-.27 1.11-.18.327-.44.587-.78.78-.34.187-.743.28-1.21.28h-1.27V37Zm1.17-3.86c.32 0 .574-.08.76-.24.187-.167.28-.41.28-.73s-.093-.56-.28-.72c-.186-.167-.44-.25-.76-.25h-1.17v1.94h1.17Zm3.359-1.3h1.24v.78c.146-.28.353-.493.62-.64.266-.147.563-.22.89-.22.34 0 .606.077.8.23l-.42 1.05a1.144 1.144 0 0 0-.55-.14c-.387 0-.707.167-.96.5-.254.333-.38.847-.38 1.54V37h-1.24v-5.16Zm4.187-1.34c0-.227.076-.417.23-.57a.774.774 0 0 1 .57-.23c.226 0 .416.077.57.23.153.153.23.343.23.57a.774.774 0 0 1-.23.57.774.774 0 0 1-.57.23.774.774 0 0 1-.57-.23.774.774 0 0 1-.23-.57Zm1.42 6.5h-1.24v-5.16h1.24V37Zm3.723.08c-.507 0-.957-.113-1.35-.34-.394-.227-.7-.54-.92-.94a2.853 2.853 0 0 1-.33-1.38c0-.513.11-.97.33-1.37.22-.407.526-.723.92-.95.393-.227.843-.34 1.35-.34 1.146 0 1.923.47 2.33 1.41l-1.13.51c-.26-.52-.66-.78-1.2-.78-.387 0-.707.14-.96.42-.254.28-.38.647-.38 1.1 0 .453.126.82.38 1.1.253.28.573.42.96.42.54 0 .94-.26 1.2-.78l1.13.51c-.407.94-1.184 1.41-2.33 1.41Zm8.026-2.26h-3.81c.067.38.224.67.47.87.247.193.547.29.9.29.294 0 .537-.06.73-.18.2-.127.39-.317.57-.57l1.05.57c-.253.413-.576.73-.97.95-.386.22-.87.33-1.45.33-.546 0-1.016-.127-1.41-.38a2.463 2.463 0 0 1-.87-1 2.945 2.945 0 0 1-.29-1.28c0-.447.1-.873.3-1.28.207-.407.504-.737.89-.99.387-.26.844-.39 1.37-.39.534 0 .99.12 1.37.36.38.24.667.557.86.95.194.387.29.8.29 1.24v.51Zm-1.27-.98a1.134 1.134 0 0 0-.41-.72c-.22-.187-.5-.28-.84-.28-.286 0-.543.09-.77.27a1.333 1.333 0 0 0-.47.73h2.49Z"
+                                        fill="#fff"
+                                      ></path>
+                                      undefined
+                                    </svg>
+                                    undefined
+                                  </div>
+                                  undefined
+                                  <div class="ddsweb-value-bar__content-container e96549_l011wq_contentContainer">
+                                    undefined
+                                    <p class="ddsweb-text ddsweb-value-bar__content-text e96549_l011wq_contentText e96549_l011wq_singleLineEllipse e4e453_GlysEa_text e4e453_GlysEa_shortFormMd">
+                                      Â£1.70 Clubcard Price</p>undefined
+                                    <p class="ddsweb-text ddsweb-value-bar__content-subtext e96549_l011wq_subText e4e453_GlysEa_text e4e453_GlysEa_shortFormXs">
+                                      (Â£1.70/litre)</p>undefined
+                                  </div>
+                                  undefined
+                                  <div class="ddsweb-value-bar__icon-container e96549_l011wq_iconContainer">undefined
+                                    <svgundefinedxmlns
+                                    ="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16
+                                    16" aria-hidden="true" class="ddsweb-icon">undefined
+                                    <path
+                                      fill="currentColor"
+                                      d="M4.354 2.771 9.77 8l-5.417 5.223 1.04 1.08L11.932 8 5.395 1.692z"
+                                    ></path>
+                                    undefined</svg>undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                                <p class="ddsweb-text ddsweb-value-bar__terms e96549_l011wq_termsText e4e453_GlysEa_text e4e453_GlysEa_shortFormXs">
+                                  Offer valid for delivery from 16/06/2025 until 01/07/2025</p>undefined</a>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="SYzVzFchtWoMVV4 b74ac0_yqjFKG_buyBoxContainer">undefined
+                          <div
+                            class="a61aa9_8WKJvW_base gmbSLnrHMPeotsm ddsweb-buybox__container b74ac0_Al-Kra_withPadding"
+                            layout="[object Object]"
+                          >undefined
+                            <div class="a61aa9_8WKJvW_base ddsweb-buybox__price-and-actions">undefined
+                              <div class="b74ac0_Al-Kra_priceContainerNarrow">undefined
+                                <div class="a61aa9_8WKJvW_base ddsweb-buybox__price ddsweb-price__container">undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_priceText e4e453_GlysEa_text e4e453_GlysEa_shortFormLg">
+                                    Â£2.10</p>undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_subtext ddsweb-price__subtext e4e453_GlysEa_text e4e453_GlysEa_shortFormSm">
+                                    Â£2.10/litre</p>undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                              <div class="a61aa9_8WKJvW_base b74ac0_tYC73a_container ddsweb-buybox__actions ddsweb-quantity-controls__container">
+                                undefined
+                                <div class="b74ac0_tYC73a_formGroup ddsweb-quantity-controls__form-group ddsweb-form-group__container a5e853_L8Eusa_container">
+                                  undefined<label
+                                  class="ddsweb-form-group__label ddsweb-label b6e373_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_dark a61aa9_8WKJvW_visuallyHidden a61aa9_8WKJvW_emphasized a61aa9_8WKJvW_cursorPointer"
+                                  for="quantity-controls-276761995"
+                                >Quantity controls, undefined</label>undefined
+                                  <div class="ddsweb-form-group__children a5e853_L8Eusa_children a5e853_L8Eusa_childrenWithTopLabel a5e853_L8Eusa_childrenWithHideLabelAndNoHelpLink">
+                                    undefined
+                                    <div class="b74ac0_tYC73a_quantityControlWrapper">undefined<label
+                                      class="a61aa9_8WKJvW_visuallyHidden"
+                                      id="quantity-controls-276761995-label"
+                                    >Quantity of Alpro Almond No Sugar Long Life Dairy Free Drink 1L</label>undefined
+                                      <div class="ddsweb-text-input__wrapper a29b8c_L8Eusa_wrapper">undefined
+                                        <div class="b74ac0_tYC73a_input ddsweb-quantity-controls__input ddsweb-text-input__container a29b8c_L8Eusa_container a61aa9_8WKJvW_baseForm">
+                                          undefined<input
+                                          type="number"
+                                          class="ddsweb-text-input a29b8c_L8Eusa_input a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_bareInput"
+                                          data-auto="ddsweb-quantity-controls-input"
+                                          autoComplete="off"
+                                          id="quantity-controls-276761995"
+                                          maxLength="2"
+                                          aria-labelledby="quantity-controls-276761995-label"
+                                          value="1"
+                                        />undefined
+                                        </div>
+                                        undefined
+                                      </div>
+                                      undefined
+                                    </div>
+                                    undefined
+                                    <button
+                                      class="ddsweb-quantity-controls__add-button b74ac0_tYC73a_textButton ddsweb-button ddsweb-button--text-button a9d866_8WKJvW_textButton a9d866_8WKJvW_base a9d866_8WKJvW_hasOutline a9d866_8WKJvW_primary a9d866_8WKJvW_md"
+                                      type="submit"
+                                      data-auto="ddsweb-quantity-controls-add-button"
+                                      aria-label="add 1 Alpro Almond No Sugar Long Life Dairy Free Drink 1L"
+                                      _formGroupId="quantity-controls-276761995"
+                                    >
+                                      undefined<span class="ddsweb-button__inner-container a9d866_8WKJvW_container">Add</span>undefined
+                                    </button>
+                                    undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_messagingContainer"></div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </li>
+                  undefined
+                  <li
+                    data-testid="275067782"
+                    class="WL_DZkV_Rvg0WJi"
+                    data-auto-available="true"
+                  >undefined
+                    <div class="_ecrjxvBD_ol38Z">undefined
+                      <div class="b74ac0_VtpGGW_verticalTile">undefined
+                        <div class="woiNVEfMHMoKFq_"></div>
+                        undefined
+                        <div class="KZ_O18bCgiFApFM b74ac0_yqjFKG_imageContainer">undefined<a
+                          class="b74ac0_dUMb6G_imageContainer"
+                          href="/groceries/en-GB/products/275067782"
+                          aria-hidden="true"
+                          tabindex="-1"
+                          data-testid="imageContainer_275067782"
+                        >undefined<img
+                          class="b74ac0_dUMb6G_baseImage b74ac0_dUMb6G_orientationVertical"
+                          alt=""
+                          aria-label=""
+                          src="https://digitalcontent.api.tesco.com/v2/media/ghs/ee58cd84-90df-46c5-a0df-efbc7cb4e7ee/714c8832-a552-40e6-ba4d-7d80c4fed4e3.jpeg?h=225&amp;w=225"
+                          loading="lazy"
+                          data-testid="imageElement_275067782"
+                        />undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_titleContainer">undefined
+                          <h2 class="ddsweb-heading b_hC4jHw06HMmj4 b74ac0_Iwyiba_title a011e9_3F9ECG_heading a011e9_3F9ECG_headlineMd">
+                            undefined<a
+                            class="b74ac0_Iwyiba_titleLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline fb7694_8WKJvW_inlineLink fb7694_8WKJvW_link"
+                            href="/groceries/en-GB/products/275067782"
+                          >Alpro Almond No Sugar Chilled Dairy Free Drink 1L</a>undefined</h2>undefined
+                        </div>
+                        undefined
+                        <div class="zWmtMMlajUtTHAW">undefined
+                          <div
+                            class="b794f2_XrmOxq_nonInteractive ddsweb-rating__container"
+                            data-testid="star-rating"
+                            aria-label="Average customer rating 4.3 out of 5 stars"
+                          >undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-half-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <g clip-path="url(#clip0_1_2)">undefined
+                                <path
+                                  d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74036L9.0369 11.0633L6.24228 9.51529Z"
+                                  fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                ></path>
+                                undefined
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6 9.95267V0L7.842 3.932L12 4.56867L8.98933 7.66L9.696 12L6 9.95267Z"
+                                  fill="var(--ddsweb-theme-colors-white, #ffffff)"
+                                ></path>
+                                undefined
+                              </g>
+                              undefined
+                              <path
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                              <defs>undefined
+                                <clipPath id="clip0_1_2">undefined
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                  undefined
+                                </clipPath>
+                                undefined
+                              </defs>
+                              undefined
+                            </svg>
+                            undefined
+                            <p class="ddsweb-text b794f2_XrmOxq_hint ddsweb-rating__hint aba71b_GlysEa_text aba71b_GlysEa_shortFormSm">
+                              4.3 (52)</p>undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_variationsContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_deliveryMessageContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_detailsContainer">undefined<a
+                          class="b74ac0_WDok8a_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/reviews/submission/275067782"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Write a review</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined<a
+                          aria-label="Rest of shelf Almond Drinks"
+                          class="b74ac0_58qGOW_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/shop/fresh-food/dairy-free-and-dairy-alternatives/dairy-free-drinks/almond-drinks"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Rest of shelf</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_promotionsContainer"></div>
+                        undefined
+                        <div class="SYzVzFchtWoMVV4 b74ac0_yqjFKG_buyBoxContainer">undefined
+                          <div
+                            class="a61aa9_8WKJvW_base gmbSLnrHMPeotsm ddsweb-buybox__container b74ac0_Al-Kra_withPadding"
+                            layout="[object Object]"
+                          >undefined
+                            <div class="a61aa9_8WKJvW_base ddsweb-buybox__price-and-actions">undefined
+                              <div class="b74ac0_Al-Kra_priceContainerNarrow">undefined
+                                <div class="a61aa9_8WKJvW_base ddsweb-buybox__price ddsweb-price__container">undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_priceText e4e453_GlysEa_text e4e453_GlysEa_shortFormLg">
+                                    Â£2.00</p>undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_subtext ddsweb-price__subtext e4e453_GlysEa_text e4e453_GlysEa_shortFormSm">
+                                    Â£2.00/litre</p>undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                              <div class="a61aa9_8WKJvW_base b74ac0_tYC73a_container ddsweb-buybox__actions ddsweb-quantity-controls__container">
+                                undefined
+                                <div class="b74ac0_tYC73a_formGroup ddsweb-quantity-controls__form-group ddsweb-form-group__container a5e853_L8Eusa_container">
+                                  undefined<label
+                                  class="ddsweb-form-group__label ddsweb-label b6e373_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_dark a61aa9_8WKJvW_visuallyHidden a61aa9_8WKJvW_emphasized a61aa9_8WKJvW_cursorPointer"
+                                  for="quantity-controls-275067782"
+                                >Quantity controls, undefined</label>undefined
+                                  <div class="ddsweb-form-group__children a5e853_L8Eusa_children a5e853_L8Eusa_childrenWithTopLabel a5e853_L8Eusa_childrenWithHideLabelAndNoHelpLink">
+                                    undefined
+                                    <div class="b74ac0_tYC73a_quantityControlWrapper">undefined<label
+                                      class="a61aa9_8WKJvW_visuallyHidden"
+                                      id="quantity-controls-275067782-label"
+                                    >Quantity of Alpro Almond No Sugar Chilled Dairy Free Drink 1L</label>undefined
+                                      <div class="ddsweb-text-input__wrapper a29b8c_L8Eusa_wrapper">undefined
+                                        <div class="b74ac0_tYC73a_input ddsweb-quantity-controls__input ddsweb-text-input__container a29b8c_L8Eusa_container a61aa9_8WKJvW_baseForm">
+                                          undefined<input
+                                          type="number"
+                                          class="ddsweb-text-input a29b8c_L8Eusa_input a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_bareInput"
+                                          data-auto="ddsweb-quantity-controls-input"
+                                          autoComplete="off"
+                                          id="quantity-controls-275067782"
+                                          maxLength="2"
+                                          aria-labelledby="quantity-controls-275067782-label"
+                                          value="1"
+                                        />undefined
+                                        </div>
+                                        undefined
+                                      </div>
+                                      undefined
+                                    </div>
+                                    undefined
+                                    <button
+                                      class="ddsweb-quantity-controls__add-button b74ac0_tYC73a_textButton ddsweb-button ddsweb-button--text-button a9d866_8WKJvW_textButton a9d866_8WKJvW_base a9d866_8WKJvW_hasOutline a9d866_8WKJvW_primary a9d866_8WKJvW_md"
+                                      type="submit"
+                                      data-auto="ddsweb-quantity-controls-add-button"
+                                      aria-label="add 1 Alpro Almond No Sugar Chilled Dairy Free Drink 1L"
+                                      _formGroupId="quantity-controls-275067782"
+                                    >
+                                      undefined<span class="ddsweb-button__inner-container a9d866_8WKJvW_container">Add</span>undefined
+                                    </button>
+                                    undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_messagingContainer"></div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </li>
+                  undefined
+                  <li
+                    data-testid="272012512"
+                    class="WL_DZkV_Rvg0WJi"
+                    data-auto-available="true"
+                  >undefined
+                    <div class="_ecrjxvBD_ol38Z">undefined
+                      <div class="b74ac0_VtpGGW_verticalTile">undefined
+                        <div class="woiNVEfMHMoKFq_"></div>
+                        undefined
+                        <div class="KZ_O18bCgiFApFM b74ac0_yqjFKG_imageContainer">undefined<a
+                          class="b74ac0_dUMb6G_imageContainer"
+                          href="/groceries/en-GB/products/272012512"
+                          aria-hidden="true"
+                          tabindex="-1"
+                          data-testid="imageContainer_272012512"
+                        >undefined<img
+                          class="b74ac0_dUMb6G_baseImage b74ac0_dUMb6G_orientationVertical"
+                          alt=""
+                          aria-label=""
+                          src="https://digitalcontent.api.tesco.com/v2/media/ghs/e4ec8439-f21b-4fb1-a6b1-ca6e2a154062/4c9558dd-2316-4a27-b5b1-6f9be3921e66.jpeg?h=225&amp;w=225"
+                          loading="lazy"
+                          data-testid="imageElement_272012512"
+                        />undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_titleContainer">undefined
+                          <h2 class="ddsweb-heading b_hC4jHw06HMmj4 b74ac0_Iwyiba_title a011e9_3F9ECG_heading a011e9_3F9ECG_headlineMd">
+                            undefined<a
+                            class="b74ac0_Iwyiba_titleLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline fb7694_8WKJvW_inlineLink fb7694_8WKJvW_link"
+                            href="/groceries/en-GB/products/272012512"
+                          >Alpro Almond Original Long Life Dairy Free Drink 1L</a>undefined</h2>undefined
+                        </div>
+                        undefined
+                        <div class="zWmtMMlajUtTHAW">undefined
+                          <div
+                            class="b794f2_XrmOxq_nonInteractive ddsweb-rating__container"
+                            data-testid="star-rating"
+                            aria-label="Average customer rating 4.2 out of 5 stars"
+                          >undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-half-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <g clip-path="url(#clip0_1_2)">undefined
+                                <path
+                                  d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74036L9.0369 11.0633L6.24228 9.51529Z"
+                                  fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                ></path>
+                                undefined
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6 9.95267V0L7.842 3.932L12 4.56867L8.98933 7.66L9.696 12L6 9.95267Z"
+                                  fill="var(--ddsweb-theme-colors-white, #ffffff)"
+                                ></path>
+                                undefined
+                              </g>
+                              undefined
+                              <path
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                              <defs>undefined
+                                <clipPath id="clip0_1_2">undefined
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                  undefined
+                                </clipPath>
+                                undefined
+                              </defs>
+                              undefined
+                            </svg>
+                            undefined
+                            <p class="ddsweb-text b794f2_XrmOxq_hint ddsweb-rating__hint aba71b_GlysEa_text aba71b_GlysEa_shortFormSm">
+                              4.2 (40)</p>undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_variationsContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_deliveryMessageContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_detailsContainer">undefined<a
+                          class="b74ac0_WDok8a_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/reviews/submission/272012512"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Write a review</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined<a
+                          aria-label="Rest of shelf Almond Drinks"
+                          class="b74ac0_58qGOW_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/shop/fresh-food/dairy-free-and-dairy-alternatives/dairy-free-drinks/almond-drinks"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Rest of shelf</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_promotionsContainer">undefined
+                          <div class="b74ac0_AgCE_W_promotionsContainer">undefined
+                            <div>undefined
+                              <div class="b74ac0_W_3NaW_promotionsWithClubcardPriceContainer">undefined<a
+                                href="/groceries/en-GB/promotions/93042292"
+                                class="ddsweb-value-bar__container e96549_l011wq_container"
+                              >undefined
+                                <div class="ddsweb-value-bar__inner-container e96549_l011wq_innerContainer e96549_l011wq_roundedCorners">
+                                  undefined
+                                  <div class="ddsweb-value-bar__clubcard-logo ddsweb-value-bar__clubcard-logo-uk">
+                                    undefined
+                                    <svg
+                                      width="56"
+                                      height="56"
+                                      fill="none"
+                                      undefinedxmlns="http://www.w3.org/2000/svg"
+                                    >undefined<title>Clubcard Price</title>undefined
+                                      <path
+                                        d="M0 12C0 5.373 5.373 0 12 0h44v56H12C5.373 56 0 50.627 0 44V12Z"
+                                        fill="#00539F"
+                                      ></path>
+                                      undefined
+                                      <path
+                                        d="M10.315 27.08c-.6 0-1.157-.137-1.67-.41a3.185 3.185 0 0 1-1.24-1.23c-.313-.547-.47-1.193-.47-1.94 0-.747.157-1.39.47-1.93a3.097 3.097 0 0 1 1.24-1.23c.513-.28 1.07-.42 1.67-.42.727 0 1.344.17 1.85.51.514.34.874.827 1.08 1.46l-1.13.45a1.638 1.638 0 0 0-.64-.88c-.306-.227-.693-.34-1.16-.34-.373 0-.717.09-1.03.27a1.86 1.86 0 0 0-.75.8c-.187.353-.28.79-.28 1.31s.093.96.28 1.32c.187.353.437.62.75.8.313.173.657.26 1.03.26.467 0 .854-.11 1.16-.33.314-.22.527-.517.64-.89l1.13.45c-.206.633-.566 1.12-1.08 1.46-.506.34-1.123.51-1.85.51Zm5.153-.08h-1.24v-7.08h1.24V27Zm5.927 0h-1.24v-.81c-.174.28-.397.5-.67.66-.274.153-.577.23-.91.23-.547 0-.974-.163-1.28-.49-.3-.327-.45-.777-.45-1.35v-3.4h1.24v3.1c0 .667.29 1 .87 1 .38 0 .673-.163.88-.49.213-.333.32-.787.32-1.36v-2.25h1.24V27Zm4.156.08a1.99 1.99 0 0 1-.9-.19 1.503 1.503 0 0 1-.58-.51V27h-1.24v-7.08h1.24v2.55c.167-.22.38-.393.64-.52s.55-.19.87-.19c.44 0 .83.113 1.17.34.34.227.604.543.79.95.194.4.29.857.29 1.37 0 .507-.103.963-.31 1.37-.2.4-.473.717-.82.95-.346.227-.73.34-1.15.34Zm-.28-1.14c.367 0 .67-.137.91-.41.247-.273.37-.643.37-1.11 0-.467-.123-.837-.37-1.11a1.159 1.159 0 0 0-.91-.41 1.19 1.19 0 0 0-.92.41c-.24.273-.36.643-.36 1.11 0 .467.12.837.36 1.11.247.273.554.41.92.41Zm6.08 1.14c-.507 0-.957-.113-1.35-.34-.394-.227-.7-.54-.92-.94a2.853 2.853 0 0 1-.33-1.38c0-.513.11-.97.33-1.37.22-.407.526-.723.92-.95.393-.227.843-.34 1.35-.34 1.146 0 1.923.47 2.33 1.41l-1.13.51c-.26-.52-.66-.78-1.2-.78-.387 0-.707.14-.96.42-.254.28-.38.647-.38 1.1 0 .453.126.82.38 1.1.253.28.573.42.96.42.54 0 .94-.26 1.2-.78l1.13.51c-.407.94-1.184 1.41-2.33 1.41Zm4.666 0c-.3 0-.583-.06-.85-.18a1.538 1.538 0 0 1-.64-.52c-.16-.233-.24-.51-.24-.83 0-.507.19-.913.57-1.22.38-.313.894-.47 1.54-.47h1.11v-.18c0-.26-.09-.467-.27-.62-.18-.16-.423-.24-.73-.24-.246 0-.47.067-.67.2-.2.127-.35.277-.45.45l-.95-.57c.18-.327.447-.597.8-.81.354-.22.777-.33 1.27-.33.707 0 1.257.17 1.65.51.394.34.59.83.59 1.47V27h-1.02l-.17-.66c-.166.227-.38.407-.64.54-.253.133-.553.2-.9.2Zm.3-1.06c.334 0 .614-.1.84-.3.234-.2.35-.447.35-.74v-.14h-.98c-.286 0-.516.057-.69.17a.506.506 0 0 0-.25.45c0 .18.06.32.18.42.127.093.31.14.55.14Zm3.653-4.18h1.24v.78c.147-.28.353-.493.62-.64.267-.147.563-.22.89-.22.34 0 .607.077.8.23l-.42 1.05a1.144 1.144 0 0 0-.55-.14c-.387 0-.707.167-.96.5-.253.333-.38.847-.38 1.54V27h-1.24v-5.16ZM46 27.08c-.42 0-.803-.113-1.15-.34a2.337 2.337 0 0 1-.82-.95 3.15 3.15 0 0 1-.29-1.37c0-.513.094-.97.28-1.37.194-.407.46-.723.8-.95.34-.227.73-.34 1.17-.34.347 0 .65.063.91.19.26.12.46.293.6.52v-2.55h1.24V27H47.5v-.62a1.676 1.676 0 0 1-.6.51 1.99 1.99 0 0 1-.9.19Zm.3-1.14c.367 0 .67-.137.91-.41.248-.273.37-.643.37-1.11 0-.467-.122-.837-.37-1.11a1.159 1.159 0 0 0-.91-.41c-.366 0-.672.137-.92.41-.24.273-.36.643-.36 1.11 0 .467.12.837.36 1.11.247.273.554.41.92.41ZM17.957 37h-1.3v-7h2.57c.467 0 .87.097 1.21.29.34.187.6.447.78.78.18.327.27.693.27 1.1 0 .407-.09.777-.27 1.11-.18.327-.44.587-.78.78-.34.187-.743.28-1.21.28h-1.27V37Zm1.17-3.86c.32 0 .574-.08.76-.24.187-.167.28-.41.28-.73s-.093-.56-.28-.72c-.186-.167-.44-.25-.76-.25h-1.17v1.94h1.17Zm3.359-1.3h1.24v.78c.146-.28.353-.493.62-.64.266-.147.563-.22.89-.22.34 0 .606.077.8.23l-.42 1.05a1.144 1.144 0 0 0-.55-.14c-.387 0-.707.167-.96.5-.254.333-.38.847-.38 1.54V37h-1.24v-5.16Zm4.187-1.34c0-.227.076-.417.23-.57a.774.774 0 0 1 .57-.23c.226 0 .416.077.57.23.153.153.23.343.23.57a.774.774 0 0 1-.23.57.774.774 0 0 1-.57.23.774.774 0 0 1-.57-.23.774.774 0 0 1-.23-.57Zm1.42 6.5h-1.24v-5.16h1.24V37Zm3.723.08c-.507 0-.957-.113-1.35-.34-.394-.227-.7-.54-.92-.94a2.853 2.853 0 0 1-.33-1.38c0-.513.11-.97.33-1.37.22-.407.526-.723.92-.95.393-.227.843-.34 1.35-.34 1.146 0 1.923.47 2.33 1.41l-1.13.51c-.26-.52-.66-.78-1.2-.78-.387 0-.707.14-.96.42-.254.28-.38.647-.38 1.1 0 .453.126.82.38 1.1.253.28.573.42.96.42.54 0 .94-.26 1.2-.78l1.13.51c-.407.94-1.184 1.41-2.33 1.41Zm8.026-2.26h-3.81c.067.38.224.67.47.87.247.193.547.29.9.29.294 0 .537-.06.73-.18.2-.127.39-.317.57-.57l1.05.57c-.253.413-.576.73-.97.95-.386.22-.87.33-1.45.33-.546 0-1.016-.127-1.41-.38a2.463 2.463 0 0 1-.87-1 2.945 2.945 0 0 1-.29-1.28c0-.447.1-.873.3-1.28.207-.407.504-.737.89-.99.387-.26.844-.39 1.37-.39.534 0 .99.12 1.37.36.38.24.667.557.86.95.194.387.29.8.29 1.24v.51Zm-1.27-.98a1.134 1.134 0 0 0-.41-.72c-.22-.187-.5-.28-.84-.28-.286 0-.543.09-.77.27a1.333 1.333 0 0 0-.47.73h2.49Z"
+                                        fill="#fff"
+                                      ></path>
+                                      undefined
+                                    </svg>
+                                    undefined
+                                  </div>
+                                  undefined
+                                  <div class="ddsweb-value-bar__content-container e96549_l011wq_contentContainer">
+                                    undefined
+                                    <p class="ddsweb-text ddsweb-value-bar__content-text e96549_l011wq_contentText e96549_l011wq_singleLineEllipse e4e453_GlysEa_text e4e453_GlysEa_shortFormMd">
+                                      Â£1.70 Clubcard Price</p>undefined
+                                    <p class="ddsweb-text ddsweb-value-bar__content-subtext e96549_l011wq_subText e4e453_GlysEa_text e4e453_GlysEa_shortFormXs">
+                                      (Â£1.70/litre)</p>undefined
+                                  </div>
+                                  undefined
+                                  <div class="ddsweb-value-bar__icon-container e96549_l011wq_iconContainer">undefined
+                                    <svgundefinedxmlns
+                                    ="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16
+                                    16" aria-hidden="true" class="ddsweb-icon">undefined
+                                    <path
+                                      fill="currentColor"
+                                      d="M4.354 2.771 9.77 8l-5.417 5.223 1.04 1.08L11.932 8 5.395 1.692z"
+                                    ></path>
+                                    undefined</svg>undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                                <p class="ddsweb-text ddsweb-value-bar__terms e96549_l011wq_termsText e4e453_GlysEa_text e4e453_GlysEa_shortFormXs">
+                                  Offer valid for delivery from 16/06/2025 until 01/07/2025</p>undefined</a>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="SYzVzFchtWoMVV4 b74ac0_yqjFKG_buyBoxContainer">undefined
+                          <div
+                            class="a61aa9_8WKJvW_base gmbSLnrHMPeotsm ddsweb-buybox__container b74ac0_Al-Kra_withPadding"
+                            layout="[object Object]"
+                          >undefined
+                            <div class="a61aa9_8WKJvW_base ddsweb-buybox__price-and-actions">undefined
+                              <div class="b74ac0_Al-Kra_priceContainerNarrow">undefined
+                                <div class="a61aa9_8WKJvW_base ddsweb-buybox__price ddsweb-price__container">undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_priceText e4e453_GlysEa_text e4e453_GlysEa_shortFormLg">
+                                    Â£2.10</p>undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_subtext ddsweb-price__subtext e4e453_GlysEa_text e4e453_GlysEa_shortFormSm">
+                                    Â£2.10/litre</p>undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                              <div class="a61aa9_8WKJvW_base b74ac0_tYC73a_container ddsweb-buybox__actions ddsweb-quantity-controls__container">
+                                undefined
+                                <div class="b74ac0_tYC73a_formGroup ddsweb-quantity-controls__form-group ddsweb-form-group__container a5e853_L8Eusa_container">
+                                  undefined<label
+                                  class="ddsweb-form-group__label ddsweb-label b6e373_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_dark a61aa9_8WKJvW_visuallyHidden a61aa9_8WKJvW_emphasized a61aa9_8WKJvW_cursorPointer"
+                                  for="quantity-controls-272012512"
+                                >Quantity controls, undefined</label>undefined
+                                  <div class="ddsweb-form-group__children a5e853_L8Eusa_children a5e853_L8Eusa_childrenWithTopLabel a5e853_L8Eusa_childrenWithHideLabelAndNoHelpLink">
+                                    undefined
+                                    <div class="b74ac0_tYC73a_quantityControlWrapper">undefined<label
+                                      class="a61aa9_8WKJvW_visuallyHidden"
+                                      id="quantity-controls-272012512-label"
+                                    >Quantity of Alpro Almond Original Long Life Dairy Free Drink 1L</label>undefined
+                                      <div class="ddsweb-text-input__wrapper a29b8c_L8Eusa_wrapper">undefined
+                                        <div class="b74ac0_tYC73a_input ddsweb-quantity-controls__input ddsweb-text-input__container a29b8c_L8Eusa_container a61aa9_8WKJvW_baseForm">
+                                          undefined<input
+                                          type="number"
+                                          class="ddsweb-text-input a29b8c_L8Eusa_input a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_bareInput"
+                                          data-auto="ddsweb-quantity-controls-input"
+                                          autoComplete="off"
+                                          id="quantity-controls-272012512"
+                                          maxLength="2"
+                                          aria-labelledby="quantity-controls-272012512-label"
+                                          value="1"
+                                        />undefined
+                                        </div>
+                                        undefined
+                                      </div>
+                                      undefined
+                                    </div>
+                                    undefined
+                                    <button
+                                      class="ddsweb-quantity-controls__add-button b74ac0_tYC73a_textButton ddsweb-button ddsweb-button--text-button a9d866_8WKJvW_textButton a9d866_8WKJvW_base a9d866_8WKJvW_hasOutline a9d866_8WKJvW_primary a9d866_8WKJvW_md"
+                                      type="submit"
+                                      data-auto="ddsweb-quantity-controls-add-button"
+                                      aria-label="add 1 Alpro Almond Original Long Life Dairy Free Drink 1L"
+                                      _formGroupId="quantity-controls-272012512"
+                                    >
+                                      undefined<span class="ddsweb-button__inner-container a9d866_8WKJvW_container">Add</span>undefined
+                                    </button>
+                                    undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_messagingContainer"></div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </li>
+                  undefined
+                  <li
+                    data-testid="272103255"
+                    class="WL_DZkV_Rvg0WJi"
+                    data-auto-available="true"
+                  >undefined
+                    <div class="_ecrjxvBD_ol38Z">undefined
+                      <div class="b74ac0_VtpGGW_verticalTile">undefined
+                        <div class="woiNVEfMHMoKFq_"></div>
+                        undefined
+                        <div class="KZ_O18bCgiFApFM b74ac0_yqjFKG_imageContainer">undefined<a
+                          class="b74ac0_dUMb6G_imageContainer"
+                          href="/groceries/en-GB/products/272103255"
+                          aria-hidden="true"
+                          tabindex="-1"
+                          data-testid="imageContainer_272103255"
+                        >undefined<img
+                          class="b74ac0_dUMb6G_baseImage b74ac0_dUMb6G_orientationVertical"
+                          alt=""
+                          aria-label=""
+                          src="https://digitalcontent.api.tesco.com/v2/media/ghs/22feaad2-4784-4b61-ae79-8a7e2069d295/1d80eb2b-7b4c-47e2-9339-8fa95750af17.jpeg?h=225&amp;w=225"
+                          loading="lazy"
+                          data-testid="imageElement_272103255"
+                        />undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_titleContainer">undefined
+                          <h2 class="ddsweb-heading b_hC4jHw06HMmj4 b74ac0_Iwyiba_title a011e9_3F9ECG_heading a011e9_3F9ECG_headlineMd">
+                            undefined<a
+                            class="b74ac0_Iwyiba_titleLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline fb7694_8WKJvW_inlineLink fb7694_8WKJvW_link"
+                            href="/groceries/en-GB/products/272103255"
+                          >Alpro Almond Original Chilled Dairy Free Drink 1L</a>undefined</h2>undefined
+                        </div>
+                        undefined
+                        <div class="zWmtMMlajUtTHAW">undefined
+                          <div
+                            class="b794f2_XrmOxq_nonInteractive ddsweb-rating__container"
+                            data-testid="star-rating"
+                            aria-label="Average customer rating 4.1 out of 5 stars"
+                          >undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-half-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <g clip-path="url(#clip0_1_2)">undefined
+                                <path
+                                  d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74036L9.0369 11.0633L6.24228 9.51529Z"
+                                  fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                ></path>
+                                undefined
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6 9.95267V0L7.842 3.932L12 4.56867L8.98933 7.66L9.696 12L6 9.95267Z"
+                                  fill="var(--ddsweb-theme-colors-white, #ffffff)"
+                                ></path>
+                                undefined
+                              </g>
+                              undefined
+                              <path
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                              <defs>undefined
+                                <clipPath id="clip0_1_2">undefined
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                  undefined
+                                </clipPath>
+                                undefined
+                              </defs>
+                              undefined
+                            </svg>
+                            undefined
+                            <p class="ddsweb-text b794f2_XrmOxq_hint ddsweb-rating__hint aba71b_GlysEa_text aba71b_GlysEa_shortFormSm">
+                              4.1 (84)</p>undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_variationsContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_deliveryMessageContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_detailsContainer">undefined<a
+                          class="b74ac0_WDok8a_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/reviews/submission/272103255"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Write a review</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined<a
+                          aria-label="Rest of shelf Almond Drinks"
+                          class="b74ac0_58qGOW_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/shop/fresh-food/dairy-free-and-dairy-alternatives/dairy-free-drinks/almond-drinks"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Rest of shelf</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_promotionsContainer"></div>
+                        undefined
+                        <div class="SYzVzFchtWoMVV4 b74ac0_yqjFKG_buyBoxContainer">undefined
+                          <div
+                            class="a61aa9_8WKJvW_base gmbSLnrHMPeotsm ddsweb-buybox__container b74ac0_Al-Kra_withPadding"
+                            layout="[object Object]"
+                          >undefined
+                            <div class="a61aa9_8WKJvW_base ddsweb-buybox__price-and-actions">undefined
+                              <div class="b74ac0_Al-Kra_priceContainerNarrow">undefined
+                                <div class="a61aa9_8WKJvW_base ddsweb-buybox__price ddsweb-price__container">undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_priceText e4e453_GlysEa_text e4e453_GlysEa_shortFormLg">
+                                    Â£2.00</p>undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_subtext ddsweb-price__subtext e4e453_GlysEa_text e4e453_GlysEa_shortFormSm">
+                                    Â£2.00/litre</p>undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                              <div class="a61aa9_8WKJvW_base b74ac0_tYC73a_container ddsweb-buybox__actions ddsweb-quantity-controls__container">
+                                undefined
+                                <div class="b74ac0_tYC73a_formGroup ddsweb-quantity-controls__form-group ddsweb-form-group__container a5e853_L8Eusa_container">
+                                  undefined<label
+                                  class="ddsweb-form-group__label ddsweb-label b6e373_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_dark a61aa9_8WKJvW_visuallyHidden a61aa9_8WKJvW_emphasized a61aa9_8WKJvW_cursorPointer"
+                                  for="quantity-controls-272103255"
+                                >Quantity controls, undefined</label>undefined
+                                  <div class="ddsweb-form-group__children a5e853_L8Eusa_children a5e853_L8Eusa_childrenWithTopLabel a5e853_L8Eusa_childrenWithHideLabelAndNoHelpLink">
+                                    undefined
+                                    <div class="b74ac0_tYC73a_quantityControlWrapper">undefined<label
+                                      class="a61aa9_8WKJvW_visuallyHidden"
+                                      id="quantity-controls-272103255-label"
+                                    >Quantity of Alpro Almond Original Chilled Dairy Free Drink 1L</label>undefined
+                                      <div class="ddsweb-text-input__wrapper a29b8c_L8Eusa_wrapper">undefined
+                                        <div class="b74ac0_tYC73a_input ddsweb-quantity-controls__input ddsweb-text-input__container a29b8c_L8Eusa_container a61aa9_8WKJvW_baseForm">
+                                          undefined<input
+                                          type="number"
+                                          class="ddsweb-text-input a29b8c_L8Eusa_input a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_bareInput"
+                                          data-auto="ddsweb-quantity-controls-input"
+                                          autoComplete="off"
+                                          id="quantity-controls-272103255"
+                                          maxLength="2"
+                                          aria-labelledby="quantity-controls-272103255-label"
+                                          value="1"
+                                        />undefined
+                                        </div>
+                                        undefined
+                                      </div>
+                                      undefined
+                                    </div>
+                                    undefined
+                                    <button
+                                      class="ddsweb-quantity-controls__add-button b74ac0_tYC73a_textButton ddsweb-button ddsweb-button--text-button a9d866_8WKJvW_textButton a9d866_8WKJvW_base a9d866_8WKJvW_hasOutline a9d866_8WKJvW_primary a9d866_8WKJvW_md"
+                                      type="submit"
+                                      data-auto="ddsweb-quantity-controls-add-button"
+                                      aria-label="add 1 Alpro Almond Original Chilled Dairy Free Drink 1L"
+                                      _formGroupId="quantity-controls-272103255"
+                                    >
+                                      undefined<span class="ddsweb-button__inner-container a9d866_8WKJvW_container">Add</span>undefined
+                                    </button>
+                                    undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_messagingContainer"></div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </li>
+                  undefined
+                  <li
+                    data-testid="304783080"
+                    class="WL_DZkV_Rvg0WJi"
+                    data-auto-available="true"
+                  >undefined
+                    <div class="_ecrjxvBD_ol38Z">undefined
+                      <div class="b74ac0_VtpGGW_verticalTile">undefined
+                        <div class="woiNVEfMHMoKFq_"></div>
+                        undefined
+                        <div class="KZ_O18bCgiFApFM b74ac0_yqjFKG_imageContainer">undefined<a
+                          class="b74ac0_dUMb6G_imageContainer"
+                          href="/groceries/en-GB/products/304783080"
+                          aria-hidden="true"
+                          tabindex="-1"
+                          data-testid="imageContainer_304783080"
+                        >undefined<img
+                          class="b74ac0_dUMb6G_baseImage b74ac0_dUMb6G_orientationVertical"
+                          alt=""
+                          aria-label=""
+                          src="https://digitalcontent.api.tesco.com/v2/media/ghs/18737b5b-f355-4125-a0ee-6fb96ba1f2c3/80601352-0da5-4cfb-84ca-c015cc5a36b9.jpeg?h=225&amp;w=225"
+                          loading="lazy"
+                          data-testid="imageElement_304783080"
+                        />undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_titleContainer">undefined
+                          <h2 class="ddsweb-heading b_hC4jHw06HMmj4 b74ac0_Iwyiba_title a011e9_3F9ECG_heading a011e9_3F9ECG_headlineMd">
+                            undefined<a
+                            class="b74ac0_Iwyiba_titleLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline fb7694_8WKJvW_inlineLink fb7694_8WKJvW_link"
+                            href="/groceries/en-GB/products/304783080"
+                          >Alpro Barista Almond Long Life Dairy Free Drink 1L</a>undefined</h2>undefined
+                        </div>
+                        undefined
+                        <div class="zWmtMMlajUtTHAW">undefined
+                          <div
+                            class="b794f2_XrmOxq_nonInteractive ddsweb-rating__container"
+                            data-testid="star-rating"
+                            aria-label="Average customer rating 4.3 out of 5 stars"
+                          >undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-half-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <g clip-path="url(#clip0_1_2)">undefined
+                                <path
+                                  d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74036L9.0369 11.0633L6.24228 9.51529Z"
+                                  fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                ></path>
+                                undefined
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6 9.95267V0L7.842 3.932L12 4.56867L8.98933 7.66L9.696 12L6 9.95267Z"
+                                  fill="var(--ddsweb-theme-colors-white, #ffffff)"
+                                ></path>
+                                undefined
+                              </g>
+                              undefined
+                              <path
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                              <defs>undefined
+                                <clipPath id="clip0_1_2">undefined
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                  undefined
+                                </clipPath>
+                                undefined
+                              </defs>
+                              undefined
+                            </svg>
+                            undefined
+                            <p class="ddsweb-text b794f2_XrmOxq_hint ddsweb-rating__hint aba71b_GlysEa_text aba71b_GlysEa_shortFormSm">
+                              4.3 (51)</p>undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_variationsContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_deliveryMessageContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_detailsContainer">undefined<a
+                          class="b74ac0_WDok8a_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/reviews/submission/304783080"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Write a review</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined<a
+                          aria-label="Rest of shelf Almond Drinks"
+                          class="b74ac0_58qGOW_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/shop/fresh-food/dairy-free-and-dairy-alternatives/dairy-free-drinks/almond-drinks"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Rest of shelf</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_promotionsContainer">undefined
+                          <div class="b74ac0_AgCE_W_promotionsContainer">undefined
+                            <div>undefined
+                              <div class="b74ac0_W_3NaW_promotionsWithClubcardPriceContainer">undefined<a
+                                href="/groceries/en-GB/promotions/93042294"
+                                class="ddsweb-value-bar__container e96549_l011wq_container"
+                              >undefined
+                                <div class="ddsweb-value-bar__inner-container e96549_l011wq_innerContainer e96549_l011wq_roundedCorners">
+                                  undefined
+                                  <div class="ddsweb-value-bar__clubcard-logo ddsweb-value-bar__clubcard-logo-uk">
+                                    undefined
+                                    <svg
+                                      width="56"
+                                      height="56"
+                                      fill="none"
+                                      undefinedxmlns="http://www.w3.org/2000/svg"
+                                    >undefined<title>Clubcard Price</title>undefined
+                                      <path
+                                        d="M0 12C0 5.373 5.373 0 12 0h44v56H12C5.373 56 0 50.627 0 44V12Z"
+                                        fill="#00539F"
+                                      ></path>
+                                      undefined
+                                      <path
+                                        d="M10.315 27.08c-.6 0-1.157-.137-1.67-.41a3.185 3.185 0 0 1-1.24-1.23c-.313-.547-.47-1.193-.47-1.94 0-.747.157-1.39.47-1.93a3.097 3.097 0 0 1 1.24-1.23c.513-.28 1.07-.42 1.67-.42.727 0 1.344.17 1.85.51.514.34.874.827 1.08 1.46l-1.13.45a1.638 1.638 0 0 0-.64-.88c-.306-.227-.693-.34-1.16-.34-.373 0-.717.09-1.03.27a1.86 1.86 0 0 0-.75.8c-.187.353-.28.79-.28 1.31s.093.96.28 1.32c.187.353.437.62.75.8.313.173.657.26 1.03.26.467 0 .854-.11 1.16-.33.314-.22.527-.517.64-.89l1.13.45c-.206.633-.566 1.12-1.08 1.46-.506.34-1.123.51-1.85.51Zm5.153-.08h-1.24v-7.08h1.24V27Zm5.927 0h-1.24v-.81c-.174.28-.397.5-.67.66-.274.153-.577.23-.91.23-.547 0-.974-.163-1.28-.49-.3-.327-.45-.777-.45-1.35v-3.4h1.24v3.1c0 .667.29 1 .87 1 .38 0 .673-.163.88-.49.213-.333.32-.787.32-1.36v-2.25h1.24V27Zm4.156.08a1.99 1.99 0 0 1-.9-.19 1.503 1.503 0 0 1-.58-.51V27h-1.24v-7.08h1.24v2.55c.167-.22.38-.393.64-.52s.55-.19.87-.19c.44 0 .83.113 1.17.34.34.227.604.543.79.95.194.4.29.857.29 1.37 0 .507-.103.963-.31 1.37-.2.4-.473.717-.82.95-.346.227-.73.34-1.15.34Zm-.28-1.14c.367 0 .67-.137.91-.41.247-.273.37-.643.37-1.11 0-.467-.123-.837-.37-1.11a1.159 1.159 0 0 0-.91-.41 1.19 1.19 0 0 0-.92.41c-.24.273-.36.643-.36 1.11 0 .467.12.837.36 1.11.247.273.554.41.92.41Zm6.08 1.14c-.507 0-.957-.113-1.35-.34-.394-.227-.7-.54-.92-.94a2.853 2.853 0 0 1-.33-1.38c0-.513.11-.97.33-1.37.22-.407.526-.723.92-.95.393-.227.843-.34 1.35-.34 1.146 0 1.923.47 2.33 1.41l-1.13.51c-.26-.52-.66-.78-1.2-.78-.387 0-.707.14-.96.42-.254.28-.38.647-.38 1.1 0 .453.126.82.38 1.1.253.28.573.42.96.42.54 0 .94-.26 1.2-.78l1.13.51c-.407.94-1.184 1.41-2.33 1.41Zm4.666 0c-.3 0-.583-.06-.85-.18a1.538 1.538 0 0 1-.64-.52c-.16-.233-.24-.51-.24-.83 0-.507.19-.913.57-1.22.38-.313.894-.47 1.54-.47h1.11v-.18c0-.26-.09-.467-.27-.62-.18-.16-.423-.24-.73-.24-.246 0-.47.067-.67.2-.2.127-.35.277-.45.45l-.95-.57c.18-.327.447-.597.8-.81.354-.22.777-.33 1.27-.33.707 0 1.257.17 1.65.51.394.34.59.83.59 1.47V27h-1.02l-.17-.66c-.166.227-.38.407-.64.54-.253.133-.553.2-.9.2Zm.3-1.06c.334 0 .614-.1.84-.3.234-.2.35-.447.35-.74v-.14h-.98c-.286 0-.516.057-.69.17a.506.506 0 0 0-.25.45c0 .18.06.32.18.42.127.093.31.14.55.14Zm3.653-4.18h1.24v.78c.147-.28.353-.493.62-.64.267-.147.563-.22.89-.22.34 0 .607.077.8.23l-.42 1.05a1.144 1.144 0 0 0-.55-.14c-.387 0-.707.167-.96.5-.253.333-.38.847-.38 1.54V27h-1.24v-5.16ZM46 27.08c-.42 0-.803-.113-1.15-.34a2.337 2.337 0 0 1-.82-.95 3.15 3.15 0 0 1-.29-1.37c0-.513.094-.97.28-1.37.194-.407.46-.723.8-.95.34-.227.73-.34 1.17-.34.347 0 .65.063.91.19.26.12.46.293.6.52v-2.55h1.24V27H47.5v-.62a1.676 1.676 0 0 1-.6.51 1.99 1.99 0 0 1-.9.19Zm.3-1.14c.367 0 .67-.137.91-.41.248-.273.37-.643.37-1.11 0-.467-.122-.837-.37-1.11a1.159 1.159 0 0 0-.91-.41c-.366 0-.672.137-.92.41-.24.273-.36.643-.36 1.11 0 .467.12.837.36 1.11.247.273.554.41.92.41ZM17.957 37h-1.3v-7h2.57c.467 0 .87.097 1.21.29.34.187.6.447.78.78.18.327.27.693.27 1.1 0 .407-.09.777-.27 1.11-.18.327-.44.587-.78.78-.34.187-.743.28-1.21.28h-1.27V37Zm1.17-3.86c.32 0 .574-.08.76-.24.187-.167.28-.41.28-.73s-.093-.56-.28-.72c-.186-.167-.44-.25-.76-.25h-1.17v1.94h1.17Zm3.359-1.3h1.24v.78c.146-.28.353-.493.62-.64.266-.147.563-.22.89-.22.34 0 .606.077.8.23l-.42 1.05a1.144 1.144 0 0 0-.55-.14c-.387 0-.707.167-.96.5-.254.333-.38.847-.38 1.54V37h-1.24v-5.16Zm4.187-1.34c0-.227.076-.417.23-.57a.774.774 0 0 1 .57-.23c.226 0 .416.077.57.23.153.153.23.343.23.57a.774.774 0 0 1-.23.57.774.774 0 0 1-.57.23.774.774 0 0 1-.57-.23.774.774 0 0 1-.23-.57Zm1.42 6.5h-1.24v-5.16h1.24V37Zm3.723.08c-.507 0-.957-.113-1.35-.34-.394-.227-.7-.54-.92-.94a2.853 2.853 0 0 1-.33-1.38c0-.513.11-.97.33-1.37.22-.407.526-.723.92-.95.393-.227.843-.34 1.35-.34 1.146 0 1.923.47 2.33 1.41l-1.13.51c-.26-.52-.66-.78-1.2-.78-.387 0-.707.14-.96.42-.254.28-.38.647-.38 1.1 0 .453.126.82.38 1.1.253.28.573.42.96.42.54 0 .94-.26 1.2-.78l1.13.51c-.407.94-1.184 1.41-2.33 1.41Zm8.026-2.26h-3.81c.067.38.224.67.47.87.247.193.547.29.9.29.294 0 .537-.06.73-.18.2-.127.39-.317.57-.57l1.05.57c-.253.413-.576.73-.97.95-.386.22-.87.33-1.45.33-.546 0-1.016-.127-1.41-.38a2.463 2.463 0 0 1-.87-1 2.945 2.945 0 0 1-.29-1.28c0-.447.1-.873.3-1.28.207-.407.504-.737.89-.99.387-.26.844-.39 1.37-.39.534 0 .99.12 1.37.36.38.24.667.557.86.95.194.387.29.8.29 1.24v.51Zm-1.27-.98a1.134 1.134 0 0 0-.41-.72c-.22-.187-.5-.28-.84-.28-.286 0-.543.09-.77.27a1.333 1.333 0 0 0-.47.73h2.49Z"
+                                        fill="#fff"
+                                      ></path>
+                                      undefined
+                                    </svg>
+                                    undefined
+                                  </div>
+                                  undefined
+                                  <div class="ddsweb-value-bar__content-container e96549_l011wq_contentContainer">
+                                    undefined
+                                    <p class="ddsweb-text ddsweb-value-bar__content-text e96549_l011wq_contentText e96549_l011wq_singleLineEllipse e4e453_GlysEa_text e4e453_GlysEa_shortFormMd">
+                                      Â£1.70 Clubcard Price</p>undefined
+                                    <p class="ddsweb-text ddsweb-value-bar__content-subtext e96549_l011wq_subText e4e453_GlysEa_text e4e453_GlysEa_shortFormXs">
+                                      (Â£1.70/litre)</p>undefined
+                                  </div>
+                                  undefined
+                                  <div class="ddsweb-value-bar__icon-container e96549_l011wq_iconContainer">undefined
+                                    <svgundefinedxmlns
+                                    ="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16
+                                    16" aria-hidden="true" class="ddsweb-icon">undefined
+                                    <path
+                                      fill="currentColor"
+                                      d="M4.354 2.771 9.77 8l-5.417 5.223 1.04 1.08L11.932 8 5.395 1.692z"
+                                    ></path>
+                                    undefined</svg>undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                                <p class="ddsweb-text ddsweb-value-bar__terms e96549_l011wq_termsText e4e453_GlysEa_text e4e453_GlysEa_shortFormXs">
+                                  Offer valid for delivery from 16/06/2025 until 01/07/2025</p>undefined</a>undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="SYzVzFchtWoMVV4 b74ac0_yqjFKG_buyBoxContainer">undefined
+                          <div
+                            class="a61aa9_8WKJvW_base gmbSLnrHMPeotsm ddsweb-buybox__container b74ac0_Al-Kra_withPadding"
+                            layout="[object Object]"
+                          >undefined
+                            <div class="a61aa9_8WKJvW_base ddsweb-buybox__price-and-actions">undefined
+                              <div class="b74ac0_Al-Kra_priceContainerNarrow">undefined
+                                <div class="a61aa9_8WKJvW_base ddsweb-buybox__price ddsweb-price__container">undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_priceText e4e453_GlysEa_text e4e453_GlysEa_shortFormLg">
+                                    Â£2.10</p>undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_subtext ddsweb-price__subtext e4e453_GlysEa_text e4e453_GlysEa_shortFormSm">
+                                    Â£2.10/litre</p>undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                              <div class="a61aa9_8WKJvW_base b74ac0_tYC73a_container ddsweb-buybox__actions ddsweb-quantity-controls__container">
+                                undefined
+                                <div class="b74ac0_tYC73a_formGroup ddsweb-quantity-controls__form-group ddsweb-form-group__container a5e853_L8Eusa_container">
+                                  undefined<label
+                                  class="ddsweb-form-group__label ddsweb-label b6e373_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_dark a61aa9_8WKJvW_visuallyHidden a61aa9_8WKJvW_emphasized a61aa9_8WKJvW_cursorPointer"
+                                  for="quantity-controls-304783080"
+                                >Quantity controls, undefined</label>undefined
+                                  <div class="ddsweb-form-group__children a5e853_L8Eusa_children a5e853_L8Eusa_childrenWithTopLabel a5e853_L8Eusa_childrenWithHideLabelAndNoHelpLink">
+                                    undefined
+                                    <div class="b74ac0_tYC73a_quantityControlWrapper">undefined<label
+                                      class="a61aa9_8WKJvW_visuallyHidden"
+                                      id="quantity-controls-304783080-label"
+                                    >Quantity of Alpro Barista Almond Long Life Dairy Free Drink 1L</label>undefined
+                                      <div class="ddsweb-text-input__wrapper a29b8c_L8Eusa_wrapper">undefined
+                                        <div class="b74ac0_tYC73a_input ddsweb-quantity-controls__input ddsweb-text-input__container a29b8c_L8Eusa_container a61aa9_8WKJvW_baseForm">
+                                          undefined<input
+                                          type="number"
+                                          class="ddsweb-text-input a29b8c_L8Eusa_input a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_bareInput"
+                                          data-auto="ddsweb-quantity-controls-input"
+                                          autoComplete="off"
+                                          id="quantity-controls-304783080"
+                                          maxLength="2"
+                                          aria-labelledby="quantity-controls-304783080-label"
+                                          value="1"
+                                        />undefined
+                                        </div>
+                                        undefined
+                                      </div>
+                                      undefined
+                                    </div>
+                                    undefined
+                                    <button
+                                      class="ddsweb-quantity-controls__add-button b74ac0_tYC73a_textButton ddsweb-button ddsweb-button--text-button a9d866_8WKJvW_textButton a9d866_8WKJvW_base a9d866_8WKJvW_hasOutline a9d866_8WKJvW_primary a9d866_8WKJvW_md"
+                                      type="submit"
+                                      data-auto="ddsweb-quantity-controls-add-button"
+                                      aria-label="add 1 Alpro Barista Almond Long Life Dairy Free Drink 1L"
+                                      _formGroupId="quantity-controls-304783080"
+                                    >
+                                      undefined<span class="ddsweb-button__inner-container a9d866_8WKJvW_container">Add</span>undefined
+                                    </button>
+                                    undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_messagingContainer"></div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </li>
+                  undefined
+                  <li
+                    data-testid="316547434"
+                    class="WL_DZkV_Rvg0WJi"
+                    data-auto-available="true"
+                  >undefined
+                    <div class="_ecrjxvBD_ol38Z">undefined
+                      <div class="b74ac0_VtpGGW_verticalTile">undefined
+                        <div class="woiNVEfMHMoKFq_"></div>
+                        undefined
+                        <div class="KZ_O18bCgiFApFM b74ac0_yqjFKG_imageContainer">undefined<a
+                          class="b74ac0_dUMb6G_imageContainer"
+                          href="/groceries/en-GB/products/316547434"
+                          aria-hidden="true"
+                          tabindex="-1"
+                          data-testid="imageContainer_316547434"
+                        >undefined<img
+                          class="b74ac0_dUMb6G_baseImage b74ac0_dUMb6G_orientationVertical"
+                          alt=""
+                          aria-label=""
+                          src="https://digitalcontent.api.tesco.com/v2/media/ghs/c481a998-8511-474d-bba5-09cf3282cd9b/21189d28-509b-4816-8075-5aeb65fa1176_614663061.jpeg?h=225&amp;w=225"
+                          loading="lazy"
+                          data-testid="imageElement_316547434"
+                        />undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_titleContainer">undefined
+                          <h2 class="ddsweb-heading b_hC4jHw06HMmj4 b74ac0_Iwyiba_title a011e9_3F9ECG_heading a011e9_3F9ECG_headlineMd">
+                            undefined<a
+                            class="b74ac0_Iwyiba_titleLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline fb7694_8WKJvW_inlineLink fb7694_8WKJvW_link"
+                            href="/groceries/en-GB/products/316547434"
+                          >Alpro No Sugars Nutty Almond Drink 500ml</a>undefined</h2>undefined
+                        </div>
+                        undefined
+                        <div class="zWmtMMlajUtTHAW">undefined
+                          <div
+                            class="b794f2_XrmOxq_nonInteractive ddsweb-rating__container"
+                            data-testid="star-rating"
+                            aria-label="Average customer rating 4.4 out of 5 stars"
+                          >undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <path
+                                fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                            </svg>
+                            undefined
+                            <svg
+                              class="ddsweb-rating__icon-half-active"
+                              aria-hidden="true"
+                              undefinedxmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                            >undefined
+                              <g clip-path="url(#clip0_1_2)">undefined
+                                <path
+                                  d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74036L9.0369 11.0633L6.24228 9.51529Z"
+                                  fill="var(--ddsweb-theme-colors-tesco-blue, #00539f)"
+                                ></path>
+                                undefined
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M6 9.95267V0L7.842 3.932L12 4.56867L8.98933 7.66L9.696 12L6 9.95267Z"
+                                  fill="var(--ddsweb-theme-colors-white, #ffffff)"
+                                ></path>
+                                undefined
+                              </g>
+                              undefined
+                              <path
+                                stroke="var(--ddsweb-theme-colors-grayscale, #666666)"
+                                d="M6.24228 9.51529L6 9.38108L5.75772 9.51529L2.9631 11.0633L3.50417 7.74036L3.54466 7.49166L3.36886 7.31115L1.03607 4.91585L4.23368 4.42624L4.49754 4.38584L4.61078 4.14411L6 1.17863L7.38922 4.14411L7.50246 4.38584L7.76632 4.42624L10.9639 4.91585L8.63114 7.31115L8.45534 7.49166L8.49583 7.74035L9.0369 11.0633L6.24228 9.51529Z"
+                              ></path>
+                              undefined
+                              <defs>undefined
+                                <clipPath id="clip0_1_2">undefined
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                  undefined
+                                </clipPath>
+                                undefined
+                              </defs>
+                              undefined
+                            </svg>
+                            undefined
+                            <p class="ddsweb-text b794f2_XrmOxq_hint ddsweb-rating__hint aba71b_GlysEa_text aba71b_GlysEa_shortFormSm">
+                              4.4 (98)</p>undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_variationsContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_deliveryMessageContainer"></div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_detailsContainer">undefined<a
+                          class="b74ac0_WDok8a_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/reviews/submission/316547434"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Write a review</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined<a
+                          aria-label="Rest of shelf Almond Drinks"
+                          class="b74ac0_58qGOW_styledLink ddsweb-link ddsweb-link__anchor ddsweb-link__standalone fb7694_8WKJvW_link fb7694_8WKJvW_standaloneLink fb7694_8WKJvW_md fb7694_8WKJvW_hasIcon fb7694_8WKJvW_iconContainerRight"
+                          style="--text-align-global:left"
+                          href="/groceries/en-GB/shop/fresh-food/dairy-free-and-dairy-alternatives/dairy-free-drinks/almond-drinks"
+                        >undefined<span
+                          class="ddsweb-link__text fb7694_8WKJvW_linkText"
+                          style="--order-global-left:0"
+                        >Rest of shelf</span>undefined<span
+                          class="ddsweb-link__icon-container fb7694_8WKJvW_iconContainer"
+                          style="--margin-global-left:var(--ddsweb-theme-spacing-xs);--order-global-right:1"
+                        >undefined<svg
+                          aria-hidden="true"
+                          color="currentColor"
+                          class="ddsweb-link__icon fb7694_8WKJvW_iconScale ddsweb-icon__svg a58b1c_dFtksG_svg"
+                          height="10"
+                          preserveAspectRatio="xMinYMax meet"
+                          stroke="currentColor"
+                          style="--svg-width:12px;--svg-height:20px"
+                          viewBox="-1 0 12 20"
+                          width="6"
+                          undefinedxmlns="http://www.w3.org/2000/svg"
+                        >undefined<path
+                          d="M1.312 1.348L10.276 10l-8.964 8.644"
+                          fill="none"
+                          stroke="currentColor"
+                        ></path>undefined</svg>undefined</span>undefined</a>undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_promotionsContainer"></div>
+                        undefined
+                        <div class="SYzVzFchtWoMVV4 b74ac0_yqjFKG_buyBoxContainer">undefined
+                          <div
+                            class="a61aa9_8WKJvW_base gmbSLnrHMPeotsm ddsweb-buybox__container b74ac0_Al-Kra_withPadding"
+                            layout="[object Object]"
+                          >undefined
+                            <div class="a61aa9_8WKJvW_base ddsweb-buybox__price-and-actions">undefined
+                              <div class="b74ac0_Al-Kra_priceContainerNarrow">undefined
+                                <div class="a61aa9_8WKJvW_base ddsweb-buybox__price ddsweb-price__container">undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_priceText e4e453_GlysEa_text e4e453_GlysEa_shortFormLg">
+                                    Â£1.15</p>undefined
+                                  <p class="ddsweb-text b74ac0_FKk1BW_subtext ddsweb-price__subtext e4e453_GlysEa_text e4e453_GlysEa_shortFormSm">
+                                    Â£2.30/litre</p>undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                              <div class="a61aa9_8WKJvW_base b74ac0_tYC73a_container ddsweb-buybox__actions ddsweb-quantity-controls__container">
+                                undefined
+                                <div class="b74ac0_tYC73a_formGroup ddsweb-quantity-controls__form-group ddsweb-form-group__container a5e853_L8Eusa_container">
+                                  undefined<label
+                                  class="ddsweb-form-group__label ddsweb-label b6e373_3F9ECG_label a61aa9_8WKJvW_base a61aa9_8WKJvW_font a61aa9_8WKJvW_md a61aa9_8WKJvW_base a61aa9_8WKJvW_dark a61aa9_8WKJvW_visuallyHidden a61aa9_8WKJvW_emphasized a61aa9_8WKJvW_cursorPointer"
+                                  for="quantity-controls-316547434"
+                                >Quantity controls, undefined</label>undefined
+                                  <div class="ddsweb-form-group__children a5e853_L8Eusa_children a5e853_L8Eusa_childrenWithTopLabel a5e853_L8Eusa_childrenWithHideLabelAndNoHelpLink">
+                                    undefined
+                                    <div class="b74ac0_tYC73a_quantityControlWrapper">undefined<label
+                                      class="a61aa9_8WKJvW_visuallyHidden"
+                                      id="quantity-controls-316547434-label"
+                                    >Quantity of Alpro No Sugars Nutty Almond Drink 500ml</label>undefined
+                                      <div class="ddsweb-text-input__wrapper a29b8c_L8Eusa_wrapper">undefined
+                                        <div class="b74ac0_tYC73a_input ddsweb-quantity-controls__input ddsweb-text-input__container a29b8c_L8Eusa_container a61aa9_8WKJvW_baseForm">
+                                          undefined<input
+                                          type="number"
+                                          class="ddsweb-text-input a29b8c_L8Eusa_input a61aa9_8WKJvW_root a61aa9_8WKJvW_reset a61aa9_8WKJvW_bareForm a61aa9_8WKJvW_bareInput"
+                                          data-auto="ddsweb-quantity-controls-input"
+                                          autoComplete="off"
+                                          id="quantity-controls-316547434"
+                                          maxLength="2"
+                                          aria-labelledby="quantity-controls-316547434-label"
+                                          value="1"
+                                        />undefined
+                                        </div>
+                                        undefined
+                                      </div>
+                                      undefined
+                                    </div>
+                                    undefined
+                                    <button
+                                      class="ddsweb-quantity-controls__add-button b74ac0_tYC73a_textButton ddsweb-button ddsweb-button--text-button a9d866_8WKJvW_textButton a9d866_8WKJvW_base a9d866_8WKJvW_hasOutline a9d866_8WKJvW_primary a9d866_8WKJvW_md"
+                                      type="submit"
+                                      data-auto="ddsweb-quantity-controls-add-button"
+                                      aria-label="add 1 Alpro No Sugars Nutty Almond Drink 500ml"
+                                      _formGroupId="quantity-controls-316547434"
+                                    >
+                                      undefined<span class="ddsweb-button__inner-container a9d866_8WKJvW_container">Add</span>undefined
+                                    </button>
+                                    undefined
+                                  </div>
+                                  undefined
+                                </div>
+                                undefined
+                              </div>
+                              undefined
+                            </div>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                        <div class="b74ac0_yqjFKG_messagingContainer"></div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </li>
+                  undefined
+                </ul>
+                undefined
+                <nav class="BEmtjE9VpmU2GRw ddsweb-pagination__container e07b82_1sGP9G_paginationBarWrapper e07b82_1sGP9G_noTopBorder">
+                  undefined
+                  <div class="ddsweb-pagination__results e07b82_1sGP9G_paginationResultsWrapper">undefined
+                    <p class="ddsweb-text e07b82_1sGP9G_styledText aba71b_GlysEa_text aba71b_GlysEa_shortFormMd">
+                      undefined<span
+                      class="ddsweb-text aba71b_GlysEa_text aba71b_GlysEa_shortFormMd"
+                      role="alert"
+                      aria-live="polite"
+                    >undefined<div>Showing undefined<strong class="w8aYcKeBSbkryDt">1 to 6</strong> of undefined<strong class="w8aYcKeBSbkryDt">6</strong> itemsundefined</div>undefined</span>undefined
+                    </p>
+                    undefined
+                  </div>
+                  undefined
+                  <div class="e07b82_1sGP9G_paginationControls">undefined
+                    <div class="ddsweb-pagination__navigation e07b82_1sGP9G_paginationNav e07b82_1sGP9G_showTopBorder">
+                      undefined
+                      <ul class="e07b82_1sGP9G_unorderedList">undefined
+                        <li class="ddsweb-pagination__page-item e07b82_1sGP9G_paginationPageItem">undefined<a
+                          aria-label="Previous page"
+                          class="ddsweb-pagination-page-action__link e07b82_1sGP9G_paginationActionLink e07b82_1sGP9G_iconButtonVariant ddsweb-link ddsweb-link__anchor ddsweb-link__iconButtonLink c2c5ac_8WKJvW_iconButtonLinkSecondary c2c5ac_8WKJvW_iconButtonLinkDisabled c2c5ac_8WKJvW_iconButtonLinkIcon c2c5ac_8WKJvW_iconButtonLinkXs c2c5ac_8WKJvW_disabled c2c5ac_8WKJvW_hasIcon c2c5ac_8WKJvW_iconContainerLeft"
+                          aria-disabled="true"
+                          role="link"
+                          data-nextpreviousbtn="previous"
+                          data-testid="previous"
+                        >undefined
+                          <svg
+                            aria-hidden="true"
+                            color="currentColor"
+                            class="ddsweb-link__icon c2c5ac_8WKJvW_iconScale ddsweb-icon__svg a98401_dFtksG_svg"
+                            height="13.33"
+                            preserveAspectRatio="xMinYMax meet"
+                            stroke="currentColor"
+                            style="--svg-width:12px;--svg-height:20px"
+                            viewBox="1 0 12 20"
+                            width="8"
+                            undefinedxmlns="http://www.w3.org/2000/svg"
+                          >undefined
+                            <path
+                              d="M10.688 18.652L1.723 10l8.964-8.644"
+                              fill="none"
+                              stroke="currentColor"
+                            ></path>
+                            undefined
+                          </svg>
+                          undefined</a>undefined
+                        </li>
+                        undefined
+                        <li class="ddsweb-pagination__page-item e07b82_1sGP9G_paginationPageItem">undefined<a
+                          aria-label="page: 1"
+                          class="page ddsweb-pagination-page-action__link e07b82_1sGP9G_paginationActionLink e07b82_1sGP9G_linkStandaloneVariant e07b82_1sGP9G_inverse e07b82_1sGP9G_currentPage ddsweb-link ddsweb-link__anchor ddsweb-link__standalone c2c5ac_8WKJvW_link c2c5ac_8WKJvW_standaloneLink c2c5ac_8WKJvW_md c2c5ac_8WKJvW_inverse c2c5ac_8WKJvW_linkTextNoIcon c2c5ac_8WKJvW_iconContainerRight"
+                          href="/groceries/en-GB/search?query=alpro+almond&amp;sortBy=relevance&amp;count=24#top"
+                          data-page="1"
+                          data-testid="page-1"
+                          aria-current="page"
+                        >undefined<span class="ddsweb-link__text c2c5ac_8WKJvW_linkText">1</span>undefined</a>undefined
+                        </li>
+                        undefined
+                        <li class="ddsweb-pagination__page-item e07b82_1sGP9G_paginationPageItem">undefined<a
+                          aria-label="Next page"
+                          class="ddsweb-pagination-page-action__link e07b82_1sGP9G_paginationActionLink e07b82_1sGP9G_iconButtonVariant ddsweb-link ddsweb-link__anchor ddsweb-link__iconButtonLink c2c5ac_8WKJvW_iconButtonLinkSecondary c2c5ac_8WKJvW_iconButtonLinkDisabled c2c5ac_8WKJvW_iconButtonLinkIcon c2c5ac_8WKJvW_iconButtonLinkXs c2c5ac_8WKJvW_disabled c2c5ac_8WKJvW_hasIcon c2c5ac_8WKJvW_iconContainerLeft"
+                          aria-disabled="true"
+                          role="link"
+                          data-nextpreviousbtn="next"
+                          data-testid="next"
+                        >undefined
+                          <svg
+                            aria-hidden="true"
+                            color="currentColor"
+                            class="ddsweb-link__icon c2c5ac_8WKJvW_iconScale ddsweb-icon__svg a98401_dFtksG_svg"
+                            height="13.33"
+                            preserveAspectRatio="xMinYMax meet"
+                            stroke="currentColor"
+                            style="--svg-width:12px;--svg-height:20px"
+                            viewBox="-1 0 12 20"
+                            width="8"
+                            undefinedxmlns="http://www.w3.org/2000/svg"
+                          >undefined
+                            <path
+                              d="M1.312 1.348L10.276 10l-8.964 8.644"
+                              fill="none"
+                              stroke="currentColor"
+                            ></path>
+                            undefined
+                          </svg>
+                          undefined</a>undefined
+                        </li>
+                        undefined
+                      </ul>
+                      undefined
+                    </div>
+                    undefined
+                  </div>
+                  undefined
+                </nav>
+                undefined
+                <div
+                  data-testid="back-to-top-hidden"
+                  class="lSTHgi2nfNsS0PB"
+                >undefined
+                  <button
+                    class="NCAYlUKKFNwaU57 ddsweb-button ddsweb-button--icon-button e897bf_8WKJvW_base e897bf_8WKJvW_iconButton e897bf_8WKJvW_hasOutline e897bf_8WKJvW_secondary e897bf_8WKJvW_md"
+                    type="button"
+                    aria-label="Back to the top"
+                  >undefined<span class="ddsweb-button__icon-container e897bf_8WKJvW_iconButtonContainer">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                    fill="currentColor"
+                    d="m4.13 12.554 7.143-7.143v15.037h1.5V5.41l7.144 7.143 1.06-1.06-8.954-8.955-8.954 8.955z"
+                  ></path>undefined</svg>undefined</span>undefined
+                  </button>
+                  undefined
+                </div>
+                undefined
+                <div></div>
+                undefined
+              </div>
+              undefined
+            </div>
+            undefined
+          </div>
+          undefined
+          <div data-plp-breadcrumb="[]"></div>
+          undefined
+        </div>
+        undefined
+      </main>
+      undefined
+      <div class="template-sidecolumn has-mfe-children">undefined
+        <div data-mfe="mfe-basket">undefined
+          <div class="styles__BasketWrapper-mfe-basket__sc-1wbzsxp-0 kdNEDv">undefined
+            <div class="styles__HeadingWrapper-mfe-basket__sc-1wbzsxp-6 jCCaNo">undefined
+              <h2 class="ddsweb-heading bb2eab_3F9ECG_heading bb2eab_3F9ECG_headlineLg">Basket</h2>undefined
+              <hr class="styles__StyledDivider-mfe-basket__sc-1wbzsxp-3 iWrprx ddsweb-divider dbc798_avS3_G_divider" />
+              undefined
+            </div>
+            undefined
+            <header
+              aria-label="Basket Summary"
+              class="style__BasketSummaryWrapper-mfe-basket__sc-1kctg46-0 cMXoHV"
+            >undefined
+              <div class="style__HeadingsWrapper-mfe-basket__sc-1kctg46-1 dOpBHu">undefined<a
+                aria-label="Review your basket"
+                class="ddsweb-link ddsweb-link__anchor ddsweb-link__iconButtonLink eeb4e4_8WKJvW_iconButtonLinkPrimary eeb4e4_8WKJvW_iconButtonLinkIcon eeb4e4_8WKJvW_hasIcon eeb4e4_8WKJvW_iconContainerLeft"
+                href="https://www.tesco.com/groceries/en-GB/trolley"
+                data-auto="basket-icon"
+              >undefined
+                <svg
+                  aria-hidden="true"
+                  color="currentColor"
+                  class="ddsweb-link__icon eeb4e4_8WKJvW_iconScale ddsweb-icon__svg dcc040_dFtksG_svg"
+                  height="22"
+                  preserveAspectRatio="xMinYMax meet"
+                  stroke="currentColor"
+                  style="--svg-width:24px;--svg-height:22px"
+                  viewBox="0 1 24 22"
+                  width="24"
+                  undefinedxmlns="http://www.w3.org/2000/svg"
+                >undefined
+                  <path
+                    d="M20 20.5H4l-2.5-11h21zM12 12v6M16 12v6M8 12v6M12 9.5L18 1"
+                    fill="none"
+                    stroke="currentColor"
+                  ></path>
+                  undefined
+                </svg>
+                undefined</a>undefined
+                <div
+                  role="status"
+                  data-testid="summary-status"
+                  class="style__GuidePriceWrapper-mfe-basket__sc-1kctg46-2 bZJGhb"
+                >undefined<h3 class="b6f394_8WKJvW_visuallyHidden">Â£0.00undefined
+                  <!-- -->undefined
+                  <!-- -->Guide priceundefined
+                </h3>undefined<span
+                  class="ddsweb-text style__PriceBodyText-mfe-basket__sc-1kctg46-3 frIJmE bc00b2_GlysEa_text bc00b2_GlysEa_shortFormMd"
+                  aria-hidden="true"
+                  data-auto="basket-guide-price"
+                >undefined<span
+                  data-auto="price-value"
+                  class="style__GuidePriceBodyHeader-mfe-basket__sc-1kctg46-4 hITafP"
+                >Â£0.00</span>undefined<br />undefined<span class="style__GuidePriceBodyText-mfe-basket__sc-1kctg46-5 hGyNAT">Guide price</span>undefined</span>undefined
+                </div>
+                undefined
+              </div>
+              undefined<a
+                class="style__CheckoutButton-mfe-basket__sc-1kctg46-9 kseQNV ddsweb-link ddsweb-link__anchor ddsweb-link__textButton eeb4e4_8WKJvW_link eeb4e4_8WKJvW_textButton eeb4e4_8WKJvW_stretch eeb4e4_8WKJvW_textButtonDisabled eeb4e4_8WKJvW_textButtonPrimary eeb4e4_8WKJvW_textButtonWrapText eeb4e4_8WKJvW_iconContainerLeft"
+                aria-disabled="true"
+                role="link"
+                data-auto="mini-trolley-checkout"
+              >undefined<span class="ddsweb-link__text eeb4e4_8WKJvW_linkText eeb4e4_8WKJvW_linkTextWrap">Checkout</span>undefined</a>undefined
+            </header>
+            undefined
+            <div
+              data-testid="basket-items-container"
+              class="styles__BasketItemListWrapper-mfe-basket__sc-1wbzsxp-1 gAhOVn"
+            >undefined
+              <div class="style__StyledSubBasketContainer-mfe-basket__sc-1yf48n3-8 khdnwf">undefined
+                <div class="style__StyledHeaderContainer-mfe-basket__sc-1yf48n3-9 ePJLYE">undefined
+                  <h3 class="ddsweb-heading style__StyledTopHeading-mfe-basket__sc-1yf48n3-10 bYhcLQ bb2eab_3F9ECG_heading bb2eab_3F9ECG_headlineMd">
+                    Groceries</h3>undefined
+                  <hr class="styles__StyledDivider-mfe-basket__sc-1wbzsxp-3 iWrprx ddsweb-divider dbc798_avS3_G_divider" />
+                  undefined
+                  <h4 class="ddsweb-heading style__StyledHeading-mfe-basket__sc-1yf48n3-1 henqUv bb2eab_3F9ECG_heading bb2eab_3F9ECG_headlineMd">
+                    Reserve a slot for either home delivery or collection</h4>undefined
+                </div>
+                undefined
+              </div>
+              undefined
+              <div
+                data-testid="empty-basket-container"
+                class="styles__EmptyBasketContainer-mfe-basket__sc-1bm2vf-2 jFRAPg"
+              >undefined
+                <div
+                  class="ddsweb-icon__background dcc040_dFtksG_background"
+                  style="--icon-bg-color:#e5e5e5;--icon-size:40px"
+                >undefined
+                  <svg
+                    aria-hidden="true"
+                    color="currentColor"
+                    class="ddsweb-icon__svg dcc040_dFtksG_svg"
+                    height="22"
+                    preserveAspectRatio="xMinYMax meet"
+                    stroke="#666666"
+                    style="--svg-width:24px;--svg-height:22px"
+                    viewBox="0 1 24 22"
+                    width="24"
+                    undefinedxmlns="http://www.w3.org/2000/svg"
+                  >undefined
+                    <path
+                      d="M20 20.5H4l-2.5-11h21zM12 12v6M16 12v6M8 12v6M12 9.5L18 1"
+                      fill="none"
+                      stroke="#666666"
+                    ></path>
+                    undefined
+                  </svg>
+                  undefined
+                </div>
+                undefined<h4
+                  class="ddsweb-heading styles__Subheading-mfe-basket__sc-1bm2vf-0 iyzYDu bb2eab_3F9ECG_heading bb2eab_3F9ECG_headlineLg"
+                  data-testid="empty-basket-heading"
+                >Grocery basket empty</h4>undefined<p
+                  class="ddsweb-text styles__BodyText-mfe-basket__sc-1bm2vf-1 cZsOKk bc00b2_GlysEa_text bc00b2_GlysEa_shortFormMd"
+                  data-testid="empty-basket-explanation"
+                >Products you add to your basket will appear here</p>undefined
+              </div>
+              undefined
+            </div>
+            undefined
+          </div>
+          undefined
+        </div>
+        undefined
+      </div>
+      undefined
+    </div>
+    undefined
+    <div class="template-footer has-mfe-children">undefined
+      <div data-mfe="mfe-footer">undefined
+        <div class="Euh_kZStE522LNb">undefined
+          <div data-testid="app-footer">undefined
+            <footer
+              class="ddsweb-footer__container bf05ff_L8Eusa_container"
+              style="--footer-fixed-from-width:1512px"
+            >undefined
+              <div class="ddsweb-footer__sub-container bf05ff_L8Eusa_subContainer">undefined
+                <div class="ddsweb-footer__links-container bf05ff_L8Eusa_linksContainer">undefined
+                  <div>undefined
+                    <h2 class="ddsweb-heading ddsweb-footer__link-list-header bf05ff_L8Eusa_linkListHeader fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineMd">
+                      Here to help</h2>undefined
+                    <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/account/dashboard/en-GB"
+                      >My Account</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="/groceries/en-GB/orders"
+                      >My Grocery Orders</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/help/"
+                      >Help &amp; FAQs</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/zones/product-recall/"
+                      >Product Recall</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/zones/privacy-centre/"
+                      >Privacy centre</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/pharmacy"
+                      >Tesco Pharmacy</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tescophoto.com/"
+                      >Tesco Photo</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/zones/tesco-magazine"
+                      >Tesco Magazine</a>undefined
+                      </li>
+                      undefined
+                    </ul>
+                    undefined
+                  </div>
+                  undefined
+                  <div>undefined
+                    <h2 class="ddsweb-heading ddsweb-footer__link-list-header bf05ff_L8Eusa_linkListHeader fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineMd">
+                      About</h2>undefined
+                    <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/accessibility/"
+                      >Accessibility</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/sitemap/"
+                      >Sitemap</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/privacy-and-cookies-policy/"
+                      >Privacy &amp; cookies policy</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/general-terms-and-conditions"
+                      >General terms &amp; conditions</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/grocery-terms-and-conditions/"
+                      >Product terms &amp; conditions</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/general-terms-and-conditions#6-coupon-terms-and-conditions"
+                      >Coupon terms &amp; conditions</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/zones/ratings-and-reviews-policy"
+                      >Ratings &amp; reviews policy</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://digitalcontent.api.tesco.com/v2/media/ghs-mktg/2defb3c4-6cb9-4d9d-a8cf-df6d63e60fab/MP_Partner-Information_PDF.pdf"
+                        target="_blank"
+                      >Partner directory</a>undefined
+                      </li>
+                      undefined
+                    </ul>
+                    undefined
+                  </div>
+                  undefined
+                  <div>undefined
+                    <h2 class="ddsweb-heading ddsweb-footer__link-list-header bf05ff_L8Eusa_linkListHeader fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineMd">
+                      Ways to save</h2>undefined
+                    <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/deliverysaver/?=&amp;icid=Grocerywebfooter_DeliverySaver"
+                      >Delivery Saver</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://secure.tesco.com/clubcard/"
+                      >Clubcard</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/zone/tesco-delivery-click-and-collect"
+                      >Click+Collect</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/groceries/en-GB/buylists/clubcard-prices/top-picks"
+                      >Clubcard Prices</a>undefined
+                      </li>
+                      undefined
+                    </ul>
+                    undefined
+                  </div>
+                  undefined
+                  <div>undefined
+                    <h2 class="ddsweb-heading ddsweb-footer__link-list-header bf05ff_L8Eusa_linkListHeader fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineMd">
+                      Contact us</h2>undefined
+                    <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/"
+                      >Tesco.com</a>undefined
+                      </li>
+                      undefined
+                      <li class="ddsweb-footer__link-list-item">undefined<a
+                        class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink ddsweb-link ddsweb-link__anchor ddsweb-link__inline d06bbc_8WKJvW_inlineLink d06bbc_8WKJvW_link"
+                        href="https://www.tesco.com/store-locator/uk/"
+                      >Store locator</a>undefined
+                      </li>
+                      undefined
+                    </ul>
+                    undefined
+                  </div>
+                  undefined
+                </div>
+                undefined
+                <div class="ddsweb-footer__accordions-row bf05ff_L8Eusa_accordionRow">undefined
+                  <div class="bf05ff_L8Eusa_linkListColumn">undefined
+                    <div
+                      class="fc4242_8WKJvW_container"
+                      data-accordion=""
+                      data-testid="accordion"
+                    >undefined
+                      <div
+                        class="fc4242_8WKJvW_item"
+                        data-testid="accordion-item"
+                      >undefined
+                        <h3
+                          class="ddsweb-heading fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXl"
+                          data-testid="accordion-header"
+                        >undefined
+                          <button
+                            class="fc4242_8WKJvW_button ddsweb-button ddsweb-button--external-text-button d3c58b_8WKJvW_base d3c58b_8WKJvW_externalTextButton d3c58b_8WKJvW_secondary d3c58b_8WKJvW_xs d3c58b_8WKJvW_externalTextButtonXs"
+                            type="button"
+                            aria-controls="accordion-panel-footer-accordion-0"
+                            aria-expanded="false"
+                            data-accordion-button=""
+                            data-testid="accordion-control"
+                            id="accordion-header-footer-accordion-0"
+                          >
+                            undefined<span class="ddsweb-button__text-container d3c58b_8WKJvW_externalTextButtonTextContainer">undefined<span class="ddsweb-text db5227_GlysEa_text db5227_GlysEa_shortFormMd">Here to help</span>undefined</span>undefined<span class="ddsweb-button__icon-container ddsweb-button__icon-container--right d3c58b_8WKJvW_externalTextButtonBaseIconContainer d3c58b_8WKJvW_externalTextButtonIconContainer d3c58b_8WKJvW_hasOutline d3c58b_8WKJvW_externalTextButtonIconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon">undefined<path
+                            fill="currentColor"
+                            d="M13.229 4.354 8 9.77 2.778 4.354l-1.08 1.041L8 11.931l6.308-6.535z"
+                          ></path>undefined</svg>undefined</span>undefined
+                          </button>
+                          undefined
+                        </h3>
+                        undefined
+                        <div
+                          aria-labelledby="accordion-header-footer-accordion-0"
+                          class="fc4242_8WKJvW_panel fc4242_8WKJvW_hidden"
+                          data-testid="accordion-panel"
+                          id="accordion-panel-footer-accordion-0"
+                          role="region"
+                          style="height:0px"
+                        >undefined
+                          <div class="fc4242_8WKJvW_content">undefined
+                            <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/account/dashboard/en-GB"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">My Account</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="/groceries/en-GB/orders"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">My Grocery Orders</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/help/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Help &amp; FAQs</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/zones/product-recall/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Product Recall</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/zones/privacy-centre/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Privacy centre</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/pharmacy"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Tesco Pharmacy</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tescophoto.com/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Tesco Photo</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/zones/tesco-magazine"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Tesco Magazine</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                            </ul>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                      <div
+                        class="fc4242_8WKJvW_item"
+                        data-testid="accordion-item"
+                      >undefined
+                        <h3
+                          class="ddsweb-heading fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXl"
+                          data-testid="accordion-header"
+                        >undefined
+                          <button
+                            class="fc4242_8WKJvW_button ddsweb-button ddsweb-button--external-text-button d3c58b_8WKJvW_base d3c58b_8WKJvW_externalTextButton d3c58b_8WKJvW_secondary d3c58b_8WKJvW_xs d3c58b_8WKJvW_externalTextButtonXs"
+                            type="button"
+                            aria-controls="accordion-panel-footer-accordion-1"
+                            aria-expanded="false"
+                            data-accordion-button=""
+                            data-testid="accordion-control"
+                            id="accordion-header-footer-accordion-1"
+                          >
+                            undefined<span class="ddsweb-button__text-container d3c58b_8WKJvW_externalTextButtonTextContainer">undefined<span class="ddsweb-text db5227_GlysEa_text db5227_GlysEa_shortFormMd">About</span>undefined</span>undefined<span class="ddsweb-button__icon-container ddsweb-button__icon-container--right d3c58b_8WKJvW_externalTextButtonBaseIconContainer d3c58b_8WKJvW_externalTextButtonIconContainer d3c58b_8WKJvW_hasOutline d3c58b_8WKJvW_externalTextButtonIconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon">undefined<path
+                            fill="currentColor"
+                            d="M13.229 4.354 8 9.77 2.778 4.354l-1.08 1.041L8 11.931l6.308-6.535z"
+                          ></path>undefined</svg>undefined</span>undefined
+                          </button>
+                          undefined
+                        </h3>
+                        undefined
+                        <div
+                          aria-labelledby="accordion-header-footer-accordion-1"
+                          class="fc4242_8WKJvW_panel fc4242_8WKJvW_hidden"
+                          data-testid="accordion-panel"
+                          id="accordion-panel-footer-accordion-1"
+                          role="region"
+                          style="height:0px"
+                        >undefined
+                          <div class="fc4242_8WKJvW_content">undefined
+                            <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/accessibility/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Accessibility</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/sitemap/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Sitemap</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/privacy-and-cookies-policy/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Privacy &amp; cookies policy</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/general-terms-and-conditions"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">General terms &amp; conditions</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/grocery-terms-and-conditions/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Product terms &amp; conditions</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/general-terms-and-conditions#6-coupon-terms-and-conditions"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Coupon terms &amp; conditions</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/zones/ratings-and-reviews-policy"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Ratings &amp; reviews policy</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://digitalcontent.api.tesco.com/v2/media/ghs-mktg/2defb3c4-6cb9-4d9d-a8cf-df6d63e60fab/MP_Partner-Information_PDF.pdf"
+                                target="_blank"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Partner directory</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                            </ul>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                      <div
+                        class="fc4242_8WKJvW_item"
+                        data-testid="accordion-item"
+                      >undefined
+                        <h3
+                          class="ddsweb-heading fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXl"
+                          data-testid="accordion-header"
+                        >undefined
+                          <button
+                            class="fc4242_8WKJvW_button ddsweb-button ddsweb-button--external-text-button d3c58b_8WKJvW_base d3c58b_8WKJvW_externalTextButton d3c58b_8WKJvW_secondary d3c58b_8WKJvW_xs d3c58b_8WKJvW_externalTextButtonXs"
+                            type="button"
+                            aria-controls="accordion-panel-footer-accordion-2"
+                            aria-expanded="false"
+                            data-accordion-button=""
+                            data-testid="accordion-control"
+                            id="accordion-header-footer-accordion-2"
+                          >
+                            undefined<span class="ddsweb-button__text-container d3c58b_8WKJvW_externalTextButtonTextContainer">undefined<span class="ddsweb-text db5227_GlysEa_text db5227_GlysEa_shortFormMd">Ways to save</span>undefined</span>undefined<span class="ddsweb-button__icon-container ddsweb-button__icon-container--right d3c58b_8WKJvW_externalTextButtonBaseIconContainer d3c58b_8WKJvW_externalTextButtonIconContainer d3c58b_8WKJvW_hasOutline d3c58b_8WKJvW_externalTextButtonIconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon">undefined<path
+                            fill="currentColor"
+                            d="M13.229 4.354 8 9.77 2.778 4.354l-1.08 1.041L8 11.931l6.308-6.535z"
+                          ></path>undefined</svg>undefined</span>undefined
+                          </button>
+                          undefined
+                        </h3>
+                        undefined
+                        <div
+                          aria-labelledby="accordion-header-footer-accordion-2"
+                          class="fc4242_8WKJvW_panel fc4242_8WKJvW_hidden"
+                          data-testid="accordion-panel"
+                          id="accordion-panel-footer-accordion-2"
+                          role="region"
+                          style="height:0px"
+                        >undefined
+                          <div class="fc4242_8WKJvW_content">undefined
+                            <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/deliverysaver/?=&amp;icid=Grocerywebfooter_DeliverySaver"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Delivery Saver</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://secure.tesco.com/clubcard/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Clubcard</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/zone/tesco-delivery-click-and-collect"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Click+Collect</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/groceries/en-GB/buylists/clubcard-prices/top-picks"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Clubcard Prices</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                            </ul>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                      <div
+                        class="fc4242_8WKJvW_item"
+                        data-testid="accordion-item"
+                      >undefined
+                        <h3
+                          class="ddsweb-heading fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXl"
+                          data-testid="accordion-header"
+                        >undefined
+                          <button
+                            class="fc4242_8WKJvW_button ddsweb-button ddsweb-button--external-text-button d3c58b_8WKJvW_base d3c58b_8WKJvW_externalTextButton d3c58b_8WKJvW_secondary d3c58b_8WKJvW_xs d3c58b_8WKJvW_externalTextButtonXs"
+                            type="button"
+                            aria-controls="accordion-panel-footer-accordion-3"
+                            aria-expanded="false"
+                            data-accordion-button=""
+                            data-testid="accordion-control"
+                            id="accordion-header-footer-accordion-3"
+                          >
+                            undefined<span class="ddsweb-button__text-container d3c58b_8WKJvW_externalTextButtonTextContainer">undefined<span class="ddsweb-text db5227_GlysEa_text db5227_GlysEa_shortFormMd">Contact us</span>undefined</span>undefined<span class="ddsweb-button__icon-container ddsweb-button__icon-container--right d3c58b_8WKJvW_externalTextButtonBaseIconContainer d3c58b_8WKJvW_externalTextButtonIconContainer d3c58b_8WKJvW_hasOutline d3c58b_8WKJvW_externalTextButtonIconRight">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="ddsweb-icon">undefined<path
+                            fill="currentColor"
+                            d="M13.229 4.354 8 9.77 2.778 4.354l-1.08 1.041L8 11.931l6.308-6.535z"
+                          ></path>undefined</svg>undefined</span>undefined
+                          </button>
+                          undefined
+                        </h3>
+                        undefined
+                        <div
+                          aria-labelledby="accordion-header-footer-accordion-3"
+                          class="fc4242_8WKJvW_panel fc4242_8WKJvW_hidden"
+                          data-testid="accordion-panel"
+                          id="accordion-panel-footer-accordion-3"
+                          role="region"
+                          style="height:0px"
+                        >undefined
+                          <div class="fc4242_8WKJvW_content">undefined
+                            <ul class="ddsweb-footer__link-list bf05ff_L8Eusa_linkList">undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Tesco.com</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                              <li class="ddsweb-footer__link-list-item bf05ff_L8Eusa_linkListItem">undefined<a
+                                class="ddsweb-footer__link-list-link bf05ff_L8Eusa_linkListLink bf05ff_L8Eusa_linkListMobile ddsweb-link ddsweb-link__anchor ddsweb-link__standalone d06bbc_8WKJvW_link d06bbc_8WKJvW_standaloneLink d06bbc_8WKJvW_md d06bbc_8WKJvW_hasIcon d06bbc_8WKJvW_iconContainerRight"
+                                href="https://www.tesco.com/store-locator/uk/"
+                              >undefined<span class="ddsweb-link__text d06bbc_8WKJvW_linkTextWrap">Store locator</span>undefined<span class="ddsweb-link__icon-container d06bbc_8WKJvW_iconContainer d06bbc_8WKJvW_iconContainerWrapText">undefined<svgundefinedxmlns="http: //www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="ddsweb-icon">undefined<path
+                                fill="currentColor"
+                                d="M6.79 3.887 15.197 12l-8.405 8.105 1.041 1.08L17.357 12 7.832 2.808z"
+                              ></path>undefined</svg>undefined</span>undefined</a>undefined
+                              </li>
+                              undefined
+                            </ul>
+                            undefined
+                          </div>
+                          undefined
+                        </div>
+                        undefined
+                      </div>
+                      undefined
+                    </div>
+                    undefined
+                  </div>
+                  undefined
+                </div>
+                undefined
+                <div>undefined
+                  <h2 class="ddsweb-heading ba7baf_8WKJvW_visuallyHidden fb9de6_3F9ECG_heading fb9de6_3F9ECG_headlineXxl">
+                    Follow us</h2>undefined
+                  <ul class="ddsweb-footer__social-icons-container bf05ff_L8Eusa_socialIconsContainer">undefined
+                    <li>undefined<a
+                      class="ddsweb-footer__social-icon bf05ff_L8Eusa_socialIcon bf05ff_L8Eusa_facebook ddsweb-link ddsweb-link__anchor ddsweb-link__iconButton d06bbc_8WKJvW_link d06bbc_8WKJvW_hasIcon"
+                      href="https://www.facebook.com/tesco/"
+                      target="_blank"
+                    >undefined
+                      <svg
+                        class="bf05ff_L8Eusa_icon"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        undefinedxmlns="http://www.w3.org/2000/svg"
+                        aria-label="Facebook"
+                        role="img"
+                      >undefined
+                        <g clip-path="url(#undefined-normal)">undefined
+                          <path
+                            d="M40 20.0018C40 8.95613 31.0457 0.00183105 20 0.00183105C8.9543 0.00183105 0 8.95613 0 20.0018C0 29.9843 7.31367 38.2585 16.875 39.7589V25.7831H11.7969V20.0018H16.875V15.5956C16.875 10.5831 19.8609 7.81433 24.4293 7.81433C26.6168 7.81433 28.9062 8.20496 28.9062 8.20496V13.1268H26.3844C23.9 13.1268 23.125 14.6686 23.125 16.2518V20.0018H28.6719L27.7852 25.7831H23.125V39.7589C32.6863 38.2585 40 29.9843 40 20.0018Z"
+                            fill="#1877F2"
+                          ></path>
+                          undefined
+                          <path
+                            d="M27.7852 25.7831L28.6719 20.0018H23.125V16.2518C23.125 14.6702 23.9 13.1268 26.3844 13.1268H28.9062V8.20496C28.9062 8.20496 26.6176 7.81433 24.4293 7.81433C19.8609 7.81433 16.875 10.5831 16.875 15.5956V20.0018H11.7969V25.7831H16.875V39.7589C18.9457 40.0828 21.0543 40.0828 23.125 39.7589V25.7831H27.7852Z"
+                            fill="white"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <defs>undefined
+                          <clipPath id="undefined-normal">undefined
+                            <rect
+                              width="40"
+                              height="40"
+                              fill="white"
+                              transform="translate(0 0.00183105)"
+                            ></rect>
+                            undefined
+                          </clipPath>
+                          undefined
+                        </defs>
+                        undefined
+                      </svg>
+                      undefined</a>undefined
+                    </li>
+                    undefined
+                    <li>undefined<a
+                      class="ddsweb-footer__social-icon bf05ff_L8Eusa_socialIcon bf05ff_L8Eusa_twitter ddsweb-link ddsweb-link__anchor ddsweb-link__iconButton d06bbc_8WKJvW_link d06bbc_8WKJvW_hasIcon"
+                      href="https://twitter.com/tesco"
+                      target="_blank"
+                    >undefined
+                      <svg
+                        class="bf05ff_L8Eusa_icon"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        undefinedxmlns="http://www.w3.org/2000/svg"
+                        aria-label="Twitter"
+                        role="img"
+                      >undefined
+                        <rect
+                          y=".002"
+                          width="40"
+                          height="40"
+                          rx="20"
+                          fill="#000"
+                        ></rect>
+                        undefined
+                        <path
+                          d="m22.283 18.164 8.935-10.162H29.1l-7.758 8.824-6.196-8.824H8l9.37 13.343L8 32.002h2.117l8.193-9.318 6.543 9.318H32l-9.717-13.838Zm-2.9 3.299-.95-1.329L10.88 9.562h3.252l6.096 8.532.95 1.329 7.924 11.09h-3.253l-6.466-9.05Z"
+                          fill="#fff"
+                        ></path>
+                        undefined
+                      </svg>
+                      undefined</a>undefined
+                    </li>
+                    undefined
+                    <li>undefined<a
+                      class="ddsweb-footer__social-icon bf05ff_L8Eusa_socialIcon bf05ff_L8Eusa_pinterest ddsweb-link ddsweb-link__anchor ddsweb-link__iconButton d06bbc_8WKJvW_link d06bbc_8WKJvW_hasIcon"
+                      href="https://pinterest.com/tesco/"
+                      target="_blank"
+                    >undefined
+                      <svg
+                        class="bf05ff_L8Eusa_icon"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        undefinedxmlns="http://www.w3.org/2000/svg"
+                        aria-label="Pinterest"
+                        role="img"
+                      >undefined
+                        <g clip-path="url(#undefined-normal)">undefined
+                          <path
+                            d="M20.0017 40.0002C31.0464 40.0002 40 31.0466 40 20.0018C40 8.95705 31.0464 0.003479 20.0017 0.003479C8.95686 0.003479 0.0032959 8.95705 0.0032959 20.0018C0.0032959 31.0466 8.95686 40.0002 20.0017 40.0002Z"
+                            fill="white"
+                          ></path>
+                          undefined
+                          <path
+                            d="M20 0.00185481C15.3386 0.0023772 10.8238 1.6308 7.23534 4.60585C3.64685 7.58091 1.21004 11.7158 0.345772 16.2963C-0.518493 20.8768 0.244065 25.6154 2.50174 29.6935C4.75941 33.7716 8.37043 36.9333 12.7111 38.6323C12.5366 37.0504 12.3819 34.6158 12.7802 32.8891C13.144 31.3286 15.1259 22.9467 15.1259 22.9467C14.7199 22.0123 14.5162 21.0025 14.5284 19.9837C14.5284 17.2019 16.1399 15.1261 18.1498 15.1261C19.8568 15.1261 20.6798 16.4068 20.6798 17.9426C20.6798 19.6595 19.5885 22.2224 19.0239 24.6027C18.5531 26.5928 20.023 28.2241 21.9868 28.2241C25.5424 28.2241 28.2749 24.4759 28.2749 19.0652C28.2749 14.2768 24.8329 10.9286 19.921 10.9286C14.2255 10.9154 10.8839 15.1837 10.8839 19.5903C10.8839 21.3089 11.5424 23.1525 12.3654 24.1549C12.4359 24.2304 12.4856 24.3228 12.5098 24.4232C12.5341 24.5236 12.532 24.6285 12.5037 24.7278C12.3523 25.3599 12.0099 26.7179 11.9473 26.9961C11.8601 27.3632 11.6576 27.4405 11.279 27.2644C8.78188 26.1006 7.21974 22.4496 7.21974 19.5163C7.21974 13.2068 11.8041 7.41255 20.4346 7.41255C27.3728 7.41255 32.7638 12.3508 32.7638 18.9648C32.7638 25.857 28.4181 31.4043 22.3852 31.4043C20.3588 31.4043 18.4543 30.3508 17.8025 29.0998C17.8025 29.0998 16.7983 32.9187 16.5564 33.8537C16.1037 35.5903 14.8856 37.7681 14.0708 39.0965C16.8226 39.9555 19.7276 40.2095 22.5868 39.8411C25.446 39.4727 28.1917 38.4907 30.636 36.9621C33.0802 35.4336 35.1651 33.3948 36.748 30.9854C38.3308 28.576 39.374 25.8529 39.8063 23.0027C40.2386 20.1525 40.0496 17.2425 39.2524 14.4721C38.4552 11.7017 37.0685 9.13642 35.1874 6.95192C33.3063 4.76742 30.9752 3.01536 28.3539 1.81577C25.7325 0.61618 22.8828 -0.00258818 20 0.00185481Z"
+                            fill="#E60023"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <defs>undefined
+                          <clipPath id="undefined-normal">undefined
+                            <rect
+                              width="40"
+                              height="40"
+                              fill="white"
+                              transform="translate(0 0.00183105)"
+                            ></rect>
+                            undefined
+                          </clipPath>
+                          undefined
+                        </defs>
+                        undefined
+                      </svg>
+                      undefined</a>undefined
+                    </li>
+                    undefined
+                    <li>undefined<a
+                      class="ddsweb-footer__social-icon bf05ff_L8Eusa_socialIcon bf05ff_L8Eusa_youtube ddsweb-link ddsweb-link__anchor ddsweb-link__iconButton d06bbc_8WKJvW_link d06bbc_8WKJvW_hasIcon"
+                      href="https://www.youtube.com/tesco"
+                      target="_blank"
+                    >undefined
+                      <svg
+                        class="bf05ff_L8Eusa_icon"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        undefinedxmlns="http://www.w3.org/2000/svg"
+                        aria-label="YouTube"
+                        role="img"
+                      >undefined
+                        <rect
+                          y="0.00183105"
+                          width="40"
+                          height="40"
+                          rx="20"
+                          fill="#FF0000"
+                        ></rect>
+                        undefined
+                        <g clip-path="url(#undefined-normal)">undefined
+                          <path
+                            d="M31.0191 14.4999C30.8891 14.0168 30.6328 13.5758 30.2759 13.2212C29.9191 12.8666 29.4741 12.6107 28.9857 12.4793C27.1875 12.0018 20 12.0018 20 12.0018C20 12.0018 12.8125 12.0018 11.0143 12.4793C10.5258 12.6107 10.0809 12.8666 9.72407 13.2212C9.36721 13.5758 9.11094 14.0168 8.98091 14.4999C8.5 16.2831 8.5 20.0018 8.5 20.0018C8.5 20.0018 8.5 23.7205 8.98091 25.5038C9.11094 25.9869 9.36721 26.4278 9.72407 26.7825C10.0809 27.1371 10.5258 27.3929 11.0143 27.5244C12.8125 28.0018 20 28.0018 20 28.0018C20 28.0018 27.1875 28.0018 28.9857 27.5244C29.4741 27.3929 29.9191 27.1371 30.2759 26.7825C30.6328 26.4278 30.8891 25.9869 31.0191 25.5038C31.5 23.7205 31.5 20.0018 31.5 20.0018C31.5 20.0018 31.5 16.2831 31.0191 14.4999ZM17.6477 23.3786V16.6251L23.6591 20.0018L17.6477 23.3786Z"
+                            fill="white"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <defs>undefined
+                          <clipPath id="undefined-normal">undefined
+                            <rect
+                              width="23"
+                              height="16"
+                              fill="white"
+                              transform="translate(8.5 12.0018)"
+                            ></rect>
+                            undefined
+                          </clipPath>
+                          undefined
+                        </defs>
+                        undefined
+                      </svg>
+                      undefined</a>undefined
+                    </li>
+                    undefined
+                    <li>undefined<a
+                      class="ddsweb-footer__social-icon bf05ff_L8Eusa_socialIcon bf05ff_L8Eusa_instagram ddsweb-link ddsweb-link__anchor ddsweb-link__iconButton d06bbc_8WKJvW_link d06bbc_8WKJvW_hasIcon"
+                      href="https://www.instagram.com/tesco/"
+                      target="_blank"
+                    >undefined
+                      <svg
+                        class="bf05ff_L8Eusa_icon"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        undefinedxmlns="http://www.w3.org/2000/svg"
+                        aria-label="Instagram"
+                        role="img"
+                      >undefined
+                        <rect
+                          y="0.00183105"
+                          width="40"
+                          height="40"
+                          rx="20"
+                          fill="#E1306C"
+                        ></rect>
+                        undefined
+                        <g clip-path="url(#undefined-normal)">undefined
+                          <path
+                            d="M20 10.164C23.2044 10.164 23.5835 10.1763 24.8492 10.234C26.0191 10.2873 26.6545 10.4826 27.0775 10.647C27.5993 10.8391 28.0714 11.146 28.4589 11.5449C28.8578 11.9323 29.1646 12.4044 29.3568 12.9263C29.5211 13.3493 29.7164 13.9847 29.7698 15.1546C29.8274 16.4202 29.8398 16.7994 29.8398 20.0038C29.8398 23.2081 29.8274 23.5873 29.7698 24.8529C29.7164 26.0228 29.5211 26.6582 29.3568 27.0812C29.1569 27.5986 28.8511 28.0685 28.4589 28.4607C28.0667 28.8529 27.5968 29.1588 27.0794 29.3586C26.6564 29.523 26.021 29.7183 24.8511 29.7716C23.5859 29.8293 23.2063 29.8416 20.0019 29.8416C16.7976 29.8416 16.4179 29.8293 15.1527 29.7716C13.9829 29.7183 13.3474 29.523 12.9244 29.3586C12.4026 29.1665 11.9305 28.8596 11.543 28.4607C11.1441 28.0733 10.8373 27.6012 10.6451 27.0793C10.4808 26.6563 10.2855 26.0209 10.2321 24.851C10.1745 23.5854 10.1621 23.2062 10.1621 20.0018C10.1621 16.7975 10.1745 16.4183 10.2321 15.1527C10.2855 13.9828 10.4808 13.3474 10.6451 12.9244C10.8373 12.4025 11.1441 11.9304 11.543 11.543C11.9305 11.1441 12.4026 10.8372 12.9244 10.6451C13.3474 10.4807 13.9829 10.2854 15.1527 10.2321C16.4184 10.1744 16.7976 10.1621 20.0019 10.1621L20 10.164ZM20.0019 7.99994C16.7428 7.99994 16.3341 8.01375 15.0541 8.07234C13.7742 8.13093 12.903 8.33528 12.1394 8.63204C11.3388 8.93331 10.6134 9.40553 10.014 10.0158C9.40455 10.6155 8.93315 11.3408 8.63258 12.1413C8.33344 12.9048 8.13052 13.777 8.0724 15.0541C8.01429 16.3312 8 16.7427 8 20.0018C8 23.261 8.01381 23.6697 8.0724 24.9496C8.13099 26.2295 8.33344 27.0989 8.6302 27.8624C8.93146 28.6631 9.40369 29.3884 10.014 29.9879C10.6135 30.5981 11.3388 31.0705 12.1394 31.3721C12.9016 31.6684 13.7752 31.8713 15.0522 31.9299C16.3293 31.9885 16.7409 32.0018 20 32.0018C23.2591 32.0018 23.6678 31.988 24.9478 31.9299C26.2277 31.8718 27.097 31.6684 27.8606 31.3721C28.6577 31.0637 29.3817 30.5923 29.986 29.9879C30.5904 29.3835 31.0619 28.6596 31.3703 27.8624C31.6666 27.1003 31.8695 26.2267 31.9281 24.9496C31.9867 23.6725 32 23.261 32 20.0018C32 16.7427 31.9862 16.334 31.9281 15.0541C31.87 13.7742 31.6666 12.9048 31.3703 12.1413C31.0687 11.3407 30.5963 10.6154 29.986 10.0158C29.3863 9.40639 28.661 8.93499 27.8606 8.63443C27.097 8.33528 26.2248 8.13236 24.9478 8.07425C23.6707 8.01613 23.2591 8.00184 20 8.00184L20.0019 7.99994Z"
+                            fill="white"
+                          ></path>
+                          undefined
+                          <path
+                            d="M20 13.8399C18.7812 13.8399 17.5897 14.2013 16.5763 14.8785C15.5629 15.5557 14.773 16.5181 14.3066 17.6442C13.8402 18.7703 13.7182 20.0093 13.956 21.2047C14.1938 22.4002 14.7808 23.4982 15.6427 24.36C16.5045 25.2218 17.6026 25.8087 18.7981 26.0464C19.9935 26.2841 21.2326 26.162 22.3586 25.6955C23.4846 25.2291 24.447 24.4391 25.1241 23.4257C25.8012 22.4122 26.1625 21.2207 26.1624 20.0019C26.1625 19.1926 26.0031 18.3913 25.6935 17.6436C25.3838 16.8959 24.9299 16.2166 24.3576 15.6444C23.7853 15.0722 23.106 14.6183 22.3583 14.3087C21.6106 13.9991 20.8092 13.8398 20 13.8399ZM20 24.0017C19.2086 24.0017 18.435 23.767 17.777 23.3274C17.119 22.8877 16.6061 22.2628 16.3033 21.5317C16.0005 20.8005 15.9212 19.996 16.0756 19.2198C16.23 18.4437 16.6111 17.7307 17.1707 17.1711C17.7303 16.6115 18.4432 16.2304 19.2194 16.076C19.9956 15.9217 20.8001 16.0009 21.5312 16.3037C22.2623 16.6066 22.8873 17.1194 23.3269 17.7774C23.7666 18.4355 24.0013 19.2091 24.0013 20.0004C24.0013 21.0616 23.5797 22.0794 22.8293 22.8298C22.0789 23.5801 21.0612 24.0017 20 24.0017Z"
+                            fill="white"
+                          ></path>
+                          undefined
+                          <path
+                            d="M26.4058 15.036C27.2011 15.036 27.8458 14.3913 27.8458 13.596C27.8458 12.8007 27.2011 12.156 26.4058 12.156C25.6106 12.156 24.9659 12.8007 24.9659 13.596C24.9659 14.3913 25.6106 15.036 26.4058 15.036Z"
+                            fill="white"
+                          ></path>
+                          undefined
+                        </g>
+                        undefined
+                        <defs>undefined
+                          <clipPath id="undefined-normal">undefined
+                            <rect
+                              width="24"
+                              height="24"
+                              fill="white"
+                              transform="translate(8 8.00183)"
+                            ></rect>
+                            undefined
+                          </clipPath>
+                          undefined
+                        </defs>
+                        undefined
+                      </svg>
+                      undefined</a>undefined
+                    </li>
+                    undefined
+                  </ul>
+                  undefined
+                </div>
+                undefined
+              </div>
+              undefined
+              <div class="bf05ff_L8Eusa_copyrightContainer">undefined
+                <p class="ddsweb-text bf05ff_L8Eusa_copyrightText db5227_GlysEa_text db5227_GlysEa_shortFormMd">Â©
+                  undefined
+                  <!-- -->2025 Tesco.com. All rights reservedundefined
+                </p>undefined
+                <div
+                  role="separator"
+                  class="bf05ff_L8Eusa_separator ddsweb-divider ae718b_avS3_G_divider ae718b_avS3_G_light"
+                ></div>
+                undefined
+                <div class="bf05ff_L8Eusa_iconsWrapper">undefined
+                  <svg
+                    width="45"
+                    height="44"
+                    fill="none"
+                    undefinedxmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 45 44"
+                    role="img"
+                  >undefined<title>Visa Secure</title>undefined
+                    <path
+                      d="M44.5 0H.5v44h44V0Z"
+                      fill="#fff"
+                    ></path>
+                    undefined
+                    <path
+                      d="M44.5 22H.5v22h44V22ZM18.03 6.16l-4.15 9.86h-2.7L9.15 8.13c-.13-.49-.22-.66-.6-.86-.62-.34-1.62-.65-2.5-.85l.06-.29h4.36c.55 0 1.04.38 1.17 1l1.07 5.71 2.67-6.73h2.66v.05Zm10.58 6.64c.02-2.6-3.6-2.76-3.58-3.91 0-.36.36-.73 1.1-.82a4.77 4.77 0 0 1 2.5.44l.45-2.09a6.9 6.9 0 0 0-2.4-.44c-2.54 0-4.31 1.33-4.31 3.26-.03 1.43 1.26 2.23 2.24 2.7 1 .48 1.33.8 1.33 1.22 0 .66-.8.95-1.53.97-1.29.03-2.02-.35-2.62-.62l-.47 2.16c.6.26 1.71.5 2.85.53 2.69-.02 4.44-1.33 4.44-3.4Zm6.67 3.22h2.35l-2.06-9.89h-2.18c-.49 0-.91.3-1.09.74l-3.84 9.15h2.7l.54-1.46h3.29l.29 1.46Zm-2.85-3.49 1.36-3.7.78 3.7h-2.14ZM21.68 6.16l-2.11 9.88H17l2.11-9.88h2.56Z"
+                      fill="#1434CB"
+                    ></path>
+                    undefined
+                    <path
+                      d="M9.7 31.71c0-.31.07-.58.22-.8.16-.22.36-.38.62-.49.27-.1.56-.18.9-.18a2.91 2.91 0 0 1 1.39.34l.07.82h-.02a1.74 1.74 0 0 0-.4-.24 3.44 3.44 0 0 0-.51-.18 2.19 2.19 0 0 0-.54-.07c-.26 0-.49.05-.66.13a.5.5 0 0 0-.27.47c0 .18.04.31.11.4.09.09.2.18.36.25.15.06.35.13.6.2.22.06.44.13.64.17.2.07.38.16.51.25.16.1.27.24.36.4.09.18.13.38.13.64 0 .51-.15.9-.49 1.16-.33.26-.8.4-1.38.4-.28 0-.6-.05-.88-.11-.32-.1-.56-.2-.74-.34l-.04-.82h.02a2.74 2.74 0 0 0 1.71.58c.67 0 1-.22 1-.69a.77.77 0 0 0-.11-.4c-.07-.11-.2-.18-.36-.24a4.54 4.54 0 0 0-.64-.2l-.6-.18a2.24 2.24 0 0 1-.51-.27 1.22 1.22 0 0 1-.36-.4 1.1 1.1 0 0 1-.13-.6Zm4.2 3.62v-4.97h3.22v.7h-2.35v1.34h1.84v.69h-1.84v1.51h2.33v.71h-3.2v.02Zm4.53-2.49c0 .38.07.72.2.98.14.3.34.5.6.65.27.15.58.22.94.22.37 0 .69-.07.93-.18.24-.11.47-.27.64-.44h.03l-.1.86a2.83 2.83 0 0 1-1.6.47c-.4 0-.75-.07-1.06-.2a2.43 2.43 0 0 1-1.31-1.38 2.95 2.95 0 0 1 0-2.02 2.43 2.43 0 0 1 2.36-1.58c.35 0 .64.05.9.11.25.07.47.18.65.31l.09.9h-.02a2.08 2.08 0 0 0-1.51-.58c-.36 0-.67.06-.94.22-.26.15-.44.38-.57.64-.16.31-.23.65-.23 1.02Zm6.09 1.83c.45 0 .78-.1.98-.3.2-.2.31-.53.31-1v-3.04h.73v3.1c0 .68-.17 1.2-.53 1.5-.35.31-.87.47-1.53.47-.67 0-1.18-.16-1.56-.47-.38-.3-.55-.82-.55-1.5v-3.1h.89v3.03c0 .46.08.8.28 1 .2.22.54.3.98.3Zm2.89.66v-4.97h2.11c.34 0 .6.06.85.2a1.43 1.43 0 0 1 .75 1.3c0 .34-.09.65-.29.9a1.3 1.3 0 0 1-.77.5l1.28 2.07h-1l-1.15-1.95h-.89v1.95h-.89Zm1.87-4.29h-1v1.7h1c.3 0 .55-.07.69-.2a.88.88 0 0 0 .22-.63c0-.29-.07-.49-.22-.62-.14-.18-.38-.25-.7-.25Zm2.71 4.29v-4.97h3.22v.7h-2.33v1.34h1.84v.69h-1.84v1.51h2.33v.71H32v.02Z"
+                      fill="#fff"
+                    ></path>
+                    undefined
+                  </svg>
+                  undefined
+                  <svg
+                    fill="none"
+                    undefinedxmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 113 20"
+                    width="113"
+                    height="20"
+                    role="img"
+                  >undefined<title>Mastercard ID Check</title>undefined
+                    <path
+                      fill="#fff"
+                      d="M.5 0h112v20H.5z"
+                    ></path>
+                    undefined
+                    <g clip-path="url(#undefined-a)">undefined
+                      <path
+                        d="M19.59 2.58h-8.12V17.3h8.12V2.58Z"
+                        fill="#FF5F00"
+                      ></path>
+                      undefined
+                      <path
+                        d="M11.99 9.95a9.44 9.44 0 0 1 3.54-7.37 9.22 9.22 0 0 0-13.59 2.4 9.45 9.45 0 0 0 3.8 13.4 9.19 9.19 0 0 0 9.8-1.07 9.34 9.34 0 0 1-3.55-7.36Z"
+                        fill="#EB001B"
+                      ></path>
+                      undefined
+                      <path
+                        d="M30.53 9.95a9.44 9.44 0 0 1-5.22 8.42 9.19 9.19 0 0 1-9.78-1.06 9.36 9.36 0 0 0 3.54-7.36 9.46 9.46 0 0 0-3.54-7.37 9.22 9.22 0 0 1 13.6 2.4 9.44 9.44 0 0 1 1.4 4.97Zm-.88 5.8v-.3h.12v-.06h-.3v.06h.11v.3h.07Zm.6 0v-.36h-.1l-.1.25-.12-.25h-.09v.36h.07v-.27l.1.23h.07l.1-.23v.27h.06Z"
+                        fill="#F79E1B"
+                      ></path>
+                      undefined
+                      <path
+                        d="M39.98 19.37h-.35V.4h.35v18.97Zm9.5-3.62h-.96V4.58h.96v11.17Zm7.03-11.17c.85-.02 1.69.12 2.5.39a4.9 4.9 0 0 1 3.07 2.88 6.7 6.7 0 0 1 0 4.63A4.9 4.9 0 0 1 59 15.36c-.8.27-1.64.4-2.49.4h-4.03V4.57h4.03Zm-3.07.92v9.33h3.07a6.3 6.3 0 0 0 2.14-.33 3.91 3.91 0 0 0 2.51-2.4 5.94 5.94 0 0 0 0-3.86 3.95 3.95 0 0 0-2.51-2.41 6.38 6.38 0 0 0-2.14-.33h-3.07Zm20.25-1.05a5.86 5.86 0 0 1 2.62.62 4.96 4.96 0 0 1 1.85 1.68l-.8.54a3.92 3.92 0 0 0-1.54-1.39 4.4 4.4 0 0 0-2.13-.51c-.63 0-1.25.11-1.83.34a4.37 4.37 0 0 0-2.47 2.49 5.46 5.46 0 0 0 0 3.9 4.37 4.37 0 0 0 2.46 2.48 4.85 4.85 0 0 0 3.96-.16 4.23 4.23 0 0 0 1.54-1.4l.79.58a4.72 4.72 0 0 1-1.86 1.65 6.11 6.11 0 0 1-4.83.18 5.41 5.41 0 0 1-2.99-2.97 6.4 6.4 0 0 1 0-4.62 5.4 5.4 0 0 1 5.23-3.41Zm7.44 5.1A2.86 2.86 0 0 1 83 8.2a3.67 3.67 0 0 1 2.03.13 2.64 2.64 0 0 1 1.63 1.56c.16.4.24.83.23 1.26v4.6H86v-4.32c0-.35-.05-.7-.16-1.03-.1-.28-.25-.55-.46-.77a2.05 2.05 0 0 0-.75-.48 2.84 2.84 0 0 0-2 .01 2.33 2.33 0 0 0-1.31 1.3c-.13.32-.2.67-.2 1.01v4.28h-.9V4.25h.9v5.3Zm11.13-1.43a3.35 3.35 0 0 1 3.2 2.29 4.43 4.43 0 0 1 .26 1.92H89.5c.02.4.12.8.29 1.16a2.75 2.75 0 0 0 1.52 1.4 3.27 3.27 0 0 0 2.47-.1c.4-.19.78-.45 1.1-.78l.49.63a4.42 4.42 0 0 1-1.47.98c-.25.1-.52.16-.78.2a5.7 5.7 0 0 1-.8.05 3.9 3.9 0 0 1-1.5-.28 3.49 3.49 0 0 1-1.96-2.02 4.3 4.3 0 0 1-.28-1.57c0-.53.1-1.06.29-1.56a3.5 3.5 0 0 1 3.4-2.32Zm-.02.8a2.68 2.68 0 0 0-1.86.75 2.5 2.5 0 0 0-.58.82 3.3 3.3 0 0 0-.3 1.06h5.32a3.28 3.28 0 0 0-.26-1.07 2.47 2.47 0 0 0-2.32-1.55Zm8.68-.8c.53 0 1.05.1 1.54.3.46.2.87.49 1.2.87l-.58.61a2.9 2.9 0 0 0-2.18-.93 2.82 2.82 0 0 0-2.65 1.82 3.48 3.48 0 0 0 0 2.42 2.8 2.8 0 0 0 2.65 1.8c.42.01.83-.07 1.22-.25.36-.16.7-.4.98-.68l.56.63c-.33.37-.74.67-1.2.86-1 .4-2.09.4-3.08 0a3.59 3.59 0 0 1-1.99-2.03c-.37-1-.37-2.09 0-3.08a3.62 3.62 0 0 1 3.53-2.34Zm5.45 3.29h1.21l3.13-3.17h1.14l-3.54 3.55 3.6 3.96h-1.15l-3.18-3.52h-1.2v3.52h-.9V4.25h.9v7.16Z"
+                        fill="#000"
+                      ></path>
+                      undefined
+                    </g>
+                    undefined
+                    <defs>undefined
+                      <clipPath id="undefined-a">undefined
+                        <path
+                          fill="#fff"
+                          transform="translate(.53 .4)"
+                          d="M0 0h111.38v18.97H0z"
+                        ></path>
+                        undefined
+                      </clipPath>
+                      undefined
+                    </defs>
+                    undefined
+                  </svg>
+                  undefined
+                  <svg
+                    width="85"
+                    height="40"
+                    fill="none"
+                    undefinedxmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 85 40"
+                    role="img"
+                  >undefined<title>American Express SafeKey</title>undefined
+                    <path
+                      fill="#fff"
+                      d="M.5 0h84v40H.5z"
+                    ></path>
+                    undefined
+                    <g clip-path="url(#undefined-a)">undefined
+                      <mask
+                        id="undefined-b"
+                        style="mask-type:alpha"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="11"
+                        width="44"
+                        height="17"
+                      >undefined
+                        <path
+                          d="M.54 11.91h43.1v15.54H.53V11.9Z"
+                          fill="#fff"
+                        ></path>
+                        undefined
+                      </mask>
+                      undefined
+                      <g mask="url(#undefined-b)">undefined
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M41.34 20.75c-.14-1.64-.95-2.5-2.45-2.5-1.22 0-2.33.68-2.58 2.5h5.03Zm-7.56 1.06c0-4.1 2.9-5.59 5.13-5.59 2.41 0 4.72 1.44 4.72 5.8v.6h-7.36c.1 1.93 1.3 2.78 2.88 2.78a3.9 3.9 0 0 0 3.02-1.25l1.32 1.3a5.82 5.82 0 0 1-4.52 1.94c-2.7 0-5.2-1.64-5.2-5.58Zm-6.13 5.35v-8.75H25.8v-1.99h1.86v-1.09c0-1.8.75-3.2 3.5-3.2.46 0 1.29.09 1.47.1v1.93a4.61 4.61 0 0 0-.85-.08c-.9 0-1.62.24-1.62 1.4v.94h2.35v1.99h-2.35v8.75h-2.5Zm-6.55-2.99v-2.36c-2.98.4-4.56 1.13-4.56 2.3 0 .85.59 1.3 1.5 1.3a4.3 4.3 0 0 0 3.06-1.24Zm-7.01.4c0-2.32 1.98-3.88 7.01-4.44v-.33c0-1.07-.56-1.53-1.76-1.53-1.5 0-2.72.72-3.63 1.45l-1.22-1.56a7.72 7.72 0 0 1 5.2-1.94c2.87 0 3.87 1.38 3.87 3.89v4.43c0 1.29.08 2.08.3 2.62h-2.51a3.88 3.88 0 0 1-.25-1.37 5.19 5.19 0 0 1-3.97 1.54c-1.75 0-3.04-.97-3.04-2.75ZM.54 23.65l2-1.05a4.35 4.35 0 0 0 4.14 2.61c1.83 0 3.07-.58 3.07-1.94 0-1.3-.94-1.9-3.41-2.63-2.9-.85-5.23-1.64-5.23-4.49 0-2.55 2.09-4.23 5.13-4.23 2.96 0 4.7 1.46 5.62 3.22L10 16.4a4.15 4.15 0 0 0-3.8-2.18c-1.66 0-2.6.6-2.6 1.7 0 1.4 1.07 1.86 3.52 2.59 2.84.83 5.11 1.76 5.11 4.57 0 2.45-2.09 4.37-5.66 4.37-2.98 0-5.09-1.54-6.04-3.8Z"
+                          fill="#18265D"
+                        ></path>
+                        undefined
+                      </g>
+                      undefined
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M46.76 27.16V12.2h1.78v7.72l6.8-7.72h2.15l-5.16 5.7 5.87 9.26h-2.05l-5-7.9-2.6 2.85v5.05h-1.8Zm20.05-6.25c-.14-1.9-1.05-3.2-2.81-3.2-1.44 0-2.8 1-3.05 3.2h5.86Zm-7.64.91c0-3.88 2.6-5.56 4.85-5.56 2.53 0 4.46 1.78 4.46 5.65v.36H60.9c.06 2.4 1.46 3.7 3.23 3.7 1.54 0 2.41-.63 3.22-1.74l1.02.9a4.98 4.98 0 0 1-4.36 2.26c-2.54 0-4.85-1.84-4.85-5.57ZM69.76 31l.4-1.39c.3.08.83.18 1.58.18 1.1 0 1.62-.46 2.05-1.51l.4-1.05-4.13-10.75h1.84l3.15 8.64h.04l3.14-8.64H80l-4.59 11.9c-.73 1.88-1.56 2.89-3.65 2.89-.95 0-1.54-.12-2-.26ZM82.3 17.97c.19 0 .3-.06.3-.22s-.11-.23-.3-.23h-.24v.45h.24Zm-.67-.83h.7c.43 0 .68.19.68.59 0 .27-.12.42-.32.51l.36.68h-.45l-.32-.63h-.22v.63h-.43v-1.78Zm1.95.93a1.3 1.3 0 0 0-1.31-1.34c-.74 0-1.3.57-1.3 1.33 0 .76.56 1.33 1.32 1.33.74 0 1.3-.56 1.3-1.32Zm-2.94 0c0-.92.72-1.64 1.65-1.64.91 0 1.62.7 1.62 1.63 0 .93-.71 1.64-1.64 1.64a1.6 1.6 0 0 1-1.63-1.63Z"
+                        fill="#18265D"
+                      ></path>
+                      undefined
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="m12.32 1.43-1.5 4.2h.4l.45-1.29h1.7l.45 1.3h.42l-1.49-4.21h-.43Zm.2.47.74 2.1H11.8l.72-2.09Zm2.69-.45h.52l1.41 3.66h.01l1.4-3.66h.53v4.19h-.4V2.13h-.01l-.26.73-1.1 2.78h-.36l-1.1-2.78-.25-.75h-.01v3.53h-.38v-4.2Zm5.17 0h2.51v.37h-2.1v1.42h1.57v.36h-1.58v1.67h2.23v.37h-2.63v-4.2Zm5.03 1.95c.7 0 1.09-.2 1.09-.8 0-.58-.39-.79-1.1-.79h-.97V3.4h.98Zm-1.37-1.95h1.4c.94 0 1.46.4 1.46 1.13 0 .68-.4 1.02-1 1.13l1.06 1.93h-.46l-1.02-1.88h-1.05v1.88h-.4v-4.2Z"
+                        fill="#7F8484"
+                      ></path>
+                      undefined
+                      <mask
+                        id="undefined-c"
+                        style="mask-type:alpha"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="1"
+                        width="84"
+                        height="31"
+                      >undefined
+                        <path
+                          d="M.54 31.27h83.38V1.37H.54v29.9Z"
+                          fill="#fff"
+                        ></path>
+                        undefined
+                      </mask>
+                      undefined
+                      <g
+                        mask="url(#undefined-c)"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        fill="#7F8484"
+                      >undefined
+                        <path
+                          d="M28.13 5.64h.4v-4.2h-.4v4.2Zm1.56-2.12c0-1.26.7-2.15 1.75-2.15.85 0 1.32.5 1.52 1.28l-.39.1c-.19-.67-.5-1.01-1.14-1.01-.81 0-1.34.7-1.34 1.77 0 1.16.54 1.84 1.35 1.84.63 0 1.02-.36 1.2-1.06l.39.08c-.2.83-.75 1.35-1.6 1.35-1.05 0-1.74-.86-1.74-2.2Zm6.33.47L35.3 1.9h-.01l-.72 2.08h1.45Zm-.93-2.56h.44l1.49 4.2h-.42l-.45-1.28h-1.7L34 5.64h-.4l1.5-4.21Zm2.9.02h.43l2.31 3.45h.01V1.45h.38v4.19h-.35l-2.4-3.57v3.57h-.38v-4.2Zm5.92 0h2.51v.37h-2.1v1.42h1.57v.36H44.3v1.67h2.23v.37H43.9v-4.2Zm4.76 1.94L47.4 1.45h.46l1.05 1.62 1.04-1.62h.43l-1.26 1.94 1.45 2.25h-.43L48.88 3.7l-1.26 1.93h-.41l1.46-2.25Zm4.23.03c.7 0 1.09-.21 1.09-.82 0-.57-.38-.79-1.09-.79h-.97v1.61h.98Zm-1.38-1.97h1.4c.91 0 1.47.37 1.47 1.14 0 .84-.63 1.19-1.51 1.19h-.95v1.86h-.4v-4.2Zm5.26 1.95c.69 0 1.08-.2 1.08-.8 0-.58-.38-.79-1.09-.79h-.97V3.4h.98ZM55.4 1.45h1.4c.94 0 1.46.4 1.46 1.13 0 .68-.4 1.02-1 1.13l1.06 1.93h-.45l-1.03-1.88H55.8v1.88h-.4v-4.2Zm4.03 0h2.51v.37h-2.1v1.42h1.57v.36h-1.57v1.67h2.22v.37h-2.63v-4.2Zm3.34 3.15.36-.12c.19.58.61.88 1.2.88.63 0 1.04-.3 1.04-.76 0-.44-.21-.66-1.1-.94-.9-.28-1.36-.53-1.36-1.22 0-.6.54-1.07 1.3-1.07.8 0 1.25.4 1.45.96l-.35.16c-.2-.55-.57-.76-1.1-.76-.56 0-.9.3-.9.68 0 .47.27.63 1.16.92.87.27 1.3.56 1.3 1.24 0 .7-.61 1.14-1.45 1.14-.8 0-1.35-.43-1.55-1.1Zm3.86 0 .35-.12c.19.58.62.88 1.2.88.64 0 1.04-.3 1.04-.76 0-.44-.2-.66-1.1-.94-.9-.28-1.36-.53-1.36-1.22 0-.6.54-1.07 1.3-1.07.8 0 1.25.4 1.45.96l-.34.16c-.21-.55-.58-.76-1.1-.76-.57 0-.91.3-.91.68 0 .47.28.63 1.16.92.88.27 1.3.56 1.3 1.24 0 .7-.61 1.14-1.45 1.14-.79 0-1.35-.43-1.55-1.1Z"
+                        ></path>
+                        undefined
+                      </g>
+                      undefined
+                    </g>
+                    undefined
+                    <defs>undefined
+                      <clipPath id="undefined-a">undefined
+                        <path
+                          fill="#fff"
+                          transform="translate(.5)"
+                          d="M0 0h84v31H0z"
+                        ></path>
+                        undefined
+                      </clipPath>
+                      undefined
+                    </defs>
+                    undefined
+                  </svg>
+                  undefined
+                </div>
+                undefined
+              </div>
+              undefined
+            </footer>
+            undefined
+          </div>
+          undefined
+        </div>
+        undefined
+      </div>
+      undefined
+    </div>
+    undefined
+    <div data-mfe="mfe-global-scripts"></div>
+    undefined
+  </div>
+  undefined
+</div>
+undefined
+<script type="asparagus-data">
+  {"routes":[{"name":"global-homepage","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002F","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-digital-content\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"recipes","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002Frecipes\u002F:language([a-z]{2}-[A-Z]{2})?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-recipes\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"category","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002Fshop\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fcategory\u002F:categories(.+)","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-digital-content\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"buylists","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics","mfe-basket-manager"],"path":"\u002Fshop\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fbuylists\u002F:group?\u002F:list?\u002F:category?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-buylists\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"buylists-groceries","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics","mfe-basket-manager"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fbuylists\u002F:group?\u002F:list?\u002F:category?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-buylists\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"browse","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics","mfe-basket-manager"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fshop\u002F:categories(.+)","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-plp\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"promotions","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002Fgroceries\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fpromotions","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-promotions\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"promotions-list","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002Fgroceries\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fpromotions\u002F:list(.+)","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-promotions\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"favourites","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Ffavorites","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-favourites\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"homepage","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-digital-content\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"landing","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002Fshop\u002F:language([a-z]{2}-[A-Z]{2})?\u002Flanding\u002F:page","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-digital-content\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"order-details","layout":"with-sidebasket","path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders\u002F:orderId","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"nonVisualMFE":["mfe-analytics"],"requiresAuthentication":true},{"name":"order-receipt","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders\u002F:orderId\u002Freceipt","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"order-return","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders\u002F:orderId\u002Freturn","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"order-return","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders\u002F:orderId\u002Freturn\u002F:fulfilmentGroup","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"return-receipt","layout":"single-column","nonVisualMFE":["mfe-analytics"],"path":"\u002Fgroceries\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders\u002Freturn-receipt\u002F:returnOrderNo","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"order-tracking","layout":"with-sidebasket","path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders\u002F:orderId\u002Ftracking\u002F:deliveryGroupId","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"nonVisualMFE":["mfe-analytics"],"requiresAuthentication":true},{"name":"orders","layout":"with-sidebasket","path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Forders","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-orders\\"\u003E\u003C\u002Fdiv\u003E"},"nonVisualMFE":["mfe-analytics"],"requiresAuthentication":true},{"name":"pdp","layout":"with-sidebasket","path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fproducts\u002F:productId?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-pdp\\"\u003E\u003C\u002Fdiv\u003E"},"nonVisualMFE":["mfe-analytics","mfe-basket-manager"]},{"name":"pdp-localstore","layout":"mfe-plus-footer","path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Flocal\u002F:storeId\u002Fproducts\u002F:productId","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-pdp\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"search","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics","mfe-basket-manager"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fsearch","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-plp\\"\u003E\u003C\u002Fdiv\u003E"}},{"name":"slots","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fslots","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-slots\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"slots-collection","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fslots\u002Fcollection\u002F:date?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-slots\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"slots-delivery","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fslots\u002Fdelivery\u002F:date?","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-slots\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"slots-ondemand","layout":"with-sidebasket","nonVisualMFE":["mfe-analytics"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Fslots\u002Fondemand","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-slots\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true},{"name":"trolley","layout":"single-column-height","nonVisualMFE":["mfe-analytics","mfe-basket-manager"],"path":"\u002F(groceries|shop)\u002F:language([a-z]{2}-[A-Z]{2})?\u002Ftrolley","placeholders":{"main":"\u003Cdiv data-mfe=\\"mfe-trolley\\"\u003E\u003C\u002Fdiv\u003E"},"requiresAuthentication":true}],"layouts":[{"html":"\u003Cdiv\u003E\\n  \u003Cdiv class=\\"template-wrapper\\"\u003E\\n    \u003Cmain id=\\"main-content\\" class=\\"template-content has-mfe-children\\"\u003E\\n      {{ main }}\\n    \u003C\u002Fmain\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv class=\\"template-footer has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-footer\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv data-mfe=\\"mfe-global-scripts\\"\u003E\u003C\u002Fdiv\u003E\\n\u003C\u002Fdiv\u003E\\n","name":"mfe-plus-footer"},{"html":"\u003Cdiv\u003E\\n  \u003Cdiv class=\\"template-header has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-header\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cmain id=\\"main-content\\" class=\\"template-content\\"\u003E{{ main }}\u003C\u002Fmain\u003E\\n  \u003Cdiv class=\\"template-footer has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-footer\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv data-mfe=\\"mfe-global-scripts\\"\u003E\u003C\u002Fdiv\u003E\\n\u003C\u002Fdiv\u003E\\n","name":"single-column"},{"html":"\u003Cdiv\u003E\\n  \u003Cdiv class=\\"template-header has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-header\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cmain id=\\"main-content\\" class=\\"template-content template-content-full-height\\"\u003E\\n    {{ main }}\\n  \u003C\u002Fmain\u003E\\n  \u003Cdiv class=\\"template-footer has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-footer\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv data-mfe=\\"mfe-global-scripts\\"\u003E\u003C\u002Fdiv\u003E\\n\u003C\u002Fdiv\u003E\\n","name":"single-column-height"},{"html":"\u003Cdiv\u003E\\n  \u003Cdiv\u003E\\n    \u003Cmain class=\\"has-mfe-children\\"\u003E{{ main }}\u003C\u002Fmain\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv data-mfe=\\"mfe-global-scripts\\"\u003E\u003C\u002Fdiv\u003E\\n\u003C\u002Fdiv\u003E\\n","name":"single-mfe"},{"html":"{{main}} {{secondary}} {{tertiary}}\\n","name":"test-ssr"},{"html":"\u003Cmain id=\\"main-content\\"\u003E{{ main }}\u003C\u002Fmain\u003E\\n","name":"test"},{"html":"\u003Cdiv\u003E\\n  \u003Cdiv class=\\"template-header has-mfe-children\\"\u003E{{ main }}\u003C\u002Fdiv\u003E\\n  \u003Cdiv class=\\"template-footer has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-footer\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv data-mfe=\\"mfe-global-scripts\\"\u003E\u003C\u002Fdiv\u003E\\n\u003C\u002Fdiv\u003E\\n","name":"test-multiple"},{"html":"\u003Cdiv\u003E\\n  \u003C!-- Will remove sticky-header id, when moved to a conditional layout --\u003E\\n  \u003Cdiv class=\\"template-header has-mfe-children\\" id=\\"sticky-header\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-header\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv class=\\"template-wrapper\\"\u003E\\n    \u003Cmain id=\\"main-content\\" class=\\"template-content has-mfe-children\\"\u003E\\n      {{ main }}\\n    \u003C\u002Fmain\u003E\\n    \u003Cdiv class=\\"template-sidecolumn has-mfe-children\\"\u003E\\n      \u003Cdiv data-mfe=\\"mfe-basket\\"\u003E\u003C\u002Fdiv\u003E\\n    \u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv class=\\"template-footer has-mfe-children\\"\u003E\\n    \u003Cdiv data-mfe=\\"mfe-footer\\"\u003E\u003C\u002Fdiv\u003E\\n  \u003C\u002Fdiv\u003E\\n  \u003Cdiv data-mfe=\\"mfe-global-scripts\\"\u003E\u003C\u002Fdiv\u003E\\n\u003C\u002Fdiv\u003E\\n","name":"with-sidebasket"}]}
+</script>
+undefined
+<script type="application/discover+json">{
+  "mfe-header": {
+    "external": "header@\u002Fassets\u002Fmfe-header\u002F39ea8d4708e4baf3f67f.js",
+    "props": {
+      "authentication": {
+        "authenticated": false,
+        "UUID": null
+      },
+      "config": {
+        "client": {
+          "cookieBanner": {
+            "hasRejectAllCookies": true,
+            "managePreferencesUrl": "\u002Fhelp\u002Fen-GB\u002Fmanage-cookie-preferences",
+            "setPreferencesUrl": "\u002Fhelp\u002Fen-GB\u002Fset-cookie-preferences"
+          },
+          "SAYT": {
+            "suggestionsApiUrl": "https:\u002F\u002Fsearch.api.tesco.com\u002Fsearch\u002Fsuggestion"
+          },
+          "helpUrl": "\u002Fhelp",
+          "pathPrefix": "groceries",
+          "logoVersion": "pride",
+          "isGlobalHeader": true,
+          "enableSuperDepartmentNav": true,
+          "shouldHeaderLogoLinkToRootDomain": true,
+          "isfeatureEntryPointEnabled": true,
+          "isNPSEnabled": true,
+          "enableDesktopLargeWidth": true,
+          "appBar": {
+            "menuItems": [
+              {
+                "id": "app-bar-tesco-bank",
+                "href": "https:\u002F\u002Fwww.tescobank.com\u002F?referrerid=tesco\u002Fredirect",
+                "text": "app-bar.tesco-bank",
+                "target": "_blank"
+              },
+              {
+                "id": "app-bar-tesco-mobile",
+                "text": "app-bar.tesco-mobile",
+                "href": "https:\u002F\u002Fwww.tescomobile.com",
+                "target": "_blank"
+              },
+              {
+                "id": "app-bar-delivery-saver",
+                "href": "\u002Fdeliverysaver\u002F",
+                "text": "app-bar.delivery-saver"
+              },
+              {
+                "id": "app-bar-store-locator",
+                "href": "\u002Fstore-locator",
+                "text": "app-bar.store-locator"
+              },
+              {
+                "id": "app-bar-my-orders",
+                "href": "\u002Fgroceries\u002Fen-GB\u002Forders",
+                "text": "app-bar.signed-in.my-orders",
+                "filterIds": [
+                  "authLinks"
+                ]
+              },
+              {
+                "id": "app-bar-help",
+                "href": "https:\u002F\u002Fwww.tesco.com\u002Fhelp\u002Fpages\u002Fonline-grocery-faqs",
+                "target": "_blank",
+                "text": "app-bar.help"
+              },
+              {
+                "id": "app-bar-feedback",
+                "text": "app-bar.feedback",
+                "filterIds": [
+                  "experienceLinks",
+                  "customLinks"
+                ]
+              },
+              {
+                "id": "app-bar-my-account",
+                "text": "app-bar.signed-in.my-account",
+                "filterIds": [
+                  "authLinks",
+                  "customLinks"
+                ]
+              },
+              {
+                "id": "app-bar-sign-out",
+                "text": "app-bar.signed-in.sign-out",
+                "filterIds": [
+                  "customLinks",
+                  "authLinks"
+                ]
+              }
+            ]
+          },
+          "appDownloadConfig": {
+            "allowedUrls": [],
+            "appId": {
+              "android": {
+                "mobile": "com.tesco.grocery.view",
+                "tablet": "com.tesco.tablet"
+              },
+              "ios": {
+                "mobile": "389581236"
+              }
+            },
+            "url": {
+              "android": {
+                "mobile": "https:\u002F\u002Fplay.google.com\u002Fstore\u002Fapps\u002Fdetails?id=com.tesco.grocery.view",
+                "tablet": "https:\u002F\u002Fplay.google.com\u002Fstore\u002Fapps\u002Fdetails?id=com.tesco.tablet"
+              },
+              "ios": {
+                "mobile": "https:\u002F\u002Fapps.apple.com\u002Fgb\u002Fapp\u002Ftesco-groceries\u002Fid389581236"
+              }
+            }
+          },
+          "primaryNav": {
+            "menuItems": {
+              "desktop": [
+                {
+                  "id": "primary-nav-all-departments",
+                  "href": "\u002Fgroceries#",
+                  "hasPopup": true,
+                  "popupIcon": "true",
+                  "text": "primary-navigation.all-departments",
+                  "ariaLabel": "primary-navigation.all-departments-aria-label",
+                  "analytics": {
+                    "isDeferred": false
+                  }
+                },
+                {
+                  "id": "primary-nav-groceries-and-essentials",
+                  "href": "\u002Fgroceries\u002Fen-GB",
+                  "text": "primary-navigation.groceries-and-essentials",
+                  "analytics": {
+                    "isDeferred": false
+                  }
+                },
+                {
+                  "id": "primary-nav-favourites",
+                  "href": "\u002Fgroceries\u002Fen-GB\u002Ffavorites",
+                  "text": "primary-navigation.favourites",
+                  "analytics": {
+                    "featureKey": "my-favourites"
+                  },
+                  "subPaths": [
+                    "\u002Fgroceries\u002Fen-GB\u002Ffavorites\u002Fpreviously-bought",
+                    "\u002Fgroceries\u002Fen-GB\u002Ffavorites\u002Fusuals",
+                    "\u002Fgroceries\u002Fen-GB\u002Ffavorites\u002Flast-order"
+                  ]
+                },
+                {
+                  "id": "primary-nav-promotions",
+                  "href": "\u002Fgroceries\u002Fen-GB\u002Fpromotions",
+                  "text": "primary-navigation.promotions",
+                  "hideForOnDemand": true,
+                  "analytics": {
+                    "featureKey": "promotions"
+                  }
+                },
+                {
+                  "id": "primary-nav-tesco-clubcard",
+                  "href": "https:\u002F\u002Fsecure.tesco.com\u002Fclubcard",
+                  "text": "primary-navigation.tesco-clubcard",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "target": "_blank"
+                },
+                {
+                  "id": "utility-direct-clothing",
+                  "href": "\u002Fshop\u002Fen-GB\u002Flanding\u002Ff-f",
+                  "text": "primary-navigation.clothing",
+                  "hideForOnDemand": true
+                },
+                {
+                  "id": "primary-nav-cms-driven",
+                  "href": " ",
+                  "text": " "
+                },
+                {
+                  "id": "primary-nav-recipes",
+                  "href": "https:\u002F\u002Fwww.tesco.com\u002Frealfood",
+                  "text": "primary-navigation.recipes",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "target": "_blank"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002F?referrerid=tesco\u002Fredirect&tgabv=a2",
+                      "text": "more-from-tesco.tesco-bank.homepage",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Floans\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.personal-loans",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Fcredit-cards\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.credit-cards",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Fsavings\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.savings-accounts",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Fhelp\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.help",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "text": "more-from-tesco.tesco-bank",
+                  "hasPopup": false,
+                  "href": "https:\u002F\u002Fwww.tescobank.com\u002F?referrerid=tesco\u002Fredirect&tgabv=a2",
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::tesco-bank",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fpay-monthly?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.pay-monthly-phones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fpay-as-you-go?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.pay-as-you-go-phones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fsim-only-deals\u002Fsim-only-contracts?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.sim-only-deals",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fapple?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.apple-iphones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fsamsung?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.samsung-phones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescomobile.com",
+                  "text": "more-from-tesco.tesco-mobile",
+                  "hasPopup": true,
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::tesco-mobile",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Fcar-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.car-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Fpet-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.pet-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Fhome-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.home-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Ftravel-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.travel-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescoinsurance.com",
+                  "text": "more-from-tesco.tesco-insurance",
+                  "hasPopup": true,
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::tesco-insurance",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002F",
+                      "text": "more-from-tesco.travel-money.order-travel-money",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fbuy-euros\u002F",
+                      "text": "more-from-tesco.travel-money.order-euros",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fbuy-dollars\u002F",
+                      "text": "more-from-tesco.travel-money.order-us-dollars",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fcurrency-buy-back\u002F",
+                      "text": "more-from-tesco.travel-money.currency-buy-back",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fbuy-in-store\u002F",
+                      "text": "more-from-tesco.travel-money.buy-currency-in-store",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescotravelmoney.com",
+                  "text": "more-from-tesco.travel-money",
+                  "hasPopup": true,
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::travel-money",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescogiftcards.com\u002F",
+                      "text": "more-from-tesco.e-gift-cards.buy-a-giftcard",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescogiftcards.com\u002Fbalance",
+                      "text": "more-from-tesco.e-gift-cards.order-euros",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescogiftcards.com",
+                  "text": "more-from-tesco.e-gift-cards",
+                  "hasPopup": true,
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::e-gift-cards",
+                  "mobile": "more"
+                },
+                {
+                  "children": null,
+                  "href": "https:\u002F\u002Fwww.tesco.com\u002Fzones\u002Ftesco-magazine",
+                  "text": "more-from-tesco.tesco-magazine",
+                  "hasPopup": false,
+                  "label": "moreFromTesco",
+                  "target": "_blank",
+                  "analytics": {
+                    "isDeferred": true
+                  },
+                  "id": "moreFromTesco::tesco-magazine",
+                  "mobile": "more"
+                }
+              ],
+              "mobile": [
+                {
+                  "id": "primary-nav-all-departments",
+                  "href": "\u002F",
+                  "hasPopup": true,
+                  "text": "primary-navigation.all-departments",
+                  "analytics": {
+                    "isDeferred": false
+                  }
+                },
+                {
+                  "id": "primary-nav-groceries-and-essentials",
+                  "href": "\u002Fgroceries\u002Fen-GB",
+                  "text": "primary-navigation.groceries-and-essentials",
+                  "analytics": {
+                    "isDeferred": false
+                  }
+                },
+                {
+                  "id": "primary-nav-favourites",
+                  "href": "\u002Fgroceries\u002Fen-GB\u002Ffavorites",
+                  "text": "primary-navigation.favourites",
+                  "analytics": {
+                    "featureKey": "my-favourites"
+                  }
+                },
+                {
+                  "id": "primary-nav-promotions",
+                  "href": "\u002Fgroceries\u002Fen-GB\u002Fpromotions",
+                  "text": "primary-navigation.promotions",
+                  "hideForOnDemand": true,
+                  "analytics": {
+                    "featureKey": "promotions"
+                  }
+                },
+                {
+                  "id": "primary-nav-tesco-clubcard",
+                  "href": "https:\u002F\u002Fsecure.tesco.com\u002Fclubcard",
+                  "text": "primary-navigation.tesco-clubcard",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "target": "_blank"
+                },
+                {
+                  "id": "utility-direct-clothing",
+                  "href": "\u002Fshop\u002Fen-GB\u002Flanding\u002Ff-f",
+                  "text": "primary-navigation.clothing",
+                  "hideForOnDemand": true
+                },
+                {
+                  "id": "primary-nav-cms-driven",
+                  "href": " ",
+                  "text": " "
+                },
+                {
+                  "id": "primary-nav-recipes",
+                  "href": "https:\u002F\u002Fwww.tesco.com\u002Frealfood",
+                  "text": "primary-navigation.recipes",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "target": "_blank"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002F?referrerid=tesco\u002Fredirect&tgabv=a2",
+                      "text": "more-from-tesco.tesco-bank.homepage",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Floans\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.personal-loans",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Fcredit-cards\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.credit-cards",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Fsavings\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.savings-accounts",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescobank.com\u002Fhelp\u002F?referrerid=tesco\u002Fredirect",
+                      "text": "more-from-tesco.tesco-bank.help",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "text": "more-from-tesco.tesco-bank",
+                  "hasPopup": false,
+                  "href": "https:\u002F\u002Fwww.tescobank.com\u002F?referrerid=tesco\u002Fredirect&tgabv=a2",
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::tesco-bank",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fpay-monthly?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.pay-monthly-phones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fpay-as-you-go?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.pay-as-you-go-phones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fsim-only-deals\u002Fsim-only-contracts?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.sim-only-deals",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fapple?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.apple-iphones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescomobile.com\u002Fshop\u002Fsamsung?utm_source=tesco&utm_medium=tesco&utm_campaign=DCHPmenu",
+                      "text": "more-from-tesco.tesco-mobile.samsung-phones",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescomobile.com",
+                  "text": "more-from-tesco.tesco-mobile",
+                  "hasPopup": true,
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::tesco-mobile",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Fcar-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.car-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Fpet-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.pet-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Fhome-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.home-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescoinsurance.com\u002Ftravel-insurance\u002F",
+                      "text": "more-from-tesco.tesco-insurance.travel-insurance",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescoinsurance.com",
+                  "text": "more-from-tesco.tesco-insurance",
+                  "hasPopup": true,
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::tesco-insurance",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002F",
+                      "text": "more-from-tesco.travel-money.order-travel-money",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fbuy-euros\u002F",
+                      "text": "more-from-tesco.travel-money.order-euros",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fbuy-dollars\u002F",
+                      "text": "more-from-tesco.travel-money.order-us-dollars",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fcurrency-buy-back\u002F",
+                      "text": "more-from-tesco.travel-money.currency-buy-back",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescotravelmoney.com\u002Fbuy-in-store\u002F",
+                      "text": "more-from-tesco.travel-money.buy-currency-in-store",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescotravelmoney.com",
+                  "text": "more-from-tesco.travel-money",
+                  "hasPopup": true,
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::travel-money",
+                  "mobile": "more"
+                },
+                {
+                  "children": [
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescogiftcards.com\u002F",
+                      "text": "more-from-tesco.e-gift-cards.buy-a-giftcard",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    },
+                    {
+                      "children": null,
+                      "href": "https:\u002F\u002Fwww.tescogiftcards.com\u002Fbalance",
+                      "text": "more-from-tesco.e-gift-cards.order-euros",
+                      "hasPopup": false,
+                      "target": "_blank"
+                    }
+                  ],
+                  "href": "https:\u002F\u002Fwww.tescogiftcards.com",
+                  "text": "more-from-tesco.e-gift-cards",
+                  "hasPopup": true,
+                  "label": "moreFromTesco",
+                  "analytics": {
+                    "isDeferred": false
+                  },
+                  "id": "moreFromTesco::e-gift-cards",
+                  "mobile": "more"
+                },
+                {
+                  "children": null,
+                  "href": "https:\u002F\u002Fwww.tesco.com\u002Fzones\u002Ftesco-magazine",
+                  "text": "more-from-tesco.tesco-magazine",
+                  "hasPopup": false,
+                  "label": "moreFromTesco",
+                  "target": "_blank",
+                  "analytics": {
+                    "isDeferred": true
+                  },
+                  "id": "moreFromTesco::tesco-magazine",
+                  "mobile": "more"
+                }
+              ]
+            },
+            "useOffersLinks": true,
+            "useNewBrowseNode": true,
+            "offersLinksPosition": "bottom"
+          },
+          "recipesUrl": "https:\u002F\u002Frealfood.tesco.com",
+          "slots": {
+            "slotExpiryTime": {
+              "collection": 1800000,
+              "delivery": 1800000,
+              "ondemand": 300000
+            }
+          },
+          "cacheableExperimentKeys": [
+            "GHS-UK_1972_searchBoxPosition"
+          ],
+          "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
+          "externalMyAccountDomain": true,
+          "checkoutUrl": "https:\u002F\u002Fwww.tesco.com\u002Fcheckout\u002Fen-GB\u002Fgroceries\u002Frecommendations",
+          "homeUrl": "\u002F",
+          "deliverySaverUrl": "\u002Fdeliverysaver",
+          "hasSearchAsYouType": true,
+          "showMultiSearchLink": true,
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "accept-all-cookies": "Accept all cookies",
+        "reject-all-cookies": "Reject all cookies",
+        "amend-order-banner.cancel-button-label": "Cancel",
+        "amend-order-banner.message": "Save by {date}",
+        "amend-order-banner.modal.close-text": "No",
+        "amend-order-banner.modal.confirm-cancel": "Yes, cancel",
+        "amend-order-banner.modal.modal.body.line1": "If you cancel, the changes you've made won't be saved.",
+        "amend-order-banner.modal.modal.body.line2": "Do you still want to cancel?",
+        "amend-order-banner.modal.modal.title": "Cancel",
+        "amend-order-banner.save-and-checkout-button-label": "Checkout to confirm changes",
+        "amend-order-banner.checkout-mixed-basket-save-button-label": "Save or check out",
+        "amend-order-banner.slot-change-message": "Save by {date} to retain your new slot",
+        "amend-order-banner.title": "Making changes",
+        "app-bar.feedback": "Feedback",
+        "app-bar.help": "Help",
+        "app-bar.tesco-bank": "Tesco Bank",
+        "app-bar.tesco-mobile": "Tesco Mobile",
+        "app-bar.delivery-saver": "Delivery Saver",
+        "app-bar.store-locator": "Store locator",
+        "app-bar.signed-in.greeting": "Hello {firstName}",
+        "app-bar.signed-in.my-account": "My account",
+        "app-bar.signed-in.my-orders": "My orders",
+        "app-bar.signed-in.sign-out": "Sign out",
+        "app-bar.signed-out.register": "Register",
+        "app-bar.signed-out.sign-in": "Sign in",
+        "back": "Back",
+        "close": "Close",
+        "cookie-banner-body": "Want to know more? Check out our {cookiePolicyLink}. {manageCookiesLink}",
+        "cookie-banner-title": "We use cookies to improve your experience on our website. Please let us know your preferences.",
+        "cookies-policy-title": "cookies policy",
+        "global-header-aria-label": "Global Header",
+        "global-navigation-aria-label": "Useful Links",
+        "guide-price": "Guide price",
+        "basket-icon-aria-label": "Basket",
+        "total": "Total",
+        "total-estimated": "Total (estimated)",
+        "manage-cookies": "Manage cookies",
+        "masthead.ally.logoLinkAriaLabel": "Tesco Home page",
+        "primary-navigation.about-this-site": "About this site",
+        "primary-navigation.account": "My account",
+        "primary-navigation.clothing": "F&F Clothing",
+        "primary-navigation.tesco-clubcard": "Tesco Clubcard",
+        "primary-navigation.clubcard-account": "Clubcard account",
+        "primary-navigation.online-club-url": "",
+        "primary-navigation.delivery-saver": "Delivery Saver",
+        "primary-navigation.marketplace": "Marketplace",
+        "primary-navigation.download-the-app": "Download the app",
+        "primary-navigation.favourites": "My Favourites",
+        "primary-navigation.groceries-and-essentials": "Groceries & Essentials",
+        "primary-navigation.all-departments": "All Departments",
+        "primary-navigation.all-departments-aria-label": "All Departments, expand to view options",
+        "primary-navigation.feedback": "Feedback",
+        "primary-navigation.help": "Help",
+        "primary-navigation.inspiration": "Inspiration",
+        "primary-navigation.menu": "Menu",
+        "primary-navigation.more-from-tesco": "More from Tesco",
+        "primary-navigation.more": "More",
+        "primary-navigation.more-aria-label": "More, expand to view options",
+        "primary-navigation.my-orders": "My orders",
+        "primary-navigation.online-club": "Online Club",
+        "primary-navigation.promotions": "Special Offers",
+        "primary-navigation.recipes": "Recipes",
+        "primary-navigation.store-locator": "Store locator",
+        "primary-navigation.taxonomy": "Groceries",
+        "primary-navigation.translation": "English",
+        "primary-navigation.book-a-slot": "Book a slot",
+        "search.ally.clearButtonAriaLabel": "Clear search field",
+        "search.ally.searchInputLabel": "Enter a product to search for",
+        "search.ally.showSearchButton": "Toggle search bar",
+        "search.ally.submitButtonAriaLabel": "Search for products",
+        "search.multiSearch": "Search with a list of items",
+        "search.placeholder": "Search",
+        "book-change-slot-button.new-order": "Book a slot",
+        "book-change-slot-button.additional-order": "Book another slot",
+        "book-change-slot-button.replace-order": "Change your slot",
+        "slot-context.book-a-slot.no-order-exists.header": "Reserve a slot for either home delivery or collection",
+        "slot-context.book-a-slot.order-exists.header": "You can place more than one order with us at a time",
+        "slot-context.order-in-progress.amend": "Making changes",
+        "slot-context.order-in-progress.checkout-by": "Please checkout by {time}",
+        "slot-context.order-in-progress.checkout-in": "Checkout in \u003Cb\u003E{minutes} mins {seconds} secs\u003C\u002Fb\u003E",
+        "slot-context.order-in-progress.deliver-by": "Today, 60 min delivery",
+        "slot-context.order-in-progress.expired": "Your slot has expired",
+        "slot-context.order-in-progress.order-type.click-n-collect": "Click+Collect",
+        "slot-context.order-in-progress.order-type.home-delivery": "Home delivery",
+        "slot-context.order-in-progress.order-type.on-demand": "Whoosh delivery",
+        "primary-navigation.new-in-taxonomy": "New in {nodeName}",
+        "taxonomy.all": "All {nodeName}",
+        "taxonomy.all-offers": "Offers on {category}",
+        "new-tag-label": "New",
+        "more-from-tesco.tesco-bank": "Tesco Bank",
+        "more-from-tesco.tesco-bank.homepage": "Homepage",
+        "more-from-tesco.tesco-bank.personal-loans": "Personal Loans",
+        "more-from-tesco.tesco-bank.credit-cards": "Clubcard Credit Cards",
+        "more-from-tesco.tesco-bank.savings-accounts": "Savings Accounts",
+        "more-from-tesco.tesco-bank.help": "Help",
+        "more-from-tesco.tesco-mobile": "Tesco Mobile",
+        "more-from-tesco.tesco-mobile.pay-monthly-phones": "Pay monthly phones",
+        "more-from-tesco.tesco-mobile.pay-as-you-go-phones": "Pay as you go phones",
+        "more-from-tesco.tesco-mobile.sim-only-deals": "SIM only deals",
+        "more-from-tesco.tesco-mobile.apple-iphones": "Apple iPhones",
+        "more-from-tesco.tesco-mobile.samsung-phones": "Samsung phones",
+        "more-from-tesco.tesco-insurance": "Tesco Insurance",
+        "more-from-tesco.tesco-insurance.car-insurance": "Car Insurance",
+        "more-from-tesco.tesco-insurance.pet-insurance": "Pet Insurance",
+        "more-from-tesco.tesco-insurance.home-insurance": "Home Insurance",
+        "more-from-tesco.tesco-insurance.travel-insurance": "Travel Insurance",
+        "more-from-tesco.travel-money": "Travel Money",
+        "more-from-tesco.travel-money.order-travel-money": "Order Travel Money",
+        "more-from-tesco.travel-money.order-euros": "Order Euros",
+        "more-from-tesco.travel-money.order-us-dollars": "Order US Dollars",
+        "more-from-tesco.travel-money.currency-buy-back": "Currency Buy Back",
+        "more-from-tesco.travel-money.buy-currency-in-store": "Buy Currency in Store",
+        "more-from-tesco.e-gift-cards": "E-Gift Cards",
+        "more-from-tesco.e-gift-cards.buy-a-giftcard": "Buy a Giftcard",
+        "more-from-tesco.e-gift-cards.order-euros": "Order Euros",
+        "more-from-tesco.tesco-magazine": "Tesco Magazine",
+        "smart-banner.download-title": "Tesco",
+        "smart-banner.download-store-type.android": "In Google Play",
+        "smart-banner.download-store-type.ios": "On the App Store",
+        "smart-banner.download-price": "Free - {appStoreType}",
+        "smart-banner.download-text": "View",
+        "cookies-policy-url": "https:\u002F\u002Fwww.tesco.com\u002Fhelp\u002Fprivacy-and-cookies\u002Fprivacy-centre\u002Fprivacy-policy-information\u002Fprivacy-policy\u002F",
+        "primary-navigation.clubcard-account-url": "https:\u002F\u002Fsecure.tesco.com\u002Fclubcard\u002F",
+        "primary-navigation.store-locator-url": "https:\u002F\u002Fwww.tesco.com\u002Fstore-locator\u002Fuk\u002F?stop_mobi=yes"
+      },
+      "origin": "https:\u002F\u002Fwww.tesco.com",
+      "isSmartBannerCookiePresent": false
+    },
+    "vanillaCSS": [
+      {
+        "href": "\u002Fassets\u002Fmfe-header\u002Fac406279bafcdb67c3f0.css",
+        "rel": "stylesheet"
+      },
+      {
+        "href": "\u002Fassets\u002Fmfe-header\u002Fe66eae8d7993b960851a.css",
+        "rel": "stylesheet"
+      }
+    ],
+    "version": "2025.06.19-25cb3726"
+  },
+  "mfe-plp": {
+    "external": "plp@\u002Fassets\u002Fmfe-plp\u002F62d189dcb0a65c09bd0d.js",
+    "vanillaCSS": [
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F8a1a1b6cbfd1d3aa6052.css",
+        "hash": "8a1a1b6cbfd1d3aa6052.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F74a567a6674acbb614df.css",
+        "hash": "74a567a6674acbb614df.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fc93e5858cc415c15e9e8.css",
+        "hash": "c93e5858cc415c15e9e8.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fb74e0b000d52c5101f77.css",
+        "hash": "b74e0b000d52c5101f77.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fbac57663409d08a2d432.css",
+        "hash": "bac57663409d08a2d432.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F4a1b0fc0555491d14d77.css",
+        "hash": "4a1b0fc0555491d14d77.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ff9e379a7cbc49813abf4.css",
+        "hash": "f9e379a7cbc49813abf4.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F0fd2c6f539d65af88dd4.css",
+        "hash": "0fd2c6f539d65af88dd4.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fd5da273a562617e94bf6.css",
+        "hash": "d5da273a562617e94bf6.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F9d9cf29ed5a83a2c6afa.css",
+        "hash": "9d9cf29ed5a83a2c6afa.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Faf0073cbf6573fd69325.css",
+        "hash": "af0073cbf6573fd69325.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F4acb719203db8d06faf5.css",
+        "hash": "4acb719203db8d06faf5.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F8d9aecd172179dda3e51.css",
+        "hash": "8d9aecd172179dda3e51.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F27d635df485763516380.css",
+        "hash": "27d635df485763516380.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fcebf2fd89eb07bae1270.css",
+        "hash": "cebf2fd89eb07bae1270.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F73722a97eaf9904015ed.css",
+        "hash": "73722a97eaf9904015ed.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F1858f842cd1fc7f1223b.css",
+        "hash": "1858f842cd1fc7f1223b.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F034ea338b72fc04f0c9a.css",
+        "hash": "034ea338b72fc04f0c9a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F66e3516a212d6aacf921.css",
+        "hash": "66e3516a212d6aacf921.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F2edbedcb6759c30098cf.css",
+        "hash": "2edbedcb6759c30098cf.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F70fffd2420fb96099812.css",
+        "hash": "70fffd2420fb96099812.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa64b2e0df04b6de93012.css",
+        "hash": "a64b2e0df04b6de93012.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F22199a54ae3174cce039.css",
+        "hash": "22199a54ae3174cce039.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fdf35f8526c32c4868e6f.css",
+        "hash": "df35f8526c32c4868e6f.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fd34b5b7bb3c2a1356411.css",
+        "hash": "d34b5b7bb3c2a1356411.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F0be0104a8282936fe42b.css",
+        "hash": "0be0104a8282936fe42b.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F4d891b0382bb300ba6be.css",
+        "hash": "4d891b0382bb300ba6be.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F5f4d16257acaed3885f6.css",
+        "hash": "5f4d16257acaed3885f6.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F80ec98861137ef62ef00.css",
+        "hash": "80ec98861137ef62ef00.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fe01dbde2b3b3ab6e2d8a.css",
+        "hash": "e01dbde2b3b3ab6e2d8a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Facdfca8cd2e8bb18f002.css",
+        "hash": "acdfca8cd2e8bb18f002.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F1656447ff334f1b5945a.css",
+        "hash": "1656447ff334f1b5945a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F3a1d9109499e12ae6cf2.css",
+        "hash": "3a1d9109499e12ae6cf2.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F2c54cedc2301671fd3cc.css",
+        "hash": "2c54cedc2301671fd3cc.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa50c0b041d0c1275ff5e.css",
+        "hash": "a50c0b041d0c1275ff5e.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F8a546366acea8ab17a60.css",
+        "hash": "8a546366acea8ab17a60.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F37abfaa148359436477d.css",
+        "hash": "37abfaa148359436477d.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F5528de7e887c0b638457.css",
+        "hash": "5528de7e887c0b638457.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fb2deacae255e48259af3.css",
+        "hash": "b2deacae255e48259af3.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ffa82f45eb8fa47a558e2.css",
+        "hash": "fa82f45eb8fa47a558e2.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F432a6b9951ec9f06c90e.css",
+        "hash": "432a6b9951ec9f06c90e.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa958f65dbc8d8ef0a7a6.css",
+        "hash": "a958f65dbc8d8ef0a7a6.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F093f2fbfe463317956ef.css",
+        "hash": "093f2fbfe463317956ef.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F59b5b06474a6045881a8.css",
+        "hash": "59b5b06474a6045881a8.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F2ea09d7b2166df28e22d.css",
+        "hash": "2ea09d7b2166df28e22d.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa5ddeda8cc15f4a99a6f.css",
+        "hash": "a5ddeda8cc15f4a99a6f.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F1060401b53c9d934d064.css",
+        "hash": "1060401b53c9d934d064.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ff347d4d35a94aab0078f.css",
+        "hash": "f347d4d35a94aab0078f.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ff5bd4c3c301756e09d85.css",
+        "hash": "f5bd4c3c301756e09d85.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ffc687230d794e86ed1bd.css",
+        "hash": "fc687230d794e86ed1bd.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ff865431fa3a56fe9dec5.css",
+        "hash": "f865431fa3a56fe9dec5.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ff7a48e0a3a2e6767b9d9.css",
+        "hash": "f7a48e0a3a2e6767b9d9.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fb7f9e181b60720478bdb.css",
+        "hash": "b7f9e181b60720478bdb.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F4d06ea5f7e79789ce03d.css",
+        "hash": "4d06ea5f7e79789ce03d.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fd205e4a2da506302fefa.css",
+        "hash": "d205e4a2da506302fefa.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F7850b31263ba30af55b1.css",
+        "hash": "7850b31263ba30af55b1.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F05b0d00cc8f94c585c0a.css",
+        "hash": "05b0d00cc8f94c585c0a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F0ffb20a2dcc0ed51dbb3.css",
+        "hash": "0ffb20a2dcc0ed51dbb3.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F4e01dcfe23b391562d9e.css",
+        "hash": "4e01dcfe23b391562d9e.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fb2a7d0c9741760f9f3b3.css",
+        "hash": "b2a7d0c9741760f9f3b3.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F5b7bcab46cb1f3e2ded0.css",
+        "hash": "5b7bcab46cb1f3e2ded0.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ffb49d30dab0e725bbe72.css",
+        "hash": "fb49d30dab0e725bbe72.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F9a1cdc7081b1fcf848ae.css",
+        "hash": "9a1cdc7081b1fcf848ae.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ff9d73d908bbb586a99f0.css",
+        "hash": "f9d73d908bbb586a99f0.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fd94dc03040448f724447.css",
+        "hash": "d94dc03040448f724447.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F103ca130a9ffac449fc0.css",
+        "hash": "103ca130a9ffac449fc0.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F53380a5fbfd7169e4182.css",
+        "hash": "53380a5fbfd7169e4182.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F5b556c6431a87d3d0f4c.css",
+        "hash": "5b556c6431a87d3d0f4c.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F0e544e305ad0ecd64a7b.css",
+        "hash": "0e544e305ad0ecd64a7b.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F4c146983f03fb6515cbb.css",
+        "hash": "4c146983f03fb6515cbb.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa407356ac2be306774e1.css",
+        "hash": "a407356ac2be306774e1.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F0d7cbf7deafe66cf27cf.css",
+        "hash": "0d7cbf7deafe66cf27cf.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa14821254200228688b6.css",
+        "hash": "a14821254200228688b6.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F814c225b85b705739e1e.css",
+        "hash": "814c225b85b705739e1e.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fb7c895a63a65837d7186.css",
+        "hash": "b7c895a63a65837d7186.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Ffb0df226ccd8cefe3870.css",
+        "hash": "fb0df226ccd8cefe3870.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F991ba1dd5e3a988360bb.css",
+        "hash": "991ba1dd5e3a988360bb.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fa2b391f22ecc365e73b5.css",
+        "hash": "a2b391f22ecc365e73b5.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002Fdb8876c9b2412131adca.css",
+        "hash": "db8876c9b2412131adca.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F5dc135b21eef4ae1264a.css",
+        "hash": "5dc135b21eef4ae1264a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F0c9a00188d838cad5bed.css",
+        "hash": "0c9a00188d838cad5bed.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F88f58fe7520c979d523f.css",
+        "hash": "88f58fe7520c979d523f.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-plp\u002F38162f03b94d4e325261.css",
+        "hash": "38162f03b94d4e325261.css"
+      }
+    ],
+    "version": "2025.06.26-cd8ff1ba",
+    "props": {
+      "authentication": {
+        "authenticated": false,
+        "UUID": null
+      },
+      "config": {
+        "client": {
+          "altRegionCode": "",
+          "basePath": "groceries",
+          "defaultFilterOptionsCount": {
+            "desktop": 16,
+            "mobile": 3,
+            "vertical": 4,
+            "pageSize": 48
+          },
+          "defaultShoppingMethod": "delivery",
+          "dynamicFilterConfigValue": "true",
+          "pagination": {
+            "resultCountOptions": [
+              "24",
+              "48"
+            ],
+            "delta": 2,
+            "defaultItemsPerPage": 24,
+            "productCountLimit": 10000
+          },
+          "defaultSortValue": "relevance",
+          "defaultDebounceTimer": 100,
+          "routeSpecificConfig": {
+            "search": {
+              "component": "search",
+              "dataSetDetails": {
+                "queryName": "GET_SEARCH_RESULT",
+                "dataProperty": "search"
+              },
+              "isTaxonomyRequired": false,
+              "recommendationConfig": {
+                "pageId": "searchPLP",
+                "pageName": "search",
+                "pageSize": 24,
+                "position": 1,
+                "provider": "TREX",
+                "pageType": "sr"
+              },
+              "positionForIbyc": 3,
+              "dfpStaticBanner": {
+                "position": "top",
+                "pageId": "search"
+              }
+            },
+            "browse": {
+              "component": "browse",
+              "dataSetDetails": {
+                "queryName": "GET_CATEGORY_RESULTS",
+                "dataProperty": "category"
+              },
+              "isTaxonomyRequired": true,
+              "recommendationConfig": {
+                "pageId": "browsePLP",
+                "pageName": "browse",
+                "pageSize": 24,
+                "position": 1,
+                "provider": "TREX",
+                "pageType": "sr"
+              },
+              "positionForIbyc": 1,
+              "dfpStaticBanner": {
+                "position": "top",
+                "pageId": ""
+              },
+              "gamVideoBanner": {
+                "position": "top",
+                "pageId": "browse-interrupt\u002Fbrowse"
+              }
+            }
+          },
+          "recommendations": {
+            "search": {
+              "pageId": "searchPLP",
+              "pageName": "search",
+              "pageSize": 24,
+              "position": 1,
+              "provider": "TREX",
+              "pageType": "sr"
+            }
+          },
+          "search": {
+            "position": 1
+          },
+          "optimizelyFeatures": {
+            "search": "GHS-UK_search",
+            "media": "GHS-UK_media"
+          },
+          "currency": "GBP",
+          "fractionDigits": 2,
+          "showRecommendationsCarousel": true,
+          "showPopularFilter": true,
+          "showFavouritesFilter": true,
+          "showStarRating": true,
+          "showIbycCarousel": true,
+          "showDepositReturnCharge": false,
+          "renderDescriptionMetaTag": false,
+          "overridePromotionsUrl": false,
+          "overrideRegionCode": false,
+          "prependAllToHigherLevelPill": false,
+          "dynamicFiltersDelimiter": "__",
+          "productVariationsConfig": {
+            "showProductVariations": true
+          },
+          "clicksForIbyc": 3,
+          "marketplacePageLink": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fmarketplace",
+          "dietaryPageLink": "https:\u002F\u002Fwww.tesco.com\u002Fhelp\u002Fterms-and-conditions\u002F#17-using-our-diet-and-lifestyle-search-function",
+          "contactDataConfig": {
+            "telephoneNumber": "+41-0800 323 4040",
+            "availableLanguages": "English",
+            "servedAreas": "UK"
+          },
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "back-to-top": "Back to the top",
+        "buybox.quantity": "Quantity",
+        "buybox.weight": "Weight",
+        "customer-ratings": "Average customer rating {averageRating} out of {overallRatingRange} stars",
+        "dietary-info.message": "This list may contain products not suitable for milk and\u002For egg allergy sufferers. Always check the online information and product label.",
+        "dietary-info.read-more": "Read more",
+        "error.boundary.body": "Please press OK to refresh the page.",
+        "error.boundary.heading": "Sorry, an error has occurred.",
+        "error.boundary.ok": "OK",
+        "filters.dietary.footer-text": "In partnership with SpoonGuru. \u003Ca\u003EFind out more about each filter\u003C\u002Fa\u003E",
+        "filters.dietary.header-text": "Filters should not be used as an alternative to medical advice. Always check the label.",
+        "filters.facet.aisle": "categories",
+        "filters.facet.brands": "brands",
+        "filters.facet.department": "categories",
+        "filters.facet.shelf": "categories",
+        "filters.facets.aisle": "Categories",
+        "filters.facets.brands": "Brands",
+        "filters.facets.department": "Categories",
+        "filters.facets.shelf": "Categories",
+        "filters.facets.offers": "Special Offers",
+        "filters.filterBy": "Filter by",
+        "filters.marketplace.footer-text": "\u003Ca\u003EFind out more about Marketplace\u003C\u002Fa\u003E",
+        "filters.marketplace.header-text": "Marketplace products are sold and sent by our partners and don't come in your grocery order.",
+        "filters.productSource.facets.Ghs": "Show Tesco products only",
+        "filters.productSource.facets.GhsAndMarketplace": "Show Tesco and Marketplace products",
+        "filters.productSource.facets.MarketplaceOnly": "Show Marketplace products only",
+        "filters.showFew": "Fewer",
+        "filters.showMore": "More",
+        "filters:clear-all": "Clear filters",
+        "ibyc.heading": "Inspired by your choice",
+        "ibyc-error.heading": "Something went wrong",
+        "ibyc-error.sub-heading": "Sorry, we can't load these products right now.",
+        "info-messages.temporarily-unavailable": "This product's currently out of stock",
+        "loader.accessibleLabel": "loading",
+        "mobile.filters.button-title": "Sort and filter ({resultCount})",
+        "mobile.filters.cancel": "Cancel",
+        "mobile.filters.done": "Done",
+        "mobile.filters.heading": "Sort and filter",
+        "mobile.pagination.show-more": "Show {showMoreCount} more",
+        "no-results-spa-modal-body": "Sorry, no products found.",
+        "no-results-spa-modal-button-text": "OK",
+        "noResults.browse-button.text": "Browse store",
+        "noResults.heading": "No matches",
+        "noResults.search-button.text": "Search",
+        "noResults.sub-heading": "Check the spelling or try searching for something else.",
+        "page.title": "Results for \\"{searchTerm}\\"",
+        "pagination.next-page": "Next page",
+        "pagination.page-index": "page: {index}",
+        "pagination.page-size-post-text": "items per page",
+        "pagination.page-size-pre-text": "Show",
+        "pagination.previous-page": "Previous page",
+        "pagination.results-count-under-limit": "Showing \u003Ccode\u003E{min} to {max}\u003C\u002Fcode\u003E of \u003Ccode\u003E{total}\u003C\u002Fcode\u003E items",
+        "pagination.results-count-over-limit": "Showing \u003Ccode\u003E{min} to {max}\u003C\u002Fcode\u003E of over \u003Ccode\u003E{total}\u003C\u002Fcode\u003E items",
+        "popular-filter.title": "Popular Filters",
+        "results.breadCrumb.backToText": "Back to",
+        "results.heading": "Results for â{searchTerm}â",
+        "results.heading.fuzzy": "No products found for â{searchTerm}â",
+        "results.heading.spellchecker": "Showing results for â{searchTerm}â",
+        "results.subheading.fuzzy": "Showing closest matching products",
+        "results.subheading.spellchecker": "No exact matches found for â{query}â",
+        "sort.price-ascending": "Price: Low to High",
+        "sort.price-descending": "Price: High to Low",
+        "sort.title-ascending": "Name: A-Z",
+        "sort.title-descending": "Name: Z-A",
+        "sort.relevance": "Relevance",
+        "sort.sort-by": "Sort by",
+        "vertical.filters.heading": "Filters",
+        "vertical.filters.button-title": "Filters",
+        "vertical.filters.close-button-title": "Close",
+        "vertical.filters.close-aria-label": "Close Filters",
+        "vertical.filters.open-aria-label": "Open Filters",
+        "vertical.filters.back-to-all-filters": "Back to all filters",
+        "rest-of-shelf.rest-of-shelf": "Rest of shelf",
+        "description-meta-tag": "",
+        "write-a-review.message": "Write a review",
+        "all-category-pill": "All {pillName}"
+      },
+      "origin": "https:\u002F\u002Fwww.tesco.com"
+    }
+  },
+  "mfe-basket": {
+    "external": "basket@\u002Fassets\u002Fmfe-basket\u002Ff99449d9a50cdfe34d6e.js",
+    "vanillaCSS": [
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F4c28575b7a084346415f.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F595a6d28045ed67bdea5.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F0bfd25fa74978845bced.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F36e53f7c3300d95ecaf3.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F5c2230407a5bc249b3a0.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F10a47be0d3a2dcea6b51.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002Ffe48fa8c73ef560fdd2d.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002Fa78af0b9803f1504dfe1.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F97a297108945530be4fb.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002Ff5c2639d5fa4da091e09.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F8450a317fd4cb70c816d.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F454ff9ad826c3fe3ba1a.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F5c76256996d92b0ca547.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002Fb9f6b99505217ac9dc1b.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F634db86fc14136e1c9ce.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F2b0da4e549af3919f1ec.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002Fbf1000c90340a9f4738f.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002F0e46272cf2a880c5dbc0.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-basket\u002Fd0b17c37b6ae5d56821d.css"
+      }
+    ],
+    "props": {
+      "authentication": {
+        "authenticated": false,
+        "UUID": null
+      },
+      "config": {
+        "client": {
+          "fetchFulfilmentEstimatedArrival": true,
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "a11yBasketItemImage": "Image of {name}",
+        "a11yBasketSummary": "Basket Summary",
+        "a11yBasketUpdating": "Basket price updating",
+        "a11yDecrement": "Decrease {name} by one",
+        "a11yDecrementWithUnits": "Decrease {name} by one {units}",
+        "a11yDescription": "{amount} {isUnitsDisplayed, select, true {{units}} other {}} {isMax, select, true {(Maximum amount)} false {} other {}} {name} for {calculatedPrice}",
+        "a11yDescriptionLoading": "{amount} {isUnitsDisplayed, select, true {{units}} other {}} {name}, price is currently updating",
+        "a11yGoalGradientDescription": "Percentage progress towards the minimum basket charge threshold.",
+        "a11yIncrement": "Increase {name} by one",
+        "a11yIncrementWithUnits": "Increase {name} by one {units}",
+        "a11yRemoveFromBasket": "Remove {name} from basket",
+        "a11yReviewBasket": "Review your basket",
+        "a11yUpdatingPrice": "Price is currently updating",
+        "basket": "Basket",
+        "basketGroceries": "Groceries",
+        "marketplace": "products",
+        "fnf": "products",
+        "fnfDetailsSize": "Size: {size}",
+        "fnfDetailsColour": "Colour: {colour}",
+        "basketMarketplace": "Marketplace",
+        "basketFnf": "F&F Clothing",
+        "totalItemPrice": "Total item price",
+        "totalEstimated": "Total (estimated)",
+        "total": "Total",
+        "marketplaceDeliveryOption": "Choose delivery option at checkout",
+        "basketGuidePriceWhat": "What's the guide price?",
+        "changeYourSlotMessage": "Change your slot",
+        "checkout": "Checkout",
+        "checkoutInAmend": "Checkout to confirm changes",
+        "checkoutInAmend1882": "Save changes",
+        "clubcard-price": "Clubcard Price applied",
+        "deliveryBreached": "Your basket exceeds the {itemsLimit} items limit. Please reduce to {itemsLimit} to checkout",
+        "deliveryBreached-ondemand": "Your basket is over the weight or size limit. To check out, please remove items.",
+        "emptyBasketExplanation": "Products you add to your basket will appear here",
+        "emptyBasketHeading": "Empty Basket",
+        "emptyGroceriesBasketHeading": "Grocery basket empty",
+        "epwWithAmendAvailabilityOverride": "Quantity can no longer be increased",
+        "epwWithoutAmendAvailabilityOverride": "This product is no longer available",
+        "excludedProduct": "This product's currently out of stock",
+        "favouritesExplanation": "Use Favourites to quickly add items youâve bought before",
+        "favouritesHeading": "Favourites",
+        "favouritesLink": "Shop Favourites",
+        "freeDeliveryUnderThreshold": "Shop for {threshold} and enjoy free delivery",
+        "freeDeliveryOverThreshold": "Free delivery",
+        "previouslyBoughtHeading": "Previously bought",
+        "previouslyBoughtLink": "Shop Previously bought",
+        "previouslyBoughtExplanation": "Use Previously bought to quickly add items youâve bought before.",
+        "usualsLink": "Shop my Usuals",
+        "inAhurryHeading": "In a hurry?",
+        "addUsualsButton": "Add my Usuals",
+        "addUsualsExplanation": "Quickly add regular buys to your basket or shop your previous purchases.",
+        "inAhurryExplanation": "Quickly shop for your previous purchases and regular buys.",
+        "groupBulkBuyLimitMessage": "Max. quantity ordered for product group",
+        "guidePrice": "Guide price",
+        "groceries": "groceries",
+        "items": "Items",
+        "maxQuantityMessage": "Max. quantity ordered for item",
+        "minimumBasketChargeLink": "minimum basket charge",
+        "minimumBasketChargeMessageWithSlot": "For baskets under {calculatedMinBasketCharge}, we add a {calculatedSurcharge}",
+        "minimumBasketChargeMessageWithGrocerySlot": "For grocery baskets under {calculatedMinBasketCharge}, we add a {calculatedSurcharge}",
+        "minimumBasketChargeMessageWithGrocerySlotExperimentOop2432": "Add {calculatedDifferenceFromMbcThreshold} more in items to avoid {calculatedSurcharge}",
+        "missedPromotions": "Missed Offer ",
+        "offerComplete": "Offer complete",
+        "offerIncomplete": "Offer incomplete",
+        "offerPartlyComplete": "Offer partially complete",
+        "offerSavings": "Offer savings",
+        "permanentlyUnavailable": "This product has been removed from our range",
+        "permanentlyUnavailableOnDemand": "This product's unavailable on Whoosh.",
+        "viewFullBasketLink": "View full basket",
+        "updating": "Updating",
+        "checkoutBy": "Please check out by {time}",
+        "onDemandCheckoutIn": "Please check out in ",
+        "onDemandCountdownMinutes": "{minutes, plural, =1 {# minute} other {# minutes}}",
+        "onDemandCountdownSeconds": "{seconds, plural, =1 {# second} other {# seconds}}",
+        "onDemandDeliverBy": "Delivery from as little as 20 minutes",
+        "onDemandDynamicDeliverBy": "Delivery in {min}-{max} {unit}",
+        "onDemandScheduledDeliverBy": "Today, {time}",
+        "slotExpired": "Your slot has expired",
+        "seeFewer": "See fewer",
+        "seeMore": "See all",
+        "clickAndCollect": "Click+Collect",
+        "homeDelivery": "Home delivery",
+        "onDemand": "Whoosh delivery",
+        "slotContextCardHomeDelivery": "Home delivery booked",
+        "slotContextCardOnDemand": "Whoosh delivery booked",
+        "slotContextCardClickAndCollect": "Click+Collect booked",
+        "slotContextCardChangeYourSlot": " Change your slot?",
+        "bookASlot": "Book a slot",
+        "noSlotBooked": "Reserve a slot for either home delivery or collection",
+        "slotOrderExists": "You can place more than one order with us at a time",
+        "slotAmend": "Making changes",
+        "a11yDeliveryInformation": "Delivery information",
+        "errorBasketHeading": "Sorry, an error has occurred.",
+        "errorBasketBody": "Please press OK to refresh the page.",
+        "errorOk": "OK",
+        "summaryDepositMessage": "Deposits",
+        "includesDrsCharge": "Includes {charges} Deposit"
+      },
+      "timeZone": "Europe\u002FLondon"
+    },
+    "version": "2025.06.16-b4c03-main"
+  },
+  "mfe-footer": {
+    "external": "footer@\u002Fassets\u002Fmfe-footer\u002Fc7a20f66da4ab718e07e.js",
+    "vanillaCSS": [
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F7f5289de374681d02134.css",
+        "hash": "7f5289de374681d02134.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F1fe47447f14a77b7dcf2.css",
+        "hash": "1fe47447f14a77b7dcf2.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F22d6466542802f4a3a3c.css",
+        "hash": "22d6466542802f4a3a3c.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F90140d7fe5ca412eaa19.css",
+        "hash": "90140d7fe5ca412eaa19.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002Fb57cb0b7d4a9ec59d2c5.css",
+        "hash": "b57cb0b7d4a9ec59d2c5.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F0be0104a8282936fe42b.css",
+        "hash": "0be0104a8282936fe42b.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002Fe4a68063f4a123bc7cb2.css",
+        "hash": "e4a68063f4a123bc7cb2.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F307afda9e9227bd669fc.css",
+        "hash": "307afda9e9227bd669fc.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F65e13e0e2d8e52ee0308.css",
+        "hash": "65e13e0e2d8e52ee0308.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002F679418079da3d21b9f5c.css",
+        "hash": "679418079da3d21b9f5c.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002Ff81393190eb97018cf37.css",
+        "hash": "f81393190eb97018cf37.css"
+      },
+      {
+        "rel": "stylesheet",
+        "href": "\u002Fassets\u002Fmfe-footer\u002Ff10466006cb4738034df.css",
+        "hash": "f10466006cb4738034df.css"
+      }
+    ],
+    "version": "2025.06.13-fbfb7b22",
+    "props": {
+      "config": {
+        "client": {
+          "myAccountUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fdashboard\u002Fen-GB",
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {}
+      },
+      "messages": {
+        "about": "About",
+        "accessibility": "Accessibility",
+        "amex": "American Express SafeKey",
+        "bookADelivery": "Book a delivery",
+        "clickCollect": "Click+Collect",
+        "clubcard": "Clubcard",
+        "clubcardPrices": "Clubcard Prices",
+        "contactUs": "Contact us",
+        "copyright": "{year} Tesco.com. All rights reserved",
+        "couponTermsConditions": "Coupon terms & conditions",
+        "deliverySaver": "Delivery Saver",
+        "facebook": "Facebook",
+        "favourites": "Favourites",
+        "firstTimeShopping": "First time shopping",
+        "followUs": "Follow us",
+        "generalTermsConditions": "General terms & conditions",
+        "help": "Help & FAQs",
+        "hereToHelp": "Here to help",
+        "howToShop": "How to shop",
+        "instagram": "Instagram",
+        "maestro": "Maestro",
+        "mastercard": "Mastercard ID Check",
+        "myAccount": "My Account",
+        "myOrders": "My Grocery Orders",
+        "partnerDirectory": "Partner directory",
+        "ratings&ReviewPolicy": "Ratings & reviews policy",
+        "paymentOptions": "Payment options",
+        "pharmacy": "Tesco Pharmacy",
+        "pinterest": "Pinterest",
+        "price": "Price",
+        "privacyAndCookies": "Privacy & Cookies",
+        "privacyCentre": "Privacy centre",
+        "privacyCookiePolicy": "Privacy & cookies policy",
+        "productRecall": "Product Recall",
+        "productTermsConditions": "Product terms & conditions",
+        "registration": "Registration",
+        "safeOnlineShopping": "Safe online shopping",
+        "serviceCharge": "Service Charge",
+        "sitemap": "Sitemap",
+        "storeLocator": "Store locator",
+        "termsAndConditions": "Terms & Conditions",
+        "tescoBank": "Tesco Bank",
+        "tescoMagazine": "Tesco Magazine",
+        "tescoPhoto": "Tesco Photo",
+        "twitter": "Twitter",
+        "vatInvoice": "How to get a VAT invoice",
+        "visa": "Visa Secure",
+        "waysToSave": "Ways to save",
+        "whereWeDeliver": "Where we deliver",
+        "youtube": "YouTube"
+      }
+    }
+  },
+  "mfe-global-scripts": {
+    "external": "globalScripts@\u002Fassets\u002Fmfe-global-scripts\u002Fe5332765fcabedbed3f0.js",
+    "version": "2025.06.18-57236975",
+    "props": {
+      "authentication": {
+        "authenticated": false,
+        "UUID": null
+      },
+      "config": {
+        "client": {
+          "bingMaps": {
+            "clientId": "AsmhrPuia8p5xdMee4PT0Xzp4DNvHF3gyyBUCdfMfIopjHfCHCfLKLRtpBmdFPPS",
+            "sdkUrl": "https:\u002F\u002Fwww.bing.com\u002Fmaps\u002Fsdk\u002Fmapcontrol"
+          },
+          "dfpAdUnitPath": "\u002F8326\u002Fgrocery\u002F",
+          "dfp": {
+            "limitedSdkUrl": "https:\u002F\u002Fpagead2.googlesyndication.com\u002Ftag\u002Fjs\u002Fgpt.js",
+            "sdkUrl": "https:\u002F\u002Fsecurepubads.g.doubleclick.net\u002Ftag\u002Fjs\u002Fgpt.js",
+            "sizeMappings": [
+              [
+                [
+                  0,
+                  531
+                ],
+                [
+                  "fluid",
+                  [
+                    300,
+                    250
+                  ],
+                  [
+                    375,
+                    258
+                  ],
+                  [
+                    375,
+                    110
+                  ]
+                ]
+              ],
+              [
+                [
+                  532,
+                  723
+                ],
+                [
+                  "fluid",
+                  [
+                    532,
+                    110
+                  ],
+                  [
+                    300,
+                    250
+                  ]
+                ]
+              ],
+              [
+                [
+                  724,
+                  917
+                ],
+                "fluid"
+              ],
+              [
+                [
+                  918,
+                  50000
+                ],
+                "fluid"
+              ]
+            ]
+          },
+          "slots": {
+            "trolleyUrl": "\u002Ftrolley"
+          },
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {},
+        "server": {
+          "global": {
+            "ssrMangoUrl": "http:\u002F\u002Frelease.xapi-gateway.disco.very"
+          }
+        }
+      },
+      "hostEnv": "prod",
+      "messages": {
+        "customerSatisfactionSurvey.confirmation.continue": "Continue shopping",
+        "customerSatisfactionSurvey.confirmation.text": "Please continue shopping and complete the survey when you have finished.",
+        "customerSatisfactionSurvey.confirmation.title": "Thank you for participating",
+        "customerSatisfactionSurvey.consent.email.accept": "Yes I can help",
+        "customerSatisfactionSurvey.consent.email.text": "We would love to hear about your visit today. When you have finished on Tesco Groceries, can we email you some questions about your visit to improve our website?",
+        "customerSatisfactionSurvey.consent.email.title": "Help us improve the website",
+        "customerSatisfactionSurvey.consent.form.accept": "Yes I'll give feedback",
+        "customerSatisfactionSurvey.consent.form.text": "When you have finished on Tesco Groceries, can we ask you some questions about your visit to help us improve our website? Remember to answer them after you have finished your shop so we can help about your full experience.",
+        "customerSatisfactionSurvey.consent.form.title": "We would love to hear about your visit today",
+        "customerSatisfactionSurvey.consent.reject": "No thanks",
+        "customerSatisfactionSurvey.email.formLabel": "Please enter a valid email address",
+        "customerSatisfactionSurvey.email.submit": "Confirm",
+        "customerSatisfactionSurvey.email.text": "Please enter your email address for us to send the questions to below",
+        "customerSatisfactionSurvey.email.title": "We really appreciate your help",
+        "inputs.email.label": "Email address",
+        "inputs.email.placeholder": "Email address",
+        "modal.label": "Tesco Groceries modal dialog",
+        "modal.title": "Tesco Groceries modal dialog",
+        "modal.close": "Close Tesco Groceries modal",
+        "modal.slot-expiry.button.checkout": "Check out",
+        "modal.slot-expiry.button.ok": "OK",
+        "modal.slot-expiry.heading": "Your slot expires soon",
+        "modal.slot-expiry.no-items.body": "To keep it, add items to your basket and check out by {expiryTime}.",
+        "modal.slot-expiry.with-items.body": "Check out by {expiryTime} to confirm your order.",
+        "modal.slot-expiry.whoosh.no-items.body": "Add items to your basket and check out by {expiryTime} to get your shopping in {min}-{max} minutes.",
+        "modal.slot-expiry.whoosh.with-items.body": "Check out by {expiryTime} to get your shopping in {min}-{max} minutes.",
+        "oop-2656.b.modal.slot-expiry.whoosh.with-items.body.line-1": "Check out by {expiryTime} if youâre ready to confirm your Whoosh order.",
+        "oop-2656.b.modal.slot-expiry.whoosh.with-items.body.line-2": "Or extend your slot reservation by 30 minutes, if you need more time.",
+        "oop-2656.c.modal.slot-expiry.whoosh.with-items.body.line-1": "You can extend your Whoosh slot reservation by 30 minutes, if you need more time.",
+        "oop-2656.c.modal.slot-expiry.whoosh.with-items.body.line-2": "Or check out by {expiryTime} if youâre ready to confirm your Whoosh order.",
+        "oop-2656.modal.slot-expiry.button.extend": "Extend 30 minutes",
+        "oop-2656.modal.error.messaging": "Something went wrong. We canât extend your slot."
+      },
+      "version": "2025.06.18-57236975"
+    }
+  },
+  "mfe-analytics": {
+    "external": "analytics@\u002Fassets\u002Fmfe-analytics\u002Fd0c2fb28dc3964811f35.js",
+    "version": "2025.06.25-3a411f1e",
+    "props": {
+      "authentication": {
+        "authenticated": false
+      },
+      "config": {
+        "client": {
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {}
+      },
+      "hostEnv": "prod",
+      "route": {
+        "name": "search",
+        "params": {
+          "0": "groceries",
+          "query": "alpro almond",
+          "language": "en-GB"
+        },
+        "path": "\u002Fgroceries\u002Fen-GB\u002Fsearch"
+      },
+      "version": "2025.06.25-3a411f1e"
+    }
+  },
+  "mfe-basket-manager": {
+    "external": "basketManager@\u002Fassets\u002Fmfe-basket-manager\u002F2982982e435fa1cfa542.js",
+    "version": "2025.06.25-b2c57da1",
+    "props": {
+      "authentication": {
+        "authenticated": false
+      },
+      "config": {
+        "client": {
+          "global": {
+            "locale": "en-GB",
+            "supportedLocales": [
+              "en-GB"
+            ],
+            "timeZone": "Europe\u002FLondon",
+            "devTools": {
+              "apolloClient": false
+            },
+            "analytics": {
+              "host": "https:\u002F\u002Fwww.tesco.com",
+              "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+            },
+            "env": "prod",
+            "apmConsumer": "default",
+            "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+            "cookiePreferences": {
+              "displayCookieBanner": true,
+              "experienceCookiesEnabled": false,
+              "advertisingCookiesEnabled": false
+            },
+            "consumer": "groceries",
+            "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+            "deviceInfo": {
+              "browserType": "Firefox",
+              "browserVersion": "128",
+              "deviceType": "desktop",
+              "operatingSystem": "Windows NT"
+            },
+            "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+            "hostRegion": "eun-azure",
+            "mfeRollout": {
+              "browse": true,
+              "buylists-groceries": true,
+              "buylists": true,
+              "category": true,
+              "favourites": true,
+              "global-homepage": true,
+              "homepage": true,
+              "landing": true,
+              "order-details": true,
+              "order-receipt": true,
+              "order-return": true,
+              "orders": true,
+              "pdp": true,
+              "promotions": false,
+              "promotions-list": false,
+              "search": true,
+              "slots-collection": true,
+              "slots-delivery": true,
+              "slots-ondemand": true,
+              "slots": true,
+              "trolley": true
+            },
+            "region": "uk",
+            "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+            "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+            "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+            "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+            "optimizelyDisabled": true,
+            "optimizelyDisabledReason": "Optimizely disabled by consent"
+          }
+        },
+        "feature": {},
+        "server": {
+          "global": {
+            "ssrMangoUrl": "http:\u002F\u002Frelease.xapi-gateway.disco.very"
+          }
+        }
+      },
+      "hostEnv": "prod",
+      "route": {
+        "name": "search",
+        "params": {
+          "0": "groceries",
+          "query": "alpro almond",
+          "language": "en-GB"
+        },
+        "path": "\u002Fgroceries\u002Fen-GB\u002Fsearch"
+      },
+      "version": "2025.06.25-b2c57da1"
+    }
+  },
+  "mfe-orchestrator": {
+    "props": {
+      "apolloCache": {
+        "ROOT_QUERY": {
+          "__typename": "Query",
+          "page({\\"dfpReportingRequired\\":false,\\"isReporting\\":false,\\"pageName\\":\\"navigation\\",\\"populateTargetingParams\\":true,\\"preview\\":null,\\"targetingParams\\":\\"aggregate=true&country=UK&lang=en_GB&loggedOn=false&sver=1\\"})@maxTime({\\"ms\\":900})": {
+            "__typename": "DCSPage",
+            "children": [
+              {
+                "__typename": "RawComponent",
+                "type": "Panel",
+                "props": {
+                  "ruleId": "",
+                  "tracking": {},
+                  "id": "NavigationTab",
+                  "ordered": true
+                },
+                "childrenType": null,
+                "children": [
+                  {
+                    "__typename": "RawComponent",
+                    "type": "Tab",
+                    "props": {
+                      "catId": "0",
+                      "ruleId": "defaultClientType",
+                      "contentId": "4bc6f700-58d7-4f7a-b027-10a2df040245",
+                      "tracking": {},
+                      "id": "Top Deals",
+                      "tabName": "Top Deals",
+                      "link": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB\u002Fbuylists\u002Fmarketplace-deals\u002Ftop-deals?Nav_ID_MP_deals"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "taxonomy({\\"configs\\":[],\\"includeInspirationEvents\\":false})": [
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Marketplace",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Clothing & Accessories",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Summer",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Fresh Food",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Bakery",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Frozen Food",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Treats & Snacks",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Food Cupboard",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Drinks",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Baby & Toddler",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Health & Beauty",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Pets",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Household",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Home & Ents",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            },
+            {
+              "__typename": "TaxonomyItemType",
+              "name": "Electronics & Gaming",
+              "label": "superDepartment",
+              "source": "essearch",
+              "pageType": "NONE"
+            }
+          ],
+          "search({\\"appliedFacetArgs\\":[],\\"configs\\":[{\\"featureKey\\":\\"dynamic_filter\\",\\"params\\":[{\\"name\\":\\"enable\\",\\"value\\":\\"true\\"}]}],\\"count\\":24,\\"filterCriteria\\":[{\\"name\\":\\"0\\",\\"values\\":[\\"groceries\\"]}],\\"page\\":1,\\"query\\":\\"alpro almond\\",\\"sortBy\\":\\"relevance\\"})": {
+            "__typename": "ProductListType",
+            "info": {
+              "__typename": "ListInfoType",
+              "total": 6,
+              "page": 1,
+              "pageId": null,
+              "count": 6,
+              "pageSize": 24,
+              "matchType": "exact",
+              "offset": 0,
+              "query": {
+                "__typename": "QueryType",
+                "searchTerm": "alpro almond",
+                "actualTerm": "alpro almond"
+              }
+            },
+            "results": [
+              {
+                "__typename": "CompositeResultType",
+                "node": {
+                  "__ref": "ProductType:276761995"
+                }
+              },
+              {
+                "__typename": "CompositeResultType",
+                "node": {
+                  "__ref": "ProductType:275067782"
+                }
+              },
+              {
+                "__typename": "CompositeResultType",
+                "node": {
+                  "__ref": "ProductType:272012512"
+                }
+              },
+              {
+                "__typename": "CompositeResultType",
+                "node": {
+                  "__ref": "ProductType:272103255"
+                }
+              },
+              {
+                "__typename": "CompositeResultType",
+                "node": {
+                  "__ref": "ProductType:304783080"
+                }
+              },
+              {
+                "__typename": "CompositeResultType",
+                "node": {
+                  "__ref": "ProductType:316547434"
+                }
+              }
+            ],
+            "facetGroups": null,
+            "popFilters": [
+              {
+                "__typename": "ProductListFacetsType",
+                "category": "Pop Filter",
+                "categoryId": "popfilters",
+                "facets": [
+                  {
+                    "__ref": "FacetType:b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz"
+                  }
+                ]
+              }
+            ],
+            "facets": [
+              {
+                "__ref": "FacetBooleanType:offer"
+              },
+              {
+                "__ref": "FacetMultiLevelType:category"
+              },
+              {
+                "__ref": "FacetListType:dietaries"
+              }
+            ],
+            "options": {
+              "__typename": "ListOptionsType",
+              "sortBy": [
+                "relevance",
+                "price-ascending",
+                "price-descending"
+              ]
+            }
+          }
+        },
+        "PromotionType:{\\"id\\":\\"93042295\\",\\"description\\":\\"Â£1.70 Clubcard Price\\"}": {
+          "__typename": "PromotionType",
+          "id": "93042295",
+          "promotionType": null,
+          "startDate": "2025-06-15T23:00:00Z",
+          "endDate": "2025-07-01T23:00:00Z",
+          "description": "Â£1.70 Clubcard Price",
+          "unitSellingInfo": "Â£1.70\u002Flitre",
+          "price": {
+            "__typename": "PromotionPriceType",
+            "beforeDiscount": null,
+            "afterDiscount": 2.1
+          },
+          "attributes": [
+            "CLUBCARD_PRICING"
+          ]
+        },
+        "ProductType:276761995": {
+          "__typename": "ProductType",
+          "context": null,
+          "id": "276761995",
+          "tpnb": "73339773",
+          "tpnc": "276761995",
+          "gtin": "05411188112709",
+          "adId": null,
+          "baseProductId": "73339773",
+          "title": "Alpro Almond No Sugar Long Life Dairy Free Drink 1L",
+          "brandName": "ALPRO",
+          "shortDescription": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fc2197781-de6b-4601-9c12-4c0dd9cf9cbb\u002F7ef68106-f8b5-4b0b-8ace-cfb3998a2d9c.jpeg?h=225&w=225",
+          "superDepartmentId": "b;RnJlc2glMjBGb29k",
+          "media": {
+            "__typename": "ProductMediaType",
+            "defaultImage": {
+              "__typename": "ProductMediaDefaultImageType",
+              "aspectRatio": null
+            }
+          },
+          "quantityInBasket": null,
+          "superDepartmentName": "Fresh Food",
+          "departmentId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVz",
+          "departmentName": "Dairy Free & Dairy Alternatives",
+          "aisleId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "aisleName": "Dairy Free Drinks",
+          "shelfId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtzJTdDQWxtb25kJTIwRHJpbmtz",
+          "shelfName": "Almond Drinks",
+          "displayType": "Quantity",
+          "productType": "SingleProduct",
+          "averageWeight": 0,
+          "bulkBuyLimit": 25,
+          "groupBulkBuyLimit": 0,
+          "bulkBuyLimitMessage": "You are able to buy a maximum of 25 of this item",
+          "bulkBuyLimitGroupId": "G00000216",
+          "timeRestrictedDelivery": null,
+          "restrictedDelivery": null,
+          "isForSale": true,
+          "isInFavourites": null,
+          "isNew": false,
+          "isRestrictedOrderAmendment": null,
+          "status": "AvailableForSale",
+          "maxWeight": 0,
+          "minWeight": 0,
+          "increment": 0,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false
+              }
+            ]
+          },
+          "catchWeightList": null,
+          "price": {
+            "__typename": "PriceType",
+            "actual": 2.1,
+            "unitPrice": 2.1,
+            "unitOfMeasure": "litre"
+          },
+          "promotions": [
+            {
+              "__ref": "PromotionType:{\\"id\\":\\"93042295\\",\\"description\\":\\"Â£1.70 Clubcard Price\\"}"
+            }
+          ],
+          "restrictions": [],
+          "reviews": {
+            "__typename": "ReviewsType",
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": 65,
+              "overallRating": 4.3,
+              "overallRatingRange": 5
+            }
+          },
+          "modelMetadata": null
+        },
+        "ProductType:275067782": {
+          "__typename": "ProductType",
+          "context": null,
+          "id": "275067782",
+          "tpnb": "72500589",
+          "tpnc": "275067782",
+          "gtin": "05411188112778",
+          "adId": null,
+          "baseProductId": "72500589",
+          "title": "Alpro Almond No Sugar Chilled Dairy Free Drink 1L",
+          "brandName": "ALPRO",
+          "shortDescription": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fee58cd84-90df-46c5-a0df-efbc7cb4e7ee\u002F714c8832-a552-40e6-ba4d-7d80c4fed4e3.jpeg?h=225&w=225",
+          "superDepartmentId": "b;RnJlc2glMjBGb29k",
+          "media": {
+            "__typename": "ProductMediaType",
+            "defaultImage": {
+              "__typename": "ProductMediaDefaultImageType",
+              "aspectRatio": null
+            }
+          },
+          "quantityInBasket": null,
+          "superDepartmentName": "Fresh Food",
+          "departmentId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVz",
+          "departmentName": "Dairy Free & Dairy Alternatives",
+          "aisleId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "aisleName": "Dairy Free Drinks",
+          "shelfId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtzJTdDQWxtb25kJTIwRHJpbmtz",
+          "shelfName": "Almond Drinks",
+          "displayType": "Quantity",
+          "productType": "SingleProduct",
+          "averageWeight": 0,
+          "bulkBuyLimit": 25,
+          "groupBulkBuyLimit": 0,
+          "bulkBuyLimitMessage": "You are able to buy a maximum of 25 of this item",
+          "bulkBuyLimitGroupId": "G00000053",
+          "timeRestrictedDelivery": null,
+          "restrictedDelivery": null,
+          "isForSale": true,
+          "isInFavourites": null,
+          "isNew": false,
+          "isRestrictedOrderAmendment": null,
+          "status": "AvailableForSale",
+          "maxWeight": 0,
+          "minWeight": 0,
+          "increment": 0,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false
+              }
+            ]
+          },
+          "catchWeightList": null,
+          "price": {
+            "__typename": "PriceType",
+            "actual": 2,
+            "unitPrice": 2,
+            "unitOfMeasure": "litre"
+          },
+          "promotions": [],
+          "restrictions": [],
+          "reviews": {
+            "__typename": "ReviewsType",
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": 52,
+              "overallRating": 4.3,
+              "overallRatingRange": 5
+            }
+          },
+          "modelMetadata": null
+        },
+        "PromotionType:{\\"id\\":\\"93042292\\",\\"description\\":\\"Â£1.70 Clubcard Price\\"}": {
+          "__typename": "PromotionType",
+          "id": "93042292",
+          "promotionType": null,
+          "startDate": "2025-06-15T23:00:00Z",
+          "endDate": "2025-07-01T23:00:00Z",
+          "description": "Â£1.70 Clubcard Price",
+          "unitSellingInfo": "Â£1.70\u002Flitre",
+          "price": {
+            "__typename": "PromotionPriceType",
+            "beforeDiscount": null,
+            "afterDiscount": 2.1
+          },
+          "attributes": [
+            "CLUBCARD_PRICING"
+          ]
+        },
+        "ProductType:272012512": {
+          "__typename": "ProductType",
+          "context": null,
+          "id": "272012512",
+          "tpnb": "70987983",
+          "tpnc": "272012512",
+          "gtin": "05411188110835",
+          "adId": null,
+          "baseProductId": "70987983",
+          "title": "Alpro Almond Original Long Life Dairy Free Drink 1L",
+          "brandName": "ALPRO",
+          "shortDescription": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fe4ec8439-f21b-4fb1-a6b1-ca6e2a154062\u002F4c9558dd-2316-4a27-b5b1-6f9be3921e66.jpeg?h=225&w=225",
+          "superDepartmentId": "b;RnJlc2glMjBGb29k",
+          "media": {
+            "__typename": "ProductMediaType",
+            "defaultImage": {
+              "__typename": "ProductMediaDefaultImageType",
+              "aspectRatio": null
+            }
+          },
+          "quantityInBasket": null,
+          "superDepartmentName": "Fresh Food",
+          "departmentId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVz",
+          "departmentName": "Dairy Free & Dairy Alternatives",
+          "aisleId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "aisleName": "Dairy Free Drinks",
+          "shelfId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtzJTdDQWxtb25kJTIwRHJpbmtz",
+          "shelfName": "Almond Drinks",
+          "displayType": "Quantity",
+          "productType": "SingleProduct",
+          "averageWeight": 0,
+          "bulkBuyLimit": 25,
+          "groupBulkBuyLimit": 0,
+          "bulkBuyLimitMessage": "You are able to buy a maximum of 25 of this item",
+          "bulkBuyLimitGroupId": "G00000027",
+          "timeRestrictedDelivery": null,
+          "restrictedDelivery": null,
+          "isForSale": true,
+          "isInFavourites": null,
+          "isNew": false,
+          "isRestrictedOrderAmendment": null,
+          "status": "AvailableForSale",
+          "maxWeight": 0,
+          "minWeight": 0,
+          "increment": 0,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false
+              }
+            ]
+          },
+          "catchWeightList": null,
+          "price": {
+            "__typename": "PriceType",
+            "actual": 2.1,
+            "unitPrice": 2.1,
+            "unitOfMeasure": "litre"
+          },
+          "promotions": [
+            {
+              "__ref": "PromotionType:{\\"id\\":\\"93042292\\",\\"description\\":\\"Â£1.70 Clubcard Price\\"}"
+            }
+          ],
+          "restrictions": [],
+          "reviews": {
+            "__typename": "ReviewsType",
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": 40,
+              "overallRating": 4.2,
+              "overallRatingRange": 5
+            }
+          },
+          "modelMetadata": null
+        },
+        "ProductType:272103255": {
+          "__typename": "ProductType",
+          "context": null,
+          "id": "272103255",
+          "tpnb": "71034802",
+          "tpnc": "272103255",
+          "gtin": "05411188110859",
+          "adId": null,
+          "baseProductId": "71034802",
+          "title": "Alpro Almond Original Chilled Dairy Free Drink 1L",
+          "brandName": "ALPRO",
+          "shortDescription": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F22feaad2-4784-4b61-ae79-8a7e2069d295\u002F1d80eb2b-7b4c-47e2-9339-8fa95750af17.jpeg?h=225&w=225",
+          "superDepartmentId": "b;RnJlc2glMjBGb29k",
+          "media": {
+            "__typename": "ProductMediaType",
+            "defaultImage": {
+              "__typename": "ProductMediaDefaultImageType",
+              "aspectRatio": null
+            }
+          },
+          "quantityInBasket": null,
+          "superDepartmentName": "Fresh Food",
+          "departmentId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVz",
+          "departmentName": "Dairy Free & Dairy Alternatives",
+          "aisleId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "aisleName": "Dairy Free Drinks",
+          "shelfId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtzJTdDQWxtb25kJTIwRHJpbmtz",
+          "shelfName": "Almond Drinks",
+          "displayType": "Quantity",
+          "productType": "SingleProduct",
+          "averageWeight": 0,
+          "bulkBuyLimit": 25,
+          "groupBulkBuyLimit": 0,
+          "bulkBuyLimitMessage": "You are able to buy a maximum of 25 of this item",
+          "bulkBuyLimitGroupId": "G00000216",
+          "timeRestrictedDelivery": null,
+          "restrictedDelivery": null,
+          "isForSale": true,
+          "isInFavourites": null,
+          "isNew": false,
+          "isRestrictedOrderAmendment": null,
+          "status": "AvailableForSale",
+          "maxWeight": 0,
+          "minWeight": 0,
+          "increment": 0,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false
+              }
+            ]
+          },
+          "catchWeightList": null,
+          "price": {
+            "__typename": "PriceType",
+            "actual": 2,
+            "unitPrice": 2,
+            "unitOfMeasure": "litre"
+          },
+          "promotions": [],
+          "restrictions": [],
+          "reviews": {
+            "__typename": "ReviewsType",
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": 84,
+              "overallRating": 4.1,
+              "overallRatingRange": 5
+            }
+          },
+          "modelMetadata": null
+        },
+        "PromotionType:{\\"id\\":\\"93042294\\",\\"description\\":\\"Â£1.70 Clubcard Price\\"}": {
+          "__typename": "PromotionType",
+          "id": "93042294",
+          "promotionType": null,
+          "startDate": "2025-06-15T23:00:00Z",
+          "endDate": "2025-07-01T23:00:00Z",
+          "description": "Â£1.70 Clubcard Price",
+          "unitSellingInfo": "Â£1.70\u002Flitre",
+          "price": {
+            "__typename": "PromotionPriceType",
+            "beforeDiscount": null,
+            "afterDiscount": 2.1
+          },
+          "attributes": [
+            "CLUBCARD_PRICING"
+          ]
+        },
+        "ProductType:304783080": {
+          "__typename": "ProductType",
+          "context": null,
+          "id": "304783080",
+          "tpnb": "87227999",
+          "tpnc": "304783080",
+          "gtin": "05411188129899",
+          "adId": null,
+          "baseProductId": "87227999",
+          "title": "Alpro Barista Almond Long Life Dairy Free Drink 1L",
+          "brandName": "ALPRO",
+          "shortDescription": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002F18737b5b-f355-4125-a0ee-6fb96ba1f2c3\u002F80601352-0da5-4cfb-84ca-c015cc5a36b9.jpeg?h=225&w=225",
+          "superDepartmentId": "b;RnJlc2glMjBGb29k",
+          "media": {
+            "__typename": "ProductMediaType",
+            "defaultImage": {
+              "__typename": "ProductMediaDefaultImageType",
+              "aspectRatio": null
+            }
+          },
+          "quantityInBasket": null,
+          "superDepartmentName": "Fresh Food",
+          "departmentId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVz",
+          "departmentName": "Dairy Free & Dairy Alternatives",
+          "aisleId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "aisleName": "Dairy Free Drinks",
+          "shelfId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtzJTdDQWxtb25kJTIwRHJpbmtz",
+          "shelfName": "Almond Drinks",
+          "displayType": "Quantity",
+          "productType": "SingleProduct",
+          "averageWeight": 0,
+          "bulkBuyLimit": 25,
+          "groupBulkBuyLimit": 0,
+          "bulkBuyLimitMessage": "You are able to buy a maximum of 25 of this item",
+          "bulkBuyLimitGroupId": "G00000027",
+          "timeRestrictedDelivery": null,
+          "restrictedDelivery": null,
+          "isForSale": true,
+          "isInFavourites": null,
+          "isNew": false,
+          "isRestrictedOrderAmendment": null,
+          "status": "AvailableForSale",
+          "maxWeight": 0,
+          "minWeight": 0,
+          "increment": 0,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false
+              }
+            ]
+          },
+          "catchWeightList": null,
+          "price": {
+            "__typename": "PriceType",
+            "actual": 2.1,
+            "unitPrice": 2.1,
+            "unitOfMeasure": "litre"
+          },
+          "promotions": [
+            {
+              "__ref": "PromotionType:{\\"id\\":\\"93042294\\",\\"description\\":\\"Â£1.70 Clubcard Price\\"}"
+            }
+          ],
+          "restrictions": [],
+          "reviews": {
+            "__typename": "ReviewsType",
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": 51,
+              "overallRating": 4.3,
+              "overallRatingRange": 5
+            }
+          },
+          "modelMetadata": null
+        },
+        "ProductType:316547434": {
+          "__typename": "ProductType",
+          "context": null,
+          "id": "316547434",
+          "tpnb": "93161485",
+          "tpnc": "316547434",
+          "gtin": "05411188139904",
+          "adId": null,
+          "baseProductId": "93161485",
+          "title": "Alpro No Sugars Nutty Almond Drink 500ml",
+          "brandName": "ALPRO",
+          "shortDescription": null,
+          "defaultImageUrl": "https:\u002F\u002Fdigitalcontent.api.tesco.com\u002Fv2\u002Fmedia\u002Fghs\u002Fc481a998-8511-474d-bba5-09cf3282cd9b\u002F21189d28-509b-4816-8075-5aeb65fa1176_614663061.jpeg?h=225&w=225",
+          "superDepartmentId": "b;RnJlc2glMjBGb29k",
+          "media": {
+            "__typename": "ProductMediaType",
+            "defaultImage": {
+              "__typename": "ProductMediaDefaultImageType",
+              "aspectRatio": null
+            }
+          },
+          "quantityInBasket": null,
+          "superDepartmentName": "Fresh Food",
+          "departmentId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVz",
+          "departmentName": "Dairy Free & Dairy Alternatives",
+          "aisleId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "aisleName": "Dairy Free Drinks",
+          "shelfId": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtzJTdDQWxtb25kJTIwRHJpbmtz",
+          "shelfName": "Almond Drinks",
+          "displayType": "Quantity",
+          "productType": "SingleProduct",
+          "averageWeight": 0,
+          "bulkBuyLimit": 99,
+          "groupBulkBuyLimit": 0,
+          "bulkBuyLimitMessage": "Max allowed is 99.",
+          "bulkBuyLimitGroupId": null,
+          "timeRestrictedDelivery": null,
+          "restrictedDelivery": null,
+          "isForSale": true,
+          "isInFavourites": null,
+          "isNew": false,
+          "isRestrictedOrderAmendment": null,
+          "status": "AvailableForSale",
+          "maxWeight": 0,
+          "minWeight": 0,
+          "increment": 0,
+          "details": {
+            "__typename": "ProductDetailsType",
+            "components": [
+              {
+                "__typename": "AdditionalInfo",
+                "isLowEverydayPricing": false
+              }
+            ]
+          },
+          "catchWeightList": null,
+          "price": {
+            "__typename": "PriceType",
+            "actual": 1.15,
+            "unitPrice": 2.3,
+            "unitOfMeasure": "litre"
+          },
+          "promotions": [],
+          "restrictions": [],
+          "reviews": {
+            "__typename": "ReviewsType",
+            "stats": {
+              "__typename": "ReviewStatsType",
+              "noOfReviews": 98,
+              "overallRating": 4.4,
+              "overallRatingRange": 5
+            }
+          },
+          "modelMetadata": null
+        },
+        "FacetType:b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz": {
+          "__typename": "FacetType",
+          "id": "b;RnJlc2glMjBGb29kJTdDRGFpcnklMjBGcmVlJTIwJiUyMERhaXJ5JTIwQWx0ZXJuYXRpdmVzJTdDRGFpcnklMjBGcmVlJTIwRHJpbmtz",
+          "name": "Dairy Free Drinks",
+          "count": null,
+          "selected": false
+        },
+        "FacetBooleanType:offer": {
+          "__typename": "FacetBooleanType",
+          "id": "offer",
+          "name": "Special Offers",
+          "type": "boolean",
+          "values": {
+            "__typename": "DynamicFilterValues",
+            "count": 3,
+            "isSelected": null,
+            "value": "true",
+            "name": null
+          }
+        },
+        "FacetMultiLevelType:category": {
+          "__typename": "FacetMultiLevelType",
+          "id": "category",
+          "name": "Categories",
+          "type": "multiLevel",
+          "values": {
+            "__typename": "MultilevelFacetValues",
+            "children": [
+              {
+                "__typename": "DynamicFilterValues",
+                "count": 21,
+                "name": "Fresh Food",
+                "value": "Fresh Food",
+                "isSelected": null
+              },
+              {
+                "__typename": "DynamicFilterValues",
+                "count": 11,
+                "name": "Drinks",
+                "value": "Drinks",
+                "isSelected": null
+              },
+              {
+                "__typename": "DynamicFilterValues",
+                "count": 3,
+                "name": "Food Cupboard",
+                "value": "Food Cupboard",
+                "isSelected": null
+              }
+            ],
+            "appliedValues": null
+          },
+          "multiplicity": null,
+          "metadata": null
+        },
+        "FacetListType:dietaries": {
+          "__typename": "FacetListType",
+          "id": "dietaries",
+          "name": "Lifestyle & Dietary",
+          "type": "list",
+          "values": [
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Halal",
+              "value": "Halal",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Lacto-vegetarian",
+              "value": "Lacto-vegetarian",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Low fat",
+              "value": "Low fat",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Low salt",
+              "value": "Low salt",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Low saturated fat",
+              "value": "Low saturated fat",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Low sugar",
+              "value": "Low sugar",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "No egg",
+              "value": "No egg",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "No gluten",
+              "value": "No gluten",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "No lactose",
+              "value": "No lactose",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "No milk",
+              "value": "No milk",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "No soya",
+              "value": "No soya",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Ovo-vegetarian",
+              "value": "Ovo-vegetarian",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Pescetarian",
+              "value": "Pescetarian",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Vegan",
+              "value": "Vegan",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Vegetarian",
+              "value": "Vegetarian",
+              "isSelected": null,
+              "count": 6
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Low calorie",
+              "value": "Low calorie",
+              "isSelected": null,
+              "count": 3
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Source of fibre",
+              "value": "Source of fibre",
+              "isSelected": null,
+              "count": 3
+            },
+            {
+              "__typename": "DynamicFilterValues",
+              "name": "Sugar free",
+              "value": "Sugar free",
+              "isSelected": null,
+              "count": 3
+            }
+          ],
+          "multiplicity": "multiple",
+          "metadata": {
+            "__typename": "Metadata",
+            "description": "Filters should not be used as an alternative to medical advice. Always check the label.",
+            "footerText": "In partnership with SpoonGuru.",
+            "linkText": "Find out more about each filter",
+            "linkUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fzone\u002Fgeneral-terms-and-conditions#Dietary"
+          }
+        }
+      },
+      "config": {
+        "global": {
+          "locale": "en-GB",
+          "supportedLocales": [
+            "en-GB"
+          ],
+          "timeZone": "Europe\u002FLondon",
+          "devTools": {
+            "apolloClient": false
+          },
+          "analytics": {
+            "host": "https:\u002F\u002Fwww.tesco.com",
+            "path": "\u002Fuserinteraction\u002Fv1\u002Fevents\u002Froute\u002Fcustonline"
+          },
+          "env": "prod",
+          "apmConsumer": "default",
+          "atrc": "56c26c05-01d6-4ed4-bea2-2104fe262a5e",
+          "cookiePreferences": {
+            "displayCookieBanner": true,
+            "experienceCookiesEnabled": false,
+            "advertisingCookiesEnabled": false
+          },
+          "consumer": "groceries",
+          "csrfToken": "UBDMQYyU-NcXJxGppapJLHnc98IsYgVBZv2U",
+          "deviceInfo": {
+            "browserType": "Firefox",
+            "browserVersion": "128",
+            "deviceType": "desktop",
+            "operatingSystem": "Windows NT"
+          },
+          "groceriesUrl": "https:\u002F\u002Fwww.tesco.com\u002Fgroceries\u002Fen-GB",
+          "hostRegion": "eun-azure",
+          "mfeRollout": {
+            "browse": true,
+            "buylists-groceries": true,
+            "buylists": true,
+            "category": true,
+            "favourites": true,
+            "global-homepage": true,
+            "homepage": true,
+            "landing": true,
+            "order-details": true,
+            "order-receipt": true,
+            "order-return": true,
+            "orders": true,
+            "pdp": true,
+            "promotions": false,
+            "promotions-list": false,
+            "search": true,
+            "slots-collection": true,
+            "slots-delivery": true,
+            "slots-ondemand": true,
+            "slots": true,
+            "trolley": true
+          },
+          "region": "uk",
+          "registrationUrl": "https:\u002F\u002Fsecure.tesco.com\u002Faccount\u002Fen-GB\u002Fregister",
+          "serverErrorUrl": "https:\u002F\u002Ftesco.com\u002Fgroceries\u002Fen-GB\u002Ferror",
+          "signInUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogin",
+          "signOutUrl": "https:\u002F\u002Fwww.tesco.com\u002Faccount\u002Fauth\u002Fen-GB\u002Flogout",
+          "optimizelyDisabled": true,
+          "optimizelyDisabledReason": "Optimizely disabled by consent"
+        },
+        "hasQueueItSession": false,
+        "mangoApiKey": "TvOSZJHlEk0pjniDGQFAc9Q59WGAR4dA",
+        "mangoUrl": "https:\u002F\u002Fxapi.tesco.com\u002F",
+        "mfeRolloutDebug": "browse:true;buylists-groceries:true;buylists:true;category:true;favourites:true;global-homepage:true;homepage:true;landing:true;order-details:true;order-receipt:true;order-return:true;orders:true;pdp:true;promotions:,false;promotions-list:,false;search:true;slots-collection:true;slots-delivery:true;slots-ondemand:true;slots:true;trolley:true;",
+        "traceId": "56c26c05-01d6-4ed4-bea2-2104fe262a5e:e5df56a7-8035-4fe3-96bb-a7484951a026"
+      },
+      "errorPageUrl": "\u002Fassets\u002Fmfe-orchestrator\u002F4b998ddf.html",
+      "experiments": {
+        "ghs_clubcard_active_message": {
+          "flagKey": "ghs_clubcard_active_message",
+          "variables": {},
+          "variationKey": "21921911413"
+        },
+        "attributes": {
+          "featureFlagSite": "GHS-UK",
+          "featureFlagConsumer": "default",
+          "not_bucketed": "Optimizely disabled by consent"
+        }
+      }
+    },
+    "version": "2025.06.26-2e19f439"
+  }
+}</script>
+undefined
+<div style="position: absolute; display: flex; height: 0; width: 60px; gap: 20px;">undefined
+  <div
+    id="flex-gap-test"
+    style="flex: 1;"
+    data-min-width="18"
+    data-max-width="22"
+  ></div>
+  undefined
+  <div style="flex: 1;"></div>
+  undefined
+</div>
+undefined
+<script
+  type="application/json"
+  id="gtmDataLayer"
+>
+  [
+    {
+      "country": "uk",
+      "cookiePreferences": {
+        "advertising": false,
+        "displayInterrupt": true,
+        "experience": false
+      },
+      "env": "container-prd",
+      "event": "gtm.js"
+    }
+  ]
+</script>
+undefined
+<script type="module">
+  window.dataLayer = JSON.parse(document.getElementById('gtmDataLayer').textContent);
+  window.dataLayer['gtm.start'] = Orchestrator.getGtmStart();
+  const gtmScript = document.createElement('script');
+  gtmScript.async = true;
+  gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-T6MT4X9';
+  document.head.appendChild(gtmScript);
+</script>
+undefined
+<noscript>undefined<img
+  src="https://www.tesco.com/akam/13/pixel_36e31778?a=dD04ZGRiMWMzOGFjZWIxY2JkMDE5NWZiYjJmYTE4Y2YyMzhhMDhiZTIyJmpzPW9mZg=="
+  style="visibility: hidden; position: absolute; left: -999px; top: -999px;"
+/>undefined
+</noscript>
+undefined
+<script
+  type="text/javascript"
+  nonce="74accc47f103525293f61b5971409533"
+  src="/k6szQOLNE2Enu6lDZcW97Wf3/p9ESShENYbDm/aioOJQUXBw/CiwRUj/gGQ2c"
+></script>
+undefined
+<script
+  type="text/javascript"
+  nonce="74accc47f103525293f61b5971409533"
+  src="/k6szQOLNE2Enu6lDZcW97Wf3/tJESShEN/VCoZJQUXBw/A0FnYE/Y1I31k?v=3ad92bcb-c439-83e1-9201-8c9433860217"
+  defer
+></script>
+undefined
+</body>
+undefined
+</html>
+`;
+}
