@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse, isAxiosError } from 'axios';
+import axios, { isAxiosError } from 'axios';
 import * as cheerio from 'cheerio';
 import { Config } from '../config';
 import { SupermarketProduct } from '../supermarket-product.model';
@@ -25,42 +25,56 @@ export class Tesco extends Supermarket {
   public async getProduct(
     productId: string
   ): Promise<SupermarketProduct | null> {
-    let search: AxiosResponse;
-
     try {
-      search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
+      // TODO retry this if it fails, sometimes it works on the second try
+      const $ = await this.fetchSingleProductPage(productId);
+
+      const rawState = $('script[type="application/discover+json"]')?.html();
+      if (!rawState) {
+        throw new Error('No raw state found in Tesco page');
+      }
+      const state = JSON.parse(rawState);
+
+      const apollo = state?.['mfe-orchestrator']?.props?.apolloCache;
+      const product = apollo?.['ProductType:' + productId];
+
+      if (!product) {
+        throw new Error('No product found in Tesco page');
+      }
+
+      return this.parseSingleProductData(product, apollo);
+    } catch (e) {
+      console.error(e);
+      throw new Error('Failed to parse Tesco state');
+    }
+  }
+
+  private async fetchSingleProductPage(
+    productId: string
+  ): Promise<cheerio.CheerioAPI> {
+    try {
+      const search = await axios.get(
+        `${this.config.tescoUrl}product/${productId}`
+      );
+
+      return cheerio.load(search.data);
     } catch (e) {
       if (isAxiosError(e) && e.response?.status === 404) {
         console.error(
           `Got a 404 while fetching tesco product "${productId}":`,
           e.message
         );
-        return null;
+        throw new Error('NOT_FOUND'); // TODO make a separate error here
       } else {
         throw e;
       }
     }
+  }
 
-    const $ = cheerio.load(search.data);
-
-    // TODO type these, mabye
-    let product;
-    let apollo;
-
-    try {
-      const rawState = $('script[type="application/discover+json"]').html();
-      if (!rawState) {
-        throw new Error('No raw state found in Tesco page');
-      }
-      const state = JSON.parse(rawState);
-
-      apollo = state['mfe-orchestrator']['props']['apolloCache'];
-      product = apollo['ProductType:' + productId];
-    } catch (e) {
-      console.error(e);
-      throw new Error('Failed to parse Tesco state');
-    }
-
+  private parseSingleProductData(
+    product: any,
+    apollo: any
+  ): SupermarketProduct {
     const unitOfMeasure = product.price.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
     if (!unitOfMeasure) {
       throw new Error('Could not parse unit of measure');
@@ -94,10 +108,10 @@ export class Tesco extends Supermarket {
     console.log(product);
 
     return SupermarketProduct({
-      id: this.getId(productId),
+      id: this.getId(product.id),
       name: product.title,
       image: product.defaultImageUrl,
-      url: `https://www.tesco.com/groceries/en-GB/products/${productId}`,
+      url: `https://www.tesco.com/groceries/en-GB/products/${product.id}`,
       price: product.price.actual,
       packSize: {
         amount: parseFloat(packSize.value || '') || 1,
