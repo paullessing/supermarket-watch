@@ -12,7 +12,7 @@ const sainsburysUrl =
   'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
 
 const curlHeaders = [
-  'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+  'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0',
   'Accept-Language: en-GB,en;q=0.5',
 ].reduce((acc, curr) => acc.concat('-H', curr), []);
 
@@ -64,7 +64,7 @@ function createPendingPromise() {
   return result;
 }
 
-async function loadPage(url) {
+async function loadPageViaBrowser(url) {
   const browserWrapper = await getBrowser();
   console.log(`Using browser #${browserWrapper.index}`);
   const browser = browserWrapper.use();
@@ -110,6 +110,9 @@ async function streamFromUrl(url, res) {
 }
 
 app.use(compression());
+
+app.get('/health', (req, res) => res.status(200).end('ALLOK'));
+
 app.get('/tesco/product/:id', async (req, res) => {
   try {
     const productId = parseInt(req.params.id, 10);
@@ -117,11 +120,12 @@ app.get('/tesco/product/:id', async (req, res) => {
       return res.status(400).end();
     }
     console.log(`Fetching ${productId}`);
-    const result = await loadPage(
-      `${tescoUrl}products/${encodeURIComponent(productId)}`
+    const result = await streamFromUrl(
+      `${tescoUrl}products/${encodeURIComponent(productId)}`,
+      res
     );
 
-    res.send(result);
+    // res.send(result);
 
     console.log(`Got ${result.length} bytes`);
     res.end();
