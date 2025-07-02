@@ -11,10 +11,64 @@ const tescoUrl = 'https://www.tesco.com/groceries/en-GB/';
 const sainsburysUrl =
   'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
 
-const curlHeaders = [
-  'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0',
-  'Accept-Language: en-GB,en;q=0.5',
-].reduce((acc, curr) => acc.concat('-H', curr), []);
+const userAgent = {
+  value: null,
+  fetched: Number.MIN_SAFE_INTEGER,
+  async get() {
+    const fetchedDiffDays = Math.floor(
+      (new Date().getTime() - this.fetched) / 24 / 3600 / 1000
+    );
+    if (!this.value || fetchedDiffDays >= 1) {
+      this.value = await getRandomFirefoxUserAgent();
+      this.fetched = new Date().getTime();
+    }
+    return this.value;
+  },
+};
+
+async function getRandomFirefoxUserAgent() {
+  const res = await fetch(
+    'https://product-details.mozilla.org/1.0/firefox_versions.json'
+  );
+  if (!res.ok) throw new Error(`Failed to fetch version: ${res.status}`);
+  const data = await res.json();
+
+  const baseVersion = data.LATEST_FIREFOX_VERSION; // e.g., "140.0.2"
+  const [major, minor = 0, patch = 0] = baseVersion.split('.').map(Number);
+
+  // Slight random version offset (simulate recent version)
+  const randomMajor = major + [0, 0, 0, 1, -1][Math.floor(Math.random() * 5)]; // ±1 or same
+  const randomMinor = Math.floor(Math.random() * 3); // 0 to 2
+  const version = `${randomMajor}.${randomMinor}`;
+
+  // Platform variations
+  const platforms = [
+    `Windows NT 10.0; Win64; x64`,
+    `Windows NT 10.0; WOW64`,
+    `Macintosh; Intel Mac OS X 10_${14 + Math.floor(Math.random() * 4)}_${Math.floor(Math.random() * 10)}`,
+    `X11; Linux x86_64`,
+    `X11; Ubuntu; Linux x86_64`,
+  ];
+  const platform = platforms[Math.floor(Math.random() * platforms.length)];
+
+  // Build UA string
+  return `Mozilla/5.0 (${platform}; rv:${version}) Gecko/20100101 Firefox/${version}`;
+}
+
+async function getCurlHeaders() {
+  return [
+    `User-Agent: ${await userAgent.get()}`,
+    'Accept-Language: en-GB,en;q=0.5',
+  ]
+    .reduce((acc, curr) => acc.concat('-H', curr), [])
+    .map((value, i, arr) => {
+      // debug
+      if (i === 0) {
+        console.log(arr);
+      }
+      return value;
+    });
+}
 
 // Clean up previous temp files
 const oldFiles = readdirSync('/tmp').filter((name) => name.startsWith('Temp-') || name.startsWith('puppeteer_dev_'));
@@ -89,9 +143,13 @@ async function loadPageViaBrowser(url) {
 }
 
 async function streamFromUrl(url, res) {
-  return await new Promise((resolve, reject) => {
+  return await new Promise(async (resolve, reject) => {
     let bytes = 0;
-    const curl = spawn('curl', [url, ...curlHeaders, '--compressed']);
+    const curl = spawn('curl', [
+      url,
+      ...(await getCurlHeaders()),
+      '--compressed',
+    ]);
     curl.stdout.on('data', (chunk) => {
       res.write(chunk);
       bytes += `${chunk}`.length;
