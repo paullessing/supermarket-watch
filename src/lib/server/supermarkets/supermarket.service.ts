@@ -129,6 +129,7 @@ export class SupermarketService {
 
     const product = await this.supermarketList.fetchProduct(id);
 
+    // TODO check if this is happening too often to Tesco products
     console.debug(
       'getSingleItem:',
       forceFresh ? 'Forced refresh, storing' : 'Cache miss, storing',
