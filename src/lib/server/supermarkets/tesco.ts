@@ -72,8 +72,8 @@ export class Tesco extends Supermarket {
   }
 
   private parseSingleProductData(
-    product: any,
-    apollo: any
+    product: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    apollo: any // eslint-disable-line @typescript-eslint/no-explicit-any
   ): SupermarketProduct {
     const unitOfMeasure = product.price.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
     if (!unitOfMeasure) {
