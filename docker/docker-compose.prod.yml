@@ -3,8 +3,12 @@ services:
     container_name: shopping-api
     image: ghcr.io/paullessing/supermarket-watch:latest
     depends_on:
-      - mongo
-      - proxy
+      mongo:
+        condition: service_healthy
+        restart: true
+      proxy:
+        condition: service_healthy
+        restart: false
     ports:
       - ${PORT:-3333}:3333
     environment:
@@ -36,6 +40,16 @@ services:
     restart: always
     networks:
       supermarket_network:
+    healthcheck:
+      test: >
+        node -e "fetch('http://localhost:3333/health')
+          .then(res => res.text())
+          .then(text => process.exit(text === 'ALLOK' ? 0: 1))
+          .catch(e => { console.error(e); process.exit(1); })"
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
   mongo:
     container_name: shopping-db
     image: mongo:5

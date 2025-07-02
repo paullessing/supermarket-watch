@@ -5,7 +5,12 @@ services:
       dockerfile: docker/dev.Dockerfile
     command: 'sh -c "npm install && npm run dev -- --host 0.0.0.0"'
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+        restart: true
+      proxy:
+        condition: service_healthy
+        restart: false
     environment:
       NODE_ENV: dev
       TESCO_URL: http://proxy:3333/tesco/
@@ -44,6 +49,16 @@ services:
     restart: always
     networks:
       proxy_network:
+    healthcheck:
+      test: >
+        node -e "fetch('http://localhost:3333/health')
+          .then(res => res.text())
+          .then(text => process.exit(text === 'ALLOK' ? 0: 1))
+          .catch(e => { console.error(e); process.exit(1); })"
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
 
   mongo:
     image: mongo:5
@@ -55,6 +70,12 @@ services:
       - '27017:27017'
     networks:
       mongo_network:
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/shopping --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
 networks:
   webnet:
