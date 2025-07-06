@@ -129,10 +129,13 @@ export interface ProductType {
   modelMetadata: null;
 }
 
+type RootQueryKey<Prefix extends string> = `${Prefix}(${string})`;
+
 export interface ApolloCache {
   ROOT_QUERY: {
     __typename: 'Query';
-    'page(stringTODO)': {
+  } & {
+    [K in RootQueryKey<'page'>]: {
       __typename: 'DCSPage';
       children: [
         {
@@ -163,8 +166,10 @@ export interface ApolloCache {
         },
       ];
     };
-    'taxonomy(stringTODO)': TaxonomyEntry[];
-    'search(stringTODO)': {
+  } & {
+    [K in RootQueryKey<'taxonomy'>]: TaxonomyEntry[];
+  } & {
+    [K in RootQueryKey<'search'>]: {
       __typename: 'ProductListType';
       info: {
         __typename: 'ListInfoType';
