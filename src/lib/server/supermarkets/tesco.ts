@@ -9,6 +9,11 @@ import {
 } from './supermarket';
 import type { ProductDetails } from './tesco-product.model';
 import { standardiseUnit } from '$lib/models';
+import type {
+  ApolloCache,
+  ProductType,
+  PromotionType,
+} from '$lib/server/supermarkets/tesco-search.model';
 
 export class Tesco extends Supermarket {
   public static readonly NAME = 'Tesco';
@@ -169,7 +174,7 @@ export class Tesco extends Supermarket {
     );
 
     // console.log(data);
-    const apolloCache = data['mfe-orchestrator'].props.apolloCache;
+    const apolloCache: ApolloCache = data['mfe-orchestrator'].props.apolloCache;
 
     const searchKey = Object.keys(apolloCache.ROOT_QUERY).find((key) =>
       key.match(/^search\b/)
@@ -179,14 +184,18 @@ export class Tesco extends Supermarket {
       return [];
     }
 
-    const resultKeys = apolloCache.ROOT_QUERY[searchKey].results
+    const resultKeys = apolloCache.ROOT_QUERY[
+      searchKey as 'search(stringTODO)'
+    ].results
       .filter((result: any) => result.__typename === 'CompositeResultType')
       .map((result: any): string => result.node.__ref);
 
-    const resultObjects = resultKeys.map((key: string) => apolloCache[key]);
+    const resultObjects = resultKeys.map(
+      (key: string) => apolloCache[key as keyof ApolloCache] as ProductType
+    );
 
     const results = resultObjects.map(
-      (resultObject: any): SearchResultItemWithoutTracking => {
+      (resultObject): SearchResultItemWithoutTracking => {
         const result: SearchResultItemWithoutTracking = {
           id: this.getId(resultObject.id),
           name: resultObject.title,
@@ -198,7 +207,10 @@ export class Tesco extends Supermarket {
 
         if (resultObject.promotions) {
           const promotions = resultObject.promotions.map(
-            (promoData: any) => apolloCache[promoData?.__ref]
+            (promoData: any) =>
+              apolloCache[
+                promoData?.__ref as keyof ApolloCache
+              ] as PromotionType
           );
           const promotion = this.getPromotion(promotions);
 
@@ -222,18 +234,24 @@ export class Tesco extends Supermarket {
   }
 
   private getPromotion(
-    // TODO: type this properly again, since it changed
-    promotions: ProductDetails['promotions']
+    promotions: ProductDetails['promotions'] | PromotionType[]
   ): null | { price: number; offerText: string; endDate: string } {
+    function isSearchPromotion(
+      promotion: PromotionType | Record<string, unknown>
+    ): promotion is PromotionType {
+      return (
+        '__typeName' in promotion && promotion.__typeName === 'PromotionType'
+      );
+    }
+
     const promotion = promotions.find(
       ({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0
     );
 
     if (promotion) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const match = (promotion as any).description.match(
-        /^Â?£(\d+\.\d{2}) (.*)$/
-      );
+      const match = isSearchPromotion(promotion)
+        ? promotion.description.match(/^Â?£(\d+\.\d{2}) (.*)$/)
+        : promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
       if (match) {
         return {
           price: parseFloat(match[1]),
