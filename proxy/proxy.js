@@ -240,7 +240,7 @@ app.get('/sainsburys/product', async (req, res) => {
 
 console.log('Launching Puppeteer...');
 Promise.all(
-  new Array(5).fill(null).map((_, i) =>
+  new Array(0).fill(null).map((_, i) =>
     puppeteer
       .launch({
         browser: 'firefox',
