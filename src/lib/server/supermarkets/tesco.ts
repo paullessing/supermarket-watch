@@ -239,9 +239,7 @@ export class Tesco extends Supermarket {
     function isSearchPromotion(
       promotion: PromotionType | Record<string, unknown>
     ): promotion is PromotionType {
-      return (
-        '__typeName' in promotion && promotion.__typeName === 'PromotionType'
-      );
+      return (promotion as PromotionType).__typename === 'PromotionType';
     }
 
     const promotion = promotions.find(
