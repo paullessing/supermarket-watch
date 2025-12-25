@@ -3,6 +3,7 @@ const { spawn } = require('child_process');
 const puppeteer = require('puppeteer');
 const compression = require('compression');
 const express = require('express');
+const { readdirSync, rmSync } = require('fs');
 
 const port = 3333;
 
@@ -14,6 +15,14 @@ const curlHeaders = [
   'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
   'Accept-Language: en-GB,en;q=0.5',
 ].reduce((acc, curr) => acc.concat('-H', curr), []);
+
+// Clean up previous temp files
+const oldFiles = readdirSync('/tmp').filter((name) => name.startsWith('Temp-') || name.startsWith('puppeteer_dev_'));
+console.log(`Deleting ${oldFiles.length} old and temporary directories`);
+for (const oldFile of oldFiles) {
+  console.log('Deleting:', '/tmp/' + name);
+  fs.rmSync('/tmp/' + oldFile, { force: true, recursive: true });
+}
 
 const app = express();
 /**
@@ -176,6 +185,7 @@ Promise.all(
         executablePath: '/usr/bin/firefox',
         headless: true,
         defaultViewport: null,
+        args: [` --profile /tmp/firefox_profile_${i}`],
       })
       .then(
         (browser) => {
