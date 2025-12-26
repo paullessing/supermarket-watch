@@ -1,4 +1,4 @@
-FROM node:22-alpine AS install
+FROM node:24-alpine AS install
 
 WORKDIR /usr/src/app
 
@@ -7,15 +7,15 @@ RUN apk update && apk add \
     ca-certificates
 
 # Install curl-impersonate from GitHub releases
-RUN curl -L -o curl-impersonate.tar.gz https://github.com/lwthiker/curl-impersonate/releases/download/v0.6.1/curl-impersonate-v0.6.1.x86_64-linux-gnu.tar.gz \
+RUN curl -L -o curl-impersonate.tar.gz https://github.com/lexiforest/curl-impersonate/releases/download/v1.2.5/curl-impersonate-v1.2.5.x86_64-linux-gnu.tar.gz \
         && mkdir curl-impersonate \
         && tar -xzf curl-impersonate.tar.gz -C curl-impersonate
 
 COPY proxy/package.json proxy/package-lock.json ./
-RUN npm install --ci
+RUN npm ci
 
 
-FROM node:22-slim AS serve
+FROM node:24-slim AS serve
 
 WORKDIR /usr/src/app
 

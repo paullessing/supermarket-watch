@@ -71,7 +71,9 @@ async function getCurlHeaders() {
 }
 
 // Clean up previous temp files
-const oldFiles = readdirSync('/tmp').filter((name) => name.startsWith('Temp-') || name.startsWith('puppeteer_dev_'));
+const oldFiles = readdirSync('/tmp').filter(
+  (name) => name.startsWith('Temp-') || name.startsWith('puppeteer_dev_')
+);
 console.log(`Deleting ${oldFiles.length} old and temporary directories`);
 for (const oldFile of oldFiles) {
   console.log('Deleting:', '/tmp/' + oldFile);
@@ -177,7 +179,7 @@ app.get('/tesco/product/:id', async (req, res) => {
     if (isNaN(productId)) {
       return res.status(400).end();
     }
-    console.log(`Fetching ${productId}`);
+    console.log(`Tesco: Fetching ${productId}`);
     const result = await streamFromUrl(
       `${tescoUrl}products/${encodeURIComponent(productId)}`,
       res
@@ -185,7 +187,7 @@ app.get('/tesco/product/:id', async (req, res) => {
 
     // res.send(result);
 
-    console.log(`Got ${result.length} bytes`);
+    console.log(`Tesco: Got ${result.length} bytes`);
     res.end();
   } catch (e) {
     console.log(e);
