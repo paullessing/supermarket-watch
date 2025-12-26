@@ -71,7 +71,9 @@ async function getCurlHeaders() {
 }
 
 // Clean up previous temp files
-const oldFiles = readdirSync('/tmp').filter((name) => name.startsWith('Temp-') || name.startsWith('puppeteer_dev_'));
+const oldFiles = readdirSync('/tmp').filter(
+  (name) => name.startsWith('Temp-') || name.startsWith('puppeteer_dev_')
+);
 console.log(`Deleting ${oldFiles.length} old and temporary directories`);
 for (const oldFile of oldFiles) {
   console.log('Deleting:', '/tmp/' + name);
