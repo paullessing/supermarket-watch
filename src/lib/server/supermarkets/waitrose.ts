@@ -35,6 +35,7 @@ export class Waitrose extends Supermarket {
 
   constructor(private readonly config: Config) {
     super();
+    console.log('Using Waitrose API at ' + config.waitroseUrl);
   }
 
   public getPrefix(): string {
@@ -57,7 +58,7 @@ export class Waitrose extends Supermarket {
     await this.init();
 
     const search = await axios.get<SingleResult>(
-      `https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`,
+      `${this.config.waitroseUrl}custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`,
       {
         headers: {
           authorization: this.token,
@@ -80,7 +81,7 @@ export class Waitrose extends Supermarket {
   public async search(term: string): Promise<SearchResultWithoutTracking> {
     await this.init();
 
-    const url = `https://www.waitrose.com/api/content-prod/v2/cms/publish/productcontent/search/${this.customerId}?clientType=WEB_APP`;
+    const url = `${this.config.waitroseUrl}content-prod/v2/cms/publish/productcontent/search/${this.customerId}?clientType=WEB_APP`;
     const requestBody = {
       customerSearchRequest: {
         queryParams: {

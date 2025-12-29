@@ -10,6 +10,7 @@ services:
       NODE_ENV: dev
       TESCO_URL: http://proxy:3333/tesco/
       SAINSBURYS_URL: http://proxy:3333/sainsburys/
+      WAITROSE_URL: http://proxy:3333/waitrose/
       MONGODB_HOST: mongo
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
       RUN_MIGRATION: ${RUN_MIGRATION:-}
