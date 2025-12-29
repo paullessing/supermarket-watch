@@ -17,6 +17,7 @@ services:
       PORT: ${PORT:-3333}
       TESCO_URL: ${TESCO_URL}
       SAINSBURYS_URL: ${SAINSBURYS_URL}
+      WAITROSE_URL: ${WAITROSE_URL}
       SEARCH_RESULT_COUNT: ${SEARCH_RESULT_COUNT:-36}
     restart: always
     networks:
