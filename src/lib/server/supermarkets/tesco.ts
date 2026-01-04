@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from 'axios';
+import axios, { type AxiosResponse, isAxiosError } from 'axios';
 import * as cheerio from 'cheerio';
 import { Config } from '../config';
 import { SupermarketProduct } from '../supermarket-product.model';
@@ -9,11 +9,6 @@ import {
 } from './supermarket';
 import type { ProductDetails } from './tesco-product.model';
 import { standardiseUnit } from '$lib/models';
-import type {
-  ApolloCache,
-  ProductType,
-  PromotionType,
-} from '$lib/server/supermarkets/tesco-search.model';
 
 export class Tesco extends Supermarket {
   public static readonly NAME = 'Tesco';
@@ -30,56 +25,42 @@ export class Tesco extends Supermarket {
   public async getProduct(
     productId: string
   ): Promise<SupermarketProduct | null> {
+    let search: AxiosResponse;
+
     try {
-      // TODO retry this if it fails, sometimes it works on the second try
-      const $ = await this.fetchSingleProductPage(productId);
-
-      const rawState = $('script[type="application/discover+json"]')?.html();
-      if (!rawState) {
-        throw new Error('No raw state found in Tesco page');
-      }
-      const state = JSON.parse(rawState);
-
-      const apollo = state?.['mfe-orchestrator']?.props?.apolloCache;
-      const product = apollo?.['ProductType:' + productId];
-
-      if (!product) {
-        throw new Error('No product found in Tesco page');
-      }
-
-      return this.parseSingleProductData(product, apollo);
-    } catch (e) {
-      console.error(e);
-      throw new Error('Failed to parse Tesco state');
-    }
-  }
-
-  private async fetchSingleProductPage(
-    productId: string
-  ): Promise<cheerio.CheerioAPI> {
-    try {
-      const search = await axios.get(
-        `${this.config.tescoUrl}product/${productId}`
-      );
-
-      return cheerio.load(search.data);
+      search = await axios.get(`${this.config.tescoUrl}product/${productId}`);
     } catch (e) {
       if (isAxiosError(e) && e.response?.status === 404) {
         console.error(
           `Got a 404 while fetching tesco product "${productId}":`,
           e.message
         );
-        throw new Error('NOT_FOUND'); // TODO make a separate error here
+        return null;
       } else {
         throw e;
       }
     }
-  }
 
-  private parseSingleProductData(
-    product: any, // eslint-disable-line @typescript-eslint/no-explicit-any
-    apollo: any // eslint-disable-line @typescript-eslint/no-explicit-any
-  ): SupermarketProduct {
+    const $ = cheerio.load(search.data);
+
+    // TODO type these, mabye
+    let product;
+    let apollo;
+
+    try {
+      const rawState = $('script[type="application/discover+json"]').html();
+      if (!rawState) {
+        throw new Error('No raw state found in Tesco page');
+      }
+      const state = JSON.parse(rawState);
+
+      apollo = state['mfe-orchestrator']['props']['apolloCache'];
+      product = apollo['ProductType:' + productId];
+    } catch (e) {
+      console.error(e);
+      throw new Error('Failed to parse Tesco state');
+    }
+
     const unitOfMeasure = product.price.unitOfMeasure.match(/^(\d*)([^\d].*)$/);
     if (!unitOfMeasure) {
       throw new Error('Could not parse unit of measure');
@@ -113,10 +94,10 @@ export class Tesco extends Supermarket {
     console.log(product);
 
     return SupermarketProduct({
-      id: this.getId(product.id),
+      id: this.getId(productId),
       name: product.title,
       image: product.defaultImageUrl,
-      url: `https://www.tesco.com/groceries/en-GB/products/${product.id}`,
+      url: `https://www.tesco.com/groceries/en-GB/products/${productId}`,
       price: product.price.actual,
       packSize: {
         amount: parseFloat(packSize.value || '') || 1,
@@ -174,7 +155,7 @@ export class Tesco extends Supermarket {
     );
 
     // console.log(data);
-    const apolloCache: ApolloCache = data['mfe-orchestrator'].props.apolloCache;
+    const apolloCache = data['mfe-orchestrator'].props.apolloCache;
 
     const searchKey = Object.keys(apolloCache.ROOT_QUERY).find((key) =>
       key.match(/^search\b/)
@@ -184,18 +165,14 @@ export class Tesco extends Supermarket {
       return [];
     }
 
-    const resultKeys = apolloCache.ROOT_QUERY[
-      searchKey as 'search(stringTODO)'
-    ].results
+    const resultKeys = apolloCache.ROOT_QUERY[searchKey].results
       .filter((result: any) => result.__typename === 'CompositeResultType')
       .map((result: any): string => result.node.__ref);
 
-    const resultObjects = resultKeys.map(
-      (key: string) => apolloCache[key as keyof ApolloCache] as ProductType
-    );
+    const resultObjects = resultKeys.map((key: string) => apolloCache[key]);
 
     const results = resultObjects.map(
-      (resultObject): SearchResultItemWithoutTracking => {
+      (resultObject: any): SearchResultItemWithoutTracking => {
         const result: SearchResultItemWithoutTracking = {
           id: this.getId(resultObject.id),
           name: resultObject.title,
@@ -207,10 +184,7 @@ export class Tesco extends Supermarket {
 
         if (resultObject.promotions) {
           const promotions = resultObject.promotions.map(
-            (promoData: any) =>
-              apolloCache[
-                promoData?.__ref as keyof ApolloCache
-              ] as PromotionType
+            (promoData: any) => apolloCache[promoData?.__ref]
           );
           const promotion = this.getPromotion(promotions);
 
@@ -234,22 +208,18 @@ export class Tesco extends Supermarket {
   }
 
   private getPromotion(
-    promotions: ProductDetails['promotions'] | PromotionType[]
+    // TODO: type this properly again, since it changed
+    promotions: ProductDetails['promotions']
   ): null | { price: number; offerText: string; endDate: string } {
-    function isSearchPromotion(
-      promotion: PromotionType | Record<string, unknown>
-    ): promotion is PromotionType {
-      return (promotion as PromotionType).__typename === 'PromotionType';
-    }
-
     const promotion = promotions.find(
       ({ attributes }) => attributes.indexOf('CLUBCARD_PRICING') >= 0
     );
 
     if (promotion) {
-      const match = isSearchPromotion(promotion)
-        ? promotion.description.match(/^Â?£(\d+\.\d{2}) (.*)$/)
-        : promotion.offerText.match(/^£(\d+\.\d{2}) (.*)$/);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const match = (promotion as any).description.match(
+        /^Â?£(\d+\.\d{2}) (.*)$/
+      );
       if (match) {
         return {
           price: parseFloat(match[1]),
