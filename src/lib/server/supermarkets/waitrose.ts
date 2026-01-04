@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as cheerio from 'cheerio';
 import { Config } from '../config';
 import {
   type SpecialOffer,
@@ -35,6 +36,7 @@ export class Waitrose extends Supermarket {
 
   constructor(private readonly config: Config) {
     super();
+    console.log('Using Waitrose API at ' + config.waitroseUrl);
   }
 
   public getPrefix(): string {
@@ -56,31 +58,31 @@ export class Waitrose extends Supermarket {
   public async getProduct(id: string): Promise<SupermarketProduct | null> {
     await this.init();
 
-    const search = await axios.get<SingleResult>(
-      `https://www.waitrose.com/api/custsearch-prod/v3/search/${this.customerId}/${id}?orderId=0`,
-      {
-        headers: {
-          authorization: this.token,
-        },
-      }
+    const response = await axios.get<string>(
+      `${this.config.waitroseUrl}ecom/products/name/${id}`
     );
 
-    const searchResult = search.data;
-    if (!searchResult.products.length) {
+    const $: cheerio.CheerioAPI = cheerio.load(response.data);
+
+    const script = $('script#__NEXT_DATA__').text();
+    if (!script) {
       return null;
-    } else {
-      const result = searchResult.products[0];
+    }
 
-      // console.log(JSON.stringify(result, null, 2));
-
-      return transformSingleResult(this.getId(id), result);
+    try {
+      const data = JSON.parse(script);
+      console.log(JSON.stringify(data?.props?.pageProps?.product, null, 2));
+      return transformSingleResult(id, data?.props?.pageProps?.product);
+    } catch (e) {
+      console.error(e);
+      return null;
     }
   }
 
   public async search(term: string): Promise<SearchResultWithoutTracking> {
     await this.init();
 
-    const url = `https://www.waitrose.com/api/content-prod/v2/cms/publish/productcontent/search/${this.customerId}?clientType=WEB_APP`;
+    const url = `${this.config.waitroseUrl}api/content-prod/v2/cms/publish/productcontent/search/${this.customerId}?clientType=WEB_APP`;
     const requestBody = {
       customerSearchRequest: {
         queryParams: {
@@ -134,7 +136,7 @@ export class Waitrose extends Supermarket {
 }
 
 function getSpecialOffer(
-  promotion: Required<SingleResult['products'][0]>['promotion'],
+  promotion: SingleResult['products'][0]['promotions'][0],
   originalPrice: number,
   promotionalPrice: number,
   pricePerUnit: number
@@ -154,26 +156,27 @@ function transformSingleResult(
   id: string,
   result: SingleResult['products'][0]
 ): SupermarketProduct {
-  const promotionalPrice = result.promotion?.promotionUnitPrice?.amount;
+  const promotionalPrice = result.promotions?.[0]?.promotionUnitPrice?.amount;
 
-  const defaultPrice = result.currentSaleUnitPrice.price.amount;
+  const defaultPrice = result.pricing.currentSaleUnitRetailPrice.price.amount;
 
   const { pricePerUnit, unitAmount, unitName } = getPrice(result);
   const packSize = parsePackSize(result.size);
 
   const price = promotionalPrice || defaultPrice;
 
-  const specialOffer = result.promotion
-    ? getSpecialOffer(result.promotion, defaultPrice, price, pricePerUnit)
+  const specialOffer = result.promotions?.length
+    ? getSpecialOffer(result.promotions[0], defaultPrice, price, pricePerUnit)
     : null;
 
   return SupermarketProduct({
     id,
     name: result.name,
     image:
-      result.productImageUrls.extraLarge ||
-      result.productImageUrls.large ||
-      result.productImageUrls.medium ||
+      result.images.extraLarge ||
+      result.images.large ||
+      result.images.medium ||
+      result.image ||
       result.thumbnail,
     url: `https://www.waitrose.com/ecom/products/_/${result.id}`, // _ is a slug and not relevant, so we use something arbitrary
 
@@ -217,7 +220,7 @@ function getPrice(result: SingleResult['products'][0]): {
   }
 
   return {
-    pricePerUnit: result.currentSaleUnitPrice.price.amount,
+    pricePerUnit: result.pricing.currentSaleUnitRetailPrice.price.amount,
     unitAmount: 1,
     unitName: 'each',
   };

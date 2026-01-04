@@ -61,6 +61,7 @@ interface Promotion {
   promotionId: number; // 375864
   pyoPromotion: boolean; // false
   myWaitrosePromotion: boolean; // false
+  wasDisplayPrice: string; // '£2.20'
 }
 
 interface DetailedPromotion extends Promotion {
@@ -299,21 +300,49 @@ export interface SingleResult {
         averageRating: number; // 4.4412
         reviewCount: number; // 34
       };
-      currentSaleUnitPrice: {
-        quantity: {
-          amount: number; // 1
-          uom: string; // 'C62'
-        };
-        price: {
-          amount: number; // 3
-          currencyCode: string; // 'GBP'
+      pricing: {
+        displayPrice: string; // '£1.50';
+        displayPriceEstimated: boolean; // false;
+        displayPriceQualifier: string; // '£1.50/litre';
+        displayUOMPrice: string; // '(£1.50 per litre)';
+        promotions: [
+          {
+            myWaitrosePromotion: boolean; // false;
+            promotionDescription: string; // 'Save 70p';
+            promotionExpiryDate: string; // '2026-01-01';
+            promotionId: number; // 518267;
+            promotionType: string; // 'FER';
+            promotionUnitPrice: {
+              amount: number; // 1.5;
+              currencyCode: string; // 'GBP';
+            };
+            promotionalPricePerUnit: string; // '(£1.50 per litre)';
+            wasDisplayPrice: string; // '£2.20';
+            pyoPromotion: boolean; // false;
+            groups: [
+              {
+                threshold: number; // 1;
+                name: string; // 'X';
+              },
+            ];
+          },
+        ];
+        currentSaleUnitRetailPrice: {
+          price: {
+            amount: number; // 2.2;
+            currencyCode: string; // 'GBP';
+          };
+          quantity: {
+            quantity: number; // 1;
+            uom: string; // 'C62';
+          };
         };
       };
+
       defaultQuantity: {
         amount: number; // 1
         uom: string; // 'C62'
       };
-      promotion?: Promotion;
       promotions: DetailedPromotion[];
       persistDefault: boolean; // false
       displayPrice: string; // '£2.40'
@@ -357,7 +386,7 @@ export interface SingleResult {
         brandedUsageInstr: string; // 'Yumminess! To Make Plant Shawarma Pitas in 20 Minutes for 2 You'll Also Need: - 1 clove of garlic - 5 g chives - 2 tbsp of (vegan) mayonnaise - 2 tbsp of (vegan) yoghurt - 200 g of cherry tomatoes - 1 small red onion - 2 large pitas - lettuce - Olive oil, pepper and salt'
       };
       maxPersonalisedMessageLength: number; // 0
-      productImageUrls: {
+      images: {
         small: string; // 'https://ecom-su-static-prod.wtrecom.com/images/products/9/LN_472425_BP_9.jpg'
         medium: string; // 'https://ecom-su-static-prod.wtrecom.com/images/products/3/LN_472425_BP_3.jpg'
         large: string; // 'https://ecom-su-static-prod.wtrecom.com/images/products/11/LN_472425_BP_11.jpg'

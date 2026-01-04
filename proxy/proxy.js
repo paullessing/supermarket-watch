@@ -10,6 +10,10 @@ const port = 3333;
 const tescoUrl = 'https://www.tesco.com/groceries/en-GB/';
 const sainsburysUrl =
   'https://www.sainsburys.co.uk/groceries-api/gol-services/product/v1/';
+const waitroseUrls = {
+  search: `https://www.waitrose.com/api/content-prod/v2/cms/publish/productcontent/search/${-1 /*customerId*/}`,
+  product: `https://www.waitrose.com/ecom/products/name`,
+};
 
 const userAgent = {
   value: null,
@@ -63,9 +67,9 @@ async function getCurlHeaders() {
     .reduce((acc, curr) => acc.concat('-H', curr), [])
     .map((value, i, arr) => {
       // debug
-      if (i === 0) {
-        console.log(arr);
-      }
+      // if (i === 0) {
+      //   console.log(arr);
+      // }
       return value;
     });
 }
@@ -77,7 +81,7 @@ const oldFiles = readdirSync('/tmp').filter(
 console.log(`Deleting ${oldFiles.length} old and temporary directories`);
 for (const oldFile of oldFiles) {
   console.log('Deleting:', '/tmp/' + oldFile);
-  fs.rmSync('/tmp/' + oldFile, { force: true, recursive: true });
+  rmSync('/tmp/' + oldFile, { force: true, recursive: true });
 }
 
 const app = express();
@@ -98,13 +102,16 @@ class BrowserWrapper {
     this.browser = browser;
     this.index = index;
   }
+
   use() {
     this.pendingPromise = createPendingPromise();
     return this.browser;
   }
+
   done() {
     this.pendingPromise = null;
   }
+
   async wait() {
     await this.pendingPromise?.promise;
     return this;
@@ -120,16 +127,17 @@ function createPendingPromise() {
   return result;
 }
 
+/**
+ * Loads a page using Puppeteer
+ */
 async function loadPageViaBrowser(url) {
   const browserWrapper = await getBrowser();
-  console.log(`Using browser #${browserWrapper.index}`);
+  console.log(`Using puppeteer browser #${browserWrapper.index}`);
   const browser = browserWrapper.use();
   try {
     const start = new Date().getTime();
     const page = await browser.newPage();
-    await page.setUserAgent(
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'
-    );
+    await page.setUserAgent(await userAgent.get());
     await page.goto(url);
 
     const data = await page.content();
@@ -144,14 +152,28 @@ async function loadPageViaBrowser(url) {
   }
 }
 
-async function streamFromUrl(url, res) {
+async function streamFromUrl(url, resOrCurlArgs, maybeRes) {
+  const args = maybeRes ? resOrCurlArgs : {};
+  const res = maybeRes ?? resOrCurlArgs;
+  const curlArgs = [
+    '-L',
+    ...(await getCurlHeaders()),
+    ...Object.entries(args.headers ?? {}).flatMap(([key, value]) => [
+      '-H',
+      `${key}: ${value}`,
+    ]),
+  ];
+
+  if (args.post) {
+    curlArgs.push('-X', 'POST');
+    if (args.body) {
+      curlArgs.push('--data-raw', JSON.stringify(args.body));
+    }
+  }
+
   return await new Promise(async (resolve, reject) => {
     let bytes = 0;
-    const curl = spawn('curl', [
-      url,
-      ...(await getCurlHeaders()),
-      '--compressed',
-    ]);
+    const curl = spawn('curl', [url, '--compressed', ...curlArgs]);
     curl.stdout.on('data', (chunk) => {
       res.write(chunk);
       bytes += `${chunk}`.length;
@@ -184,8 +206,6 @@ app.get('/tesco/product/:id', async (req, res) => {
       `${tescoUrl}products/${encodeURIComponent(productId)}`,
       res
     );
-
-    // res.send(result);
 
     console.log(`Tesco: Got ${result.length} bytes`);
     res.end();
@@ -239,6 +259,64 @@ app.get('/sainsburys/product', async (req, res) => {
     res.status(500).send(e.toString()).end();
   }
 });
+
+app.get('/waitrose/ecom/products/:name/:productId', async (req, res) => {
+  try {
+    const productId = '' + (req.params.productId ?? '');
+
+    if (!productId) {
+      return res.status(400).end();
+    }
+    console.log(`Waitrose: Fetching ${productId}`);
+
+    const result = await streamFromUrl(
+      `${waitroseUrls.product}/${encodeURIComponent(productId)}`,
+      res
+    );
+
+    console.log(`Waitrose: Got ${result} bytes`);
+    res.end();
+  } catch (e) {
+    console.log(e);
+    res.status(500).send(e.toString()).end();
+  }
+});
+
+app.post(
+  '/waitrose/api/content-prod/v2/cms/publish/productcontent/search/:customerId',
+  express.json(),
+  async (req, res) => {
+    try {
+      const customerId = parseInt(req.params.customerId, 10);
+      if (isNaN(customerId)) {
+        return res.status(400).end();
+      }
+
+      console.log(
+        `Waitrose: Searching ${req.body?.customerSearchRequest?.queryParams?.searchTerm}`
+      );
+
+      const result = await streamFromUrl(
+        `${waitroseUrls.search}?${new URLSearchParams(req.query ?? {}).toString()}`,
+        {
+          post: true,
+          headers: {
+            authorization: req.headers?.authorization,
+            Connection: 'keep-alive',
+          },
+          body: req.body,
+        },
+        res
+      );
+
+      console.log(`Waitrose: Got ${result} bytes`);
+      res.end();
+    } catch (e) {
+      console.log(e);
+      res.status(500).send(e.toString()).end();
+    }
+  }
+);
 
 console.log('Launching Puppeteer...');
 Promise.all(
