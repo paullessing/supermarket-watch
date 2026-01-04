@@ -76,7 +76,7 @@ const oldFiles = readdirSync('/tmp').filter(
 );
 console.log(`Deleting ${oldFiles.length} old and temporary directories`);
 for (const oldFile of oldFiles) {
-  console.log('Deleting:', '/tmp/' + name);
+  console.log('Deleting:', '/tmp/' + oldFile);
   fs.rmSync('/tmp/' + oldFile, { force: true, recursive: true });
 }
 
